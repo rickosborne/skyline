@@ -8,6 +8,12 @@ A Web interface will eventually be available via:
 
 > https://rickosborne.github.io/skyline/
 
+You probably want one of:
+
+* [Guides](guide) — Player and narrator guides, giving play and setting guidance.
+* [Stories](story) — Narrative adventure modules of varying size.
+* [Adapters](adapter) — Modules which explain how to adapt Skyline and the world of _Horizon_ to your preferred game system. 
+
 ## Copyright
 
 The creator and owner of this fan work is Rick Osborne.
