@@ -3,19 +3,26 @@
 This isn't supposed to be a coding project, dammit!
 
 * Book converters
+  * Tooling: https://github.com/rickosborne/skyline/issues/20
+  * Decision: https://github.com/rickosborne/skyline/issues/4
+  * Implementation: https://github.com/rickosborne/skyline/issues/3
   * Maybe [Electric Book](https://github.com/electricbookworks/electric-book)?
     * Not keen on the toolchain
     * Themes
+    * POC: https://github.com/rickosborne/skyline/issues/1
   * Maybe [Gitbook](https://www.gitbook.com/)?
     * Would need to find old v1, or be willing to go with (yet another) cloud hosting
   * Maybe just [Hugo](https://gohugo.io/documentation/)
     * No built-in PDF support? Have to build my own via Pandoc?  (Nahhhh, there's got to be someone else who wants to build PDFs)
     * Very nice themes!
+    * POC: https://github.com/rickosborne/skyline/issues/2
+  * Custom Web theme: https://github.com/rickosborne/skyline/issues/8
 
 * Stats data schema and tooling
   * Because I really don't want to maintain all those adapters by hand
-  * CI tests to ensure correct materialization
-  * Entities
+  * CI tests to ensure correct materialization: https://github.com/rickosborne/skyline/issues/7
+  * Tooling: https://github.com/rickosborne/skyline/issues/6
+  * Entities: https://github.com/rickosborne/skyline/issues/5
     * Character stats
     * Character maneuvers
     * Equipment stats
