@@ -15,7 +15,7 @@ Read aloud:
 > The occasional footprints in the dirt are clear and aren't all covered in guano or moss.
 > Someone else has been here no more than a few weeks ago.
 
-There's just enough light to let everyone work there way down and deeper into the cave.
+There's just enough light to let everyone work their way down and deeper into the cave.
 At least one person will need to create light.
 
 When they do, the walls reveal what everyone was already expecting: you've stumbled into ruins of the Old Ones.

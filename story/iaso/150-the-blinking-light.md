@@ -8,6 +8,7 @@ Read aloud:
 
 Prying the door open is straightforward, requiring the equivalent of strength check against Moderate difficulty for one person.
 If multiple people work on it together, no roll is required.
+One of the people opening the door slices a hand in the effort (even if it's on a lever or pry bar), taking Light damage.
 
 Read aloud:
 
