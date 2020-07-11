@@ -24,7 +24,7 @@ It says `Autosuture`, with a boxy graphic in the general shape of a cupped hand.
 Characters with persistent medical conditions will notice that their Focus overlays begin to show more information about their conditions:
 
 * Treatable conditions will be labeled with `Treatment: [PHARMA PLACEHOLDER]`.
-* Missing limbs will be labeled with `[PROSTETICS PLACEHOLDER]`.
+* Missing limbs will be labeled with `[PROSTHETICS PLACEHOLDER]`.
 
 IASO will speak aloud again:
 
