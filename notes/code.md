@@ -4,7 +4,13 @@ This isn't supposed to be a coding project, dammit!
 
 * Book converters
   * Maybe [Electric Book](https://github.com/electricbookworks/electric-book)?
+    * Not keen on the toolchain
+    * Themes
   * Maybe [Gitbook](https://www.gitbook.com/)?
+    * Would need to find old v1, or be willing to go with (yet another) cloud hosting
+  * Maybe just [Hugo](https://gohugo.io/documentation/)
+    * No built-in PDF support? Have to build my own via Pandoc?  (Nahhhh, there's got to be someone else who wants to build PDFs)
+    * Very nice themes!
 
 * Stats data schema and tooling
   * Because I really don't want to maintain all those adapters by hand
