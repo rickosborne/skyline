@@ -1,0 +1,29 @@
+Behemoth
+Bellowback
+Bristleback
+Broadhead
+Charger
+Control Tower
+Corruptor
+Deathbringer
+Fireclaw
+Frostclaw
+Glinthawk
+Grazer
+Lancehorn
+Longleg
+Metal Devil
+Ravager
+Rockbreaker
+Sawtooth
+Scorcher
+Scrapper
+Shell-Walker
+Snapmaw
+Stalker
+Stormbird
+Strider
+Tallneck
+Thunderjaw
+Trampler
+Watcher
