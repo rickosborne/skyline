@@ -14,6 +14,8 @@ You probably want one of:
 * [Stories](story) — Narrative adventure modules of varying size.
 * [Adapters](adapter) — Modules which explain how to adapt Skyline and the world of _Horizon_ to your preferred game system. 
 
+There's also a [Notes](notes) section, which might be interesting to people who want to know more about the design process for Skyline.
+
 ## Copyright
 
 The creator and owner of this fan work is Rick Osborne.
