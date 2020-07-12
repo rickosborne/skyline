@@ -20,7 +20,7 @@ As you are about to leave, a voice approaches from the darkness:
 
 > "Olara?  Are you talking to someone?  Please tell me you're talking to someone."
 
-Olara steps out of the way, allowing a young man to step forward from behind her.
+Olara steps out of the way, allowing a man to step forward from behind her.
 He's maybe a little older than Olara, with a well-kept beard peppered with what seems to be an early gray. 
 He fidgets with a necklace of blue-cable and beads as he talks.
 
