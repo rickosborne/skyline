@@ -60,7 +60,8 @@ This list is just an unsorted jumble of reminders.
 * Region names
   * Forbidden West
   * Sylens makes some reference to Nora lands as "Savage East" or something like that?  Maybe 2/3 through?
-  * Sylens mentions another, unseen group of people.  Maybe started with an "O"?
+  * Utaru
+    * One of the face paint styles is "Utaru Plainswalker"
 
 * Healing
   * https://github.com/rickosborne/skyline/issues/16

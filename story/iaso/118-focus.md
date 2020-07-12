@@ -85,4 +85,13 @@ If players choose to leave the MAU behind, they will find that they can communic
 It will then converse via their Focus.
 Outside of the facility they will find that there is no answer, nor will the MAU show up on their Focus overlay.
 
+<aside class="narrator-note">
+<header>Narrator note:</header>
+As IASO was taken offline before Zero Day, it is aware of GAIA and its own role in the Zero Dawn plan.
+It is not, however, a freed Subordinate Function like HADES or HEPHAESTUS.
+Like CYAN, IASO was created as an AI which was always intended to act semi-autonomously as a medical aid.
+It therefore includes the high-level directives which prevent it from disclosing too much information about GAIA until it can confirm how much the characters already know.
+In practical terms, this means it won't speak directly about GAIA or the Subordinate Functions by name — only in vague, indistinct generalities.
+</aside>
+
 When asked where the data storage facility is, IASO guides you to the wall at entry [168](168-power-wall.md).
