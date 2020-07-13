@@ -24,7 +24,7 @@ It says `Autosuture`, with a boxy graphic in the general shape of a cupped hand.
 Characters with persistent medical conditions will notice that their Focus overlays begin to show more information about their conditions:
 
 * Treatable conditions will be labeled with `Treatment: [PHARMA PLACEHOLDER]`.
-* Missing limbs will be labeled with `[PROSTETICS PLACEHOLDER]`.
+* Missing limbs will be labeled with `[PROSTHETICS PLACEHOLDER]`.
 
 IASO will speak aloud again:
 
@@ -38,4 +38,4 @@ IASO will speak aloud again:
 If players choose to leave IASO in this facility, its MAU may be left here or where it was discovered.
 Otherwise, it can be carried in a pack.
 
-When you are done investigating other areas on the map, make your way back out to the entrance and continue on to entry [107](107-exit.md).
+When you are done investigating other areas on the map, make your way back out to the main room and continue on to entry [107](107-lab.md).

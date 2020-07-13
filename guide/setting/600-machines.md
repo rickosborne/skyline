@@ -5,7 +5,7 @@ These machines were originally designed as docile and safe to be around, with an
 It would be more efficient to build large, tractor-combine-like vehicles to work the land, but that would put psychological distance between humans, the land, and the working machines.
 Instead, to strengthen the bond of humans and machines working together to rebuild, the machines were designed with aesthetically pleasing animal shapes to prepare humans for the eventual reintroduction of their representative species.
 
-The Corruption changed this.
+The Derangement changed this.
 HEPHAESTUS began adding sharp horns and antlers, which served no agricultural or structural purpose.
 Fuel sources such as Blaze canisters were repurposed to fuel ad hoc weapons.
 Eventually, armaments including projectile and beam weapons were added, while the animal chassis lost their intended counterparts and became fantastical.

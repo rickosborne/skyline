@@ -26,6 +26,7 @@ This isn't supposed to be a coding project, dammit!
     * Character stats
     * Character maneuvers
     * Equipment stats
+    * Destructibles
 
 * My intuition is that I'm going to want _some_ amount of a Markdown-based #include preprocessing functionality
   * Front matter & back matter

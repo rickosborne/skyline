@@ -5,9 +5,9 @@ Read aloud:
 > The metal door in front of you looks plain and inert to the naked eye.
 > Through the Focus, you can see a bright blue ring, with one quadrant in an even brighter pink, glowing in the center.
 > 
-> As you read out to touch the ring, it subtly glows brighter in anticipation.
+> As you reach out to touch the ring, it subtly glows brighter in anticipation.
 > Your hand passes through it, doing nothing.
-> Making as if to grasp the pink area, you make a turning motion, like a door handle.
+> Making as if to grasp the pink area, you make a turning motion, like a door knob.
 > The pink quadrant spins to follow the motion.
 > The entire ring solidifies to a cyan before flashing out, and the door opens.
 
@@ -21,10 +21,10 @@ Along the right wall as you enter sit a pair of large containers.
 They are empty, but the dust on them has been disturbed recently.
 An investigation of the boxes, a Moderate difficulty skill check, will find a single Health Potion.
 
-On the left wall is a large unit of some kind, with a holographic interface that glows even without the Focus overlay.
+On the left wall is a large unit of some kind, with a holographic interface that glows when approached, even without the Focus overlay.
 IASO is interested in this:
 
-> This is the primary interface to the facility's system.
+> This is the primary interface to the facility's systems.
 > It appears that a power core has been removed, so it does not have enough to power the network.
 > If you will press the MAU against the unit at the indicated point, I believe I should be able to synchronize with it.
 
