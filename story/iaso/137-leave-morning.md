@@ -11,7 +11,7 @@ The machines have not been alerted to your presence.
 You may try to sneak past them, at Tricky difficulty.
 Going wide around them does not appear to be an option, as they are right in front of the well-traveled trail you know you've been looking for.
 
-If you are detected or choose to confront them, use your system's Adapter to resolve a daytime encounter.
+If you are detected or choose to confront them, use your System Adapter to resolve a daytime encounter.
 Remember that when the Watcher is alerted to your presence it will immediately alert all other machines in the area.
 Longhorns, with their herd alertness, do the same thing.
 

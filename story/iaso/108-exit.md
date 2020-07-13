@@ -25,7 +25,7 @@ The party can wait in the cave and will not be detected by the Scrappers unless 
 The Scrappers, if alerted, will not enter the cave and will instead wait outside.
 If left alone, they will work through the night and leave just before dawn, having removed anything of value from the downed machines.
 
-If the party wishes to leave the cave before then, use your system's Adapter to resolve a night-time encounter with the Scrappers.
+If the party wishes to leave the cave before then, use your System Adapter to resolve a night-time encounter with the Scrappers.
 Each Scrapper is working on a downed Watcher, which may have salvageable components if searched in time.
 No wandering machines will join the encounter, and the Scrappers are unaware of the party's presence until alerted.
 

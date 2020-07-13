@@ -23,5 +23,10 @@ He draws a map in the dirt of the location of Olara's home.
 It's a cave on All-Mother Mountain, though there's no direct route and the path around the base is not an easy one.
 He thinks you can be there and back again by mid-morning, if you're willing.
 
+<aside class="narrator-note">
+<header>Narrator note:</header>
+Again, if your session is short on time, you may want to skip this optional side-story.
+</aside>
+
 If you're willing to make the trip immediately, continue on to entry [137](137-leave-morning.md).
 Otherwise, if explain to Teb that you're not up for the trip, continue on to entry [191](191-not-interested.md).

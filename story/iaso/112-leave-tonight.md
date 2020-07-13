@@ -16,7 +16,7 @@ You can stealth past them with a skill check at Tricky difficulty — they are d
 If you engage them, they are far enough apart to take them down one at a time with stealth.
 When any of them is alerted it will notify the others.
 No wandering machines will join the fray.
-Use your system's Adapter to resolve a night-time encounter with the Scrappers.
+Use your System Adapter to resolve a night-time encounter with the Scrappers.
 Olara will help if asked — she wields a bladed staff with noticeable skill — but will otherwise stay out of the way and watch you.
 
 The rest of the trip is uneventful.
