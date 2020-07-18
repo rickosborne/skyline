@@ -11,6 +11,11 @@ Top-level sections:
   * [Hooks](025-hooks.md)
   * [Background](030-background.md)
 * [Starter Characters](040-starter-characters.md)
+  * [Yenevra Feldspar](042-fighter.md) — _Tenakth, fighter, she/her_
+  * [Thia](044-rogue.md) — _unknown, rogue, she/her_
+  * [Drake](046-ranger.md) — _Nora, Brave (hunter), he/him_
+  * [Haldred](048-engineer.md) — _Oseram, engineer, she/her_
+  * [Van](050-monk.md) — _Banuk, historian, they/them_
 * Adventure
   * [Event 100: Mother's Crown](100-mothers-crown.md)
 * [Maps & Tables](500-maps-tables.md)
