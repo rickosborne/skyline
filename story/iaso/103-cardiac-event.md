@@ -1,5 +1,7 @@
 ## 103
 
+Read aloud:
+
 > You get into a rhythm: working together to fell a tree, then to cut off all the limbs, then to segment the tree into workable lengths, loading the segments on the carts, and so on. 
 > But everyone is careful and diligent, so each tree takes about an hour.
 >
@@ -18,7 +20,7 @@ If you brought IASO with you, it will speak directly to your party members throu
 > That person is experiencing a cardiac event.
 > Attach sensor pads at the indicated locations if possible.
 
-With or without IASO, the Focus will indicate the same thing: an overlay representation of Pren being approached by two teal discs, recognizable as Sensor Pads and labeled as such.
+With or without IASO, the Focus will indicate the same thing: an overlay representation of [Pren](450-pren.md) being approached by two teal discs, recognizable as Sensor Pads and labeled as such.
 The discs move to the Pren representation, stopping off-center on the chest and blinking.
 
 If you do not have two Sensor Pads with you, one of your party can use the confusion to sneak off and run back to the ruins.
