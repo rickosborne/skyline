@@ -1,0 +1,655 @@
+{
+	"$id": "https://rickosborne.github.io/skyline/data/schema/machine.schema.json",
+	"$schema": "http://json-schema.org/draft-07/schema",
+	"additionalProperties": false,
+	"definitions": {
+		"action": {
+			"additionalProperties": false,
+			"description": "Action the machine may take",
+			"properties": {
+				"attack": {
+					"default": false,
+					"description": "It the action an attack which may be used in combat?",
+					"title": "Is attack?",
+					"type": "boolean"
+				},
+				"description": {
+					"description": "Human-readable description of the action, without any adapter-specific language",
+					"title": "Description",
+					"type": "string"
+				},
+				"effect": {
+					"default": false,
+					"description": "Is the action an effect which might combine with other actions?",
+					"title": "Is effect?",
+					"type": "boolean"
+				},
+				"id": {
+					"$ref": "#/definitions/id"
+				},
+				"title": {
+					"description": "Human-readable name for the action",
+					"title": "Title",
+					"type": "string"
+				}
+			},
+			"required": [
+				"title",
+				"description",
+				"id"
+			],
+			"title": "Action",
+			"type": "object"
+		},
+		"adapter": {
+			"additionalProperties": false,
+			"description": "Adapter-specific data",
+			"properties": {
+				"dnd5e": {
+					"$ref": "#/definitions/dnd5eAdapter"
+				}
+			},
+			"title": "Adapter Data",
+			"type": "object"
+		},
+		"component": {
+			"additionalProperties": false,
+			"description": "Component",
+			"properties": {
+				"damage": {
+					"$ref": "#/definitions/elementDecimal"
+				},
+				"damagePercent": {
+					"description": "% of overall machine health this component can take in damage before the component is destroyed",
+					"maximum": 100,
+					"minimum": 0,
+					"title": "Health %",
+					"type": "integer"
+				},
+				"loot": {
+					"$ref": "#/definitions/loot"
+				},
+				"remove": {
+					"default": "false",
+					"description": "Whether the component can be torn free",
+					"title": "Removable?",
+					"type": "boolean"
+				},
+				"targetDifficulty": {
+					"default": "Normal",
+					"description": "Relative difficulty to hit",
+					"enum": [
+						"Easy",
+						"Normal",
+						"Moderate",
+						"Tricky",
+						"Hard",
+						"Epic"
+					],
+					"title": "Difficulty to Target",
+					"type": "string"
+				},
+				"targetNotes": {
+					"description": "Targeting notes",
+					"oneOf": [
+						{
+							"type": "string"
+						},
+						{
+							"items": {
+								"type": "string"
+							},
+							"type": "array"
+						}
+					]
+				},
+				"title": {
+					"description": "Human-readable name of the component",
+					"title": "Title",
+					"type": "string"
+				}
+			},
+			"required": [
+				"title",
+				"remove",
+				"damagePercent"
+			],
+			"title": "Component",
+			"type": "object"
+		},
+		"dnd5eAdapter": {
+			"additionalProperties": false,
+			"description": "D&D 5E specifics",
+			"properties": {
+				"action": {
+					"description": "Action specifics for D&D 5E",
+					"patternProperties": {
+						"^[a-z]+([A-Z][a-z]+)*$": {
+							"additionalProperties": false,
+							"properties": {
+								"description": {
+									"description": "Human-readable description of the action",
+									"oneOf": [
+										{
+											"type": "string"
+										},
+										{
+											"items": {
+												"type": "string"
+											},
+											"type": "array"
+										}
+									]
+								},
+								"melee": {
+									"default": false,
+									"title": "Is a melee weapon attack?",
+									"type": "boolean"
+								},
+								"onHit": {
+									"description": "On-hit effects",
+									"items": {
+										"$ref": "#/definitions/onHit"
+									},
+									"title": "Hit",
+									"type": "array"
+								},
+								"ranged": {
+									"default": false,
+									"title": "Is a ranged weapon attack?",
+									"type": "boolean"
+								},
+								"reachFeet": {
+									"title": "Reach (ft.)",
+									"type": "integer"
+								},
+								"save": {
+									"additionalProperties": false,
+									"properties": {
+										"attribute": {
+											"enum": [
+												"Strength",
+												"Dexterity",
+												"Constitution",
+												"Intelligence",
+												"Wisdom",
+												"Charisma"
+											],
+											"type": "string"
+										},
+										"difficulty": {
+											"title": "DC",
+											"type": "integer"
+										}
+									},
+									"required": [
+										"difficulty",
+										"attribute"
+									],
+									"title": "Save",
+									"type": "object"
+								},
+								"target": {
+									"oneOf": [
+										{
+											"type": "integer"
+										},
+										{
+											"const": "all",
+											"type": "string"
+										}
+									]
+								},
+								"toHit": {
+									"title": "To-Hit Modifier",
+									"type": "string"
+								}
+							},
+							"title": "Action",
+							"type": "object"
+						}
+					},
+					"type": "object"
+				},
+				"armor": {
+					"additionalProperties": false,
+					"description": "Armor Class",
+					"properties": {
+						"num": {
+							"title": "Armor Class (AC)",
+							"type": "integer"
+						},
+						"type": {
+							"description": "Armor Type (i.e. Light, Plate, etc.)",
+							"title": "Armor Type",
+							"type": "string"
+						}
+					},
+					"required": [
+						"num"
+					],
+					"title": "Armor Class",
+					"type": "object"
+				},
+				"attr": {
+					"additionalProperties": false,
+					"patternProperties": {
+						".*": {
+							"additionalProperties": false,
+							"properties": {
+								"bonus": {
+									"pattern": "^[-+][0-9]+$",
+									"title": "Bonus",
+									"type": "string"
+								},
+								"score": {
+									"title": "Score",
+									"type": "integer"
+								}
+							},
+							"required": [
+								"bonus",
+								"score"
+							],
+							"title": "Attribute",
+							"type": "object"
+						}
+					},
+					"propertyNames": {
+						"enum": [
+							"STR",
+							"DEX",
+							"CON",
+							"INT",
+							"WIS",
+							"CHA"
+						],
+						"type": "string"
+					},
+					"required": [
+						"STR",
+						"DEX",
+						"CON",
+						"INT",
+						"WIS",
+						"CHA"
+					],
+					"title": "Attribute Stats",
+					"type": "object"
+				},
+				"basedOn": {
+					"additionalProperties": false,
+					"properties": {
+						"href": {
+							"format": "URL",
+							"title": "URL",
+							"type": "string"
+						},
+						"title": {
+							"title": "Title",
+							"type": "string"
+						}
+					},
+					"title": "Based On",
+					"type": "object"
+				},
+				"challenge": {
+					"additionalProperties": false,
+					"properties": {
+						"rating": {
+							"oneOf": [
+								{
+									"type": "integer"
+								},
+								{
+									"type": "string"
+								}
+							],
+							"title": "Rating"
+						},
+						"xp": {
+							"title": "XP",
+							"type": "integer"
+						}
+					},
+					"required": [
+						"rating"
+					],
+					"title": "Challenge",
+					"type": "object"
+				},
+				"hp": {
+					"additionalProperties": false,
+					"properties": {
+						"average": {
+							"title": "Average HP",
+							"type": "integer"
+						},
+						"roll": {
+							"title": "Roll",
+							"type": "string"
+						}
+					},
+					"required": [
+						"average"
+					],
+					"title": "HP",
+					"type": "object"
+				},
+				"passive": {
+					"additionalProperties": false,
+					"patternProperties": {
+						".*": {
+							"type": "integer"
+						}
+					},
+					"propertyNames": {
+						"enum": [
+							"Perception"
+						],
+						"type": "string"
+					},
+					"title": "Passive",
+					"type": "object"
+				},
+				"skill": {
+					"additionalProperties": false,
+					"patternProperties": {
+						".*": {
+							"pattern": "^[-+][0-9]+$",
+							"title": "Modifier",
+							"type": "string"
+						}
+					},
+					"propertyNames": {
+						"enum": [
+							"Perception"
+						],
+						"type": "string"
+					},
+					"title": "Skill modifiers",
+					"type": "object"
+				},
+				"speedFeet": {
+					"title": "Speed (ft.)",
+					"type": "integer"
+				}
+			},
+			"required": [
+				"armor",
+				"speedFeet"
+			],
+			"title": "D&D 5E",
+			"type": "object"
+		},
+		"elementBoolean": {
+			"description": "Element",
+			"patternProperties": {
+				".*": {
+					"default": false,
+					"type": "boolean"
+				}
+			},
+			"propertyNames": {
+				"enum": [
+					"corruption",
+					"fire",
+					"ice",
+					"shock"
+				],
+				"type": "string"
+			},
+			"title": "Element",
+			"type": "object"
+		},
+		"elementDecimal": {
+			"description": "Element",
+			"patternProperties": {
+				".*": {
+					"description": "Multiplier for this damage type",
+					"type": "number"
+				}
+			},
+			"propertyNames": {
+				"enum": [
+					"all",
+					"corruption",
+					"fire",
+					"ice",
+					"shock"
+				],
+				"type": "string"
+			},
+			"title": "Element",
+			"type": "object"
+		},
+		"id": {
+			"description": "Programmatic identifier unique to this object",
+			"pattern": "^[a-z]+([A-Z][a-z]+)*$",
+			"title": "ID",
+			"type": "string"
+		},
+		"loot": {
+			"description": "Items present for potential removal",
+			"items": {
+				"additionalProperties": false,
+				"description": "Loot item",
+				"properties": {
+					"id": {
+						"$ref": "#/definitions/id"
+					},
+					"percent": {
+						"description": "Probability of undamaged recovery, in %",
+						"maximum": 100,
+						"minimum": 1,
+						"title": "Recovery %",
+						"type": "integer"
+					},
+					"quantity": {
+						"oneOf": [
+							{
+								"minimum": 1,
+								"title": "Exact Quantity",
+								"type": "integer"
+							},
+							{
+								"additionalProperties": false,
+								"properties": {
+									"max": {
+										"title": "Maximum quantity",
+										"type": "integer"
+									},
+									"min": {
+										"default": 0,
+										"title": "Minimum quantity",
+										"type": "integer"
+									}
+								},
+								"title": "Random Quantity",
+								"type": "object"
+							}
+						]
+					},
+					"sell": {
+						"description": "Shards obtained by selling to a vendor",
+						"minimum": 0,
+						"title": "Resale Value",
+						"type": "integer"
+					},
+					"title": {
+						"description": "Human-readable title",
+						"title": "Title",
+						"type": "string"
+					}
+				},
+				"required": [
+					"id"
+				],
+				"title": "Item",
+				"type": "object"
+			},
+			"title": "Loot",
+			"type": "array"
+		},
+		"onHit": {
+			"additionalProperties": false,
+			"description": "Damage upon hit",
+			"properties": {
+				"average": {
+					"title": "Average damage",
+					"type": "integer"
+				},
+				"roll": {
+					"title": "Damage formula",
+					"type": "string"
+				},
+				"type": {
+					"enum": [
+						"bludgeoning",
+						"piercing",
+						"slashing",
+						"lightning"
+					],
+					"title": "Type",
+					"type": "string"
+				}
+			},
+			"title": "Hit",
+			"type": "object"
+		}
+	},
+	"description": "Machine (NPC)",
+	"properties": {
+		"$schema": {
+			"type": "string"
+		},
+		"action": {
+			"description": "Actions the machine may take",
+			"items": {
+				"$ref": "#/definitions/action"
+			},
+			"title": "Actions",
+			"type": "array"
+		},
+		"adapter": {
+			"$ref": "#/definitions/adapter"
+		},
+		"component": {
+			"description": "Targetable parts of the machine",
+			"patternProperties": {
+				".*": {
+					"$ref": "#/definitions/component"
+				}
+			},
+			"required": [
+				"body"
+			],
+			"title": "Components",
+			"type": "object"
+		},
+		"id": {
+			"$ref": "#/definitions/id"
+		},
+		"lang": {
+			"default": "en-US",
+			"description": "ISO 639-1 language code for human-readable text in this object",
+			"title": "Language Code",
+			"type": "string"
+		},
+		"link": {
+			"description": "Links to external resources",
+			"patternProperties": {
+				"^[a-z0-9]+$": {
+					"description": "URL",
+					"format": "URL",
+					"title": "URL",
+					"type": "string"
+				}
+			},
+			"title": "Links",
+			"type": "object"
+		},
+		"overrideSource": {
+			"enum": [
+				"unknown",
+				"none",
+				"PSI"
+			],
+			"title": "Override Source",
+			"type": "string"
+		},
+		"role": {
+			"enum": [
+				"Recon"
+			],
+			"title": "Role/Class",
+			"type": "string"
+		},
+		"size": {
+			"enum": [
+				"Small"
+			],
+			"title": "Size Class",
+			"type": "string"
+		},
+		"strong": {
+			"$ref": "#/definitions/elementBoolean"
+		},
+		"title": {
+			"description": "Display name appropriate for human readers",
+			"title": "Title",
+			"type": "string"
+		},
+		"variant": {
+			"description": "Known variant forms",
+			"patternProperties": {
+				".*": {
+					"additionalProperties": false,
+					"description": "Machine Variant",
+					"properties": {
+						"challengeLevel": {
+							"title": "Challenge Level",
+							"type": "integer"
+						},
+						"hp": {
+							"description": "Hit Points",
+							"title": "Hit Points",
+							"type": "integer"
+						}
+					},
+					"required": [
+						"challengeLevel",
+						"hp"
+					],
+					"type": "object"
+				}
+			},
+			"propertyNames": {
+				"enum": [
+					"base",
+					"corrupted",
+					"daemonic"
+				],
+				"type": "string"
+			},
+			"required": [
+				"base"
+			],
+			"title": "Variants",
+			"type": "object"
+		},
+		"weak": {
+			"$ref": "#/definitions/elementBoolean"
+		}
+	},
+	"required": [
+		"title",
+		"size",
+		"role",
+		"overrideSource",
+		"variant",
+		"id",
+		"action"
+	],
+	"type": "object"
+}

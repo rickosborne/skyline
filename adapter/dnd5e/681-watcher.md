@@ -18,12 +18,12 @@ For additional flavor, see the [Horizon Wiki on Watcher](https://horizon.fandom.
 | +2 | +2 | +2 | -3 | +1 | -2 |
 
 _**Jumping Smash.**_ If the Watcher moves at least 20 ft. straight toward a creature and then hits it with a head strike attack on the same turn, that target must succeed on a DC 12 Strength saving throw or be knocked prone. If the target is prone, the Watcher can make one head strike attack against it as a bonus action.
-                      
+            
 _**Lookout.**_ When alerted and not immediately destroyed, will alert all machines within 120 ft.
 
 ### Actions
 
-_**Blinding Stun Flash.**_ All enemies in a 30 ft. frontal cone must make a DC 12 Wisdom saving throw or be [blinded](https://www.dndbeyond.com/compendium/rules/basic-rules/appendix-a-conditions#Blinded) for 3 rounds.
+_**Blinding Stun Flash.**_ _Ranged Weapon Attack:_ All enemies in a 30 ft. frontal cone must make a DC 12 Wisdom saving throw or be [blinded](https://www.dndbeyond.com/compendium/rules/basic-rules/appendix-a-conditions#Blinded) for 3 rounds.
 
 _**Energy Blast.**_ _Ranged Weapon Attack:_ +1 to hit, reach 120 ft., one target, only when unable to get closer to target. _Hit:_ 3 (1d8 - 1) lightning damage.
 
