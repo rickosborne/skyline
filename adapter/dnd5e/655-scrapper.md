@@ -10,7 +10,7 @@ For additional flavor, see the [Horizon Wiki on Scrapper](https://horizon.fandom
 | Speed | 50 ft. |
 | Skills | Perception +3 |
 | Senses | Passive Perception 13 |
-| Challenge | 1 (200 XP) |
+| Challenge | 2 (450 XP) |
 
 | STR | DEX | CON | INT | WIS | CHA |
 | --- | --- | --- | --- | --- | --- |
