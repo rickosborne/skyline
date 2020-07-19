@@ -43,9 +43,9 @@ _**Environment.**_ Arctic. Desert. Forest. Grassland. Hill.
 
 | Component | Probability | Quantity |
 | --- | :---: | :---: |
-| Metal Shards | 100% | 5 |
+| Metal Shards | 100% | 9 |
 | Sparker | 40% | 1 |
-| Wire | 40% | 5 |
+| Wire | 40% | 4 |
 | Machine Core, Small | 20% |
 | Watcher Lens | 50% | 1 (unless targeted) |
 | Watcher Heart | 40% | 1 |
