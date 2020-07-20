@@ -1,3 +1,5 @@
+<!-- +template machine watcher dnd5ecombat -->
+
 ## Watcher
 
 Watchers are modified from the stock [Deinonychus](https://www.dndbeyond.com/monsters/deinonychus).
@@ -49,3 +51,5 @@ _**Environment.**_ Arctic. Desert. Forest. Grassland. Hill.
 | Machine Core, Small | 20% |
 | Watcher Lens | 50% | 1 (unless targeted) |
 | Watcher Heart | 40% | 1 |
+
+<!-- -template machine watcher dnd5ecombat -->

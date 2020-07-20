@@ -1,12 +1,13 @@
 $schema: '../schema/machine.schema.json'
 id: watcher
 title: Watcher
+plural: Watchers
 lang: en-US
 overrideSource: PSI
 role: Recon
 size: Small
 link:
-  horizonwiki: 'https://horizon.fandom.com/wiki/Watcher'
+  horizonWiki: 'https://horizon.fandom.com/wiki/Watcher'
 variant:
   base:
     challengeLevel: 5

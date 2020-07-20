@@ -1,0 +1,16 @@
+{
+	"compilerOptions": {
+		"alwaysStrict": true,
+		"module": "commonjs",
+		"noImplicitAny": true,
+		"noImplicitReturns": true,
+		"noImplicitThis": true,
+		"sourceMap": true,
+		"strict": false,
+		"strictNullChecks": true,
+		"target": "es5"
+	},
+	"exclude": [
+		"node_modules"
+	]
+}

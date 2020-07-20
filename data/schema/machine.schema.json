@@ -566,6 +566,12 @@
 					"type": "string"
 				}
 			},
+			"propertyNames": {
+				"enum": [
+					"horizonWiki"
+				],
+				"type": "string"
+			},
 			"title": "Links",
 			"type": "object"
 		},
@@ -576,6 +582,11 @@
 				"PSI"
 			],
 			"title": "Override Source",
+			"type": "string"
+		},
+		"plural": {
+			"description": "Display name for multiple items",
+			"title": "Plural",
 			"type": "string"
 		},
 		"role": {
