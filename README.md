@@ -15,6 +15,7 @@ You probably want one of:
 * [Adapters](adapter) — Modules which explain how to adapt Skyline and the world of _Horizon_ to your preferred game system. 
 
 There's also a [Notes](notes) section, which might be interesting to people who want to know more about the design process for Skyline.
+Data nerds might enjoy the [Data](data) section.
 
 ## Copyright
 
