@@ -80,7 +80,7 @@ component:
     damagePercent: 100
     title: Eye
     targetNotes: "Only vulnerable to piercing weapons in a 30-degree cone in front of the Watcher."
-    targetDifficulty: Tricky
+    targetDifficulty: Moderate
     damage:
       all: 2.0
     loot:
@@ -132,7 +132,7 @@ adapter:
           - "If the Watcher moves at least 20 ft. straight toward a creature and then hits it with a head strike attack on the same turn, that target must succeed on a DC 12 Strength saving throw or be knocked prone."
           - "If the target is already prone, the Watcher can make one additional head strike attack against it as a bonus action."
       blindingStunFlash:
-        description: "All enemies in a 30 ft. frontal cone must make a DC 12 Wisdom saving throw or be [blinded](https://www.dndbeyond.com/compendium/rules/basic-rules/appendix-a-conditions#Blinded) until the end of the next round."
+        description: "All enemies in a 30 ft. frontal cone are [blinded](https://www.dndbeyond.com/compendium/rules/basic-rules/appendix-a-conditions#Blinded) until the end of the next round."
         ranged: true
         target: all
         save:

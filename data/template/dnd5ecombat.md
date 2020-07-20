@@ -11,6 +11,7 @@ For additional flavor, see the [Horizon Wiki on ${title}](${link.horizonWiki}).
 | Skills | ${Object.keys(adapter.dnd5e.skill).sort().map(p => `${p} ${adapter.dnd5e.skill[p]}`).join(', ')} |
 | Senses | ${Object.keys(adapter.dnd5e.passive).sort().map(p => `Passive ${p} ${adapter.dnd5e.passive[p]}`).join(', ')} |
 | Challenge | ${adapter.dnd5e.challenge.rating} (${adapter.dnd5e.challenge.xp} XP) |
+| Overrides | ${overrideSource} |
 
 | STR | DEX | CON | INT | WIS | CHA |
 | :---: | :---: | :---: | :---: | :---: | :---: |
@@ -36,12 +37,13 @@ ${action.filter(a => a.attack).map(a => {
     const melee = extra.melee ? '_Melee Weapon Attack_' : null;
     const ranged = extra.ranged ? '_Ranged Weapon Attack_' : null;
     const toHit = extra.toHit == null ? null : `${extra.toHit} to hit`;
-    const reach = extra.reachFeet ? `reach ${extra.reachFeet} ft.` : null;
+    const reach = extra.reachFeet ? `reach ${extra.reachFeet} ft.` + (extra.minRangeFeet ? ` (min. ${extra.minRangeFeet} ft.)` : ''): null;
     const target = extra.target === 'all' ? null : extra.target === 1 ? 'one target' : `${extra.target} targets`;
+    const save = extra.save == null ? null : `Targets may make a DC ${extra.save.difficulty} ${extra.save.attribute} saving throw to ${extra.save.half ? 'take half damage' : 'avoid the attack'}.`;
     const first = [melee, ranged, toHit, reach, target].filter(t => t != null).join(', ');
     const edesc = Array.isArray(extra.description) ? extra.description.join('\n') : extra.description;
     const onHit = Array.isArray(extra.onHit) ? '_Hit:_ ' + extra.onHit.map(o => `${o.average} (${o.roll}) ${o.type} damage`).join(', ') + '.' : null;
-    extraDesc = (first === '' ? '' : (first + '.\n')) + [edesc, onHit].filter(t => t != null && t !== '').join('\n');
+    extraDesc = (first === '' ? '' : (first + '.\n')) + [edesc, save, onHit].filter(t => t != null && t !== '').join('\n');
   }
   return [title, desc, extraDesc].filter(t => t != null).join('\n');
 }).join('\n\n')}
@@ -60,23 +62,24 @@ ${Object.keys(component).sort((a, b) => a === 'body' ? -1 : b === 'body' ? 1 : a
     Epic: 14,
     Legendary: 20
   })[c.targetDifficulty || 'Normal'];
-  const ac = 'AC ' + (10 + acMod);
+  const ac = 'AC ' + (adapter.dnd5e.armor.num + acMod);
   const machineHP = adapter.dnd5e.hp.average || Math.floor(variant.base.hp / 10);
   const componentHP = Math.floor(machineHP * c.damagePercent / 100.0) + ' HP';
   const tear = c.remove ? 'can be torn off' : 'cannot be torn off'; 
   const rename = {
     shock: 'lightning'
   };
+  const explode = c.explode == null ? null : `Explodes when destroyed for 2d8 ${c.explode.element} damage to all creatures within ${c.explode.rangeFeet} ft.`;
   const damage = c.damage == null ? null : ('Takes ' + Object.keys(c.damage).map(d => d === 'all' ? `${c.damage.all}x damage` : `${c.damage[d]}x ${rename[d] || d} damage`).join(', ') + '.');
-  const contains = c.loot == null ? null : ('Contains: ' + c.loot.map(l => `${typeof l.quantity === 'number' ? l.quantity : l.quantity.min + '-' + l.quantity.max}x ${l.title}`).join(', '));
-  return [title, `${ac}, ${componentHP}, ${tear}.`, damage, c.targetNotes, contains].filter(t => t != null).join('\n');
+  const contains = c.loot == null || cid === 'body' ? null : ('Contains: ' + c.loot.map(l => `${typeof l.quantity === 'number' ? l.quantity : l.quantity.min + '-' + l.quantity.max}x ${l.title}`).join(', ') + '.');
+  return [title, `${ac}, ${componentHP}, ${tear}.`, damage, c.targetNotes, explode, contains].filter(t => t != null).join('\n');
 }).join('\n\n')}
 
 ### Loot
 
 | Component | Probability | Quantity |
 | --- | :---: | :---: |
-${Object.values(component).flatMap(c => c.loot).sort((a, b) => a.title.localeCompare(b.title)).map(l => {
+${Object.values(component).flatMap(c => c.loot || []).sort((a, b) => a.title.localeCompare(b.title)).map(l => {
   const qty = typeof l.quantity === 'number' ? l.quantity : `${l.quantity.min}-${l.quantity.max}`;
   return `| ${l.title} | ${l.percent}% | ${qty} |`;
 }).join('\n')}

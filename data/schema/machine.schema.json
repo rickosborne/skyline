@@ -15,8 +15,18 @@
 				},
 				"description": {
 					"description": "Human-readable description of the action, without any adapter-specific language",
-					"title": "Description",
-					"type": "string"
+					"oneOf": [
+						{
+							"type": "string"
+						},
+						{
+							"items": {
+								"type": "string"
+							},
+							"type": "array"
+						}
+					],
+					"title": "Description"
 				},
 				"effect": {
 					"default": false,
@@ -35,7 +45,6 @@
 			},
 			"required": [
 				"title",
-				"description",
 				"id"
 			],
 			"title": "Action",
@@ -65,6 +74,30 @@
 					"minimum": 0,
 					"title": "Health %",
 					"type": "integer"
+				},
+				"explode": {
+					"additionalProperties": false,
+					"properties": {
+						"element": {
+							"enum": [
+								"fire",
+								"ice",
+								"shock"
+							],
+							"title": "Elemental damage type",
+							"type": "string"
+						},
+						"rangeFeet": {
+							"title": "Range (ft.)",
+							"type": "integer"
+						}
+					},
+					"required": [
+						"element",
+						"rangeFeet"
+					],
+					"title": "Explosion",
+					"type": "object"
 				},
 				"loot": {
 					"$ref": "#/definitions/loot"
@@ -146,6 +179,10 @@
 									"title": "Is a melee weapon attack?",
 									"type": "boolean"
 								},
+								"minRangeFeet": {
+									"title": "Min. Range ft.",
+									"type": "integer"
+								},
 								"onHit": {
 									"description": "On-hit effects",
 									"items": {
@@ -180,6 +217,10 @@
 										"difficulty": {
 											"title": "DC",
 											"type": "integer"
+										},
+										"half": {
+											"title": "Half on success?",
+											"type": "boolean"
 										}
 									},
 									"required": [
@@ -506,9 +547,10 @@
 				"type": {
 					"enum": [
 						"bludgeoning",
+						"fire",
+						"lightning",
 						"piercing",
-						"slashing",
-						"lightning"
+						"slashing"
 					],
 					"title": "Type",
 					"type": "string"
@@ -579,7 +621,8 @@
 			"enum": [
 				"unknown",
 				"none",
-				"PSI"
+				"PSI",
+				"SIGMA"
 			],
 			"title": "Override Source",
 			"type": "string"
@@ -591,6 +634,7 @@
 		},
 		"role": {
 			"enum": [
+				"Acquisition",
 				"Recon"
 			],
 			"title": "Role/Class",

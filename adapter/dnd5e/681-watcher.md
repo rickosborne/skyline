@@ -13,6 +13,7 @@ For additional flavor, see the [Horizon Wiki on Watcher](https://horizon.fandom.
 | Skills | Perception +3 |
 | Senses | Passive Perception 13 |
 | Challenge | 1 (200 XP) |
+| Overrides | PSI |
 
 | STR | DEX | CON | INT | WIS | CHA |
 | :---: | :---: | :---: | :---: | :---: | :---: |
@@ -32,7 +33,8 @@ When alerted and not immediately destroyed, will alert all machines within 120 f
 _**Blinding Stun Flash.**_
 The Watcher emits a blinding light, disorienting enemies in front of it.
 _Ranged Weapon Attack_.
-All enemies in a 30 ft. frontal cone must make a DC 12 Wisdom saving throw or be [blinded](https://www.dndbeyond.com/compendium/rules/basic-rules/appendix-a-conditions#Blinded) until the end of the next round.
+All enemies in a 30 ft. frontal cone are [blinded](https://www.dndbeyond.com/compendium/rules/basic-rules/appendix-a-conditions#Blinded) until the end of the next round.
+Targets may make a DC 12 Wisdom saving throw to avoid the attack.
 
 _**Energy Blast.**_
 The Watcher fires a blast of energy at one target.
@@ -53,15 +55,14 @@ _Hit:_ 6 (1d8 + 2) bludgeoning damage.
 ### Components
 
 _**Body.**_
-AC 10, 9 HP, cannot be torn off.
+AC 13, 9 HP, cannot be torn off.
 Takes 2x lightning damage.
-Contains: 1-5x Metal Shards, 1-5x Wire, 1x Sparker, 1x Machine Core, Small, 1x Watcher Heart
 
 _**Eye.**_
 AC 15, 9 HP, cannot be torn off.
 Takes 2x damage.
 Only vulnerable to piercing weapons in a 30-degree cone in front of the Watcher.
-Contains: 1x Watcher Lens
+Contains: 1x Watcher Lens.
 
 ### Loot
 
