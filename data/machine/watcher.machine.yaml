@@ -80,7 +80,7 @@ component:
     damagePercent: 100
     title: Eye
     targetNotes: "Only vulnerable to piercing weapons in a 30-degree cone in front of the Watcher."
-    targetDifficulty: Moderate
+    targetDifficulty: Tricky
     damage:
       all: 2.0
     loot:
@@ -108,10 +108,10 @@ adapter:
       STR:
         score: 15
         bonus: "+2"
-      CON:
+      DEX:
         score: 15
         bonus: "+2"
-      DEX:
+      CON:
         score: 14
         bonus: "+2"
       INT:

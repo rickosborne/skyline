@@ -1,8 +1,6 @@
 import * as fs from 'fs';
 import * as console from 'console';
 import * as path from 'path';
-// @ts-ignore
-import * as boring from '@mjstahl/boring';
 import * as YAML from 'yaml';
 
 const sourceDirs = [
@@ -31,6 +29,20 @@ function getTemplate(templateId: string): string {
 	return fs.readFileSync(path.join('data', 'template', `${templateId}.md`), {encoding: "utf8"});
 }
 
+function render(template: string, data: Record<string, any>): string {
+	const [vars, vals] = Object.keys(data).reduce(([a, b]: [any[], any[]], k: string) => {
+		a.push(k)
+		b.push(data[k] as any)
+		return [a, b];
+	}, [[], []])
+	const body = `
+    'use strict';
+    return \`${template}\`;
+  `;
+	const evaluate = new Function(...vars, body);
+	return evaluate(...vals);
+}
+
 function markdown(dir: string, fileName: string): void {
 	const relativePath = path.join(dir, fileName);
 	const original = fs.readFileSync(relativePath, {encoding: "utf8"});
@@ -38,18 +50,16 @@ function markdown(dir: string, fileName: string): void {
 		console.log(`Template: path=${relativePath}: dataType=${dataType} dataName=${dataName} templateId=${templateId}`);
 		const data = getData(dataType, dataName);
 		const template = getTemplate(templateId);
-		boring.render(template, data).then((result: string) => {
-			if (result !== body) {
-				console.log(`Rendered: ${templateId} + ${dataType}/${dataName} => ${relativePath}`);
-			}
-		}).catch((err: any) => {
-			console.error(`Failed to render ${templateId} + ${dataType}/${dataName} => ${relativePath}`);
-			console.error(err);
-		});
-		return body;
+		const result = render(template, data);
+		if (result !== body) {
+			console.log(`Rendered: ${templateId} + ${dataType}/${dataName} => ${relativePath}`);
+			return `${startTag}\n\n${result}\n\n${endTag}`;
+		}
+		return entire;
 	});
 	if (updated !== original) {
 		console.log(`Updated: ${relativePath}`);
+		fs.writeFileSync(relativePath, updated, {encoding: "utf8"});
 	}
 }
 
