@@ -1,0 +1,168 @@
+$schema: '../schema/machine.schema.json'
+id: watcher
+title: Watcher
+plural: Watchers
+lang: en-US
+overrideSource: PSI
+role: Recon
+size: Small
+link:
+  horizonWiki: 'https://horizon.fandom.com/wiki/Watcher'
+variant:
+  base:
+    challengeLevel: 5
+    hp: 90
+  corrupted:
+    challengeLevel: 12
+    hp: 135
+  daemonic:
+    challengeLevel: 14
+    hp: 158
+action:
+  - id: jumpingSmash
+    title: Jumping Smash
+    description: The Watcher leaps to the target, smashing it with its head.
+    effect: true
+  - id: lookout
+    title: Lookout
+    description: When alerted and not immediately destroyed, will alert all machines within 120 ft.
+    effect: true
+  - id: blindingStunFlash
+    title: Blinding Stun Flash
+    description: The Watcher emits a blinding light, disorienting enemies in front of it.
+    attack: true
+  - id: watcherBlast
+    title: Energy Blast
+    description: The Watcher fires a blast of energy at one target.
+    attack: true
+  - id: watcherHeadStrike
+    title: Head Strike
+    description: The Watcher smashes its head into its target.
+    attack: true
+  - id: watcherTailStrike
+    title: Tail Strike
+    description: The Watcher spins, smashing its tail into its target.
+    attack: true
+component:
+  body:
+    remove: false
+    title: Body
+    damagePercent: 100
+    damage:
+      shock: 2.0
+    loot:
+      - id: metalShards
+        title: Metal Shards
+        percent: 100
+        quantity:
+          min: 1
+          max: 5
+      - id: wire
+        title: Wire
+        percent: 100
+        quantity:
+          min: 1
+          max: 5
+      - id: sparker
+        title: Sparker
+        percent: 40
+        quantity: 1
+      - id: machineCoreSmall
+        title: Machine Core, Small
+        percent: 40
+        quantity: 1
+      - id: watcherHeart
+        title: Watcher Heart
+        percent: 40
+        quantity: 1
+  eye:
+    remove: false
+    damagePercent: 100
+    title: Eye
+    targetNotes: "Only vulnerable to piercing weapons in a 30-degree cone in front of the Watcher."
+    targetDifficulty: Moderate
+    damage:
+      all: 2.0
+    loot:
+      - id: watcherLens
+        title: Watcher Lens
+        percent: 40
+        quantity: 1
+adapter:
+  dnd5e:
+    basedOn:
+      title: Deinonychus
+      href: https://www.dndbeyond.com/monsters/deinonychus
+    hp:
+      average: 9
+      roll: 2d8
+    speedFeet: 40
+    skill:
+      Perception: "+3"
+    passive:
+      Perception: 13
+    challenge:
+      rating: 1
+      xp: 200
+    attr:
+      STR:
+        score: 15
+        bonus: "+2"
+      DEX:
+        score: 15
+        bonus: "+2"
+      CON:
+        score: 14
+        bonus: "+2"
+      INT:
+        score: 4
+        bonus: "-3"
+      WIS:
+        score: 12
+        bonus: "+1"
+      CHA:
+        score: 6
+        bonus: "-2"
+    armor:
+      num: 13
+      type: Light
+    action:
+      jumpingSmash:
+        description:
+          - "If the Watcher moves at least 20 ft. straight toward a creature and then hits it with a head strike attack on the same turn, that target must succeed on a DC 12 Strength saving throw or be knocked prone."
+          - "If the target is already prone, the Watcher can make one additional head strike attack against it as a bonus action."
+      blindingStunFlash:
+        description: "All enemies in a 30 ft. frontal cone are [blinded](https://www.dndbeyond.com/compendium/rules/basic-rules/appendix-a-conditions#Blinded) until the end of the next round."
+        ranged: true
+        target: all
+        save:
+          difficulty: 12
+          attribute: Wisdom
+      watcherBlast:
+        toHit: "+1"
+        reachFeet: 120
+        target: 1
+        description: "Only used when unable to get closer to target."
+        ranged: true
+        onHit:
+          - type: lightning
+            average: 3
+            roll: 1d8 - 1
+      watcherHeadStrike:
+        melee: true
+        toHit: "+4"
+        reachFeet: 5
+        target: 1
+        onHit:
+          - type: bludgeoning
+            average: 6
+            roll: 1d8 + 2
+      watcherTailStrike:
+        melee: true
+        toHit: "+4"
+        reachFeet: 5
+        target: 1
+        onHit:
+          - type: bludgeoning
+            average: 6
+            roll: 1d8 + 2

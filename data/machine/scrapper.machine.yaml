@@ -1,0 +1,206 @@
+$schema: '../schema/machine.schema.json'
+id: scrapper
+title: Scrapper
+plural: Scrappers
+lang: en-US
+overrideSource: SIGMA
+role: Acquisition
+size: Small
+link:
+  horizonWiki: 'https://horizon.fandom.com/wiki/Scrapper'
+variant:
+  base:
+    challengeLevel: 8
+    hp: 220
+  corrupted:
+    challengeLevel: 15
+    hp: 330
+  daemonic:
+    challengeLevel: 17
+    hp: 385
+action:
+  - id: scrapperPackTactics
+    title: Pack Tactics
+    description: Scrappers coordinate their attacks with their allies.
+    effect: true
+  - id: scrapperPing
+    title: Radar Ping
+    description:
+      - An electromagnetic pulse reveals all humans, machines, and animals within a 60 ft. radius, blocked only by metal walls, or stone or wood walls at least 1 ft. thick.
+      - This pulse pierces through stealth.
+      - The Scrapper shares information gained from this pulse with all other machines within 120 ft.
+      - Takes 60 seconds to recharge.
+    effect: true
+  - id: scrapperBite
+    title: Bite
+    attack: true
+  - id: scrapperClaw
+    title: Claw
+    attack: true
+  - id: scrapperLaserBurst
+    title: Laser Burst
+    attack: true
+  - id: scrapperLaserLeadUp
+    title: Laser Lead Up
+    description: A trio of laser bursts slash across the ground.
+    attack: true
+  - id: scrapperLaserSweep
+    title: Laser Sweep
+    description: Laser fire sweeps in a straight line.
+    attack: true
+component:
+  body:
+    remove: false
+    title: Body
+    damagePercent: 100
+    loot:
+      - id: metalShards
+        title: Metal Shards
+        percent: 100
+        quantity:
+          min: 11
+          max: 22
+      - id: wire
+        title: Wire
+        percent: 100
+        quantity:
+          min: 5
+          max: 11
+      - id: machineCoreSmall
+        title: Machine Core, Small
+        percent: 40
+        quantity: 1
+      - id: scrapperHeart
+        title: Scrapper Heart
+        percent: 40
+        quantity: 1
+      - id: scrapperLens
+        title: Scrapper Lens
+        percent: 40
+        quantity: 1
+  powerCell:
+    remove: true
+    title: Power Cell
+    damagePercent: 25
+    targetDifficulty: Tricky
+    damage:
+      shock: 3.0
+    explode:
+      rangeFeet: 30
+      element: fire
+    loot:
+      - id: sparker
+        title: Sparker
+        percent: 100
+        quantity: 1
+  radar:
+    remove: true
+    damagePercent: 50
+    title: Radar
+    targetDifficulty: Moderate
+    damage:
+      all: 2.0
+adapter:
+  dnd5e:
+    basedOn:
+      title: Hyena
+      href: https://www.dndbeyond.com/monsters/hyena
+    hp:
+      average: 22
+      roll: 4d8 + 4
+    speedFeet: 50
+    skill:
+      Perception: "+3"
+    passive:
+      Perception: 13
+    challenge:
+      rating: 2
+      xp: 450
+    attr:
+      STR:
+        score: 11
+        bonus: "+0"
+      DEX:
+        score: 13
+        bonus: "+1"
+      CON:
+        score: 12
+        bonus: "+1"
+      INT:
+        score: 2
+        bonus: "-4"
+      WIS:
+        score: 12
+        bonus: "+1"
+      CHA:
+        score: 5
+        bonus: "-3"
+    armor:
+      num: 11
+      type: Light
+    action:
+      scrapperPackTactics:
+        description: "The Scrapper has advantage on an attack roll against a creature if at least one of the Scrapper's allies is within 5 feet of the creature and the ally isn't incapacitated."
+      scrapperBite:
+        melee: true
+        toHit: "+2"
+        reachFeet: 5
+        target: 1
+        onHit:
+          - average: 4
+            roll: 1d8
+            type: piercing
+      scrapperClaw:
+        melee: true
+        toHit: "+2"
+        reachFeet: 5
+        target: 1
+        onHit:
+          - average: 4
+            roll: 1d8
+            type: slashing
+      scrapperLaserBurst:
+        ranged: true
+        description: Lasers recharge at the end of the next round.
+        toHit: "+2"
+        minRangeFeet: 25
+        reachFeet: 120
+        target: 1
+        onHit:
+          - average: 4
+            roll: 1d8
+            type: fire
+      scrapperLaserLeadUp:
+        ranged: true
+        description:
+          - Targets must be within 15 ft. of each other.
+          - Lasers recharge at the end of the next round.
+        toHit: "+0"
+        minRangeFeet: 25
+        reachFeet: 60
+        target: 3
+        save:
+          attribute: Dexterity
+          difficulty: 14
+          half: true
+        onHit:
+          - type: fire
+            roll: 1d8 + 5
+            average: 10
+      scrapperLaserSweep:
+        ranged: true
+        description:
+          - Fires a laser beam in a straight 25 ft. line, hitting all targets in its path.
+          - Lasers recharge at the end of the next round.
+        toHit: "+1"
+        minRangeFeet: 25
+        reachFeet: 60
+        target: all
+        save:
+          attribute: Dexterity
+          difficulty: 14
+          half: true
+        onHit:
+          - type: fire
+            roll: 1d8 + 4
+            average: 9

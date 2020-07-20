@@ -1,0 +1,164 @@
+$schema: '../schema/machine.schema.json'
+id: lancehorn
+title: Lancehorn
+plural: Lancehorns
+lang: en-US
+overrideSource: SIGMA
+role: Acquisition
+size: Small
+link:
+  horizonWiki: 'https://horizon.fandom.com/wiki/Lancehorn'
+variant:
+  base:
+    challengeLevel: 13
+    hp: 275
+action:
+  - id: lancehornCharge
+    title: Charge
+    description: The Lancehorn lowers its head and charges at its target, picking up speed as it goes.
+    effect: true
+  - id: lancehornUpwardStab
+    title: Upward Stab
+    attack: true
+  - id: lancehornKick
+    title: Kick
+    attack: true
+  - id: lancehornLeapingGore
+    title: Leaping Gore
+    attack: true
+  - id: lancehornLeapingKick
+    title: Leaping Kick
+    attack: true
+component:
+  body:
+    remove: false
+    title: Body
+    damagePercent: 100
+    loot:
+      - id: metalShards
+        title: Metal Shards
+        percent: 100
+        quantity:
+          min: 13
+          max: 26
+      - id: wire
+        title: Wire
+        percent: 100
+        quantity:
+          min: 6
+          max: 13
+      - id: machineCoreSmall
+        title: Machine Core, Small
+        percent: 40
+        quantity: 1
+      - id: lancehornHeart
+        title: Lancehorn Heart
+        percent: 40
+        quantity: 1
+      - id: lancehornLens
+        title: Lancehorn Lens
+        percent: 40
+        quantity: 1
+  drillHorns:
+    remove: false
+    damagePercent: 50
+    title: Drill Horns
+    targetDifficulty: Tricky
+    damage:
+      all: 2.0
+  freezeCanister:
+    remove: true
+    title: Freeze Canister
+    damagePercent: 25
+    targetDifficulty: Moderate
+    damage:
+      all: 2.0
+    explode:
+      rangeFeet: 30
+      element: ice
+    loot:
+      - id: chillwater
+        title: Chillwater
+        percent: 40
+        quantity: 1
+adapter:
+  dnd5e:
+    basedOn:
+      title: Deer
+      href: https://www.dndbeyond.com/monsters/deer
+    hp:
+      average: 26
+      roll: 4d8 + 8
+    speedFeet: 50
+    passive:
+      Perception: 12
+    challenge:
+      rating: 2
+      xp: 450
+    attr:
+      STR:
+        score: 11
+        bonus: "+0"
+      DEX:
+        score: 16
+        bonus: "+3"
+      CON:
+        score: 11
+        bonus: "+0"
+      INT:
+        score: 2
+        bonus: "-4"
+      WIS:
+        score: 14
+        bonus: "+2"
+      CHA:
+        score: 5
+        bonus: "-3"
+    armor:
+      num: 12
+      type: Light
+    action:
+      lancehornCharge:
+        description:
+          - For every 15 ft. the Lancehorn moved this round before hitting with an attack, the attack does +2 damage but is -1 to hit.
+          - Targets of medium or smaller size must make a DC 14 Dexterity saving throw or be knocked [prone](https://www.dndbeyond.com/compendium/rules/basic-rules/appendix-a-conditions#Prone).
+      lancehornUpwardStab:
+        melee: true
+        toHit: "+2"
+        reachFeet: 5
+        target: 1
+        onHit:
+          - average: 7
+            roll: 2d6
+            type: piercing
+      lancehornKick:
+        melee: true
+        toHit: "+2"
+        reachFeet: 5
+        target: 1
+        onHit:
+          - average: 6
+            roll: 1d6 + 2
+            type: bludgeoning
+      lancehornLeapingGore:
+        ranged: true
+        toHit: "+1"
+        description: Leap to melee range and stab with horns.
+        minRangeFeet: 15
+        reachFeet: 25
+        target: 1
+        onHit:
+          - average: 10
+            roll: 2d6 + 3
+            type: piercing
+      lancehornLeapingKick:
+        ranged: true
+        description: Leap to melee range and kick.
+        toHit: "+1"
+        minRangeFeet: 15
+        reachFeet: 25
+        target: 1
+        onHit:
+          - type: bludgeoning
+            roll: 2d6 + 1
+            average: 8

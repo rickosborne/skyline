@@ -1,50 +1,74 @@
+<!-- +template machine lancehorn dnd5ecombat -->
+
 ## Lancehorn
 
-Lancehorn are modified from the stock [Hyena](https://www.dndbeyond.com/monsters/hyena).
+Lancehorns are modified from the stock [Deer](https://www.dndbeyond.com/monsters/deer).
 For additional flavor, see the [Horizon Wiki on Lancehorn](https://horizon.fandom.com/wiki/Lancehorn).
 
 | Stat | Value |
-| --- | --- |
-| Armor Class (AC) | 13 Light |
+| ---- | ----- |
+| Armor Class (AC) | 12 Light |
 | Hit Points (HP) | 26 (4d8 + 8) |
 | Speed | 50 ft. |
 | Senses | Passive Perception 12 |
 | Challenge | 2 (450 XP) |
+| Overrides | SIGMA |
 
 | STR | DEX | CON | INT | WIS | CHA |
-| --- | --- | --- | --- | --- | --- |
+| :---: | :---: | :---: | :---: | :---: | :---: |
 | 11 | 16 | 11 | 2 | 14 | 5 |
 | +0 | +3 | +0 | -4 | +2 | -3 |
 
-_**Charge.**_ For every 15 ft. the Lancehorn moved this round before hitting with an attack, the attack does +2 damage but is -1 to hit.  Targets of medium or smaller size must make a DC 14 Dexterity saving throw or be knocked [prone](https://www.dndbeyond.com/compendium/rules/basic-rules/appendix-a-conditions#Prone).
+_**Charge.**_
+The Lancehorn lowers its head and charges at its target, picking up speed as it goes.
+For every 15 ft. the Lancehorn moved this round before hitting with an attack, the attack does +2 damage but is -1 to hit.
+Targets of medium or smaller size must make a DC 14 Dexterity saving throw or be knocked [prone](https://www.dndbeyond.com/compendium/rules/basic-rules/appendix-a-conditions#Prone).
 
 ### Actions
 
-_**Upward Stab.**_ _Melee Weapon Attack:_ +2 to hit, reach 5 ft., one target. _Hit:_ 6 (2d6) piercing damage.
+_**Upward Stab.**_
+_Melee Weapon Attack_, +2 to hit, reach 5 ft., one target.
+_Hit:_ 7 (2d6) piercing damage.
 
-_**Kick.**_ _Melee Weapon Attack:_ +2 to hit, reach 5 ft., one target. _Hit:_ 6 (1d6 + 2) bludgeoning damage.
+_**Kick.**_
+_Melee Weapon Attack_, +2 to hit, reach 5 ft., one target.
+_Hit:_ 6 (1d6 + 2) bludgeoning damage.
 
-_**Leaping Gore.**_ (Only targets enemies at 15-20 ft. range.) _Melee Weapon Attack:_ +1 to hit, leap to close range, one target. _Hit:_ 10 (2d6 + 3) piercing damage.
+_**Leaping Gore.**_
+_Ranged Weapon Attack_, +1 to hit, reach 25 ft. (min. 15 ft.), one target.
+Leap to melee range and stab with horns.
+_Hit:_ 10 (2d6 + 3) piercing damage.
 
-_**Leaping Kick.**_ (Only targets enemies at 15-20 ft. range.) _Melee Weapon Attack:_ +1 to hit, leap to close range, one target. _Hit:_ 8 (2d6 + 1) bludgeoning damage.
+_**Leaping Kick.**_
+_Ranged Weapon Attack_, +1 to hit, reach 25 ft. (min. 15 ft.), one target.
+Leap to melee range and kick.
+_Hit:_ 8 (2d6 + 1) bludgeoning damage.
 
-### Description
+### Components
 
-_**Component: Drill Horns.**_ HP 13, AC 15. Takes double damage.  Cannot be torn free.
+_**Body.**_
+AC 12, 26 HP.
 
-_**Component: Freeze Canister.**_ HP 6, AC 15. Takes double damage.  Explodes when destroyed, applying chill to creatures within 30 ft.  May be torn free for Chillwater.
+_**Drill Horns.**_
+AC 17, 13 HP.
+Takes 2x damage.
 
-_**Environment.**_ Arctic. Desert. Forest. Grassland. Hill.
+_**Freeze Canister.**_
+AC 14, 6 HP, can tear loose.
+Takes 2x damage.
+Explodes when destroyed for 2d8 ice damage to all creatures within 30 ft.
+Contains: 1x Chillwater.
 
 ### Loot
 
 | Component | Probability | Quantity |
 | --- | :---: | :---: |
-| Metal Shards | 100% | 26 |
-| Wire | 40% | 13 |
-| Sparker | 40% | 1 |
-| Metal Vessel | 40% | 1 |
-| Chillwater | 40% | 1 (in Freeze Canister) |
-| Machine Core, Small | 20% |
-| Lancehorn Lens | 50% | 1 |
+| Chillwater | 40% | 1 |
 | Lancehorn Heart | 40% | 1 |
+| Lancehorn Lens | 40% | 1 |
+| Machine Core, Small | 40% | 1 |
+| Metal Shards | 100% | 13-26 |
+| Wire | 100% | 6-13 |
+
+
+<!-- -template machine lancehorn dnd5ecombat -->

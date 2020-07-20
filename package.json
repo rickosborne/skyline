@@ -1,0 +1,26 @@
+{
+	"author": {
+		"name": "Rick Osborne",
+		"url": "https://rickosborne.org"
+	},
+	"bugs": {
+		"url": "https://github.com/rickosborne/skyline/issues"
+	},
+	"description": "Skyline is a set of tabletop role-playing game modules unofficially set in the world of Horizon",
+	"devDependencies": {
+		"@types/node": "^14.0.23",
+		"@types/yaml": "^1.9.7",
+		"ts-node": "^8.10.2",
+		"typescript": "^3.9.7",
+		"yaml": "^1.10.0"
+	},
+	"homepage": "https://github.com/rickosborne/skyline/",
+	"license": "CC-BY-NC-SA-4.0",
+	"name": "skyline",
+	"private": true,
+	"repository": "github:rickosborne/skyline",
+	"scripts": {
+		"template": "ts-node src/template/template.ts"
+	},
+	"version": "1.0.0-pre"
+}
