@@ -10,12 +10,12 @@ const templateRE = /(<!--\s+\+template\s+(\S+)\s+(\S+)\s+(\S+)\s+-->)(.*)(<!--\s
 
 function scan(dir: string): void {
 	console.log(`Scan: ${dir}`);
-	const dirents = fs.readdirSync(dir, {withFileTypes: true});
-	for (const dirent of dirents) {
-		if (dirent.isDirectory() && !dirent.name.startsWith('.')) {
-			scan(path.join(dir, dirent.name));
-		} else if (dirent.isFile() && dirent.name.endsWith('.md')) {
-			markdown(dir, dirent.name);
+	const items = fs.readdirSync(dir, {withFileTypes: true});
+	for (const item of items) {
+		if (item.isDirectory() && !item.name.startsWith('.')) {
+			scan(path.join(dir, item.name));
+		} else if (item.isFile() && item.name.endsWith('.md')) {
+			markdown(dir, item.name);
 		}
 	}
 }
@@ -30,7 +30,7 @@ function getTemplate(templateId: string): string {
 }
 
 function render(template: string, data: Record<string, any>): string {
-	const [vars, vals] = Object.keys(data).reduce(([a, b]: [any[], any[]], k: string) => {
+	const [vars, values] = Object.keys(data).reduce(([a, b]: [any[], any[]], k: string) => {
 		a.push(k)
 		b.push(data[k] as any)
 		return [a, b];
@@ -40,7 +40,7 @@ function render(template: string, data: Record<string, any>): string {
     return \`${template}\`;
   `;
 	const evaluate = new Function(...vars, body);
-	return evaluate(...vals);
+	return evaluate(...values);
 }
 
 function markdown(dir: string, fileName: string): void {

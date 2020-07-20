@@ -8,7 +8,6 @@
 	},
 	"description": "Skyline is a set of tabletop role-playing game modules unofficially set in the world of Horizon",
 	"devDependencies": {
-		"@mjstahl/boring": "^3.2.8",
 		"@types/node": "^14.0.23",
 		"@types/yaml": "^1.9.7",
 		"ts-node": "^8.10.2",
