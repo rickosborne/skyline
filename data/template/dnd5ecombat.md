@@ -8,7 +8,7 @@ For additional flavor, see the [Horizon Wiki on ${title}](${link.horizonWiki}).
 | Armor Class (AC) | ${adapter.dnd5e.armor.num} ${adapter.dnd5e.armor.type} |
 | Hit Points (HP) | ${adapter.dnd5e.hp.average || Math.floor(variant.base.hp / 10)} (${adapter.dnd5e.hp.roll}) |
 | Speed | ${adapter.dnd5e.speedFeet} ft. |
-| Skills | ${Object.keys(adapter.dnd5e.skill).sort().map(p => `${p} ${adapter.dnd5e.skill[p]}`).join(', ')} |
+${Array.isArray(adapter.dnd5e.skill) ? `| Skills | ${Object.keys(adapter.dnd5e.skill).sort().map(p => `${p} ${adapter.dnd5e.skill[p]}`).join(', ')} |` : ''}:trimIfEmpty:
 | Senses | ${Object.keys(adapter.dnd5e.passive).sort().map(p => `Passive ${p} ${adapter.dnd5e.passive[p]}`).join(', ')} |
 | Challenge | ${adapter.dnd5e.challenge.rating} (${adapter.dnd5e.challenge.xp} XP) |
 | Overrides | ${overrideSource} |
@@ -65,14 +65,14 @@ ${Object.keys(component).sort((a, b) => a === 'body' ? -1 : b === 'body' ? 1 : a
   const ac = 'AC ' + (adapter.dnd5e.armor.num + acMod);
   const machineHP = adapter.dnd5e.hp.average || Math.floor(variant.base.hp / 10);
   const componentHP = Math.floor(machineHP * c.damagePercent / 100.0) + ' HP';
-  const tear = c.remove ? 'can be torn off' : 'cannot be torn off'; 
+  const tear = c.remove ? 'can tear loose' : null; 
   const rename = {
     shock: 'lightning'
   };
   const explode = c.explode == null ? null : `Explodes when destroyed for 2d8 ${c.explode.element} damage to all creatures within ${c.explode.rangeFeet} ft.`;
   const damage = c.damage == null ? null : ('Takes ' + Object.keys(c.damage).map(d => d === 'all' ? `${c.damage.all}x damage` : `${c.damage[d]}x ${rename[d] || d} damage`).join(', ') + '.');
   const contains = c.loot == null || cid === 'body' ? null : ('Contains: ' + c.loot.map(l => `${typeof l.quantity === 'number' ? l.quantity : l.quantity.min + '-' + l.quantity.max}x ${l.title}`).join(', ') + '.');
-  return [title, `${ac}, ${componentHP}, ${tear}.`, damage, c.targetNotes, explode, contains].filter(t => t != null).join('\n');
+  return [title, [ac, componentHP, tear].filter(t => t != null).join(', ') + '.', damage, c.targetNotes, explode, contains].filter(t => t != null).join('\n');
 }).join('\n\n')}
 
 ### Loot

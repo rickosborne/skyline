@@ -10,7 +10,6 @@ For additional flavor, see the [Horizon Wiki on Scrapper](https://horizon.fandom
 | Armor Class (AC) | 11 Light |
 | Hit Points (HP) | 22 (4d8 + 4) |
 | Speed | 50 ft. |
-| Skills | Perception +3 |
 | Senses | Passive Perception 13 |
 | Challenge | 2 (450 XP) |
 | Overrides | SIGMA |
@@ -64,16 +63,16 @@ _Hit:_ 9 (1d8 + 4) fire damage.
 ### Components
 
 _**Body.**_
-AC 11, 22 HP, cannot be torn off.
+AC 11, 22 HP.
 
 _**Power Cell.**_
-AC 16, 5 HP, can be torn off.
+AC 16, 5 HP, can tear loose.
 Takes 3x lightning damage.
 Explodes when destroyed for 2d8 fire damage to all creatures within 30 ft.
 Contains: 1x Sparker.
 
 _**Radar.**_
-AC 13, 11 HP, can be torn off.
+AC 13, 11 HP, can tear loose.
 Takes 2x damage.
 
 ### Loot

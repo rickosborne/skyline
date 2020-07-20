@@ -40,7 +40,8 @@ function render(template: string, data: Record<string, any>): string {
     return \`${template}\`;
   `;
 	const evaluate = new Function(...vars, body);
-	return evaluate(...values);
+	const rendered: string = evaluate(...values);
+	return rendered.replace(/\n[ \x09]*:trimIfEmpty:/sg, '');
 }
 
 function markdown(dir: string, fileName: string): void {

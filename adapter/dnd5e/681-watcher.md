@@ -10,7 +10,6 @@ For additional flavor, see the [Horizon Wiki on Watcher](https://horizon.fandom.
 | Armor Class (AC) | 13 Light |
 | Hit Points (HP) | 9 (2d8) |
 | Speed | 40 ft. |
-| Skills | Perception +3 |
 | Senses | Passive Perception 13 |
 | Challenge | 1 (200 XP) |
 | Overrides | PSI |
@@ -55,11 +54,11 @@ _Hit:_ 6 (1d8 + 2) bludgeoning damage.
 ### Components
 
 _**Body.**_
-AC 13, 9 HP, cannot be torn off.
+AC 13, 9 HP.
 Takes 2x lightning damage.
 
 _**Eye.**_
-AC 15, 9 HP, cannot be torn off.
+AC 15, 9 HP.
 Takes 2x damage.
 Only vulnerable to piercing weapons in a 30-degree cone in front of the Watcher.
 Contains: 1x Watcher Lens.
