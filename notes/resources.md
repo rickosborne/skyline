@@ -13,3 +13,12 @@ Miscellaneous resources with source material.
   * [John Gonzalez on Writing Horizon Zero Dawn](https://www.youtube.com/watch?v=a4P7uaaoRcM), 2018-01-16
   * [Mathijs De Jonge on Designing Horizon Zero Dawn](https://www.youtube.com/watch?v=51xnAYusKh0), 2018-02-02
 * [How Horizon Zero Dawn was designed](https://www.youtube.com/watch?v=Us_S7aNyEMc), 2017-11-01 by [The Madqueen Show](https://www.youtube.com/channel/UC0G5rpOFcY6pOdtKsCE0p2A).
+
+## Misc HZD
+
+* [HZD Interactive Map by SwissGameGuides](https://swissgameguides.com/maps/horizon_zero_dawn/world/interactive_map.html)
+
+## Systems and Content
+
+* [Community Content Programs](https://support.drivethrurpg.com/hc/en-us/categories/201257283-Community-Content-Programs)
+  * [Monte Cook - Cypher System Creator](https://support.drivethrurpg.com/hc/en-us/articles/208596786-Monte-Cook-Cypher-System-Creator)
