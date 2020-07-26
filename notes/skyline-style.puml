@@ -1,0 +1,16 @@
+' PlantUML stylesheet for Skyline
+
+' Colors
+' Sky Blue: #1d86da
+' Very light gray: #f3f3f3
+' Background gray: #777777
+
+skinparam shadowing false
+skinparam BackgroundColor white
+skinparam DefaultFontColor #222222
+skinparam DefaultFontName Roboto Condensed
+skinparam TitleFontName Roboto
+skinparam ArrowColor #777777
+
+skinparam PackageBackgroundColor #f3f3f3
+skinparam PackageBorderColor #f3f3f3

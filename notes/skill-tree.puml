@@ -1,0 +1,83 @@
+@startuml
+
+!include skyline-style.puml
+
+title Horizon Zero Dawn Skill Tree
+
+skinparam RectangleBackgroundColor #1d86da
+skinparam RectangleBorderColor #1d86da
+skinparam RectangleFontColor #ffffff
+
+package Prowler {
+	rectangle "Silent Strike (1)" as SilentStrike
+	rectangle "Strike From Above (2)" as StrikeFromAbove
+	SilentStrike <-- StrikeFromAbove
+	rectangle "Strike From Below (3)" as StrikeFromBelow
+	StrikeFromAbove <-- StrikeFromBelow
+	rectangle "Leader Strike (3)" as LeaderStrike
+	StrikeFromBelow <-- LeaderStrike
+	rectangle "Hunter Reflexes (1)" as HunterReflexes
+	rectangle "Balanced Aim (2)" as BalancedAim
+	HunterReflexes <-- BalancedAim
+	rectangle "Strong Strike (3)" as StrongStrike
+	StrikeFromAbove <-- StrongStrike
+	rectangle "Strong Strike+ (3)" as StrongStrikePlus
+	StrongStrike <-- StrongStrikePlus
+	rectangle "Silent Drop (1)" as SilentDrop
+	rectangle "Low Profile (2)" as LowProfile
+	SilentDrop <-- LowProfile
+	rectangle "Dodge Prowess (3)" as DodgeProwess
+	LowProfile <-- DodgeProwess
+	rectangle "Quiet Sprint (3)" as QuietSprint
+	DodgeProwess <-- QuietSprint
+}
+
+package Brave {
+	rectangle "Concentration (1)" as Concentration
+	rectangle "Heavy Lifter (2)" as HeavyLifter
+	Concentration <-- HeavyLifter
+	rectangle "Concentration+ (3)" as ConcentrationPlus
+	HeavyLifter <-- ConcentrationPlus
+	rectangle "Fast Reload (3)" as FastReload
+	ConcentrationPlus <-- FastReload
+	rectangle "Critical Hit (1)" as CriticalHit
+	rectangle "Critical Hit+ (2)" as CriticalHitPlus
+	CriticalHit <-- CriticalHitPlus
+	rectangle "Double Shot (3)" as DoubleShot
+	HeavyLifter <-- DoubleShot
+	rectangle "Triple Shot (3)" as TripleShot
+	DoubleShot <-- TripleShot
+	rectangle "Precision (1)" as Precision
+	rectangle "Precision+ (2)" as PrecisionPlus
+	Precision <-- PrecisionPlus
+	rectangle "Knock Down (3)" as KnockDown
+	PrecisionPlus <-- KnockDown
+	rectangle "Fighting Back (3)" as FightingBack
+	KnockDown <-- FightingBack
+}
+
+package Forager {
+	rectangle "Lure Call (1)" as LureCall
+	rectangle "Combat Override (2)" as CombatOverride
+	LureCall <-- CombatOverride
+	rectangle "Combat Override+ (3)" as CombatOverridePlus
+	CombatOverride <-- CombatOverridePlus
+	rectangle "Call Mount+ (3)" as CallMountPlus
+	CombatOverridePlus <-- CallMountPlus
+	rectangle "Healer (1)" as Healer
+	rectangle "Herbalist (2)" as Herbalist
+	Healer <-- Herbalist
+	rectangle "Gatherer (1)" as Gatherer
+	rectangle "Scavenger (2)" as Scavenger
+	Gatherer <-- Scavenger
+	rectangle "Disarm Traps (3)" as DisarmTraps
+	rectangle "Tinker (3)" as Tinker
+	DisarmTraps <-- Tinker
+	Scavenger <-- DisarmTraps
+	rectangle "Ammo Crafter (3)" as AmmoCrafter
+	Scavenger <-- AmmoCrafter
+	rectangle "Scavenger+ (3)" as ScavengerPlus
+	AmmoCrafter <-- ScavengerPlus
+}
+
+@enduml
