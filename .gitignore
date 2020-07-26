@@ -2,3 +2,8 @@
 *.iml
 node_modules/
 .DS_Store
+
+# Generated when Jekyll is run locally
+_site/
+Gemfile
+Gemfile.lock
