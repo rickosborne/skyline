@@ -20,6 +20,7 @@
 	"private": true,
 	"repository": "github:rickosborne/skyline",
 	"scripts": {
+		"jekyll:serve": "bundle exec jekyll serve",
 		"template": "ts-node src/template/template.ts"
 	},
 	"version": "1.0.0-pre"
