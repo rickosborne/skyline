@@ -31,4 +31,5 @@ Pren does wake, and though he does not know what happened, he is coherent.
 He complains of being sore all over, and thinks he just missed an axe swing and fell.
 Using whatever means you think appropriate, you'll need to persuade him to sit or lie on the cart so you can take him back to Mother's Watch.
 
+{:.story-links}
 [When you're ready to go, continue on to 105.](105-striders.md){:.story-link.story-link-continue}

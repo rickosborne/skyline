@@ -32,4 +32,5 @@ Remembering the sentiment against the Old Ones from last night, you don't think 
 Using whatever means appropriate to your system, figure out a way to get them attached.
 That could mean persuading the other, trying to attach them without anyone noticing, convincing the others to go for help, or whatever else you can think of.
 
+{:.story-links}
 [Once you've done so, continue on to 104.](104-clear.md){:.story-link.story-link-continue}

@@ -35,4 +35,5 @@ If they are wearing a Sensor Pad, the Focus overlay reveals a message stating `R
 Otherwise, the message is `Unknown pharmacological effect detected.  Attach a sensor pad for further analysis.` and lingers before fading.
 If the party brought any Sensor Pads with them, and the injured party member can do it stealthily, they may attach it while they walk, causing the Focus to give the first message.
 
+{:.story-links}
 [Continue on to entry 103.](103-cardiac-event.md){:.story-link.story-link-continue}

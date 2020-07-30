@@ -19,4 +19,5 @@ You are welcome to talk to the locals if you'd like to get a sense for how the p
 
 It's easy enough to find beds in a lodge for the night, and start out on foot in the morning.
 
+{:.story-links}
 [Once you're on the road, continue with entry 101.](101-road-to-mothers-watch.md){:.story-link.story-link-continue}

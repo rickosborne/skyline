@@ -12,4 +12,5 @@ Attempts to get Brom to wear a Focus or Sensor Pad will be met with hostility fr
 
 Olara's patience eventually wears thin, and the party heads back down the mountain.
 
+{:.story-links}
 [Continue on to entry 142.](142-back-down.md){:.story-link.story-link-continue}

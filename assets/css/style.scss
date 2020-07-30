@@ -6,6 +6,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Recursive:slnt,wght,MONO@-15..0,300..1000,0..1&display=swap');
 
 :root {
+	// In general, blues are used for most shading.
+	// For text, blues are used for read-along blocks.
 	--barely-blue: hsl(208, 80%, 99%);
 	--noon-blue: hsl(208, 80%, 88%);
   --morning-blue: hsl(208, 80%, 66%);
@@ -18,6 +20,7 @@
 	--evening-blue-25: hsla(208, 80%, 44%, 0.25);
 	--dusk-blue-25: hsla(208, 80%, 33%, 0.25);
 
+	// For text, oranges are used for Story Links.
 	--barely-orange: hsl(32, 80%, 99%);
 	--noon-orange: hsl(32, 80%, 88%);
 	--morning-orange: hsl(32, 80%, 66%);
@@ -25,6 +28,15 @@
 	--dusk-orange: hsl(32, 80%, 33%);
 	--night-orange: hsl(32, 80%, 22%);
 	--midnight-orange: hsl(32, 80%, 11%);
+
+	// For text, greens are used for Narrator Note blocks.
+	--barely-green: hsl(96, 80%, 99%);
+	--noon-green: hsl(96, 80%, 88%);
+	--morning-green: hsl(96, 80%, 66%);
+	--evening-green: hsl(96, 80%, 44%);
+	--dusk-green: hsl(96, 80%, 33%);
+	--night-green: hsl(96, 80%, 22%);
+	--midnight-green: hsl(96, 80%, 11%);
 
 	//Recursive
 	--mono: "MONO" 0; /* Monospace: Sans (natural-width) or Mono (fixed-width) */
@@ -122,6 +134,14 @@ body {
 		border-left: 0.25em solid var(--noon-blue);
 	}
 
+	p {
+		text-indent: 1em;
+
+		&.story-links {
+			text-indent: inherit;
+		}
+	}
+
 	font-size: inherit;
 	padding: 2em;
 }
@@ -177,5 +197,20 @@ em {
 	&:visited {
 		color: var(--dusk-orange);
 		background-color: var(--barely-orange);
+	}
+}
+
+.narrator-note {
+	color: var(--dusk-green);
+	background-color: var(--barely-green);
+	border-left: 0.25em solid var(--noon-green);
+	padding: 1em;
+	display: block;
+
+	header {
+		display: block;
+		color: var(--night-green);
+		font-variation-settings: var(--wght-bolder);
+		font-weight: 600;
 	}
 }

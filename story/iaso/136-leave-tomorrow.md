@@ -25,7 +25,7 @@ He thinks you can be there and back again by mid-morning, if you're willing.
 
 <aside class="narrator-note">
 <header>Narrator note:</header>
-Again, if your session is short on time, you may want to skip this optional side-story.
+<p>Again, if your session is short on time, you may want to skip this optional side-story.</p>
 </aside>
 
 {:.story-links.story-links-one}
