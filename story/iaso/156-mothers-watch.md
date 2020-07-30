@@ -50,4 +50,4 @@ Skilled persuaders can only get the guards to reveal that the High Matriarchs ha
 
 The guards, tradesmen, and merchants will direct the party to speak to Teb, a Nora man who is coordinating the construction of new lodges.
 
-Continue to entry [129: Teb](129-teb.md) when you're ready to speak to him.
+[When you're ready to speak to him, continue to entry 129: Teb.](129-teb.md){:.story-link.story-link-continue}

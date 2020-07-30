@@ -32,6 +32,6 @@ Watching them interact, it becomes clear Olara is attempting to help Brom work t
 If someone asks what is wrong with Brom, Olara will rebuff the question and politely ask you to move on.
 Should you encounter her again, her attitude toward you will be cold and distant.
 
-If you brought IASO, and a member of your party could step back around the boulder while the others talk, continue on to entry [141](141-iaso-brom.md).
-
-Otherwise, wish the two well and head back down the mountain with entry [142](142-back-down.md).
+{:.story-links.story-links-one}
+[If you brought IASO, and a member of your party could step back around the boulder while the others talk, continue on to entry 141.](141-iaso-brom.md){:.story-link.story-link-if}
+[Otherwise, wish the two well and head back down the mountain with entry 142.](142-back-down.md){:.story-link.story-link-else}

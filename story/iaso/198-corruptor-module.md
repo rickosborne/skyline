@@ -27,4 +27,4 @@ The icons are obvious: the curved body of a Watcher, and the quadrupedal shape o
 If you pass the Override Controller around among your party and let it synchronize with each, you'll notice an additional list under the heading `Friendlies`.
 Another list of icons, these are stylized renderings of your faces.
 
-Continue on to [199](199-what-next.md).
+[Continue on to 199.](199-what-next.md){:.story-link.story-link-continue}

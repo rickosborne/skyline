@@ -3,10 +3,179 @@
 
 @import "{{ site.theme }}";
 
+@import url('https://fonts.googleapis.com/css2?family=Recursive:slnt,wght,MONO@-15..0,300..1000,0..1&display=swap');
+
+:root {
+	--barely-blue: hsl(208, 80%, 99%);
+	--noon-blue: hsl(208, 80%, 88%);
+  --morning-blue: hsl(208, 80%, 66%);
+	--evening-blue: hsl(208, 80%, 44%);
+	--dusk-blue: hsl(208, 80%, 33%);
+	--night-blue: hsl(208, 80%, 22%);
+	--midnight-blue: hsl(208, 80%, 11%);
+
+	--evening-blue-50: hsla(208, 80%, 44%, 0.5);
+	--evening-blue-25: hsla(208, 80%, 44%, 0.25);
+	--dusk-blue-25: hsla(208, 80%, 33%, 0.25);
+
+	--barely-orange: hsl(32, 80%, 99%);
+	--noon-orange: hsl(32, 80%, 88%);
+	--morning-orange: hsl(32, 80%, 66%);
+	--evening-orange: hsl(32, 80%, 44%);
+	--dusk-orange: hsl(32, 80%, 33%);
+	--night-orange: hsl(32, 80%, 22%);
+	--midnight-orange: hsl(32, 80%, 11%);
+
+	//Recursive
+	--mono: "MONO" 0; /* Monospace: Sans (natural-width) or Mono (fixed-width) */
+	--casl: "CASL" 0; /* 0 (Linear) to 1 (Casual) */
+	--wght: "wght" 300; /* Weight: Light to ExtraBlack; usually set with `font-weight` */
+	--slnt: "slnt" 0; /* Slant: 0 to -15 degrees, auto cursive at -14 */
+	--CRSV: "CRSV" 0.5;  /* Cursive: always roman, auto substitution, or always cursive */
+	--wght-bolder: "wght" 600;
+	--wght-boldish: "wght" 500;
+	--casl-most: "CASL" 1;
+	--slnt-most: "slnt" -15;
+	--crsv-most: "CRSV" 1;
+	--crsv-least: "CRSV" 0;
+}
+
+html {
+	background-color: #333;
+}
+
+body {
+	font-family: Recursive, Roboto, "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-variation-settings: var(--mono), var(--casl), var(--wght), var(--slnt), var(--CRSV);
+	font-weight: 300;
+	font-size: 120%;
+	color: var(--midnight-blue);
+	background-color: white;
+
+	max-width: 60em;
+	margin: 0 auto;
+}
+
 .page-header {
   padding: 0.5rem;
 
   a.btn {
     display: none;
   }
+
+	background-color: var(--evening-blue);
+	background-image: linear-gradient(180deg, var(--evening-blue), var(--dusk-blue));
+
+	display: flex;
+	align-items: center;
+}
+
+.project-name {
+	margin-bottom: 0;
+	margin-right: 2rem;
+	border-right: thin solid rgba(255, 255, 255, 0.5);
+	padding-right: 2rem;
+	text-transform: capitalize;
+}
+
+.project-tagline {
+	margin: 0;
+}
+
+.main-content {
+	h1 {
+		color: var(--evening-blue);
+		border-bottom: thin solid var(--evening-blue-25);
+		font-variation-settings: var(--casl-most), var(--wght-bolder);
+		font-weight: 600;
+		letter-spacing: -0.04em;
+		font-size: 1.5rem;
+	}
+	h2 {
+		color: var(--dusk-blue);
+		border-bottom: thin solid var(--dusk-blue-25);
+		font-variation-settings: var(--casl-most), var(--wght-bolder);
+		font-weight: 600;
+		letter-spacing: -0.04em;
+		font-size: 1.4rem;
+	}
+	h3 {
+		color: var(--night-blue);
+		font-variation-settings: var(--casl-most), var(--wght-bolder);
+		font-weight: 600;
+		letter-spacing: -0.04em;
+		font-size: 1.3rem;
+	}
+	h4 {
+		color: var(--night-blue);
+		font-variation-settings: var(--casl-most), var(--wght-boldish), var(--slnt-most);
+		font-weight: 500;
+		letter-spacing: -0.04em;
+		font-size: 1.3rem;
+	}
+
+	blockquote {
+		font-variation-settings: var(--crsv-most), var(--casl-most), var(--slnt-most);
+		color: #555;
+		background-color: var(--barely-blue);
+		padding: 1em;
+		border-left: 0.25em solid var(--noon-blue);
+	}
+
+	font-size: inherit;
+	padding: 2em;
+}
+
+a {
+	color: var(--dusk-blue);
+	font-variation-settings: var(--wght-bolder);
+	font-weight: 600;
+}
+
+a:visited {
+	color: var(--night-blue);
+}
+
+a:hover {
+	color: var(--dusk-blue);
+	background-color: var(--noon-blue);
+}
+
+.site-footer-credits {
+	display: none;
+}
+
+strong, th {
+	font-variation-settings: var(--wght-bolder);
+}
+
+em {
+	font-variation-settings: var(--slnt-most);
+}
+
+.story-links {
+
+	.story-link {
+		border-left-color: var(--morning-orange);
+	}
+}
+
+.story-link {
+	color: var(--dusk-orange);
+	background-color: var(--barely-orange);
+	border-left: 0.25em solid var(--noon-orange);
+	padding: 1em;
+	display: block;
+
+	&:hover, &:visited:hover {
+		text-decoration: none;
+		background-color: var(--noon-orange);
+		border-left-color: var(--morning-orange);
+		color: var(--night-orange);
+	}
+
+	&:visited {
+		color: var(--dusk-orange);
+		background-color: var(--barely-orange);
+	}
 }

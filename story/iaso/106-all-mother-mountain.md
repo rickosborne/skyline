@@ -60,4 +60,4 @@ With this, he looks pointedly at your Focuses and weapons.
 
 Teb thanks each party member individually, before heading back down toward the main gate.
 
-Continue on to entry [198](198-corruptor-module.md).
+[Continue on to entry 198.](198-corruptor-module.md){:.story-link.story-link-continue}

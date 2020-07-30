@@ -20,4 +20,4 @@ The group is not hard to find.
 It looks like they are in the middle of processing the second tree when you arrive.
 They appreciate the help, taking a few minutes to show their process, and you pitch in.
 
-Continue on to entry [103](103-cardiac-event.md).
+[Continue on to entry 103.](103-cardiac-event.md){:.story-link.story-link-continue}

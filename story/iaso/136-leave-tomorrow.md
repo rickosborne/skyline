@@ -28,5 +28,6 @@ He thinks you can be there and back again by mid-morning, if you're willing.
 Again, if your session is short on time, you may want to skip this optional side-story.
 </aside>
 
-If you're willing to make the trip immediately, continue on to entry [137](137-leave-morning.md).
-Otherwise, if explain to Teb that you're not up for the trip, continue on to entry [191](191-not-interested.md).
+{:.story-links.story-links-one}
+[If you're willing to make the trip immediately, continue on to entry 137.](137-leave-morning.md){:.story-link.story-link-if}
+[Otherwise, explain to Teb that you're not up for the trip, then continue on to entry 191.](191-not-interested.md){:.story-link.story-link-else}

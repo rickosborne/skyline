@@ -35,4 +35,4 @@ A search of the room, however, does not reveal anything that looks like what is 
 
 After another few seconds the outline of the character's body and the error message will fade away, returning the Focus to normal operation.
 
-Continue with the next entry, [118](118-focus.md).
+[Continue with the next entry, 118.](118-focus.md){:.story-link.story-link-continue}

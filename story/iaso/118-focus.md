@@ -94,4 +94,4 @@ It therefore includes the high-level directives which prevent it from disclosing
 In practical terms, this means it won't speak directly about GAIA or the Subordinate Functions by name — only in vague, indistinct generalities.
 </aside>
 
-When asked where the data storage facility is, IASO guides you to the wall at entry [168](168-power-wall.md).
+[When asked where the data storage facility is, IASO guides you to the wall at entry 168.](168-power-wall.md){:.story-link.story-link-continue}
