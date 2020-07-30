@@ -15,4 +15,5 @@ Everyone gets down into the cave, backing away from the ledge and into shadow.
 You can hear the high-pitched pulse of the Scrappers' scanning components firing one after another.
 Scrappers walk by the hole, but seem unable to detect you.
 
-Continue with entry [173](173-ruins-entrance.md).
+{:.story-links}
+[Continue with entry 173.](173-ruins-entrance.md){:.story-link.story-link-continue}

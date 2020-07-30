@@ -15,4 +15,5 @@ If you are detected or choose to confront them, use your System Adapter to resol
 Remember that when the Watcher is alerted to your presence it will immediately alert all other machines in the area.
 Longhorns, with their herd alertness, do the same thing.
 
-Once you're past the machines, continue up the trail with entry [102](102-olaras-cave.md).
+{:.story-links}
+[Once you're past the machines, continue up the trail with entry 102.](102-olaras-cave.md){:.story-link.story-link-continue}

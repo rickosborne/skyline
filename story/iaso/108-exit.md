@@ -34,4 +34,5 @@ You may also attempt to sneak past the Scrappers with Moderate difficulty.
 If the Scrappers detect the party, they will chase all the way to Mother's Watch, where they will be killed by Nora Braves, but the party will not get a chance to loot the machines.
 The people of Mother's Watch are unsurprised by this, and will chide you for being out after dark, but are otherwise just grateful you've arrived.
 
-Continue on with entry [156: Mother's Watch](156-mothers-watch.md).
+{:.story-links}
+[Continue on with entry 156: Mother's Watch.](156-mothers-watch.md){:.story-link.story-link-continue}

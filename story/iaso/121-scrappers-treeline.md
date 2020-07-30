@@ -15,4 +15,6 @@ If appropriate for your system, all party members make a perception check agains
 Anyone who fails falls in the hole taking Light damage.
 
 Otherwise, even characters who notice the hole decide it's probably safer than being detected by that many Scrappers.
-Climb down into the cave and continue with entry [173](173-ruins-entrance.md).
+
+{:.story-links}
+[Climb down into the cave and continue with entry 173.](173-ruins-entrance.md){:.story-link.story-link-continue}

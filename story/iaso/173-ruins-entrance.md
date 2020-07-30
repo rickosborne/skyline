@@ -20,6 +20,6 @@ At least one person will need to create light.
 
 When they do, the walls reveal what everyone was already expecting: you've stumbled into ruins of the Old Ones.
 Find the map for [Mother's Watch Ruins](510-mothers-watch-ruins.md).
-The entry numbers marked with a triangle :triangle: require a Focus to see.
+The entry numbers marked with a triangle &#9658; require a Focus to see.
 If you're just starting out, you probably don't have a Focus yet!
 The others, marked with a circle, can be seen and investigated by anyone.

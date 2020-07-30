@@ -16,4 +16,5 @@ If you did not convince the others to leave, two of them will assist you if you 
 One has a bow with normal arrows, while the other will use an axe.
 Otherwise, they will form up around Pren and prevent the Striders from getting too close, but without causing any significant damage.
 
-When you have resolved the encounter, continue on to [106](106-all-mother-mountain.md).
+{:.story-links}
+[When you have resolved the encounter, continue on to 106.](106-all-mother-mountain.md){:.story-link.story-link-continue}

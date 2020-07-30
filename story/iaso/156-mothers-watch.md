@@ -33,10 +33,10 @@ A few people may notice the party's Focuses, but it's easy enough to pass them o
 
 <aside class="narrator-note">
 <header>Narrator note:</header>
-Most people are not aware of Aloy's delves into the Cauldrons or the truth about AIs or the Old Ones.
-That is, most don't have any better sense of history than they did before the attacks.
-Aloy was tight-lipped about her discoveries, only dropping hints of the truth here and there to very few people.
-Even her ability to ride machines is already beginning to fade into mythos — most people aren't reasoning about how she was able to do it, instead chalking it up to something mystical.
+<p>Most people are not aware of Aloy's delves into the Cauldrons or the truth about AIs or the Old Ones.
+That is, most don't have any better sense of Old Ones history than they did before the attacks.</p>
+<p>Aloy was tight-lipped about her discoveries, only dropping hints of the truth here and there to very few people.
+Even her ability to ride machines is already beginning to fade into mythos — most people aren't reasoning about how she was able to do it, instead chalking it up to something mystical.</p>
 </aside>
 
 The farther up the hills toward Mother's Heart you go, the more refugees you see.
@@ -50,4 +50,5 @@ Skilled persuaders can only get the guards to reveal that the High Matriarchs ha
 
 The guards, tradesmen, and merchants will direct the party to speak to Teb, a Nora man who is coordinating the construction of new lodges.
 
-Continue to entry [129: Teb](129-teb.md) when you're ready to speak to him.
+{:.story-links}
+[When you're ready to speak to him, continue to entry 129: Teb.](129-teb.md){:.story-link.story-link-continue}

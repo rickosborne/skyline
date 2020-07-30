@@ -37,5 +37,6 @@ If asked what will happen if they choose not to allow it:
 > My only function is to provide medical assistance.
 > Without my database, I'm sorry to say I will be of limited use to you.
 
-If players choose to press the MAU to the glowing wall unit, do so with entry [134](134-synchronize.md).
-Otherwise, continue with entry [186](186-no-synchronize.md).
+{:.story-links.story-links-one}
+[If players choose to press the MAU to the glowing wall unit, do so with entry 134.](134-synchronize.md){:.story-link.story-link-if}
+[Otherwise, continue with entry 186.](186-no-synchronize.md){:.story-link.story-link-else}

@@ -38,4 +38,5 @@ IASO will speak aloud again:
 If players choose to leave IASO in this facility, its MAU may be left here or where it was discovered.
 Otherwise, it can be carried in a pack.
 
-When you are done investigating other areas on the map, make your way back out to the main room and continue on to entry [107](107-lab.md).
+{:.story-links}
+[When you are done investigating other areas on the map, make your way back out to the main room and continue on to entry 107.](107-lab.md){:.story-link.story-link-continue}

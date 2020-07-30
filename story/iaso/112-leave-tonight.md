@@ -86,5 +86,6 @@ As the ground begins to flatten out, Olara puts a hand on Brom's shoulder, bring
 She tells you the base of the mountain will take you straight back to Mother's Watch.
 She thanks each of your party in turn before taking Brom by the hand and walking back up the trail.
 
-If you brought IASO with you, continue on to [123](123-iaso-brom-olara.md).
-Otherwise, continue on to [124](124-back-to-mothers-watch.md).
+{:.story-links.story-links-one}
+[If you brought IASO with you, continue on to 123.](123-iaso-brom-olara.md){:.story-link.story-link-if}
+[Otherwise, continue on to 124.](124-back-to-mothers-watch.md){:.story-link.story-link-else}

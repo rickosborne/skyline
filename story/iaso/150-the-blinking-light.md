@@ -29,5 +29,6 @@ The search finds something else: a box of triangular metal chips which look fami
 The dozen Focuses all seem to be in working order, and it will occur to at least one character to attach theirs to an ear as they'd seen Aloy do it.
 That person shows the others how to do it, and one by one the party is connected to the Focus network.
 
-If you have any blind or deaf party members, or members with persistent medical conditions, continue on to entry [117](117-medical-focus.md).
-Otherwise, continue on to entry [118](118-focus.md).
+{:.story-links.story-links-one}
+[If you have any blind or deaf party members, or members with persistent medical conditions, continue on to entry 117.](117-medical-focus.md){:.story-link.story-link-if}
+[Otherwise, continue on to entry 118.](118-focus.md){:.story-link.story-link-else}

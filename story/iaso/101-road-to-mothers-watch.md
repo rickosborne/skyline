@@ -21,6 +21,7 @@ Read aloud:
 If your party is escorting anyone, such as the father and son from the Hooks section, they will get excited and sprint for Mother's Watch.
 You're too tired from a long day of walking, so you yell that you'll catch up, keeping your pace.
 
-If you have anyone in your party who is deaf, continue on with entry [146](146-scrappers-deaf.md).
-If anyone in your party is blind, continue on with entry [147](147-striders-blind.md).
-Otherwise, continue with entry [162](162-striders-surprise.md).
+{:.story-links.story-links-one}
+[If you have anyone in your party who is deaf, continue on with entry 146.](146-scrappers-deaf.md){:.story-link.story-link-if}
+[If anyone in your party is blind, continue on with entry 147.](147-striders-blind.md){:.story-link.story-link-elseif}
+[Otherwise, continue with entry 162.](162-striders-surprise.md){:.story-link.story-link-else}
