@@ -106,15 +106,15 @@ adapter:
       title: Hyena
       href: https://www.dndbeyond.com/monsters/hyena
     hp:
-      average: 22
-      roll: 4d8 + 4
+      average: 44
+      roll: 8d8 + 8
     speedFeet: 50
     skill:
       Perception: "+3"
     passive:
       Perception: 13
     challenge:
-      rating: 2
+      rating: 1/4
       xp: 450
     attr:
       STR:
@@ -181,7 +181,7 @@ adapter:
         target: 3
         save:
           attribute: Dexterity
-          difficulty: 14
+          difficulty: 13
           half: true
         onHit:
           - type: fire
@@ -198,7 +198,7 @@ adapter:
         target: all
         save:
           attribute: Dexterity
-          difficulty: 14
+          difficulty: 13
           half: true
         onHit:
           - type: fire
