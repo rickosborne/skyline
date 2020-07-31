@@ -94,15 +94,15 @@ adapter:
       title: Deinonychus
       href: https://www.dndbeyond.com/monsters/deinonychus
     hp:
-      average: 9
-      roll: 2d8
+      average: 36
+      roll: 8d8
     speedFeet: 40
     skill:
       Perception: "+3"
     passive:
       Perception: 13
     challenge:
-      rating: 1
+      rating: 1/4
       xp: 200
     attr:
       STR:
@@ -146,7 +146,7 @@ adapter:
         ranged: true
         onHit:
           - type: lightning
-            average: 3
+            average: 4
             roll: 1d8 - 1
       watcherHeadStrike:
         melee: true
@@ -155,8 +155,8 @@ adapter:
         target: 1
         onHit:
           - type: bludgeoning
-            average: 6
-            roll: 1d8 + 2
+            average: 5
+            roll: 1d8 + 1
       watcherTailStrike:
         melee: true
         toHit: "+4"
@@ -164,5 +164,5 @@ adapter:
         target: 1
         onHit:
           - type: bludgeoning
-            average: 6
-            roll: 1d8 + 2
+            average: 5
+            roll: 1d8 + 1

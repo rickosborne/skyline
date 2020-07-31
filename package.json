@@ -8,8 +8,12 @@
 	},
 	"description": "Skyline is a set of tabletop role-playing game modules unofficially set in the world of Horizon",
 	"devDependencies": {
+		"@types/chai": "^4.2.12",
+		"@types/mocha": "^8.0.0",
 		"@types/node": "^14.0.23",
 		"@types/yaml": "^1.9.7",
+		"chai": "^4.2.0",
+		"mocha": "^8.1.0",
 		"ts-node": "^8.10.2",
 		"typescript": "^3.9.7",
 		"yaml": "^1.10.0"
@@ -21,7 +25,8 @@
 	"repository": "github:rickosborne/skyline",
 	"scripts": {
 		"jekyll:serve": "bundle exec jekyll serve",
-		"template": "ts-node src/template/template.ts"
+		"template": "ts-node src/template/template.ts",
+		"test": "mocha"
 	},
 	"version": "1.0.0-pre"
 }

@@ -87,13 +87,13 @@ adapter:
       title: Deer
       href: https://www.dndbeyond.com/monsters/deer
     hp:
-      average: 26
-      roll: 4d8 + 8
+      average: 52
+      roll: 8d8 + 16
     speedFeet: 50
     passive:
       Perception: 12
     challenge:
-      rating: 2
+      rating: '1/2'
       xp: 450
     attr:
       STR:
@@ -148,8 +148,8 @@ adapter:
         reachFeet: 25
         target: 1
         onHit:
-          - average: 10
-            roll: 2d6 + 3
+          - average: 8
+            roll: 2d6 + 1
             type: piercing
       lancehornLeapingKick:
         ranged: true
