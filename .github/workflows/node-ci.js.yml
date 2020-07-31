@@ -10,7 +10,7 @@ on:
     branches: [ gh-pages ]
 
 jobs:
-  build:
+  node-ci:
 
     runs-on: ubuntu-latest
 
