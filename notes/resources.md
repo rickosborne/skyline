@@ -22,3 +22,4 @@ Miscellaneous resources with source material.
 
 * [Community Content Programs](https://support.drivethrurpg.com/hc/en-us/categories/201257283-Community-Content-Programs)
   * [Monte Cook - Cypher System Creator](https://support.drivethrurpg.com/hc/en-us/articles/208596786-Monte-Cook-Cypher-System-Creator)
+* [Converting Pathfinder and D&D Monsters to the Cypher System](https://realmsofchirak.blogspot.com/2018/06/converting-pathfinder-and-d-monsters-to.html)

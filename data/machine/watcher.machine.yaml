@@ -89,6 +89,16 @@ component:
         percent: 40
         quantity: 1
 adapter:
+  cypher:
+    basedOn:
+      title: Argoraptor
+      href: http://cypherguide.com/products/predation/
+    level: 3
+    target: 9
+    armor: 1
+    damage: 3
+    movement: Long
+    health: 15
   dnd5e:
     basedOn:
       title: Deinonychus

@@ -33,12 +33,15 @@ action:
     effect: true
   - id: scrapperBite
     title: Bite
+    description: Grinding jaws attempt to shred the target.
     attack: true
   - id: scrapperClaw
     title: Claw
+    description: The Scrapper rakes with its claws.
     attack: true
   - id: scrapperLaserBurst
     title: Laser Burst
+    description: A laser burst fires at a single target.
     attack: true
   - id: scrapperLaserLeadUp
     title: Laser Lead Up
@@ -101,6 +104,13 @@ component:
     damage:
       all: 2.0
 adapter:
+  cypher:
+    level: 3
+    target: 9
+    armor: 1
+    damage: 4
+    movement: Long
+    health: 15
   dnd5e:
     basedOn:
       title: Hyena
