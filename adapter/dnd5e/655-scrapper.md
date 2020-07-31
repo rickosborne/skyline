@@ -8,10 +8,10 @@ For additional flavor, see the [Horizon Wiki on Scrapper](https://horizon.fandom
 | Stat | Value |
 | ---- | ----- |
 | Armor Class (AC) | 11 Light |
-| Hit Points (HP) | 22 (4d8 + 4) |
+| Hit Points (HP) | 44 (8d8 + 8) |
 | Speed | 50 ft. |
 | Senses | Passive Perception 13 |
-| Challenge | 2 (450 XP) |
+| Challenge | 1/4 (450 XP) |
 | Overrides | SIGMA |
 
 | STR | DEX | CON | INT | WIS | CHA |
@@ -32,14 +32,17 @@ Takes 60 seconds to recharge.
 ### Actions
 
 _**Bite.**_
+Grinding jaws attempt to shred the target.
 _Melee Weapon Attack_, +2 to hit, reach 5 ft., one target.
 _Hit:_ 4 (1d8) piercing damage.
 
 _**Claw.**_
+The Scrapper rakes with its claws.
 _Melee Weapon Attack_, +2 to hit, reach 5 ft., one target.
 _Hit:_ 4 (1d8) slashing damage.
 
 _**Laser Burst.**_
+A laser burst fires at a single target.
 _Ranged Weapon Attack_, +2 to hit, reach 120 ft. (min. 25 ft.), one target.
 Lasers recharge at the end of the next round.
 _Hit:_ 4 (1d8) fire damage.
@@ -49,7 +52,7 @@ A trio of laser bursts slash across the ground.
 _Ranged Weapon Attack_, +0 to hit, reach 60 ft. (min. 25 ft.), 3 targets.
 Targets must be within 15 ft. of each other.
 Lasers recharge at the end of the next round.
-Targets may make a DC 14 Dexterity saving throw to take half damage.
+Targets may make a DC 13 Dexterity saving throw to take half damage.
 _Hit:_ 10 (1d8 + 5) fire damage.
 
 _**Laser Sweep.**_
@@ -57,22 +60,22 @@ Laser fire sweeps in a straight line.
 _Ranged Weapon Attack_, +1 to hit, reach 60 ft. (min. 25 ft.).
 Fires a laser beam in a straight 25 ft. line, hitting all targets in its path.
 Lasers recharge at the end of the next round.
-Targets may make a DC 14 Dexterity saving throw to take half damage.
+Targets may make a DC 13 Dexterity saving throw to take half damage.
 _Hit:_ 9 (1d8 + 4) fire damage.
 
 ### Components
 
 _**Body.**_
-AC 11, 22 HP.
+AC 11, 44 HP.
 
 _**Power Cell.**_
-AC 16, 5 HP, can tear loose.
+AC 16, 11 HP, can tear loose.
 Takes 3x lightning damage.
 Explodes when destroyed for 2d8 fire damage to all creatures within 30 ft.
 Contains: 1x Sparker.
 
 _**Radar.**_
-AC 13, 11 HP, can tear loose.
+AC 13, 22 HP, can tear loose.
 Takes 2x damage.
 
 ### Loot

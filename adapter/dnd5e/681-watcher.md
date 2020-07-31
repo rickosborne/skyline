@@ -8,10 +8,10 @@ For additional flavor, see the [Horizon Wiki on Watcher](https://horizon.fandom.
 | Stat | Value |
 | ---- | ----- |
 | Armor Class (AC) | 13 Light |
-| Hit Points (HP) | 9 (2d8) |
+| Hit Points (HP) | 36 (8d8) |
 | Speed | 40 ft. |
 | Senses | Passive Perception 13 |
-| Challenge | 1 (200 XP) |
+| Challenge | 1/4 (200 XP) |
 | Overrides | PSI |
 
 | STR | DEX | CON | INT | WIS | CHA |
@@ -39,26 +39,26 @@ _**Energy Blast.**_
 The Watcher fires a blast of energy at one target.
 _Ranged Weapon Attack_, +1 to hit, reach 120 ft., one target.
 Only used when unable to get closer to target.
-_Hit:_ 3 (1d8 - 1) lightning damage.
+_Hit:_ 4 (1d8 - 1) lightning damage.
 
 _**Head Strike.**_
 The Watcher smashes its head into its target.
 _Melee Weapon Attack_, +4 to hit, reach 5 ft., one target.
-_Hit:_ 6 (1d8 + 2) bludgeoning damage.
+_Hit:_ 5 (1d8 + 1) bludgeoning damage.
 
 _**Tail Strike.**_
 The Watcher spins, smashing its tail into its target.
 _Melee Weapon Attack_, +4 to hit, reach 5 ft., one target.
-_Hit:_ 6 (1d8 + 2) bludgeoning damage.
+_Hit:_ 5 (1d8 + 1) bludgeoning damage.
 
 ### Components
 
 _**Body.**_
-AC 13, 9 HP.
+AC 13, 36 HP.
 Takes 2x lightning damage.
 
 _**Eye.**_
-AC 15, 9 HP.
+AC 15, 36 HP.
 Takes 2x damage.
 Only vulnerable to piercing weapons in a 30-degree cone in front of the Watcher.
 Contains: 1x Watcher Lens.

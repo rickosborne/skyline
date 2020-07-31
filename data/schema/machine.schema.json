@@ -54,11 +54,30 @@
 			"additionalProperties": false,
 			"description": "Adapter-specific data",
 			"properties": {
+				"cypher": {
+					"$ref": "#/definitions/cypherAdapter"
+				},
 				"dnd5e": {
 					"$ref": "#/definitions/dnd5eAdapter"
 				}
 			},
 			"title": "Adapter Data",
+			"type": "object"
+		},
+		"basedOn": {
+			"additionalProperties": false,
+			"properties": {
+				"href": {
+					"format": "URL",
+					"title": "URL",
+					"type": "string"
+				},
+				"title": {
+					"title": "Title",
+					"type": "string"
+				}
+			},
+			"title": "Based On",
 			"type": "object"
 		},
 		"component": {
@@ -148,6 +167,132 @@
 				"damagePercent"
 			],
 			"title": "Component",
+			"type": "object"
+		},
+		"cypherAdapter": {
+			"additionalProperties": false,
+			"description": "Cypher specifics",
+			"properties": {
+				"armor": {
+					"title": "Armor",
+					"type": "number"
+				},
+				"basedOn": {
+					"$ref": "#/definitions/basedOn"
+				},
+				"combatNotes": {
+					"allOf": [
+						{
+							"title": "Combat Notes"
+						},
+						{
+							"$ref": "#/definitions/oneOrMoreStrings"
+						}
+					]
+				},
+				"damage": {
+					"title": "Damage Inflicted",
+					"type": "number"
+				},
+				"health": {
+					"title": "Health",
+					"type": "number"
+				},
+				"interaction": {
+					"allOf": [
+						{
+							"title": "Interaction"
+						},
+						{
+							"$ref": "#/definitions/oneOrMoreStrings"
+						}
+					]
+				},
+				"intrusion": {
+					"allOf": [
+						{
+							"title": "GM Intrusion"
+						},
+						{
+							"$ref": "#/definitions/oneOrMoreStrings"
+						}
+					]
+				},
+				"level": {
+					"title": "Level",
+					"type": "number"
+				},
+				"lootNotes": {
+					"allOf": [
+						{
+							"title": "Loot Notes"
+						},
+						{
+							"$ref": "#/definitions/oneOrMoreStrings"
+						}
+					]
+				},
+				"modifications": {
+					"allOf": [
+						{
+							"title": "Modifications"
+						},
+						{
+							"$ref": "#/definitions/oneOrMoreStrings"
+						}
+					]
+				},
+				"motive": {
+					"allOf": [
+						{
+							"title": "Motives"
+						},
+						{
+							"$ref": "#/definitions/oneOrMoreStrings"
+						}
+					]
+				},
+				"movement": {
+					"enum": [
+						"Long",
+						"Short"
+					],
+					"title": "Movement",
+					"type": "string"
+				},
+				"movementNotes": {
+					"allOf": [
+						{
+							"title": "Movement Notes"
+						},
+						{
+							"$ref": "#/definitions/oneOrMoreStrings"
+						}
+					]
+				},
+				"target": {
+					"title": "Target Number",
+					"type": "number"
+				},
+				"use": {
+					"allOf": [
+						{
+							"title": "Use"
+						},
+						{
+							"$ref": "#/definitions/oneOrMoreStrings"
+						}
+					]
+				}
+			},
+			"required": [
+				"armor",
+				"damage",
+				"health",
+				"level",
+				"movement"
+			],
+			"title": "Cypher",
 			"type": "object"
 		},
 		"dnd5eAdapter": {
@@ -319,20 +464,7 @@
 					"type": "object"
 				},
 				"basedOn": {
-					"additionalProperties": false,
-					"properties": {
-						"href": {
-							"format": "URL",
-							"title": "URL",
-							"type": "string"
-						},
-						"title": {
-							"title": "Title",
-							"type": "string"
-						}
-					},
-					"title": "Based On",
-					"type": "object"
+					"$ref": "#/definitions/basedOn"
 				},
 				"challenge": {
 					"additionalProperties": false,
@@ -558,6 +690,19 @@
 			},
 			"title": "Hit",
 			"type": "object"
+		},
+		"oneOrMoreStrings": {
+			"oneOf": [
+				{
+					"type": "string"
+				},
+				{
+					"items": {
+						"type": "string"
+					},
+					"type": "array"
+				}
+			]
 		}
 	},
 	"description": "Machine (NPC)",

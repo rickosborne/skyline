@@ -10,6 +10,11 @@ interface StatScoreBonus {
 	score: number;
 }
 
+interface BasedOn {
+	href: string;
+	title: string;
+}
+
 export interface Machine {
 	action: {
 		id: string;
@@ -18,11 +23,24 @@ export interface Machine {
 		effect: boolean;
 	}[];
 	adapter: {
+		cypher: {
+			armor: number;
+			basedOn?: BasedOn;
+			combatNotes?: string | string[];
+			damage: number;
+			health: number;
+			interaction?: string | string[];
+			level: number;
+			lootNotes?: string | string[];
+			modifications?: string | string[];
+			motive?: string | string[];
+			movement: 'Long' | 'Short';
+			movementNotes?: string | string[];
+			target: number;
+			use?: string | string[];
+		};
 		dnd5e: {
-			basedOn: {
-				title: string;
-				href: string;
-			};
+			basedOn: BasedOn;
 			hp: {
 				average: number;
 				roll: string;
