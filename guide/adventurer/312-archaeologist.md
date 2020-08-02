@@ -2,6 +2,8 @@
 
 TODO: Introduction
 
+TODO: "Scrounger"?  Olin referred to himself as a scrounger.
+
 Strengths of an Archaeologist:
 
 * Understanding the devices of the Old Ones

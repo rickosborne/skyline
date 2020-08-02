@@ -43,9 +43,14 @@ ${Object.keys(component).sort((a, b) => a === 'body' ? -1 : b === 'body' ? 1 : a
   const rename = {
     shock: 'lightning'
   };
-  const explode = c.explode == null ? null : `Explodes when destroyed for ${c.explode.element} damage to all creatures within ${c.explode.rangeFeet} ft.`;
-  const damage = c.damage == null ? null : ('Takes ' + Object.keys(c.damage).map(d => d === 'all' ? `${c.damage.all}x damage` : `${c.damage[d]}x ${d} damage`).join(', ') + '.');
-  const contains = c.loot == null || cid === 'body' ? null : ('Contains: ' + c.loot.map(l => `${typeof l.quantity === 'number' ? l.quantity : l.quantity.min + '-' + l.quantity.max}x ${l.title}`).join(', ') + '.');
+  let explode = null;
+  if (c.explode != null) {
+    const explodeDamageType = cypher.hazardFromHZD[c.explode.element] || 'Collision';
+    const explodeRange = cypher.range.find(r => r.ftAway >= c.explode.rangeFeet);
+    explode = `Explodes when destroyed for ${explodeDamageType} damage to all creatures within ${explodeRange == null ? `${c.explode.rangeFeet} ft` : `${explodeRange.name} range`}.`;
+  }
+  const damage = c.damage == null ? null : ('Takes ' + Object.keys(c.damage).map(d => d === 'all' ? `${c.damage.all}&times; damage (all types)` : `${c.damage[d]}&times; ${cypher.hazardFromHZD[d] || d} damage`).join(', ') + '.');
+  const contains = c.loot == null || cid === 'body' ? null : ('Contains: ' + c.loot.map(l => `${typeof l.quantity === 'number' ? l.quantity : l.quantity.min + '-' + l.quantity.max}&times; ${l.title}`).join(', ') + '.');
   return [title, tear, damage, explode, contains].filter(t => t != null).join('\n');
 }).join('\n\n')}
 

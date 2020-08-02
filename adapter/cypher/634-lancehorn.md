@@ -4,13 +4,13 @@
 
 For additional flavor, see the [Horizon Wiki on Lancehorn](https://horizon.fandom.com/wiki/Lancehorn).
 
-**Level (Target Number)**: 4 (12)
+**Level (Target Number)**: 3 (9)
 
-**Health:** 15
+**Health:** 10
 
-**Damage Inflicted:** 5 points
+**Damage Inflicted:** 3 points
 
-**Armor:** 1
+**Armor:** 0
 
 **Movement:** Long
 
@@ -33,13 +33,13 @@ A short leap closes the gap with the target, striking with a kick.
 _**Body.**_
 
 _**Drill Horns.**_
-Takes 2x damage.
+Takes 2&times; damage (all types).
 
 _**Freeze Canister.**_
 Can tear loose.
-Takes 2x damage.
-Explodes when destroyed for ice damage to all creatures within 30 ft.
-Contains: 1x Chillwater.
+Takes 2&times; damage (all types).
+Explodes when destroyed for Cold damage to all creatures within Short range.
+Contains: 1&times; Chillwater.
 
 ### Loot
 

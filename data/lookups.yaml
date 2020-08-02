@@ -1,0 +1,34 @@
+dnd5e:
+  damageTypeFromHZD:
+    explosion: Force
+    fire: Fire
+    freeze: Cold
+    shock: Lightning
+  sizeFromHZD:
+    small: Medium
+    medium: Large
+    large: Huge
+  acMod:
+    Easy: -2
+    Normal: 0
+    Moderate: 2
+    Tricky: 5
+    Hard: 9
+    Epic: 14
+    Legendary: 20
+cypher:
+  hazardFromHZD:
+    explosion: Collision
+    fire: Fire
+    freeze: Cold
+    shock: Shock
+  range:
+    - mAway: 3
+      ftAway: 15
+      name: Immediate
+    - mAway: 15
+      ftAway: 45
+      name: Short
+    - mAway: 500
+      ftAway: 1500
+      name: Long

@@ -4,13 +4,13 @@
 
 For additional flavor, see the [Horizon Wiki on Scrapper](https://horizon.fandom.com/wiki/Scrapper).
 
-**Level (Target Number)**: 3 (9)
+**Level (Target Number)**: 2 (6)
 
-**Health:** 15
+**Health:** 10
 
-**Damage Inflicted:** 4 points
+**Damage Inflicted:** 1 points
 
-**Armor:** 1
+**Armor:** 0
 
 **Movement:** Long
 
@@ -37,13 +37,13 @@ _**Body.**_
 
 _**Power Cell.**_
 Can tear loose.
-Takes 3x shock damage.
-Explodes when destroyed for fire damage to all creatures within 30 ft.
-Contains: 1x Sparker.
+Takes 3&times; Shock damage.
+Explodes when destroyed for Fire damage to all creatures within Short range.
+Contains: 1&times; Sparker.
 
 _**Radar.**_
 Can tear loose.
-Takes 2x damage.
+Takes 2&times; damage (all types).
 
 ### Loot
 

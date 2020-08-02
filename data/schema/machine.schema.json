@@ -98,13 +98,7 @@
 					"additionalProperties": false,
 					"properties": {
 						"element": {
-							"enum": [
-								"fire",
-								"ice",
-								"shock"
-							],
-							"title": "Elemental damage type",
-							"type": "string"
+							"$ref": "#/definitions/elementKey"
 						},
 						"rangeFeet": {
 							"title": "Range (ft.)",
@@ -491,6 +485,10 @@
 					"title": "Challenge",
 					"type": "object"
 				},
+				"hitDie": {
+					"title": "Hit Die",
+					"type": "number"
+				},
 				"hp": {
 					"additionalProperties": false,
 					"properties": {
@@ -550,6 +548,7 @@
 			},
 			"required": [
 				"armor",
+				"hitDie",
 				"speedFeet"
 			],
 			"title": "D&D 5E",
@@ -564,16 +563,21 @@
 				}
 			},
 			"propertyNames": {
-				"enum": [
-					"corruption",
-					"fire",
-					"ice",
-					"shock"
-				],
-				"type": "string"
+				"$ref": "#/definitions/elementKey"
 			},
 			"title": "Element",
 			"type": "object"
+		},
+		"elementKey": {
+			"type": "string",
+			"title": "Element",
+			"enum": [
+				"corruption",
+				"explosion",
+				"fire",
+				"freeze",
+				"shock"
+			]
 		},
 		"elementDecimal": {
 			"description": "Element",
@@ -584,14 +588,15 @@
 				}
 			},
 			"propertyNames": {
-				"enum": [
-					"all",
-					"corruption",
-					"fire",
-					"ice",
-					"shock"
-				],
-				"type": "string"
+				"oneOf": [
+					{
+						"$ref": "#/definitions/elementKey"
+					},
+					{
+						"type": "string",
+						"const": "all"
+					}
+				]
 			},
 			"title": "Element",
 			"type": "object"
@@ -679,7 +684,10 @@
 				"type": {
 					"enum": [
 						"bludgeoning",
+						"cold",
+						"corruption",
 						"fire",
+						"force",
 						"lightning",
 						"piercing",
 						"slashing"

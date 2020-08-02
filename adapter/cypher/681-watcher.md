@@ -4,13 +4,13 @@
 
 For additional flavor, see the [Horizon Wiki on Watcher](https://horizon.fandom.com/wiki/Watcher).
 
-**Level (Target Number)**: 3 (9)
+**Level (Target Number)**: 2 (6)
 
-**Health:** 15
+**Health:** 9
 
-**Damage Inflicted:** 3 points
+**Damage Inflicted:** 1 points
 
-**Armor:** 1
+**Armor:** 0
 
 **Movement:** Long
 
@@ -31,11 +31,11 @@ The Watcher spins, smashing its tail into its target.
 ### Components
 
 _**Body.**_
-Takes 2x shock damage.
+Takes 2&times; Shock damage.
 
 _**Eye.**_
-Takes 2x damage.
-Contains: 1x Watcher Lens.
+Takes 2&times; damage (all types).
+Contains: 1&times; Watcher Lens.
 
 ### Loot
 

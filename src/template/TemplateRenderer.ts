@@ -21,13 +21,25 @@ export class TemplateRenderer {
 				} else {
 					return block([obj]);
 				}
+			},
+			ifPresent: (obj: any, block: (obj: any) => string): string => {
+				return obj == null ? '' : block(obj);
+			},
+			toWords: (text: string): string => {
+				return text.split(/\s+/g)
+					.map(w => `<span class="word" markdown="1">${w}</span>`)
+					.join(' ');
 			}
 		};
-		return Object.assign({}, base, YAML.parse(text));
+		return Object.assign({}, base, this.getLookups(), YAML.parse(text));
+	}
+
+	public getLookups(): object {
+		return YAML.parse(fs.readFileSync(path.join('data', 'lookups.yaml'), {encoding: 'utf8'}));
 	}
 
 	public getTemplate(templateId: string): string {
-		return fs.readFileSync(path.join('data', 'template', `${templateId}.md`), {encoding: "utf8"});
+		return fs.readFileSync(path.join('data', 'template', `${templateId}.md`), {encoding: 'utf8'});
 	}
 
 	public markdown(
