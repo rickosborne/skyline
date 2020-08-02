@@ -4,6 +4,8 @@
 @import "{{ site.theme }}";
 
 @import url('https://fonts.googleapis.com/css2?family=Recursive:slnt,wght,MONO@-15..0,300..1000,0..1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:700');
+@import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&family=Noto+Sans:ital,wght@0,400;0,700;1,400&display=swap');
 
 :root {
 	// In general, blues are used for most shading.
@@ -135,11 +137,11 @@ body {
 	}
 
 	p {
-		text-indent: 1em;
+		//text-indent: 1em;  // Not really feeling this.
 
-		&.story-links {
-			text-indent: inherit;
-		}
+		//&.story-links {
+		//	text-indent: inherit;
+		//}
 	}
 
 	font-size: inherit;
@@ -212,5 +214,166 @@ em {
 		color: var(--night-green);
 		font-variation-settings: var(--wght-bolder);
 		font-weight: 600;
+	}
+}
+
+// D&D 5E Stat Block styles based on: https://github.com/Nyranith/statblock5e
+
+.main-content .dnd5e-stat-block {
+	border: 0.05em #DDD solid;
+	box-shadow: 0 0 1em #867453;
+	background: #FDF1DC;
+	padding: 0.5em;
+	color: black;
+
+	font-family: 'Alegreya Sans', 'Noto Sans', 'Myriad Pro', Calibri, Helvetica, Arial, sans-serif;
+
+	&:before, &:after {
+		content: '';
+		display: block;
+		height: 0.5em;
+		background: url(../img/dnd5e-stat-block-noise.png);
+		border: thin solid #7A200D;
+	}
+
+	&:before {
+		margin: -0.55em -0.55em 0.5em -0.55em;
+	}
+
+	&:after {
+		margin: 0.5em -0.55em -0.55em -0.55em;
+	}
+
+	article {
+		column-width: 20em;
+		column-gap: 3em;
+	}
+
+	h3 {
+		font-family: 'Libre Baskerville', 'Lora', 'Calisto MT', 'Bookman Old Style', Bookman, 'Goudy Old Style', Garamond, 'Hoefler Text', 'Bitstream Charter', Georgia, serif;
+		color: #7A200D;
+		font-weight: 700;
+		letter-spacing: 0.05em;
+		margin: 0;
+		font-size: 1.4rem;
+		text-transform: uppercase;
+
+		.word {  // because smallcaps looks like ass
+			display: inline-block;
+
+			&::first-letter {
+				font-size: 1.7rem;
+			}
+		}
+	}
+
+	h4 {
+		border-bottom: 0.075em solid #7A200D;
+		color: #7A200D;
+		//font-variant: small-caps;
+		letter-spacing: 0.05em;
+		font-variation-settings: var(--slnt);
+		break-inside: avoid-column;
+		break-after: avoid-column;
+		text-transform: uppercase;
+		font-size: 1.2rem;
+
+		&::first-letter {
+			font-size: 115%;
+		}
+	}
+
+	a, a:visited {
+		color: #7A200D;
+
+		&:hover {
+			background-color: rgba(128, 128, 128, 0.2);
+			color: #b82f14;
+		}
+	}
+
+	.size-and-type {
+		margin: 0 0 0.3em 0;
+		font-size: 1rem;
+		text-transform: lowercase;
+	}
+
+	.ac-hp-speed, .additional-stats {
+
+		color: #7A200D;
+
+		&:before, &:after {
+			content: '';
+			display: block;
+			height: 0.3em;
+			background-image: linear-gradient(45deg, #7A200D, rgba(122, 32, 13, 0));
+			margin: 0.5em 0;
+		}
+
+		p {
+			margin: 0;
+			text-indent: hanging 0.5em;
+		}
+	}
+
+	.non-attacks {
+		padding: 0.5em 0;
+	}
+
+	table.stats, table.loot-list {
+		margin: 0.5em 0;
+		border: none;
+		display: table;
+
+		th, td {
+			border: none;
+			padding: 0 1em;
+		}
+	}
+
+	table.stats {
+		width: 100%;
+		color: #7A200D;
+
+		th, td {
+			text-align: center;
+		}
+	}
+
+	table.loot-list {
+
+		.loot-percent, .loot-qty {
+			text-align: right;
+		}
+
+		th {
+			text-align: left;
+			color: rgba(0, 0, 0, 0.6);
+		}
+
+		tbody {
+
+			tr {
+				border-top: thin solid rgba(128, 128, 128, 0.1);
+			}
+		}
+
+		td:first-of-type, th:first-of-type {
+			padding-left: 0;
+		}
+
+		td:last-of-type, th:last-of-type {
+			padding-right: 0;
+		}
+	}
+}
+
+@media (max-width: 40rem){
+	.main-content .dnd5e-stat-block {
+		table.stats, table.loot-list {
+			th, td {
+				padding: 0 0.5em;
+			}
+		}
 	}
 }

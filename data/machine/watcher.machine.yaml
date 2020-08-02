@@ -93,16 +93,17 @@ adapter:
     basedOn:
       title: Argoraptor
       href: http://cypherguide.com/products/predation/
-    level: 3
-    target: 9
-    armor: 1
-    damage: 3
+    level: 2
+    target: 6
+    armor: 0
+    damage: 1
     movement: Long
-    health: 15
+    health: 9
   dnd5e:
     basedOn:
       title: Deinonychus
       href: https://www.dndbeyond.com/monsters/deinonychus
+    hitDie: 8
     hp:
       average: 36
       roll: 8d8
@@ -112,8 +113,8 @@ adapter:
     passive:
       Perception: 13
     challenge:
-      rating: 1/4
-      xp: 200
+      rating: 1/2
+      xp: 100
     attr:
       STR:
         score: 15
@@ -150,14 +151,14 @@ adapter:
           attribute: Wisdom
       watcherBlast:
         toHit: "+1"
-        reachFeet: 120
+        reachFeet: 150
         target: 1
         description: "Only used when unable to get closer to target."
         ranged: true
         onHit:
-          - type: lightning
-            average: 4
-            roll: 1d8 - 1
+          - type: force
+            average: 3
+            roll: 1d4
       watcherHeadStrike:
         melee: true
         toHit: "+4"
@@ -166,7 +167,7 @@ adapter:
         onHit:
           - type: bludgeoning
             average: 5
-            roll: 1d8 + 1
+            roll: 1d8
       watcherTailStrike:
         melee: true
         toHit: "+4"
@@ -174,5 +175,5 @@ adapter:
         target: 1
         onHit:
           - type: bludgeoning
-            average: 5
-            roll: 1d8 + 1
+            average: 6
+            roll: 1d8 + 2

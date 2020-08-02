@@ -79,7 +79,7 @@ component:
       all: 2.0
     explode:
       rangeFeet: 30
-      element: ice
+      element: freeze
     loot:
       - id: chillwater
         title: Chillwater
@@ -87,16 +87,17 @@ component:
         quantity: 1
 adapter:
   cypher:
-    level: 4
-    target: 12
-    armor: 1
-    damage: 5
+    level: 3
+    target: 9
+    armor: 0
+    damage: 3
     movement: Long
-    health: 15
+    health: 10
   dnd5e:
     basedOn:
       title: Deer
       href: https://www.dndbeyond.com/monsters/deer
+    hitDie: 8
     hp:
       average: 52
       roll: 8d8 + 16
@@ -104,7 +105,7 @@ adapter:
     passive:
       Perception: 12
     challenge:
-      rating: '1/2'
+      rating: 2
       xp: 450
     attr:
       STR:
@@ -139,8 +140,8 @@ adapter:
         reachFeet: 5
         target: 1
         onHit:
-          - average: 7
-            roll: 2d6
+          - average: 11
+            roll: 2d8 + 2
             type: piercing
       lancehornKick:
         melee: true
@@ -148,8 +149,8 @@ adapter:
         reachFeet: 5
         target: 1
         onHit:
-          - average: 6
-            roll: 1d6 + 2
+          - average: 8
+            roll: 1d8 + 4
             type: bludgeoning
       lancehornLeapingGore:
         ranged: true
@@ -159,8 +160,8 @@ adapter:
         reachFeet: 25
         target: 1
         onHit:
-          - average: 8
-            roll: 2d6 + 1
+          - average: 17
+            roll: 3d8 + 4
             type: piercing
       lancehornLeapingKick:
         ranged: true
@@ -171,5 +172,5 @@ adapter:
         target: 1
         onHit:
           - type: bludgeoning
-            roll: 2d6 + 1
+            roll: 1d8 + 4
             average: 8

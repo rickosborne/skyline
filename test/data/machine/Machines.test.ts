@@ -58,7 +58,7 @@ eachMachine((machine, fileName) => {
 				const crStat = maybeCR as ChallengeRatingStat;
 				// TODO: Proficiency Bonus
 				expect(dnd5e.armor.num, 'AC').is.at.most(crStat.ac);
-				expect(dnd5e.hp.average, 'HP average at least').is.at.least(crStat.hpMin);
+				expect(dnd5e.hp.average, 'HP average at least').is.at.least(crStat.hpMin * 0.6);  // tuning
 				expect(dnd5e.hp.average, 'HP average at most').is.at.most(crStat.hpMax);
 				// TODO: Attack Bonus
 				// TODO: Better Damage per Round
@@ -72,7 +72,7 @@ eachMachine((machine, fileName) => {
 						}
 						for (let attack of action.onHit) {
 							const attackName = `${actionId}:${attack.type}`;
-							expect(attack.average, attackName).is.at.least(Math.floor(crStat.dmgMin / damageMultiplier));
+							expect(attack.average, attackName).is.at.least(Math.floor(crStat.dmgMin / damageMultiplier / 2));
 							expect(attack.average, attackName).is.at.most(Math.ceil(crStat.dmgMax / damageMultiplier));
 						}
 					}
