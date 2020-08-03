@@ -97,7 +97,7 @@ A trio of laser bursts slash across the ground.
 _Ranged Weapon Attack_, +0 to hit, reach 60 ft. (min. 25 ft.), 3 targets.
 Targets must be within 15 ft. of each other.
 Lasers recharge at the end of the next round.
-Targets may make a DC 13 Dexterity saving throw to take half damage.
+Targets may make a DC 14 Dexterity saving throw to take half damage.
 _Hit:_ 10 (2d8 + 1) piercing damage.
 </p>
 <p class="action" markdown="1">
@@ -106,7 +106,7 @@ Laser fire sweeps in a straight line.
 _Ranged Weapon Attack_, +1 to hit, reach 60 ft. (min. 25 ft.).
 Fires a laser beam in a straight 25 ft. line, hitting all targets in its path.
 Lasers recharge at the end of the next round.
-Targets may make a DC 13 Dexterity saving throw to take half damage.
+Targets may make a DC 14 Dexterity saving throw to take half damage.
 _Hit:_ 8 (1d8 + 4) piercing damage.
 </p>
     </section>

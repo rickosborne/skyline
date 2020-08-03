@@ -1,6 +1,6 @@
 ## ${title}
 
-${plural} are modified from the stock [${adapter.dnd5e.basedOn.title}](${adapter.dnd5e.basedOn.href}).
+${ifPresent(adapter.dnd5e.basedOn, basedOn => `${plural} are modified from the stock [${basedOn.title}](${basedOn.href}).`)}:trimIfEmpty:
 For additional flavor, see the [Horizon Wiki on ${title}](${link.horizonWiki}).
 
 <div class="dnd5e-stat-block stat-block">
@@ -39,7 +39,7 @@ For additional flavor, see the [Horizon Wiki on ${title}](${link.horizonWiki}).
     <section class="additional-stats">
         <!-- Damage Resistances and Immunities -->
         ${Array.isArray(adapter.dnd5e.skill) ? `<p class="skills"><strong>Skills:</strong> ${Object.keys(adapter.dnd5e.skill).sort().map(p => `${p} ${adapter.dnd5e.skill[p]}`).join(', ')}</p>` : ''}:trimIfEmpty:
-        <p class="senses"><strong>Senses:</strong> ${Object.keys(adapter.dnd5e.passive).sort().map(p => `Passive ${p} ${adapter.dnd5e.passive[p]}`).join(', ')}</p>
+        ${ifPresent(adapter.dnd5e.passive, passive => `<p class="senses"><strong>Senses:</strong> ${Object.keys(passive).sort().map(p => `Passive ${p} ${adapter.dnd5e.passive[p]}`).join(', ')}</p>`)}:trimIfEmpty:
         <p class="challenge"><strong>Challenge:</strong> ${adapter.dnd5e.challenge.rating} (${adapter.dnd5e.challenge.xp} XP)</p>
         ${ifPresent(overrideSource, os => `<p class="overrides"><strong>Overrides:</strong> ${overrideSource}</p>`)}:trimIfEmpty:
     </section>

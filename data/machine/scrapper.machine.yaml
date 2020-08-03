@@ -215,7 +215,7 @@ adapter:
         target: all
         save:
           attribute: Dexterity
-          difficulty: 13
+          difficulty: 14
           half: true
         onHit:
           - type: piercing

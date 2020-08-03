@@ -61,7 +61,7 @@ export class TemplateRenderer {
 			// console.log(`Template: path=${relativePath}: dataType=${dataType} dataName=${dataName} templateId=${templateId}`);
 			const data = this.getData(dataType, dataName);
 			const template = this.getTemplate(templateId);
-			const result = this.render(template, data);
+			const result = this.render(template, data, `${templateId} + ${dataType}/${dataName}`);
 			const shouldWrite = block(result, body, dataType, dataName, templateId, dir, fileName);
 			if (shouldWrite) {
 				console.log(`Rendered: ${templateId} + ${dataType}/${dataName} => ${relativePath}`);
@@ -75,7 +75,7 @@ export class TemplateRenderer {
 		}
 	}
 
-	public render(template: string, data: Record<string, any>): string {
+	public render(template: string, data: Record<string, any>, context: string): string {
 		const [vars, values] = Object.keys(data).reduce(([a, b]: [any[], any[]], k: string) => {
 			a.push(k)
 			b.push(data[k] as any)
@@ -86,14 +86,25 @@ export class TemplateRenderer {
     	return \`${template}\`;
 		`;
 		const evaluate = new Function(...vars, body);
-		const rendered: string = evaluate(...values);
-		return rendered
-			.replace(/\n[ \x09]*:trimAndNextIfEmpty:[ \x09]*\n/sg, '')
-			.replace(/:trimAndNextIfEmpty:/g, '')
-			.replace(/\n[ \x09]*:trimIfEmpty:/sg, '')
-			.replace(/:trimIfEmpty:/g, '')
-			;
+		try {
+			const rendered: string = evaluate(...values);
+			return rendered
+				.replace(/\n[ \x09]*:trimAndNextIfEmpty:[ \x09]*\n/sg, '')
+				.replace(/:trimAndNextIfEmpty:/g, '')
+				.replace(/\n[ \x09]*:trimIfEmpty:/sg, '')
+				.replace(/:trimIfEmpty:/g, '')
+				;
+		} catch (e) {
+			let match;
+			if ((match = (String(e.stack) as string).match(/<anonymous>:(\d+):(\d+)/))) {
+				const lines = body.split(/\r?\n/g);
+				const lineNum = Number(match[1]) - 3;
+				console.error(`\n!!!!\n${context}\n!!!!\n${lines[lineNum-1]}\n${lines[lineNum]}\n${lines[lineNum+1]}\n!!!!\n`);
+			}
+			throw e;
+		}
 	}
+
 
 	public scan<T>(
 		dir: string,
