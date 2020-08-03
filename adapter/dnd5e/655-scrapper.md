@@ -5,7 +5,7 @@
 Scrappers are modified from the stock [Hyena](https://www.dndbeyond.com/monsters/hyena).
 For additional flavor, see the [Horizon Wiki on Scrapper](https://horizon.fandom.com/wiki/Scrapper).
 
-<div class="dnd5e-stat-block">
+<div class="dnd5e-stat-block stat-block">
     <article>
     <header class="name-and-size">
         <h3 class="title"><span class="word" markdown="1">Scrapper</span></h3>

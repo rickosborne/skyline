@@ -3,7 +3,7 @@
 ${plural} are modified from the stock [${adapter.dnd5e.basedOn.title}](${adapter.dnd5e.basedOn.href}).
 For additional flavor, see the [Horizon Wiki on ${title}](${link.horizonWiki}).
 
-<div class="dnd5e-stat-block">
+<div class="dnd5e-stat-block stat-block">
     <article>
     <header class="name-and-size">
         <h3 class="title">${toWords(title)}</h3>
@@ -91,7 +91,8 @@ ${Object.keys(component).sort((a, b) => a === 'body' ? -1 : b === 'body' ? 1 : a
   const explode = c.explode == null ? null : `Explodes when destroyed for 2d8 ${dnd5e.damageTypeFromHZD[c.explode.element] || c.explode.element} damage to all creatures within ${c.explode.rangeFeet} ft.`;
   const damage = c.damage == null ? null : ('Takes ' + Object.keys(c.damage).map(d => d === 'all' ? `${c.damage.all}&times; damage (all types)` : `${c.damage[d]}&times; ${dnd5e.damageTypeFromHZD[d] || d} damage`).join(', ') + '.');
   const contains = c.loot == null || cid === 'body' ? null : ('Contains: ' + c.loot.map(l => `${typeof l.quantity === 'number' ? l.quantity : l.quantity.min + '-' + l.quantity.max}&times; ${l.title}`).join(', ') + '.');
-  return ['<p class="component" markdown="1">', title, [ac, componentHP, tear].filter(t => t != null).join(', ') + '.', damage, c.targetNotes, explode, contains, '</p>'].filter(t => t != null).join('\n');
+  const nonTitle = [[ac, componentHP, tear].filter(t => t != null).join(', ') + '.', damage, c.targetNotes, explode, contains].filter(t => t != null).join('\n');
+  return cid === 'body' && nonTitle === '' ? '' : ['<p class="component" markdown="1">', title, nonTitle, '</p>'].join('\n');
 }).join('\n')}
     </section>
     <section class="loot-items">
