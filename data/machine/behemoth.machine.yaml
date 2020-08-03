@@ -1,0 +1,122 @@
+$schema: ../schema/machine.schema.json
+id: behemoth
+title: Behemoth
+plural: Behemoth
+lang: en-US
+overrideSource: XI
+link:
+  horizonWiki: https://horizon.fandom.com/wiki/Behemoth
+size: Large
+role: Transport
+variant:
+  base:
+    hp: 2700
+    challengeLevel: 25
+  corrupted:
+    hp: 4050
+    challengeLevel: 32
+  daemonic:
+    hp: 4725
+    challengeLevel: 40
+action:
+  - id: charge
+    title: Charge
+    description: TODO
+    effect: true
+  - id: gravityBoulderThrow
+    title: Gravity Boulder Throw
+    description: TODO
+    effect: false
+  - id: gravityPurge
+    title: Gravity Purge
+    description: TODO
+    effect: false
+  - id: grindingShrapnelBlast
+    title: Grinding Shrapnel Blast
+    description: TODO
+    effect: false
+  - id: quakeSmash
+    title: Quake Smash
+    description: TODO
+    effect: false
+component:
+  body:
+    title: Body
+    damagePercent: 100
+    remove: false
+    targetDifficulty: TODO
+adapter:
+  cypher:
+    damage: 7
+    level: 5
+    health: 23
+    target: 15
+    armor: 0
+    movement: Short
+  dnd5e:
+    armor:
+      num: 0
+      type: TODO
+    attr:
+      STR:
+        score: 0
+        bonus: TODO
+      DEX:
+        score: 0
+        bonus: TODO
+      CON:
+        score: 0
+        bonus: TODO
+      INT:
+        score: 0
+        bonus: TODO
+      WIS:
+        score: 0
+        bonus: TODO
+      CHA:
+        score: 0
+        bonus: TODO
+    speedFeet: 0
+    hitDie: 12
+    hp:
+      average: 168
+      roll: TODO
+    challenge:
+      rating: 7
+      xp: -1
+    action:
+      charge:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 6d12 + 1
+            average: 40
+      gravityBoulderThrow:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 5d12
+            average: 33
+      gravityPurge:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 4d12 + 1
+            average: 27
+      grindingShrapnelBlast:
+        description: TODO
+        target: 8
+        onHit:
+          - type: TODO
+            roll: 2d4
+            average: 5
+      quakeSmash:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 5d12
+            average: 33

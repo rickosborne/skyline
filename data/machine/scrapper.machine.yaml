@@ -1,4 +1,4 @@
-$schema: '../schema/machine.schema.json'
+$schema: ../schema/machine.schema.json
 id: scrapper
 title: Scrapper
 plural: Scrappers
@@ -7,7 +7,7 @@ overrideSource: SIGMA
 role: Acquisition
 size: Small
 link:
-  horizonWiki: 'https://horizon.fandom.com/wiki/Scrapper'
+  horizonWiki: https://horizon.fandom.com/wiki/Scrapper
 variant:
   base:
     challengeLevel: 8
@@ -51,6 +51,12 @@ action:
     title: Laser Sweep
     description: Laser fire sweeps in a straight line.
     attack: true
+  - title: Claw Swipe
+    description: TODO
+    id: clawSwipe
+  - title: Grinder Jaw Swipe
+    description: TODO
+    id: grinderJawSwipe
 component:
   body:
     remove: false
@@ -87,7 +93,7 @@ component:
     damagePercent: 25
     targetDifficulty: Tricky
     damage:
-      shock: 3.0
+      shock: 3
     explode:
       rangeFeet: 30
       element: fire
@@ -102,7 +108,7 @@ component:
     title: Radar
     targetDifficulty: Moderate
     damage:
-      all: 2.0
+      all: 2
 adapter:
   cypher:
     level: 2
@@ -151,7 +157,7 @@ adapter:
       type: Light
     action:
       scrapperPackTactics:
-        description: "The Scrapper has advantage on an attack roll against a creature if at least one of the Scrapper's allies is within 5 feet of the creature and the ally isn't incapacitated."
+        description: The Scrapper has advantage on an attack roll against a creature if at least one of the Scrapper's allies is within 5 feet of the creature and the ally isn't incapacitated.
       scrapperBite:
         melee: true
         toHit: "+2"
@@ -180,7 +186,7 @@ adapter:
         onHit:
           - average: 4
             roll: 1d6
-            type: force
+            type: piercing
       scrapperLaserLeadUp:
         ranged: true
         description:
@@ -192,10 +198,10 @@ adapter:
         target: 3
         save:
           attribute: Dexterity
-          difficulty: 13
+          difficulty: 14
           half: true
         onHit:
-          - type: force
+          - type: piercing
             roll: 2d8 + 1
             average: 10
       scrapperLaserSweep:
@@ -209,9 +215,23 @@ adapter:
         target: all
         save:
           attribute: Dexterity
-          difficulty: 13
+          difficulty: 14
           half: true
         onHit:
-          - type: force
+          - type: piercing
             roll: 1d8 + 4
             average: 8
+      clawSwipe:
+        description: TODO
+        toHit: TODO
+        onHit:
+          - type: slashing
+            average: 8
+            roll: 1d8 + 4
+      grinderJawSwipe:
+        description: TODO
+        toHit: TODO
+        onHit:
+          - type: slashing
+            average: 8
+            roll: 1d8 + 4

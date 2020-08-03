@@ -1,0 +1,130 @@
+$schema: ../schema/machine.schema.json
+id: snapmaw
+title: Snapmaw
+plural: Snapmaw
+lang: en-US
+overrideSource: RHO
+link:
+  horizonWiki: https://horizon.fandom.com/wiki/Snapmaw
+size: Medium
+role: Acquisition
+variant:
+  base:
+    hp: 1450
+    challengeLevel: 20
+  daemonic:
+    hp: 2538
+    challengeLevel: 31
+action:
+  - id: freezeBurst
+    title: Freeze Burst
+    description: TODO
+    effect: false
+  - id: lungeBite
+    title: Lunge Bite
+    description: TODO
+    effect: false
+  - id: jumpingJawBite
+    title: Jumping Jaw Bite
+    description: TODO
+    effect: false
+  - id: snapBite
+    title: Snap Bite
+    description: TODO
+    effect: false
+  - id: tailStrike
+    title: Tail Strike
+    description: TODO
+    effect: false
+  - id: spinningTailStrike
+    title: Spinning Tail Strike
+    description: TODO
+    effect: false
+component:
+  body:
+    title: Body
+    damagePercent: 100
+    remove: false
+    targetDifficulty: TODO
+adapter:
+  cypher:
+    damage: 7
+    level: 5
+    health: 16
+    target: 15
+    armor: 0
+    movement: Short
+  dnd5e:
+    armor:
+      num: 0
+      type: TODO
+    attr:
+      STR:
+        score: 0
+        bonus: TODO
+      DEX:
+        score: 0
+        bonus: TODO
+      CON:
+        score: 0
+        bonus: TODO
+      INT:
+        score: 0
+        bonus: TODO
+      WIS:
+        score: 0
+        bonus: TODO
+      CHA:
+        score: 0
+        bonus: TODO
+    speedFeet: 0
+    hitDie: 10
+    hp:
+      average: 153
+      roll: TODO
+    challenge:
+      rating: 6
+      xp: -1
+    action:
+      freezeBurst:
+        description: TODO
+        target: 1
+        onHit:
+          - type: cold
+            roll: 1d10
+            average: 6
+      lungeBite:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 4d10 + 1
+            average: 23
+      jumpingJawBite:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 4d10 + 1
+            average: 23
+      snapBite:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 3d10 + 4
+            average: 20
+      tailStrike:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 4d10 + 1
+            average: 23
+      spinningTailStrike:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 4d10 + 1
+            average: 23

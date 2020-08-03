@@ -1,0 +1,68 @@
+Machine	Link	Size	Class	Override	Challenge	HP	Weakness	Strength	Difficulty	HP Scale	Damage/Turn	Damage/Turn Scale	Impact	Impact Scale	5E Hit Dice	5E CR	5E HP	5E Dmg/Round	Damage Divisor	Cypher Level	Cypher Target Num	Cypher Health	Cypher Damage
+Watcher	https://horizon.fandom.com/wiki/Watcher	Small	Reconnaissance	PSI	5	90	None	None	1	0.0000	93	0.0000	180.77	0.0000	8	 1/2 	60	7	17.18	2	6	9	1
+Watcher, Corrupted	https://horizon.fandom.com/wiki/Watcher	Small	Reconnaissance		12	135	None	Corruption	1	0.0040	93	0.0000	197.06	0.0118	8	 1/2 	60	7	17.29	2	6	9	1
+Watcher, Daemonic	https://horizon.fandom.com/wiki/Watcher	Small	Reconnaissance		14	158	None	Corruption, Shock, Override	1	0.0060	93	0.0000	203.38	0.0164	8	 1/2 	60	7	17.33	2	6	9	1
+Redeye Watcher	https://horizon.fandom.com/wiki/Redeye_Watcher	Small	Reconnaissance		10	200	None	None	1	0.0097	93	0.0000	212.85	0.0232	8	 1/2 	60	7	17.39	2	6	10	1
+Grazer	https://horizon.fandom.com/wiki/Grazer	Small	Acquisition	SIGMA	8	150	None	None	1	0.0053	98	0.0188	213.26	0.0235	8	 1/2 	60	7	18.43	2	6	9	1
+Scrapper	https://horizon.fandom.com/wiki/Scrapper	Small	Acquisition	SIGMA	8	220	None	None	1	0.0115	96	0.0123	225.11	0.0321	8	1	78	12	11.05	2	6	10	1
+Grazer, Corrupted	https://horizon.fandom.com/wiki/Grazer	Small	Acquisition		15	225	None	Corruption	1	0.0120	98	0.0188	230.51	0.0360	8	1	78	12	11.29	2	6	10	1
+Redeye Watcher, Daemonic	https://horizon.fandom.com/wiki/Redeye_Watcher	Small	Reconnaissance		19	350	None	Corruption, Shock, Override	1	0.0230	93	0.0000	235.33	0.0395	8	1	78	12	10.68	2	6	10	1
+Redeye Watcher, Corrupted	https://horizon.fandom.com/wiki/Redeye_Watcher	Small	Reconnaissance		17	400	None	Corruption	1	0.0275	93	0.0000	240.69	0.0434	8	1	78	12	10.70	2	6	11	1
+Scrapper, Corrupted	https://horizon.fandom.com/wiki/Scrapper	Small	Acquisition		15	330	None	Corruption	1	0.0213	96	0.0123	242.03	0.0444	8	1	78	12	11.12	2	6	10	1
+Scrapper, Daemonic	https://horizon.fandom.com/wiki/Scrapper	Small	Acquisition		17	385	None	Corruption, Shock, Override	1	0.0261	96	0.0123	248.46	0.0490	8	1	78	12	11.15	2	6	11	1
+Broadhead	https://horizon.fandom.com/wiki/Broadhead	Small	Acquisition	PSI	10	175	None	None	1	0.0075	142	0.1693	318.51	0.0998	8	2	93	18	11.12	3	9	9	3
+Broadhead, Corrupted	https://horizon.fandom.com/wiki/Broadhead	Small	Acquisition		17	263	None	Corruption	1	0.0153	142	0.1693	343.63	0.1180	8	2	93	18	11.22	3	9	10	3
+Lancehorn	https://horizon.fandom.com/wiki/Lancehorn	Small	Acquisition	SIGMA	13	275	None	None	1	0.0164	144	0.1771	351.96	0.1240	8	2	93	18	11.43	3	9	10	3
+Longleg	https://horizon.fandom.com/wiki/Longleg	Medium	Reconnaissance	RHO	13	750	Shock	None	1	0.0585	168	0.2582	483.01	0.2190	10	4	123	30	8.28	4	12	13	5
+Charger	https://horizon.fandom.com/wiki/Charger	Small	Acquisition	PSI	13	325	None	None	1	0.0208	200	0.3677	502.38	0.2330	8	4	123	30	9.92	4	12	10	6
+Longleg, Corrupted	https://horizon.fandom.com/wiki/Longleg	Medium	Reconnaissance		20	1125	Shock	Corruption	1	0.0917	168	0.2582	512.59	0.2404	10	4	123	30	8.36	4	12	15	5
+Longleg, Daemonic	https://horizon.fandom.com/wiki/Longleg	Medium	Reconnaissance		22	1313	Shock	Corruption, Shock, Override	1	0.1084	168	0.2582	523.87	0.2486	10	4	123	30	8.39	4	12	16	5
+Charger, Corrupted	https://horizon.fandom.com/wiki/Charger	Small	Acquisition		20	488	None	Corruption	1	0.0353	200	0.3677	537.68	0.2586	8	4	123	30	10.04	4	12	11	6
+Glinthawk	https://horizon.fandom.com/wiki/Glinthawk	Small	Acquisition	XI	18	450	Fire	Freeze	1.2	0.0319	169	0.2613	537.72	0.2586	8	4	123	30	8.48	4	12	11	5
+Charger, Daemonic	https://horizon.fandom.com/wiki/Charger	Small	Acquisition		22	569	None	Corruption, Shock, Override	1	0.0424	200	0.3677	551.02	0.2683	8	5	138	36	8.38	4	12	12	6
+Glinthawk, Corrupted	https://horizon.fandom.com/wiki/Glinthawk	Small	Acquisition		25	675	Fire	Freeze, Corruption	1.2	0.0518	169	0.2613	573.41	0.2845	8	5	138	36	7.13	4	12	12	5
+Sawtooth	https://horizon.fandom.com/wiki/Sawtooth	Medium	Combat	SIGMA	15	1100	Fire	None	1	0.0895	190	0.3335	577.86	0.2877	10	5	138	36	8.04	4	12	14	6
+Sawtooth, Corrupted	https://horizon.fandom.com/wiki/Sawtooth	Medium	Combat		20	1650	Fire	Corruption	1	0.1382	190	0.3335	611.32	0.3119	10	5	138	36	8.13	4	12	17	6
+Corruptor	https://horizon.fandom.com/wiki/Corruptor	Medium	Chariot		18	1900	Fire	Corruption	1	0.1604	199	0.3628	651.07	0.3407	10	6	153	42	7.36	5	15	19	6
+Ravager	https://horizon.fandom.com/wiki/Ravager	Medium	Combat	RHO	20	1300	Fire	Shock	1	0.1072	211	0.4056	657.26	0.3452	10	6	153	42	7.84	5	15	16	7
+Snapmaw	https://horizon.fandom.com/wiki/Snapmaw	Medium	Acquisition	RHO	20	1450	Fire	Freeze	1	0.1205	212	0.4076	669.16	0.3539	10	6	153	42	7.89	5	15	16	7
+Trampler	https://horizon.fandom.com/wiki/Trampler	Medium	Acquisition	RHO	15	1200	Freeze	Fire	1	0.0984	221	0.4399	680.84	0.3623	10	6	153	42	8.28	5	15	15	7
+Ravager, Corrupted	https://horizon.fandom.com/wiki/Ravager	Medium	Combat		27	1950	Fire	Shock, Corruption	1	0.1648	211	0.4056	694.43	0.3722	10	6	153	42	7.94	5	15	19	7
+Fire Bellowback	https://horizon.fandom.com/wiki/Fire_Bellowback	Medium	Transport	XI	18	1600	Freeze	Fire	1	0.1338	217	0.4261	695.56	0.3730	10	6	153	42	8.17	5	15	17	7
+Freeze Bellowback	https://horizon.fandom.com/wiki/Freeze_Bellowback	Medium	Transport	XI	18	1600	Fire	Freeze	1	0.1338	217	0.4261	695.56	0.3730	10	6	153	42	8.17	5	15	17	7
+Snapmaw, Corruption	https://horizon.fandom.com/wiki/Snapmaw	Medium	Acquisition		27	2175	Fire	Freeze, Corruption	1	0.1848	212	0.4076	706.43	0.3809	10	6	153	42	7.99	5	15	20	7
+Trampler, Corrupted	https://horizon.fandom.com/wiki/Trampler	Medium	Acquisition		22	1800	Freeze	Fire, Corruption	1	0.1515	221	0.4399	719.78	0.3905	10	7	168	48	7.32	5	15	18	7
+Snapmaw, Daemonic	https://horizon.fandom.com/wiki/Snapmaw	Medium	Acquisition		31	2538	Fire	Freeze, Corruption, Shock, Override	1	0.2169	212	0.4076	720.62	0.3911	10	7	168	48	7.01	5	15	22	7
+Fire Bellowback, Corrupted	https://horizon.fandom.com/wiki/Fire_Bellowback	Medium	Transport		23	2400	Freeze	Fire, Corruption	1	0.2047	217	0.4261	733.79	0.4007	10	7	168	48	7.22	5	15	21	7
+Freeze Bellowback, Corrupted	https://horizon.fandom.com/wiki/Freeze_Bellowback	Medium	Transport		23	2400	Fire	Freeze, Corruption	1	0.2047	217	0.4261	733.79	0.4007	10	7	168	48	7.22	5	15	21	7
+Fire Bellowback, Daemonic	https://horizon.fandom.com/wiki/Fire_Bellowback	Medium	Transport		30	2800	Freeze	Fire, Corruption, Shock, Override	1	0.2401	217	0.4261	748.32	0.4112	10	7	168	48	7.26	5	15	24	7
+Freeze Bellowback, Daemonic	https://horizon.fandom.com/wiki/Freeze_Bellowback	Medium	Transport		30	2800	Fire	Freeze, Corruption, Shock, Override	1	0.2401	217	0.4261	748.32	0.4112	10	7	168	48	7.26	5	15	24	7
+Behemoth	https://horizon.fandom.com/wiki/Behemoth	Large	Transport	XI	25	2700	None	Shock	1	0.2313	223	0.4447	763.48	0.4222	12	7	168	48	7.47	5	15	23	7
+Behemoth, Corrupted	https://horizon.fandom.com/wiki/Behemoth	Large	Transport		32	4050	None	Shock, Corruption	1	0.3509	223	0.4447	802.66	0.4506	12	8	183	54	6.72	6	18	30	7
+Shell-Walker	https://horizon.fandom.com/wiki/Shell-Walker	Medium	Transport	RHO	18	800	None	Shock	1.1	0.0629	252	0.5469	805.95	0.4530	10	8	183	54	7.63	6	18	13	9
+Behemoth, Daemonic	https://horizon.fandom.com/wiki/Behemoth	Large	Transport		40	4725	None	Shock, Corruption, Override	1	0.4107	223	0.4447	817.55	0.4614	12	8	183	54	6.75	6	18	34	7
+Shell-Walker, Corrupted	https://horizon.fandom.com/wiki/Shell-Walker	Medium	Transport		28	1400	None	Shock, Corruption	1.1	0.1161	252	0.5469	873.43	0.5018	10	9	198	60	7.00	6	18	16	9
+Stalker	https://horizon.fandom.com/wiki/Stalker	Medium	Combat	XI	18	800	Shock	None	1.2	0.0629	260	0.5715	904.31	0.5242	10	9	198	60	7.27	6	18	13	9
+Stalker, Corrupted	https://horizon.fandom.com/wiki/Stalker	Medium	Combat		23	1200	Shock	Corruption	1.2	0.0984	260	0.5715	959.16	0.5640	10	10	213	66	6.72	7	21	15	9
+Stalker, Daemonic	https://horizon.fandom.com/wiki/Stalker	Medium	Combat		30	1400	Shock	Corruption, Shock, Override	1.2	0.1161	260	0.5715	980.02	0.5791	10	10	213	66	6.76	7	21	16	9
+Frostclaw	https://horizon.fandom.com/wiki/Frostclaw	Large	Acquisition	EPSILON	30	3750	Fire	Freeze	1	0.3243	319	0.7753	1140.67	0.6955	12	12	243	78	7.36	8	24	29	12
+Frostclaw, Daemonic	https://horizon.fandom.com/wiki/Frostclaw	Large	Acquisition		36	4763	Fire	Freeze, Corruption, Shock, Override	1	0.4141	319	0.7753	1173.81	0.7195	12	12	243	78	7.43	8	24	34	12
+Stormbird	https://horizon.fandom.com/wiki/Stormbird	Large	Combat	ZETA	27	5000	None	Shock	1.2	0.4351	271	0.6095	1201.49	0.7395	12	13	258	84	5.89	8	24	36	10
+Scorcher	https://horizon.fandom.com/wiki/Scorcher	Medium	Combat	EPSILON	30	2000	Freeze	Fire	1.2	0.1693	308	0.7354	1218.08	0.7516	10	13	258	84	6.72	8	24	19	11
+Fireclaw	https://horizon.fandom.com/wiki/Fireclaw	Large	Acquisition	EPSILON	50	7500	Freeze	Fire	1	0.6566	323	0.7871	1250.14	0.7748	12	13	258	84	7.12	8	24	49	12
+Stormbird, Corrupted	https://horizon.fandom.com/wiki/Stormbird	Large	Combat		40	7500	None	Shock, Corruption	1.2	0.6566	271	0.6095	1258.69	0.7810	12	13	258	84	5.99	8	24	49	10
+Scorcher, Daemonic	https://horizon.fandom.com/wiki/Scorcher	Medium	Combat		35	2800	Freeze	Fire, Corruption, Shock, Override	1.2	0.2401	308	0.7354	1272.00	0.7906	10	13	258	84	6.83	8	24	24	11
+Fireclaw, Daemonic	https://horizon.fandom.com/wiki/Fireclaw	Large	Acquisition		55	9375	Freeze	Fire, Corruption, Shock, Override	1	0.8228	323	0.7871	1281.40	0.7974	12	14	273	90	6.70	8	24	59	12
+Rockbreaker	https://horizon.fandom.com/wiki/Rockbreaker	Large	Acquisition	ZETA	23	3500	Freeze	Fire	1.2	0.3022	314	0.7562	1333.58	0.8352	12	14	273	90	6.60	9	27	27	12
+Rockbreaker, Corrupted	https://horizon.fandom.com/wiki/Rockbreaker	Large	Acquisition		30	5250	Freeze	Fire, Corruption	1.2	0.4572	314	0.7562	1399.84	0.8833	12	15	288	96	6.30	9	27	37	12
+Rockbreaker, Daemonic	https://horizon.fandom.com/wiki/Rockbreaker	Large	Acquisition		32	6125	Freeze	Fire, Corruption, Shock, Override	1.2	0.5348	314	0.7562	1425.03	0.9015	12	15	288	96	6.34	9	27	42	12
+Thunderjaw	https://horizon.fandom.com/wiki/Thunderjaw	Large	Combat	ZETA	27	6500	None	Shock	1	0.5680	385	1.0000	1467.44	0.9322	12	16	303	102	7.40	9	27	44	15
+Thunderjaw, Corrupted	https://horizon.fandom.com/wiki/Thunderjaw	Large	Combat		34	9750	None	Shock, Corruption	1	0.8560	385	1.0000	1535.21	0.9813	12	17	318	108	7.11	10	30	61	15
+Thunderjaw, Daemonic	https://horizon.fandom.com/wiki/Thunderjaw	Large	Combat		40	11375	None	Shock, Corruption, Override	1	1.0000	385	1.0000	1560.98	1.0000	12	17	318	108	7.16	10	30	70	15
+Deathbringer I (Maker's End)	https://horizon.fandom.com/wiki/Deathbringer	Large	Chariot		14	1000	Fire, Shock	Corruption															
+Deathbringer IV (To Curse the Darkness)	https://horizon.fandom.com/wiki/Deathbringer	Large	Chariot		25	3000	Fire, Shock	Corruption															
+Deathbringer IV (Face of Extinction)	https://horizon.fandom.com/wiki/Deathbringer	Large	Chariot		30	4000	Fire, Shock	Corruption															
+Deathbringer V (Heart of the Nora)	https://horizon.fandom.com/wiki/Deathbringer	Large	Chariot		25	3000	Fire, Shock	Corruption															
+Deathbringer VII (Face of Extinction)	https://horizon.fandom.com/wiki/Deathbringer	Large	Chariot			12000	Fire, Shock	Corruption															
+Deathbringer III (To Curse the Darkness)	https://horizon.fandom.com/wiki/Deathbringer	Large	Chariot				Fire, Shock	Corruption															
+Deathbringer II (Grave Hoard)	https://horizon.fandom.com/wiki/Deathbringer	Large	Chariot				Fire, Shock	Corruption															

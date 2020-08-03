@@ -1,0 +1,130 @@
+$schema: ../schema/machine.schema.json
+id: broadhead
+title: Broadhead
+plural: Broadhead
+lang: en-US
+overrideSource: PSI
+link:
+  horizonWiki: https://horizon.fandom.com/wiki/Broadhead
+size: Small
+role: Acquisition
+variant:
+  base:
+    hp: 175
+    challengeLevel: 10
+  corrupted:
+    hp: 263
+    challengeLevel: 17
+action:
+  - id: charge
+    title: Charge
+    description: TODO
+    effect: false
+  - id: doubleStrike
+    title: Double Strike
+    description: TODO
+    effect: false
+  - id: hindLegStrike
+    title: Hind Leg Strike
+    description: TODO
+    effect: false
+  - id: rodeoKick
+    title: Rodeo Kick
+    description: TODO
+    effect: false
+  - id: spinKick
+    title: Spin Kick
+    description: TODO
+    effect: false
+  - id: chargeWhileSprinting
+    title: Charge (while sprinting)
+    description: TODO
+    effect: true
+component:
+  body:
+    title: Body
+    damagePercent: 100
+    remove: false
+    targetDifficulty: TODO
+adapter:
+  cypher:
+    damage: 3
+    level: 3
+    health: 9
+    target: 9
+    armor: 0
+    movement: Short
+  dnd5e:
+    armor:
+      num: 0
+      type: TODO
+    attr:
+      STR:
+        score: 0
+        bonus: TODO
+      DEX:
+        score: 0
+        bonus: TODO
+      CON:
+        score: 0
+        bonus: TODO
+      INT:
+        score: 0
+        bonus: TODO
+      WIS:
+        score: 0
+        bonus: TODO
+      CHA:
+        score: 0
+        bonus: TODO
+    speedFeet: 0
+    hitDie: 8
+    hp:
+      average: 93
+      roll: TODO
+    challenge:
+      rating: 2
+      xp: -1
+    action:
+      charge:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 4d8 + 2
+            average: 20
+      doubleStrike:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 2d8 + 4
+            average: 13
+      hindLegStrike:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 2d8 + 2
+            average: 11
+      rodeoKick:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 2d8 + 1
+            average: 10
+      spinKick:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 2d8
+            average: 9
+      chargeWhileSprinting:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 1d4
+            average: 3

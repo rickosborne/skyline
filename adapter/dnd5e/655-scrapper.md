@@ -57,6 +57,16 @@ This pulse pierces through stealth.
 The Scrapper shares information gained from this pulse with all other machines within 120 ft.
 Takes 60 seconds to recharge.
 </p>
+<p class="non-attack" markdown="1">
+_**Claw Swipe.**_
+TODO
+TODO
+</p>
+<p class="non-attack" markdown="1">
+_**Grinder Jaw Swipe.**_
+TODO
+TODO
+</p>
     </section>
     <section class="actions">
         <header>
@@ -79,7 +89,7 @@ _**Laser Burst.**_
 A laser burst fires at a single target.
 _Ranged Weapon Attack_, +2 to hit, reach 120 ft. (min. 25 ft.), 3 targets.
 Lasers recharge at the end of the next round.
-_Hit:_ 4 (1d6) force damage.
+_Hit:_ 4 (1d6) piercing damage.
 </p>
 <p class="action" markdown="1">
 _**Laser Lead Up.**_
@@ -87,8 +97,8 @@ A trio of laser bursts slash across the ground.
 _Ranged Weapon Attack_, +0 to hit, reach 60 ft. (min. 25 ft.), 3 targets.
 Targets must be within 15 ft. of each other.
 Lasers recharge at the end of the next round.
-Targets may make a DC 13 Dexterity saving throw to take half damage.
-_Hit:_ 10 (2d8 + 1) force damage.
+Targets may make a DC 14 Dexterity saving throw to take half damage.
+_Hit:_ 10 (2d8 + 1) piercing damage.
 </p>
 <p class="action" markdown="1">
 _**Laser Sweep.**_
@@ -96,8 +106,8 @@ Laser fire sweeps in a straight line.
 _Ranged Weapon Attack_, +1 to hit, reach 60 ft. (min. 25 ft.).
 Fires a laser beam in a straight 25 ft. line, hitting all targets in its path.
 Lasers recharge at the end of the next round.
-Targets may make a DC 13 Dexterity saving throw to take half damage.
-_Hit:_ 8 (1d8 + 4) force damage.
+Targets may make a DC 14 Dexterity saving throw to take half damage.
+_Hit:_ 8 (1d8 + 4) piercing damage.
 </p>
     </section>
     <section class="components">

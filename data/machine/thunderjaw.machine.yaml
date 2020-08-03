@@ -1,0 +1,199 @@
+$schema: ../schema/machine.schema.json
+id: thunderjaw
+title: Thunderjaw
+plural: Thunderjaw
+lang: en-US
+overrideSource: ZETA
+link:
+  horizonWiki: https://horizon.fandom.com/wiki/Thunderjaw
+size: Large
+role: Combat
+variant:
+  base:
+    hp: 6500
+    challengeLevel: 27
+  corrupted:
+    hp: 9750
+    challengeLevel: 34
+  daemonic:
+    hp: 11375
+    challengeLevel: 40
+action:
+  - id: biteAttack
+    title: Bite Attack
+    description: TODO
+    effect: false
+  - id: charge
+    title: Charge
+    description: TODO
+    effect: false
+  - id: footStomp
+    title: Foot Stomp
+    description: TODO
+    effect: false
+  - id: rushingBiteAttack
+    title: Rushing Bite Attack
+    description: TODO
+    effect: false
+  - id: tailSlam
+    title: Tail Slam
+    description: TODO
+    effect: false
+  - id: tailSwipe
+    title: Tail Swipe
+    description: TODO
+    effect: false
+  - id: discLauncher360Attack
+    title: Disc Launcher - 360 Attack
+    description: TODO
+    effect: false
+  - id: discLauncherBarrage
+    title: Disc Launcher - Barrage
+    description: TODO
+    effect: false
+  - id: discLauncherHoming
+    title: Disc Launcher - Homing
+    description: TODO
+    effect: false
+  - id: laserSweep
+    title: Laser Sweep
+    description: TODO
+    effect: false
+  - id: cannonBurstLeadUp
+    title: Cannon Burst - Lead Up
+    description: TODO
+    effect: false
+  - id: cannonBurstSideToSide
+    title: Cannon Burst - Side to Side
+    description: TODO
+    effect: false
+component:
+  body:
+    title: Body
+    damagePercent: 100
+    remove: false
+    targetDifficulty: TODO
+adapter:
+  cypher:
+    damage: 15
+    level: 9
+    health: 44
+    target: 27
+    armor: 0
+    movement: Short
+  dnd5e:
+    armor:
+      num: 0
+      type: TODO
+    attr:
+      STR:
+        score: 0
+        bonus: TODO
+      DEX:
+        score: 0
+        bonus: TODO
+      CON:
+        score: 0
+        bonus: TODO
+      INT:
+        score: 0
+        bonus: TODO
+      WIS:
+        score: 0
+        bonus: TODO
+      CHA:
+        score: 0
+        bonus: TODO
+    speedFeet: 0
+    hitDie: 12
+    hp:
+      average: 303
+      roll: TODO
+    challenge:
+      rating: 16
+      xp: -1
+    action:
+      biteAttack:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 5d12 + 2
+            average: 34
+      charge:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 5d12 + 5
+            average: 37
+      footStomp:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 7d12
+            average: 46
+      rushingBiteAttack:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 5d12 + 2
+            average: 34
+      tailSlam:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 6d12 + 2
+            average: 41
+      tailSwipe:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 6d12 + 2
+            average: 41
+      discLauncher360Attack:
+        description: TODO
+        target: 5
+        onHit:
+          - type: force
+            roll: 2d12 + 5
+            average: 18
+      discLauncherBarrage:
+        description: TODO
+        target: 5
+        onHit:
+          - type: force
+            roll: 2d12 + 5
+            average: 18
+      discLauncherHoming:
+        description: TODO
+        target: 5
+        onHit:
+          - type: force
+            roll: 2d12 + 5
+            average: 18
+      laserSweep:
+        description: TODO
+        target: 5
+        onHit:
+          - type: TODO
+            roll: 4d12 + 1
+            average: 27
+      cannonBurstLeadUp:
+        description: TODO
+        target: 5
+        onHit:
+          - type: TODO
+            roll: 1d12 + 2
+            average: 8
+      cannonBurstSideToSide:
+        description: TODO
+        target: 5
+        onHit:
+          - type: TODO
+            roll: 1d12 + 5
+            average: 11

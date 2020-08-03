@@ -1,0 +1,173 @@
+Machine	Action	Times per Fight	Range Min (m)	Range Max (m)	Normal Damage	Shock Damage	Freeze Damage	Fire Damage	Explode Damage	Multi-Attack	Tick Damage	Tick Count	Tick Type	Cleave	Status	Cooldown Turns	Range	Pre-Multiplier	Multiplier	Damage Per Attack	Averaged Count	Likelihood per Round	Effective Damage Per Round	Avg Dmg per Round	5E Damage Divisor	5E Hit Die	5E Avg Die	5E Normal Avg	5E Normal Roll	5E Lightning Avg	5E Lightning Roll	5E Cold Avg	5E Cold Roll	5E Fire Avg	5E Fire Roll	5E Force Avg	5E Force Roll	5E Tick Avg	5E Tick Roll
+Broadhead	Charge 	A	15	50	225												Far	225	1	225	5	20%	45	142	11.12	8	4.5	20	4d8 + 2										
+Broadhead	Double Strike 	A	0	7	150												Jump	150	1	150	5	20%	30		11.12	8	4.5	13	2d8 + 4										
+Broadhead	Hind Leg Strike 	A	1.5	3.5	125												Melee	125	1	125	5	20%	25		11.12	8	4.5	11	2d8 + 2										
+Broadhead	Rodeo Kick 	A	0	2.5	110												Melee	110	1	110	5	20%	22		11.12	8	4.5	10	2d8 + 1										
+Broadhead	Spin Kick 	A	1.5	3.5	100												Melee	100	1	100	5	20%	20		11.12	8	4.5	9	2d8										
+Broadhead	Charge (while sprinting)	0			35													35			5				11.12	8	4.5	3	1d4										
+Watcher	Energy Blast 	A	0	55					40								Any	40	1	40	4	25%	10	93	17.18	8	4.5									2	1d4		
+Watcher	Head Strike 	A	4	9	90												Close	90	1	90	4	25%	23		17.18	8	4.5	5	1d8										
+Watcher	Jumping Smash 	A	6	11	90												Medium	90	1	90	4	25%	23		17.18	8	4.5	5	1d8										
+Watcher	Tail Strike 	A	2.5	6	100									Cleave			Jump	100	1.5	150	4	25%	38		17.18	8	4.5	6	1d8 + 2										
+Watcher	Blinding Stun Flash 	1	6	11	0									*	Blind		Medium	0			4				17.18	8	4.5												
+Grazer	Charge	A	0	50	120												Any	120	1	120	5	20%	24	98	18.43	8	4.5	7	1d8 + 3										
+Grazer	Front Leg Kick 	A	1.5	3.5	90												Melee	90	1	90	5	20%	18		18.43	8	4.5	5	1d8										
+Grazer	Hind Leg Kick 	A	1.5	3.5	90												Melee	90	1	90	5	20%	18		18.43	8	4.5	5	1d8										
+Grazer	Leaping Front Kick 	A	2	6	90												Jump	90	1	90	5	20%	18		18.43	8	4.5	5	1d8										
+Grazer	Upward Stab 	A	1	3.5	100												Melee	100	1	100	5	20%	20		18.43	8	4.5	5	1d8										
+Lancehorn	Charge	A	0	50	150												Any	150	1	150	7	14%	21	144	11.43	8	4.5	13	2d8 + 4										
+Lancehorn	Front Leg Kick 	A	1.5	2.5	120										Knockdown		Melee	120	1	120	7	14%	17		11.43	8	4.5	10	2d8 + 1										
+Lancehorn	Gore and Flip 	A	1.5	6.5	200										Knockdown		Jump	200	1	200	7	14%	29		11.43	8	4.5	17	3d8 + 4										
+Lancehorn	Hind Leg Kick 	A	1.5	3.5	120										Knockdown		Melee	120	1	120	7	14%	17		11.43	8	4.5	10	2d8 + 1										
+Lancehorn	Leaping Front Kick 	A	2	6	90												Jump	90	1	90	7	14%	13		11.43	8	4.5	8	1d8 + 4										
+Lancehorn	Leaping Horn Stab 	A	7.5	12.5	200												Medium	200	1	200	7	14%	29		11.43	8	4.5	17	3d8 + 4										
+Lancehorn	Upward Stab 	A	1	3.5	130												Melee	130	1	130	7	14%	19		11.43	8	4.5	11	2d8 + 2										
+Charger	Charge	A	15	50	100												Far	100	1	100	5	20%	20	200	9.92	8	4.5	10	2d8 + 1										
+Charger	Double Strike 	A	0	7	200												Jump	200	1	200	5	20%	40		9.92	8	4.5	20	4d8 + 2										
+Charger	Hind Leg Strike 	A	1.5	3.5	175												Melee	175	1	175	5	20%	35		9.92	8	4.5	18	4d8										
+Charger	Rodeo Kick 	A	0	2.5	200									Cleave			Melee	200	1.5	300	5	20%	60		9.92	8	4.5	20	4d8 + 2										
+Charger	Spin Kick 	A	1.5	3.5	225												Melee	225	1	225	5	20%	45		9.92	8	4.5	23	5d8										
+Scrapper	Laser Burst 	A	8	29	40					3							Medium	40	1	120	5	20%	24	96	11.05	8	4.5	4	1d6										
+Scrapper	Laser Lead Up 	A	8	25	105						12	3	Laser Fire	Cleave		3	Medium	47	1.5	71	5	20%	14		11.05	8	4.5	10	2d8 + 1									1	1d4
+Scrapper	Laser Sweep 	A	8	20	90						50	3	Laser Fire	Cleave		3	Medium	80	1.5	120	5	20%	24		11.05	8	4.5	8	1d8 + 4									5	1d8
+Scrapper	Claw Swipe 	A	5	12	85												Close	85	1	85	5	20%	17		11.05	8	4.5	8	1d8 + 4										
+Scrapper	Grinder Jaw Swipe 	A	8	12	85												Medium	85	1	85	5	20%	17		11.05	8	4.5	8	1d8 + 4										
+Shell-Walker	Claw Combo 	A	2	8	200					3							Jump	200	1	600	7	14%	86	252	7.63	10	5.5	26	4d10 + 4										
+Shell-Walker	Multi-Claw Strike 	A	2	8	200					2							Jump	200	1	400	7	14%	57		7.63	10	5.5	26	4d10 + 4										
+Shell-Walker	Shield Claw Strike 	A	2	8	200										Knockdown		Jump	200	1	200	7	14%	29		7.63	10	5.5	26	4d10 + 4										
+Shell-Walker	360 Shock 	A	0	12		300								Cleave		3	Any	100	1.5	150	7	14%	21		7.63	10	5.5			39	7d10								
+Shell-Walker	Charging Shock Blast 	A	10	30		80											Medium	80	1	80	7	14%	11		7.63	10	5.5			10	1d10 + 5								
+Shell-Walker	Homing Shock Blast 	A	30	60		140					30	5	Shock			3	Far	97	1	97	7	14%	14		7.63	10	5.5			18	3d10 + 2							4	1d6
+Shell-Walker	Shock Volley 	A	30	60		80				3							Far	80	1	240	7	14%	34		7.63	10	5.5			10	1d10 + 5								
+Stalker	Mine Launch 	0	0	8					100								Jump	100			6			260	7.27	10	5.5									14	2d10 + 3		
+Stalker	Claw Fury 	A	9	20.5	300												Medium	300	1	300	6	17%	50		7.27	10	5.5	41	7d10 + 3										
+Stalker	Claw Swipe 	A	4	7	175												Close	175	1	175	6	17%	29		7.27	10	5.5	24	4d10 + 2										
+Stalker	Jumping Mandible Stab 	A	12	18	170												Medium	170	1	170	6	17%	28		7.27	10	5.5	23	4d10 + 1										
+Stalker	Mandible Stab 	A	5	9	140												Close	140	1	140	6	17%	23		7.27	10	5.5	19	3d10 + 3										
+Stalker	Tail Swipe 	A	0	4	275									Cleave			Melee	275	1.5	413	6	17%	69		7.27	10	5.5	38	6d10 + 5										
+Stalker	Dart Gun Shot 	A	6	80	120					3							Medium	120	1	360	6	17%	60		7.27	10	5.5	17	3d10										
+Glinthawk	Freeze Cloud 	A	0	100			20			4	30	3	Freeze			3	Any	37	1	147	3	33%	49	169	8.48	8	4.5					2	1d4					4	1d6
+Glinthawk	Freeze Spit 	A	0	150			60			4	30	3	Freeze			3	Any	50	1	200	3	33%	67		8.48	8	4.5					7	1d8 + 3					4	1d6
+Glinthawk	Claw Slash 	A	7.5	18.5	160												Medium	160	1	160	3	33%	53		8.48	8	4.5	19	4d8 + 1										
+Trampler	Mineral Explosion 	A	0	9.5					300								Jump	300	1	300	6	17%	50	221	8.28	10	5.5									36	6d10 + 3		
+Trampler	Charge 	A	22	80	200						10	10	Fire				Far	300	1	300	6	17%	50		8.28	10	5.5	24	4d10 + 2									1	1d4
+Trampler	Dust Cloud 	A	0	6	210										Dust		Jump	210	1	210	6	17%	35		8.28	10	5.5	25	4d10 + 3										
+Trampler	Ground Blast 	A	0	40	300				50							3	Any	117	1	117	6	17%	19		8.28	10	5.5	36	6d10 + 3							6	1d10		
+Trampler	Hind Leg Strike 	A	0	5	200												Melee	200	1	200	6	17%	33		8.28	10	5.5	24	4d10 + 2										
+Trampler	Horn Thrash 	A	15	25	200												Far	200	1	200	6	17%	33		8.28	10	5.5	24	4d10 + 2										
+Scorcher	Cinder Claws 	A	7	11	140			140		4						4	Medium	70	1	280	8	13%	35	308	6.72	10	5.5	21	3d10 + 5					21	3d10 + 5				
+Scorcher	Scorching Fang 	A	1	8	140			140									Jump	280	1	280	8	13%	35		6.72	10	5.5	21	3d10 + 5					21	3d10 + 5				
+Scorcher	Quick Scorching Fang 	A	1.5	6	140			140									Jump	280	1	280	8	13%	35		6.72	10	5.5	21	3d10 + 5					21	3d10 + 5				
+Scorcher	Furnace Blast 	A	0	5				300						Cleave		3	Melee	100	1.5	150	8	13%	19		6.72	10	5.5							45	8d10 + 1				
+Scorcher	Heat Wave 	A	7	20				220									Medium	220	1	220	8	13%	28		6.72	10	5.5							33	6d10				
+Scorcher	Mine Launcher: Area Fire 	A	15	80					250	10				Cleave		10	Far	25	1.5	375	8	13%	47		6.72	10	5.5									37	6d10 + 4		
+Scorcher	Mine Launcher: Formation Fire 	A	15	80					250	12				Cleave		12	Far	21	1.5	375	8	13%	47		6.72	10	5.5									37	6d10 + 4		
+Scorcher	Ignition Boost 	A	10	25	250			100			50	3	Fire				Medium	500	1	500	8	13%	63		6.72	10	5.5	37	6d10 + 4					15	2d10 + 4			7	1d10 + 2
+Sawtooth	Berserker Fury 	A	3	10	300												Close	300	1	300	4	25%	75	190	8.04	10	5.5	37	6d10 + 4										
+Sawtooth	Claw Swipe 	A	7	11	140												Medium	140	1	140	4	25%	35		8.04	10	5.5	17	3d10										
+Sawtooth	Jaw Smash 	A	1	8	140												Jump	140	1	140	4	25%	35		8.04	10	5.5	17	3d10										
+Sawtooth	Jumping Jaw Smash 	A	16	23	180												Far	180	1	180	4	25%	45		8.04	10	5.5	22	4d10										
+Longleg	Jet Blast 	A	1	50				190									Any	190	1	190	5	20%	38	168	8.28	10	5.5							23	4d10 + 1				
+Longleg	Beak Thrust 	A	10.5	15.5	160												Medium	160	1	160	5	20%	32		8.28	10	5.5	19	3d10 + 3										
+Longleg	Chicken Scratch 	A	5	14	130												Close	130	1	130	5	20%	26		8.28	10	5.5	16	2d10 + 5										
+Longleg	Dashing Claw Jump 	A	5	7	100				80								Close	180	1	180	5	20%	36		8.28	10	5.5	12	2d10 + 1							10	1d10 + 5		
+Longleg	Jumping Wing Blast 	A	5	13.5	180												Close	180	1	180	5	20%	36		8.28	10	5.5	22	4d10										
+Longleg	Stun Blast 	0	1	30											Deafen		Any	0			5				8.28	10	5.5												
+Ravager	Berserker Fury 	A	3	10	300												Close	300	1	300	7	14%	43	211	7.84	10	5.5	38	6d10 + 5										
+Ravager	Claw Swipe 	A	7	11	170												Medium	170	1	170	7	14%	24		7.84	10	5.5	22	4d10										
+Ravager	Jumping Jaw Smash 	A	16	23	220												Far	220	1	220	7	14%	31		7.84	10	5.5	28	5d10										
+Ravager	Mandible Stab 	A	1	8	160												Jump	160	1	160	7	14%	23		7.84	10	5.5	20	3d10 + 4										
+Ravager	Shock Jaw Smash 	A	1	8		180											Jump	180	1	180	7	14%	26		7.84	10	5.5			23	4d10 + 1								
+Ravager	Cannon Burst 	A	15	65	40					5							Far	40	1	200	7	14%	29		7.84	10	5.5	5	2d4										
+Ravager	Shock Cocoon 	A	1.25	5.25		165								Cleave			Jump	165	1.5	248	7	14%	35		7.84	10	5.5			21	3d10 + 5								
+Fire Bellowback	Elemental Circular Attack 	A	0	9				150			10	3	Fire	Cleave			Jump	180	1.5	270	6	17%	45	217	8.17	10	5.5							18	3d10 + 2			1	1d4
+Fire Bellowback	Elemental Projectile 	A	20	50				60			70	3	Fire				Far	270	1	270	6	17%	45		8.17	10	5.5							7	1d10 + 2			9	1d10 + 4
+Fire Bellowback	Elemental Spray 	A	4	20				125						Cleave			Close	125	1.5	188	6	17%	31		8.17	10	5.5							15	2d10 + 4				
+Fire Bellowback	Leaping Smash 	A	19.5	21.5	145												Far	145	1	145	6	17%	24		8.17	10	5.5	18	3d10 + 2										
+Fire Bellowback	Shoulder Barge 	A	5	17	180												Close	180	1	180	6	17%	30		8.17	10	5.5	22	4d10										
+Fire Bellowback	Tail Swipe 	A	8.5	12.5	250												Medium	250	1	250	6	17%	42		8.17	10	5.5	31	5d10 + 4										
+Freeze Bellowback	Elemental Circular Attack 	A	0	9			150				10	3	Freeze	Cleave			Jump	180	1.5	270	6	17%	45	217	8.17	10	5.5					18	3d10 + 2					1	1d4
+Freeze Bellowback	Elemental Projectile 	A	20	50			60				70	3	Freeze				Far	270	1	270	6	17%	45		8.17	10	5.5					7	1d10 + 2					9	1d10 + 4
+Freeze Bellowback	Elemental Spray 	A	4	20			125							Cleave			Close	125	1.5	188	6	17%	31		8.17	10	5.5					15	2d10 + 4						
+Freeze Bellowback	Leaping Smash 	A	19.5	21.5	145												Far	145	1	145	6	17%	24		8.17	10	5.5	18	3d10 + 2										
+Freeze Bellowback	Shoulder Barge 	A	5	17	180												Close	180	1	180	6	17%	30		8.17	10	5.5	22	4d10										
+Freeze Bellowback	Tail Swipe 	A	8.5	12.5	250												Medium	250	1	250	6	17%	42		8.17	10	5.5	31	5d10 + 4										
+Snapmaw	Freeze Burst 	A	20	45			50				50	3	Freeze	Cleave			Far	200	1.5	300	6	17%	50	212	7.89	10	5.5					6	1d10					6	1d10
+Snapmaw	Lunge Bite 	A	8	12	180												Medium	180	1	180	6	17%	30		7.89	10	5.5	23	4d10 + 1										
+Snapmaw	Jumping Jaw Bite 	A	0	17	180												Any	180	1	180	6	17%	30		7.89	10	5.5	23	4d10 + 1										
+Snapmaw	Snap Bite 	A	3	11	160												Close	160	1	160	6	17%	27		7.89	10	5.5	20	3d10 + 4										
+Snapmaw	Tail Strike 	A	10	15	180												Medium	180	1	180	6	17%	30		7.89	10	5.5	23	4d10 + 1										
+Snapmaw	Spinning Tail Strike 	A	0	6	180									Cleave			Jump	180	1.5	270	6	17%	45		7.89	10	5.5	23	4d10 + 1										
+Frostclaw	Ice Spikes 	A	15	50	125		125				25	3	Freeze	Cleave			Far	325	1.5	488	13	8%	38	319	7.36	12	6.5	17	2d12 + 4			17	2d12 + 4					3	1d4
+Frostclaw	Back Slash 	A	1	15	150		75				23	3	Freeze				Any	294	1	294	13	8%	23		7.36	12	6.5	20	3d12			10	1d12 + 4					3	1d4
+Frostclaw	Fury Slash 	A	3	18	200		100			3						3	Close	100	1	300	13	8%	23		7.36	12	6.5	27	4d12 + 1			14	2d12 + 1						
+Frostclaw	Lunge Dive 	A	3	18	200		100										Close	300	1	300	13	8%	23		7.36	12	6.5	27	4d12 + 1			14	2d12 + 1						
+Frostclaw	Back Crush 	A	8	11	200				50								Medium	250	1	250	13	8%	19		7.36	12	6.5	27	4d12 + 1							7	1d12		
+Frostclaw	Lunge Slash 	A	8	14	200		100										Medium	300	1	300	13	8%	23		7.36	12	6.5	27	4d12 + 1			14	2d12 + 1						
+Frostclaw	Hail Storm 	A	10	20			145							Cleave			Medium	145	1.5	218	13	8%	17		7.36	12	6.5					20	3d12						
+Frostclaw	Frost Blast 	A	0	8	200		100							Cleave		3	Jump	100	1.5	150	13	8%	12		7.36	12	6.5	27	4d12 + 1			14	2d12 + 1						
+Frostclaw	Grinder Scrape 	A	15	50	125		75										Far	200	1	200	13	8%	15		7.36	12	6.5	17	2d12 + 4			10	1d12 + 4						
+Frostclaw	Claw Slash 	A	2	8	75		150			6				Cleave		3	Jump	75	1.5	675	13	8%	52		7.36	12	6.5	10	1d12 + 4			20	3d12						
+Frostclaw	Frost Dive 	A	7	25	50				200					Cleave			Medium	250	1.5	375	13	8%	29		7.36	12	6.5	7	1d12							27	4d12 + 1		
+Frostclaw	Frost Crush 	A	6	13	100		200								Drain		Medium	300	1	300	13	8%	23		7.36	12	6.5	14	2d12 + 1			27	4d12 + 1						
+Frostclaw	Frost Slam 	A	0	5	200									Cleave			Melee	200	1.5	300	13	8%	23		7.36	12	6.5	27	4d12 + 1										
+Frostclaw	Ice Storm 	2									50	3	Freeze	Cleave	Self-Cleanse			150	1.5	225	13				7.36	12	6.5											7	1d12
+Fireclaw	Lava Burst 	A	15	50	200			65			50	3	Fire			3	Far	138	1	138	15	7%	9	323	7.12	12	6.5	28	4d12 + 2					9	1d12 + 3			7	1d12
+Fireclaw	Volcanic Meteor Shower 	A	15	50	135			200	200		50	3	Fire			3	Far	228	1	228	15	7%	15		7.12	12	6.5	19	2d12 + 6					28	4d12 + 2	28	4d12 + 2	7	1d12
+Fireclaw	Back Slash 	A	3	11	200			100									Close	300	1	300	15	7%	20		7.12	12	6.5	28	4d12 + 2					14	2d12 + 1				
+Fireclaw	Fury Slash 	A	4	25	225			125		3				Cleave		3	Close	117	1.5	525	15	7%	35		7.12	12	6.5	32	4d12 + 6					18	2d12 + 5				
+Fireclaw	Lunge Dive 	A	4	25	250			125									Close	375	1	375	15	7%	25		7.12	12	6.5	35	5d12 + 3					18	2d12 + 5				
+Fireclaw	Back Crush 	A	11	15	200				50								Medium	250	1	250	15	7%	17		7.12	12	6.5	28	4d12 + 2							7	1d12		
+Fireclaw	Fire Storm 	A	10	20				150						Cleave			Medium	150	1.5	225	15	7%	15		7.12	12	6.5							21	3d12 + 2				
+Fireclaw	Flame Blast 	A	0	10	130			180						Cleave		3	Any	103	1.5	155	15	7%	10		7.12	12	6.5	18	2d12 + 5					25	3d12 + 6				
+Fireclaw	Grinder Scrape 	A	15	50	110					3							Far	110	1	330	15	7%	22		7.12	12	6.5	15	2d12 + 2										
+Fireclaw	Claw Slash 	A	1	20	125			175		6						3	Any	100	1	600	15	7%	40		7.12	12	6.5	18	2d12 + 5					25	3d12 + 6				
+Fireclaw	Inferno Dive 	A	10	34	235			175			100	3	Fire	Cleave		3	Medium	237	1.5	355	15	7%	24		7.12	12	6.5	33	5d12					25	3d12 + 6			14	2d12 + 1
+Fireclaw	Rock Shield - Charge 	A	5	60	135			135									Close	270	1	270	15	7%	18		7.12	12	6.5	19	2d12 + 6					19	2d12 + 6				
+Fireclaw	Rock Shield - Throw 	A	15	50	180			180			50	3	Fire		Drain	3	Far	170	1	170	15	7%	11		7.12	12	6.5	25	3d12 + 6					25	3d12 + 6			7	1d12
+Fireclaw	Rock Shield - Smash 	A	0	7	225			400	200		100	3	Fire	Cleave	Drain	3	Jump	375	1.5	563	15	7%	38		7.12	12	6.5	32	4d12 + 6					56	8d12 + 4	28	4d12 + 2	14	2d12 + 1
+Fireclaw	Inferno Slam 	A	0	7	235			175			100	3	Fire	Cleave		3	Jump	237	1.5	355	15	7%	24		7.12	12	6.5	33	5d12					25	3d12 + 6			14	2d12 + 1
+Fireclaw	Fire Storm 	2									50	3	Fire	Cleave	Self-Cleanse			150	1.5	225	15				7.12	12	6.5											7	1d12
+Behemoth	Charge 	1	22	80	300												Far	300	1	300	4			223	7.47	12	6.5	40	6d12 + 1										
+Behemoth	Gravity Boulder Throw 	A	10	45	250												Medium	250	1	250	4	25%	63		7.47	12	6.5	33	5d12										
+Behemoth	Gravity Purge 	A	0	9.5	200						150	5	Physical	Cleave		5	Jump	190	1.5	285	4	25%	71		7.47	12	6.5	27	4d12 + 1									20	3d12
+Behemoth	Grinding Shrapnel Blast 	A	8	25	35					8							Medium	35	1	280	4	25%	70		7.47	12	6.5	5	2d4										
+Behemoth	Quake Smash 	A	1	22	250									Cleave		5	Any	50	1.5	75	4	25%	19		7.47	12	6.5	33	5d12										
+Stormbird	Jumping Claw Smash 	A	15	31	180												Far	180	1	180	11	9%	16	271	5.89	12	6.5	31	4d12 + 5										
+Stormbird	Beak Smash 	A	8	24	180	50											Medium	230	1	230	11	9%	21		5.89	12	6.5	31	4d12 + 5	8	1d12 + 2								
+Stormbird	Take Off 	A	0	30	150									Cleave			Any	150	1.5	225	11	9%	20		5.89	12	6.5	25	3d12 + 6										
+Stormbird	Tail Lash 	A	14	22		300											Medium	300	1	300	11	9%	27		5.89	12	6.5			51	7d12 + 6								
+Stormbird	Thunder Rush 	A	15	40		360								Cleave		3	Far	120	1.5	180	11	9%	16		5.89	12	6.5			61	9d12 + 3								
+Stormbird	Screech Blast 	0	0	20										Cleave	Deafen		Any	0			11				5.89	12	6.5												
+Stormbird	Hurricane Blast 	A	10	25	150									Cleave			Medium	150	1.5	225	11	9%	20		5.89	12	6.5	25	3d12 + 6										
+Stormbird	Thunder Clash 	A	0	150		450								Cleave		3	Any	150	1.5	225	11	9%	20		5.89	12	6.5			76	11d12 + 5								
+Stormbird	Quick Land 	A	0	8		220											Jump	220	1	220	11	9%	20		5.89	12	6.5			37	5d12 + 5								
+Stormbird	Shock Blast 	A	15	100		250					20	3	Shock	Cleave		3	Far	103	1.5	155	11	9%	14		5.89	12	6.5			42	6d12 + 3							3	1d4
+Stormbird	Shock Burst 	A	15	60		175				3				Cleave		3	Far	58	1.5	263	11	9%	24		5.89	12	6.5			30	4d12 + 4								
+Stormbird	Thunder Bomb Run 	A	0	100		250				5	20	3	Shock	Cleave		3	Any	103	1.5	775	11	9%	70		5.89	12	6.5			42	6d12 + 3							3	1d4
+Corruptor	Inferno Blast 	A	15	80				60		6	25	3		Cleave		3	Far	45	1.5	405	7	14%	58	199	7.36	10	5.5							8	1d10 + 3			3	1d4
+Corruptor	Rock Shrapnel 	A	5	8	120												Close	120	1	120	7	14%	17		7.36	10	5.5	16	2d10 + 5										
+Corruptor	Talon Swipe 180 	A	4	10	120									Cleave			Close	120	1.5	180	7	14%	26		7.36	10	5.5	16	2d10 + 5										
+Corruptor	Talon Swipe 360 	A	3	8	120									Cleave			Close	120	1.5	180	7	14%	26		7.36	10	5.5	16	2d10 + 5										
+Corruptor	Talon Strike 	A	5	10	110				40								Close	150	1	150	7	14%	21		7.36	10	5.5	15	2d10 + 4							5	2d4		
+Corruptor	Corruption Spike 	A	15	50	80				50								Far	130	1	130	7	14%	19		7.36	10	5.5	11	2d10							7	1d10 + 2		
+Corruptor	Boulder Throw 	A	15	80	150									Cleave			Far	150	1.5	225	7	14%	32		7.36	10	5.5	20	3d10 + 4										
+Rockbreaker	Leaping Crush 	A	0	30	250									Cleave			Any	250	1.5	375	7	14%	54	314	6.60	12	6.5	38	5d12 + 6										
+Rockbreaker	Jaw Smash 	A	0	14	200									Cleave			Any	200	1.5	300	7	14%	43		6.60	12	6.5	30	4d12 + 4										
+Rockbreaker	Lunge Crush 	A	10	19	200									Cleave			Medium	200	1.5	300	7	14%	43		6.60	12	6.5	30	4d12 + 4										
+Rockbreaker	Shark Bite 	A	0	150	200									Cleave			Any	200	1.5	300	7	14%	43		6.60	12	6.5	30	4d12 + 4										
+Rockbreaker	Spinning Smash 	A	0	10	180									Cleave			Any	180	1.5	270	7	14%	39		6.60	12	6.5	27	4d12 + 1										
+Rockbreaker	Rock Blast 	A	0	30	50					6				Cleave		3	Any	17	1.5	150	7	14%	21		6.60	12	6.5	8	1d12 + 2										
+Rockbreaker	Rock Volcano 	A	0	150					100		150	6		Cleave		3	Any	333	1.5	500	7	14%	71		6.60	12	6.5									15	2d12 + 2	23	3d12 + 4
+Thunderjaw	Bite Attack 	A	11	17	250												Medium	250	1	250	12	8%	21	385	7.40	12	6.5	34	5d12 + 2										
+Thunderjaw	Charge 	A	20	80	275									Cleave			Far	275	1.5	413	12	8%	34		7.40	12	6.5	37	5d12 + 5										
+Thunderjaw	Foot Stomp 	A	0	7	340									Cleave			Jump	340	1.5	510	12	8%	43		7.40	12	6.5	46	7d12										
+Thunderjaw	Rushing Bite Attack 	A	18	33	250									Cleave			Far	250	1.5	375	12	8%	31		7.40	12	6.5	34	5d12 + 2										
+Thunderjaw	Tail Slam 	A	6	16	300									Cleave			Medium	300	1.5	450	12	8%	38		7.40	12	6.5	41	6d12 + 2										
+Thunderjaw	Tail Swipe 	A	17	27	300									Cleave			Far	300	1.5	450	12	8%	38		7.40	12	6.5	41	6d12 + 2										
+Thunderjaw	Disc Launcher - 360 Attack 	A	5	25					130	5				Cleave		6	Close	22	1.5	163	12	8%	14		7.40	12	6.5									18	2d12 + 5		
+Thunderjaw	Disc Launcher - Barrage 	A	20	80					130	5				Cleave		6	Far	22	1.5	163	12	8%	14		7.40	12	6.5									18	2d12 + 5		
+Thunderjaw	Disc Launcher - Homing 	A	20	80					130	5				Cleave		6	Far	22	1.5	163	12	8%	14		7.40	12	6.5									18	2d12 + 5		
+Thunderjaw	Laser Sweep 	A	25	60	200					5	130	3				3	Far	197	1	983	12	8%	82		7.40	12	6.5	27	4d12 + 1									18	2d12 + 5
+Thunderjaw	Cannon Burst - Lead Up 	A	20	80	60					5							Far	60	1	300	12	8%	25		7.40	12	6.5	8	1d12 + 2										
+Thunderjaw	Cannon Burst - Side to Side 	A	20	80	80					5							Far	80	1	400	12	8%	33		7.40	12	6.5	11	1d12 + 5										

@@ -603,7 +603,7 @@
 		},
 		"id": {
 			"description": "Programmatic identifier unique to this object",
-			"pattern": "^[a-z]+([A-Z][a-z]+)*$",
+			"pattern": "^[a-z]+([A-Z][a-z]+[0-9]*)*$",
 			"title": "ID",
 			"type": "string"
 		},
@@ -774,8 +774,12 @@
 			"enum": [
 				"unknown",
 				"none",
+				"EPSILON",
 				"PSI",
-				"SIGMA"
+				"RHO",
+				"SIGMA",
+				"XI",
+				"ZETA"
 			],
 			"title": "Override Source",
 			"type": "string"
@@ -788,13 +792,18 @@
 		"role": {
 			"enum": [
 				"Acquisition",
-				"Recon"
+				"Chariot",
+				"Combat",
+				"Reconnaissance",
+				"Transport"
 			],
 			"title": "Role/Class",
 			"type": "string"
 		},
 		"size": {
 			"enum": [
+				"Large",
+				"Medium",
 				"Small"
 			],
 			"title": "Size Class",

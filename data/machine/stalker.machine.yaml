@@ -1,0 +1,144 @@
+$schema: ../schema/machine.schema.json
+id: stalker
+title: Stalker
+plural: Stalker
+lang: en-US
+overrideSource: XI
+link:
+  horizonWiki: https://horizon.fandom.com/wiki/Stalker
+size: Medium
+role: Combat
+variant:
+  base:
+    hp: 800
+    challengeLevel: 18
+  corrupted:
+    hp: 1200
+    challengeLevel: 23
+  daemonic:
+    hp: 1400
+    challengeLevel: 30
+action:
+  - id: mineLaunch
+    title: Mine Launch
+    description: TODO
+    effect: true
+  - id: clawFury
+    title: Claw Fury
+    description: TODO
+    effect: false
+  - id: clawSwipe
+    title: Claw Swipe
+    description: TODO
+    effect: false
+  - id: jumpingMandibleStab
+    title: Jumping Mandible Stab
+    description: TODO
+    effect: false
+  - id: mandibleStab
+    title: Mandible Stab
+    description: TODO
+    effect: false
+  - id: tailSwipe
+    title: Tail Swipe
+    description: TODO
+    effect: false
+  - id: dartGunShot
+    title: Dart Gun Shot
+    description: TODO
+    effect: false
+component:
+  body:
+    title: Body
+    damagePercent: 100
+    remove: false
+    targetDifficulty: TODO
+adapter:
+  cypher:
+    damage: 9
+    level: 6
+    health: 13
+    target: 18
+    armor: 0
+    movement: Short
+  dnd5e:
+    armor:
+      num: 0
+      type: TODO
+    attr:
+      STR:
+        score: 0
+        bonus: TODO
+      DEX:
+        score: 0
+        bonus: TODO
+      CON:
+        score: 0
+        bonus: TODO
+      INT:
+        score: 0
+        bonus: TODO
+      WIS:
+        score: 0
+        bonus: TODO
+      CHA:
+        score: 0
+        bonus: TODO
+    speedFeet: 0
+    hitDie: 10
+    hp:
+      average: 198
+      roll: TODO
+    challenge:
+      rating: 9
+      xp: -1
+    action:
+      mineLaunch:
+        description: TODO
+        target: 1
+        onHit:
+          - type: force
+            roll: 2d10 + 3
+            average: 14
+      clawFury:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 7d10 + 3
+            average: 41
+      clawSwipe:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 4d10 + 2
+            average: 24
+      jumpingMandibleStab:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 4d10 + 1
+            average: 23
+      mandibleStab:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 3d10 + 3
+            average: 19
+      tailSwipe:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 6d10 + 5
+            average: 38
+      dartGunShot:
+        description: TODO
+        target: 3
+        onHit:
+          - type: TODO
+            roll: 3d10
+            average: 17

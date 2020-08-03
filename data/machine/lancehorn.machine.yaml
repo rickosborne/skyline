@@ -1,4 +1,4 @@
-$schema: '../schema/machine.schema.json'
+$schema: ../schema/machine.schema.json
 id: lancehorn
 title: Lancehorn
 plural: Lancehorns
@@ -7,30 +7,38 @@ overrideSource: SIGMA
 role: Acquisition
 size: Small
 link:
-  horizonWiki: 'https://horizon.fandom.com/wiki/Lancehorn'
+  horizonWiki: https://horizon.fandom.com/wiki/Lancehorn
 variant:
   base:
     challengeLevel: 13
     hp: 275
 action:
-  - id: lancehornCharge
+  - id: charge
     title: Charge
     description: The Lancehorn lowers its head and charges at its target, picking up speed as it goes.
     effect: true
-  - id: lancehornUpwardStab
+  - id: upwardStab
     title: Upward Stab
     description: Grinding drill horns thrust at one target.
     attack: true
-  - id: lancehornKick
-    title: Kick
+  - id: goreAndFlip
+    title: Gore and Flip
+    description: Grinding drill horns thrust at one target.
+    attack: true
+  - id: frontLegKick
+    title: Front Leg Kick
     description: Powerful rear legs strike out at a target.
     attack: true
-  - id: lancehornLeapingGore
-    title: Leaping Gore
+  - id: hindLegKick
+    title: Hind Leg Kick
+    description: Powerful rear legs strike out at a target.
+    attack: true
+  - id: leapingHornStab
+    title: Leaping Horn Stab
     description: A short leap closes the gap with the target, striking with drill horns.
     attack: true
-  - id: lancehornLeapingKick
-    title: Leaping Kick
+  - id: leapingFrontKick
+    title: Leaping Front Kick
     description: A short leap closes the gap with the target, striking with a kick.
     attack: true
 component:
@@ -69,14 +77,14 @@ component:
     title: Drill Horns
     targetDifficulty: Tricky
     damage:
-      all: 2.0
+      all: 2
   freezeCanister:
     remove: true
     title: Freeze Canister
     damagePercent: 25
     targetDifficulty: Moderate
     damage:
-      all: 2.0
+      all: 2
     explode:
       rangeFeet: 30
       element: freeze
@@ -130,29 +138,33 @@ adapter:
       num: 12
       type: Light
     action:
-      lancehornCharge:
+      charge:
         description:
           - For every 15 ft. the Lancehorn moved this round before hitting with an attack, the attack does +2 damage but is -1 to hit.
           - Targets of medium or smaller size must make a DC 14 Dexterity saving throw or be knocked [prone](https://www.dndbeyond.com/compendium/rules/basic-rules/appendix-a-conditions#Prone).
-      lancehornUpwardStab:
+        onHit:
+          - type: piercing
+            average: 13
+            roll: 2d8 + 4
+      goreAndFlip:
         melee: true
         toHit: "+2"
         reachFeet: 5
         target: 1
         onHit:
-          - average: 11
-            roll: 2d8 + 2
+          - average: 17
+            roll: 3d8 + 4
             type: piercing
-      lancehornKick:
+      frontLegKick:
         melee: true
         toHit: "+2"
         reachFeet: 5
         target: 1
         onHit:
-          - average: 8
-            roll: 1d8 + 4
+          - average: 10
+            roll: 2d8 + 1
             type: bludgeoning
-      lancehornLeapingGore:
+      leapingHornStab:
         ranged: true
         toHit: "+1"
         description: Leap to melee range and stab with horns.
@@ -163,7 +175,7 @@ adapter:
           - average: 17
             roll: 3d8 + 4
             type: piercing
-      lancehornLeapingKick:
+      leapingFrontKick:
         ranged: true
         description: Leap to melee range and kick.
         toHit: "+1"
@@ -174,3 +186,19 @@ adapter:
           - type: bludgeoning
             roll: 1d8 + 4
             average: 8
+      hindLegKick:
+        melee: true
+        toHit: "+2"
+        reachFeet: 5
+        target: 1
+        onHit:
+          - average: 10
+            roll: 2d8 + 1
+            type: bludgeoning
+      upwardStab:
+        description: TODO
+        toHit: TODO
+        onHit:
+          - type: piercing
+            average: 11
+            roll: 2d8 + 2

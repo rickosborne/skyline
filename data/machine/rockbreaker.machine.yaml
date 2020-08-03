@@ -1,0 +1,144 @@
+$schema: ../schema/machine.schema.json
+id: rockbreaker
+title: Rockbreaker
+plural: Rockbreaker
+lang: en-US
+overrideSource: ZETA
+link:
+  horizonWiki: https://horizon.fandom.com/wiki/Rockbreaker
+size: Large
+role: Acquisition
+variant:
+  base:
+    hp: 3500
+    challengeLevel: 23
+  corrupted:
+    hp: 5250
+    challengeLevel: 30
+  daemonic:
+    hp: 6125
+    challengeLevel: 32
+action:
+  - id: leapingCrush
+    title: Leaping Crush
+    description: TODO
+    effect: false
+  - id: jawSmash
+    title: Jaw Smash
+    description: TODO
+    effect: false
+  - id: lungeCrush
+    title: Lunge Crush
+    description: TODO
+    effect: false
+  - id: sharkBite
+    title: Shark Bite
+    description: TODO
+    effect: false
+  - id: spinningSmash
+    title: Spinning Smash
+    description: TODO
+    effect: false
+  - id: rockBlast
+    title: Rock Blast
+    description: TODO
+    effect: false
+  - id: rockVolcano
+    title: Rock Volcano
+    description: TODO
+    effect: false
+component:
+  body:
+    title: Body
+    damagePercent: 100
+    remove: false
+    targetDifficulty: TODO
+adapter:
+  cypher:
+    damage: 12
+    level: 9
+    health: 27
+    target: 27
+    armor: 0
+    movement: Short
+  dnd5e:
+    armor:
+      num: 0
+      type: TODO
+    attr:
+      STR:
+        score: 0
+        bonus: TODO
+      DEX:
+        score: 0
+        bonus: TODO
+      CON:
+        score: 0
+        bonus: TODO
+      INT:
+        score: 0
+        bonus: TODO
+      WIS:
+        score: 0
+        bonus: TODO
+      CHA:
+        score: 0
+        bonus: TODO
+    speedFeet: 0
+    hitDie: 12
+    hp:
+      average: 273
+      roll: TODO
+    challenge:
+      rating: 14
+      xp: -1
+    action:
+      leapingCrush:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 5d12 + 6
+            average: 38
+      jawSmash:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 4d12 + 4
+            average: 30
+      lungeCrush:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 4d12 + 4
+            average: 30
+      sharkBite:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 4d12 + 4
+            average: 30
+      spinningSmash:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 4d12 + 1
+            average: 27
+      rockBlast:
+        description: TODO
+        target: 6
+        onHit:
+          - type: TODO
+            roll: 1d12 + 2
+            average: 8
+      rockVolcano:
+        description: TODO
+        target: 1
+        onHit:
+          - type: force
+            roll: 2d12 + 2
+            average: 15

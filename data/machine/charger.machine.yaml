@@ -1,0 +1,122 @@
+$schema: ../schema/machine.schema.json
+id: charger
+title: Charger
+plural: Charger
+lang: en-US
+overrideSource: PSI
+link:
+  horizonWiki: https://horizon.fandom.com/wiki/Charger
+size: Small
+role: Acquisition
+variant:
+  base:
+    hp: 325
+    challengeLevel: 13
+  corrupted:
+    hp: 488
+    challengeLevel: 20
+  daemonic:
+    hp: 569
+    challengeLevel: 22
+action:
+  - id: charge
+    title: Charge
+    description: TODO
+    effect: false
+  - id: doubleStrike
+    title: Double Strike
+    description: TODO
+    effect: false
+  - id: hindLegStrike
+    title: Hind Leg Strike
+    description: TODO
+    effect: false
+  - id: rodeoKick
+    title: Rodeo Kick
+    description: TODO
+    effect: false
+  - id: spinKick
+    title: Spin Kick
+    description: TODO
+    effect: false
+component:
+  body:
+    title: Body
+    damagePercent: 100
+    remove: false
+    targetDifficulty: TODO
+adapter:
+  cypher:
+    damage: 6
+    level: 4
+    health: 10
+    target: 12
+    armor: 0
+    movement: Short
+  dnd5e:
+    armor:
+      num: 0
+      type: TODO
+    attr:
+      STR:
+        score: 0
+        bonus: TODO
+      DEX:
+        score: 0
+        bonus: TODO
+      CON:
+        score: 0
+        bonus: TODO
+      INT:
+        score: 0
+        bonus: TODO
+      WIS:
+        score: 0
+        bonus: TODO
+      CHA:
+        score: 0
+        bonus: TODO
+    speedFeet: 0
+    hitDie: 8
+    hp:
+      average: 123
+      roll: TODO
+    challenge:
+      rating: 4
+      xp: -1
+    action:
+      charge:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 2d8 + 1
+            average: 10
+      doubleStrike:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 4d8 + 2
+            average: 20
+      hindLegStrike:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 4d8
+            average: 18
+      rodeoKick:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 4d8 + 2
+            average: 20
+      spinKick:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 5d8
+            average: 23

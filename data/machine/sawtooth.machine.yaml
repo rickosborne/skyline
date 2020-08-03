@@ -1,0 +1,108 @@
+$schema: ../schema/machine.schema.json
+id: sawtooth
+title: Sawtooth
+plural: Sawtooth
+lang: en-US
+overrideSource: SIGMA
+link:
+  horizonWiki: https://horizon.fandom.com/wiki/Sawtooth
+size: Medium
+role: Combat
+variant:
+  base:
+    hp: 1100
+    challengeLevel: 15
+  corrupted:
+    hp: 1650
+    challengeLevel: 20
+action:
+  - id: berserkerFury
+    title: Berserker Fury
+    description: TODO
+    effect: false
+  - id: clawSwipe
+    title: Claw Swipe
+    description: TODO
+    effect: false
+  - id: jawSmash
+    title: Jaw Smash
+    description: TODO
+    effect: false
+  - id: jumpingJawSmash
+    title: Jumping Jaw Smash
+    description: TODO
+    effect: false
+component:
+  body:
+    title: Body
+    damagePercent: 100
+    remove: false
+    targetDifficulty: TODO
+adapter:
+  cypher:
+    damage: 6
+    level: 4
+    health: 14
+    target: 12
+    armor: 0
+    movement: Short
+  dnd5e:
+    armor:
+      num: 0
+      type: TODO
+    attr:
+      STR:
+        score: 0
+        bonus: TODO
+      DEX:
+        score: 0
+        bonus: TODO
+      CON:
+        score: 0
+        bonus: TODO
+      INT:
+        score: 0
+        bonus: TODO
+      WIS:
+        score: 0
+        bonus: TODO
+      CHA:
+        score: 0
+        bonus: TODO
+    speedFeet: 0
+    hitDie: 10
+    hp:
+      average: 138
+      roll: TODO
+    challenge:
+      rating: 5
+      xp: -1
+    action:
+      berserkerFury:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 6d10 + 4
+            average: 37
+      clawSwipe:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 3d10
+            average: 17
+      jawSmash:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 3d10
+            average: 17
+      jumpingJawSmash:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 4d10
+            average: 22

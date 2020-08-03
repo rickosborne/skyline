@@ -1,0 +1,164 @@
+$schema: ../schema/machine.schema.json
+id: scorcher
+title: Scorcher
+plural: Scorcher
+lang: en-US
+overrideSource: EPSILON
+link:
+  horizonWiki: https://horizon.fandom.com/wiki/Scorcher
+size: Medium
+role: Combat
+variant:
+  base:
+    hp: 2000
+    challengeLevel: 30
+  daemonic:
+    hp: 2800
+    challengeLevel: 35
+action:
+  - id: cinderClaws
+    title: Cinder Claws
+    description: TODO
+    effect: false
+  - id: scorchingFang
+    title: Scorching Fang
+    description: TODO
+    effect: false
+  - id: quickScorchingFang
+    title: Quick Scorching Fang
+    description: TODO
+    effect: false
+  - id: furnaceBlast
+    title: Furnace Blast
+    description: TODO
+    effect: false
+  - id: heatWave
+    title: Heat Wave
+    description: TODO
+    effect: false
+  - id: mineLauncherAreaFire
+    title: "Mine Launcher: Area Fire"
+    description: TODO
+    effect: false
+  - id: mineLauncherFormationFire
+    title: "Mine Launcher: Formation Fire"
+    description: TODO
+    effect: false
+  - id: ignitionBoost
+    title: Ignition Boost
+    description: TODO
+    effect: false
+component:
+  body:
+    title: Body
+    damagePercent: 100
+    remove: false
+    targetDifficulty: TODO
+adapter:
+  cypher:
+    damage: 11
+    level: 8
+    health: 19
+    target: 24
+    armor: 0
+    movement: Short
+  dnd5e:
+    armor:
+      num: 0
+      type: TODO
+    attr:
+      STR:
+        score: 0
+        bonus: TODO
+      DEX:
+        score: 0
+        bonus: TODO
+      CON:
+        score: 0
+        bonus: TODO
+      INT:
+        score: 0
+        bonus: TODO
+      WIS:
+        score: 0
+        bonus: TODO
+      CHA:
+        score: 0
+        bonus: TODO
+    speedFeet: 0
+    hitDie: 10
+    hp:
+      average: 258
+      roll: TODO
+    challenge:
+      rating: 13
+      xp: -1
+    action:
+      cinderClaws:
+        description: TODO
+        target: 4
+        onHit:
+          - type: TODO
+            roll: 3d10 + 5
+            average: 21
+          - type: fire
+            roll: 3d10 + 5
+            average: 21
+      scorchingFang:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 3d10 + 5
+            average: 21
+          - type: fire
+            roll: 3d10 + 5
+            average: 21
+      quickScorchingFang:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 3d10 + 5
+            average: 21
+          - type: fire
+            roll: 3d10 + 5
+            average: 21
+      furnaceBlast:
+        description: TODO
+        target: 1
+        onHit:
+          - type: fire
+            roll: 8d10 + 1
+            average: 45
+      heatWave:
+        description: TODO
+        target: 1
+        onHit:
+          - type: fire
+            roll: 6d10
+            average: 33
+      mineLauncherAreaFire:
+        description: TODO
+        target: 10
+        onHit:
+          - type: force
+            roll: 6d10 + 4
+            average: 37
+      mineLauncherFormationFire:
+        description: TODO
+        target: 12
+        onHit:
+          - type: force
+            roll: 6d10 + 4
+            average: 37
+      ignitionBoost:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 6d10 + 4
+            average: 37
+          - type: fire
+            roll: 2d10 + 4
+            average: 15

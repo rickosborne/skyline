@@ -1,0 +1,141 @@
+$schema: ../schema/machine.schema.json
+id: ravager
+title: Ravager
+plural: Ravager
+lang: en-US
+overrideSource: RHO
+link:
+  horizonWiki: https://horizon.fandom.com/wiki/Ravager
+size: Medium
+role: Combat
+variant:
+  base:
+    hp: 1300
+    challengeLevel: 20
+  corrupted:
+    hp: 1950
+    challengeLevel: 27
+action:
+  - id: berserkerFury
+    title: Berserker Fury
+    description: TODO
+    effect: false
+  - id: clawSwipe
+    title: Claw Swipe
+    description: TODO
+    effect: false
+  - id: jumpingJawSmash
+    title: Jumping Jaw Smash
+    description: TODO
+    effect: false
+  - id: mandibleStab
+    title: Mandible Stab
+    description: TODO
+    effect: false
+  - id: shockJawSmash
+    title: Shock Jaw Smash
+    description: TODO
+    effect: false
+  - id: cannonBurst
+    title: Cannon Burst
+    description: TODO
+    effect: false
+  - id: shockCocoon
+    title: Shock Cocoon
+    description: TODO
+    effect: false
+component:
+  body:
+    title: Body
+    damagePercent: 100
+    remove: false
+    targetDifficulty: TODO
+adapter:
+  cypher:
+    damage: 7
+    level: 5
+    health: 16
+    target: 15
+    armor: 0
+    movement: Short
+  dnd5e:
+    armor:
+      num: 0
+      type: TODO
+    attr:
+      STR:
+        score: 0
+        bonus: TODO
+      DEX:
+        score: 0
+        bonus: TODO
+      CON:
+        score: 0
+        bonus: TODO
+      INT:
+        score: 0
+        bonus: TODO
+      WIS:
+        score: 0
+        bonus: TODO
+      CHA:
+        score: 0
+        bonus: TODO
+    speedFeet: 0
+    hitDie: 10
+    hp:
+      average: 153
+      roll: TODO
+    challenge:
+      rating: 6
+      xp: -1
+    action:
+      berserkerFury:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 6d10 + 5
+            average: 38
+      clawSwipe:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 4d10
+            average: 22
+      jumpingJawSmash:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 5d10
+            average: 28
+      mandibleStab:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 3d10 + 4
+            average: 20
+      shockJawSmash:
+        description: TODO
+        target: 1
+        onHit:
+          - type: lightning
+            roll: 4d10 + 1
+            average: 23
+      cannonBurst:
+        description: TODO
+        target: 5
+        onHit:
+          - type: TODO
+            roll: 2d4
+            average: 5
+      shockCocoon:
+        description: TODO
+        target: 1
+        onHit:
+          - type: lightning
+            roll: 3d10 + 5
+            average: 21

@@ -46,15 +46,23 @@ _**Upward Stab.**_
 Grinding drill horns thrust at one target.
 </p>
 <p markdown="1">
-_**Kick.**_
+_**Gore and Flip.**_
+Grinding drill horns thrust at one target.
+</p>
+<p markdown="1">
+_**Front Leg Kick.**_
 Powerful rear legs strike out at a target.
 </p>
 <p markdown="1">
-_**Leaping Gore.**_
+_**Hind Leg Kick.**_
+Powerful rear legs strike out at a target.
+</p>
+<p markdown="1">
+_**Leaping Horn Stab.**_
 A short leap closes the gap with the target, striking with drill horns.
 </p>
 <p markdown="1">
-_**Leaping Kick.**_
+_**Leaping Front Kick.**_
 A short leap closes the gap with the target, striking with a kick.
 </p>
         </section>
