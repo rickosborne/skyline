@@ -25,6 +25,7 @@
 	"repository": "github:rickosborne/skyline",
 	"scripts": {
 		"jekyll:serve": "bundle exec jekyll serve",
+		"machines:attacks": "ts-node src/machine/attacks.ts",
 		"template": "ts-node src/template/template.ts",
 		"test": "mocha"
 	},
