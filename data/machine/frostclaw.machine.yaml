@@ -1,0 +1,248 @@
+$schema: ../schema/machine.schema.json
+id: frostclaw
+title: Frostclaw
+plural: Frostclaw
+lang: en-US
+overrideSource: EPSILON
+link:
+  horizonWiki: https://horizon.fandom.com/wiki/Frostclaw
+size: Large
+role: Acquisition
+variant:
+  base:
+    hp: 3750
+    challengeLevel: 30
+  daemonic:
+    hp: 4763
+    challengeLevel: 36
+action:
+  - id: iceSpikes
+    title: Ice Spikes
+    description: TODO
+    effect: false
+  - id: backSlash
+    title: Back Slash
+    description: TODO
+    effect: false
+  - id: furySlash
+    title: Fury Slash
+    description: TODO
+    effect: false
+  - id: lungeDive
+    title: Lunge Dive
+    description: TODO
+    effect: false
+  - id: backCrush
+    title: Back Crush
+    description: TODO
+    effect: false
+  - id: lungeSlash
+    title: Lunge Slash
+    description: TODO
+    effect: false
+  - id: hailStorm
+    title: Hail Storm
+    description: TODO
+    effect: false
+  - id: frostBlast
+    title: Frost Blast
+    description: TODO
+    effect: false
+  - id: grinderScrape
+    title: Grinder Scrape
+    description: TODO
+    effect: false
+  - id: clawSlash
+    title: Claw Slash
+    description: TODO
+    effect: false
+  - id: frostDive
+    title: Frost Dive
+    description: TODO
+    effect: false
+  - id: frostCrush
+    title: Frost Crush
+    description: TODO
+    effect: false
+  - id: frostSlam
+    title: Frost Slam
+    description: TODO
+    effect: false
+  - id: iceStorm
+    title: Ice Storm
+    description: TODO
+    effect: true
+component:
+  body:
+    title: Body
+    damagePercent: 100
+    remove: false
+    targetDifficulty: TODO
+adapter:
+  cypher:
+    damage: 12
+    level: 8
+    health: 29
+    target: 24
+    armor: 0
+    movement: Short
+  dnd5e:
+    armor:
+      num: 0
+      type: TODO
+    attr:
+      STR:
+        score: 0
+        bonus: TODO
+      DEX:
+        score: 0
+        bonus: TODO
+      CON:
+        score: 0
+        bonus: TODO
+      INT:
+        score: 0
+        bonus: TODO
+      WIS:
+        score: 0
+        bonus: TODO
+      CHA:
+        score: 0
+        bonus: TODO
+    speedFeet: 0
+    hitDie: 12
+    hp:
+      average: 243
+      roll: TODO
+    challenge:
+      rating: 12
+      xp: -1
+    action:
+      iceSpikes:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 2d12 + 4
+            average: 17
+          - type: cold
+            roll: 2d12 + 4
+            average: 17
+      backSlash:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 3d12
+            average: 20
+          - type: cold
+            roll: 1d12 + 4
+            average: 10
+      furySlash:
+        description: TODO
+        target: 3
+        onHit:
+          - type: TODO
+            roll: 4d12 + 1
+            average: 27
+          - type: cold
+            roll: 2d12 + 1
+            average: 14
+      lungeDive:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 4d12 + 1
+            average: 27
+          - type: cold
+            roll: 2d12 + 1
+            average: 14
+      backCrush:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 4d12 + 1
+            average: 27
+          - type: force
+            roll: 1d12
+            average: 7
+      lungeSlash:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 4d12 + 1
+            average: 27
+          - type: cold
+            roll: 2d12 + 1
+            average: 14
+      hailStorm:
+        description: TODO
+        target: 1
+        onHit:
+          - type: cold
+            roll: 3d12
+            average: 20
+      frostBlast:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 4d12 + 1
+            average: 27
+          - type: cold
+            roll: 2d12 + 1
+            average: 14
+      grinderScrape:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 2d12 + 4
+            average: 17
+          - type: cold
+            roll: 1d12 + 4
+            average: 10
+      clawSlash:
+        description: TODO
+        target: 6
+        onHit:
+          - type: TODO
+            roll: 1d12 + 4
+            average: 10
+          - type: cold
+            roll: 3d12
+            average: 20
+      frostDive:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 1d12
+            average: 7
+          - type: force
+            roll: 4d12 + 1
+            average: 27
+      frostCrush:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 2d12 + 1
+            average: 14
+          - type: cold
+            roll: 4d12 + 1
+            average: 27
+      frostSlam:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 4d12 + 1
+            average: 27
+      iceStorm:
+        description: TODO
+        target: 1
+        onHit: []

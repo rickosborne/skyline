@@ -1,0 +1,278 @@
+$schema: ../schema/machine.schema.json
+id: fireclaw
+title: Fireclaw
+plural: Fireclaw
+lang: en-US
+overrideSource: EPSILON
+link:
+  horizonWiki: https://horizon.fandom.com/wiki/Fireclaw
+size: Large
+role: Acquisition
+variant:
+  base:
+    hp: 7500
+    challengeLevel: 50
+  daemonic:
+    hp: 9375
+    challengeLevel: 55
+action:
+  - id: lavaBurst
+    title: Lava Burst
+    description: TODO
+    effect: false
+  - id: volcanicMeteorShower
+    title: Volcanic Meteor Shower
+    description: TODO
+    effect: false
+  - id: backSlash
+    title: Back Slash
+    description: TODO
+    effect: false
+  - id: furySlash
+    title: Fury Slash
+    description: TODO
+    effect: false
+  - id: lungeDive
+    title: Lunge Dive
+    description: TODO
+    effect: false
+  - id: backCrush
+    title: Back Crush
+    description: TODO
+    effect: false
+  - id: fireStorm
+    title: Fire Storm
+    description: TODO
+    effect: false
+  - id: flameBlast
+    title: Flame Blast
+    description: TODO
+    effect: false
+  - id: grinderScrape
+    title: Grinder Scrape
+    description: TODO
+    effect: false
+  - id: clawSlash
+    title: Claw Slash
+    description: TODO
+    effect: false
+  - id: infernoDive
+    title: Inferno Dive
+    description: TODO
+    effect: false
+  - id: rockShieldCharge
+    title: Rock Shield - Charge
+    description: TODO
+    effect: false
+  - id: rockShieldThrow
+    title: Rock Shield - Throw
+    description: TODO
+    effect: false
+  - id: rockShieldSmash
+    title: Rock Shield - Smash
+    description: TODO
+    effect: false
+  - id: infernoSlam
+    title: Inferno Slam
+    description: TODO
+    effect: false
+  - id: fireStorm
+    title: Fire Storm
+    description: TODO
+    effect: true
+component:
+  body:
+    title: Body
+    damagePercent: 100
+    remove: false
+    targetDifficulty: TODO
+adapter:
+  cypher:
+    damage: 12
+    level: 8
+    health: 49
+    target: 24
+    armor: 0
+    movement: Short
+  dnd5e:
+    armor:
+      num: 0
+      type: TODO
+    attr:
+      STR:
+        score: 0
+        bonus: TODO
+      DEX:
+        score: 0
+        bonus: TODO
+      CON:
+        score: 0
+        bonus: TODO
+      INT:
+        score: 0
+        bonus: TODO
+      WIS:
+        score: 0
+        bonus: TODO
+      CHA:
+        score: 0
+        bonus: TODO
+    speedFeet: 0
+    hitDie: 12
+    hp:
+      average: 258
+      roll: TODO
+    challenge:
+      rating: 13
+      xp: -1
+    action:
+      lavaBurst:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 4d12 + 2
+            average: 28
+          - type: fire
+            roll: 1d12 + 3
+            average: 9
+      volcanicMeteorShower:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 2d12 + 6
+            average: 19
+          - type: fire
+            roll: 4d12 + 2
+            average: 28
+          - type: force
+            roll: 4d12 + 2
+            average: 28
+      backSlash:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 4d12 + 2
+            average: 28
+          - type: fire
+            roll: 2d12 + 1
+            average: 14
+      furySlash:
+        description: TODO
+        target: 3
+        onHit:
+          - type: TODO
+            roll: 4d12 + 6
+            average: 32
+          - type: fire
+            roll: 2d12 + 5
+            average: 18
+      lungeDive:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 5d12 + 3
+            average: 35
+          - type: fire
+            roll: 2d12 + 5
+            average: 18
+      backCrush:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 4d12 + 2
+            average: 28
+          - type: force
+            roll: 1d12
+            average: 7
+      fireStorm:
+        description: TODO
+        target: 1
+        onHit:
+          - type: fire
+            average: 21
+            roll: 3d12 + 2
+      flameBlast:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 2d12 + 5
+            average: 18
+          - type: fire
+            roll: 3d12 + 6
+            average: 25
+      grinderScrape:
+        description: TODO
+        target: 3
+        onHit:
+          - type: TODO
+            roll: 2d12 + 2
+            average: 15
+      clawSlash:
+        description: TODO
+        target: 6
+        onHit:
+          - type: TODO
+            roll: 2d12 + 5
+            average: 18
+          - type: fire
+            roll: 3d12 + 6
+            average: 25
+      infernoDive:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 5d12
+            average: 33
+          - type: fire
+            roll: 3d12 + 6
+            average: 25
+      rockShieldCharge:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 2d12 + 6
+            average: 19
+          - type: fire
+            roll: 2d12 + 6
+            average: 19
+      rockShieldThrow:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 3d12 + 6
+            average: 25
+          - type: fire
+            roll: 3d12 + 6
+            average: 25
+      rockShieldSmash:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 4d12 + 6
+            average: 32
+          - type: fire
+            roll: 8d12 + 4
+            average: 56
+          - type: force
+            roll: 4d12 + 2
+            average: 28
+      infernoSlam:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 5d12
+            average: 33
+          - type: fire
+            roll: 3d12 + 6
+            average: 25

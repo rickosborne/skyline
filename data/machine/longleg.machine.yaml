@@ -1,0 +1,133 @@
+$schema: ../schema/machine.schema.json
+id: longleg
+title: Longleg
+plural: Longleg
+lang: en-US
+overrideSource: RHO
+link:
+  horizonWiki: https://horizon.fandom.com/wiki/Longleg
+size: Medium
+role: Reconnaissance
+variant:
+  base:
+    hp: 750
+    challengeLevel: 13
+  corrupted:
+    hp: 1125
+    challengeLevel: 20
+  daemonic:
+    hp: 1313
+    challengeLevel: 22
+action:
+  - id: jetBlast
+    title: Jet Blast
+    description: TODO
+    effect: false
+  - id: beakThrust
+    title: Beak Thrust
+    description: TODO
+    effect: false
+  - id: chickenScratch
+    title: Chicken Scratch
+    description: TODO
+    effect: false
+  - id: dashingClawJump
+    title: Dashing Claw Jump
+    description: TODO
+    effect: false
+  - id: jumpingWingBlast
+    title: Jumping Wing Blast
+    description: TODO
+    effect: false
+  - id: stunBlast
+    title: Stun Blast
+    description: TODO
+    effect: true
+component:
+  body:
+    title: Body
+    damagePercent: 100
+    remove: false
+    targetDifficulty: TODO
+adapter:
+  cypher:
+    damage: 5
+    level: 4
+    health: 13
+    target: 12
+    armor: 0
+    movement: Short
+  dnd5e:
+    armor:
+      num: 0
+      type: TODO
+    attr:
+      STR:
+        score: 0
+        bonus: TODO
+      DEX:
+        score: 0
+        bonus: TODO
+      CON:
+        score: 0
+        bonus: TODO
+      INT:
+        score: 0
+        bonus: TODO
+      WIS:
+        score: 0
+        bonus: TODO
+      CHA:
+        score: 0
+        bonus: TODO
+    speedFeet: 0
+    hitDie: 10
+    hp:
+      average: 123
+      roll: TODO
+    challenge:
+      rating: 4
+      xp: -1
+    action:
+      jetBlast:
+        description: TODO
+        target: 1
+        onHit:
+          - type: fire
+            roll: 4d10 + 1
+            average: 23
+      beakThrust:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 3d10 + 3
+            average: 19
+      chickenScratch:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 2d10 + 5
+            average: 16
+      dashingClawJump:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 2d10 + 1
+            average: 12
+          - type: force
+            roll: 1d10 + 5
+            average: 10
+      jumpingWingBlast:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 4d10
+            average: 22
+      stunBlast:
+        description: TODO
+        target: 1
+        onHit: []

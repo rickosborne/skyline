@@ -1,0 +1,133 @@
+$schema: ../schema/machine.schema.json
+id: trampler
+title: Trampler
+plural: Trampler
+lang: en-US
+overrideSource: RHO
+link:
+  horizonWiki: https://horizon.fandom.com/wiki/Trampler
+size: Medium
+role: Acquisition
+variant:
+  base:
+    hp: 1200
+    challengeLevel: 15
+  corrupted:
+    hp: 1800
+    challengeLevel: 22
+action:
+  - id: mineralExplosion
+    title: Mineral Explosion
+    description: TODO
+    effect: false
+  - id: charge
+    title: Charge
+    description: TODO
+    effect: false
+  - id: dustCloud
+    title: Dust Cloud
+    description: TODO
+    effect: false
+  - id: groundBlast
+    title: Ground Blast
+    description: TODO
+    effect: false
+  - id: hindLegStrike
+    title: Hind Leg Strike
+    description: TODO
+    effect: false
+  - id: hornThrash
+    title: Horn Thrash
+    description: TODO
+    effect: false
+component:
+  body:
+    title: Body
+    damagePercent: 100
+    remove: false
+    targetDifficulty: TODO
+adapter:
+  cypher:
+    damage: 7
+    level: 5
+    health: 15
+    target: 15
+    armor: 0
+    movement: Short
+  dnd5e:
+    armor:
+      num: 0
+      type: TODO
+    attr:
+      STR:
+        score: 0
+        bonus: TODO
+      DEX:
+        score: 0
+        bonus: TODO
+      CON:
+        score: 0
+        bonus: TODO
+      INT:
+        score: 0
+        bonus: TODO
+      WIS:
+        score: 0
+        bonus: TODO
+      CHA:
+        score: 0
+        bonus: TODO
+    speedFeet: 0
+    hitDie: 10
+    hp:
+      average: 153
+      roll: TODO
+    challenge:
+      rating: 6
+      xp: -1
+    action:
+      mineralExplosion:
+        description: TODO
+        target: 1
+        onHit:
+          - type: force
+            roll: 6d10 + 3
+            average: 36
+      charge:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 4d10 + 2
+            average: 24
+      dustCloud:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 4d10 + 3
+            average: 25
+      groundBlast:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 6d10 + 3
+            average: 36
+          - type: force
+            roll: 1d10
+            average: 6
+      hindLegStrike:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 4d10 + 2
+            average: 24
+      hornThrash:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 4d10 + 2
+            average: 24

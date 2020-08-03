@@ -1,0 +1,97 @@
+$schema: ../schema/machine.schema.json
+id: glinthawk
+title: Glinthawk
+plural: Glinthawk
+lang: en-US
+overrideSource: XI
+link:
+  horizonWiki: https://horizon.fandom.com/wiki/Glinthawk
+size: Small
+role: Acquisition
+variant:
+  base:
+    hp: 450
+    challengeLevel: 18
+  corrupted:
+    hp: 675
+    challengeLevel: 25
+action:
+  - id: freezeCloud
+    title: Freeze Cloud
+    description: TODO
+    effect: false
+  - id: freezeSpit
+    title: Freeze Spit
+    description: TODO
+    effect: false
+  - id: clawSlash
+    title: Claw Slash
+    description: TODO
+    effect: false
+component:
+  body:
+    title: Body
+    damagePercent: 100
+    remove: false
+    targetDifficulty: TODO
+adapter:
+  cypher:
+    damage: 5
+    level: 4
+    health: 11
+    target: 12
+    armor: 0
+    movement: Short
+  dnd5e:
+    armor:
+      num: 0
+      type: TODO
+    attr:
+      STR:
+        score: 0
+        bonus: TODO
+      DEX:
+        score: 0
+        bonus: TODO
+      CON:
+        score: 0
+        bonus: TODO
+      INT:
+        score: 0
+        bonus: TODO
+      WIS:
+        score: 0
+        bonus: TODO
+      CHA:
+        score: 0
+        bonus: TODO
+    speedFeet: 0
+    hitDie: 8
+    hp:
+      average: 123
+      roll: TODO
+    challenge:
+      rating: 4
+      xp: -1
+    action:
+      freezeCloud:
+        description: TODO
+        target: 4
+        onHit:
+          - type: cold
+            roll: 1d4
+            average: 2
+      freezeSpit:
+        description: TODO
+        target: 4
+        onHit:
+          - type: cold
+            roll: 1d8 + 3
+            average: 7
+      clawSlash:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 4d8 + 1
+            average: 19

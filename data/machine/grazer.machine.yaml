@@ -1,0 +1,119 @@
+$schema: ../schema/machine.schema.json
+id: grazer
+title: Grazer
+plural: Grazer
+lang: en-US
+overrideSource: SIGMA
+link:
+  horizonWiki: https://horizon.fandom.com/wiki/Grazer
+size: Small
+role: Acquisition
+variant:
+  base:
+    hp: 150
+    challengeLevel: 8
+  corrupted:
+    hp: 225
+    challengeLevel: 15
+action:
+  - id: charge
+    title: Charge
+    description: TODO
+    effect: false
+  - id: frontLegKick
+    title: Front Leg Kick
+    description: TODO
+    effect: false
+  - id: hindLegKick
+    title: Hind Leg Kick
+    description: TODO
+    effect: false
+  - id: leapingFrontKick
+    title: Leaping Front Kick
+    description: TODO
+    effect: false
+  - id: upwardStab
+    title: Upward Stab
+    description: TODO
+    effect: false
+component:
+  body:
+    title: Body
+    damagePercent: 100
+    remove: false
+    targetDifficulty: TODO
+adapter:
+  cypher:
+    damage: 1
+    level: 2
+    health: 9
+    target: 6
+    armor: 0
+    movement: Short
+  dnd5e:
+    armor:
+      num: 0
+      type: TODO
+    attr:
+      STR:
+        score: 0
+        bonus: TODO
+      DEX:
+        score: 0
+        bonus: TODO
+      CON:
+        score: 0
+        bonus: TODO
+      INT:
+        score: 0
+        bonus: TODO
+      WIS:
+        score: 0
+        bonus: TODO
+      CHA:
+        score: 0
+        bonus: TODO
+    speedFeet: 0
+    hitDie: 8
+    hp:
+      average: 60
+      roll: TODO
+    challenge:
+      rating: .nan
+      xp: -1
+    action:
+      charge:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 1d8 + 3
+            average: 7
+      frontLegKick:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 1d8
+            average: 5
+      hindLegKick:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 1d8
+            average: 5
+      leapingFrontKick:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 1d8
+            average: 5
+      upwardStab:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 1d8
+            average: 5

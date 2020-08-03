@@ -1,0 +1,141 @@
+$schema: ../schema/machine.schema.json
+id: shellWalker
+title: Shell-Walker
+plural: Shell-Walker
+lang: en-US
+overrideSource: RHO
+link:
+  horizonWiki: https://horizon.fandom.com/wiki/Shell-Walker
+size: Medium
+role: Transport
+variant:
+  base:
+    hp: 800
+    challengeLevel: 18
+  corrupted:
+    hp: 1400
+    challengeLevel: 28
+action:
+  - id: clawCombo
+    title: Claw Combo
+    description: TODO
+    effect: false
+  - id: multiClawStrike
+    title: Multi-Claw Strike
+    description: TODO
+    effect: false
+  - id: shieldClawStrike
+    title: Shield Claw Strike
+    description: TODO
+    effect: false
+  - id: 360Shock
+    title: 360 Shock
+    description: TODO
+    effect: false
+  - id: chargingShockBlast
+    title: Charging Shock Blast
+    description: TODO
+    effect: false
+  - id: homingShockBlast
+    title: Homing Shock Blast
+    description: TODO
+    effect: false
+  - id: shockVolley
+    title: Shock Volley
+    description: TODO
+    effect: false
+component:
+  body:
+    title: Body
+    damagePercent: 100
+    remove: false
+    targetDifficulty: TODO
+adapter:
+  cypher:
+    damage: 9
+    level: 6
+    health: 13
+    target: 18
+    armor: 0
+    movement: Short
+  dnd5e:
+    armor:
+      num: 0
+      type: TODO
+    attr:
+      STR:
+        score: 0
+        bonus: TODO
+      DEX:
+        score: 0
+        bonus: TODO
+      CON:
+        score: 0
+        bonus: TODO
+      INT:
+        score: 0
+        bonus: TODO
+      WIS:
+        score: 0
+        bonus: TODO
+      CHA:
+        score: 0
+        bonus: TODO
+    speedFeet: 0
+    hitDie: 10
+    hp:
+      average: 183
+      roll: TODO
+    challenge:
+      rating: 8
+      xp: -1
+    action:
+      clawCombo:
+        description: TODO
+        target: 3
+        onHit:
+          - type: TODO
+            roll: 4d10 + 4
+            average: 26
+      multiClawStrike:
+        description: TODO
+        target: 2
+        onHit:
+          - type: TODO
+            roll: 4d10 + 4
+            average: 26
+      shieldClawStrike:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 4d10 + 4
+            average: 26
+      360Shock:
+        description: TODO
+        target: 1
+        onHit:
+          - type: lightning
+            roll: 7d10
+            average: 39
+      chargingShockBlast:
+        description: TODO
+        target: 1
+        onHit:
+          - type: lightning
+            roll: 1d10 + 5
+            average: 10
+      homingShockBlast:
+        description: TODO
+        target: 1
+        onHit:
+          - type: lightning
+            roll: 3d10 + 2
+            average: 18
+      shockVolley:
+        description: TODO
+        target: 3
+        onHit:
+          - type: lightning
+            roll: 1d10 + 5
+            average: 10

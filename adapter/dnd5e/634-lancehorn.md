@@ -59,24 +59,37 @@ Targets of medium or smaller size must make a DC 14 Dexterity saving throw or be
 <p class="action" markdown="1">
 _**Upward Stab.**_
 Grinding drill horns thrust at one target.
-_Melee Weapon Attack_, +2 to hit, reach 5 ft., one target.
+TODO to hit, undefined targets.
+TODO
 _Hit:_ 11 (2d8 + 2) piercing damage.
 </p>
 <p class="action" markdown="1">
-_**Kick.**_
-Powerful rear legs strike out at a target.
+_**Gore and Flip.**_
+Grinding drill horns thrust at one target.
 _Melee Weapon Attack_, +2 to hit, reach 5 ft., one target.
-_Hit:_ 8 (1d8 + 4) bludgeoning damage.
+_Hit:_ 17 (3d8 + 4) piercing damage.
 </p>
 <p class="action" markdown="1">
-_**Leaping Gore.**_
+_**Front Leg Kick.**_
+Powerful rear legs strike out at a target.
+_Melee Weapon Attack_, +2 to hit, reach 5 ft., one target.
+_Hit:_ 10 (2d8 + 1) bludgeoning damage.
+</p>
+<p class="action" markdown="1">
+_**Hind Leg Kick.**_
+Powerful rear legs strike out at a target.
+_Melee Weapon Attack_, +2 to hit, reach 5 ft., one target.
+_Hit:_ 10 (2d8 + 1) bludgeoning damage.
+</p>
+<p class="action" markdown="1">
+_**Leaping Horn Stab.**_
 A short leap closes the gap with the target, striking with drill horns.
 _Ranged Weapon Attack_, +1 to hit, reach 25 ft. (min. 15 ft.), one target.
 Leap to melee range and stab with horns.
 _Hit:_ 17 (3d8 + 4) piercing damage.
 </p>
 <p class="action" markdown="1">
-_**Leaping Kick.**_
+_**Leaping Front Kick.**_
 A short leap closes the gap with the target, striking with a kick.
 _Ranged Weapon Attack_, +1 to hit, reach 25 ft. (min. 15 ft.), one target.
 Leap to melee range and kick.

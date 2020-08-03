@@ -1,0 +1,133 @@
+$schema: ../schema/machine.schema.json
+id: fireBellowback
+title: Fire Bellowback
+plural: Fire Bellowback
+lang: en-US
+overrideSource: XI
+link:
+  horizonWiki: https://horizon.fandom.com/wiki/Fire_Bellowback
+size: Medium
+role: Transport
+variant:
+  base:
+    hp: 1600
+    challengeLevel: 18
+  corrupted:
+    hp: 2400
+    challengeLevel: 23
+  daemonic:
+    hp: 2800
+    challengeLevel: 30
+action:
+  - id: elementalCircularAttack
+    title: Elemental Circular Attack
+    description: TODO
+    effect: false
+  - id: elementalProjectile
+    title: Elemental Projectile
+    description: TODO
+    effect: false
+  - id: elementalSpray
+    title: Elemental Spray
+    description: TODO
+    effect: false
+  - id: leapingSmash
+    title: Leaping Smash
+    description: TODO
+    effect: false
+  - id: shoulderBarge
+    title: Shoulder Barge
+    description: TODO
+    effect: false
+  - id: tailSwipe
+    title: Tail Swipe
+    description: TODO
+    effect: false
+component:
+  body:
+    title: Body
+    damagePercent: 100
+    remove: false
+    targetDifficulty: TODO
+adapter:
+  cypher:
+    damage: 7
+    level: 5
+    health: 17
+    target: 15
+    armor: 0
+    movement: Short
+  dnd5e:
+    armor:
+      num: 0
+      type: TODO
+    attr:
+      STR:
+        score: 0
+        bonus: TODO
+      DEX:
+        score: 0
+        bonus: TODO
+      CON:
+        score: 0
+        bonus: TODO
+      INT:
+        score: 0
+        bonus: TODO
+      WIS:
+        score: 0
+        bonus: TODO
+      CHA:
+        score: 0
+        bonus: TODO
+    speedFeet: 0
+    hitDie: 10
+    hp:
+      average: 153
+      roll: TODO
+    challenge:
+      rating: 6
+      xp: -1
+    action:
+      elementalCircularAttack:
+        description: TODO
+        target: 1
+        onHit:
+          - type: fire
+            roll: 3d10 + 2
+            average: 18
+      elementalProjectile:
+        description: TODO
+        target: 1
+        onHit:
+          - type: fire
+            roll: 1d10 + 2
+            average: 7
+      elementalSpray:
+        description: TODO
+        target: 1
+        onHit:
+          - type: fire
+            roll: 2d10 + 4
+            average: 15
+      leapingSmash:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 3d10 + 2
+            average: 18
+      shoulderBarge:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 4d10
+            average: 22
+      tailSwipe:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 5d10 + 4
+            average: 31

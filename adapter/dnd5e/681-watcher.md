@@ -72,7 +72,7 @@ _**Energy Blast.**_
 The Watcher fires a blast of energy at one target.
 _Ranged Weapon Attack_, +1 to hit, reach 150 ft., one target.
 Only used when unable to get closer to target.
-_Hit:_ 3 (1d4) force damage.
+_Hit:_ 2 (1d4) force damage.
 </p>
 <p class="action" markdown="1">
 _**Head Strike.**_

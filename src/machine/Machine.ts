@@ -98,13 +98,13 @@ export interface LootItem {
 }
 
 export interface MachineComponent {
-	damage: Record<string, number>;
+	damage?: Record<string, number>;
 	damagePercent: number;
-	explode: {
+	explode?: {
 		rangeFeet: number;
 		element: string;
 	};
-	loot: LootItem[];
+	loot?: LootItem[];
 	remove: boolean;
 	targetDifficulty: string;
 	title: string;

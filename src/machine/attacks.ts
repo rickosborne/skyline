@@ -200,7 +200,10 @@ interface MachineSummary {
 
 const summaryTsv = new TsvFile(summaryFilePath);
 const summaries = summaryTsv.eachLine(r => {
-	const reqStr = r.req('5E CR');
+	const reqStr = r.opt('5E CR');
+	if (reqStr == null) {
+		return undefined;
+	}
 	const cr: number | string = isNaN(reqStr as unknown as number) ? reqStr : Number(reqStr);
 	const summary: MachineSummary = {
 		machineName: r.req('Machine'),
@@ -229,11 +232,11 @@ const summaries = summaryTsv.eachLine(r => {
 			level: r.reqNum('Cypher Level'),
 			health: r.reqNum('Cypher Health'),
 			damage: r.reqNum('Cypher Damage'),
-			target: r.reqNum('Cypher Target Number'),
+			target: r.reqNum('Cypher Target Num'),
 		}
 	};
 	return summary;
-});
+}).filter(s => s != null) as MachineSummary[];
 
 function logUpdate<T extends Record<string, any>, K extends string & keyof T, U extends T[K]>(target: T, key: K, updatedValue: U, path: string): void {
 	const existing = target[key] as U;
@@ -427,7 +430,7 @@ for (let attacks of Object.values(machines)) {
 			title: machineName,
 			plural: machineName,
 			lang: 'en-US',
-			overrideSource: summary.overrides,
+			overrideSource: summary.overrides || 'none',
 			link: {
 				horizonWiki: summary.wikiLink,
 			},
@@ -440,7 +443,14 @@ for (let attacks of Object.values(machines)) {
 				description: 'TODO',
 				effect: attack.timesPerFight !== 'A'
 			}) as MachineAction),
-			component: {},
+			component: {
+				body: {
+					title: 'Body',
+					damagePercent: 100,
+					remove: false,
+					targetDifficulty: 'TODO',
+				}
+			},
 			adapter: {
 				cypher: {
 					damage: summary.cypher.damage,
@@ -496,7 +506,7 @@ for (let attacks of Object.values(machines)) {
 						const dnd5e = attack.dnd5e;
 						action[id] = {
 							description: 'TODO',
-							target: attack.cleave === '*' ? 'all' : attack.multiAttack,
+							target: attack.cleave === '*' ? 'all' : (attack.multiAttack || 1),
 							onHit: onHitMappers.map(mapper => {
 								const roll = mapper.getRoll(dnd5e);
 								const avg = mapper.getAvg(dnd5e);

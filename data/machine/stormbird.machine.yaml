@@ -1,0 +1,196 @@
+$schema: ../schema/machine.schema.json
+id: stormbird
+title: Stormbird
+plural: Stormbird
+lang: en-US
+overrideSource: ZETA
+link:
+  horizonWiki: https://horizon.fandom.com/wiki/Stormbird
+size: Large
+role: Combat
+variant:
+  base:
+    hp: 5000
+    challengeLevel: 27
+  corrupted:
+    hp: 7500
+    challengeLevel: 40
+action:
+  - id: jumpingClawSmash
+    title: Jumping Claw Smash
+    description: TODO
+    effect: false
+  - id: beakSmash
+    title: Beak Smash
+    description: TODO
+    effect: false
+  - id: takeOff
+    title: Take Off
+    description: TODO
+    effect: false
+  - id: tailLash
+    title: Tail Lash
+    description: TODO
+    effect: false
+  - id: thunderRush
+    title: Thunder Rush
+    description: TODO
+    effect: false
+  - id: screechBlast
+    title: Screech Blast
+    description: TODO
+    effect: true
+  - id: hurricaneBlast
+    title: Hurricane Blast
+    description: TODO
+    effect: false
+  - id: thunderClash
+    title: Thunder Clash
+    description: TODO
+    effect: false
+  - id: quickLand
+    title: Quick Land
+    description: TODO
+    effect: false
+  - id: shockBlast
+    title: Shock Blast
+    description: TODO
+    effect: false
+  - id: shockBurst
+    title: Shock Burst
+    description: TODO
+    effect: false
+  - id: thunderBombRun
+    title: Thunder Bomb Run
+    description: TODO
+    effect: false
+component:
+  body:
+    title: Body
+    damagePercent: 100
+    remove: false
+    targetDifficulty: TODO
+adapter:
+  cypher:
+    damage: 10
+    level: 8
+    health: 36
+    target: 24
+    armor: 0
+    movement: Short
+  dnd5e:
+    armor:
+      num: 0
+      type: TODO
+    attr:
+      STR:
+        score: 0
+        bonus: TODO
+      DEX:
+        score: 0
+        bonus: TODO
+      CON:
+        score: 0
+        bonus: TODO
+      INT:
+        score: 0
+        bonus: TODO
+      WIS:
+        score: 0
+        bonus: TODO
+      CHA:
+        score: 0
+        bonus: TODO
+    speedFeet: 0
+    hitDie: 12
+    hp:
+      average: 258
+      roll: TODO
+    challenge:
+      rating: 13
+      xp: -1
+    action:
+      jumpingClawSmash:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 4d12 + 5
+            average: 31
+      beakSmash:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 4d12 + 5
+            average: 31
+          - type: lightning
+            roll: 1d12 + 2
+            average: 8
+      takeOff:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 3d12 + 6
+            average: 25
+      tailLash:
+        description: TODO
+        target: 1
+        onHit:
+          - type: lightning
+            roll: 7d12 + 6
+            average: 51
+      thunderRush:
+        description: TODO
+        target: 1
+        onHit:
+          - type: lightning
+            roll: 9d12 + 3
+            average: 61
+      screechBlast:
+        description: TODO
+        target: 1
+        onHit: []
+      hurricaneBlast:
+        description: TODO
+        target: 1
+        onHit:
+          - type: TODO
+            roll: 3d12 + 6
+            average: 25
+      thunderClash:
+        description: TODO
+        target: 1
+        onHit:
+          - type: lightning
+            roll: 11d12 + 5
+            average: 76
+      quickLand:
+        description: TODO
+        target: 1
+        onHit:
+          - type: lightning
+            roll: 5d12 + 5
+            average: 37
+      shockBlast:
+        description: TODO
+        target: 1
+        onHit:
+          - type: lightning
+            roll: 6d12 + 3
+            average: 42
+      shockBurst:
+        description: TODO
+        target: 3
+        onHit:
+          - type: lightning
+            roll: 4d12 + 4
+            average: 30
+      thunderBombRun:
+        description: TODO
+        target: 5
+        onHit:
+          - type: lightning
+            roll: 6d12 + 3
+            average: 42
