@@ -61,7 +61,7 @@ export interface DND5EAdapter {
 		WIS: StatScoreBonus;
 		CHA: StatScoreBonus;
 	};
-	basedOn: BasedOn;
+	basedOn?: BasedOn;
 	challenge: {
 		rating: number;
 		xp: number;
@@ -71,7 +71,7 @@ export interface DND5EAdapter {
 		average: number;
 		roll: string;
 	};
-	passive: Record<string, number>;
+	passive?: Record<string, number>;
 	speedFeet: number;
 }
 
@@ -122,7 +122,7 @@ export interface Machine {
 	id: string;
 	lang: string;
 	link: Record<string, string>;
-	overrideSource: string;
+	overrideSource?: string;
 	plural: string;
 	role: string;
 	size: string;

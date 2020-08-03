@@ -51,6 +51,12 @@ action:
     title: Laser Sweep
     description: Laser fire sweeps in a straight line.
     attack: true
+  - title: Claw Swipe
+    description: TODO
+    id: clawSwipe
+  - title: Grinder Jaw Swipe
+    description: TODO
+    id: grinderJawSwipe
 component:
   body:
     remove: false
@@ -180,7 +186,7 @@ adapter:
         onHit:
           - average: 4
             roll: 1d6
-            type: force
+            type: piercing
       scrapperLaserLeadUp:
         ranged: true
         description:
@@ -195,7 +201,7 @@ adapter:
           difficulty: 13
           half: true
         onHit:
-          - type: force
+          - type: piercing
             roll: 2d8 + 1
             average: 10
       scrapperLaserSweep:
@@ -212,6 +218,20 @@ adapter:
           difficulty: 13
           half: true
         onHit:
-          - type: force
+          - type: piercing
             roll: 1d8 + 4
             average: 8
+      clawSwipe:
+        description: TODO
+        toHit: TODO
+        onHit:
+          - type: slashing
+            average: 8
+            roll: 1d8 + 4
+      grinderJawSwipe:
+        description: TODO
+        toHit: TODO
+        onHit:
+          - type: slashing
+            average: 8
+            roll: 1d8 + 4
