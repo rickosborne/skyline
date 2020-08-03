@@ -5,7 +5,7 @@
 Watchers are modified from the stock [Deinonychus](https://www.dndbeyond.com/monsters/deinonychus).
 For additional flavor, see the [Horizon Wiki on Watcher](https://horizon.fandom.com/wiki/Watcher).
 
-<div class="dnd5e-stat-block">
+<div class="dnd5e-stat-block stat-block">
     <article>
     <header class="name-and-size">
         <h3 class="title"><span class="word" markdown="1">Watcher</span></h3>

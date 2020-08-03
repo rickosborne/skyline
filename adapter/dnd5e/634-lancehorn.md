@@ -5,7 +5,7 @@
 Lancehorns are modified from the stock [Deer](https://www.dndbeyond.com/monsters/deer).
 For additional flavor, see the [Horizon Wiki on Lancehorn](https://horizon.fandom.com/wiki/Lancehorn).
 
-<div class="dnd5e-stat-block">
+<div class="dnd5e-stat-block stat-block">
     <article>
     <header class="name-and-size">
         <h3 class="title"><span class="word" markdown="1">Lancehorn</span></h3>
