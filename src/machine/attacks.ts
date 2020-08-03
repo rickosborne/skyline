@@ -3,9 +3,12 @@ import * as fs from 'fs';
 import * as console from 'console';
 import * as YAML from 'yaml';
 import {ActionOnHit, DND5EAction, DND5EAdapter, Machine, MachineAction, MachineAdapters} from "./Machine";
+import {Type} from "yaml/util";
 
 const dataMachinePath = path.join(__dirname, '..', '..', 'data', 'machine');
 const attacksFilePath = path.join(dataMachinePath, 'hzd-machines-attacks.tsv');
+
+const makeChanges = false;
 
 interface TsvRecord {
 	lineNumber: number;
@@ -168,10 +171,14 @@ function logUpdate<T extends Record<string, any>, K extends string & keyof T, U 
 	const existing = target[key] as U;
 	if (existing == null) {
 		console.log(`\tAdding ${path}.${key}: ${updatedValue}`);
-		target[key] = updatedValue;
+		if (makeChanges) {
+			target[key] = updatedValue;
+		}
 	} else if (existing !== updatedValue) {
 		console.log(`\tUpdating ${path}.${key}: ${existing} => ${updatedValue}`);
-		target[key] = updatedValue;
+		if (makeChanges) {
+			target[key] = updatedValue;
+		}
 	} else {
 		// console.log(`\tUnchanged: ${path}.${key}: ${updatedValue}`);
 	}
@@ -180,7 +187,7 @@ function logUpdate<T extends Record<string, any>, K extends string & keyof T, U 
 function traverse<T extends Record<string, any>, K extends string & keyof T, U extends T[K]>(target: T, key: K, defaultValue: () => U, parentPath: string, block: (value: U, childPath: string) => U | undefined | void = v => v): void {
 	const existing = target[key] as U;
 	const replacement = block(existing || defaultValue(), parentPath + '.' + key);
-	if (replacement != null && replacement !== existing) {
+	if (replacement != null && replacement !== existing && makeChanges) {
 		target[key] = replacement;
 	}
 }
@@ -189,7 +196,7 @@ function like<T>(target: T[], predicate: (item: T) => boolean, defaultValue: () 
 	const existingIndex = target.findIndex(predicate);
 	const value = existingIndex === -1 ? defaultValue() : target[existingIndex];
 	const replacement = block(value, parentPath + '[' + existingIndex + ']');
-	if (replacement != null && replacement !== value) {
+	if (replacement != null && replacement !== value && makeChanges) {
 		if (existingIndex === -1) {
 			target.push(replacement);
 		} else {
@@ -210,6 +217,7 @@ function titleCase(s: string): string {
 		.join('');
 }
 
+YAML.scalarOptions.str.fold.lineWidth = 0;
 
 for (let attacks of Object.values(machines)) {
 	const machineName = attacks[0].machineName;
@@ -218,7 +226,8 @@ for (let attacks of Object.values(machines)) {
 	const yamlPath = path.join(dataMachinePath, `${machineName.toLowerCase()}.machine.yaml`);
 	if (fs.existsSync(yamlPath)) {
 		console.log(`Machine: ${machineName} (${fileName})`);
-		const def: Machine = YAML.parse(fs.readFileSync(yamlPath, {encoding: 'utf8'}));
+		const originalYaml = fs.readFileSync(yamlPath, {encoding: 'utf8'});
+		const def: Machine = YAML.parse(originalYaml);
 		traverse(def, 'adapter', () => ({}) as MachineAdapters, '$', (adapter, adapterPath) => {
 			traverse(adapter, 'dnd5e', () => ({}) as DND5EAdapter, adapterPath, (dnd5e, dnd5ePath) => {
 				logUpdate(dnd5e, 'hitDie', hitDie, dnd5ePath);
@@ -305,6 +314,12 @@ for (let attacks of Object.values(machines)) {
 			});
 			return adapter;
 		});
+		const updatedYaml = YAML.stringify(def, {
+			sortMapEntries: false,
+		});
+		if (originalYaml !== updatedYaml) {
+			fs.writeFileSync(yamlPath, updatedYaml, {encoding: "utf8"});
+		}
 	} else {
 		// console.log(`Skipping ${machineName}`);
 	}

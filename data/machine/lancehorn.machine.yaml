@@ -1,4 +1,4 @@
-$schema: '../schema/machine.schema.json'
+$schema: ../schema/machine.schema.json
 id: lancehorn
 title: Lancehorn
 plural: Lancehorns
@@ -7,7 +7,7 @@ overrideSource: SIGMA
 role: Acquisition
 size: Small
 link:
-  horizonWiki: 'https://horizon.fandom.com/wiki/Lancehorn'
+  horizonWiki: https://horizon.fandom.com/wiki/Lancehorn
 variant:
   base:
     challengeLevel: 13
@@ -69,14 +69,14 @@ component:
     title: Drill Horns
     targetDifficulty: Tricky
     damage:
-      all: 2.0
+      all: 2
   freezeCanister:
     remove: true
     title: Freeze Canister
     damagePercent: 25
     targetDifficulty: Moderate
     damage:
-      all: 2.0
+      all: 2
     explode:
       rangeFeet: 30
       element: freeze

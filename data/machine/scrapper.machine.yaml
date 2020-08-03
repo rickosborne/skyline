@@ -1,4 +1,4 @@
-$schema: '../schema/machine.schema.json'
+$schema: ../schema/machine.schema.json
 id: scrapper
 title: Scrapper
 plural: Scrappers
@@ -7,7 +7,7 @@ overrideSource: SIGMA
 role: Acquisition
 size: Small
 link:
-  horizonWiki: 'https://horizon.fandom.com/wiki/Scrapper'
+  horizonWiki: https://horizon.fandom.com/wiki/Scrapper
 variant:
   base:
     challengeLevel: 8
@@ -87,7 +87,7 @@ component:
     damagePercent: 25
     targetDifficulty: Tricky
     damage:
-      shock: 3.0
+      shock: 3
     explode:
       rangeFeet: 30
       element: fire
@@ -102,7 +102,7 @@ component:
     title: Radar
     targetDifficulty: Moderate
     damage:
-      all: 2.0
+      all: 2
 adapter:
   cypher:
     level: 2
@@ -151,7 +151,7 @@ adapter:
       type: Light
     action:
       scrapperPackTactics:
-        description: "The Scrapper has advantage on an attack roll against a creature if at least one of the Scrapper's allies is within 5 feet of the creature and the ally isn't incapacitated."
+        description: The Scrapper has advantage on an attack roll against a creature if at least one of the Scrapper's allies is within 5 feet of the creature and the ally isn't incapacitated.
       scrapperBite:
         melee: true
         toHit: "+2"
