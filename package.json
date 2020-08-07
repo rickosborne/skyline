@@ -6,7 +6,7 @@
 	"bugs": {
 		"url": "https://github.com/rickosborne/skyline/issues"
 	},
-	"description": "Skyline is a set of tabletop role-playing game modules unofficially set in the world of Horizon",
+	"description": "Tabletop role-playing game modules unofficially set in the world of Horizon.",
 	"devDependencies": {
 		"@types/chai": "^4.2.12",
 		"@types/mocha": "^8.0.0",

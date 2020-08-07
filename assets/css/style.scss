@@ -1,6 +1,7 @@
 ---
 ---
 
+//noinspection CssUnknownTarget
 @import "{{ site.theme }}";
 
 @import url('https://fonts.googleapis.com/css2?family=Recursive:slnt,wght,MONO@-15..0,300..1000,0..1&display=swap');
@@ -33,8 +34,8 @@
 
 	// For text, greens are used for Narrator Note blocks.
 	--barely-green: hsl(96, 80%, 99%);
-	--noon-green: hsl(96, 80%, 88%);
-	--morning-green: hsl(96, 80%, 66%);
+	--noon-green: hsl(96, 80%, 77%);
+	--morning-green: hsl(96, 80%, 55%);
 	--evening-green: hsl(96, 80%, 44%);
 	--dusk-green: hsl(96, 80%, 33%);
 	--night-green: hsl(96, 80%, 22%);
@@ -52,6 +53,11 @@
 	--slnt-most: "slnt" -15;
 	--crsv-most: "CRSV" 1;
 	--crsv-least: "CRSV" 0;
+
+	--cadence: 1.5rem;
+	--cadence-quarter: 0.375rem;
+	--cadence-half: 0.75rem;
+	--cadence-double: 3rem;
 }
 
 html {
@@ -68,10 +74,11 @@ body {
 
 	max-width: 60em;
 	margin: 0 auto;
+	line-height: var(--cadence);
 }
 
 .page-header {
-  padding: 0.5rem;
+  padding: var(--cadence-half);
 
   a.btn {
     display: none;
@@ -81,19 +88,26 @@ body {
 	background-image: linear-gradient(180deg, var(--evening-blue), var(--dusk-blue));
 
 	display: flex;
-	align-items: center;
-}
+	//align-items: center;
 
-.project-name {
-	margin-bottom: 0;
-	margin-right: 2rem;
-	border-right: thin solid rgba(255, 255, 255, 0.5);
-	padding-right: 2rem;
-	text-transform: capitalize;
-}
+	.project-name {
+		margin: var(--cadence-half) var(--cadence-double) var(--cadence-half) 0;
+		border-right: thin solid rgba(255, 255, 255, 0.5);
+		padding-right: var(--cadence-double);
+		text-transform: capitalize;
 
-.project-tagline {
-	margin: 0;
+		color: white;
+		font-weight: 300;
+		letter-spacing: 0.04em;
+		font-size: 3rem;
+		line-height: var(--cadence-double);
+		min-height: var(--cadence-double);
+	}
+
+	.project-tagline {
+		margin-bottom: 0;
+	}
+
 }
 
 .main-content {
@@ -104,6 +118,8 @@ body {
 		font-weight: 600;
 		letter-spacing: -0.04em;
 		font-size: 1.5rem;
+		line-height: var(--cadence-double);
+		min-height: var(--cadence-double);
 	}
 	h2 {
 		color: var(--dusk-blue);
@@ -112,6 +128,8 @@ body {
 		font-weight: 600;
 		letter-spacing: -0.04em;
 		font-size: 1.4rem;
+		line-height: var(--cadence-double);
+		min-height: var(--cadence-double);
 	}
 	h3 {
 		color: var(--night-blue);
@@ -119,6 +137,8 @@ body {
 		font-weight: 600;
 		letter-spacing: -0.04em;
 		font-size: 1.3rem;
+		line-height: var(--cadence-double);
+		min-height: var(--cadence-double);
 	}
 	h4 {
 		color: var(--night-blue);
@@ -126,26 +146,67 @@ body {
 		font-weight: 500;
 		letter-spacing: -0.04em;
 		font-size: 1.3rem;
+		line-height: var(--cadence-double);
+		min-height: var(--cadence-double);
 	}
 
-	blockquote {
+	blockquote, .narrator-note {
 		font-variation-settings: var(--crsv-most), var(--casl-most), var(--slnt-most);
 		color: #555;
 		background-color: var(--barely-blue);
-		padding: 1em;
-		border-left: 0.25em solid var(--noon-blue);
+		padding: var(--cadence) var(--cadence-half);
+		margin: 0;
+		border-left: var(--cadence-quarter) solid var(--noon-blue);
+	}
+
+	.narrator-note {
+		color: var(--dusk-green);
+		background-color: var(--barely-green);
+		border-left-color: var(--noon-green);
+		display: block;
+		padding: var(--cadence) var(--cadence-half);
+
+		header {
+			display: block;
+			color: var(--night-green);
+			font-variation-settings: var(--wght-bolder);
+			font-weight: 600;
+			margin: 0 0 var(--cadence) 0;
+		}
+
+		p:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	table {
+		display: table;
+		width: auto;
+		margin: var(--cadence) 0;
+
+		th, td {
+			padding: var(--cadence-quarter) var(--cadence-half);
+		}
+	}
+
+	ul {
+		padding-left: var(--cadence);
+	}
+
+	li {
+		margin: var(--cadence-half) 0;
+
+		&:first-child {
+			margin-top: var(--cadence-half);
+		}
 	}
 
 	p {
-		//text-indent: 1em;  // Not really feeling this.
-
-		//&.story-links {
-		//	text-indent: inherit;
-		//}
+		margin: var(--cadence) 0;
 	}
 
 	font-size: inherit;
-	padding: 2em;
+	padding: var(--cadence);
 }
 
 a {
@@ -185,8 +246,8 @@ em {
 .story-link {
 	color: var(--dusk-orange);
 	background-color: var(--barely-orange);
-	border-left: 0.25em solid var(--noon-orange);
-	padding: 1em;
+	border-left: var(--cadence-quarter) solid var(--noon-orange);
+	padding: var(--cadence) var(--cadence-half);
 	display: block;
 
 	&:hover, &:visited:hover {
@@ -202,18 +263,33 @@ em {
 	}
 }
 
-.narrator-note {
-	color: var(--dusk-green);
-	background-color: var(--barely-green);
-	border-left: 0.25em solid var(--noon-green);
-	padding: 1em;
-	display: block;
 
-	header {
+@media (max-width: 40rem) {
+	:root {
+		--cadence: 1.3rem;
+		--cadence-half: 0.65rem;
+		--cadence-quarter: 0.325rem;
+		--cadence-double: 2.6rem;
+	}
+
+	body {
+		font-size: 100%;
+	}
+	.page-header {
 		display: block;
-		color: var(--night-green);
-		font-variation-settings: var(--wght-bolder);
-		font-weight: 600;
+		text-align: left;
+		padding: var(--cadence-half) var(--cadence-half) var(--cadence) var(--cadence-half);
+
+		.project-name {
+			border-right: none;
+			padding-right: 0;
+			margin-right: 0;
+			font-size: 2rem;
+			margin-top: 0;
+		}
+	}
+	.main-content {
+		padding: var(--cadence-half);
 	}
 }
 
@@ -221,14 +297,14 @@ em {
 
 .stat-block {
 	table.stats, table.loot-list {
-		margin: 0.5em 0;
+		margin: var(--cadence-half) 0;
 		border: none;
 		display: table;
 		width: 100%;
 
 		th, td {
 			border: none;
-			padding: 0 1em;
+			padding: 0 var(--cadence-half);
 		}
 	}
 
@@ -275,17 +351,17 @@ em {
 
 	article {
 		column-width: 20rem;
-		column-gap: 3rem;
+		column-gap: var(--cadence-double);
 	}
 }
 
 // D&D 5E Stat Block styles based on: https://github.com/Nyranith/statblock5e
 
 .dnd5e-stat-block {
-	border: 0.05em #DDD solid;
-	box-shadow: 0 0 1em #867453;
+	border: 0.05rem #DDD solid;
+	box-shadow: 0 0 var(--cadence-half) #867453;
 	background: #FDF1DC;
-	padding: 0.5em;
+	padding: 0.5rem;
 	color: black;
 
 	font-family: 'Alegreya Sans', 'Noto Sans', 'Myriad Pro', Calibri, Helvetica, Arial, sans-serif;
@@ -293,17 +369,17 @@ em {
 	&:before, &:after {
 		content: '';
 		display: block;
-		height: 0.5em;
+		height: 0.5rem;
 		background: url(../img/dnd5e-stat-block-noise.png);
 		border: thin solid #7A200D;
 	}
 
 	&:before {
-		margin: -0.55em -0.55em 0.5em -0.55em;
+		margin: -0.55rem -0.55rem 0.5rem -0.55rem;
 	}
 
 	&:after {
-		margin: 0.5em -0.55em -0.55em -0.55em;
+		margin: 0.5rem -0.55rem -0.55rem -0.55rem;
 	}
 
 	h3 {
@@ -350,7 +426,7 @@ em {
 	}
 
 	.size-and-type {
-		margin: 0 0 0.3em 0;
+		margin: 0 0 0.3rem 0;
 		font-size: 1rem;
 		text-transform: lowercase;
 	}
@@ -362,19 +438,19 @@ em {
 		&:before, &:after {
 			content: '';
 			display: block;
-			height: 0.3em;
+			height: 0.3rem;
 			background-image: linear-gradient(45deg, #7A200D, rgba(122, 32, 13, 0));
-			margin: 0.5em 0;
+			margin: 0.5rem 0;
 		}
 
 		p {
 			margin: 0;
-			text-indent: hanging 0.5em;
+			text-indent: hanging 0.5rem;
 		}
 	}
 
 	.non-attacks {
-		padding: 0.5em 0;
+		padding: 0.5rem 0;
 	}
 
 	table.stats {
@@ -383,7 +459,7 @@ em {
 }
 
 .cypher-stat-block {
-	padding-bottom: 0.5em;
+	padding-bottom: var(--cadence-half);
 	border-bottom: thick solid var(--night-green);
 	color: var(--midnight-green);
 	font-size: 1rem;
@@ -461,7 +537,7 @@ em {
 	.stat-block {
 		table.stats, table.loot-list {
 			th, td {
-				padding: 0 0.5em;
+				padding: 0 var(--cadence-half);
 			}
 		}
 	}
