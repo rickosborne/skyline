@@ -1,26 +1,31 @@
-### Yenevra Feldspar
+### Yenever Feldspar
 
-_Tenakth, fighter, she/her_
+_Tenakth, fighter_
 
 _Primary skills:_ melee combat, intimidation, strength, endurance
 
-_Appearance:_ Towering over most, broad-shouldered, and thick-framed, Yenna is a wall of solid muscle.
-Where many [Tenakth](https://horizon.fandom.com/wiki/Tenakth) would prefer a base of blue body paint and red mouth and neck, she has replaced the red with white, covering almost all the bronze skin beneath.
-Her clothing shows the same changes: trading out reds and yellows for greens and browns.
-She's kept traditional shaved skull to the sides, though she keeps the top short so it won't catch on the pair of oversized axes she keeps on her back.
+_Appearance:_ Towering over most, broad-shouldered, and thick-framed, Yen is a wall of solid muscle.
+Where many [Tenakth](https://horizon.fandom.com/wiki/Tenakth) would prefer a base of blue body paint and red mouth and neck, they have replaced the red with white, covering almost all the bronze skin beneath.
+Their clothing shows the same changes: trading out reds and yellows for greens and browns.
+They've kept traditional shaved skull to the sides, though they keep the top short to prevent it from catching on the pair of oversized axes they keep on their back.
 
-_Background:_ Yenna was expelled from her village and from Tenakth lands.
-She doesn't talk about why, but then she doesn't talk much at all.
-She's mentioned her parents — her father is a blacksmith and her mother a leatherworker — but the subject seems to pain her.
+_Background:_ The Tenakth expelled Yen from their village and all Tenakth lands.
+They don't talk about why, but then they don't talk much at all.
+They've mentioned their parents — their father is a blacksmith and mother a leatherworker, but the subject seems painful.
 
-_Attitude:_ Most people look at Yenna and see a thick-headed brute, and she's fine with that.
-If they struck up a conversation they'd soon find her to be more intelligent than most, and quick to laugh with those she considers friends.
-She's also quick to anger and all too aware of her ability to do harm, so she tends to keep people at arms' length for their own protection.
+_Attitude:_ Most people look at Yen and see a thick-headed brute — a mis-impression Yen is not quick to correct.
+Anyone striking up a conversation would soon find them to be more intelligent than most, and quick to laugh with those they consider friends.
+They're also quick to anger and all too aware of their ability to do harm, so they tend to keep people at arms' length for their own protection.
 
-_Hopes:_ Yenna is still trying to figure out where she fits.
-While she agrees with the ideals of strength and direct action of her Tenakth forebears, she cannot stomach their oppression and indifference.
-Most days, her bar is low: she hopes to meet people who are not inherently afraid of her, or who want to just use her for her size.
+_Hopes:_ Yen is still trying to figure out where they fit.
+While they agree with the ideals of strength and direct action of their Tenakth forebears, they cannot stomach the tribe's oppression and indifference.
+Most days, Yen's bar is low: they hope to meet people who are not inherently afraid of them, or who want to just use them for their size.
 
-_Fears:_ She would not soon admit it aloud, but she worries that she will wander alone for the rest of her days, never connecting with anyone.
+_Fears:_ They would not soon admit it aloud, but they worry they will wander alone for the rest of their days, never connecting with anyone.
 
-Yenevra's full character sheet is available in the [Adapter](600-adapters.md) for your system.
+Yenever's full character sheet is available in the [Adapter](600-adapters.md) for your system.
+
+#### Personality Questions
+
+* What events led Yen to be exiled from the Tenakth?
+* What is one thing that might get them to go back?

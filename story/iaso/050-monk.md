@@ -1,6 +1,6 @@
 ### Van
 
-_Banuk, historian, they/them_
+_Banuk, historian_
 
 _Primary skills:_ lore, martial combat, machine subversion
 
@@ -30,3 +30,8 @@ Van has also had to abandon villages and tribes when no amount of reason or pers
 This has planted the seeds of doubt that Van could ever do enough, or that one day they'll be too curious and too slow and will fall to a horrible act, becoming a story themselves.
 
 Van's full character sheet is available in the [Adapter](600-adapters.md) for your system.
+
+#### Personality Questions
+
+* What is one story Van loves to tell to all who will listen?
+* What is the first thing Van notices upon meeting a new person?
