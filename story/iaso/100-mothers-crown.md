@@ -11,7 +11,7 @@ Read the following aloud to everyone:
 > But word has been going around that Mother's Watch doesn't have enough workers to keep up with demand.
 > You've decided to make the trip and see what you can do to help.
 
-A map of Mother's Crown can be found in the Maps & Tables section.
+A map of Mother's Crown can be found in the [Maps & Tables](500-maps-tables.md) section.
 If you're curious about Mother's Crown before you head out you are welcome to poke around and talk to the people here by reading through the Adventure entries which match the numbers on the map.
 Starter characters have all the gear they'll need, so you don't need to worry about shopping.
 
