@@ -11,16 +11,19 @@ Top-level sections:
   * [Hooks](025-hooks.md)
   * [Background](030-background.md)
 * [Starter Characters](040-starter-characters.md)
-  * [Yenevra Feldspar](042-fighter.md) — _Tenakth, fighter, she/her_
-  * [Thia](044-rogue.md) — _unknown, rogue, she/her_
-  * [Drake](046-ranger.md) — _Nora, Brave (hunter), he/him_
-  * [Haldred](048-engineer.md) — _Oseram, engineer, she/her_
-  * [Van](050-monk.md) — _Banuk, historian, they/them_
+  * [Yenever Feldspar](042-fighter.md) — _Tenakth, fighter_
+  * [Thorn](044-rogue.md) — _unknown, rogue_
+  * [Drake](046-ranger.md) — _Nora, Brave (hunter)_
+  * [Haldred](048-engineer.md) — _Oseram, engineer_
+  * [Van](050-monk.md) — _Banuk, historian_
 * Adventure
   * [Event 100: Mother's Crown](100-mothers-crown.md)
+* [NPCs](400-npc.md)
+  * [Arund](405-arund.md){:.spoiler}
+  * [Pren](450-pren.md){:.spoiler}
 * [Maps & Tables](500-maps-tables.md)
-  * [Mother's Cradle](505-mothers-cradle.md)
-  * [Mother's Watch Ruins](510-mothers-watch-ruins.md)
+  * [Mother's Cradle](505-mothers-cradle.md){:.spoiler}
+  * [Mother's Watch Ruins](510-mothers-watch-ruins.md){:.spoiler}
   * [Artifacts](590-artifacts.md)
 * [Adapters](600-adapters.md)
   * [D&D 5E](605-5e.md)
