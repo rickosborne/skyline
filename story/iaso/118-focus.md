@@ -1,3 +1,8 @@
+---
+Location: Mother's Watch Ruins
+State: Exploring
+---
+
 ## 118
 
 Focus overlays are jarring for first-time users.

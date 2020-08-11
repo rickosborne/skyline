@@ -1,3 +1,15 @@
+---
+tags:
+- character-sheet
+- guide
+breadcrumbs:
+- title: Starter Characters
+  href: 040-starter-characters
+next:
+  title: Thorn (rogue)
+  href: 044-rogue
+---
+
 ### Yenever Feldspar
 
 _Tenakth, fighter_
@@ -33,5 +45,6 @@ Yenever's full character sheet is available in the [Adapter](600-adapters.md) fo
 
 #### Personality Questions
 
+{:.col-span-all}
 * What events led Yen to be exiled from the Tenakth?
 * What is one thing that might get them to go back?

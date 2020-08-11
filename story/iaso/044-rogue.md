@@ -1,3 +1,15 @@
+---
+tags:
+- character-sheet
+- guide
+breadcrumbs:
+- title: Starter Characters
+  href: 040-starter-characters
+next:
+  title: Drake (ranger)
+  href: 046-ranger
+---
+
 ### Thorn
 
 _unknown, rogue_
@@ -32,5 +44,6 @@ Thorn's full character sheet is available in the [Adapter](600-adapters.md) for 
 
 #### Personality Questions
 
+{:.col-span-all}
 * Why is Thorn so secretive about their background?
 * What would it take for Thorn to share something truly personal?

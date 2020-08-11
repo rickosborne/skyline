@@ -1,3 +1,11 @@
+---
+tags:
+- guide
+next:
+  title: Begin the adventure!
+  href: 099-adventure
+---
+
 ## Additional Character Options
 
 TODO overview text

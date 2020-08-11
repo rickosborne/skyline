@@ -1,3 +1,11 @@
+---
+tags:
+- guide
+next:
+  title: Yenever Feldspar (fighter)
+  href: 042-fighter
+---
+
 ### Starter Characters
 
 If your players have already created their characters, skip ahead to [Chapter 1](101-road-to-mothers-watch.md).
@@ -9,3 +17,9 @@ The characters here are described using gender-neutral they/them pronouns.
 Players should feel free to use whatever pronouns they choose.
 
 Each character also has questions to help the player add some emotional depth.
+
+* [Yenever Feldspar](042-fighter.md) — _Tenakth, fighter_
+* [Thorn](044-rogue.md) — _unknown, rogue_
+* [Drake](046-ranger.md) — _Nora, Brave (hunter)_
+* [Haldred](048-engineer.md) — _Oseram, engineer_
+* [Van](050-monk.md) — _Banuk, historian_

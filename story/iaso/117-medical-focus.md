@@ -1,3 +1,8 @@
+---
+Location: Mother's Watch Ruins
+State: Exploring
+---
+
 ## 117
 
 Players of blind or deaf characters should read the section on [Focus as Assistive Device](../../guide/setting/751-focus.md) from the Setting Guide.

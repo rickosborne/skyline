@@ -14,3 +14,6 @@ defaults:
       path: "assets/img"
     values:
       image: true
+
+show_downloads: false
+markdown: kramdown
