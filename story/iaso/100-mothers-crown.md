@@ -1,3 +1,10 @@
+---
+location: Mother's Crown
+state: Start
+tags:
+- story
+---
+
 # 100: Mother's Crown
 
 Read the following aloud to everyone:

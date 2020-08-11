@@ -1,3 +1,8 @@
+---
+Location: Mother's Watch Ruins
+State: Exploring
+---
+
 ## 134
 
 Read aloud:

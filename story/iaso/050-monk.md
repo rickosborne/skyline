@@ -1,3 +1,15 @@
+---
+tags:
+- character-sheet
+- guide
+breadcrumbs:
+- title: Starter Characters
+  href: 040-starter-characters
+next:
+  title: Additional Character Options
+  href: 060-additional-character-options
+---
+
 ### Van
 
 _Banuk, historian_
@@ -39,5 +51,6 @@ Van's full character sheet is available in the [Adapter](600-adapters.md) for yo
 
 #### Personality Questions
 
+{:.col-span-all}
 * What is one story Van loves to tell to all who will listen?
 * What is the first thing Van notices upon meeting a new person?

@@ -1,3 +1,15 @@
+---
+tags:
+- character-sheet
+- guide
+breadcrumbs:
+- title: Starter Characters
+  href: 040-starter-characters
+next:
+  title: Haldred (engineer)
+  href: 048-engineer
+---
+
 ### Drake
 
 _Nora, Brave (hunter)_
@@ -33,5 +45,6 @@ Drake's full character sheet is available in the [Adapter](600-adapters.md) for 
 
 #### Personality Questions
 
+{:.col-span-all}
 * How does Drake see old age?  What are they doing then?
 * Has Drake come to terms with their parents' deaths in the Red Raids?
