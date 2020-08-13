@@ -285,6 +285,12 @@ body {
 	}
 }
 
+body.full-width {
+	.main-content {
+		max-width: inherit;
+	}
+}
+
 @media (min-width: 50rem) {
 	.guide {
 		.main-content {
@@ -569,10 +575,10 @@ code {
 
 // D&D 5E Stat Block styles based on: https://github.com/Nyranith/statblock5e
 
-.dnd5e-stat-block {
+.dnd5e-stat-block, .dnd5e-pc-block {
 	border: 0.05rem #DDD solid;
 	box-shadow: 0 0 var(--cadence-half) #867453;
-	background: #FDF1DC;
+	background: hsl(38, 89%, 93%);
 	padding: 0.5rem;
 	color: black;
 
@@ -670,6 +676,348 @@ code {
 
 	table.stats {
 		color: #7A200D;
+	}
+}
+
+.dnd5e-pc-block {
+	background-color: #f8f8f8;
+	box-shadow: 0 0 var(--cadence-half) rgba(0, 0, 0, 0.5);
+	border: thin solid rgba(0, 0, 0, 0.5);
+	padding: var(--cadence);
+
+	&::before, &::after {
+		content: none;
+		margin: 0;
+		height: 0;
+		background-image: none;
+		border: none;
+	}
+
+	article {
+		column-width: inherit;
+		display: grid;
+		//grid-template:
+		//  "name   name   name    name    name    name   "
+		//	"stats  stats  pb      init    ac      hp"
+		//	"senses skills attacks attacks attacks attacks"
+		//  "profs  skills attacks attacks attacks attacks"
+		//  "walk   skills actions actions actions actions"
+		//;
+		//grid-template:
+		//		"name   name   name"
+		//		"stats  stats  stats"
+		//		"senses pb    skills"
+		//		"senses init  skills"
+		//		"profs  ac    skills"
+		//		"profs  walk  skills"
+		//		"profs   hp   skills"
+		//	  "attacks attacks attacks"
+		//	  "actions actions actions"
+		//;
+		grid-template:
+				"name   sizetype   sizetype"
+				"stats  stats  stats"
+				"senses pb    skills"
+				"senses init  skills"
+				"profs  ac    skills"
+				"profs  walk  skills"
+				"profs   hp   skills"
+			  "attacks attacks actions"
+		;
+		grid-gap: 1em;
+	}
+
+	table {
+		margin: 0;
+	}
+
+	.block {
+		//border: thin solid hsla(10, 81%, 26%, 0.2);
+		border: thin solid rgba(0, 0, 0, 0.2);
+		border-radius: 0.5em;
+		padding: 0 var(--cadence-half);
+		margin: 0;
+	}
+
+	.label {
+		//border: thin solid hsla(10, 81%, 26%, 0.2);
+		border: thin solid rgba(0, 0, 0, 0.2);
+		// background-color: hsl(38, 89%, 93%);
+		background-color: #f8f8f8;
+		border-radius: 0.25em;
+		margin: -0.5em auto 0 auto;
+		width: min-content;
+		padding: 0.25em;
+		font-size: 90%;
+		line-height: 100%;
+		white-space: nowrap;
+		text-align: center;
+
+		abbr {
+			text-decoration: none;
+		}
+	}
+
+	.legend {
+		//border: thin solid hsla(10, 81%, 26%, 0.2);
+		border: thin solid rgba(0, 0, 0, 0.2);
+		margin: 0 auto -0.5em auto;
+		//background-color: hsl(38, 89%, 93%);
+		background-color: #f8f8f8;
+		line-height: 100%;
+		padding: 0.25em;
+	}
+
+	.name {
+		grid-area: name;
+		display: flex;
+
+		h3 {
+			font-family: Roboto, 'Alegreya Sans', 'Noto Sans', 'Myriad Pro', Calibri, Helvetica, Arial, sans-serif;
+			color: navy;
+			letter-spacing: inherit;
+			font-size: 1.4rem;
+			line-height: inherit;
+			min-height: inherit;
+		}
+	}
+	.size-and-type {
+		grid-area: sizetype;
+		text-align: right;
+		//line-height: var(--cadence-double);
+		margin: 0 0 0 var(--cadence);
+		font-size: 1.4rem;
+		text-transform: none;
+	}
+
+	.stats {
+		grid-area: stats;
+		display: grid;
+		grid-template-columns: repeat(6, 1fr);
+		grid-gap: 0.25em;
+		padding: 0;
+
+		.stat {
+			text-align: center;
+
+			header {
+				font-weight: bold;
+			}
+
+			.value {
+				width: 2em;
+				border-radius: 1em;
+			}
+
+			.modifier {
+				font-size: 200%;
+				padding: 0.25em;
+				font-weight: bold;
+			}
+		}
+
+	}
+
+	.senses {
+		grid-area: senses;
+
+		.group {
+			margin: 0 auto;
+			width: min-content;
+		}
+
+		.sense {
+			//border: thin solid hsla(10, 81%, 26%, 0.2);
+			margin: 1em 0;
+			display: flex;
+			height: 1.5em;
+			line-height: 1.5em;
+
+			.value {
+				//border: thin solid hsla(10, 81%, 26%, 0.2);
+				border: thin solid rgba(0, 0, 0, 0.2);
+				//background-color: hsl(38, 89%, 93%);
+				background-color: #f8f8f8;
+				font-size: 150%;
+				width: 1.4em;
+				height: 1.4em;
+				border-radius: 1.4em;
+				text-align: center;
+				line-height: 1.2em;
+				font-weight: bold;
+				margin: -0.2em 0.75em 0 -0.2em;
+			}
+
+			.based-on {
+				color: rgba(0, 0, 0, 0.5);
+				padding-left: 0.75em;
+			}
+		}
+	}
+
+	dl {
+		dt {
+			font-weight: bold;
+			text-transform: uppercase;
+			font-size: 90%;
+			color: rgba(0, 0, 0, 0.5);
+			margin: 0;
+			padding: 0;
+			text-indent: 0;
+		}
+		dd {
+			margin: 0 0 var(--cadence-half) 0;
+			padding: 0;
+			text-indent: 0;
+		}
+	}
+
+	.skills {
+		grid-area: skills;
+
+		table {
+			width: fit-content;
+			margin: 0 auto;
+			display: table;
+			border-spacing: 0;
+
+			td, th {
+				padding: 0 0.25em;
+				text-wrap: avoid;
+				white-space: nowrap;
+			}
+			td {
+				border-top: thin solid rgba(0, 0, 0, 0.1);
+			}
+
+			td.modifies {
+				font-size: 90%;
+				color: rgba(0, 0, 0, 0.5);
+			}
+		}
+
+		.proficient.no {
+			color: rgba(0, 0, 0, 0.1);
+		}
+		.proficient.yes {
+			color: navy;
+		}
+		.bonus, .modifies, .proficient {
+			text-align: center;
+		}
+	}
+
+	.proficiencies {
+		grid-area: profs;
+	}
+
+	.actions {
+		grid-area: actions;
+	}
+
+	.attacks {
+		grid-area: attacks;
+
+		table {
+			display: table;
+			width: 100%;
+
+			td, th {
+				vertical-align: top;
+				padding: 0;
+			}
+			td {
+				border-top: thin solid rgba(0, 0, 0, 0.1);
+			}
+			.range, .hit, .damage, .type {
+				text-align: center;
+			}
+			.attack, .notes {
+				text-align: left;
+			}
+		}
+	}
+
+	.proficiency-bonus {
+		grid-area: pb;
+	}
+
+	.walking-speed {
+		grid-area: walk;
+	}
+
+	.initiative {
+		grid-area: init;
+	}
+
+	.armor-class {
+		grid-area: ac;
+	}
+
+	.hit-points {
+		grid-area: hp;
+	}
+
+	.proficiency-bonus, .walking-speed, .initiative, .armor-class, .hit-points {
+		.value {
+			margin-top: var(--cadence-quarter);
+			font-size: 200%;
+			font-weight: bold;
+			text-align: center;
+		}
+	}
+
+	.scalar {
+		//font-weight: bold;
+	}
+	.measure {
+		color: rgba(0, 0, 0, 0.2);
+		padding-left: 0.125em;
+	}
+}
+
+@media (max-width: 50rem) {
+	.dnd5e-pc-block {
+		article {
+			grid-template:
+				"name name name name name"
+				"sizetype sizetype sizetype sizetype sizetype"
+				"stats stats stats stats stats"
+				"pb init ac walk hp"
+				"senses senses senses skills skills"
+				"profs profs profs skills skills"
+				"actions actions actions skills skills"
+			  "attacks attacks attacks attacks attacks"
+			;
+
+			.name {
+				display: block;
+			}
+		}
+	}
+}
+
+@media (max-width: 40rem) {
+	.dnd5e-pc-block {
+		article {
+			grid-template:
+				"name name"
+				"sizetype sizetype"
+				"stats stats"
+				"pb skills"
+				"init skills"
+				"ac skills"
+				"walk skills"
+				"hp skills"
+				"senses profs"
+				"actions actions"
+			  "attacks attacks"
+			;
+
+			.name {
+				display: block;
+			}
+		}
 	}
 }
 
