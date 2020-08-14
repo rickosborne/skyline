@@ -234,7 +234,7 @@ tags:
                         <td class="attack">Battleaxe</td>
                         <td class="range"><span class="scalar">5</span><span class="measure">ft</span></td>
                         <td class="hit">+5</td>
-                        <td class="damage"><abbr title="Piercing" class="pierce">1d8+3&nbsp;(1H)<br>1d10+3&nbsp;(2H)</abbr></td>
+                        <td class="damage"><abbr title="Slashing" class="pierce">1d8+3&nbsp;(1H)<br>1d10+3&nbsp;(2H)</abbr></td>
                         <td class="notes">Melee, Martial</td>
                     </tr>
                     <tr>

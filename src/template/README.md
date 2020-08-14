@@ -11,9 +11,9 @@ From the root, run:
 
 It will scan Markdown (`.md`) files for HTML pseudo-comments:
 
-    <!-- +template machine lancehorn dnd5ecombat -->
+    <!-- +template machine lancehorn dnd5e-npc-stats -->
     ...
-    <!-- -template machine lancehorn dnd5ecombat -->
+    <!-- -template machine lancehorn dnd5e-npc-stats -->
 
 The syntax is pretty straightforward:
 

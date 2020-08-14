@@ -1,0 +1,106 @@
+$schema: ../../data/schema/book.schema.json
+$id: https://rickosborne.github.io/skyline/story/iaso/
+title: IASO
+adapter:
+  dnd5e:
+    playerCharacter:
+      - name: Yenever Feldspar
+        level: 1
+        class:
+          title: Barbarian
+          href: https://www.dndbeyond.com/classes/barbarian
+        race: Variant Human
+        hitDie: 12
+        armor:
+          type: None
+          num: 12
+          base: 10
+          note: "+2 Unarmored Bonus"
+        speedFeet: 30
+        passive:
+          Perception: 13
+          Investigation: 9
+          Insight: 11
+        attr:
+          STR:
+            bonus: "+3"
+            score:
+              base: 15
+              effective: 16
+              note: "+1 for Variant Human"
+          DEX:
+            bonus: "+0"
+            score: 10
+          CON:
+            bonus: "+2"
+            score:
+              base: 14
+              effective: 15
+              note: "+1 for Variant Human"
+          INT:
+            bonus: "-1"
+            score: 8
+          WIS:
+            bonus: "+1"
+            score: 13
+          CHA:
+            bonus: "+1"
+            score: 12
+        proficiencyBonus: "+2"
+        initiativeBonus: "+0"
+        proficiency:
+          - title: Armor
+            item:
+              - Light Armor
+              - Medium Armor
+              - Shields
+          - title: Weapons
+            item:
+              - Martial Weapons
+              - Simple Weapons
+        skill:
+          - title: Athletics
+            proficient: true
+          - title: Intimidation
+            proficient: true
+          - title: Perception
+            proficient: true
+          - title: Stealth
+            proficient: true
+          - title: Survival
+            proficient: true
+        hp: 14
+        attack:
+          - title: Battleaxe
+            melee: true
+            hands: 1
+            toHit: "+5"
+            reachFeet: 5
+            note: Melee, Martial
+            damage:
+              roll: 1d8 + 3
+              type: Slashing
+          - title: Battleaxe
+            melee: true
+            hands: 2
+            toHit: "+5"
+            reachFeet: 5
+            note: Melee, Martial
+            damage:
+              roll: 1d10 + 3
+              type: Slashing
+          - title: Unarmed Strike
+            melee: true
+            hands: 1
+            toHit: "+5"
+            reachFeet: 5
+            damage:
+              roll: 4
+              type: Bludgeoning
+        action:
+          - title: Rage
+            note: (See Barbarian in the 5E PHB for details.)
+        link:
+          characterDndBeyond:
+            title: Yenever on D&D Beyond
+            href: https://ddb.ac/characters/32273323/eeVZiY

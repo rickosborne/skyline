@@ -1,6 +1,8 @@
 {
 	"compilerOptions": {
 		"alwaysStrict": true,
+		"jsx": "react",
+		"jsxFactory": "h",
 		"module": "commonjs",
 		"noImplicitAny": true,
 		"noImplicitReturns": true,
@@ -8,7 +10,10 @@
 		"sourceMap": true,
 		"strict": false,
 		"strictNullChecks": true,
-		"target": "es5"
+		"target": "es5",
+		"lib": [
+			"ESNext"
+		]
 	},
 	"exclude": [
 		"node_modules"

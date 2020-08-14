@@ -1,19 +1,19 @@
-<!-- +template machine thunderjaw dnd5e-npc-stats -->
+<!-- +template machine stormbird dnd5e-npc-stats -->
 
-<h2>Thunderjaw</h2>
-<p>For additional flavor, see the <a href="https://horizon.fandom.com/wiki/Thunderjaw" rel="external">Horizon Wiki on Thunderjaw</a>.</p>
+<h2>Stormbird</h2>
+<p>For additional flavor, see the <a href="https://horizon.fandom.com/wiki/Stormbird" rel="external">Horizon Wiki on Stormbird</a>.</p>
 <div class="dnd5e-stat-block stat-block">
 	<article>
 		<header class="name-and-size">
 			<h3 class="title"><span class="word" markdown="1">
-Thunderjaw
+Stormbird
 </span></h3>
 			<p class="size-and-type"><em>Huge machine</em></p>
 		</header>
 		<section class="ac-hp-speed">
 			<p class="ac"><strong>Armor Class:</strong> 0 TODO</p>
-			<p class="hp"><strong>Hit Points:</strong> <span class="roll-average">303</span> <span class="roll-dice">(TODO)</span></p>
-			<p class="speed"><strong>Speed:</strong> <span class="scalar">0</span> <span class="measure">ft.</span></p>
+			<p class="hp"><strong>Hit Points:</strong> <span class="roll-average">258</span> <span class="roll-dice">(TODO)</span></p>
+			<p class="speed"><strong>Speed:</strong> walk <span class="scalar">15</span> <span class="measure">ft.</span>, fly <span class="scalar">60</span> <span class="measure">ft.</span></p>
 		</section>
 		<table class="stats">
 			<thead>
@@ -38,79 +38,79 @@ Thunderjaw
 			</tbody>
 		</table>
 		<section class="additional-stats">
-			<p class="challenge"><strong>Challenge:</strong> 16 (-1 XP)</p>
+			<p class="challenge"><strong>Challenge:</strong> 13 (-1 XP)</p>
 			<p class="overrides"><strong>Overrides:</strong> ZETA</p>
 		</section>
 		<section class="non-attacks">
 			<dl class="non-attack-list">
 				<div class="detailed">
-					<dt>Bite Attack</dt>
+					<dt>Jumping Claw Smash</dt>
 					<dd markdown="1">
 TODO TODO
 </dd>
 				</div>
 				<div class="detailed">
-					<dt>Charge</dt>
+					<dt>Beak Smash</dt>
 					<dd markdown="1">
 TODO TODO
 </dd>
 				</div>
 				<div class="detailed">
-					<dt>Foot Stomp</dt>
+					<dt>Take Off</dt>
 					<dd markdown="1">
 TODO TODO
 </dd>
 				</div>
 				<div class="detailed">
-					<dt>Rushing Bite Attack</dt>
+					<dt>Tail Lash</dt>
 					<dd markdown="1">
 TODO TODO
 </dd>
 				</div>
 				<div class="detailed">
-					<dt>Tail Slam</dt>
+					<dt>Thunder Rush</dt>
 					<dd markdown="1">
 TODO TODO
 </dd>
 				</div>
 				<div class="detailed">
-					<dt>Tail Swipe</dt>
+					<dt>Screech Blast</dt>
 					<dd markdown="1">
 TODO TODO
 </dd>
 				</div>
 				<div class="detailed">
-					<dt>Disc Launcher - 360 Attack</dt>
+					<dt>Hurricane Blast</dt>
 					<dd markdown="1">
 TODO TODO
 </dd>
 				</div>
 				<div class="detailed">
-					<dt>Disc Launcher - Barrage</dt>
+					<dt>Thunder Clash</dt>
 					<dd markdown="1">
 TODO TODO
 </dd>
 				</div>
 				<div class="detailed">
-					<dt>Disc Launcher - Homing</dt>
+					<dt>Quick Land</dt>
 					<dd markdown="1">
 TODO TODO
 </dd>
 				</div>
 				<div class="detailed">
-					<dt>Laser Sweep</dt>
+					<dt>Shock Blast</dt>
 					<dd markdown="1">
 TODO TODO
 </dd>
 				</div>
 				<div class="detailed">
-					<dt>Cannon Burst - Lead Up</dt>
+					<dt>Shock Burst</dt>
 					<dd markdown="1">
 TODO TODO
 </dd>
 				</div>
 				<div class="detailed">
-					<dt>Cannon Burst - Side to Side</dt>
+					<dt>Thunder Bomb Run</dt>
 					<dd markdown="1">
 TODO TODO
 </dd>
@@ -122,11 +122,11 @@ TODO TODO
 			<dl class="component-list">
 				<div class="detailed">
 					<dt>Body</dt>
-					<dd>AC TODO, 303 HP.</dd>
+					<dd>AC TODO, 258 HP.</dd>
 				</div>
 			</dl>
 		</section>
 	</article>
 </div>
 
-<!-- -template machine thunderjaw dnd5e-npc-stats -->
+<!-- -template machine stormbird dnd5e-npc-stats -->

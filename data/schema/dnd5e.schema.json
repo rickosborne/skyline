@@ -1,0 +1,255 @@
+{
+	"$id": "https://rickosborne.github.io/skyline/data/schema/dnd5e.schema.json",
+	"$schema": "http://json-schema.org/draft-07/schema",
+	"definitions": {
+		"armor": {
+			"additionalProperties": false,
+			"description": "Armor Class",
+			"properties": {
+				"base": {
+					"description": "Base AC",
+					"type": "integer"
+				},
+				"note": {
+					"allOf": [
+						{
+							"description": "Armor Notes"
+						},
+						{
+							"$ref": "skyline.schema.json#/definitions/oneOrMoreStrings"
+						}
+					]
+				},
+				"num": {
+					"title": "Armor Class (AC)",
+					"type": "integer"
+				},
+				"type": {
+					"description": "Armor Type (i.e. Light, Plate, etc.)",
+					"title": "Armor Type",
+					"type": "string"
+				}
+			},
+			"required": [
+				"num"
+			],
+			"title": "Armor Class",
+			"type": "object"
+		},
+		"attr": {
+			"additionalProperties": false,
+			"patternProperties": {
+				".*": {
+					"additionalProperties": false,
+					"properties": {
+						"bonus": {
+							"$ref": "#/definitions/bonus"
+						},
+						"score": {
+							"oneOf": [
+								{
+									"title": "Score",
+									"type": "integer"
+								},
+								{
+									"description": "Score",
+									"properties": {
+										"base": {
+											"description": "Base Score",
+											"type": "number"
+										},
+										"effective": {
+											"description": "Effective Score",
+											"type": "number"
+										},
+										"note": {
+											"allOf": [
+												{
+													"description": "Notes"
+												},
+												{
+													"$ref": "skyline.schema.json#/definitions/oneOrMoreStrings"
+												}
+											]
+										}
+									},
+									"type": "object"
+								}
+							]
+						},
+						"scoreBase": {
+							"description": "",
+							"type": "number"
+						}
+					},
+					"required": [
+						"bonus",
+						"score"
+					],
+					"title": "Attribute",
+					"type": "object"
+				}
+			},
+			"propertyNames": {
+				"$ref": "#/definitions/statAbbr"
+			},
+			"required": [
+				"STR",
+				"DEX",
+				"CON",
+				"INT",
+				"WIS",
+				"CHA"
+			],
+			"title": "Attribute Stats",
+			"type": "object"
+		},
+		"bonus": {
+			"pattern": "^[-+][0-9]+$",
+			"title": "Bonus",
+			"type": "string"
+		},
+		"challenge": {
+			"additionalProperties": false,
+			"properties": {
+				"rating": {
+					"oneOf": [
+						{
+							"type": "integer"
+						},
+						{
+							"type": "string"
+						}
+					],
+					"title": "Rating"
+				},
+				"xp": {
+					"title": "XP",
+					"type": "integer"
+				}
+			},
+			"required": [
+				"rating"
+			],
+			"title": "Challenge",
+			"type": "object"
+		},
+		"class": {
+			"description": "Class",
+			"enum": [
+				"Barbarian"
+			],
+			"type": "string"
+		},
+		"damageType": {
+			"description": "Damage Type",
+			"enum": [
+				"Bludgeoning",
+				"Piercing",
+				"Slashing"
+			],
+			"type": "string"
+		},
+		"flyFeet": {
+			"title": "Fly Speed (ft.)",
+			"type": "integer"
+		},
+		"hitDie": {
+			"enum": [
+				4,
+				6,
+				8,
+				10,
+				12,
+				20
+			],
+			"title": "Hit Die",
+			"type": "number"
+		},
+		"level": {
+			"description": "Level",
+			"maximum": 20,
+			"minimum": 1,
+			"type": "number"
+		},
+		"link": {
+			"additionalProperties": false,
+			"description": "External Links",
+			"patternProperties": {
+				".*": {
+					"additionalProperties": false,
+					"properties": {
+						"href": {
+							"description": "URL",
+							"format": "URL",
+							"type": "string"
+						},
+						"title": {
+							"description": "Title",
+							"type": "string"
+						}
+					},
+					"required": [
+						"href",
+						"title"
+					],
+					"title": "Link",
+					"type": "object"
+				}
+			},
+			"propertyNames": {
+				"enum": [
+					"characterDndBeyond"
+				],
+				"type": "string"
+			},
+			"type": "object"
+		},
+		"passive": {
+			"additionalProperties": false,
+			"patternProperties": {
+				".*": {
+					"type": "integer"
+				}
+			},
+			"propertyNames": {
+				"enum": [
+					"Insight",
+					"Investigation",
+					"Perception"
+				],
+				"type": "string"
+			},
+			"title": "Passive",
+			"type": "object"
+		},
+		"race": {
+			"description": "Race",
+			"enum": [
+				"Human",
+				"Variant Human"
+			],
+			"type": "string"
+		},
+		"speedFeet": {
+			"title": "Walk Speed (ft.)",
+			"type": "integer"
+		},
+		"statAbbr": {
+			"description": "Abbreviated Stat",
+			"enum": [
+				"STR",
+				"DEX",
+				"CON",
+				"INT",
+				"WIS",
+				"CHA"
+			],
+			"type": "string"
+		},
+		"swimFeet": {
+			"title": "Swim Speed (ft.)",
+			"type": "integer"
+		}
+	}
+}

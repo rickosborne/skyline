@@ -61,6 +61,10 @@
 					"$ref": "#/definitions/dnd5eAdapter"
 				}
 			},
+			"required": [
+				"cypher",
+				"dnd5e"
+			],
 			"title": "Adapter Data",
 			"type": "object"
 		},
@@ -180,7 +184,7 @@
 							"title": "Combat Notes"
 						},
 						{
-							"$ref": "#/definitions/oneOrMoreStrings"
+							"$ref": "skyline.schema.json#/definitions/oneOrMoreStrings"
 						}
 					]
 				},
@@ -198,7 +202,7 @@
 							"title": "Interaction"
 						},
 						{
-							"$ref": "#/definitions/oneOrMoreStrings"
+							"$ref": "skyline.schema.json#/definitions/oneOrMoreStrings"
 						}
 					]
 				},
@@ -208,7 +212,7 @@
 							"title": "GM Intrusion"
 						},
 						{
-							"$ref": "#/definitions/oneOrMoreStrings"
+							"$ref": "skyline.schema.json#/definitions/oneOrMoreStrings"
 						}
 					]
 				},
@@ -222,7 +226,7 @@
 							"title": "Loot Notes"
 						},
 						{
-							"$ref": "#/definitions/oneOrMoreStrings"
+							"$ref": "skyline.schema.json#/definitions/oneOrMoreStrings"
 						}
 					]
 				},
@@ -232,7 +236,7 @@
 							"title": "Modifications"
 						},
 						{
-							"$ref": "#/definitions/oneOrMoreStrings"
+							"$ref": "skyline.schema.json#/definitions/oneOrMoreStrings"
 						}
 					]
 				},
@@ -242,7 +246,7 @@
 							"title": "Motives"
 						},
 						{
-							"$ref": "#/definitions/oneOrMoreStrings"
+							"$ref": "skyline.schema.json#/definitions/oneOrMoreStrings"
 						}
 					]
 				},
@@ -260,7 +264,7 @@
 							"title": "Movement Notes"
 						},
 						{
-							"$ref": "#/definitions/oneOrMoreStrings"
+							"$ref": "skyline.schema.json#/definitions/oneOrMoreStrings"
 						}
 					]
 				},
@@ -274,7 +278,7 @@
 							"title": "Use"
 						},
 						{
-							"$ref": "#/definitions/oneOrMoreStrings"
+							"$ref": "skyline.schema.json#/definitions/oneOrMoreStrings"
 						}
 					]
 				}
@@ -392,102 +396,22 @@
 					"type": "object"
 				},
 				"armor": {
-					"additionalProperties": false,
-					"description": "Armor Class",
-					"properties": {
-						"num": {
-							"title": "Armor Class (AC)",
-							"type": "integer"
-						},
-						"type": {
-							"description": "Armor Type (i.e. Light, Plate, etc.)",
-							"title": "Armor Type",
-							"type": "string"
-						}
-					},
-					"required": [
-						"num"
-					],
-					"title": "Armor Class",
-					"type": "object"
+					"$ref": "dnd5e.schema.json#/definitions/armor"
 				},
 				"attr": {
-					"additionalProperties": false,
-					"patternProperties": {
-						".*": {
-							"additionalProperties": false,
-							"properties": {
-								"bonus": {
-									"pattern": "^[-+][0-9]+$",
-									"title": "Bonus",
-									"type": "string"
-								},
-								"score": {
-									"title": "Score",
-									"type": "integer"
-								}
-							},
-							"required": [
-								"bonus",
-								"score"
-							],
-							"title": "Attribute",
-							"type": "object"
-						}
-					},
-					"propertyNames": {
-						"enum": [
-							"STR",
-							"DEX",
-							"CON",
-							"INT",
-							"WIS",
-							"CHA"
-						],
-						"type": "string"
-					},
-					"required": [
-						"STR",
-						"DEX",
-						"CON",
-						"INT",
-						"WIS",
-						"CHA"
-					],
-					"title": "Attribute Stats",
-					"type": "object"
+					"$ref": "dnd5e.schema.json#/definitions/attr"
 				},
 				"basedOn": {
 					"$ref": "#/definitions/basedOn"
 				},
 				"challenge": {
-					"additionalProperties": false,
-					"properties": {
-						"rating": {
-							"oneOf": [
-								{
-									"type": "integer"
-								},
-								{
-									"type": "string"
-								}
-							],
-							"title": "Rating"
-						},
-						"xp": {
-							"title": "XP",
-							"type": "integer"
-						}
-					},
-					"required": [
-						"rating"
-					],
-					"title": "Challenge",
-					"type": "object"
+					"$ref": "dnd5e.schema.json#/definitions/challenge"
+				},
+				"flyFeet": {
+					"$ref": "dnd5e.schema.json#/definitions/flyFeet"
 				},
 				"hitDie": {
-					"title": "Hit Die",
-					"type": "number"
+					"$ref": "dnd5e.schema.json#/definitions/hitDie"
 				},
 				"hp": {
 					"additionalProperties": false,
@@ -508,20 +432,7 @@
 					"type": "object"
 				},
 				"passive": {
-					"additionalProperties": false,
-					"patternProperties": {
-						".*": {
-							"type": "integer"
-						}
-					},
-					"propertyNames": {
-						"enum": [
-							"Perception"
-						],
-						"type": "string"
-					},
-					"title": "Passive",
-					"type": "object"
+					"$ref": "dnd5e.schema.json#/definitions/passive"
 				},
 				"skill": {
 					"additionalProperties": false,
@@ -542,13 +453,18 @@
 					"type": "object"
 				},
 				"speedFeet": {
-					"title": "Speed (ft.)",
-					"type": "integer"
+					"$ref": "dnd5e.schema.json#/definitions/speedFeet"
+				},
+				"swimFeet": {
+					"$ref": "dnd5e.schema.json#/definitions/swimFeet"
 				}
 			},
 			"required": [
 				"armor",
+				"attr",
+				"challenge",
 				"hitDie",
+				"hp",
 				"speedFeet"
 			],
 			"title": "D&D 5E",
@@ -568,17 +484,6 @@
 			"title": "Element",
 			"type": "object"
 		},
-		"elementKey": {
-			"type": "string",
-			"title": "Element",
-			"enum": [
-				"corruption",
-				"explosion",
-				"fire",
-				"freeze",
-				"shock"
-			]
-		},
 		"elementDecimal": {
 			"description": "Element",
 			"patternProperties": {
@@ -593,19 +498,27 @@
 						"$ref": "#/definitions/elementKey"
 					},
 					{
-						"type": "string",
-						"const": "all"
+						"const": "all",
+						"type": "string"
 					}
 				]
 			},
 			"title": "Element",
 			"type": "object"
 		},
-		"id": {
-			"description": "Programmatic identifier unique to this object",
-			"pattern": "^[a-z]+([A-Z][a-z]+[0-9]*)*$",
-			"title": "ID",
+		"elementKey": {
+			"enum": [
+				"corruption",
+				"explosion",
+				"fire",
+				"freeze",
+				"shock"
+			],
+			"title": "Element",
 			"type": "string"
+		},
+		"id": {
+			"$ref": "skyline.schema.json#/definitions/id"
 		},
 		"loot": {
 			"description": "Items present for potential removal",
@@ -698,19 +611,6 @@
 			},
 			"title": "Hit",
 			"type": "object"
-		},
-		"oneOrMoreStrings": {
-			"oneOf": [
-				{
-					"type": "string"
-				},
-				{
-					"items": {
-						"type": "string"
-					},
-					"type": "array"
-				}
-			]
 		}
 	},
 	"description": "Machine (NPC)",
@@ -860,13 +760,15 @@
 		}
 	},
 	"required": [
-		"title",
-		"size",
-		"role",
-		"overrideSource",
-		"variant",
+		"action",
+		"adapter",
 		"id",
-		"action"
+		"overrideSource",
+		"plural",
+		"role",
+		"size",
+		"title",
+		"variant"
 	],
 	"type": "object"
 }

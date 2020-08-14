@@ -11,9 +11,13 @@
 		"@types/chai": "^4.2.12",
 		"@types/mocha": "^8.0.0",
 		"@types/node": "^14.0.23",
+		"@types/prettier": "^2.0.2",
 		"@types/yaml": "^1.9.7",
 		"chai": "^4.2.0",
+		"json-schema-to-typescript": "^9.1.1",
 		"mocha": "^8.1.0",
+		"preact": "^10.4.7",
+		"prettier": "^2.0.5",
 		"ts-node": "^8.10.2",
 		"typescript": "^3.9.7",
 		"yaml": "^1.10.0"
@@ -24,8 +28,9 @@
 	"private": true,
 	"repository": "github:rickosborne/skyline",
 	"scripts": {
-		"jekyll:serve": "bundle exec jekyll serve",
+		"jekyll:serve": "bundle exec jekyll serve --profile",
 		"machines:attacks": "ts-node src/machine/attacks.ts",
+		"schema": "ts-node src/schema/schema.ts",
 		"template": "ts-node src/template/template.ts",
 		"test": "mocha"
 	},
