@@ -23,7 +23,7 @@ export function ifLines<S extends string | undefined | null | string[]>(
 	return parts.join(lineDelim) + suffix;
 }
 
-export function ifPresent(obj: any, block: (obj: any) => string): string {
+export function ifPresent<T>(obj: T | null | undefined, block: (obj: T) => string): string {
 	return obj == null ? "" : block(obj);
 }
 
@@ -48,7 +48,7 @@ export interface Lookups {
 		acMod: Record<string, number>;
 		skill: Array<{
 			title: string;
-			skill: string;
+			modifies: string;
 		}>;
 	};
 }
@@ -72,3 +72,17 @@ export const DND5E_STATS: Array<{ attr: string; title: string }> = DND5E_STAT_AT
 	attr,
 	title: DND5E_STAT_TITLES[attr],
 }));
+
+export interface DND5ESense {
+	modifies: string;
+	title: string;
+}
+
+export const DND5E_SENSES: DND5ESense[] = [
+	{title: "Perception", modifies: 'WIS'},
+	{title: "Investigation", modifies: 'INT'},
+	{title: "Insight", modifies: 'WIS'},
+];
+
+export const LOOKUPS = getLookups();
+

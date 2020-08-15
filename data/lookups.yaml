@@ -18,41 +18,41 @@ dnd5e:
     Legendary: 20
   skill:
     - title: Acrobatics
-      skill: DEX
+      modifies: DEX
     - title: Animal Handling
-      skill: WIS
+      modifies: WIS
     - title: Arcana
-      skill: INT
+      modifies: INT
     - title: Athletics
-      skill: STR
+      modifies: STR
     - title: Deception
-      skill: CHA
+      modifies: CHA
     - title: History
-      skill: INT
+      modifies: INT
     - title: Insight
-      skill: WIS
+      modifies: WIS
     - title: Intimidation
-      skill: CHA
+      modifies: CHA
     - title: Investigation
-      skill: INT
+      modifies: INT
     - title: Medicine
-      skill: WIS
+      modifies: WIS
     - title: Nature
-      skill: INT
+      modifies: INT
     - title: Perception
-      skill: WIS
+      modifies: WIS
     - title: Performance
-      skill: CHA
+      modifies: CHA
     - title: Persuasion
-      skill: CHA
+      modifies: CHA
     - title: Religion
-      skill: INT
+      modifies: INT
     - title: Sleight of Hand
-      skill: DEX
+      modifies: DEX
     - title: Stealth
-      skill: DEX
+      modifies: DEX
     - title: Survival
-      skill: WIS
+      modifies: WIS
 cypher:
   hazardFromHZD:
     explosion: Collision

@@ -3,7 +3,8 @@ import {TemplateRenderer} from './TemplateRenderer';
 const templateRenderer = new TemplateRenderer();
 
 const sourceDirs = [
-	'adapter'
+	'adapter',
+	'story/iaso'
 ];
 
 sourceDirs.forEach(sourceDir => {

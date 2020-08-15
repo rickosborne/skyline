@@ -1,6 +1,9 @@
 $schema: ../../data/schema/book.schema.json
 $id: https://rickosborne.github.io/skyline/story/iaso/
 title: IASO
+playerCharacter:
+  - name: Yenever Feldspar
+    tribe: Tenakth
 adapter:
   dnd5e:
     playerCharacter:

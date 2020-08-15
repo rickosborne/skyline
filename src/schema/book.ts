@@ -9,11 +9,35 @@ export type ArmorClassAC = number;
  * Armor Type (i.e. Light, Plate, etc.)
  */
 export type ArmorType = string;
+export type ExactNumber = number;
+export type DiceRoll = string;
+/**
+ * Hands
+ */
+export type HandCount = number;
+/**
+ * Range (feet)
+ */
+export type RangeFeet = number;
+/**
+ * Reach (feet)
+ */
+export type ReachFeet = number;
 export type Bonus = string;
-export type Score = number;
+export type EffectiveScore = number;
+export type FlySpeedFt = number;
 export type HitDie = 4 | 6 | 8 | 10 | 12 | 20;
 export type HitPoints = number;
+/**
+ * Proficiencies
+ */
+export type Proficiencies = Proficiency[];
 export type WalkSpeedFt = number;
+export type SwimSpeedFt = number;
+/**
+ * Tribe
+ */
+export type Tribe = 'Banuk' | 'Carja' | 'Nora' | 'Oseram' | 'Shadow Carja' | 'Tenakth' | 'Utaru';
 
 /**
  * Book
@@ -22,6 +46,10 @@ export interface Book {
   $id: string;
   $schema: string;
   adapter: AdapterData;
+  /**
+   * Player Characters
+   */
+  playerCharacter?: PlayerCharacter[];
   /**
    * Title
    */
@@ -63,66 +91,20 @@ export interface Dnd5EPlayerCharacter {
    * Attacks
    */
   attack?: {
-    /**
-     * Area
-     */
-    area?: {
-      /**
-       * Count of areas
-       */
-      count?: number;
-      /**
-       * Radius (feet)
-       */
-      radiusFeet?: number;
-      /**
-       * Shape
-       */
-      shape?: 'CUBE' | 'SPHERE';
-      /**
-       * Length Each Side (feed)
-       */
-      sideFeet?: number;
-    };
-    /**
-     * Damage
-     */
-    damage?: {
-      /**
-       * Average
-       */
-      avg?: number;
-      roll?: {
-        [k: string]: unknown;
-      } & (number | string);
-      /**
-       * Damage Type
-       */
-      type?: 'Bludgeoning' | 'Piercing' | 'Slashing';
-    };
-    /**
-     * Hands
-     */
-    hands?: number;
+    area?: AreaEffect;
+    damage: Damage;
+    hands: HandCount;
     /**
      * Melee?
      */
     melee?: boolean;
-    note?: {
-      [k: string]: unknown;
-    } & (string | string[]);
-    /**
-     * Range (feet)
-     */
-    rangeFeet?: number;
+    note?: Notes & (string | string[]);
+    rangeFeet?: RangeFeet;
     /**
      * Ranged?
      */
     ranged?: boolean;
-    /**
-     * Reach (feet)
-     */
-    reachFeet?: number;
+    reachFeet?: ReachFeet;
     /**
      * Spell?
      */
@@ -130,30 +112,17 @@ export interface Dnd5EPlayerCharacter {
     /**
      * Attack Title
      */
-    title?: string;
-    toHit?: {
+    title: string;
+    toHit: {
       [k: string]: unknown;
     } & Bonus;
   }[];
   attr: AttributeStats;
-  /**
-   * Class
-   */
-  class: {
-    /**
-     * URL
-     */
-    href?: string;
-    /**
-     * Class
-     */
-    title?: 'Barbarian';
-  };
+  class: LinkedClass;
+  flyFeet?: FlySpeedFt;
   hitDie: HitDie;
   hp?: HitPoints;
-  initiativeBonus: {
-    [k: string]: unknown;
-  } & Bonus;
+  initiativeBonus: InitiativeBonus & Bonus;
   /**
    * Level
    */
@@ -169,13 +138,8 @@ export interface Dnd5EPlayerCharacter {
    */
   name: string;
   passive: Passive;
-  /**
-   * Proficiencies
-   */
-  proficiency?: unknown[];
-  proficiencyBonus: {
-    [k: string]: unknown;
-  } & Bonus;
+  proficiency?: Proficiencies;
+  proficiencyBonus: ProficiencyBonus & Bonus;
   /**
    * Race
    */
@@ -198,6 +162,7 @@ export interface Dnd5EPlayerCharacter {
     title: string;
   }[];
   speedFeet: WalkSpeedFt;
+  swimFeet?: SwimSpeedFt;
 }
 /**
  * Armor Class
@@ -207,11 +172,56 @@ export interface ArmorClass {
    * Base AC
    */
   base?: number;
-  note?: {
-    [k: string]: unknown;
-  } & (string | string[]);
+  note?: Notes & (string | string[]);
   num: ArmorClassAC;
   type?: ArmorType;
+}
+/**
+ * Notes
+ */
+export interface Notes {
+  [k: string]: unknown;
+}
+/**
+ * Area Effect
+ */
+export interface AreaEffect {
+  /**
+   * Count of areas
+   */
+  count?: number;
+  /**
+   * Radius (feet)
+   */
+  radiusFeet?: number;
+  /**
+   * Shape
+   */
+  shape?: 'CUBE' | 'SPHERE';
+  /**
+   * Length Each Side (feed)
+   */
+  sideFeet?: number;
+}
+/**
+ * Damage
+ */
+export interface Damage {
+  /**
+   * Average
+   */
+  avg?: number;
+  roll?: Roll & (ExactNumber | DiceRoll);
+  /**
+   * Damage Type
+   */
+  type: 'Bludgeoning' | 'Piercing' | 'Slashing';
+}
+/**
+ * Roll
+ */
+export interface Roll {
+  [k: string]: unknown;
 }
 export interface AttributeStats {
   [k: string]: Attribute;
@@ -222,23 +232,41 @@ export interface AttributeStats {
  */
 export interface Attribute {
   bonus: Bonus;
-  score:
-    | Score
-    | {
-        /**
-         * Base Score
-         */
-        base?: number;
-        /**
-         * Effective Score
-         */
-        effective?: number;
-        note?: {
-          [k: string]: unknown;
-        } & (string | string[]);
-        [k: string]: unknown;
-      };
+  score: EffectiveScore | ComplexScore;
   scoreBase?: number;
+}
+/**
+ * Complex Score
+ */
+export interface ComplexScore {
+  /**
+   * Base Score
+   */
+  base: number;
+  /**
+   * Effective Score
+   */
+  effective: number;
+  note: Notes & (string | string[]);
+}
+/**
+ * Linked Class
+ */
+export interface LinkedClass {
+  /**
+   * URL
+   */
+  href: string;
+  /**
+   * Class
+   */
+  title: 'Barbarian';
+}
+/**
+ * Initiative Bonus
+ */
+export interface InitiativeBonus {
+  [k: string]: unknown;
 }
 /**
  * This interface was referenced by `undefined`'s JSON-Schema definition
@@ -260,4 +288,36 @@ export interface Passive {
    * via the `patternProperty` ".*".
    */
   [k: string]: number;
+}
+/**
+ * Proficiency
+ */
+export interface Proficiency {
+  item: Proficiency1 & (string | string[]);
+  /**
+   * Proficiency Group Title
+   */
+  title: string;
+}
+/**
+ * Proficiency
+ */
+export interface Proficiency1 {
+  [k: string]: unknown;
+}
+/**
+ * Proficiency Bonus
+ */
+export interface ProficiencyBonus {
+  [k: string]: unknown;
+}
+/**
+ * Player Character
+ */
+export interface PlayerCharacter {
+  /**
+   * Name
+   */
+  name: string;
+  tribe?: string | Tribe;
 }

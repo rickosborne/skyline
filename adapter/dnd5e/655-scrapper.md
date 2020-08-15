@@ -140,7 +140,7 @@ Laser fire sweeps in a straight line. <em>Ranged Weapon Attack</em>, +1 to hit, 
 					<tr>
 						<td class="loot-title">Metal Shards</td>
 						<td class="loot-percent">100%</td>
-						<td class="loot-qty">11-22</td>
+						<td class="loot-qty">11&#8209;22</td>
 					</tr>
 					<tr>
 						<td class="loot-title">Scrapper Heart</td>
@@ -160,7 +160,7 @@ Laser fire sweeps in a straight line. <em>Ranged Weapon Attack</em>, +1 to hit, 
 					<tr>
 						<td class="loot-title">Wire</td>
 						<td class="loot-percent">100%</td>
-						<td class="loot-qty">5-11</td>
+						<td class="loot-qty">5&#8209;11</td>
 					</tr>
 				</tbody>
 			</table>

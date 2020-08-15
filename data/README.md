@@ -7,4 +7,3 @@ Areas of interest:
 
 * [machine](machine) — data for the various machine enemies
 * [schema](schema) — schemas for the various types of data
-* [template](template) — templates for rendering the data

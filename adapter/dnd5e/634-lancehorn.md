@@ -144,12 +144,12 @@ A short leap closes the gap with the target, striking with a kick. <em>Ranged We
 					<tr>
 						<td class="loot-title">Metal Shards</td>
 						<td class="loot-percent">100%</td>
-						<td class="loot-qty">13-26</td>
+						<td class="loot-qty">13&#8209;26</td>
 					</tr>
 					<tr>
 						<td class="loot-title">Wire</td>
 						<td class="loot-percent">100%</td>
-						<td class="loot-qty">6-13</td>
+						<td class="loot-qty">6&#8209;13</td>
 					</tr>
 				</tbody>
 			</table>

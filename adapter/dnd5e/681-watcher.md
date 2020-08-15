@@ -120,7 +120,7 @@ AC 15, 36 HP. Takes 2&times; damage (all types). Only vulnerable to piercing wea
 					<tr>
 						<td class="loot-title">Metal Shards</td>
 						<td class="loot-percent">100%</td>
-						<td class="loot-qty">1-5</td>
+						<td class="loot-qty">1&#8209;5</td>
 					</tr>
 					<tr>
 						<td class="loot-title">Sparker</td>
@@ -140,7 +140,7 @@ AC 15, 36 HP. Takes 2&times; damage (all types). Only vulnerable to piercing wea
 					<tr>
 						<td class="loot-title">Wire</td>
 						<td class="loot-percent">100%</td>
-						<td class="loot-qty">1-5</td>
+						<td class="loot-qty">1&#8209;5</td>
 					</tr>
 				</tbody>
 			</table>

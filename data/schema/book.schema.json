@@ -73,57 +73,16 @@
 						"description": "Attack",
 						"properties": {
 							"area": {
-								"additionalProperties": false,
-								"description": "Area",
-								"properties": {
-									"count": {
-										"default": 1,
-										"description": "Count of areas",
-										"minimum": 1,
-										"type": "integer"
-									},
-									"radiusFeet": {
-										"description": "Radius (feet)",
-										"minimum": 0,
-										"type": "integer"
-									},
-									"shape": {
-										"description": "Shape",
-										"enum": [
-											"CUBE",
-											"SPHERE"
-										],
-										"type": "string"
-									},
-									"sideFeet": {
-										"description": "Length Each Side (feed)",
-										"minimum": 0,
-										"type": "integer"
-									}
-								},
-								"type": "object"
+								"$ref": "dnd5e.schema.json#/definitions/areaEffect"
 							},
 							"damage": {
-								"additionalProperties": false,
-								"description": "Damage",
-								"properties": {
-									"avg": {
-										"description": "Average",
-										"type": "integer"
-									},
-									"roll": {
-										"$ref": "skyline.schema.json#/definitions/roll"
-									},
-									"type": {
-										"$ref": "dnd5e.schema.json#/definitions/damageType"
-									}
-								},
-								"type": "object"
+								"$ref": "dnd5e.schema.json#/definitions/damage"
 							},
 							"hands": {
 								"description": "Hands",
 								"maximum": 2,
 								"minimum": 1,
+								"title": "Hand Count",
 								"type": "integer"
 							},
 							"melee": {
@@ -132,19 +91,10 @@
 								"type": "boolean"
 							},
 							"note": {
-								"allOf": [
-									{
-										"description": "Notes"
-									},
-									{
-										"$ref": "skyline.schema.json#/definitions/oneOrMoreStrings"
-									}
-								]
+								"$ref": "skyline.schema.json#/definitions/note"
 							},
 							"rangeFeet": {
-								"description": "Range (feet)",
-								"minimum": 0,
-								"type": "integer"
+								"$ref": "dnd5e.schema.json#/definitions/rangeFeet"
 							},
 							"ranged": {
 								"default": false,
@@ -152,9 +102,7 @@
 								"type": "boolean"
 							},
 							"reachFeet": {
-								"description": "Reach (feet)",
-								"minimum": 0,
-								"type": "integer"
+								"$ref": "dnd5e.schema.json#/definitions/reachFeet"
 							},
 							"spell": {
 								"default": false,
@@ -176,6 +124,12 @@
 								]
 							}
 						},
+						"required": [
+							"damage",
+							"hands",
+							"title",
+							"toHit"
+						],
 						"type": "object"
 					},
 					"type": "array"
@@ -185,7 +139,7 @@
 				},
 				"class": {
 					"additionalProperties": false,
-					"description": "Class",
+					"description": "Linked Class",
 					"properties": {
 						"href": {
 							"description": "URL",
@@ -196,7 +150,15 @@
 							"$ref": "dnd5e.schema.json#/definitions/class"
 						}
 					},
+					"required": [
+						"href",
+						"title"
+					],
+					"title": "Linked Class",
 					"type": "object"
+				},
+				"flyFeet": {
+					"$ref": "dnd5e.schema.json#/definitions/flyFeet"
 				},
 				"hitDie": {
 					"$ref": "dnd5e.schema.json#/definitions/hitDie"
@@ -208,7 +170,8 @@
 				"initiativeBonus": {
 					"allOf": [
 						{
-							"description": "Initiative Bonus"
+							"description": "Initiative Bonus",
+							"title": "Initiative Bonus"
 						},
 						{
 							"$ref": "dnd5e.schema.json#/definitions/bonus"
@@ -230,34 +193,41 @@
 				},
 				"proficiency": {
 					"description": "Proficiencies",
-					"patternProperties": {
-						".*": {
-							"additionalProperties": false,
-							"description": "Proficiency",
-							"properties": {
-								"item": {
-									"allOf": [
-										{
-											"description": "Proficiency"
-										},
-										{
-											"$ref": "skyline.schema.json#/definitions/oneOrMoreStrings"
-										}
-									]
-								},
-								"title": {
-									"description": "Proficiency Group Title"
-								}
+					"items": {
+						"additionalProperties": false,
+						"description": "Proficiency",
+						"properties": {
+							"item": {
+								"allOf": [
+									{
+										"description": "Proficiency",
+										"title": "Proficiency"
+									},
+									{
+										"$ref": "skyline.schema.json#/definitions/oneOrMoreStrings"
+									}
+								]
 							},
-							"type": "object"
-						}
+							"title": {
+								"description": "Proficiency Group Title",
+								"type": "string"
+							}
+						},
+						"required": [
+							"item",
+							"title"
+						],
+						"title": "Proficiency",
+						"type": "object"
 					},
+					"title": "Proficiencies",
 					"type": "array"
 				},
 				"proficiencyBonus": {
 					"allOf": [
 						{
-							"description": "Proficiency Bonus"
+							"description": "Proficiency Bonus",
+							"title": "Proficiency Bonus"
 						},
 						{
 							"$ref": "dnd5e.schema.json#/definitions/bonus"
@@ -305,6 +275,9 @@
 				},
 				"speedFeet": {
 					"$ref": "dnd5e.schema.json#/definitions/speedFeet"
+				},
+				"swimFeet": {
+					"$ref": "dnd5e.schema.json#/definitions/swimFeet"
 				}
 			},
 			"required": [
@@ -321,6 +294,45 @@
 				"speedFeet"
 			],
 			"type": "object"
+		},
+		"playerCharacter": {
+			"additionalProperties": false,
+			"description": "Player Character",
+			"properties": {
+				"name": {
+					"description": "Name",
+					"type": "string"
+				},
+				"tribe": {
+					"oneOf": [
+						{
+							"const": "unknown",
+							"description": "Custom Tribe",
+							"type": "string"
+						},
+						{
+							"$ref": "#/definitions/tribe"
+						}
+					]
+				}
+			},
+			"required": [
+				"name"
+			],
+			"type": "object"
+		},
+		"tribe": {
+			"description": "Tribe",
+			"enum": [
+				"Banuk",
+				"Carja",
+				"Nora",
+				"Oseram",
+				"Shadow Carja",
+				"Tenakth",
+				"Utaru"
+			],
+			"type": "string"
 		}
 	},
 	"description": "Book",
@@ -334,6 +346,13 @@
 		},
 		"adapter": {
 			"$ref": "#/definitions/adapter"
+		},
+		"playerCharacter": {
+			"description": "Player Characters",
+			"items": {
+				"$ref": "#/definitions/playerCharacter"
+			},
+			"type": "array"
 		},
 		"title": {
 			"description": "Title",

@@ -6,14 +6,19 @@ relative_links:
 exclude:
   - '.idea/workspace.xml'
   - 'node_modules/*'
+  - '*.ts'
+  - '*.tsx'
+  - '*.puml'
+  - '*.tsv'
+  - 'assets/css/skyline-original.scss'
 
 theme: jekyll-theme-cayman
 
-defaults:
-  - scope:
-      path: "assets/img"
-    values:
-      image: true
+#defaults:
+#  - scope:
+#      path: "assets/img"
+#    values:
+#      image: true
 
 show_downloads: false
 markdown: kramdown

@@ -1,5 +1,8 @@
+import * as fs from "fs";
+import * as path from "path";
 import {h} from 'preact';
-import {Action, Component, DD5E, Item, Machine, RandomQuantity} from '../schema/machine';
+import * as YAML from "yaml";
+import {Machine} from '../schema/machine';
 import {ATemplate} from "./ATemplate";
 import {html} from './hypertext';
 import {DND5E_STAT_ATTR, DND5E_STATS, getLookups, ifLines, Lookups, toWords} from "./util";
@@ -21,7 +24,16 @@ export class Dnd5ENpcStats extends ATemplate<Machine> {
 		throw new Error(`Not a machine: ${JSON.stringify(data)}`);
 	}
 
+	getData(dataType: string, dataName: string, params: Record<string, string>): object | undefined {
+		if (dataType !== 'machine') {
+			return undefined;
+		}
+		const text = fs.readFileSync(path.join(__dirname, "..", "..", "data", "machine", `${dataName}.${dataType}.yaml`), {encoding: "utf8"});
+		return YAML.parse(text);
+	}
+
 	render(data: Machine): string {
+		// noinspection HtmlDeprecatedTag
 		return ifLines([
 			html(<h2>{data.title}</h2>),
 			html(
@@ -81,7 +93,12 @@ export class Dnd5ENpcStats extends ATemplate<Machine> {
 								<strong data-if-siblings>Skills:</strong>
 								{Object.keys(data.adapter.dnd5e.skill || []).sort().map(p => `${p} ${(data.adapter.dnd5e.skill || {})[p]}`).join(', ')}
 							</p>
-							{this.renderSenses(data)}
+							<p class="senses" data-if-children data-space>
+								<strong data-if-siblings>Senses:</strong>
+								{ifLines(Object.keys(data.adapter.dnd5e.passive || {})
+									.sort()
+									.map(p => `Passive ${p} ${(data.adapter.dnd5e.passive || {})[p]}`))}
+							</p>
 							<p class="challenge">
 								<strong>Challenge:</strong> {data.adapter.dnd5e.challenge.rating} ({data.adapter.dnd5e.challenge.xp} XP)
 							</p>
@@ -90,19 +107,92 @@ export class Dnd5ENpcStats extends ATemplate<Machine> {
 							</p>
 						</section>
 						<section class="non-attacks" data-if-children>
-							{this.renderNonAttacks(data)}
+							<dl class="non-attack-list" data-if-children>
+								{ifLines(data.action
+									.filter(a => !a.attack)
+									.map(a => {
+										const extra = (data.adapter.dnd5e.action || {})[a.id];
+										const extraDesc = extra == null ? null : ifLines(extra.description);
+										return html(
+											<div class="detailed">
+												<dt>{a.title}</dt>
+												<dd
+													data-markdown={extraDesc != null && extraDesc !== '' ? 1 : 0}>{ifLines(a.description)} {extraDesc}</dd>
+											</div>
+										);
+									}))}
+							</dl>
 						</section>
 						<section class="actions" data-if-children>
 							<header data-if-siblings>
 								<h4>Actions</h4>
 							</header>
-							{this.renderActions(data)}
+							<dl class="action-list" data-if-children>
+								{ifLines(data.action.filter(a => a.attack).map(a => {
+									const desc = Array.isArray(a.description) ? a.description.join('\n') : a.description;
+									const extra = (data.adapter.dnd5e.action || {})[a.id];
+									let extraDesc;
+									if (extra != null) {
+										const melee = extra.melee ? html(<em>Melee Weapon Attack</em>) : null;
+										const ranged = extra.ranged ? html(<em>Ranged Weapon Attack</em>) : null;
+										const toHit = extra.toHit == null ? null : `${extra.toHit} to hit`;
+										const reach = extra.reachFeet ? `reach ${extra.reachFeet} ft.` + (extra.minRangeFeet ? ` (min. ${extra.minRangeFeet} ft.)` : '') : null;
+										const target = extra.target === 'all' ? null : extra.target === 1 ? 'one target' : `${extra.target} targets`;
+										const save = extra.save == null ? null : `Targets may make a DC ${extra.save.difficulty} ${extra.save.attribute} saving throw to ${extra.save.half ? 'take half damage' : 'avoid the attack'}.`;
+										const first = ifLines([melee, ranged, toHit, reach, target], ', ', '.\n');
+										const onHit = Array.isArray(extra.onHit) ? html(<em>Hit:</em>) + ' ' + extra.onHit.map(o => [
+											html(<span class="roll-average">{o.average}</span>),
+											html(<span class="roll-dice">({o.roll})</span>),
+											html(<span class="damage-type">{o.type}</span>),
+											`damage`
+										].join(' ')).join(', ') + '.' : null;
+										extraDesc = ifLines([first, extra.description, save, onHit]);
+									}
+									return html(
+										<div class="detailed">
+											<dt>{a.title}</dt>
+											<dd data-if-children data-markdown="1">{desc} {extraDesc}</dd>
+										</div>
+									);
+								}))}
+							</dl>
 						</section>
 						<section class="components" data-if-children>
 							<header data-if-siblings>
 								<h4>Components</h4>
 							</header>
-							{this.renderComponents(data)}
+							<dl class="component-list" data-if-children>
+								{ifLines(Object.keys(data.component || {})
+									.sort((a, b) => a === BODY ? -1 : b === BODY ? 1 : a.localeCompare(b))
+									.map(cid => {
+										const c = (data.component || {})[cid];
+										const acMod = (LOOKUPS.dnd5e.acMod || [])[c.targetDifficulty || 'Normal'];
+										const ac = 'AC ' + (data.adapter.dnd5e.armor.num ? data.adapter.dnd5e.armor.num + acMod : 'TODO');
+										const machineHP = data.adapter.dnd5e.hp.average || Math.floor(data.variant.base.hp / 10);
+										const componentHP = Math.floor(machineHP * c.damagePercent / 100.0) + ' HP';
+										const tear = c.remove ? 'can tear loose' : null;
+										const explode = c.explode == null ? null : `Explodes when destroyed for 2d8 ${LOOKUPS.dnd5e.damageTypeFromHZD[c.explode.element] || c.explode.element} damage to all creatures within ${c.explode.rangeFeet} ft.`;
+										const damage = c.damage == null ? null : ('Takes ' + Object.keys(c.damage)
+											.map(d => d === 'all' ? `${c.damage?.all}&times; damage (all types)` : `${(c.damage || {})[d]}&times; ${LOOKUPS.dnd5e.damageTypeFromHZD[d] || d} damage`)
+											.join(', ') + '.');
+										const contains = c.loot == null || cid === BODY ? null : (html(
+											<em>Contains:</em>) + ' ' + c.loot.map(l => this.renderQuantity(l.quantity, '&times;') + ` ${l.title}`).join(', ') + '.');
+										const needsMarkdown = Array.isArray(c.targetNotes) || typeof c.targetNotes === 'string' ? 1 : 0;
+										const nonTitle = ifLines([
+											ifLines([ac, componentHP, tear], ', ', '.'),
+											damage,
+											c.targetNotes,
+											explode,
+											contains
+										]);
+										return cid === BODY && nonTitle === '' ? '' : html(
+											<div class="detailed">
+												<dt>{c.title}</dt>
+												<dd data-markdown={needsMarkdown}>{nonTitle}</dd>
+											</div>
+										);
+									}))}
+							</dl>
 						</section>
 						<section class="loot-items" data-if-children>
 							<header data-if-siblings>
@@ -117,7 +207,16 @@ export class Dnd5ENpcStats extends ATemplate<Machine> {
 								</tr>
 								</thead>
 								<tbody data-if-children>
-								{this.renderLootList(data)}
+								{ifLines(Object.values(data.component || {})
+									.flatMap(c => c.loot || [])
+									.sort((a, b) => (a.title || '').localeCompare(b.title || ''))
+									.map(l => html(
+										<tr>
+											<td class="loot-title">{l.title}</td>
+											<td class="loot-percent">{l.percent}%</td>
+											<td class="loot-qty">{this.renderQuantity(l.quantity)}</td>
+										</tr>
+									)))}
 								</tbody>
 							</table>
 						</section>
@@ -125,154 +224,5 @@ export class Dnd5ENpcStats extends ATemplate<Machine> {
 				</div>
 			)
 		]);
-	}
-
-	private renderActions(data: Machine): string {
-		return html(
-			<dl class="action-list" data-if-children>
-				{data.action.filter(a => a.attack).map(a => this.renderAttack(a, data.adapter.dnd5e)).join('\n')}
-			</dl>
-		);
-	}
-
-// noinspection JSMethodCanBeStatic
-	private renderAttack(a: Action, dnd5e: DD5E): string {
-		const desc = Array.isArray(a.description) ? a.description.join('\n') : a.description;
-		const extra = (dnd5e.action || {})[a.id];
-		let extraDesc;
-		if (extra != null) {
-			const melee = extra.melee ? html(<em>Melee Weapon Attack</em>) : null;
-			const ranged = extra.ranged ? html(<em>Ranged Weapon Attack</em>) : null;
-			const toHit = extra.toHit == null ? null : `${extra.toHit} to hit`;
-			const reach = extra.reachFeet ? `reach ${extra.reachFeet} ft.` + (extra.minRangeFeet ? ` (min. ${extra.minRangeFeet} ft.)` : '') : null;
-			const target = extra.target === 'all' ? null : extra.target === 1 ? 'one target' : `${extra.target} targets`;
-			const save = extra.save == null ? null : `Targets may make a DC ${extra.save.difficulty} ${extra.save.attribute} saving throw to ${extra.save.half ? 'take half damage' : 'avoid the attack'}.`;
-			const first = ifLines([melee, ranged, toHit, reach, target], ', ', '.\n');
-			const onHit = Array.isArray(extra.onHit) ? html(<em>Hit:</em>) + ' ' + extra.onHit.map(o => [
-				html(<span class="roll-average">{o.average}</span>),
-				html(<span class="roll-dice">({o.roll})</span>),
-				html(<span class="damage-type">{o.type}</span>),
-				`damage`
-			].join(' ')).join(', ') + '.' : null;
-			extraDesc = ifLines([first, extra.description, save, onHit]);
-		}
-		return html(
-			<div class="detailed">
-				<dt>{a.title}</dt>
-				<dd data-if-children data-markdown="1">{desc} {extraDesc}</dd>
-			</div>
-		);
-	}
-
-	private renderComponent(c: Component, data: Machine, cid: string): string {
-		const acMod = (LOOKUPS.dnd5e.acMod || [])[c.targetDifficulty || 'Normal'];
-		const ac = 'AC ' + (data.adapter.dnd5e.armor.num ? data.adapter.dnd5e.armor.num + acMod : 'TODO');
-		const machineHP = data.adapter.dnd5e.hp.average || Math.floor(data.variant.base.hp / 10);
-		const componentHP = Math.floor(machineHP * c.damagePercent / 100.0) + ' HP';
-		const tear = c.remove ? 'can tear loose' : null;
-		const explode = c.explode == null ? null : `Explodes when destroyed for 2d8 ${LOOKUPS.dnd5e.damageTypeFromHZD[c.explode.element] || c.explode.element} damage to all creatures within ${c.explode.rangeFeet} ft.`;
-		const damage = c.damage == null ? null : ('Takes ' + Object.keys(c.damage)
-			.map(d => d === 'all' ? `${c.damage?.all}&times; damage (all types)` : `${(c.damage || {})[d]}&times; ${LOOKUPS.dnd5e.damageTypeFromHZD[d] || d} damage`)
-			.join(', ') + '.');
-		const contains = c.loot == null || cid === BODY ? null : (html(
-			<em>Contains:</em>) + ' ' + c.loot.map(l => this.renderQuantity(l.quantity, '&times;') + ` ${l.title}`).join(', ') + '.');
-		const needsMarkdown = Array.isArray(c.targetNotes) || typeof c.targetNotes === 'string' ? 1 : 0;
-		const nonTitle = ifLines([
-			ifLines([ac, componentHP, tear], ', ', '.'),
-			damage,
-			c.targetNotes,
-			explode,
-			contains
-		]);
-		return cid === BODY && nonTitle === '' ? '' : html(
-			<div class="detailed">
-				<dt>{c.title}</dt>
-				<dd data-markdown={needsMarkdown}>{nonTitle}</dd>
-			</div>
-		);
-	}
-
-	private renderComponents(data: Machine): string {
-		const components = Object.keys(data.component || {})
-			.sort((a, b) => a === BODY ? -1 : b === BODY ? 1 : a.localeCompare(b));
-		if (components.length < 1) {
-			return '';
-		}
-		return html(
-			<dl class="component-list" data-if-children>
-				{components
-					.map(cid => this.renderComponent((data.component || {})[cid], data, cid))
-					.join('\n')}
-			</dl>
-		);
-	}
-
-	// noinspection JSMethodCanBeStatic
-	private renderLootItem(l: Item): string {
-		return html(
-			<tr>
-				<td class="loot-title">{l.title}</td>
-				<td class="loot-percent">{l.percent}%</td>
-				<td class="loot-qty">{this.renderQuantity(l.quantity)}</td>
-			</tr>
-		);
-	}
-
-	private renderLootList(data: Machine): string {
-		if (data.component == null) {
-			return '';
-		}
-		return ifLines(Object.values(data.component)
-			.flatMap(c => c.loot || [])
-			.sort((a, b) => (a.title || '').localeCompare(b.title || ''))
-			.map(l => this.renderLootItem(l)));
-	}
-
-	// noinspection JSMethodCanBeStatic
-	private renderNonAttack(a: Action, dnd5e: DD5E): string {
-		const desc = ifLines(a.description);
-		const extra = (dnd5e.action || {})[a.id];
-		const extraDesc = extra == null ? null : ifLines(extra.description);
-		return html(
-			<div class="detailed">
-				<dt>{a.title}</dt>
-				<dd data-markdown={extraDesc != null && extraDesc !== '' ? 1 : 0}>{desc} {extraDesc}</dd>
-			</div>
-		);
-	}
-
-	private renderNonAttacks(data: Machine): string {
-		return html(
-			<dl class="non-attack-list" data-if-children>
-				{data.action
-					.filter(a => !a.attack)
-					.map(a => this.renderNonAttack(a, data.adapter.dnd5e))
-					.join('\n')}
-			</dl>
-		);
-	}
-
-	// noinspection JSMethodCanBeStatic
-	private renderQuantity(qty: number | RandomQuantity | undefined, suffix: string = ''): string {
-		if (qty == null) {
-			return '';
-		} else if (typeof qty === 'number') {
-			return String(qty) + suffix;
-		} else {
-			return `${qty.min}${suffix}-${qty.max}${suffix}`;
-		}
-	}
-
-	private renderSenses(data: Machine): string {
-		const passive = data.adapter.dnd5e.passive;
-		if (passive == null) {
-			return '';
-		}
-		const senses = Object.keys(passive).sort().map(p => `Passive ${p} ${(passive || {})[p]}`).join(', ');
-		return html(
-			<p class="senses">
-				<strong>Senses:</strong> {senses}
-			</p>
-		);
 	}
 }

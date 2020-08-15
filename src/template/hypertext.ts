@@ -33,6 +33,11 @@ const REMOVED_IF_FALSY = [
 	DATA_MARKDOWN,
 ];
 
+const VOID_TAGS = [
+	'br',
+	'hr'
+];
+
 
 export function html(
 	jsx: JSX.Element | string | number | boolean | undefined,
@@ -78,7 +83,8 @@ export function html(
 	if (onlyIfChildren && innerHtml.match(/^\s*$/s)) {
 		return "";
 	}
-	const tag = unwrap ? innerHtml : `<${jsx.type}${attrs == null || attrs === "" ? "" : (" " + attrs)}>${innerHtml}</${jsx.type}>`;
+	const endTag = VOID_TAGS.includes(String(jsx.type)) ? '' : `</${jsx.type}>`;
+	const tag = unwrap ? innerHtml : `<${jsx.type}${attrs == null || attrs === "" ? "" : (" " + attrs)}>${innerHtml}${endTag}`;
 	if (nested) {
 		return tag;
 	}

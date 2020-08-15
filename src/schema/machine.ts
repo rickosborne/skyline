@@ -56,7 +56,7 @@ export type ArmorClassAC = number;
  */
 export type ArmorType = string;
 export type Bonus = string;
-export type Score = number;
+export type EffectiveScore = number;
 export type Rating = number | string;
 export type XP = number;
 export type FlySpeedFt = number;
@@ -281,11 +281,15 @@ export interface ArmorClass {
    * Base AC
    */
   base?: number;
-  note?: {
-    [k: string]: unknown;
-  } & (string | string[]);
+  note?: Notes & (string | string[]);
   num: ArmorClassAC;
   type?: ArmorType;
+}
+/**
+ * Notes
+ */
+export interface Notes {
+  [k: string]: unknown;
 }
 export interface AttributeStats {
   [k: string]: Attribute;
@@ -296,23 +300,22 @@ export interface AttributeStats {
  */
 export interface Attribute {
   bonus: Bonus;
-  score:
-    | Score
-    | {
-        /**
-         * Base Score
-         */
-        base?: number;
-        /**
-         * Effective Score
-         */
-        effective?: number;
-        note?: {
-          [k: string]: unknown;
-        } & (string | string[]);
-        [k: string]: unknown;
-      };
+  score: EffectiveScore | ComplexScore;
   scoreBase?: number;
+}
+/**
+ * Complex Score
+ */
+export interface ComplexScore {
+  /**
+   * Base Score
+   */
+  base: number;
+  /**
+   * Effective Score
+   */
+  effective: number;
+  note: Notes & (string | string[]);
 }
 export interface Challenge {
   rating: Rating;

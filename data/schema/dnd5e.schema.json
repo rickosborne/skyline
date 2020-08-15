@@ -2,6 +2,38 @@
 	"$id": "https://rickosborne.github.io/skyline/data/schema/dnd5e.schema.json",
 	"$schema": "http://json-schema.org/draft-07/schema",
 	"definitions": {
+		"areaEffect": {
+			"additionalProperties": false,
+			"description": "Area Effect",
+			"properties": {
+				"count": {
+					"default": 1,
+					"description": "Count of areas",
+					"minimum": 1,
+					"type": "integer"
+				},
+				"radiusFeet": {
+					"description": "Radius (feet)",
+					"minimum": 0,
+					"type": "integer"
+				},
+				"shape": {
+					"description": "Shape",
+					"enum": [
+						"CUBE",
+						"SPHERE"
+					],
+					"type": "string"
+				},
+				"sideFeet": {
+					"description": "Length Each Side (feed)",
+					"minimum": 0,
+					"type": "integer"
+				}
+			},
+			"title": "Area Effect",
+			"type": "object"
+		},
 		"armor": {
 			"additionalProperties": false,
 			"description": "Armor Class",
@@ -11,14 +43,7 @@
 					"type": "integer"
 				},
 				"note": {
-					"allOf": [
-						{
-							"description": "Armor Notes"
-						},
-						{
-							"$ref": "skyline.schema.json#/definitions/oneOrMoreStrings"
-						}
-					]
+					"$ref": "skyline.schema.json#/definitions/note"
 				},
 				"num": {
 					"title": "Armor Class (AC)",
@@ -48,32 +73,11 @@
 						"score": {
 							"oneOf": [
 								{
-									"title": "Score",
+									"title": "Effective Score",
 									"type": "integer"
 								},
 								{
-									"description": "Score",
-									"properties": {
-										"base": {
-											"description": "Base Score",
-											"type": "number"
-										},
-										"effective": {
-											"description": "Effective Score",
-											"type": "number"
-										},
-										"note": {
-											"allOf": [
-												{
-													"description": "Notes"
-												},
-												{
-													"$ref": "skyline.schema.json#/definitions/oneOrMoreStrings"
-												}
-											]
-										}
-									},
-									"type": "object"
+									"$ref": "#/definitions/complexScore"
 								}
 							]
 						},
@@ -141,6 +145,51 @@
 			],
 			"type": "string"
 		},
+		"complexScore": {
+			"additionalProperties": false,
+			"description": "Complex Score",
+			"properties": {
+				"base": {
+					"description": "Base Score",
+					"type": "integer"
+				},
+				"effective": {
+					"description": "Effective Score",
+					"type": "integer"
+				},
+				"note": {
+					"$ref": "skyline.schema.json#/definitions/note"
+				}
+			},
+			"required": [
+				"base",
+				"effective",
+				"note"
+			],
+			"title": "Complex Score",
+			"type": "object"
+		},
+		"damage": {
+			"additionalProperties": false,
+			"description": "Damage",
+			"properties": {
+				"avg": {
+					"description": "Average",
+					"type": "integer"
+				},
+				"roll": {
+					"$ref": "skyline.schema.json#/definitions/roll"
+				},
+				"type": {
+					"$ref": "dnd5e.schema.json#/definitions/damageType"
+				}
+			},
+			"required": [
+				"type"
+			],
+			"title": "Damage",
+			"type": "object"
+		},
 		"damageType": {
 			"description": "Damage Type",
 			"enum": [
@@ -151,6 +200,7 @@
 			"type": "string"
 		},
 		"flyFeet": {
+			"minimum": 0,
 			"title": "Fly Speed (ft.)",
 			"type": "integer"
 		},
@@ -231,7 +281,20 @@
 			],
 			"type": "string"
 		},
+		"rangeFeet": {
+			"description": "Range (feet)",
+			"minimum": 0,
+			"title": "Range Feet",
+			"type": "integer"
+		},
+		"reachFeet": {
+			"description": "Reach (feet)",
+			"minimum": 0,
+			"title": "Reach Feet",
+			"type": "integer"
+		},
 		"speedFeet": {
+			"minimum": 0,
 			"title": "Walk Speed (ft.)",
 			"type": "integer"
 		},
@@ -248,6 +311,7 @@
 			"type": "string"
 		},
 		"swimFeet": {
+			"minimum": 0,
 			"title": "Swim Speed (ft.)",
 			"type": "integer"
 		}
