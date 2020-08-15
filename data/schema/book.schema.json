@@ -96,6 +96,11 @@
 							"rangeFeet": {
 								"$ref": "dnd5e.schema.json#/definitions/rangeFeet"
 							},
+							"rangeMultiplier": {
+								"default": 3,
+								"title": "Range Multiplier",
+								"type": "integer"
+							},
 							"ranged": {
 								"default": false,
 								"description": "Ranged?",
@@ -119,7 +124,30 @@
 										"description": "Bonus to Hit"
 									},
 									{
-										"$ref": "dnd5e.schema.json#/definitions/bonus"
+										"oneOf": [
+											{
+												"$ref": "dnd5e.schema.json#/definitions/bonus"
+											},
+											{
+												"additionalProperties": false,
+												"properties": {
+													"num": {
+														"minimum": 1,
+														"title": "DC Number",
+														"type": "integer"
+													},
+													"stat": {
+														"$ref": "dnd5e.schema.json#/definitions/statAbbr"
+													}
+												},
+												"required": [
+													"num",
+													"stat"
+												],
+												"title": "Hit DC",
+												"type": "object"
+											}
+										]
 									}
 								]
 							}
@@ -156,6 +184,16 @@
 					],
 					"title": "Linked Class",
 					"type": "object"
+				},
+				"defense": {
+					"allOf": [
+						{
+							"title": "Defenses"
+						},
+						{
+							"$ref": "skyline.schema.json#/definitions/oneOrMoreStrings"
+						}
+					]
 				},
 				"flyFeet": {
 					"$ref": "dnd5e.schema.json#/definitions/flyFeet"
@@ -237,6 +275,33 @@
 				"race": {
 					"$ref": "dnd5e.schema.json#/definitions/race"
 				},
+				"savingThrow": {
+					"additionalProperties": false,
+					"properties": {
+						"advantage": {
+							"allOf": [
+								{
+									"title": "Advantage on Saving Throws"
+								},
+								{
+									"$ref": "skyline.schema.json#/definitions/oneOrMoreStrings"
+								}
+							]
+						},
+						"proficient": {
+							"items": {
+								"$ref": "dnd5e.schema.json#/definitions/statAbbr"
+							},
+							"title": "Proficiency for Saving Throws",
+							"type": "array"
+						}
+					},
+					"required": [
+						"proficient"
+					],
+					"title": "Saving Throw",
+					"type": "object"
+				},
 				"skill": {
 					"description": "Skills",
 					"items": {
@@ -246,24 +311,23 @@
 							"bonus": {
 								"$ref": "dnd5e.schema.json#/definitions/bonus"
 							},
+							"expertise": {
+								"default": false,
+								"description": "Expertise?",
+								"title": "Is Expert?",
+								"type": "boolean"
+							},
 							"proficient": {
 								"default": false,
 								"description": "Proficient?",
+								"title": "Is Proficient?",
 								"type": "boolean"
 							},
 							"stat": {
-								"allOf": [
-									{
-										"description": "Base Stat"
-									},
-									{
-										"$ref": "dnd5e.schema.json#/definitions/statAbbr"
-									}
-								]
+								"$ref": "dnd5e.schema.json#/definitions/statAbbr"
 							},
 							"title": {
-								"description": "Skill Name",
-								"type": "string"
+								"$ref": "dnd5e.schema.json#/definitions/skillName"
 							}
 						},
 						"required": [

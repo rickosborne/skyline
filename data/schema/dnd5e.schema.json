@@ -141,8 +141,21 @@
 		"class": {
 			"description": "Class",
 			"enum": [
-				"Barbarian"
+				"Artificer",
+				"Barbarian",
+				"Bard",
+				"Cleric",
+				"Druid",
+				"Fighter",
+				"Monk",
+				"Paladin",
+				"Ranger",
+				"Rogue",
+				"Sorcerer",
+				"Warlock",
+				"Wizard"
 			],
+			"title": "Class Name",
 			"type": "string"
 		},
 		"complexScore": {
@@ -193,6 +206,7 @@
 		"damageType": {
 			"description": "Damage Type",
 			"enum": [
+				"Acid",
 				"Bludgeoning",
 				"Piercing",
 				"Slashing"
@@ -293,6 +307,30 @@
 			"title": "Reach Feet",
 			"type": "integer"
 		},
+		"skillName": {
+			"description": "Skill Name",
+			"enum": [
+				"Acrobatics",
+				"Animal Handling",
+				"Arcana",
+				"Athletics",
+				"Deception",
+				"History",
+				"Insight",
+				"Intimidation",
+				"Investigation",
+				"Medicine",
+				"Nature",
+				"Perception",
+				"Performance",
+				"Persuasion",
+				"Religion",
+				"Sleight of Hand",
+				"Stealth",
+				"Survival"
+			],
+			"title": "Skill Name"
+		},
 		"speedFeet": {
 			"minimum": 0,
 			"title": "Walk Speed (ft.)",
@@ -308,6 +346,7 @@
 				"WIS",
 				"CHA"
 			],
+			"title": "Abbreviated Stat",
 			"type": "string"
 		},
 		"swimFeet": {

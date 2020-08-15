@@ -128,11 +128,15 @@ export class Dnd5EPcStats extends ATemplate<PlayerCharacterInfo> {
 								{ifLines(LOOKUPS.dnd5e.skill.map(skill => {
 									const playerSkill = (data.dnd5e.skill || []).find(s => s.title === skill.title);
 									const proficient = playerSkill != null && !!playerSkill.proficient;
-									const classNames = ['proficient', proficient ? 'yes' : 'no'];
+									const expertise = playerSkill != null && !!playerSkill.expertise;
+									const classNames = ['proficient', expertise ? 'expert' : proficient ? 'yes' : 'no'];
 									const bonus = Number(data.dnd5e.attr[skill.modifies].bonus) + (proficient ? Number(data.dnd5e.proficiencyBonus) : 0);
 									return html(
 										<tr>
-											<td class={classNames.join(' ')}>{proficient ? '&check;' : '&cross;'}</td>
+											<td class={classNames.join(' ')}>
+												{proficient ? '&check;' : '&cross;'}
+												<abbr data-if-present={expertise} title="+1 from Expertise">+</abbr>
+											</td>
 											<td class="modifies">{skill.modifies}</td>
 											<td class="skill-name">{skill.title}</td>
 											<td class="bonus">{bonus < 0 ? bonus : `+${bonus}`}</td>
@@ -189,23 +193,25 @@ export class Dnd5EPcStats extends ATemplate<PlayerCharacterInfo> {
 								<tbody>
 								{ifLines((data.dnd5e.attack || []).map(attack => {
 									const type = attack.melee ? 'Melee' : attack.ranged ? 'Ranged' : attack.spell ? 'Spell' : 'Unknown';
+									const rangeMultiplier = attack.rangeMultiplier == null ? 3 : attack.rangeMultiplier;
+									const rangeMax = attack.rangeFeet != null && rangeMultiplier > 0 ? `/${attack.rangeFeet * rangeMultiplier}` : '';
 									// noinspection HtmlDeprecatedTag
 									return html(
 										<tr>
-											<td class="type"><abbr title={type} class={type.toLowerCase()}>{type[0]}</abbr></td>
+											<td class="type"><abbr title={type} class={type.toLowerCase()}>{attack.hands + 'H&nbsp;' + type[0]}</abbr></td>
 											<td class="attack">{attack.title}</td>
 											<td class="range">
-												<marquee data-if-present={attack.reachFeet} data-unwrap>
-													<span class="scalar reach">{attack.reachFeet}</span> <span class="measure">ft.</span> Reach
-												</marquee>
-												<marquee data-if-present={attack.rangeFeet} data-unwrap>
-													<span class="scalar range">{attack.rangeFeet}</span> <span class="measure">ft.</span> Range
-												</marquee>
+												<abbr title="Reach" data-if-present={attack.reachFeet}>
+													<span class="scalar reach">{attack.reachFeet}</span> <span class="measure">ft.</span>
+												</abbr>
+												<abbr data-if-present={attack.rangeFeet} title="Range">
+													<span class="scalar range">{attack.rangeFeet}{rangeMax}</span> <span class="measure">ft.</span>
+												</abbr>
 											</td>
-											<td class="hit">{attack.toHit}</td>
+											<td class="hit">{typeof attack.toHit === 'string' ? attack.toHit : `${attack.toHit.stat} ${attack.toHit.num}`}</td>
 											<td class="damage">
 												<abbr title={attack.damage.type}
-															class={attack.damage.type.toLowerCase()}>{String(attack.damage.roll).replace(/\s+/g, '&nbsp;')}&nbsp;({attack.hands}H)</abbr>
+															class={attack.damage.type.toLowerCase()}>{String(attack.damage.roll).replace(/\s+/g, '&nbsp;')}</abbr>
 											</td>
 											<td class="notes">{ifLines([attack.note], ', ')}</td>
 										</tr>

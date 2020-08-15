@@ -19,12 +19,35 @@ export type HandCount = number;
  * Range (feet)
  */
 export type RangeFeet = number;
+export type RangeMultiplier = number;
 /**
  * Reach (feet)
  */
 export type ReachFeet = number;
 export type Bonus = string;
+export type DCNumber = number;
+/**
+ * Abbreviated Stat
+ */
+export type AbbreviatedStat = 'STR' | 'DEX' | 'CON' | 'INT' | 'WIS' | 'CHA';
 export type EffectiveScore = number;
+/**
+ * Class
+ */
+export type ClassName =
+  | 'Artificer'
+  | 'Barbarian'
+  | 'Bard'
+  | 'Cleric'
+  | 'Druid'
+  | 'Fighter'
+  | 'Monk'
+  | 'Paladin'
+  | 'Ranger'
+  | 'Rogue'
+  | 'Sorcerer'
+  | 'Warlock'
+  | 'Wizard';
 export type FlySpeedFt = number;
 export type HitDie = 4 | 6 | 8 | 10 | 12 | 20;
 export type HitPoints = number;
@@ -32,6 +55,37 @@ export type HitPoints = number;
  * Proficiencies
  */
 export type Proficiencies = Proficiency[];
+export type ProficiencyForSavingThrows = AbbreviatedStat[];
+/**
+ * Expertise?
+ */
+export type IsExpert = boolean;
+/**
+ * Proficient?
+ */
+export type IsProficient = boolean;
+/**
+ * Skill Name
+ */
+export type SkillName =
+  | 'Acrobatics'
+  | 'Animal Handling'
+  | 'Arcana'
+  | 'Athletics'
+  | 'Deception'
+  | 'History'
+  | 'Insight'
+  | 'Intimidation'
+  | 'Investigation'
+  | 'Medicine'
+  | 'Nature'
+  | 'Perception'
+  | 'Performance'
+  | 'Persuasion'
+  | 'Religion'
+  | 'Sleight of Hand'
+  | 'Stealth'
+  | 'Survival';
 export type WalkSpeedFt = number;
 export type SwimSpeedFt = number;
 /**
@@ -100,6 +154,7 @@ export interface Dnd5EPlayerCharacter {
     melee?: boolean;
     note?: Notes & (string | string[]);
     rangeFeet?: RangeFeet;
+    rangeMultiplier?: RangeMultiplier;
     /**
      * Ranged?
      */
@@ -115,10 +170,11 @@ export interface Dnd5EPlayerCharacter {
     title: string;
     toHit: {
       [k: string]: unknown;
-    } & Bonus;
+    } & (Bonus | HitDC);
   }[];
   attr: AttributeStats;
   class: LinkedClass;
+  defense?: Defenses & (string | string[]);
   flyFeet?: FlySpeedFt;
   hitDie: HitDie;
   hp?: HitPoints;
@@ -144,22 +200,16 @@ export interface Dnd5EPlayerCharacter {
    * Race
    */
   race: 'Human' | 'Variant Human';
+  savingThrow?: SavingThrow;
   /**
    * Skills
    */
   skill?: {
     bonus?: Bonus;
-    /**
-     * Proficient?
-     */
-    proficient?: boolean;
-    stat?: {
-      [k: string]: unknown;
-    } & ('STR' | 'DEX' | 'CON' | 'INT' | 'WIS' | 'CHA');
-    /**
-     * Skill Name
-     */
-    title: string;
+    expertise?: IsExpert;
+    proficient?: IsProficient;
+    stat?: AbbreviatedStat;
+    title: SkillName;
   }[];
   speedFeet: WalkSpeedFt;
   swimFeet?: SwimSpeedFt;
@@ -215,13 +265,17 @@ export interface Damage {
   /**
    * Damage Type
    */
-  type: 'Bludgeoning' | 'Piercing' | 'Slashing';
+  type: 'Acid' | 'Bludgeoning' | 'Piercing' | 'Slashing';
 }
 /**
  * Roll
  */
 export interface Roll {
   [k: string]: unknown;
+}
+export interface HitDC {
+  num: DCNumber;
+  stat: AbbreviatedStat;
 }
 export interface AttributeStats {
   [k: string]: Attribute;
@@ -257,10 +311,10 @@ export interface LinkedClass {
    * URL
    */
   href: string;
-  /**
-   * Class
-   */
-  title: 'Barbarian';
+  title: ClassName;
+}
+export interface Defenses {
+  [k: string]: unknown;
 }
 /**
  * Initiative Bonus
@@ -309,6 +363,13 @@ export interface Proficiency1 {
  * Proficiency Bonus
  */
 export interface ProficiencyBonus {
+  [k: string]: unknown;
+}
+export interface SavingThrow {
+  advantage?: AdvantageOnSavingThrows & (string | string[]);
+  proficient: ProficiencyForSavingThrows;
+}
+export interface AdvantageOnSavingThrows {
   [k: string]: unknown;
 }
 /**

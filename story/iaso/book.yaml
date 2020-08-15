@@ -4,6 +4,14 @@ title: IASO
 playerCharacter:
   - name: Yenever Feldspar
     tribe: Tenakth
+  - name: Thorn
+    tribe: unknown
+  - name: Drake
+    tribe: Nora
+  - name: Haldred
+    tribe: Oseram
+  - name: Van
+    tribe: Banuk
 adapter:
   dnd5e:
     playerCharacter:
@@ -12,6 +20,10 @@ adapter:
         class:
           title: Barbarian
           href: https://www.dndbeyond.com/classes/barbarian
+        link:
+          characterDndBeyond:
+            title: Yenever on D&D Beyond
+            href: https://ddb.ac/characters/32273323/eeVZiY
         race: Variant Human
         hitDie: 12
         armor:
@@ -20,6 +32,10 @@ adapter:
           base: 10
           note: "+2 Unarmored Bonus"
         speedFeet: 30
+        savingThrow:
+          proficient:
+            - STR
+            - CON
         passive:
           Perception: 13
           Investigation: 9
@@ -79,7 +95,7 @@ adapter:
             hands: 1
             toHit: "+5"
             reachFeet: 5
-            note: Melee, Martial
+            note: Martial, Versatile
             damage:
               roll: 1d8 + 3
               type: Slashing
@@ -88,10 +104,38 @@ adapter:
             hands: 2
             toHit: "+5"
             reachFeet: 5
-            note: Melee, Martial
+            note: Martial, Versatile
             damage:
               roll: 1d10 + 3
               type: Slashing
+          - title: Greataxe
+            melee: true
+            hands: 2
+            toHit: "+5"
+            reachFeet: 5
+            note: Martial, Heavy, Two-Handed
+            damage:
+              roll: 1d12 + 3
+              type: Slashing
+          - title: Javelin
+            melee: true
+            hands: 1
+            toHit: "+5"
+            reachFeet: 5
+            note: Simple
+            damage:
+              roll: 1d6 + 3
+              type: Piercing
+          - title: Javelin
+            ranged: true
+            hands: 1
+            toHit: "+5"
+            rangeFeet: 30
+            rangeMultiplier: 4
+            note: Simple, Thrown
+            damage:
+              roll: 1d6 + 3
+              type: Piercing
           - title: Unarmed Strike
             melee: true
             hands: 1
@@ -103,7 +147,545 @@ adapter:
         action:
           - title: Rage
             note: (See Barbarian in the 5E PHB for details.)
+          - title: Two-Weapon Fighting
+            note:
+              - Attack with a weapon in your off hand as a Bonus Action.
+              - Don't add your ability modifier to the damage unless it is negative.
+      - name: Thorn
         link:
           characterDndBeyond:
-            title: Yenever on D&D Beyond
-            href: https://ddb.ac/characters/32273323/eeVZiY
+            title: Thorn on D&D Beyond
+            href: https://ddb.ac/characters/32275948/SRFX29
+        level: 1
+        class:
+          title: Rogue
+          href: https://www.dndbeyond.com/classes/rogue
+        race: Variant Human
+        hitDie: 8
+        armor:
+          type: Light Leather
+          num: 14
+        speedFeet: 30
+        savingThrow:
+          proficient:
+            - DEX
+            - INT
+        passive:
+          Perception: 13
+          Investigation: 13
+          Insight: 11
+        attr:
+          STR:
+            bonus: "+0"
+            score: 10
+          DEX:
+            bonus: "+3"
+            score:
+              base: 15
+              effective: 16
+              note: "+1 for Variant Human"
+          CON:
+            bonus: "-1"
+            score: 8
+          INT:
+            bonus: "+1"
+            score: 12
+          WIS:
+            bonus: "+1"
+            score: 13
+          CHA:
+            bonus: "+2"
+            score:
+              base: 14
+              effective: 15
+              note: "+1 for Variant Human"
+        proficiencyBonus: "+2"
+        initiativeBonus: "+3"
+        proficiency:
+          - title: Armor
+            item: Light Armor
+          - title: Weapons
+            item:
+              - Crossbow
+              - Hand
+              - Longsword
+              - Rapier
+              - Shortsword
+              - Simple Weapons
+          - title: Tools
+            item:
+              - Playing Card Set
+              - Poisoner's Kit
+              - Thieves' Tools
+          - title: Languages
+            item: Thieves' Cant
+        skill:
+          - title: Acrobatics
+            proficient: true
+          - title: Athletics
+            proficient: true
+          - title: Deception
+            proficient: true
+            expertise: true
+          - title: Investigation
+            proficient: true
+          - title: Perception
+            proficient: true
+          - title: Sleight of Hand
+            proficient: true
+          - title: Stealth
+            proficient: true
+        hp: 7
+        attack:
+          - title: Dagger
+            melee: true
+            hands: 1
+            toHit: "+5"
+            reachFeet: 5
+            note: Simple, Finesse, Light
+            damage:
+              roll: 1d4 + 3
+              type: Piercing
+          - title: Dagger
+            ranged: true
+            hands: 1
+            toHit: "+5"
+            rangeFeet: 20
+            rangeMultiplier: 3
+            note: Simple, Finesse, Light, Thrown
+            damage:
+              roll: 1d4 + 3
+              type: Piercing
+          - title: Unarmed Strike
+            melee: true
+            hands: 1
+            toHit: "+2"
+            reachFeet: 5
+            damage:
+              roll: 1
+              type: Bludgeoning
+        action:
+          - title: Sneak Attack
+            note: (See Rogue in the 5E PHB for details.)
+          - title: Two-Weapon Fighting
+            note:
+              - Attack with a weapon in your off hand as a Bonus Action.
+              - Don't add your ability modifier to the damage unless it is negative.
+      - name: Drake
+        link:
+          characterDndBeyond:
+            title: Drake on D&D Beyond
+            href: https://ddb.ac/characters/32277744/76gvfH
+        level: 1
+        class:
+          title: Ranger
+          href: https://www.dndbeyond.com/classes/ranger
+        race: Variant Human
+        hitDie: 10
+        armor:
+          type: Light Leather
+          num: 14
+        speedFeet: 30
+        savingThrow:
+          proficient:
+            - STR
+            - DEX
+        passive:
+          Perception: 14
+          Investigation: 13
+          Insight: 12
+        attr:
+          STR:
+            bonus: "+2"
+            score: 14
+          DEX:
+            bonus: "+3"
+            score:
+              base: 15
+              effective: 16
+              note: "+1 for Variant Human"
+          CON:
+            bonus: "-1"
+            score: 12
+          INT:
+            bonus: "-1"
+            score: 8
+          WIS:
+            bonus: "+2"
+            score:
+              base: 12
+              effective: 14
+              note: "+1 for Variant Human"
+          CHA:
+            bonus: "+0"
+            score: 10
+        proficiencyBonus: "+2"
+        initiativeBonus: "+3"
+        proficiency:
+          - title: Armor
+            item:
+              - Light Armor
+              - Medium Armor
+              - Shields
+          - title: Weapons
+            item:
+              - Martial Weapons
+              - Simple Weapons
+        skill:
+          - title: Athletics
+            proficient: true
+          - title: Investigation
+            proficient: true
+          - title: Nature
+            proficient: true
+          - title: Perception
+            proficient: true
+          - title: Stealth
+            proficient: true
+          - title: Survival
+            proficient: true
+        hp: 11
+        attack:
+          - title: Quarterstaff
+            melee: true
+            hands: 1
+            toHit: "+4"
+            reachFeet: 5
+            note: Simple, Versatile
+            damage:
+              roll: 1d6 + 2
+              type: Bludgeoning
+          - title: Quarterstaff
+            melee: true
+            hands: 2
+            toHit: "+4"
+            reachFeet: 5
+            note: Simple, Versatile
+            damage:
+              roll: 1d8 + 2
+              type: Bludgeoning
+          - title: Javelin
+            melee: true
+            hands: 1
+            toHit: "+4"
+            reachFeet: 5
+            note: Simple
+            damage:
+              roll: 1d6 + 2
+              type: Piercing
+          - title: Javelin
+            ranged: true
+            hands: 1
+            toHit: "+4"
+            rangeFeet: 30
+            rangeMultiplier: 4
+            note: Simple, Thrown
+            damage:
+              roll: 1d6 + 2
+              type: Piercing
+          - title: Longbow
+            ranged: true
+            hands: 2
+            toHit: "+5"
+            rangeFeet: 150
+            rangeMultiplier: 4
+            note: Martial, Ammunition, Heavy, Two-Handed
+            damage:
+              roll: 1d8 + 3
+              type: Piercing
+          - title: Unarmed Strike
+            melee: true
+            hands: 1
+            toHit: "+4"
+            reachFeet: 5
+            damage:
+              roll: 3
+              type: Bludgeoning
+        action:
+          - title: Two-Weapon Fighting
+            note:
+              - Attack with a weapon in your off hand as a Bonus Action.
+              - Don't add your ability modifier to the damage unless it is negative.
+      - name: Haldred
+        link:
+          characterDndBeyond:
+            title: Haldred on D&D Beyond
+            href: https://ddb.ac/characters/32279306/EJdAJx
+        level: 1
+        class:
+          title: Artificer
+          href: https://www.dndbeyond.com/classes/artificer
+        race: Variant Human
+        hitDie: 8
+        armor:
+          type: Medium Studded Leather
+          num: 13
+        speedFeet: 30
+        savingThrow:
+          proficient:
+            - CON
+            - INT
+          advantage: avoid or resist traps
+        defense: Resistance to damage dealt by traps
+        passive:
+          Perception: 14
+          Investigation: 15
+          Insight: 14
+        attr:
+          STR:
+            bonus: "+0"
+            score: 10
+          DEX:
+            bonus: "+1"
+            score: 13
+          CON:
+            bonus: "+1"
+            score:
+              base: 12
+              effective: 13
+              note: "+1 for Variant Human"
+          INT:
+            bonus: "+3"
+            score:
+              base: 15
+              effective: 16
+              note: "+1 for Variant Human"
+          WIS:
+            bonus: "+2"
+            score: 14
+          CHA:
+            bonus: "-1"
+            score: 8
+        proficiencyBonus: "+2"
+        initiativeBonus: "+1"
+        proficiency:
+          - title: Armor
+            item:
+              - Light Armor
+              - Medium Armor
+              - Shields
+          - title: Weapons
+            item:
+              - Firearms
+              - Simple Weapons
+          - title: Tools
+            item:
+              - Alchemist's Supplies
+              - Brewer's Supplies
+              - Thieves' Tools
+              - Tinker's Tools
+        skill:
+          - title: Arcana
+            proficient: true
+          - title: Insight
+            proficient: true
+          - title: Investigation
+            proficient: true
+          - title: Medicine
+            proficient: true
+          - title: Perception
+            proficient: true
+        hp: 9
+        attack:
+          - title: Crossbow, Light
+            ranged: true
+            hands: 2
+            toHit: "+3"
+            rangeFeet: 80
+            rangeMultiplier: 4
+            note: Simple, Ammunition, Loading, Two-Handed
+            damage:
+              roll: 1d8 + 1
+              type: Piercing
+          - title: Light Hammer
+            melee: true
+            hands: 1
+            toHit: "+2"
+            reachFeet: 5
+            note: Simple, Light
+            damage:
+              roll: 1d4
+              type: Bludgeoning
+          - title: Light Hammer
+            ranged: true
+            hands: 1
+            toHit: "+4"
+            rangeFeet: 20
+            rangeMultiplier: 3
+            note: Simple, Light, Thrown
+            damage:
+              roll: 1d4
+              type: Bludgeoning
+          - title: Sling
+            ranged: true
+            hands: 1
+            toHit: "+3"
+            rangeFeet: 30
+            rangeMultiplier: 4
+            note: Simple, Ammunition
+            damage:
+              roll: 1d4 + 1
+              type: Bludgeoning
+          - title: Acid Splash
+            spell: true
+            hands: 1
+            toHit:
+              stat: DEX
+              num: 13
+            rangeFeet: 60
+            rangeMultiplier: 0
+            note: V/S
+            damage:
+              roll: 1d6
+              type: Acid
+          - title: Unarmed Strike
+            melee: true
+            hands: 1
+            toHit: "+1"
+            reachFeet: 5
+            damage:
+              roll: 1
+              type: Bludgeoning
+        action:
+          - title: Two-Weapon Fighting
+            note:
+              - Attack with a weapon in your off hand as a Bonus Action.
+              - Don't add your ability modifier to the damage unless it is negative.
+          - title: Tinkering
+            note: (See Artificer in the 5E PHB.)
+          - title: Expeditious Retreat
+            note: (See the 5E PHB.)
+          - title: Light
+            note: (See the 5E PHB.)
+          - title: Disguise Self
+            note: (See the 5E PHB.)
+          - title: Grease
+            note: (See the 5E PHB.)
+      - name: Van
+        link:
+          characterDndBeyond:
+            title: Van on D&D Beyond
+            href: https://ddb.ac/characters/32281052/pnE9Lz
+        level: 1
+        class:
+          title: Monk
+          href: https://www.dndbeyond.com/classes/monk
+        race: Variant Human
+        hitDie: 8
+        armor:
+          type: None
+          num: 15
+          base: 10
+          note: "+2 from Dexterity Bonus, +3 from Unarmored Defense"
+        speedFeet: 30
+        savingThrow:
+          proficient:
+            - STR
+            - DEX
+        passive:
+          Perception: 18
+          Investigation: 16
+          Insight: 15
+        attr:
+          STR:
+            bonus: "+1"
+            score: 12
+          DEX:
+            bonus: "+2"
+            score:
+              base: 14
+              effective: 15
+              note: "+1 for Variant Human"
+          CON:
+            bonus: "+0"
+            score: 10
+          INT:
+            bonus: "+1"
+            score: 13
+          WIS:
+            bonus: "+3"
+            score:
+              base: 15
+              effective: 16
+              note: "+1 for Variant Human"
+          CHA:
+            bonus: "-1"
+            score: 8
+        proficiencyBonus: "+2"
+        initiativeBonus: "+1"
+        proficiency:
+          - title: Armor
+            item: None
+          - title: Weapons
+            item:
+              - Shortsword
+              - Simple Weapons
+          - title: Tools
+            item:
+              - Cartographer's Tools
+        skill:
+          - title: Arcana
+            proficient: true
+          - title: Athletics
+            proficient: true
+          - title: History
+            proficient: true
+          - title: Insight
+            proficient: true
+          - title: Survival
+            proficient: true
+        hp: 9
+        attack:
+          - title: Dart
+            ranged: true
+            hands: 1
+            toHit: "+4"
+            rangeFeet: 20
+            rangeMultiplier: 3
+            note: Simple, Finesse, Thrown
+            damage:
+              roll: 1d4 + 2
+              type: Piercing
+          - title: Spear
+            melee: true
+            hands: 1
+            toHit: "+4"
+            reachFeet: 5
+            note: Simple
+            damage:
+              roll: 1d6 + 2
+              type: Piercing
+          - title: Spear
+            melee: true
+            hands: 2
+            toHit: "+4"
+            reachFeet: 5
+            note: Simple, Versatile
+            damage:
+              roll: 1d8 + 2
+              type: Piercing
+          - title: Spear
+            ranged: true
+            hands: 1
+            toHit: "+4"
+            rangeFeet: 20
+            rangeMultiplier: 3
+            note: Simple, Thrown
+            damage:
+              roll: 1d6 + 2
+              type: Piercing
+          - title: Unarmed Strike
+            melee: true
+            hands: 1
+            toHit: "+4"
+            reachFeet: 5
+            damage:
+              roll: 1d4 + 2
+              type: Bludgeoning
+        action:
+          - title: Two-Weapon Fighting
+            note:
+              - Attack with a weapon in your off hand as a Bonus Action.
+              - Don't add your ability modifier to the damage unless it is negative.
+          - title: Unarmed Strike
+            note: (See Monk in the 5E PHB.)

@@ -587,7 +587,7 @@ code {
 .dnd5e-pc-block article {
   column-width: inherit;
   display: grid;
-  grid-template: "name   sizetype   sizetype" "stats  stats  stats" "senses pb    skills" "senses init  skills" "profs  ac    skills" "profs  walk  skills" "profs   hp   skills" "attacks attacks actions";
+  grid-template: "name   sizetype   sizetype" "stats  stats  stats" "senses pb    skills" "senses init  skills" "profs  ac    skills" "profs  walk  skills" "profs   hp   skills" "actions attacks attacks";
   grid-gap: 1em;
 }
 .dnd5e-pc-block table {
@@ -785,6 +785,9 @@ code {
 .dnd5e-pc-block .measure {
   color: rgba(0, 0, 0, 0.2);
   padding-left: 0.125em;
+}
+.dnd5e-pc-block a, .dnd5e-pc-block a:visited, .dnd5e-pc-block a:focus, .dnd5e-pc-block a:target, .dnd5e-pc-block a:hover {
+  color: navy;
 }
 
 @media (max-width: 50rem) {

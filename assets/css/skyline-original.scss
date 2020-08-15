@@ -750,7 +750,7 @@ code {
 				"profs  ac    skills"
 				"profs  walk  skills"
 				"profs   hp   skills"
-			  "attacks attacks actions"
+			  "actions attacks attacks"
 		;
 		grid-gap: 1em;
 	}
@@ -1001,6 +1001,10 @@ code {
 	.measure {
 		color: rgba(0, 0, 0, 0.2);
 		padding-left: 0.125em;
+	}
+
+	a, a:visited, a:focus, a:target, a:hover {
+		color: navy;
 	}
 }
 

@@ -67,7 +67,7 @@ export function html(
 	if (children != null) {
 		const rendered = (Array.isArray(children) ? children : [children])
 			.map(child => ({
-				mustKeep: realElement(child) ? !child.props[IF_SIBLINGS] : stringify(child) !== "",
+				mustKeep: realElement(child) && child.props != null ? !child.props[IF_SIBLINGS] : stringify(child) !== "",
 				rendered: html(child, true),
 			}));
 		if (rendered.findIndex(child => child.mustKeep && child.rendered !== '') >= 0) {
