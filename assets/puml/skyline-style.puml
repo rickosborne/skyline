@@ -1,3 +1,5 @@
+hide circle
+
 skinparam {
 	DefaultFontName Roboto Condensed
 	DefaultFontSize 16

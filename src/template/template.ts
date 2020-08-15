@@ -4,7 +4,8 @@ const templateRenderer = new TemplateRenderer();
 
 const sourceDirs = [
 	'adapter',
-	'story/iaso'
+	'story/iaso',
+	'CONTRIBUTING.md'
 ];
 
 sourceDirs.forEach(sourceDir => {
