@@ -9,6 +9,7 @@
   * [Fireclaw](626-fireclaw.md)
   * [Lancehorn](634-lancehorn.md)
   * [Scrapper](655-scrapper.md)
+  * [Stormbird](667-stormbird.md)
   * [Thunderjaw](675-thunderjaw.md)
   * [Watcher](681-watcher.md)
 * [Errata](940-errata.md)

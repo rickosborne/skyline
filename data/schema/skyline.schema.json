@@ -1,0 +1,57 @@
+{
+	"$id": "https://rickosborne.github.io/skyline/data/schema/skyline.schema.json",
+	"$schema": "http://json-schema.org/draft-07/schema",
+	"definitions": {
+		"id": {
+			"description": "Programmatic identifier unique to this object",
+			"pattern": "^[a-z]+([A-Z][a-z]+[0-9]*)*$",
+			"title": "ID",
+			"type": "string"
+		},
+		"note": {
+			"allOf": [
+				{
+					"description": "Notes",
+					"title": "Notes"
+				},
+				{
+					"$ref": "#/definitions/oneOrMoreStrings"
+				}
+			]
+		},
+		"oneOrMoreStrings": {
+			"oneOf": [
+				{
+					"type": "string"
+				},
+				{
+					"items": {
+						"type": "string"
+					},
+					"type": "array"
+				}
+			]
+		},
+		"roll": {
+			"allOf": [
+				{
+					"description": "Roll",
+					"title": "Roll"
+				},
+				{
+					"oneOf": [
+						{
+							"title": "Exact Number",
+							"type": "integer"
+						},
+						{
+							"pattern": "^(?:\\d+d(?:4|6|8|10|12|20|100))( \\+ \\d+)?$",
+							"title": "Dice Roll",
+							"type": "string"
+						}
+					]
+				}
+			]
+		}
+	}
+}

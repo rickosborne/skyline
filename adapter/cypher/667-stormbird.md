@@ -1,14 +1,14 @@
-<!-- +template machine thunderjaw cypher-creature -->
+<!-- +template machine stormbird cypher-creature -->
 
-<h2>Thunderjaw</h2>
-<p>For additional flavor, see the <a href="https://horizon.fandom.com/wiki/Thunderjaw" rel="external">Horizon Wiki on Thunderjaw</a>.</p>
+<h2>Stormbird</h2>
+<p>For additional flavor, see the <a href="https://horizon.fandom.com/wiki/Stormbird" rel="external">Horizon Wiki on Stormbird</a>.</p>
 <div class="cypher-stat-block stat-block">
 	<article>
 		<header class="title">
 			<h3><span class="word" markdown="1">
-Thunderjaw
+Stormbird
 </span></h3>
-			<aside class="level-and-target">9 (27)</aside>
+			<aside class="level-and-target">8 (24)</aside>
 		</header>
 		<section class="stats-tab">
 			<table class="stats">
@@ -24,11 +24,11 @@ Thunderjaw
 				</thead>
 				<tbody>
 					<tr>
-						<td>9</td>
-						<td>27</td>
-						<td>44</td>
+						<td>8</td>
+						<td>24</td>
+						<td>36</td>
 						<td>0</td>
-						<td>15</td>
+						<td>10</td>
 						<td>Short</td>
 					</tr>
 				</tbody>
@@ -37,4 +37,4 @@ Thunderjaw
 	</article>
 </div>
 
-<!-- -template machine thunderjaw cypher-creature -->
+<!-- -template machine stormbird cypher-creature -->

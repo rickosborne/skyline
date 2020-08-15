@@ -101,7 +101,8 @@ adapter:
       CHA:
         score: 0
         bonus: TODO
-    speedFeet: 0
+    speedFeet: 15
+    flyFeet: 60
     hitDie: 12
     hp:
       average: 258

@@ -16,6 +16,43 @@ dnd5e:
     Hard: 9
     Epic: 14
     Legendary: 20
+  skill:
+    - title: Acrobatics
+      modifies: DEX
+    - title: Animal Handling
+      modifies: WIS
+    - title: Arcana
+      modifies: INT
+    - title: Athletics
+      modifies: STR
+    - title: Deception
+      modifies: CHA
+    - title: History
+      modifies: INT
+    - title: Insight
+      modifies: WIS
+    - title: Intimidation
+      modifies: CHA
+    - title: Investigation
+      modifies: INT
+    - title: Medicine
+      modifies: WIS
+    - title: Nature
+      modifies: INT
+    - title: Perception
+      modifies: WIS
+    - title: Performance
+      modifies: CHA
+    - title: Persuasion
+      modifies: CHA
+    - title: Religion
+      modifies: INT
+    - title: Sleight of Hand
+      modifies: DEX
+    - title: Stealth
+      modifies: DEX
+    - title: Survival
+      modifies: WIS
 cypher:
   hazardFromHZD:
     explosion: Collision

@@ -1,0 +1,433 @@
+{
+	"$id": "https://rickosborne.github.io/skyline/data/schema/book.schema.json",
+	"$schema": "http://json-schema.org/draft-07/schema",
+	"additionalProperties": false,
+	"definitions": {
+		"adapter": {
+			"additionalProperties": false,
+			"description": "Adapter-specific data",
+			"properties": {
+				"dnd5e": {
+					"$ref": "#/definitions/dnd5eAdapter"
+				}
+			},
+			"required": [
+				"dnd5e"
+			],
+			"title": "Adapter Data",
+			"type": "object"
+		},
+		"dnd5eAdapter": {
+			"additionalProperties": false,
+			"description": "D&D 5E specifics",
+			"properties": {
+				"playerCharacter": {
+					"description": "Player Characters",
+					"items": {
+						"$ref": "#/definitions/dnd5ePlayerCharacter"
+					},
+					"type": "array"
+				}
+			},
+			"required": [
+				"playerCharacter"
+			],
+			"type": "object"
+		},
+		"dnd5ePlayerCharacter": {
+			"additionalProperties": false,
+			"description": "Player Character",
+			"properties": {
+				"action": {
+					"description": "Other Actions",
+					"items": {
+						"additionalProperties": false,
+						"description": "Other Action",
+						"properties": {
+							"note": {
+								"allOf": [
+									{
+										"description": "Notes"
+									},
+									{
+										"$ref": "skyline.schema.json#/definitions/oneOrMoreStrings"
+									}
+								]
+							},
+							"title": {
+								"description": "Title",
+								"type": "string"
+							}
+						},
+						"type": "object"
+					},
+					"type": "array"
+				},
+				"armor": {
+					"$ref": "dnd5e.schema.json#/definitions/armor"
+				},
+				"attack": {
+					"description": "Attacks",
+					"items": {
+						"additionalProperties": false,
+						"description": "Attack",
+						"properties": {
+							"area": {
+								"$ref": "dnd5e.schema.json#/definitions/areaEffect"
+							},
+							"damage": {
+								"$ref": "dnd5e.schema.json#/definitions/damage"
+							},
+							"hands": {
+								"description": "Hands",
+								"maximum": 2,
+								"minimum": 1,
+								"title": "Hand Count",
+								"type": "integer"
+							},
+							"melee": {
+								"default": false,
+								"description": "Melee?",
+								"type": "boolean"
+							},
+							"note": {
+								"$ref": "skyline.schema.json#/definitions/note"
+							},
+							"rangeFeet": {
+								"$ref": "dnd5e.schema.json#/definitions/rangeFeet"
+							},
+							"rangeMultiplier": {
+								"default": 3,
+								"title": "Range Multiplier",
+								"type": "integer"
+							},
+							"ranged": {
+								"default": false,
+								"description": "Ranged?",
+								"type": "boolean"
+							},
+							"reachFeet": {
+								"$ref": "dnd5e.schema.json#/definitions/reachFeet"
+							},
+							"spell": {
+								"default": false,
+								"description": "Spell?",
+								"type": "boolean"
+							},
+							"title": {
+								"description": "Attack Title",
+								"type": "string"
+							},
+							"toHit": {
+								"allOf": [
+									{
+										"description": "Bonus to Hit"
+									},
+									{
+										"oneOf": [
+											{
+												"$ref": "dnd5e.schema.json#/definitions/bonus"
+											},
+											{
+												"additionalProperties": false,
+												"properties": {
+													"num": {
+														"minimum": 1,
+														"title": "DC Number",
+														"type": "integer"
+													},
+													"stat": {
+														"$ref": "dnd5e.schema.json#/definitions/statAbbr"
+													}
+												},
+												"required": [
+													"num",
+													"stat"
+												],
+												"title": "Hit DC",
+												"type": "object"
+											}
+										]
+									}
+								]
+							}
+						},
+						"required": [
+							"damage",
+							"hands",
+							"title",
+							"toHit"
+						],
+						"type": "object"
+					},
+					"type": "array"
+				},
+				"attr": {
+					"$ref": "dnd5e.schema.json#/definitions/attr"
+				},
+				"class": {
+					"additionalProperties": false,
+					"description": "Linked Class",
+					"properties": {
+						"href": {
+							"description": "URL",
+							"format": "URL",
+							"type": "string"
+						},
+						"title": {
+							"$ref": "dnd5e.schema.json#/definitions/class"
+						}
+					},
+					"required": [
+						"href",
+						"title"
+					],
+					"title": "Linked Class",
+					"type": "object"
+				},
+				"defense": {
+					"allOf": [
+						{
+							"title": "Defenses"
+						},
+						{
+							"$ref": "skyline.schema.json#/definitions/oneOrMoreStrings"
+						}
+					]
+				},
+				"flyFeet": {
+					"$ref": "dnd5e.schema.json#/definitions/flyFeet"
+				},
+				"hitDie": {
+					"$ref": "dnd5e.schema.json#/definitions/hitDie"
+				},
+				"hp": {
+					"title": "Hit Points",
+					"type": "number"
+				},
+				"initiativeBonus": {
+					"allOf": [
+						{
+							"description": "Initiative Bonus",
+							"title": "Initiative Bonus"
+						},
+						{
+							"$ref": "dnd5e.schema.json#/definitions/bonus"
+						}
+					]
+				},
+				"level": {
+					"$ref": "dnd5e.schema.json#/definitions/level"
+				},
+				"link": {
+					"$ref": "dnd5e.schema.json#/definitions/link"
+				},
+				"name": {
+					"description": "Name",
+					"type": "string"
+				},
+				"passive": {
+					"$ref": "dnd5e.schema.json#/definitions/passive"
+				},
+				"proficiency": {
+					"description": "Proficiencies",
+					"items": {
+						"additionalProperties": false,
+						"description": "Proficiency",
+						"properties": {
+							"item": {
+								"allOf": [
+									{
+										"description": "Proficiency",
+										"title": "Proficiency"
+									},
+									{
+										"$ref": "skyline.schema.json#/definitions/oneOrMoreStrings"
+									}
+								]
+							},
+							"title": {
+								"description": "Proficiency Group Title",
+								"type": "string"
+							}
+						},
+						"required": [
+							"item",
+							"title"
+						],
+						"title": "Proficiency",
+						"type": "object"
+					},
+					"title": "Proficiencies",
+					"type": "array"
+				},
+				"proficiencyBonus": {
+					"allOf": [
+						{
+							"description": "Proficiency Bonus",
+							"title": "Proficiency Bonus"
+						},
+						{
+							"$ref": "dnd5e.schema.json#/definitions/bonus"
+						}
+					]
+				},
+				"race": {
+					"$ref": "dnd5e.schema.json#/definitions/race"
+				},
+				"savingThrow": {
+					"additionalProperties": false,
+					"properties": {
+						"advantage": {
+							"allOf": [
+								{
+									"title": "Advantage on Saving Throws"
+								},
+								{
+									"$ref": "skyline.schema.json#/definitions/oneOrMoreStrings"
+								}
+							]
+						},
+						"proficient": {
+							"items": {
+								"$ref": "dnd5e.schema.json#/definitions/statAbbr"
+							},
+							"title": "Proficiency for Saving Throws",
+							"type": "array"
+						}
+					},
+					"required": [
+						"proficient"
+					],
+					"title": "Saving Throw",
+					"type": "object"
+				},
+				"skill": {
+					"description": "Skills",
+					"items": {
+						"additionalProperties": false,
+						"description": "Skill",
+						"properties": {
+							"bonus": {
+								"$ref": "dnd5e.schema.json#/definitions/bonus"
+							},
+							"expertise": {
+								"default": false,
+								"description": "Expertise?",
+								"title": "Is Expert?",
+								"type": "boolean"
+							},
+							"proficient": {
+								"default": false,
+								"description": "Proficient?",
+								"title": "Is Proficient?",
+								"type": "boolean"
+							},
+							"stat": {
+								"$ref": "dnd5e.schema.json#/definitions/statAbbr"
+							},
+							"title": {
+								"$ref": "dnd5e.schema.json#/definitions/skillName"
+							}
+						},
+						"required": [
+							"title"
+						],
+						"type": "object"
+					},
+					"type": "array"
+				},
+				"speedFeet": {
+					"$ref": "dnd5e.schema.json#/definitions/speedFeet"
+				},
+				"swimFeet": {
+					"$ref": "dnd5e.schema.json#/definitions/swimFeet"
+				}
+			},
+			"required": [
+				"armor",
+				"attr",
+				"class",
+				"hitDie",
+				"initiativeBonus",
+				"level",
+				"name",
+				"passive",
+				"proficiencyBonus",
+				"race",
+				"speedFeet"
+			],
+			"type": "object"
+		},
+		"playerCharacter": {
+			"additionalProperties": false,
+			"description": "Player Character",
+			"properties": {
+				"name": {
+					"description": "Name",
+					"type": "string"
+				},
+				"tribe": {
+					"oneOf": [
+						{
+							"const": "unknown",
+							"description": "Custom Tribe",
+							"type": "string"
+						},
+						{
+							"$ref": "#/definitions/tribe"
+						}
+					]
+				}
+			},
+			"required": [
+				"name"
+			],
+			"type": "object"
+		},
+		"tribe": {
+			"description": "Tribe",
+			"enum": [
+				"Banuk",
+				"Carja",
+				"Nora",
+				"Oseram",
+				"Shadow Carja",
+				"Tenakth",
+				"Utaru"
+			],
+			"type": "string"
+		}
+	},
+	"description": "Book",
+	"properties": {
+		"$id": {
+			"format": "URL",
+			"type": "string"
+		},
+		"$schema": {
+			"type": "string"
+		},
+		"adapter": {
+			"$ref": "#/definitions/adapter"
+		},
+		"playerCharacter": {
+			"description": "Player Characters",
+			"items": {
+				"$ref": "#/definitions/playerCharacter"
+			},
+			"type": "array"
+		},
+		"title": {
+			"description": "Title",
+			"type": "string"
+		}
+	},
+	"required": [
+		"$id",
+		"$schema",
+		"title",
+		"adapter"
+	],
+	"type": "object"
+}

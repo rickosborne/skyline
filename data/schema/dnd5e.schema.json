@@ -1,0 +1,358 @@
+{
+	"$id": "https://rickosborne.github.io/skyline/data/schema/dnd5e.schema.json",
+	"$schema": "http://json-schema.org/draft-07/schema",
+	"definitions": {
+		"areaEffect": {
+			"additionalProperties": false,
+			"description": "Area Effect",
+			"properties": {
+				"count": {
+					"default": 1,
+					"description": "Count of areas",
+					"minimum": 1,
+					"type": "integer"
+				},
+				"radiusFeet": {
+					"description": "Radius (feet)",
+					"minimum": 0,
+					"type": "integer"
+				},
+				"shape": {
+					"description": "Shape",
+					"enum": [
+						"CUBE",
+						"SPHERE"
+					],
+					"type": "string"
+				},
+				"sideFeet": {
+					"description": "Length Each Side (feed)",
+					"minimum": 0,
+					"type": "integer"
+				}
+			},
+			"title": "Area Effect",
+			"type": "object"
+		},
+		"armor": {
+			"additionalProperties": false,
+			"description": "Armor Class",
+			"properties": {
+				"base": {
+					"description": "Base AC",
+					"type": "integer"
+				},
+				"note": {
+					"$ref": "skyline.schema.json#/definitions/note"
+				},
+				"num": {
+					"title": "Armor Class (AC)",
+					"type": "integer"
+				},
+				"type": {
+					"description": "Armor Type (i.e. Light, Plate, etc.)",
+					"title": "Armor Type",
+					"type": "string"
+				}
+			},
+			"required": [
+				"num"
+			],
+			"title": "Armor Class",
+			"type": "object"
+		},
+		"attr": {
+			"additionalProperties": false,
+			"patternProperties": {
+				".*": {
+					"additionalProperties": false,
+					"properties": {
+						"bonus": {
+							"$ref": "#/definitions/bonus"
+						},
+						"score": {
+							"oneOf": [
+								{
+									"title": "Effective Score",
+									"type": "integer"
+								},
+								{
+									"$ref": "#/definitions/complexScore"
+								}
+							]
+						},
+						"scoreBase": {
+							"description": "",
+							"type": "number"
+						}
+					},
+					"required": [
+						"bonus",
+						"score"
+					],
+					"title": "Attribute",
+					"type": "object"
+				}
+			},
+			"propertyNames": {
+				"$ref": "#/definitions/statAbbr"
+			},
+			"required": [
+				"STR",
+				"DEX",
+				"CON",
+				"INT",
+				"WIS",
+				"CHA"
+			],
+			"title": "Attribute Stats",
+			"type": "object"
+		},
+		"bonus": {
+			"pattern": "^[-+][0-9]+$",
+			"title": "Bonus",
+			"type": "string"
+		},
+		"challenge": {
+			"additionalProperties": false,
+			"properties": {
+				"rating": {
+					"oneOf": [
+						{
+							"type": "integer"
+						},
+						{
+							"type": "string"
+						}
+					],
+					"title": "Rating"
+				},
+				"xp": {
+					"title": "XP",
+					"type": "integer"
+				}
+			},
+			"required": [
+				"rating"
+			],
+			"title": "Challenge",
+			"type": "object"
+		},
+		"class": {
+			"description": "Class",
+			"enum": [
+				"Artificer",
+				"Barbarian",
+				"Bard",
+				"Cleric",
+				"Druid",
+				"Fighter",
+				"Monk",
+				"Paladin",
+				"Ranger",
+				"Rogue",
+				"Sorcerer",
+				"Warlock",
+				"Wizard"
+			],
+			"title": "Class Name",
+			"type": "string"
+		},
+		"complexScore": {
+			"additionalProperties": false,
+			"description": "Complex Score",
+			"properties": {
+				"base": {
+					"description": "Base Score",
+					"type": "integer"
+				},
+				"effective": {
+					"description": "Effective Score",
+					"type": "integer"
+				},
+				"note": {
+					"$ref": "skyline.schema.json#/definitions/note"
+				}
+			},
+			"required": [
+				"base",
+				"effective",
+				"note"
+			],
+			"title": "Complex Score",
+			"type": "object"
+		},
+		"damage": {
+			"additionalProperties": false,
+			"description": "Damage",
+			"properties": {
+				"avg": {
+					"description": "Average",
+					"type": "integer"
+				},
+				"roll": {
+					"$ref": "skyline.schema.json#/definitions/roll"
+				},
+				"type": {
+					"$ref": "dnd5e.schema.json#/definitions/damageType"
+				}
+			},
+			"required": [
+				"type"
+			],
+			"title": "Damage",
+			"type": "object"
+		},
+		"damageType": {
+			"description": "Damage Type",
+			"enum": [
+				"Acid",
+				"Bludgeoning",
+				"Piercing",
+				"Slashing"
+			],
+			"type": "string"
+		},
+		"flyFeet": {
+			"minimum": 0,
+			"title": "Fly Speed (ft.)",
+			"type": "integer"
+		},
+		"hitDie": {
+			"enum": [
+				4,
+				6,
+				8,
+				10,
+				12,
+				20
+			],
+			"title": "Hit Die",
+			"type": "number"
+		},
+		"level": {
+			"description": "Level",
+			"maximum": 20,
+			"minimum": 1,
+			"type": "number"
+		},
+		"link": {
+			"additionalProperties": false,
+			"description": "External Links",
+			"patternProperties": {
+				".*": {
+					"additionalProperties": false,
+					"properties": {
+						"href": {
+							"description": "URL",
+							"format": "URL",
+							"type": "string"
+						},
+						"title": {
+							"description": "Title",
+							"type": "string"
+						}
+					},
+					"required": [
+						"href",
+						"title"
+					],
+					"title": "Link",
+					"type": "object"
+				}
+			},
+			"propertyNames": {
+				"enum": [
+					"characterDndBeyond"
+				],
+				"type": "string"
+			},
+			"type": "object"
+		},
+		"passive": {
+			"additionalProperties": false,
+			"patternProperties": {
+				".*": {
+					"type": "integer"
+				}
+			},
+			"propertyNames": {
+				"enum": [
+					"Insight",
+					"Investigation",
+					"Perception"
+				],
+				"type": "string"
+			},
+			"title": "Passive",
+			"type": "object"
+		},
+		"race": {
+			"description": "Race",
+			"enum": [
+				"Human",
+				"Variant Human"
+			],
+			"type": "string"
+		},
+		"rangeFeet": {
+			"description": "Range (feet)",
+			"minimum": 0,
+			"title": "Range Feet",
+			"type": "integer"
+		},
+		"reachFeet": {
+			"description": "Reach (feet)",
+			"minimum": 0,
+			"title": "Reach Feet",
+			"type": "integer"
+		},
+		"skillName": {
+			"description": "Skill Name",
+			"enum": [
+				"Acrobatics",
+				"Animal Handling",
+				"Arcana",
+				"Athletics",
+				"Deception",
+				"History",
+				"Insight",
+				"Intimidation",
+				"Investigation",
+				"Medicine",
+				"Nature",
+				"Perception",
+				"Performance",
+				"Persuasion",
+				"Religion",
+				"Sleight of Hand",
+				"Stealth",
+				"Survival"
+			],
+			"title": "Skill Name"
+		},
+		"speedFeet": {
+			"minimum": 0,
+			"title": "Walk Speed (ft.)",
+			"type": "integer"
+		},
+		"statAbbr": {
+			"description": "Abbreviated Stat",
+			"enum": [
+				"STR",
+				"DEX",
+				"CON",
+				"INT",
+				"WIS",
+				"CHA"
+			],
+			"title": "Abbreviated Stat",
+			"type": "string"
+		},
+		"swimFeet": {
+			"minimum": 0,
+			"title": "Swim Speed (ft.)",
+			"type": "integer"
+		}
+	}
+}

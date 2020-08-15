@@ -1,45 +1,33 @@
+import * as console from "console";
 import * as fs from "fs";
 import * as path from "path";
-import * as YAML from "yaml";
-import * as console from "console";
+import {ARenderer} from "../ARenderer";
+import {ATemplate} from "./ATemplate";
+import {CypherCreature} from "./CypherCreature";
+import {Dnd5ENpcStats} from "./Dnd5ENpcStats";
+import {Dnd5EPcStats} from "./Dnd5EPcStats";
 
-export class TemplateRenderer {
-	public readonly templateRE = /(<!--\s+\+template\s+(\S+)\s+(\S+)\s+(\S+)\s+-->)(.*)(<!--\s+-template\s+\2\s+\3\s+\4\s+-->)/s;
+const TYPED_TEMPLATES: ATemplate<any>[] = [
+	new Dnd5ENpcStats(),
+	new Dnd5EPcStats(),
+	new CypherCreature(),
+];
 
-	public getData(dataType: string, dataName: string): object {
-		const text = fs.readFileSync(path.join('data', dataType, `${dataName}.${dataType}.yaml`), {encoding: "utf8"});
-		// noinspection JSUnusedGlobalSymbols
-		const base = {
-			ifLines: (
-				obj: string | string[] | undefined | null,
-				block: (lines: string[]) => string = (lines) => lines.join('\n')
-			): string => {
-				if (obj == null) {
-					return '';
-				} else if (Array.isArray(obj)) {
-					return block(obj);
-				} else {
-					return block([obj]);
-				}
-			},
-			ifPresent: (obj: any, block: (obj: any) => string): string => {
-				return obj == null ? '' : block(obj);
-			},
-			toWords: (text: string): string => {
-				return text.split(/\s+/g)
-					.map(w => `<span class="word" markdown="1">${w}</span>`)
-					.join(' ');
+export class TemplateRenderer extends ARenderer {
+	public readonly templateRE = /(<!--\s+\+template\s+(\S+)\s+(\S+)\s+(\S+)\s+(.+?\s+)?-->)(.*)(<!--\s+-template\s+\2\s+\3\s+\4\s+-->)/s;
+
+	public getData(dataType: string, dataName: string, params: Record<string, string>): object {
+		for (let renderer of TYPED_TEMPLATES) {
+			const data = renderer.getData(dataType, dataName, params);
+			if (data != null) {
+				return data;
 			}
-		};
-		return Object.assign({}, base, this.getLookups(), YAML.parse(text));
+		}
+		throw new Error(`Cannot load: ${dataType} ${dataName}`);
 	}
 
-	public getLookups(): object {
-		return YAML.parse(fs.readFileSync(path.join('data', 'lookups.yaml'), {encoding: 'utf8'}));
-	}
-
-	public getTemplate(templateId: string): string {
-		return fs.readFileSync(path.join('data', 'template', `${templateId}.md`), {encoding: 'utf8'});
+	getScanExtension(): string {
+		return ".md";
 	}
 
 	public markdown(
@@ -53,16 +41,22 @@ export class TemplateRenderer {
 			templateId: string,
 			templateDir: string,
 			templateFileName: string,
+			params: Record<string, string>,
 		) => boolean = ((orig, upd) => orig.trim() !== upd.trim())
 	): void {
 		const relativePath = path.join(dir, fileName);
 		const original = fs.readFileSync(relativePath, {encoding: "utf8"});
-		const updated = original.replace(this.templateRE, (entire, startTag, dataType, dataName, templateId, body, endTag) => {
+		const updated = original.replace(this.templateRE, (entire, startTag, dataType, dataName, templateId, keyVals, body, endTag) => {
 			// console.log(`Template: path=${relativePath}: dataType=${dataType} dataName=${dataName} templateId=${templateId}`);
-			const data = this.getData(dataType, dataName);
-			const template = this.getTemplate(templateId);
-			const result = this.render(template, data, `${templateId} + ${dataType}/${dataName}`);
-			const shouldWrite = block(result, body, dataType, dataName, templateId, dir, fileName);
+			const kv: Record<string, string> = {};
+			let match;
+			const re = /\s*(\w+)=(?:"([^"]*)"|(\S+))/g;
+			while ((match = re.exec(keyVals || ""))) {
+				kv[match[1]] = match[2];
+			}
+			const data = this.getData(dataType, dataName, kv);
+			const result = this.render(data, `${templateId} + ${dataType}/${dataName}`, dataType, templateId, kv);
+			const shouldWrite = block(result, body, dataType, dataName, templateId, dir, fileName, kv);
 			if (shouldWrite) {
 				console.log(`Rendered: ${templateId} + ${dataType}/${dataName} => ${relativePath}`);
 				return `${startTag}\n\n${result}\n\n${endTag}`;
@@ -75,53 +69,12 @@ export class TemplateRenderer {
 		}
 	}
 
-	public render(template: string, data: Record<string, any>, context: string): string {
-		const [vars, values] = Object.keys(data).reduce(([a, b]: [any[], any[]], k: string) => {
-			a.push(k)
-			b.push(data[k] as any)
-			return [a, b];
-		}, [[], []])
-		const body = `
-    	'use strict';
-    	return \`${template}\`;
-		`;
-		const evaluate = new Function(...vars, body);
-		try {
-			const rendered: string = evaluate(...values);
-			return rendered
-				.replace(/\n[ \x09]*:trimAndNextIfEmpty:[ \x09]*\n/sg, '')
-				.replace(/:trimAndNextIfEmpty:/g, '')
-				.replace(/\n[ \x09]*:trimIfEmpty:/sg, '')
-				.replace(/:trimIfEmpty:/g, '')
-				;
-		} catch (e) {
-			let match;
-			if ((match = (String(e.stack) as string).match(/<anonymous>:(\d+):(\d+)/))) {
-				const lines = body.split(/\r?\n/g);
-				const lineNum = Number(match[1]) - 3;
-				console.error(`\n!!!!\n${context}\n!!!!\n${lines[lineNum-1]}\n${lines[lineNum]}\n${lines[lineNum+1]}\n!!!!\n`);
-			}
-			throw e;
+	protected render<T>(data: Record<string, any>, context: string, dataType: string, templateId: string, params: Record<string, string>): string {
+		const renderer: ATemplate<T> | undefined = TYPED_TEMPLATES.filter(tt => tt.canRender(dataType, templateId, params)).shift();
+		if (renderer != null) {
+			const typed: T = renderer.convert(data, params);
+			return renderer.render(typed, params);
 		}
-	}
-
-
-	public scan<T>(
-		dir: string,
-		block: (dir: string, name: string) => T,
-	): T[] {
-		// console.log(`Scan: ${dir}`);
-		const items = fs.readdirSync(dir, {withFileTypes: true});
-		const results: T[] = [];
-		for (const item of items) {
-			if (item.isDirectory() && !item.name.startsWith('.')) {
-				const partial = this.scan(path.join(dir, item.name), block);
-				results.push(...partial);
-			} else if (item.isFile() && item.name.endsWith('.md')) {
-				const result = block(dir, item.name);
-				results.push(result);
-			}
-		}
-		return results;
+		throw new Error(`No renderers for ${context}`)
 	}
 }
