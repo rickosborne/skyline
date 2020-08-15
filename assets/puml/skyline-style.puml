@@ -1,0 +1,26 @@
+skinparam {
+	DefaultFontName Roboto Condensed
+	DefaultFontSize 16
+	shadowing false
+
+	' --barely-blue: hsl(208, 80%, 99%); #FAFDFE
+	' --noon-blue: hsl(208, 80%, 88%); #C8E2F9
+	' --morning-blue: hsl(208, 80%, 66%); #63ADEE
+
+	' --barely-orange: hsl(32, 80%, 99%); #FEFDFA
+	' --noon-orange: hsl(32, 80%, 88%); #F9E2C8
+	' --morning-orange: hsl(32, 80%, 66%); #EEAD63
+	' --evening-orange: hsl(32, 80%, 44%); #CA7616
+
+	' --barely-green: hsl(96, 80%, 99%); #FCFEFA
+	' --noon-green: hsl(96, 80%, 77%); #BBF395
+	' --morning-green: hsl(96, 80%, 55%); #7AE830
+
+	FileBorderColor #dddddd
+	FileBackgroundColor #eeeeee
+	ComponentBorderColor #dddddd
+	ComponentBackgroundColor #eeeeee
+	CloudBorderColor #dddddd
+	CloudBackgroundColor #eeeeee
+	ArrowColor #cccccc
+}
