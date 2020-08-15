@@ -486,6 +486,10 @@ code {
 	text-indent: -1.5rem;
 }
 
+object {
+	max-width: 100%;
+}
+
 @media (max-width: 40rem) {
 	:root {
 		--cadence: 1.5rem;

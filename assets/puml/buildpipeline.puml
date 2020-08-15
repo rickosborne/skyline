@@ -1,0 +1,71 @@
+@startuml
+
+title Build Pipeline & Assets
+
+!include skyline-style.puml
+
+skinparam {
+	FileBorderColor<<Source>> #63ADEE
+	FileBackgroundColor<<Source>> #C8E2F9
+	ComponentBorderColor #EEAD63
+	ComponentBackgroundColor #F9E2C8
+	CloudBackgroundColor #FCFEFA
+	CloudBorderColor #BBF395
+	ComponentBorderColor<<Library>> #cccccc
+	ComponentBackgroundColor<<Library>> #dddddd
+	LegendBackgroundColor transparent
+	LegendBorderColor transparent
+	LegendBorderThickness 0
+}
+
+file "data/schema/machine.schema.json" as MachineJSONSchema<<Source>>
+file "data/schema/book.schema.json" as BookJSONSchema<<Source>>
+file "*.machine.yaml" as MachineYAML<<Source>>
+file "src/schema/*.ts" as TypeScriptSchema<<Intermediate>>
+file "**/{machine}.md" as MachineMD<<Intermediate>>
+file "**/*.md" as GenericMD<<Source>>
+file "**/book.yaml" as BookYAML<<Source>>
+file "**/{player-character}.md" as PlayerCharacterMD<<Intermediate>>
+file "data/machine/hzd-machines*.tsv" as MachinesTSV<<Source>>
+file "assets/css/skyline-original.scss" as Stylesheet<<Source>>
+file "_sass/skyline.scss" as JekyllCSS<<Intermediate>>
+component "src/template/*.tsx" as Templates<<Script>>
+component "src/template/template.ts" as TemplateRenderer<<Script>>
+component "src/schema/schema.ts" as JSONSchemaToTypescript<<Script>>
+component "GitHub Pages\nJekyll" as GHPages<<Library>>
+component "src/machine/attacks.ts" as AttacksTS<<Script>>
+component "sass" as Sass<<Library>>
+cloud "Site" as Site
+
+BookYAML ..> BookJSONSchema : validated by
+MachineYAML ...> MachineJSONSchema : validated by
+Templates ..> TypeScriptSchema : validated by
+MachinesTSV --> AttacksTS
+MachineYAML <-- AttacksTS : One-time initial setup
+MachineJSONSchema --> JSONSchemaToTypescript
+' JSONSchemaToTypescript <-- BookJSONSchema
+BookJSONSchema --> JSONSchemaToTypescript
+JSONSchemaToTypescript --> TypeScriptSchema
+GenericMD --> GHPages
+MachineMD --> GHPages
+GHPages --> Site
+MachineYAML --> MachineMD
+Templates --> MachineMD
+TemplateRenderer --> MachineMD
+Templates --> PlayerCharacterMD
+TemplateRenderer --> PlayerCharacterMD
+PlayerCharacterMD --> GHPages
+Stylesheet --> Sass
+Sass --> JekyllCSS
+JekyllCSS --> GHPages
+BookYAML --> PlayerCharacterMD
+
+legend
+|= Resource |= Type |= Handling |
+|<#63ADEE> File | <<Source>> | Edited by hand |
+|<#EEAD63> Component | <<Script>> | Edited by Hand |
+|<#dddddd> File | <<Intermediate>> | Generated, not edited! |
+|<#cccccc> Component | <<Library>> | Third-party app |
+endlegend
+
+@enduml

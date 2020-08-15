@@ -1,5 +1,6 @@
 plugins:
   - jekyll-relative-links
+  - jekyll-plantuml
 relative_links:
   enabled: true
   collections: true
@@ -11,14 +12,12 @@ exclude:
   - '*.puml'
   - '*.tsv'
   - 'assets/css/skyline-original.scss'
+  - 'assets/puml/*'
+include:
+  - LICENSE.md
+  - CONTRIBUTING.md
 
 theme: jekyll-theme-cayman
-
-#defaults:
-#  - scope:
-#      path: "assets/img"
-#    values:
-#      image: true
 
 show_downloads: false
 markdown: kramdown

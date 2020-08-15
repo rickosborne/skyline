@@ -17,6 +17,10 @@ You probably want one of:
 There's also a [Notes](notes) section, which might be interesting to people who want to know more about the design process for Skyline.
 Data nerds might enjoy the [Data](data) section.
 
+## Development
+
+See [Contributing](CONTRIBUTING.md).
+
 ## Copyright
 
 The creator and owner of this fan work is Rick Osborne.
