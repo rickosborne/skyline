@@ -9,6 +9,7 @@ skinparam {
 	FileBackgroundColor<<Source>> #C8E2F9
 	ComponentBorderColor #EEAD63
 	ComponentBackgroundColor #F9E2C8
+	ComponentStyle uml1
 	CloudBackgroundColor #FCFEFA
 	CloudBorderColor #BBF395
 	ComponentBorderColor<<Library>> #cccccc
@@ -16,49 +17,79 @@ skinparam {
 	LegendBackgroundColor transparent
 	LegendBorderColor transparent
 	LegendBorderThickness 0
+	PackageBorderColor #cccccc
 }
 
-file "data/schema/machine.schema.json" as MachineJSONSchema<<Source>>
-file "data/schema/book.schema.json" as BookJSONSchema<<Source>>
-file "*.machine.yaml" as MachineYAML<<Source>>
-file "src/schema/*.ts" as TypeScriptSchema<<Intermediate>>
-file "**/{machine}.md" as MachineMD<<Intermediate>>
-file "**/*.md" as GenericMD<<Source>>
-file "**/book.yaml" as BookYAML<<Source>>
-file "**/{player-character}.md" as PlayerCharacterMD<<Intermediate>>
-file "data/machine/hzd-machines*.tsv" as MachinesTSV<<Source>>
-file "assets/css/skyline-original.scss" as Stylesheet<<Source>>
-file "_sass/skyline.scss" as JekyllCSS<<Intermediate>>
-component "src/template/*.tsx" as Templates<<Script>>
-component "src/template/template.ts" as TemplateRenderer<<Script>>
-component "src/schema/schema.ts" as JSONSchemaToTypescript<<Script>>
-component "GitHub Pages\nJekyll" as GHPages<<Library>>
-component "src/machine/attacks.ts" as AttacksTS<<Script>>
-component "sass" as Sass<<Library>>
-cloud "Site" as Site
+package "PlantUML" as PlantUMLPackage {
+	file "assets/puml/*.puml\nDiagram Sources" as PlantUML<<Source>>
+	component "PlantUML" as PlantUMLJar<<Library>>
+	component "src/template/PlantUml*.ts\nPlantUML Renderer" as PlantUMLRenderer<<Script>>
 
-BookYAML ..> BookJSONSchema : validated by
-MachineYAML ...> MachineJSONSchema : validated by
-Templates ..> TypeScriptSchema : validated by
-MachinesTSV --> AttacksTS
-MachineYAML <-- AttacksTS : One-time initial setup
+	PlantUMLJar <.. PlantUMLRenderer : uses
+	PlantUML --> PlantUMLRenderer
+}
+
+package "CSS" {
+	file "assets/css/skyline-original.scss\nSite Stylesheet" as Stylesheet<<Source>>
+	component "dart-sass" as Sass<<Library>>
+	file "_sass/skyline.scss\nGenerated CSS" as JekyllCSS<<Intermediate>>
+
+	Stylesheet --> Sass
+  Sass --> JekyllCSS
+}
+
+package "Machine NPCs" {
+	file "data/schema/machine.schema.json\nMachine Data Schema" as MachineJSONSchema<<Source>>
+	file "*.machine.yaml\nMachine Data" as MachineYAML<<Source>>
+	file "**/{machine}.md\nMachine Stat Block" as MachineMD<<Intermediate>>
+	file "data/machine/hzd-machines*.tsv\nMachine Statistics" as MachinesTSV<<Source>>
+	component "src/template/*.tsx\nAdapter Renderers" as MachineRenderers<<Script>>
+	component "src/machine/attacks.ts\nMachine Data Renderer" as AttacksTS<<Script>>
+
+	MachineYAML ...> MachineJSONSchema : validated by
+	MachinesTSV --> AttacksTS
+	MachineYAML <-- AttacksTS : One-time initial setup
+	MachineYAML --> MachineMD
+	MachineRenderers --> MachineMD
+}
+
+package "Books & Player Characters" {
+	file "**/book.yaml\nBook Data" as BookYAML<<Source>>
+	file "data/schema/book.schema.json\nBook Schema" as BookJSONSchema<<Source>>
+	file "**/{player-character}.md\nPlayer Character Sheet" as PlayerCharacterMD<<Intermediate>>
+	component "src/template/*.tsx\nAdapter Renderers" as PCRenderers<<Script>>
+
+	BookYAML ..> BookJSONSchema : validated by
+	PCRenderers --> PlayerCharacterMD
+	BookYAML --> PlayerCharacterMD
+}
+
+package "Data Schema" {
+	component "src/schema/schema.ts\nTypescript Generator" as JSONSchemaToTypescript<<Script>>
+	file "src/schema/*.ts\nTypescript Interfaces" as TypeScriptSchema<<Intermediate>>
+
+	JSONSchemaToTypescript --> TypeScriptSchema
+}
+
+package "Prose & Packaging" {
+	file "**/*.md\nProse & Rendered Blocks" as GenericMD<<Source>>
+	component "Jekyll & GitHub Pages" as GHPages<<Library>>
+	cloud "Site" as Site
+
+	GenericMD --> GHPages
+	GHPages --> Site
+}
+
+
+MachineRenderers ..> TypeScriptSchema : validated by
+PCRenderers ..> TypeScriptSchema : validated by
 MachineJSONSchema --> JSONSchemaToTypescript
 ' JSONSchemaToTypescript <-- BookJSONSchema
 BookJSONSchema --> JSONSchemaToTypescript
-JSONSchemaToTypescript --> TypeScriptSchema
-GenericMD --> GHPages
+PlantUMLRenderer --> GenericMD
 MachineMD --> GHPages
-GHPages --> Site
-MachineYAML --> MachineMD
-Templates --> MachineMD
-TemplateRenderer --> MachineMD
-Templates --> PlayerCharacterMD
-TemplateRenderer --> PlayerCharacterMD
 PlayerCharacterMD --> GHPages
-Stylesheet --> Sass
-Sass --> JekyllCSS
 JekyllCSS --> GHPages
-BookYAML --> PlayerCharacterMD
 
 legend
 |= Resource |= Type |= Handling |

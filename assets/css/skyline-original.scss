@@ -21,7 +21,7 @@
 // .. but Noto Sans doesn't have the weight options to balance Noto Serif
 //@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 // Used for D&D Stat Blocks (headers)
-@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:700');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&display=swap');
 // Used for D&D Stat Blocks (body)
 @import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&family=Noto+Sans:ital,wght@0,400;0,700;1,400&display=swap');
 
@@ -486,8 +486,14 @@ code {
 	text-indent: -1.5rem;
 }
 
-object {
+object, svg {
 	max-width: 100%;
+	height: auto;
+}
+
+.fullscreen-svg {
+	background-color: white;
+	cursor: pointer;
 }
 
 @media (max-width: 40rem) {

@@ -10,7 +10,29 @@ export abstract class ATemplate<T> {
 
 	abstract getData(dataType: string, dataName: string, params: Record<string, string>): object | undefined;
 
-	abstract render(data: T, params: Record<string, string>): string;
+	abstract render(data: T, params: Record<string, string>, originalBody: string): string;
+
+	public renderStartTag(
+		original: string,
+		data: T,
+		dataType: string,
+		dataName: string,
+		templateId: string,
+		params: Record<string, string>,
+	): string {
+		return original;
+	}
+
+	public renderEndTag(
+		original: string,
+		data: T,
+		dataType: string,
+		dataName: string,
+		templateId: string,
+		params: Record<string, string>,
+	): string {
+		return original;
+	}
 
 	public renderDetailedItem(title: string, details: string | string[] | undefined | null): string {
 		return html(
