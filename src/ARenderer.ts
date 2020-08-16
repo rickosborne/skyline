@@ -20,7 +20,7 @@ export abstract class ARenderer {
 		const stat = fs.statSync(dir);
 		let relativeDir = dir;
 		if (stat.isFile()) {
-			relativeDir = '';
+			relativeDir = "";
 		}
 		const items: SimpleDirEnt[] = stat.isDirectory() ? fs.readdirSync(dir, {withFileTypes: true}) : stat.isFile() ? [{
 			name: dir,

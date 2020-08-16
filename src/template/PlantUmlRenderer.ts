@@ -14,6 +14,7 @@ interface PlantUmlData {
 
 export class PlantUmlRenderer extends ATemplate<PlantUmlData> {
 	canRender(dataType: string, templateId: string, params: Record<string, string>): boolean {
+		// console.log(`canRender ${dataType} -- ${templateId} -- ${JSON.stringify(params)}`);
 		return dataType === "plantuml";
 	}
 
@@ -73,7 +74,7 @@ export class PlantUmlRenderer extends ATemplate<PlantUmlData> {
 			.replace(/<svg.*?>/s, svg => svg
 				.replace(/\s+(width|height|style)="[^"]*"/g, "")
 			);
-		console.log(`Params ${JSON.stringify(params)}`);
+		// console.log(`Params ${JSON.stringify(params)}`);
 		if (!!params.link) {
 			svg = `<div class="fullscreen-svg" onclick="if(!document.fullscreenElement && this.requestFullscreen){this.requestFullscreen()}else if(document.fullscreenElement && document.exitFullscreen){document.exitFullscreen()}">${svg}</div>`;
 		}

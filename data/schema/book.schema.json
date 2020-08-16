@@ -396,6 +396,7 @@
 				"Tenakth",
 				"Utaru"
 			],
+			"title": "Tribe Name",
 			"type": "string"
 		}
 	},
@@ -416,10 +417,12 @@
 			"items": {
 				"$ref": "#/definitions/playerCharacter"
 			},
+			"title": "Player Characters",
 			"type": "array"
 		},
 		"title": {
-			"description": "Title",
+			"description": "A generic title, which is short, human-readable, and generally Title Cased.",
+			"title": "Title",
 			"type": "string"
 		}
 	},

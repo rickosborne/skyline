@@ -1,7 +1,7 @@
 /* tslint:disable */
 /**
  * DO NOT MODIFY THIS FILE BY HAND.
- * Original source: book.schema.json
+ * Original source: data/schema/book.schema.json
  */
 
 export type ArmorClassAC = number;
@@ -91,7 +91,15 @@ export type SwimSpeedFt = number;
 /**
  * Tribe
  */
-export type Tribe = 'Banuk' | 'Carja' | 'Nora' | 'Oseram' | 'Shadow Carja' | 'Tenakth' | 'Utaru';
+export type TribeName = 'Banuk' | 'Carja' | 'Nora' | 'Oseram' | 'Shadow Carja' | 'Tenakth' | 'Utaru';
+/**
+ * Player Characters
+ */
+export type PlayerCharacters = PlayerCharacter[];
+/**
+ * A generic title, which is short, human-readable, and generally Title Cased.
+ */
+export type Title = string;
 
 /**
  * Book
@@ -100,14 +108,8 @@ export interface Book {
   $id: string;
   $schema: string;
   adapter: AdapterData;
-  /**
-   * Player Characters
-   */
-  playerCharacter?: PlayerCharacter[];
-  /**
-   * Title
-   */
-  title: string;
+  playerCharacter?: PlayerCharacters;
+  title: Title;
 }
 /**
  * Adapter-specific data
@@ -380,5 +382,5 @@ export interface PlayerCharacter {
    * Name
    */
   name: string;
-  tribe?: string | Tribe;
+  tribe?: string | TribeName;
 }

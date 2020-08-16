@@ -1,7 +1,7 @@
 /* tslint:disable */
 /**
  * DO NOT MODIFY THIS FILE BY HAND.
- * Original source: machine.schema.json
+ * Original source: data/schema/machine.schema.json
  */
 
 /**

@@ -21,7 +21,7 @@ For performance and consistency, most of the content for Skyline is actually dat
 That is, if you're writing HTML by hand you're probably doing it wrong.
 Visually, the system looks like this:
 
-<!-- +template plantuml buildpipeline * hash="f21101245e69f4ddd047d2129ea5ac08dac5c5f7d441009d61473891aa0c28d8" link=1 -->
+<!-- +template plantuml build-pipeline * hash="f21101245e69f4ddd047d2129ea5ac08dac5c5f7d441009d61473891aa0c28d8" link=1 -->
 
 <div class="fullscreen-svg" onclick="if(!document.fullscreenElement && this.requestFullscreen){this.requestFullscreen()}else if(document.fullscreenElement && document.exitFullscreen){document.exitFullscreen()}"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" preserveAspectRatio="none" version="1.1" viewBox="0 0 1817 964" zoomAndPan="magnify"><defs/><g><text fill="#000000" font-family="Roboto Condensed" font-size="16" lengthAdjust="spacingAndGlyphs" textLength="147" x="826" y="14.8438">Build Pipeline &amp; Assets</text><!--MD5=[29637bea514bed2d26b12d4e2abe88ff]
 cluster PlantUMLPackage--><polygon fill="#FFFFFF" points="296,25.1563,365,25.1563,372,49.9063,595,49.9063,595,333.1563,296,333.1563,296,25.1563" style="stroke: #CCCCCC; stroke-width: 1.5;"/><line style="stroke: #CCCCCC; stroke-width: 1.5;" x1="296" x2="372" y1="49.9063" y2="49.9063"/><text fill="#000000" font-family="Roboto Condensed" font-size="16" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="63" x="300" y="42">PlantUML</text><!--MD5=[e28e1606f6841d642c1c3bc2ebe04d70]
@@ -75,7 +75,7 @@ link MachineMD to GHPages--><path d="M1408.04,317.3362 C1343.39,371.2163 1215.18
 link PlayerCharacterMD to GHPages--><path d="M676.14,498.2463 C633.8,531.0463 572.76,578.3563 532.98,609.1763 " fill="none" id="PlayerCharacterMD-&gt;GHPages" style="stroke: #CCCCCC; stroke-width: 1.0;"/><polygon fill="#CCCCCC" points="528.72,612.4762,538.2823,610.1178,532.6698,609.4105,533.3771,603.798,528.72,612.4762" style="stroke: #CCCCCC; stroke-width: 1.0;"/><!--MD5=[c98fd95ef65f7f2509f4c63fbb411f75]
 link JekyllCSS to GHPages--><path d="M248.02,498.2463 C305.11,531.3163 387.64,579.1163 440.8,609.9163 " fill="none" id="JekyllCSS-&gt;GHPages" style="stroke: #CCCCCC; stroke-width: 1.0;"/><polygon fill="#CCCCCC" points="445.22,612.4762,439.4467,604.497,440.8965,609.9649,435.4285,611.4146,445.22,612.4762" style="stroke: #CCCCCC; stroke-width: 1.0;"/><rect fill="#FFFFFF" height="107.75" rx="5" ry="5" style="stroke: #FFFFFF; stroke-width: 0.0;" width="356" x="721" y="846.1563"/><text fill="#000000" font-family="Roboto Condensed" font-size="16" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="60" x="731" y="868">Resource</text><text fill="#000000" font-family="Roboto Condensed" font-size="16" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="32" x="812" y="868">Type</text><text fill="#000000" font-family="Roboto Condensed" font-size="16" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="58" x="928" y="868">Handling</text><rect fill="#63ADEE" height="18.75" style="stroke: none; stroke-width: 1.0;" width="81" x="727" y="871.9063"/><text fill="#000000" font-family="Roboto Condensed" font-size="16" lengthAdjust="spacingAndGlyphs" textLength="23" x="731" y="886.75">File</text><text fill="#000000" font-family="Roboto Condensed" font-size="16" lengthAdjust="spacingAndGlyphs" textLength="71" x="812" y="886.75">&lt;&lt;Source&gt;&gt;</text><text fill="#000000" font-family="Roboto Condensed" font-size="16" lengthAdjust="spacingAndGlyphs" textLength="95" x="928" y="886.75">Edited by hand</text><rect fill="#EEAD63" height="18.75" style="stroke: none; stroke-width: 1.0;" width="81" x="727" y="890.6563"/><text fill="#000000" font-family="Roboto Condensed" font-size="16" lengthAdjust="spacingAndGlyphs" textLength="73" x="731" y="905.5">Component</text><text fill="#000000" font-family="Roboto Condensed" font-size="16" lengthAdjust="spacingAndGlyphs" textLength="65" x="812" y="905.5">&lt;&lt;Script&gt;&gt;</text><text fill="#000000" font-family="Roboto Condensed" font-size="16" lengthAdjust="spacingAndGlyphs" textLength="97" x="928" y="905.5">Edited by Hand</text><rect fill="#DDDDDD" height="18.75" style="stroke: none; stroke-width: 1.0;" width="81" x="727" y="909.4063"/><text fill="#000000" font-family="Roboto Condensed" font-size="16" lengthAdjust="spacingAndGlyphs" textLength="23" x="731" y="924.25">File</text><text fill="#000000" font-family="Roboto Condensed" font-size="16" lengthAdjust="spacingAndGlyphs" textLength="108" x="812" y="924.25">&lt;&lt;Intermediate&gt;&gt;</text><text fill="#000000" font-family="Roboto Condensed" font-size="16" lengthAdjust="spacingAndGlyphs" textLength="139" x="928" y="924.25">Generated, not edited!</text><rect fill="#CCCCCC" height="18.75" style="stroke: none; stroke-width: 1.0;" width="81" x="727" y="928.1563"/><text fill="#000000" font-family="Roboto Condensed" font-size="16" lengthAdjust="spacingAndGlyphs" textLength="73" x="731" y="943">Component</text><text fill="#000000" font-family="Roboto Condensed" font-size="16" lengthAdjust="spacingAndGlyphs" textLength="73" x="812" y="943">&lt;&lt;Library&gt;&gt;</text><text fill="#000000" font-family="Roboto Condensed" font-size="16" lengthAdjust="spacingAndGlyphs" textLength="98" x="928" y="943">Third-party app</text><line style="stroke: #000000; stroke-width: 1.0;" x1="727" x2="1071" y1="853.1563" y2="853.1563"/><line style="stroke: #000000; stroke-width: 1.0;" x1="727" x2="1071" y1="871.9063" y2="871.9063"/><line style="stroke: #000000; stroke-width: 1.0;" x1="727" x2="1071" y1="890.6563" y2="890.6563"/><line style="stroke: #000000; stroke-width: 1.0;" x1="727" x2="1071" y1="909.4063" y2="909.4063"/><line style="stroke: #000000; stroke-width: 1.0;" x1="727" x2="1071" y1="928.1563" y2="928.1563"/><line style="stroke: #000000; stroke-width: 1.0;" x1="727" x2="1071" y1="946.9063" y2="946.9063"/><line style="stroke: #000000; stroke-width: 1.0;" x1="727" x2="727" y1="853.1563" y2="946.9063"/><line style="stroke: #000000; stroke-width: 1.0;" x1="808" x2="808" y1="853.1563" y2="946.9063"/><line style="stroke: #000000; stroke-width: 1.0;" x1="924" x2="924" y1="853.1563" y2="946.9063"/><line style="stroke: #000000; stroke-width: 1.0;" x1="1071" x2="1071" y1="853.1563" y2="946.9063"/></g></svg></div>
 
-<!-- -template plantuml buildpipeline * -->
+<!-- -template plantuml build-pipeline * -->
 
 ## Development Process
 
@@ -83,21 +83,25 @@ Start up the CSS pipeline:
 
     npm run sass
 
+Start up the JSONSchema-to-Typescript pipeline:
+
+    npm run schema:watch
+
+Start up the template pipeline:
+
+    npm run template:watch
+
 Start up the Jekyll pipeline:
 
     npm run jekyll:serve
 
-This will watch for changes to Markdown and SCSS, but not changes in data files.
-Jekyll will also occasionally get confused when you add new files, and will need to be restarted.
+Once those are up and running, changes to most things will yield changes in the browser.
+Most of those watchers, including Jekyll, will also occasionally get confused when you add new files, and will need to be restarted.
 
-To have the various renderers inject content into the template blocks in Markdown files:
+Some changes won't get caught by the watchers.
+In those cases, you can force a full sync, which isn't as expensive as it sounds:
 
     npm run template
-
-If you change the schema, that will need to get compiled into Typescript interfaces.
-Again, there's no watcher here:
-
-    npm run schema
 
 To make sure you haven't completely trashed anything:
 
