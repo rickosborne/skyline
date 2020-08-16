@@ -89,8 +89,8 @@ eachMachine((machine, fileName) => {
 				// expect(dnd5e.hp.average, 'HP average at most').is.at.most(crStat.hpMax);
 				// TODO: Attack Bonus
 				// TODO: Better Damage per Round
-				for (let actionId of Object.keys(dnd5e.action)) {
-					const action = dnd5e.action[actionId];
+				for (let actionId of Object.keys(dnd5e.action || {})) {
+					const action = (dnd5e.action || {})[actionId];
 					if (Array.isArray(action.onHit)) {
 						let damageMultiplier = 1.0;
 						if (action.save != null) {

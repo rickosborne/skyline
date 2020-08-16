@@ -1,12 +1,28 @@
-import * as path from 'path';
-import * as fs from 'fs';
-import * as console from 'console';
-import * as YAML from 'yaml';
-import {ActionOnHit, DND5EAction, DND5EAdapter, Machine, MachineAction, MachineAdapters, Variant} from "./Machine";
+import * as console from "console";
+import * as fs from "fs";
+import * as path from "path";
+import * as YAML from "yaml";
+import {
+	AdapterData,
+	DD5EAction,
+	DD5EMachineActions,
+	DD5EMachineAdapter,
+	DD5EOnHit,
+	DD5EOnHits,
+	DifficultyToTarget,
+	HitDie,
+	Machine,
+	MachineAction,
+	MachineActions,
+	MachineVariant,
+	OverrideSource,
+	RoleClass,
+	SizeClass
+} from "../schema/machine";
 
-const dataMachinePath = path.join(__dirname, '..', '..', 'data', 'machine');
-const attacksFilePath = path.join(dataMachinePath, 'hzd-machines-attacks.tsv');
-const summaryFilePath = path.join(dataMachinePath, 'hzd-machines.tsv');
+const dataMachinePath = path.join(__dirname, "..", "..", "data", "machine");
+const attacksFilePath = path.join(dataMachinePath, "hzd-machines-attacks.tsv");
+const summaryFilePath = path.join(dataMachinePath, "hzd-machines.tsv");
 
 const makeChanges = true;
 
@@ -29,9 +45,9 @@ class TsvFile {
 	constructor(
 		readonly filePath: string
 	) {
-		this.lines = fs.readFileSync(filePath, {encoding: 'utf8'})
+		this.lines = fs.readFileSync(filePath, {encoding: "utf8"})
 			.split(/\r?\n/g)
-			.map(line => line.split('\t'));
+			.map(line => line.split("\t"));
 		this.columns = (this.lines.shift() || []).reduce((p, c, i) => {
 			p[c.toLowerCase()] = i;
 			return p;
@@ -47,7 +63,7 @@ class TsvFile {
 					throw new Error(`Unknown column '${name}' at line ${lineNumber}`);
 				}
 				const value = line[colNum];
-				return value != null && !(value.trim() === '') ? value : undefined;
+				return value != null && !(value.trim() === "") ? value : undefined;
 			};
 			const req = (name: string): string => {
 				const value = opt(name);
@@ -96,7 +112,7 @@ interface DND5EStats {
 	fireRoll: string | undefined;
 	forceAvg: number | undefined;
 	forceRoll: string | undefined;
-	hitDie: number;
+	hitDie: HitDie;
 	lightningAvg: number | undefined;
 	lightningRoll: string | undefined;
 	normalAvg: number | undefined;
@@ -117,40 +133,40 @@ interface MachineAttack {
 	rangeMin: number | undefined;
 	tickCount: number | undefined;
 	tickType: string | undefined;
-	timesPerFight: 'A' | number;
+	timesPerFight: "A" | number;
 	title: string;
 }
 
 const attacksTsv = new TsvFile(attacksFilePath);
 const attacks = attacksTsv.eachLine(record => {
-	const timesPerFight = record.req('Times per Fight');
+	const timesPerFight = record.req("Times per Fight");
 	const attack: MachineAttack = {
 		lineNumber: record.lineNumber,
-		machineName: record.req('Machine'),
-		title: record.req('Action'),
-		timesPerFight: timesPerFight === 'A' ? 'A' : Number(timesPerFight),
-		rangeMin: record.optNum('Range Min (m)'),
-		rangeMax: record.optNum('Range Max (m)'),
-		multiAttack: record.optNum('Multi-Attack'),
-		tickCount: record.optNum('Tick Count'),
-		tickType: record.opt('Tick Type'),
-		cleave: record.opt('Cleave'),
-		otherStatus: record.opt('Status'),
-		cooldown: record.optNum('Cooldown Turns'),
+		machineName: record.req("Machine"),
+		title: record.req("Action"),
+		timesPerFight: timesPerFight === "A" ? "A" : Number(timesPerFight),
+		rangeMin: record.optNum("Range Min (m)"),
+		rangeMax: record.optNum("Range Max (m)"),
+		multiAttack: record.optNum("Multi-Attack"),
+		tickCount: record.optNum("Tick Count"),
+		tickType: record.opt("Tick Type"),
+		cleave: record.opt("Cleave"),
+		otherStatus: record.opt("Status"),
+		cooldown: record.optNum("Cooldown Turns"),
 		dnd5e: {
-			hitDie: record.reqNum('5E Hit Die'),
-			normalAvg: record.optNum('5E Normal Avg'),
-			normalRoll: record.opt('5E Normal Roll'),
-			lightningAvg: record.optNum('5E Lightning Avg'),
-			lightningRoll: record.opt('5E Lightning Roll'),
-			coldAvg: record.optNum('5E Cold Avg'),
-			coldRoll: record.opt('5E Cold Roll'),
-			fireAvg: record.optNum('5E Fire Avg'),
-			fireRoll: record.opt('5E Fire Roll'),
-			forceAvg: record.optNum('5E Force Avg'),
-			forceRoll: record.opt('5E Force Roll'),
-			tickAvg: record.optNum('5E Tick Avg'),
-			tickRoll: record.opt('5E Tick Roll'),
+			hitDie: record.reqNum("5E Hit Die") as HitDie,
+			normalAvg: record.optNum("5E Normal Avg"),
+			normalRoll: record.opt("5E Normal Roll"),
+			lightningAvg: record.optNum("5E Lightning Avg"),
+			lightningRoll: record.opt("5E Lightning Roll"),
+			coldAvg: record.optNum("5E Cold Avg"),
+			coldRoll: record.opt("5E Cold Roll"),
+			fireAvg: record.optNum("5E Fire Avg"),
+			fireRoll: record.opt("5E Fire Roll"),
+			forceAvg: record.optNum("5E Force Avg"),
+			forceRoll: record.opt("5E Force Roll"),
+			tickAvg: record.optNum("5E Tick Avg"),
+			tickRoll: record.opt("5E Tick Roll"),
 		}
 	};
 	return attack;
@@ -168,21 +184,15 @@ const machines = attacks.reduce((p, c) => {
 // Cypher Level	Cypher Target Num	Cypher Health	Cypher Damage
 
 interface MachineSummary {
-	machineName: string;
-	wikiLink: string;
-	hzdSize: string;
-	hzdClass: string;
-	overrides: string | undefined;
-	hzdChallenge: number;
-	hp: number;
-	weak: string | undefined;
-	strong: string | undefined;
+	cypher: {
+		level: number,
+		target: number,
+		health: number,
+		damage: number,
+	},
 	difficulty: number;
-	hpScale: number;
 	dmgPerTurn: number;
 	dmgPerTurnScale: number;
-	impact: number;
-	impactScale: number;
 	dnd5e: {
 		hitDie: number,
 		cr: number | string,
@@ -190,49 +200,55 @@ interface MachineSummary {
 		dmgPerRound: number,
 		dmgDivisor: number,
 	},
-	cypher: {
-		level: number,
-		target: number,
-		health: number,
-		damage: number,
-	},
+	hp: number;
+	hpScale: number;
+	hzdChallenge: number;
+	hzdClass: string;
+	hzdSize: string;
+	impact: number;
+	impactScale: number;
+	machineName: string;
+	overrides: OverrideSource | undefined;
+	strong: string | undefined;
+	weak: string | undefined;
+	wikiLink: string;
 }
 
 const summaryTsv = new TsvFile(summaryFilePath);
 const summaries = summaryTsv.eachLine(r => {
-	const reqStr = r.opt('5E CR');
+	const reqStr = r.opt("5E CR");
 	if (reqStr == null) {
 		return undefined;
 	}
 	const cr: number | string = isNaN(reqStr as unknown as number) ? reqStr : Number(reqStr);
 	const summary: MachineSummary = {
-		machineName: r.req('Machine'),
-		wikiLink: r.req('Link'),
-		hzdSize: r.req('Size'),
-		hzdClass: r.req('Class'),
-		overrides: r.opt('Override'),
-		hzdChallenge: r.reqNum('Challenge'),
-		hp: r.reqNum('HP'),
-		weak: r.opt('Weakness'),
-		strong: r.opt('Strength'),
-		difficulty: r.reqNum('Difficulty'),
-		hpScale: r.reqNum('HP Scale'),
-		dmgPerTurn: r.reqNum('Damage/Turn'),
-		dmgPerTurnScale: r.reqNum('Damage/Turn Scale'),
-		impact: r.reqNum('Impact'),
-		impactScale: r.reqNum('Impact Scale'),
+		machineName: r.req("Machine"),
+		wikiLink: r.req("Link"),
+		hzdSize: r.req("Size"),
+		hzdClass: r.req("Class"),
+		overrides: r.opt("Override") as OverrideSource,
+		hzdChallenge: r.reqNum("Challenge"),
+		hp: r.reqNum("HP"),
+		weak: r.opt("Weakness"),
+		strong: r.opt("Strength"),
+		difficulty: r.reqNum("Difficulty"),
+		hpScale: r.reqNum("HP Scale"),
+		dmgPerTurn: r.reqNum("Damage/Turn"),
+		dmgPerTurnScale: r.reqNum("Damage/Turn Scale"),
+		impact: r.reqNum("Impact"),
+		impactScale: r.reqNum("Impact Scale"),
 		dnd5e: {
-			hitDie: r.reqNum('5E Hit Dice'),
+			hitDie: r.reqNum("5E Hit Dice"),
 			cr,
-			hp: r.reqNum('5E HP'),
-			dmgPerRound: r.reqNum('5E Dmg/Round'),
-			dmgDivisor: r.reqNum('Damage Divisor')
+			hp: r.reqNum("5E HP"),
+			dmgPerRound: r.reqNum("5E Dmg/Round"),
+			dmgDivisor: r.reqNum("Damage Divisor")
 		},
 		cypher: {
-			level: r.reqNum('Cypher Level'),
-			health: r.reqNum('Cypher Health'),
-			damage: r.reqNum('Cypher Damage'),
-			target: r.reqNum('Cypher Target Num'),
+			level: r.reqNum("Cypher Level"),
+			health: r.reqNum("Cypher Health"),
+			damage: r.reqNum("Cypher Damage"),
+			target: r.reqNum("Cypher Target Num"),
 		}
 	};
 	return summary;
@@ -257,7 +273,7 @@ function logUpdate<T extends Record<string, any>, K extends string & keyof T, U 
 
 function traverse<T extends Record<string, any>, K extends string & keyof T, U extends T[K]>(target: T, key: K, defaultValue: () => U, parentPath: string, block: (value: U, childPath: string) => U | undefined | void = v => v): void {
 	const existing = target[key] as U;
-	const replacement = block(existing || defaultValue(), parentPath + '.' + key);
+	const replacement = block(existing || defaultValue(), parentPath + "." + key);
 	if (replacement != null && replacement !== existing && makeChanges) {
 		console.log(`\tTraverse updating ${parentPath}.${key}`);
 		target[key] = replacement;
@@ -270,7 +286,7 @@ function like<T>(target: T[], predicate: (item: T) => boolean, defaultValue: () 
 	if (value == null) {
 		return;
 	}
-	const replacement = block(value, parentPath + '[' + existingIndex + ']');
+	const replacement = block(value, parentPath + "[" + existingIndex + "]");
 	if (replacement != null && (existingIndex < 0 || replacement !== value) && makeChanges) {
 		if (existingIndex < 0) {
 			console.log(`\tPushing to ${parentPath}`);
@@ -291,43 +307,43 @@ function camelCase(s: string): string {
 			}
 			return t.length < 2 ? t.toUpperCase() : (t[0].toUpperCase() + t.substr(1));
 		})
-		.join('');
+		.join("");
 }
 
 YAML.scalarOptions.str.fold.lineWidth = 0;
 
 interface OnHitMapper {
-	prefix: string;
-	pred: (oh: ActionOnHit) => boolean;
-	type?: string;
 	getAvg: (s: DND5EStats) => number;
 	getRoll: (s: DND5EStats) => string;
+	pred: (oh: DD5EOnHit) => boolean;
+	prefix: string;
+	type?: string;
 }
 
 const onHitMappers = [{
-	prefix: 'normal',
-	pred: oh => ['bludgeoning', 'piercing', 'slashing', 'TODO'].includes(oh.type),
-	type: 'TODO',
+	prefix: "normal",
+	pred: oh => ["bludgeoning", "piercing", "slashing", "TODO"].includes(oh.type as string),
+	type: "TODO",
 	getAvg: s => s.normalAvg,
 	getRoll: s => s.normalRoll,
 }, {
-	prefix: 'fire',
-	pred: oh => oh.type === 'fire',
+	prefix: "fire",
+	pred: oh => oh.type === "fire",
 	getAvg: s => s.fireAvg,
 	getRoll: s => s.fireRoll,
 }, {
-	prefix: 'lightning',
-	pred: oh => oh.type === 'lightning',
+	prefix: "lightning",
+	pred: oh => oh.type === "lightning",
 	getAvg: s => s.lightningAvg,
 	getRoll: s => s.lightningRoll,
 }, {
-	prefix: 'cold',
-	pred: oh => oh.type === 'cold',
+	prefix: "cold",
+	pred: oh => oh.type === "cold",
 	getAvg: s => s.coldAvg,
 	getRoll: s => s.coldRoll,
 }, {
-	prefix: 'force',
-	pred: oh => oh.type === 'force',
+	prefix: "force",
+	pred: oh => oh.type === "force",
 	getAvg: s => s.forceAvg,
 	getRoll: s => s.forceRoll,
 }] as OnHitMapper[];
@@ -335,7 +351,7 @@ const onHitMappers = [{
 for (let attacks of Object.values(machines)) {
 	const machineName = attacks[0].machineName;
 	const hitDie = attacks[0].dnd5e.hitDie;
-	const fileName = machineName.toLowerCase().replace(/[^a-z]+/g, '');
+	const fileName = machineName.toLowerCase().replace(/[^a-z]+/g, "");
 	const yamlPath = path.join(dataMachinePath, `${machineName.toLowerCase()}.machine.yaml`);
 	const summary = summaries.find(s => s.machineName.toLowerCase() === machineName.toLowerCase());
 	if (summary == null) {
@@ -345,30 +361,30 @@ for (let attacks of Object.values(machines)) {
 	const daemonic = summaries.find(s => s.machineName.toLowerCase() === machineName.toLowerCase() + ", daemonic");
 	if (fs.existsSync(yamlPath)) {
 		console.log(`Machine: ${machineName} (${fileName})`);
-		const originalYaml = fs.readFileSync(yamlPath, {encoding: 'utf8'});
+		const originalYaml = fs.readFileSync(yamlPath, {encoding: "utf8"});
 		const def: Machine = YAML.parse(originalYaml);
-		traverse(def, 'adapter', () => ({}) as MachineAdapters, '$', (adapter, adapterPath) => {
-			traverse(adapter, 'dnd5e', () => ({}) as DND5EAdapter, adapterPath, (dnd5e, dnd5ePath) => {
-				logUpdate(dnd5e, 'hitDie', hitDie, dnd5ePath);
-				traverse(def, 'action', () => [] as MachineAction[], '$', (actions, actionsPath) => {
+		traverse(def, "adapter", () => ({}) as AdapterData, "$", (adapter, adapterPath) => {
+			traverse(adapter, "dnd5e", () => ({}) as DD5EMachineAdapter, adapterPath, (dnd5e, dnd5ePath) => {
+				logUpdate(dnd5e, "hitDie", hitDie, dnd5ePath);
+				traverse(def, "action", () => ([]) as MachineActions, "$", (actions, actionsPath) => {
 					for (let attack of attacks) {
 						const stats5e = attack.dnd5e;
 						like(actions, a => a.title === attack.title, () => ({
 							title: attack.title,
-							description: 'TODO',
+							description: "TODO",
 							id: camelCase(attack.title),
 						}) as MachineAction, actionsPath, (action) => {
-							traverse(dnd5e, 'action', () => ({}) as Record<string, DND5EAction>, dnd5ePath, (dnd5eActions, dnd5eActionsPath) => {
+							traverse(dnd5e, "action", () => ({}) as DD5EMachineActions, dnd5ePath, (dnd5eActions, dnd5eActionsPath) => {
 								traverse(dnd5eActions, action.id, () => ({
-									description: 'TODO',
-									toHit: 'TODO',
+									description: "TODO",
+									toHit: "TODO",
 									onHit: [],
-								}) as DND5EAction, dnd5eActionsPath, (dnd5eAction, dnd5eActionPath) => {
+								}) as DD5EAction, dnd5eActionsPath, (dnd5eAction, dnd5eActionPath) => {
 									// logUpdate(dnd5eAction, 'target', attack.cleave === '*' ? 'all' : (attack.multiAttack || 1), dnd5eActionPath);
 									// logUpdate(dnd5eAction, 'reachFeet', attack.rangeMax == null ? undefined : attack.rangeMax * 3, dnd5eActionPath);
 									// logUpdate(dnd5eAction, 'melee', !(attack.rangeMin == null || attack.rangeMin >= 5), dnd5eActionPath);
 									// logUpdate(dnd5eAction, 'ranged', !(attack.rangeMax == null || attack.rangeMax < 5), dnd5eActionPath);
-									traverse(dnd5eAction, 'onHit', () => [] as ActionOnHit[], dnd5eActionPath, (onHits, onHitsPath) => {
+									traverse(dnd5eAction, "onHit", () => [] as DD5EOnHits, dnd5eActionPath, (onHits, onHitsPath) => {
 										for (let part of onHitMappers) {
 											const avg = part.getAvg(stats5e);
 											const roll = part.getRoll(stats5e);
@@ -379,9 +395,9 @@ for (let attacks of Object.values(machines)) {
 											}
 											like(onHits, part.pred, () => ({
 												type: part.type || part.prefix,
-											}) as ActionOnHit, onHitsPath, (onHit, onHitPath) => {
-												logUpdate(onHit, 'average', avg, onHitPath);
-												logUpdate(onHit, 'roll', roll, onHitPath);
+											}) as DD5EOnHit, onHitsPath, (onHit, onHitPath) => {
+												logUpdate(onHit, "average", avg, onHitPath);
+												logUpdate(onHit, "roll", roll, onHitPath);
 												return onHit;
 											});
 										}
@@ -407,7 +423,7 @@ for (let attacks of Object.values(machines)) {
 			fs.writeFileSync(yamlPath, updatedYaml, {encoding: "utf8"});
 		}
 	} else {
-		const variant: Record<string, Variant> = {
+		const variant: Record<string, MachineVariant> = {
 			base: {
 				hp: summary.hp,
 				challengeLevel: summary.hzdChallenge
@@ -429,26 +445,26 @@ for (let attacks of Object.values(machines)) {
 			id: camelCase(machineName),
 			title: machineName,
 			plural: machineName,
-			lang: 'en-US',
-			overrideSource: summary.overrides || 'none',
+			lang: "en-US",
+			overrideSource: summary.overrides || "none",
 			link: {
 				horizonWiki: summary.wikiLink,
 			},
-			size: summary.hzdSize,
-			role: summary.hzdClass,
+			size: summary.hzdSize as SizeClass,
+			role: summary.hzdClass as RoleClass,
 			variant,
 			action: attacks.map(attack => ({
 				id: camelCase(attack.title),
 				title: attack.title,
-				description: 'TODO',
-				effect: attack.timesPerFight !== 'A'
+				description: "TODO",
+				effect: attack.timesPerFight !== "A"
 			}) as MachineAction),
 			component: {
 				body: {
-					title: 'Body',
+					title: "Body",
 					damagePercent: 100,
 					remove: false,
-					targetDifficulty: 'TODO',
+					targetDifficulty: "TODO" as DifficultyToTarget,
 				}
 			},
 			adapter: {
@@ -458,55 +474,55 @@ for (let attacks of Object.values(machines)) {
 					health: summary.cypher.health,
 					target: summary.cypher.target,
 					armor: 0,
-					movement: 'Short',
+					movement: "Short",
 				},
 				dnd5e: {
 					armor: {
 						num: 0,
-						type: 'TODO'
+						type: "TODO"
 					},
 					attr: {
 						STR: {
 							score: 0,
-							bonus: 'TODO'
+							bonus: "TODO"
 						},
 						DEX: {
 							score: 0,
-							bonus: 'TODO'
+							bonus: "TODO"
 						},
 						CON: {
 							score: 0,
-							bonus: 'TODO'
+							bonus: "TODO"
 						},
 						INT: {
 							score: 0,
-							bonus: 'TODO'
+							bonus: "TODO"
 						},
 						WIS: {
 							score: 0,
-							bonus: 'TODO'
+							bonus: "TODO"
 						},
 						CHA: {
 							score: 0,
-							bonus: 'TODO'
+							bonus: "TODO"
 						},
 					},
 					speedFeet: 0,
-					hitDie: summary.dnd5e.hitDie,
+					hitDie: summary.dnd5e.hitDie as HitDie,
 					hp: {
 						average: summary.dnd5e.hp,
-						roll: 'TODO'
+						roll: "TODO"
 					},
 					challenge: {
-						rating: summary.dnd5e.cr === '1/2' ? 0.5 : Number(summary.dnd5e.cr),
+						rating: summary.dnd5e.cr === "1/2" ? 0.5 : Number(summary.dnd5e.cr),
 						xp: -1,
 					},
 					action: attacks.reduce((action, attack) => {
 						const id = camelCase(attack.title);
 						const dnd5e = attack.dnd5e;
 						action[id] = {
-							description: 'TODO',
-							target: attack.cleave === '*' ? 'all' : (attack.multiAttack || 1),
+							description: "TODO",
+							target: attack.cleave === "*" ? "all" : (attack.multiAttack || 1),
 							onHit: onHitMappers.map(mapper => {
 								const roll = mapper.getRoll(dnd5e);
 								const avg = mapper.getAvg(dnd5e);
@@ -517,16 +533,16 @@ for (let attacks of Object.values(machines)) {
 									type: mapper.type || mapper.prefix,
 									roll: roll,
 									average: avg
-								}) as ActionOnHit;
-							}).filter(oh => oh != null) as ActionOnHit[],
+								}) as DD5EOnHit;
+							}).filter(oh => oh != null) as DD5EOnHits,
 						};
 						return action;
-					}, {} as Record<string, DND5EAction>),
+					}, {} as DD5EMachineActions),
 				}
 			},
 		};
-		const yaml = YAML.stringify(Object.assign({['$schema']: '../schema/machine.schema.json'}, machine), {sortMapEntries: false});
-		const fileName = machineName.toLowerCase().replace(/[^a-z]+/g, '');
+		const yaml = YAML.stringify(Object.assign({["$schema"]: "../schema/machine.schema.json"}, machine), {sortMapEntries: false});
+		const fileName = machineName.toLowerCase().replace(/[^a-z]+/g, "");
 		fs.writeFileSync(path.join(dataMachinePath, `${fileName}.machine.yaml`), yaml, {encoding: "utf8"});
 	}
 }

@@ -4,8 +4,14 @@
  * Original source: data/schema/book.schema.json
  */
 
+export type AbilityIsAction = boolean;
+export type CypherBook = 'CSR' | 'Predation';
+export type CypherBookPageNumber = number;
 export type CypherAbilityCostValue = number;
+export type CypherAbilityCostPlus = boolean;
 export type CypherStatAbbr = 'Intellect' | 'Might' | 'Speed';
+export type AbilityIsEnabler = boolean;
+export type CypherFamiliarity = 'Inability' | 'Practiced' | 'Specialized' | 'Trained';
 /**
  * A generic title, which is short, human-readable, and generally Title Cased.
  */
@@ -24,6 +30,10 @@ export type CypherSkillList = CypherSkillListItem[];
  * This is the Adjective part of the character summary.
  */
 export type CypherSummaryAdjective = string;
+/**
+ * The "a/an" part of the character summary
+ */
+export type CypherSummaryArticle = 'a' | 'an' | 'the';
 /**
  * This is the Noun part of the character summary.
  */
@@ -45,6 +55,7 @@ export type CypherEffort = number;
 export type CypherEquipmentList = CypherEquipment[];
 export type ExactNumber = number;
 export type DiceRoll = string;
+export type CypherStatBase = number;
 export type CypherStatEdge = number;
 export type CypherStatPool = number;
 export type CypherTier = number;
@@ -156,6 +167,9 @@ export type SwimSpeedFt = number;
 export type DND5EPlayerCharacters = Dnd5EPlayerCharacter[];
 /**
  * Tribe
+ *
+ * This interface was referenced by `Book`'s JSON-Schema
+ * via the `definition` "tribe".
  */
 export type TribeName = 'Banuk' | 'Carja' | 'Nora' | 'Oseram' | 'Shadow Carja' | 'Tenakth' | 'Utaru';
 /**
@@ -175,6 +189,9 @@ export interface Book {
 }
 /**
  * Adapter-specific data
+ *
+ * This interface was referenced by `Book`'s JSON-Schema
+ * via the `definition` "adapter".
  */
 export interface AdapterData {
   cypher: CypherAdapter;
@@ -182,6 +199,9 @@ export interface AdapterData {
 }
 /**
  * Cypher System specifics
+ *
+ * This interface was referenced by `Book`'s JSON-Schema
+ * via the `definition` "cypherAdapter".
  */
 export interface CypherAdapter {
   companion?: CypherCompanions;
@@ -199,12 +219,21 @@ export interface CypherCompanion {
   summary: CypherCharacterSummary;
 }
 export interface CypherAbility {
+  action?: AbilityIsAction;
+  bookRef?: CypherBookReference;
   cost?: CypherAbilityCost;
+  enabler?: AbilityIsEnabler;
+  familiarity?: CypherFamiliarity;
   note?: Notes & (string | string[]);
   title: Title;
 }
+export interface CypherBookReference {
+  book: CypherBook;
+  page: CypherBookPageNumber;
+}
 export interface CypherAbilityCost {
   num: CypherAbilityCostValue;
+  plus?: CypherAbilityCostPlus;
   pool: CypherStatAbbr;
 }
 /**
@@ -225,7 +254,11 @@ export interface CypherSkillListItem {
 }
 export interface CypherCharacterSummary {
   adjective: CypherSummaryAdjective;
+  article?: CypherSummaryArticle;
+  descriptorRef?: CypherBookReference;
+  focusRef?: CypherBookReference;
   noun: CypherSummaryNoun;
+  typeRef?: CypherBookReference;
   verb: CypherSummaryVerb;
 }
 export interface CypherPlayerCharacter {
@@ -274,17 +307,25 @@ export interface CypherStat {
   Speed: CypherStatSummary;
 }
 export interface CypherStatSummary {
+  base?: CypherStatBase;
   edge?: CypherStatEdge;
+  note?: Notes & (string | string[]);
   pool: CypherStatPool;
 }
 /**
  * D&D 5E specifics
+ *
+ * This interface was referenced by `Book`'s JSON-Schema
+ * via the `definition` "dnd5eAdapter".
  */
 export interface DD5EAdapter {
   playerCharacter: DND5EPlayerCharacters;
 }
 /**
  * Player Character
+ *
+ * This interface was referenced by `Book`'s JSON-Schema
+ * via the `definition` "dnd5ePlayerCharacter".
  */
 export interface Dnd5EPlayerCharacter {
   action?: DD5EOtherActions;
@@ -500,6 +541,9 @@ export interface DD5ESkill {
 }
 /**
  * Player Character
+ *
+ * This interface was referenced by `Book`'s JSON-Schema
+ * via the `definition` "playerCharacter".
  */
 export interface PlayerCharacter {
   /**

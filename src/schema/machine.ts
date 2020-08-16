@@ -18,6 +18,9 @@ export type Description = string | string[];
 export type IsEffect = boolean;
 /**
  * Programmatic identifier unique to this object
+ *
+ * This interface was referenced by `Machine`'s JSON-Schema
+ * via the `definition` "id".
  */
 export type ID = string;
 /**
@@ -27,7 +30,7 @@ export type Title = string;
 /**
  * Actions the machine may take
  */
-export type Actions = Action[];
+export type MachineActions = MachineAction[];
 export type Armor = number;
 export type URL = string;
 export type Title1 = string;
@@ -40,11 +43,19 @@ export type IsAMeleeWeaponAttack = boolean;
 export type MinRangeFt = number;
 export type AverageDamage = number;
 export type DamageFormula = string;
-export type Type = 'bludgeoning' | 'cold' | 'corruption' | 'fire' | 'force' | 'lightning' | 'piercing' | 'slashing';
+export type DamageType =
+  | 'bludgeoning'
+  | 'cold'
+  | 'corruption'
+  | 'fire'
+  | 'force'
+  | 'lightning'
+  | 'piercing'
+  | 'slashing';
 /**
  * On-hit effects
  */
-export type Hit1 = Hit[];
+export type DD5EOnHits = DD5EOnHit[];
 export type IsARangedWeaponAttack = boolean;
 export type ReachFt = number;
 export type DC = number;
@@ -74,6 +85,10 @@ export type SwimSpeedFt = number;
  * % of overall machine health this component can take in damage before the component is destroyed
  */
 export type Health1 = number;
+/**
+ * This interface was referenced by `Machine`'s JSON-Schema
+ * via the `definition` "elementKey".
+ */
 export type Element1 = 'corruption' | 'explosion' | 'fire' | 'freeze' | 'shock';
 export type RangeFt = number;
 /**
@@ -93,6 +108,9 @@ export type ResaleValue = number;
 export type Title2 = string;
 /**
  * Items present for potential removal
+ *
+ * This interface was referenced by `Machine`'s JSON-Schema
+ * via the `definition` "loot".
  */
 export type Loot = Item[];
 /**
@@ -140,7 +158,7 @@ export type HitPoints = number;
  */
 export interface Machine {
   $schema?: string;
-  action: Actions;
+  action: MachineActions;
   adapter: AdapterData;
   component?: Components;
   id: ID;
@@ -152,13 +170,16 @@ export interface Machine {
   size: SizeClass;
   strong?: Element2;
   title: Title4;
-  variant: Variants;
+  variant: MachineVariants;
   weak?: Element2;
 }
 /**
  * Action the machine may take
+ *
+ * This interface was referenced by `Machine`'s JSON-Schema
+ * via the `definition` "action".
  */
-export interface Action {
+export interface MachineAction {
   attack?: IsAttack;
   description?: Description;
   effect?: IsEffect;
@@ -167,13 +188,19 @@ export interface Action {
 }
 /**
  * Adapter-specific data
+ *
+ * This interface was referenced by `Machine`'s JSON-Schema
+ * via the `definition` "adapter".
  */
 export interface AdapterData {
   cypher: Cypher;
-  dnd5e: DD5E;
+  dnd5e: DD5EMachineAdapter;
 }
 /**
  * Cypher specifics
+ *
+ * This interface was referenced by `Machine`'s JSON-Schema
+ * via the `definition` "cypherAdapter".
  */
 export interface Cypher {
   armor: Armor;
@@ -192,6 +219,10 @@ export interface Cypher {
   target?: TargetNumber;
   use?: Use & (string | string[]);
 }
+/**
+ * This interface was referenced by `Machine`'s JSON-Schema
+ * via the `definition` "basedOn".
+ */
 export interface BasedOn {
   href?: URL;
   title?: Title1;
@@ -222,14 +253,12 @@ export interface Use {
 }
 /**
  * D&D 5E specifics
+ *
+ * This interface was referenced by `Machine`'s JSON-Schema
+ * via the `definition` "dnd5eAdapter".
  */
-export interface DD5E {
-  /**
-   * Action specifics for D&D 5E
-   */
-  action?: {
-    [k: string]: Action1;
-  };
+export interface DD5EMachineAdapter {
+  action?: DD5EMachineActions;
   armor: ArmorClass;
   attr: AttributeStats;
   basedOn?: BasedOn;
@@ -243,17 +272,23 @@ export interface DD5E {
   swimFeet?: SwimSpeedFt;
 }
 /**
- * This interface was referenced by `undefined`'s JSON-Schema definition
+ * Action specifics for D&D 5E
+ */
+export interface DD5EMachineActions {
+  [k: string]: DD5EAction;
+}
+/**
+ * This interface was referenced by `DD5EMachineActions`'s JSON-Schema definition
  * via the `patternProperty` "^[a-z]+([A-Z][a-z]+)*$".
  */
-export interface Action1 {
+export interface DD5EAction {
   /**
    * Human-readable description of the action
    */
   description?: string | string[];
   melee?: IsAMeleeWeaponAttack;
   minRangeFeet?: MinRangeFt;
-  onHit?: Hit1;
+  onHit?: DD5EOnHits;
   ranged?: IsARangedWeaponAttack;
   reachFeet?: ReachFt;
   save?: Save;
@@ -262,11 +297,14 @@ export interface Action1 {
 }
 /**
  * Damage upon hit
+ *
+ * This interface was referenced by `Machine`'s JSON-Schema
+ * via the `definition` "onHit".
  */
-export interface Hit {
+export interface DD5EOnHit {
   average?: AverageDamage;
   roll?: DamageFormula;
-  type?: Type;
+  type?: DamageType;
 }
 export interface Save {
   attribute: 'Strength' | 'Dexterity' | 'Constitution' | 'Intelligence' | 'Wisdom' | 'Charisma';
@@ -346,6 +384,9 @@ export interface Components {
  *
  * This interface was referenced by `Components`'s JSON-Schema definition
  * via the `patternProperty` ".*".
+ *
+ * This interface was referenced by `Machine`'s JSON-Schema
+ * via the `definition` "component".
  */
 export interface Component {
   damage?: Element;
@@ -362,6 +403,9 @@ export interface Component {
 }
 /**
  * Element
+ *
+ * This interface was referenced by `Machine`'s JSON-Schema
+ * via the `definition` "elementDecimal".
  */
 export interface Element {
   /**
@@ -398,6 +442,9 @@ export interface Links {
 }
 /**
  * Element
+ *
+ * This interface was referenced by `Machine`'s JSON-Schema
+ * via the `definition` "elementBoolean".
  */
 export interface Element2 {
   /**
@@ -409,15 +456,16 @@ export interface Element2 {
 /**
  * Known variant forms
  */
-export interface Variants {
-  /**
-   * Machine Variant
-   *
-   * This interface was referenced by `Variants`'s JSON-Schema definition
-   * via the `patternProperty` ".*".
-   */
-  [k: string]: {
-    challengeLevel: ChallengeLevel;
-    hp: HitPoints;
-  };
+export interface MachineVariants {
+  [k: string]: MachineVariant;
+}
+/**
+ * Machine Variant
+ *
+ * This interface was referenced by `MachineVariants`'s JSON-Schema definition
+ * via the `patternProperty` ".*".
+ */
+export interface MachineVariant {
+  challengeLevel: ChallengeLevel;
+  hp: HitPoints;
 }

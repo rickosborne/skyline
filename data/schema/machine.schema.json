@@ -47,7 +47,7 @@
 				"title",
 				"id"
 			],
-			"title": "Action",
+			"title": "Machine Action",
 			"type": "object"
 		},
 		"adapter": {
@@ -331,7 +331,7 @@
 									"items": {
 										"$ref": "#/definitions/onHit"
 									},
-									"title": "Hit",
+									"title": "D&D 5E On-Hits",
 									"type": "array"
 								},
 								"ranged": {
@@ -389,10 +389,11 @@
 									"type": "string"
 								}
 							},
-							"title": "Action",
+							"title": "D&D 5E Action",
 							"type": "object"
 						}
 					},
+					"title": "D&D 5E Machine Actions",
 					"type": "object"
 				},
 				"armor": {
@@ -467,7 +468,7 @@
 				"hp",
 				"speedFeet"
 			],
-			"title": "D&D 5E",
+			"title": "D&D 5E Machine Adapter",
 			"type": "object"
 		},
 		"elementBoolean": {
@@ -605,11 +606,11 @@
 						"piercing",
 						"slashing"
 					],
-					"title": "Type",
+					"title": "Damage Type",
 					"type": "string"
 				}
 			},
-			"title": "Hit",
+			"title": "D&D 5E On-Hit",
 			"type": "object"
 		}
 	},
@@ -623,7 +624,7 @@
 			"items": {
 				"$ref": "#/definitions/action"
 			},
-			"title": "Actions",
+			"title": "Machine Actions",
 			"type": "array"
 		},
 		"adapter": {
@@ -738,6 +739,7 @@
 						"challengeLevel",
 						"hp"
 					],
+					"title": "Machine Variant",
 					"type": "object"
 				}
 			},
@@ -752,7 +754,7 @@
 			"required": [
 				"base"
 			],
-			"title": "Variants",
+			"title": "Machine Variants",
 			"type": "object"
 		},
 		"weak": {
