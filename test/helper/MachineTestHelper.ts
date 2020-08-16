@@ -1,14 +1,14 @@
-import * as fs from 'fs';
-import * as path from 'path';
-import 'mocha';
-import * as yaml from 'yaml';
-import {Machine} from '../../src/machine/Machine';
+import * as fs from "fs";
+import "mocha";
+import * as path from "path";
+import * as yaml from "yaml";
+import {Machine} from "../../src/schema/machine";
 
-const dataMachinePath = path.join(__dirname, '..', '..', 'data', 'machine');
+const dataMachinePath = path.join(__dirname, "..", "..", "data", "machine");
 
 export function eachMachine(eachMachineCallback: (machine: Machine, fileName: string) => void) {
 	const machineYamlFileNames = fs.readdirSync(dataMachinePath, {withFileTypes: true, encoding: "utf8"})
-		.filter(entry => entry.isFile() && entry.name.endsWith('.machine.yaml'))
+		.filter(entry => entry.isFile() && entry.name.endsWith(".machine.yaml"))
 		.map(entry => entry.name);
 
 	for (let machineYamlFileName of machineYamlFileNames) {
