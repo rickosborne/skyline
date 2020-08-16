@@ -86,6 +86,10 @@ export type AbbreviatedStat = 'STR' | 'DEX' | 'CON' | 'INT' | 'WIS' | 'CHA';
 export type DD5EAttacks = DD5EAttack[];
 export type EffectiveScore = number;
 /**
+ * URL
+ */
+export type ClassURL = string;
+/**
  * D&D 5E Class Name
  */
 export type DD5EClassName =
@@ -425,10 +429,7 @@ export interface ComplexScore {
  * Linked Class
  */
 export interface LinkedClass {
-  /**
-   * URL
-   */
-  href: string;
+  href: ClassURL;
   title: DD5EClassName;
 }
 export interface Defenses {
