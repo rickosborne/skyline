@@ -2,7 +2,7 @@
 
 This work, which includes all content in this repository and available via the associated URLs, is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike license:
 
-> https://creativecommons.org/licenses/by-nc-sa/4.0/
+> [creativecommons.org/licenses/by-nc-sa/4.0/](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
 The full text of the license is available via that URL.
 The following summary is an overview only and non-binding.
