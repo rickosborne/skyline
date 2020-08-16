@@ -1,0 +1,348 @@
+{
+	"$id": "https://rickosborne.github.io/skyline/data/schema/cypher.schema.json",
+	"$schema": "http://json-schema.org/draft-07/schema",
+	"definitions": {
+		"abilities": {
+			"items": {
+				"additionalProperties": false,
+				"properties": {
+					"cost": {
+						"additionalProperties": false,
+						"properties": {
+							"num": {
+								"minimum": 1,
+								"title": "Cypher Ability Cost Value",
+								"type": "integer"
+							},
+							"pool": {
+								"$ref": "#/definitions/statAbbr"
+							}
+						},
+						"required": [
+							"num",
+							"pool"
+						],
+						"title": "Cypher Ability Cost",
+						"type": "object"
+					},
+					"note": {
+						"$ref": "skyline.schema.json#/definitions/note"
+					},
+					"title": {
+						"$ref": "skyline.schema.json#/definitions/title"
+					}
+				},
+				"required": [
+					"title"
+				],
+				"title": "Cypher Ability",
+				"type": "object"
+			},
+			"title": "Cypher Ability List",
+			"type": "array"
+		},
+		"armor": {
+			"title": "Cypher Armor",
+			"type": "integer"
+		},
+		"characterSummary": {
+			"additionalProperties": false,
+			"properties": {
+				"adjective": {
+					"description": "This is the Adjective part of the character summary.",
+					"title": "Cypher Summary Adjective",
+					"type": "string"
+				},
+				"noun": {
+					"description": "This is the Noun part of the character summary.",
+					"title": "Cypher Summary Noun",
+					"type": "string"
+				},
+				"verb": {
+					"description": "This is the Verb part of the character summary.",
+					"title": "Cypher Summary Verb",
+					"type": "string"
+				}
+			},
+			"required": [
+				"adjective",
+				"noun",
+				"verb"
+			],
+			"title": "Cypher Character Summary",
+			"type": "object"
+		},
+		"companion": {
+			"additionalProperties": false,
+			"properties": {
+				"ability": {
+					"$ref": "#/definitions/abilities"
+				},
+				"accompany": {
+					"items": {
+						"$ref": "skyline.schema.json#/definitions/characterName"
+					},
+					"title": "Cypher Companion Accompanies",
+					"type": "array"
+				},
+				"armor": {
+					"$ref": "#/definitions/armor"
+				},
+				"benefit": {
+					"allOf": [
+						{
+							"title": "Cypher Companion Character Benefit"
+						},
+						{
+							"$ref": "skyline.schema.json#/definitions/oneOrMoreStrings"
+						}
+					]
+				},
+				"health": {
+					"title": "Cypher Health",
+					"type": "integer"
+				},
+				"interactionLevel": {
+					"title": "Cypher Character Interaction Level",
+					"type": "integer"
+				},
+				"name": {
+					"$ref": "skyline.schema.json#/definitions/characterName"
+				},
+				"skill": {
+					"$ref": "#/definitions/skills"
+				},
+				"summary": {
+					"$ref": "#/definitions/characterSummary"
+				}
+			},
+			"required": [
+				"name",
+				"summary"
+			],
+			"title": "Cypher Companion",
+			"type": "object"
+		},
+		"playerCharacter": {
+			"additionalProperties": false,
+			"properties": {
+				"ability": {
+					"$ref": "#/definitions/abilities"
+				},
+				"armor": {
+					"$ref": "#/definitions/armor"
+				},
+				"attack": {
+					"items": {
+						"additionalProperties": false,
+						"properties": {
+							"damage": {
+								"title": "Cypher Attack Damage",
+								"type": "integer"
+							},
+							"modifier": {
+								"title": "Cypher Attack Modifier",
+								"type": "string"
+							},
+							"title": {
+								"$ref": "skyline.schema.json#/definitions/title"
+							}
+						},
+						"required": [
+							"damage",
+							"title"
+						],
+						"title": "Cypher Attack",
+						"type": "object"
+					},
+					"title": "Cypher Attacks",
+					"type": "array"
+				},
+				"companion": {
+					"title": "Cypher Companion Name",
+					"type": "string"
+				},
+				"currency": {
+					"title": "Cypher Currency",
+					"type": "integer"
+				},
+				"cypher": {
+					"items": {
+						"additionalProperties": false,
+						"properties": {
+							"level": {
+								"title": "Cypher Cypher Level",
+								"type": "integer"
+							},
+							"note": {
+								"$ref": "skyline.schema.json#/definitions/note"
+							},
+							"title": {
+								"$ref": "skyline.schema.json#/definitions/title"
+							}
+						},
+						"required": [
+							"level",
+							"note",
+							"title"
+						],
+						"title": "Cypher Cypher",
+						"type": "object"
+					},
+					"title": "Cypher Cyphers",
+					"type": "array"
+				},
+				"cypherLimit": {
+					"title": "Cypher Cypher Limit",
+					"type": "integer"
+				},
+				"effort": {
+					"title": "Cypher Effort",
+					"type": "integer"
+				},
+				"equipment": {
+					"items": {
+						"additionalProperties": false,
+						"properties": {
+							"note": {
+								"$ref": "skyline.schema.json#/definitions/note"
+							},
+							"title": {
+								"$ref": "skyline.schema.json#/definitions/title"
+							}
+						},
+						"required": [
+							"title"
+						],
+						"title": "Cypher Equipment",
+						"type": "object"
+					},
+					"title": "Cypher Equipment List",
+					"type": "array"
+				},
+				"name": {
+					"$ref": "skyline.schema.json#/definitions/characterName"
+				},
+				"recovery": {
+					"additionalProperties": false,
+					"properties": {
+						"roll": {
+							"$ref": "skyline.schema.json#/definitions/roll"
+						}
+					},
+					"required": [
+						"roll"
+					],
+					"title": "Cypher Recovery",
+					"type": "object"
+				},
+				"skill": {
+					"$ref": "#/definitions/skills"
+				},
+				"stat": {
+					"additionalProperties": false,
+					"properties": {
+						"Intellect": {
+							"$ref": "#/definitions/statSummary"
+						},
+						"Might": {
+							"$ref": "#/definitions/statSummary"
+						},
+						"Speed": {
+							"$ref": "#/definitions/statSummary"
+						}
+					},
+					"required": [
+						"Intellect",
+						"Might",
+						"Speed"
+					],
+					"title": "Cypher Stat",
+					"type": "object"
+				},
+				"summary": {
+					"$ref": "#/definitions/characterSummary"
+				},
+				"tier": {
+					"minimum": 1,
+					"title": "Cypher Tier",
+					"type": "integer"
+				}
+			},
+			"required": [
+				"effort",
+				"name",
+				"skill",
+				"stat",
+				"summary",
+				"tier"
+			],
+			"title": "Cypher Player Character",
+			"type": "object"
+		},
+		"skills": {
+			"items": {
+				"additionalProperties": false,
+				"properties": {
+					"inability": {
+						"default": false,
+						"title": "Is Inability?",
+						"type": "boolean"
+					},
+					"pool": {
+						"$ref": "#/definitions/statAbbr"
+					},
+					"specialized": {
+						"default": false,
+						"title": "Is Specialized?",
+						"type": "boolean"
+					},
+					"title": {
+						"$ref": "skyline.schema.json#/definitions/title"
+					},
+					"trained": {
+						"default": false,
+						"title": "Is Trained?",
+						"type": "boolean"
+					}
+				},
+				"required": [
+					"pool",
+					"title"
+				],
+				"title": "Cypher Skill List Item",
+				"type": "object"
+			},
+			"title": "Cypher Skill List",
+			"type": "array"
+		},
+		"statAbbr": {
+			"enum": [
+				"Intellect",
+				"Might",
+				"Speed"
+			],
+			"title": "Cypher Stat Abbr.",
+			"type": "string"
+		},
+		"statSummary": {
+			"additionalProperties": false,
+			"properties": {
+				"edge": {
+					"default": 0,
+					"title": "Cypher Stat Edge",
+					"type": "integer"
+				},
+				"pool": {
+					"title": "Cypher Stat Pool",
+					"type": "integer"
+				}
+			},
+			"required": [
+				"pool"
+			],
+			"title": "Cypher Stat Summary",
+			"type": "object"
+		}
+	}
+}

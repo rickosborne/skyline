@@ -7,14 +7,43 @@
 			"additionalProperties": false,
 			"description": "Adapter-specific data",
 			"properties": {
+				"cypher": {
+					"$ref": "#/definitions/cypherAdapter"
+				},
 				"dnd5e": {
 					"$ref": "#/definitions/dnd5eAdapter"
 				}
 			},
 			"required": [
+				"cypher",
 				"dnd5e"
 			],
 			"title": "Adapter Data",
+			"type": "object"
+		},
+		"cypherAdapter": {
+			"additionalProperties": false,
+			"description": "Cypher System specifics",
+			"properties": {
+				"companion": {
+					"items": {
+						"$ref": "cypher.schema.json#/definitions/companion"
+					},
+					"title": "Cypher Companions",
+					"type": "array"
+				},
+				"playerCharacter": {
+					"items": {
+						"$ref": "cypher.schema.json#/definitions/playerCharacter"
+					},
+					"title": "Cypher Player Characters",
+					"type": "array"
+				}
+			},
+			"required": [
+				"playerCharacter"
+			],
+			"title": "Cypher Adapter",
 			"type": "object"
 		},
 		"dnd5eAdapter": {
@@ -26,12 +55,14 @@
 					"items": {
 						"$ref": "#/definitions/dnd5ePlayerCharacter"
 					},
+					"title": "DND5E Player Characters",
 					"type": "array"
 				}
 			},
 			"required": [
 				"playerCharacter"
 			],
+			"title": "D&D 5E Adapter",
 			"type": "object"
 		},
 		"dnd5ePlayerCharacter": {
@@ -42,25 +73,18 @@
 					"description": "Other Actions",
 					"items": {
 						"additionalProperties": false,
-						"description": "Other Action",
+						"description": "D&D5E Other Action",
 						"properties": {
 							"note": {
-								"allOf": [
-									{
-										"description": "Notes"
-									},
-									{
-										"$ref": "skyline.schema.json#/definitions/oneOrMoreStrings"
-									}
-								]
+								"$ref": "skyline.schema.json#/definitions/note"
 							},
 							"title": {
-								"description": "Title",
-								"type": "string"
+								"$ref": "skyline.schema.json#/definitions/title"
 							}
 						},
 						"type": "object"
 					},
+					"title": "D&D5E Other Actions",
 					"type": "array"
 				},
 				"armor": {
@@ -115,8 +139,7 @@
 								"type": "boolean"
 							},
 							"title": {
-								"description": "Attack Title",
-								"type": "string"
+								"$ref": "skyline.schema.json#/definitions/title"
 							},
 							"toHit": {
 								"allOf": [
@@ -158,8 +181,10 @@
 							"title",
 							"toHit"
 						],
+						"title": "D&D 5E Attack",
 						"type": "object"
 					},
+					"title": "D&D 5E Attacks",
 					"type": "array"
 				},
 				"attr": {
@@ -172,10 +197,11 @@
 						"href": {
 							"description": "URL",
 							"format": "URL",
+							"title": "Class URL",
 							"type": "string"
 						},
 						"title": {
-							"$ref": "dnd5e.schema.json#/definitions/class"
+							"$ref": "dnd5e.schema.json#/definitions/className"
 						}
 					},
 					"required": [
@@ -223,8 +249,7 @@
 					"$ref": "dnd5e.schema.json#/definitions/link"
 				},
 				"name": {
-					"description": "Name",
-					"type": "string"
+					"$ref": "skyline.schema.json#/definitions/characterName"
 				},
 				"passive": {
 					"$ref": "dnd5e.schema.json#/definitions/passive"
@@ -239,7 +264,7 @@
 								"allOf": [
 									{
 										"description": "Proficiency",
-										"title": "Proficiency"
+										"title": "Proficiency Title"
 									},
 									{
 										"$ref": "skyline.schema.json#/definitions/oneOrMoreStrings"
@@ -247,15 +272,14 @@
 								]
 							},
 							"title": {
-								"description": "Proficiency Group Title",
-								"type": "string"
+								"$ref": "skyline.schema.json#/definitions/title"
 							}
 						},
 						"required": [
 							"item",
 							"title"
 						],
-						"title": "Proficiency",
+						"title": "Proficiency Group",
 						"type": "object"
 					},
 					"title": "Proficiencies",
@@ -333,8 +357,10 @@
 						"required": [
 							"title"
 						],
+						"title": "D&D 5E Skill",
 						"type": "object"
 					},
+					"title": "D&D 5E Skills",
 					"type": "array"
 				},
 				"speedFeet": {
@@ -421,9 +447,7 @@
 			"type": "array"
 		},
 		"title": {
-			"description": "A generic title, which is short, human-readable, and generally Title Cased.",
-			"title": "Title",
-			"type": "string"
+			"$ref": "skyline.schema.json#/definitions/title"
 		}
 	},
 	"required": [

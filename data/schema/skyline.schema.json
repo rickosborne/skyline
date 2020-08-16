@@ -2,6 +2,10 @@
 	"$id": "https://rickosborne.github.io/skyline/data/schema/skyline.schema.json",
 	"$schema": "http://json-schema.org/draft-07/schema",
 	"definitions": {
+		"characterName": {
+			"title": "Character Name",
+			"type": "string"
+		},
 		"id": {
 			"description": "Programmatic identifier unique to this object",
 			"pattern": "^[a-z]+([A-Z][a-z]+[0-9]*)*$",
@@ -52,6 +56,11 @@
 					]
 				}
 			]
+		},
+		"title": {
+			"description": "A generic title, which is short, human-readable, and generally Title Cased.",
+			"title": "Title",
+			"type": "string"
 		}
 	}
 }

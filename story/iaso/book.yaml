@@ -13,6 +13,28 @@ playerCharacter:
   - name: Van
     tribe: Banuk
 adapter:
+  cypher:
+    playerCharacter:
+      - name: Yenever Feldspar
+        effort: -1
+        skill:
+          - title: TODO
+            pool: Might
+        stat:
+          Intellect:
+            edge: -1
+            pool: -1
+          Might:
+            edge: -1
+            pool: -1
+          Speed:
+            edge: -1
+            pool: -1
+        summary:
+          adjective: observant
+          noun: Tenakth
+          verb: protects their loyal friends
+        tier: 1
   dnd5e:
     playerCharacter:
       - name: Yenever Feldspar
