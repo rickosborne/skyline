@@ -4,13 +4,63 @@
  * Original source: data/schema/book.schema.json
  */
 
+export type CypherAbilityCostValue = number;
+export type CypherStatAbbr = 'Intellect' | 'Might' | 'Speed';
+/**
+ * A generic title, which is short, human-readable, and generally Title Cased.
+ */
+export type Title = string;
+export type CypherAbilityList = CypherAbility[];
+export type CharacterName = string;
+export type CypherCompanionAccompanies = CharacterName[];
+export type CypherArmor = number;
+export type CypherHealth = number;
+export type CypherCharacterInteractionLevel = number;
+export type IsInability = boolean;
+export type IsSpecialized = boolean;
+export type IsTrained = boolean;
+export type CypherSkillList = CypherSkillListItem[];
+/**
+ * This is the Adjective part of the character summary.
+ */
+export type CypherSummaryAdjective = string;
+/**
+ * This is the Noun part of the character summary.
+ */
+export type CypherSummaryNoun = string;
+/**
+ * This is the Verb part of the character summary.
+ */
+export type CypherSummaryVerb = string;
+export type CypherCompanions = CypherCompanion[];
+export type CypherAttackDamage = number;
+export type CypherAttackModifier = string;
+export type CypherAttacks = CypherAttack[];
+export type CypherCompanionName = string;
+export type CypherCurrency = number;
+export type CypherCypherLevel = number;
+export type CypherCyphers = CypherCypher[];
+export type CypherCypherLimit = number;
+export type CypherEffort = number;
+export type CypherEquipmentList = CypherEquipment[];
+export type ExactNumber = number;
+export type DiceRoll = string;
+export type CypherStatEdge = number;
+export type CypherStatPool = number;
+export type CypherTier = number;
+export type CypherPlayerCharacters = CypherPlayerCharacter[];
+/**
+ * Other Actions
+ */
+export type DD5EOtherActions = {
+  note?: Notes & (string | string[]);
+  title?: Title;
+}[];
 export type ArmorClassAC = number;
 /**
  * Armor Type (i.e. Light, Plate, etc.)
  */
 export type ArmorType = string;
-export type ExactNumber = number;
-export type DiceRoll = string;
 /**
  * Hands
  */
@@ -30,6 +80,10 @@ export type DCNumber = number;
  * Abbreviated Stat
  */
 export type AbbreviatedStat = 'STR' | 'DEX' | 'CON' | 'INT' | 'WIS' | 'CHA';
+/**
+ * Attacks
+ */
+export type DD5EAttacks = DD5EAttack[];
 export type EffectiveScore = number;
 /**
  * Class
@@ -54,7 +108,7 @@ export type HitPoints = number;
 /**
  * Proficiencies
  */
-export type Proficiencies = Proficiency[];
+export type Proficiencies = ProficiencyGroup[];
 export type ProficiencyForSavingThrows = AbbreviatedStat[];
 /**
  * Expertise?
@@ -86,8 +140,16 @@ export type SkillName =
   | 'Sleight of Hand'
   | 'Stealth'
   | 'Survival';
+/**
+ * Skills
+ */
+export type DD5ESkills = DD5ESkill[];
 export type WalkSpeedFt = number;
 export type SwimSpeedFt = number;
+/**
+ * Player Characters
+ */
+export type DND5EPlayerCharacters = Dnd5EPlayerCharacter[];
 /**
  * Tribe
  */
@@ -96,10 +158,6 @@ export type TribeName = 'Banuk' | 'Carja' | 'Nora' | 'Oseram' | 'Shadow Carja' |
  * Player Characters
  */
 export type PlayerCharacters = PlayerCharacter[];
-/**
- * A generic title, which is short, human-readable, and generally Title Cased.
- */
-export type Title = string;
 
 /**
  * Book
@@ -115,65 +173,119 @@ export interface Book {
  * Adapter-specific data
  */
 export interface AdapterData {
-  dnd5e: Dnd5EAdapter;
+  cypher: CypherAdapter;
+  dnd5e: DD5EAdapter;
+}
+/**
+ * Cypher System specifics
+ */
+export interface CypherAdapter {
+  companion?: CypherCompanions;
+  playerCharacter: CypherPlayerCharacters;
+}
+export interface CypherCompanion {
+  ability?: CypherAbilityList;
+  accompany?: CypherCompanionAccompanies;
+  armor?: CypherArmor;
+  benefit?: CypherCompanionCharacterBenefit & (string | string[]);
+  health?: CypherHealth;
+  interactionLevel?: CypherCharacterInteractionLevel;
+  name: CharacterName;
+  skill?: CypherSkillList;
+  summary: CypherCharacterSummary;
+}
+export interface CypherAbility {
+  cost?: CypherAbilityCost;
+  note?: Notes & (string | string[]);
+  title: Title;
+}
+export interface CypherAbilityCost {
+  num: CypherAbilityCostValue;
+  pool: CypherStatAbbr;
+}
+/**
+ * Notes
+ */
+export interface Notes {
+  [k: string]: unknown;
+}
+export interface CypherCompanionCharacterBenefit {
+  [k: string]: unknown;
+}
+export interface CypherSkillListItem {
+  inability?: IsInability;
+  pool: CypherStatAbbr;
+  specialized?: IsSpecialized;
+  title: Title;
+  trained?: IsTrained;
+}
+export interface CypherCharacterSummary {
+  adjective: CypherSummaryAdjective;
+  noun: CypherSummaryNoun;
+  verb: CypherSummaryVerb;
+}
+export interface CypherPlayerCharacter {
+  ability?: CypherAbilityList;
+  armor?: CypherArmor;
+  attack?: CypherAttacks;
+  companion?: CypherCompanionName;
+  currency?: CypherCurrency;
+  cypher?: CypherCyphers;
+  cypherLimit?: CypherCypherLimit;
+  effort: CypherEffort;
+  equipment?: CypherEquipmentList;
+  name: CharacterName;
+  recovery?: CypherRecovery;
+  skill: CypherSkillList;
+  stat: CypherStat;
+  summary: CypherCharacterSummary;
+  tier: CypherTier;
+}
+export interface CypherAttack {
+  damage: CypherAttackDamage;
+  modifier?: CypherAttackModifier;
+  title: Title;
+}
+export interface CypherCypher {
+  level: CypherCypherLevel;
+  note: Notes & (string | string[]);
+  title: Title;
+}
+export interface CypherEquipment {
+  note?: Notes & (string | string[]);
+  title: Title;
+}
+export interface CypherRecovery {
+  roll: Roll & (ExactNumber | DiceRoll);
+}
+/**
+ * Roll
+ */
+export interface Roll {
+  [k: string]: unknown;
+}
+export interface CypherStat {
+  Intellect: CypherStatSummary;
+  Might: CypherStatSummary;
+  Speed: CypherStatSummary;
+}
+export interface CypherStatSummary {
+  edge?: CypherStatEdge;
+  pool: CypherStatPool;
 }
 /**
  * D&D 5E specifics
  */
-export interface Dnd5EAdapter {
-  /**
-   * Player Characters
-   */
-  playerCharacter: Dnd5EPlayerCharacter[];
+export interface DD5EAdapter {
+  playerCharacter: DND5EPlayerCharacters;
 }
 /**
  * Player Character
  */
 export interface Dnd5EPlayerCharacter {
-  /**
-   * Other Actions
-   */
-  action?: {
-    note?: {
-      [k: string]: unknown;
-    } & (string | string[]);
-    /**
-     * Title
-     */
-    title?: string;
-  }[];
+  action?: DD5EOtherActions;
   armor: ArmorClass;
-  /**
-   * Attacks
-   */
-  attack?: {
-    area?: AreaEffect;
-    damage: Damage;
-    hands: HandCount;
-    /**
-     * Melee?
-     */
-    melee?: boolean;
-    note?: Notes & (string | string[]);
-    rangeFeet?: RangeFeet;
-    rangeMultiplier?: RangeMultiplier;
-    /**
-     * Ranged?
-     */
-    ranged?: boolean;
-    reachFeet?: ReachFeet;
-    /**
-     * Spell?
-     */
-    spell?: boolean;
-    /**
-     * Attack Title
-     */
-    title: string;
-    toHit: {
-      [k: string]: unknown;
-    } & (Bonus | HitDC);
-  }[];
+  attack?: DD5EAttacks;
   attr: AttributeStats;
   class: LinkedClass;
   defense?: Defenses & (string | string[]);
@@ -191,10 +303,7 @@ export interface Dnd5EPlayerCharacter {
   link?: {
     [k: string]: Link;
   };
-  /**
-   * Name
-   */
-  name: string;
+  name: CharacterName;
   passive: Passive;
   proficiency?: Proficiencies;
   proficiencyBonus: ProficiencyBonus & Bonus;
@@ -203,16 +312,7 @@ export interface Dnd5EPlayerCharacter {
    */
   race: 'Human' | 'Variant Human';
   savingThrow?: SavingThrow;
-  /**
-   * Skills
-   */
-  skill?: {
-    bonus?: Bonus;
-    expertise?: IsExpert;
-    proficient?: IsProficient;
-    stat?: AbbreviatedStat;
-    title: SkillName;
-  }[];
+  skill?: DD5ESkills;
   speedFeet: WalkSpeedFt;
   swimFeet?: SwimSpeedFt;
 }
@@ -229,10 +329,32 @@ export interface ArmorClass {
   type?: ArmorType;
 }
 /**
- * Notes
+ * Attack
  */
-export interface Notes {
-  [k: string]: unknown;
+export interface DD5EAttack {
+  area?: AreaEffect;
+  damage: Damage;
+  hands: HandCount;
+  /**
+   * Melee?
+   */
+  melee?: boolean;
+  note?: Notes & (string | string[]);
+  rangeFeet?: RangeFeet;
+  rangeMultiplier?: RangeMultiplier;
+  /**
+   * Ranged?
+   */
+  ranged?: boolean;
+  reachFeet?: ReachFeet;
+  /**
+   * Spell?
+   */
+  spell?: boolean;
+  title: Title;
+  toHit: {
+    [k: string]: unknown;
+  } & (Bonus | HitDC);
 }
 /**
  * Area Effect
@@ -268,12 +390,6 @@ export interface Damage {
    * Damage Type
    */
   type: 'Acid' | 'Bludgeoning' | 'Piercing' | 'Slashing';
-}
-/**
- * Roll
- */
-export interface Roll {
-  [k: string]: unknown;
 }
 export interface HitDC {
   num: DCNumber;
@@ -348,17 +464,14 @@ export interface Passive {
 /**
  * Proficiency
  */
-export interface Proficiency {
-  item: Proficiency1 & (string | string[]);
-  /**
-   * Proficiency Group Title
-   */
-  title: string;
+export interface ProficiencyGroup {
+  item: ProficiencyTitle & (string | string[]);
+  title: Title;
 }
 /**
  * Proficiency
  */
-export interface Proficiency1 {
+export interface ProficiencyTitle {
   [k: string]: unknown;
 }
 /**
@@ -373,6 +486,16 @@ export interface SavingThrow {
 }
 export interface AdvantageOnSavingThrows {
   [k: string]: unknown;
+}
+/**
+ * Skill
+ */
+export interface DD5ESkill {
+  bonus?: Bonus;
+  expertise?: IsExpert;
+  proficient?: IsProficient;
+  stat?: AbbreviatedStat;
+  title: SkillName;
 }
 /**
  * Player Character
