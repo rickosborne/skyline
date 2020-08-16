@@ -138,8 +138,8 @@
 			"title": "Challenge",
 			"type": "object"
 		},
-		"class": {
-			"description": "Class",
+		"className": {
+			"description": "D&D 5E Class Name",
 			"enum": [
 				"Artificer",
 				"Barbarian",
@@ -155,7 +155,7 @@
 				"Warlock",
 				"Wizard"
 			],
-			"title": "Class Name",
+			"title": "D&D 5E Class Name",
 			"type": "string"
 		},
 		"complexScore": {

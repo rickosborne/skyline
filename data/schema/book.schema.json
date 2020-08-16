@@ -200,7 +200,7 @@
 							"type": "string"
 						},
 						"title": {
-							"$ref": "dnd5e.schema.json#/definitions/class"
+							"$ref": "dnd5e.schema.json#/definitions/className"
 						}
 					},
 					"required": [
