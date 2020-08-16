@@ -28,7 +28,7 @@
 	"private": true,
 	"repository": "github:rickosborne/skyline",
 	"scripts": {
-		"jekyll:serve": "bundle exec jekyll serve --profile --livereload",
+		"jekyll:serve": "bundle exec jekyll serve --livereload",
 		"machines:attacks": "ts-node src/machine/attacks.ts",
 		"sass": "sass --watch --no-source-map assets/css/skyline-original.scss _sass/skyline.scss",
 		"schema": "ts-node src/schema/schema.ts",
