@@ -33,6 +33,7 @@
 		"sass": "sass --watch --no-source-map assets/css/skyline-original.scss _sass/skyline.scss",
 		"schema": "ts-node src/schema/schema.ts",
 		"schema:watch": "ts-node src/schema/schema.ts -- --watch",
+		"start": "npm run sass & npm run schema:watch & npm run template:watch & npm run jekyll:serve",
 		"template": "ts-node src/template/template.ts",
 		"template:watch": "ts-node src/template/template.ts -- --watch",
 		"test": "mocha"

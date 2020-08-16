@@ -79,6 +79,13 @@ link JekyllCSS to GHPages--><path d="M248.02,498.2463 C305.11,531.3163 387.64,57
 
 ## Development Process
 
+Easy mode:
+
+    npm start
+
+This starts up the next four items.
+Alternatively, you can do them one at a time.
+
 Start up the CSS pipeline:
 
     npm run sass
