@@ -4,7 +4,7 @@ import {compileFromFile} from "json-schema-to-typescript";
 import * as path from "path";
 import {ARenderer} from "../ARenderer";
 
-const ROOT_PATH = path.normalize(path.join(__dirname, '..', '..')) + '/';
+const ROOT_PATH = path.normalize(path.join(__dirname, "..", "..")) + "/";
 
 export class SchemaRenderer extends ARenderer {
 	getScanExtension(): string {
@@ -23,7 +23,7 @@ export class SchemaRenderer extends ARenderer {
 		) => void = this.writeIfNeeded,
 	) {
 		const sourcePath = path.normalize(path.join(sourceDir, fileName));
-		const sourceRelative = path.normalize(sourcePath).replace(ROOT_PATH, '');
+		const sourceRelative = path.normalize(sourcePath).replace(ROOT_PATH, "");
 		const targetName = fileName.replace(this.getScanExtension(), ".ts");
 		const targetPath = path.normalize(path.join(targetDir, targetName));
 		const originalTypescript = fs.existsSync(targetPath) ? fs.readFileSync(targetPath, {encoding: "utf8"}) : "";
@@ -44,6 +44,7 @@ export class SchemaRenderer extends ARenderer {
 				trailingComma: "es5",
 				useTabs: false
 			},
+			unreachableDefinitions: true,
 		});
 		block(originalTypescript, updatedTypescript, sourcePath, targetPath);
 	}
@@ -55,8 +56,8 @@ export class SchemaRenderer extends ARenderer {
 		targetPath: string
 	) {
 		if (originalTypescript !== updatedTypescript) {
-			const sourceRelative = path.normalize(sourcePath).replace(ROOT_PATH, '');
-			const targetRelative = path.normalize(targetPath).replace(ROOT_PATH, '');
+			const sourceRelative = path.normalize(sourcePath).replace(ROOT_PATH, "");
+			const targetRelative = path.normalize(targetPath).replace(ROOT_PATH, "");
 			fs.writeFileSync(targetPath, updatedTypescript, {encoding: "utf8"});
 			console.log(`Updated: ${sourceRelative} => ${targetRelative}`);
 		}

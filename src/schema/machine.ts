@@ -18,6 +18,9 @@ export type Description = string | string[];
 export type IsEffect = boolean;
 /**
  * Programmatic identifier unique to this object
+ *
+ * This interface was referenced by `Machine`'s JSON-Schema
+ * via the `definition` "id".
  */
 export type ID = string;
 /**
@@ -74,6 +77,10 @@ export type SwimSpeedFt = number;
  * % of overall machine health this component can take in damage before the component is destroyed
  */
 export type Health1 = number;
+/**
+ * This interface was referenced by `Machine`'s JSON-Schema
+ * via the `definition` "elementKey".
+ */
 export type Element1 = 'corruption' | 'explosion' | 'fire' | 'freeze' | 'shock';
 export type RangeFt = number;
 /**
@@ -93,6 +100,9 @@ export type ResaleValue = number;
 export type Title2 = string;
 /**
  * Items present for potential removal
+ *
+ * This interface was referenced by `Machine`'s JSON-Schema
+ * via the `definition` "loot".
  */
 export type Loot = Item[];
 /**
@@ -157,6 +167,9 @@ export interface Machine {
 }
 /**
  * Action the machine may take
+ *
+ * This interface was referenced by `Machine`'s JSON-Schema
+ * via the `definition` "action".
  */
 export interface Action {
   attack?: IsAttack;
@@ -167,6 +180,9 @@ export interface Action {
 }
 /**
  * Adapter-specific data
+ *
+ * This interface was referenced by `Machine`'s JSON-Schema
+ * via the `definition` "adapter".
  */
 export interface AdapterData {
   cypher: Cypher;
@@ -174,6 +190,9 @@ export interface AdapterData {
 }
 /**
  * Cypher specifics
+ *
+ * This interface was referenced by `Machine`'s JSON-Schema
+ * via the `definition` "cypherAdapter".
  */
 export interface Cypher {
   armor: Armor;
@@ -192,6 +211,10 @@ export interface Cypher {
   target?: TargetNumber;
   use?: Use & (string | string[]);
 }
+/**
+ * This interface was referenced by `Machine`'s JSON-Schema
+ * via the `definition` "basedOn".
+ */
 export interface BasedOn {
   href?: URL;
   title?: Title1;
@@ -222,6 +245,9 @@ export interface Use {
 }
 /**
  * D&D 5E specifics
+ *
+ * This interface was referenced by `Machine`'s JSON-Schema
+ * via the `definition` "dnd5eAdapter".
  */
 export interface DD5E {
   /**
@@ -262,6 +288,9 @@ export interface Action1 {
 }
 /**
  * Damage upon hit
+ *
+ * This interface was referenced by `Machine`'s JSON-Schema
+ * via the `definition` "onHit".
  */
 export interface Hit {
   average?: AverageDamage;
@@ -346,6 +375,9 @@ export interface Components {
  *
  * This interface was referenced by `Components`'s JSON-Schema definition
  * via the `patternProperty` ".*".
+ *
+ * This interface was referenced by `Machine`'s JSON-Schema
+ * via the `definition` "component".
  */
 export interface Component {
   damage?: Element;
@@ -362,6 +394,9 @@ export interface Component {
 }
 /**
  * Element
+ *
+ * This interface was referenced by `Machine`'s JSON-Schema
+ * via the `definition` "elementDecimal".
  */
 export interface Element {
   /**
@@ -398,6 +433,9 @@ export interface Links {
 }
 /**
  * Element
+ *
+ * This interface was referenced by `Machine`'s JSON-Schema
+ * via the `definition` "elementBoolean".
  */
 export interface Element2 {
   /**
