@@ -32,3 +32,7 @@ Top-level sections:
   * [Author's Notes](950-author-notes.md)
   * [Credits](960-credits.md)
   * [Legal](980-legal.md)
+
+## Remaining Work
+
+* [IASO Milestone on GitHub](https://github.com/rickosborne/skyline/milestone/1)
