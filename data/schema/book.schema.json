@@ -197,6 +197,7 @@
 						"href": {
 							"description": "URL",
 							"format": "URL",
+							"title": "Class URL",
 							"type": "string"
 						},
 						"title": {

@@ -41,9 +41,13 @@ if (process.argv.includes("--watch")) {
 					console.error(`Unhandled change type: ${eventType}`);
 					return;
 				}
-				schemaRenderer
-					.typescript(dir, file, targets.target)
-					.catch(err => console.error(`Failed to render ${sourcePath} to ${targetRelative}`, err));
+				try {
+					schemaRenderer
+						.typescript(dir, file, targets.target)
+						.catch(err => console.error(`Failed to render ${sourcePath} to ${targetRelative}`, err));
+				} catch (e) {
+					console.error(`Failed to render ${sourcePath}: ${JSON.stringify(e)}`);
+				}
 			});
 			console.log(`Watching: ${sourcePath}`);
 		}

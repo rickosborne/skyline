@@ -43,8 +43,12 @@ if (process.argv.includes("--watch")) {
 				return;
 			}
 			// console.info(`Changed: ${dirPart} ${fileName}`);
-			templateRenderer
-				.markdown(dirPart, fileName);
+			try {
+				templateRenderer
+					.markdown(dirPart, fileName);
+			} catch (e) {
+				console.error(`Failed to render ${dirPart}/${fileName}: ${JSON.stringify(e)}`);
+			}
 		});
 		console.log(`Watching: ${sourcePath}`);
 	});
