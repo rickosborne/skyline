@@ -16,24 +16,85 @@ adapter:
   cypher:
     playerCharacter:
       - name: Yenever Feldspar
-        effort: -1
+        ability:
+          - title: Weapons
+            familiarity: Practiced
+            note: Practiced with light, medium, and heavy weapons.
+            enabler: true
+          - title: Bash
+            bookRef:
+              book: CSR
+              page: 112
+          - title: Combat Prowess
+            bookRef:
+              book: CSR
+              page: 120
+            enabler: true
+          - title: Improved Edge
+            bookRef:
+              book: CSR
+              page: 151
+            enabler: true
+          - title: Trained Without Armor
+            bookRef:
+              book: CSR
+              page: 193
+            enabler: true
+          - title: Advice From A Friend
+            action: true
+            bookRef:
+              book: CSR
+              page: 109
+          - title: Friendly Help
+            enabler: true
+            bookRef:
+              book: CSR
+              page: 143
+          - title: Courageous
+            enabler: true
+            bookRef:
+              book: CSR
+              page: 122
+        effort: 1
+        equipment:
+          - title: Battleaxe (1H/2H)
+          - title: Greataxe (2H)
+          - title: Javelin (1H/2H, Melee, Ranged)
+          - title: Expensive item (1)
+          - title: Moderate priced item (2)
+          - title: Inexpensive item (4)
+        cypherLimit: 2
         skill:
-          - title: TODO
+          - title: All actions involving breaking inanimate objects
             pool: Might
+            trained: true
+          - title: All jumping actions
+            pool: Might
+            trained: true
         stat:
           Intellect:
-            edge: -1
-            pool: -1
+            pool: 11
           Might:
-            edge: -1
-            pool: -1
+            edge: 1
+            pool: 17
+            base: 13
+            note:
+              - "+4 from Strong (CSR 56)"
           Speed:
-            edge: -1
-            pool: -1
+            pool: 10
         summary:
-          adjective: observant
-          noun: Tenakth
-          verb: protects their loyal friends
+          adjective: strong
+          descriptorRef:
+            book: CSR
+            page: 56
+          noun: Tenakth warrior
+          typeRef:
+            book: CSR
+            page: 20
+          verb: helps their friends
+          focusRef:
+            book: CSR
+            page: 69
         tier: 1
   dnd5e:
     playerCharacter:

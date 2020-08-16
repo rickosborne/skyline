@@ -4,12 +4,22 @@
  * Original source: data/schema/cypher.schema.json
  */
 
+export type AbilityIsAction = boolean;
+export type CypherBook = 'CSR' | 'Predation';
+export type CypherBookPageNumber = number;
 export type CypherAbilityCostValue = number;
+export type CypherAbilityCostPlus = boolean;
 /**
  * This interface was referenced by `Cypher`'s JSON-Schema
  * via the `definition` "statAbbr".
  */
 export type CypherStatAbbr = 'Intellect' | 'Might' | 'Speed';
+export type AbilityIsEnabler = boolean;
+/**
+ * This interface was referenced by `Cypher`'s JSON-Schema
+ * via the `definition` "familiarity".
+ */
+export type CypherFamiliarity = 'Inability' | 'Practiced' | 'Specialized' | 'Trained';
 /**
  * A generic title, which is short, human-readable, and generally Title Cased.
  */
@@ -28,6 +38,10 @@ export type CypherArmor = number;
  * This is the Adjective part of the character summary.
  */
 export type CypherSummaryAdjective = string;
+/**
+ * The "a/an" part of the character summary
+ */
+export type CypherSummaryArticle = 'a' | 'an' | 'the';
 /**
  * This is the Noun part of the character summary.
  */
@@ -60,6 +74,7 @@ export type CypherEffort = number;
 export type CypherEquipmentList = CypherEquipment[];
 export type ExactNumber = number;
 export type DiceRoll = string;
+export type CypherStatBase = number;
 export type CypherStatEdge = number;
 export type CypherStatPool = number;
 export type CypherTier = number;
@@ -68,12 +83,25 @@ export interface Cypher {
   [k: string]: unknown;
 }
 export interface CypherAbility {
+  action?: AbilityIsAction;
+  bookRef?: CypherBookReference;
   cost?: CypherAbilityCost;
+  enabler?: AbilityIsEnabler;
+  familiarity?: CypherFamiliarity;
   note?: Notes & (string | string[]);
   title: Title;
 }
+/**
+ * This interface was referenced by `Cypher`'s JSON-Schema
+ * via the `definition` "bookRef".
+ */
+export interface CypherBookReference {
+  book: CypherBook;
+  page: CypherBookPageNumber;
+}
 export interface CypherAbilityCost {
   num: CypherAbilityCostValue;
+  plus?: CypherAbilityCostPlus;
   pool: CypherStatAbbr;
 }
 /**
@@ -88,7 +116,11 @@ export interface Notes {
  */
 export interface CypherCharacterSummary {
   adjective: CypherSummaryAdjective;
+  article?: CypherSummaryArticle;
+  descriptorRef?: CypherBookReference;
+  focusRef?: CypherBookReference;
   noun: CypherSummaryNoun;
+  typeRef?: CypherBookReference;
   verb: CypherSummaryVerb;
 }
 /**
@@ -170,6 +202,8 @@ export interface CypherStat {
  * via the `definition` "statSummary".
  */
 export interface CypherStatSummary {
+  base?: CypherStatBase;
   edge?: CypherStatEdge;
+  note?: Notes & (string | string[]);
   pool: CypherStatPool;
 }

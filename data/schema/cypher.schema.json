@@ -6,13 +6,25 @@
 			"items": {
 				"additionalProperties": false,
 				"properties": {
+					"action": {
+						"default": false,
+						"title": "Ability Is Action?",
+						"type": "boolean"
+					},
+					"bookRef": {
+						"$ref": "#/definitions/bookRef"
+					},
 					"cost": {
 						"additionalProperties": false,
 						"properties": {
 							"num": {
-								"minimum": 1,
 								"title": "Cypher Ability Cost Value",
 								"type": "integer"
+							},
+							"plus": {
+								"default": false,
+								"title": "Cypher Ability Cost Plus",
+								"type": "boolean"
 							},
 							"pool": {
 								"$ref": "#/definitions/statAbbr"
@@ -24,6 +36,14 @@
 						],
 						"title": "Cypher Ability Cost",
 						"type": "object"
+					},
+					"enabler": {
+						"default": false,
+						"title": "Ability Is Enabler?",
+						"type": "boolean"
+					},
+					"familiarity": {
+						"$ref": "#/definitions/familiarity"
 					},
 					"note": {
 						"$ref": "skyline.schema.json#/definitions/note"
@@ -45,6 +65,29 @@
 			"title": "Cypher Armor",
 			"type": "integer"
 		},
+		"bookRef": {
+			"additionalProperties": false,
+			"properties": {
+				"book": {
+					"enum": [
+						"CSR",
+						"Predation"
+					],
+					"title": "Cypher Book",
+					"type": "string"
+				},
+				"page": {
+					"title": "Cypher Book Page Number",
+					"type": "integer"
+				}
+			},
+			"required": [
+				"book",
+				"page"
+			],
+			"title": "Cypher Book Reference",
+			"type": "object"
+		},
 		"characterSummary": {
 			"additionalProperties": false,
 			"properties": {
@@ -53,10 +96,30 @@
 					"title": "Cypher Summary Adjective",
 					"type": "string"
 				},
+				"article": {
+					"default": "a",
+					"description": "The \"a/an\" part of the character summary",
+					"enum": [
+						"a",
+						"an",
+						"the"
+					],
+					"title": "Cypher Summary Article",
+					"type": "string"
+				},
+				"descriptorRef": {
+					"$ref": "#/definitions/bookRef"
+				},
+				"focusRef": {
+					"$ref": "#/definitions/bookRef"
+				},
 				"noun": {
 					"description": "This is the Noun part of the character summary.",
 					"title": "Cypher Summary Noun",
 					"type": "string"
+				},
+				"typeRef": {
+					"$ref": "#/definitions/bookRef"
 				},
 				"verb": {
 					"description": "This is the Verb part of the character summary.",
@@ -122,6 +185,16 @@
 			],
 			"title": "Cypher Companion",
 			"type": "object"
+		},
+		"familiarity": {
+			"enum": [
+				"Inability",
+				"Practiced",
+				"Specialized",
+				"Trained"
+			],
+			"title": "Cypher Familiarity",
+			"type": "string"
 		},
 		"playerCharacter": {
 			"additionalProperties": false,
@@ -328,10 +401,17 @@
 		"statSummary": {
 			"additionalProperties": false,
 			"properties": {
+				"base": {
+					"title": "Cypher Stat Base",
+					"type": "integer"
+				},
 				"edge": {
 					"default": 0,
 					"title": "Cypher Stat Edge",
 					"type": "integer"
+				},
+				"note": {
+					"$ref": "skyline.schema.json#/definitions/note"
 				},
 				"pool": {
 					"title": "Cypher Stat Pool",
