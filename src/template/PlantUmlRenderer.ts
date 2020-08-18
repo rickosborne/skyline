@@ -73,10 +73,12 @@ export class PlantUmlRenderer extends ATemplate<PlantUmlData> {
 			.replace(/<\?xml.*?\?>/s, "")
 			.replace(/<svg.*?>/s, svg => svg
 				.replace(/\s+(width|height|style)="[^"]*"/g, "")
-			);
+			)
+			.replace(/<!--.+?-->/gs, '')
+		;
 		// console.log(`Params ${JSON.stringify(params)}`);
 		if (!!params.link) {
-			svg = `<div class="fullscreen-svg" onclick="if(!document.fullscreenElement && this.requestFullscreen){this.requestFullscreen()}else if(document.fullscreenElement && document.exitFullscreen){document.exitFullscreen()}">${svg}</div>`;
+			svg = `<div class="fullscreen-svg fullscreen-able">${svg}</div>`;
 		}
 		return svg;
 	}

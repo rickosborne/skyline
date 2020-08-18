@@ -47,37 +47,44 @@ It will continue:
 
 If asked what the other Healers would look like:
 
+{:.spoiler.block}
 > I'm not sure, sorry.
 > I know they should have been produced after me — certainly by now.
 
 If asked what its function is:
 
+{:.spoiler.block}
 > My autonomous form would be capable of any number of medical procedures.
 > In my current form I should be capable of medical diagnosis and health management.
 
 If asked what is wrong:
 
+{:.spoiler.block}
 > My medical procedure database is empty.
 > My diagnostic functions are functional, and I am receiving data from your Focuses.
 > I am not receiving data from anyone or anything else in the facility, as it appears the facility power is offline.
 
 If asked how the party can help, or what it wants:
 
+{:.spoiler.block}
 > I would like to be of service.
 > If I can show you where my data storage is, could you try to get power to it?
 
 If asked whether turning on the power will cause any problems:
 
+{:.spoiler.block}
 > I do not think so, but I admit I am not certain.
 > With power offline, my sensor capabilities are limited to what I can see through the Focus network.
 > Right now, that's just you.
 
 If asked about the range of the sensors, or Focus communication:
 
+{:.spoiler.block}
 > I am not an expert on that technology, but I do know the last time I was active I received data from everyone in this facility, but not anyone in others.
 
 If asked whether the party should take the MAU base unit:
 
+{:.spoiler.block}
 > It appears I was not scheduled for reactivation, so I have not further use here.
 > I would like to be of service.
 > If I can be of use to you, you are welcome to take me with you.

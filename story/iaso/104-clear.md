@@ -20,6 +20,7 @@ You may also choose to leave them in place, but you'd then have to explain them.
 
 If you have IASO with you, it will communicate directly to the party:
 
+{:.spoiler.block}
 > It looks like he is stable for now.
 > A functioning MedBed would show more, but his condition may improve with better diet and reduced alcohol consumption.
 > Please encourage him to avoid strenuous exercise for the next two weeks.
