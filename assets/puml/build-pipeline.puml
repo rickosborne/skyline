@@ -20,7 +20,7 @@ skinparam {
 	PackageBorderColor #cccccc
 }
 
-package "PlantUML" as PlantUMLPackage {
+package "PlantUML\nnpm run template" as PlantUMLPackage {
 	file "assets/puml/*.puml\nDiagram Sources" as PlantUML<<Source>>
 	component "PlantUML" as PlantUMLJar<<Library>>
 	component "src/template/PlantUml*.ts\nPlantUML Renderer" as PlantUMLRenderer<<Script>>
@@ -29,7 +29,7 @@ package "PlantUML" as PlantUMLPackage {
 	PlantUML --> PlantUMLRenderer
 }
 
-package "CSS" {
+package "CSS\nnpm run sass" {
 	file "assets/css/skyline-original.scss\nSite Stylesheet" as Stylesheet<<Source>>
 	component "dart-sass" as Sass<<Library>>
 	file "_sass/skyline.scss\nGenerated CSS" as JekyllCSS<<Intermediate>>
@@ -38,7 +38,7 @@ package "CSS" {
   Sass --> JekyllCSS
 }
 
-package "Machine NPCs" {
+package "Machine NPCs\nnpm run template" {
 	file "data/schema/machine.schema.json\nMachine Data Schema" as MachineJSONSchema<<Source>>
 	file "*.machine.yaml\nMachine Data" as MachineYAML<<Source>>
 	file "**/{machine}.md\nMachine Stat Block" as MachineMD<<Intermediate>>
@@ -53,7 +53,7 @@ package "Machine NPCs" {
 	MachineRenderers --> MachineMD
 }
 
-package "Books & Player Characters" {
+package "Books & Player Characters\nnpm run template" {
 	file "**/book.yaml\nBook Data" as BookYAML<<Source>>
 	file "data/schema/book.schema.json\nBook Schema" as BookJSONSchema<<Source>>
 	file "**/{player-character}.md\nPlayer Character Sheet" as PlayerCharacterMD<<Intermediate>>
@@ -64,20 +64,29 @@ package "Books & Player Characters" {
 	BookYAML --> PlayerCharacterMD
 }
 
-package "Data Schema" {
+package "Data Schema\nnpm run schema" {
 	component "src/schema/schema.ts\nTypescript Generator" as JSONSchemaToTypescript<<Script>>
 	file "src/schema/*.ts\nTypescript Interfaces" as TypeScriptSchema<<Intermediate>>
 
 	JSONSchemaToTypescript --> TypeScriptSchema
 }
 
-package "Prose & Packaging" {
+package "Prose & Packaging\nnpm run jekyll:serve" {
 	file "**/*.md\nProse & Rendered Blocks" as GenericMD<<Source>>
 	component "Jekyll & GitHub Pages" as GHPages<<Library>>
 	cloud "Site" as Site
 
 	GenericMD --> GHPages
 	GHPages --> Site
+}
+
+package "UI Javascript\nnpm run assets:skyline" {
+	file "src/assets/skyline.ts\nUI TS Source" as SkylineTS<<Source>>
+	component "Typescript Compiler" as SkylineTSC<<Library>>
+	file "assets/js/skyline.js\nUI JS" as SkylineJS<<Intermediate>>
+
+	SkylineTS --> SkylineTSC
+	SkylineTSC --> SkylineJS
 }
 
 
@@ -90,6 +99,7 @@ PlantUMLRenderer --> GenericMD
 MachineMD --> GHPages
 PlayerCharacterMD --> GHPages
 JekyllCSS --> GHPages
+SkylineJS --> GHPages
 
 legend
 |= Resource |= Type |= Handling |

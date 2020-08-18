@@ -362,7 +362,6 @@ em {
 
 code {
   color: var(--dusk-blue);
-  display: inline-block;
   background-color: var(--dusk-blue-5);
   padding: 0.0625em 0.5em;
   margin: -0.0625em 0;
@@ -370,26 +369,47 @@ code {
   font-weight: 400;
 }
 
-.spoiler {
-  color: #333 !important;
-  background-color: #333 !important;
+.spoiler-label {
   display: inline-block;
-  padding: 0.2em;
-  margin: -0.2em 0;
+  margin: 0;
+  padding: 0;
 }
-.spoiler::before {
-  content: " (spoiler) ";
+.spoiler-label.block {
+  display: block;
 }
-.spoiler:hover, .spoiler:focus {
-  color: inherit !important;
-  background-color: rgba(0, 0, 0, 0.1) !important;
+.spoiler-label .spoiler {
+  display: none;
 }
-.spoiler:hover::before, .spoiler:focus::before {
-  content: none;
+.spoiler-label .spoiler-warning {
+  background-color: #333;
+  color: #666;
+  display: inline-block;
+  padding: 0 0.5em;
 }
-.spoiler:hover::after, .spoiler:focus::after {
-  content: " (spoiler) ";
+.spoiler-label .spoiler-warning::before {
+  content: " 🔒 ";
+}
+.spoiler-label .spoiler-warning.block {
+  display: block;
+  padding: var(--cadence);
+}
+.spoiler-label .spoiler-checkbox {
+  background-color: rgba(0, 0, 0, 0.1);
+  outline: 0;
+  user-select: none;
   visibility: hidden;
+  width: 0;
+  height: 0;
+  padding: 0;
+  margin: 0;
+  border: none;
+  display: block;
+}
+.spoiler-label .spoiler-checkbox:checked ~ .spoiler-warning {
+  display: none;
+}
+.spoiler-label .spoiler-checkbox:checked ~ .spoiler {
+  display: inherit;
 }
 
 .hanging-indent {
@@ -402,9 +422,12 @@ object, svg {
   height: auto;
 }
 
+.fullscreen-able {
+  cursor: pointer;
+}
+
 .fullscreen-svg {
   background-color: white;
-  cursor: pointer;
 }
 
 @media (max-width: 40rem) {

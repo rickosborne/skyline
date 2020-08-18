@@ -17,6 +17,7 @@ Read aloud:
 
 If you brought IASO with you, it will speak directly to your party members through the Focus:
 
+{:.spoiler.block}
 > That person is experiencing a cardiac event.
 > Attach sensor pads at the indicated locations if possible.
 

@@ -448,7 +448,7 @@ em {
 
 code {
 	color: var(--dusk-blue);
-	display: inline-block;
+	//display: inline-block;
 	background-color: var(--dusk-blue-5);
 	padding: 0.0625em 0.5em;
 	margin: -0.0625em 0;
@@ -456,27 +456,54 @@ code {
 	font-weight: 400;
 }
 
-.spoiler {
-	color: #333 !important;
-	background-color: #333 !important;
+.spoiler-label {
 	display: inline-block;
-	padding: 0.2em;
-	margin: -0.2em 0;
+	margin: 0;
+	padding: 0;
 
-	&::before {
-		content: " (spoiler) ";
+	&.block {
+		display: block;
 	}
 
-	&:hover, &:focus {
-		color: inherit !important;
-		background-color: rgba(0, 0, 0, 0.1) !important;
+	.spoiler {
+		display: none;
+	}
+
+	.spoiler-warning {
+		background-color: #333;
+		color: #666;
+		display: inline-block;
+		padding: 0 0.5em;
 
 		&::before {
-			content: none;
+			content: " 🔒 ";
 		}
-		&::after {
-			content: " (spoiler) ";
-			visibility: hidden;
+	}
+
+	.spoiler-warning.block {
+		display: block;
+		padding: var(--cadence);
+	}
+
+	.spoiler-checkbox {
+		background-color: rgba(0, 0, 0, 0.1);
+		outline: 0;
+		user-select: none;
+		visibility: hidden;
+		width: 0;
+		height: 0;
+		padding: 0;
+		margin: 0;
+		border: none;
+		display: block;
+
+		&:checked {
+			&~.spoiler-warning {
+				display: none;
+			}
+			&~.spoiler {
+				display: inherit;
+			}
 		}
 	}
 }
@@ -491,9 +518,12 @@ object, svg {
 	height: auto;
 }
 
+.fullscreen-able {
+	cursor: pointer;
+}
+
 .fullscreen-svg {
 	background-color: white;
-	cursor: pointer;
 }
 
 @media (max-width: 40rem) {

@@ -35,10 +35,12 @@ IASO is interested in this:
 
 If asked what else will happen:
 
+{:.spoiler.block}
 > My MAU does not have enough power to do much more than transfer my data.
 
 If asked what will happen if they choose not to allow it:
 
+{:.spoiler.block}
 > My only function is to provide medical assistance.
 > Without my database, I'm sorry to say I will be of limited use to you.
 

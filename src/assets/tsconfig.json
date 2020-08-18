@@ -1,16 +1,16 @@
 {
 	"compilerOptions": {
 		"alwaysStrict": true,
-		"jsx": "react",
-		"jsxFactory": "h",
 		"lib": [
-			"ESNext"
+			"dom",
+			"ES2015"
 		],
-		"module": "commonjs",
+		"module": "ES2015",
 		"noImplicitAny": true,
 		"noImplicitReturns": true,
 		"noImplicitThis": true,
-		"sourceMap": true,
+		"outDir": "../../assets/js/",
+		"sourceMap": false,
 		"strict": false,
 		"strictNullChecks": true,
 		"target": "es5"
