@@ -30,9 +30,9 @@ package "PlantUML\nnpm run template" as PlantUMLPackage {
 }
 
 package "CSS\nnpm run sass" {
-	file "assets/css/skyline-original.scss\nSite Stylesheet" as Stylesheet<<Source>>
+	file "assets/scss/*\nSite Stylesheet" as Stylesheet<<Source>>
 	component "dart-sass" as Sass<<Library>>
-	file "_sass/skyline.scss\nGenerated CSS" as JekyllCSS<<Intermediate>>
+	file "assets/css/all.css\nGenerated CSS" as JekyllCSS<<Intermediate>>
 
 	Stylesheet --> Sass
   Sass --> JekyllCSS
