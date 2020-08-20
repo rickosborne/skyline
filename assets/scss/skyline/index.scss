@@ -36,12 +36,17 @@
 	--night-blue: hsl(208, 80%, 22%);
 	--midnight-blue: hsl(208, 80%, 11%);
 
-	--noon-blue-50: hsl(208, 80%, 88%, 0.5);
+	--noon-blue-50: hsla(208, 80%, 88%, 0.5);
+	--noon-blue-25: hsla(208, 80%, 88%, 0.25);
+	--noon-blue-10: hsla(208, 80%, 88%, 0.10);
+	--noon-blue-5: hsla(208, 80%, 88%, 0.05);
 	--evening-blue-50: hsla(208, 80%, 44%, 0.5);
 	--evening-blue-25: hsla(208, 80%, 44%, 0.25);
 	--dusk-blue-25: hsla(208, 80%, 33%, 0.25);
 	--dusk-blue-10: hsla(208, 80%, 33%, 0.1);
 	--dusk-blue-5: hsla(208, 80%, 33%, 0.05);
+	--morning-blue-5: hsla(208, 80%, 66%, 0.05);
+	--morning-blue-25: hsla(208, 80%, 66%, 0.25);
 
 	// For text, oranges are used for Story Links.
 	--barely-orange: hsl(32, 80%, 99%);
@@ -52,6 +57,12 @@
 	--night-orange: hsl(32, 80%, 22%);
 	--midnight-orange: hsl(32, 80%, 11%);
 
+	--morning-orange-50: hsla(32, 80%, 66%, 0.50);
+	--morning-orange-25: hsla(32, 80%, 66%, 0.25);
+	--morning-orange-5: hsla(32, 80%, 66%, 0.05);
+	--evening-orange-25: hsl(32, 80%, 44%, 0.25);
+
+
 	// For text, greens are used for Narrator Note blocks.
 	--barely-green: hsl(96, 80%, 99%);
 	--noon-green: hsl(96, 80%, 77%);
@@ -60,6 +71,10 @@
 	--dusk-green: hsl(96, 80%, 33%);
 	--night-green: hsl(96, 80%, 22%);
 	--midnight-green: hsl(96, 80%, 11%);
+
+	--dusk-green-50: hsla(96, 80%, 33%, 0.5);
+	--dusk-green-25: hsla(96, 80%, 33%, 0.25);
+	--dusk-green-5: hsla(96, 80%, 33%, 0.05);
 
 	--cadence: 1.75rem;
 	--cadence-half: calc(var(--cadence) * 0.5);
@@ -89,7 +104,7 @@ body {
 	font-weight: var(--weight-normal);
 	font-size: 120%;
 	color: var(--midnight-blue);
-	background-color: white;
+	background: white url(../img/noise-512.jpg);
 
 	max-width: 60em;
 	margin: 0 auto;
@@ -144,6 +159,16 @@ body {
 		min-height: var(--cadence-double);
 		display: flex;
 		align-items: center;
+
+		a {
+			color: white;
+			font-weight: var(--weight-light);
+			text-decoration: none;
+
+			&:hover {
+				background-color: inherit;
+			}
+		}
 	}
 
 	.project-tagline {
@@ -228,11 +253,12 @@ body {
 
 	blockquote, .narrator-note {
 		//font-variation-settings: var(--crsv-most), var(--casl-most), var(--slnt-most);
-		color: #555;
-		background-color: var(--barely-blue);
 		padding: var(--cadence) var(--cadence-half);
 		margin: 0;
-		border-left: var(--cadence-quarter) solid var(--noon-blue);
+		color: var(--night-blue);
+		background-color: var(--noon-blue-10);
+		border-left: var(--cadence-quarter) solid var(--noon-blue-25);
+		background-blend-mode: lighten;
 
 		&>:first-child {
 			margin-top: 0;
@@ -245,8 +271,8 @@ body {
 
 	.narrator-note {
 		color: var(--dusk-green);
-		background-color: var(--barely-green);
-		border-left-color: var(--noon-green);
+		background-color: var(--dusk-green-5);
+		border-left-color: var(--dusk-green-25);
 		display: block;
 		padding: var(--cadence) var(--cadence-half);
 
@@ -427,22 +453,20 @@ em {
 }
 
 .story-link {
-	color: var(--dusk-orange);
-	background-color: var(--barely-orange);
-	border-left: var(--cadence-quarter) solid var(--noon-orange);
+	border-left: var(--cadence-quarter) solid var(--morning-orange-50);
 	padding: var(--cadence) var(--cadence-half);
 	display: block;
 
 	&:hover, &:visited:hover {
 		text-decoration: none;
-		background-color: var(--noon-orange);
+		background-color: var(--morning-orange-25);
 		border-left-color: var(--morning-orange);
 		color: var(--night-orange);
 	}
 
-	&:visited {
+	&, &:visited {
 		color: var(--dusk-orange);
-		background-color: var(--barely-orange);
+		background-color: var(--morning-orange-5);
 	}
 }
 

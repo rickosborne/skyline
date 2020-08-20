@@ -31,7 +31,7 @@
 		"assets:skyline": "tsc --project src/assets/tsconfig.json --watch",
 		"jekyll:serve": "bundle exec jekyll serve --livereload",
 		"machines:attacks": "ts-node src/machine/attacks.ts",
-		"sass": "sass --watch --no-source-map assets/css/skyline-original.scss _sass/skyline.scss",
+		"sass": "sass --watch --no-source-map assets/scss/all.scss:assets/css/all.css",
 		"schema": "ts-node src/schema/schema.ts",
 		"schema:watch": "ts-node src/schema/schema.ts -- --watch",
 		"start": "npm run sass & npm run schema:watch & npm run template:watch & npm run assets:skyline & npm run jekyll:serve",

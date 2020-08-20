@@ -10,7 +10,7 @@ exclude:
   - '*.tsx'
   - '*.puml'
   - '*.tsv'
-  - 'assets/css/skyline-original.scss'
+  - 'assets/css/skyline.scss'
   - 'assets/puml/*'
 include:
   - LICENSE.md

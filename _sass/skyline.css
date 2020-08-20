@@ -57,7 +57,7 @@ body {
   font-weight: var(--weight-normal);
   font-size: 120%;
   color: var(--midnight-blue);
-  background-color: white;
+  background: white url(../img/noise-512.jpg);
   max-width: 60em;
   margin: 0 auto;
   line-height: var(--cadence);
