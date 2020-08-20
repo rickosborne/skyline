@@ -5,6 +5,7 @@ relative_links:
   collections: true
 exclude:
   - '.idea/workspace.xml'
+  - '*.iml'
   - 'node_modules/*'
   - '*.ts'
   - '*.tsx'
@@ -12,6 +13,11 @@ exclude:
   - '*.tsv'
   - 'assets/css/skyline.scss'
   - 'assets/puml/*'
+  - 'Gemfile*'
+  - 'package*.json'
+  - 'tsconfig.json'
+  - 'src/*'
+  - 'assets/scss/*'
 include:
   - LICENSE.md
   - CONTRIBUTING.md
