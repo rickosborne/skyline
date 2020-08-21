@@ -21,14 +21,14 @@ Feldspar
 		<div class="summary">
 			<span class="summary-is-a">is a</span>
 			<span class="summary-descriptor"
-				><span class="ref-title">strong</span> <span class="ref-book-page"><span class="ref-book">CSR</span> <span class="ref-page">56</span></span></span
+				><span class="ref-title">strong</span> <span class="ref-book-page"><span class="ref-book">CSR</span><span class="ref-page">56</span></span></span
 			>
 			<span class="summary-type"
-				><span class="ref-title">Tenakth warrior</span> <span class="ref-book-page"><span class="ref-book">CSR</span> <span class="ref-page">20</span></span></span
+				><span class="ref-title">Tenakth warrior</span> <span class="ref-book-page"><span class="ref-book">CSR</span><span class="ref-page">20</span></span></span
 			>
 			<span class="summary-who">who</span>
 			<span class="summary-focus"
-				><span class="ref-title">helps their friends</span> <span class="ref-book-page"><span class="ref-book">CSR</span> <span class="ref-page">69</span></span></span
+				><span class="ref-title">helps their friends</span> <span class="ref-book-page"><span class="ref-book">CSR</span><span class="ref-page">69</span></span></span
 			>
 		</div>
 		<section class="tier block">
@@ -90,7 +90,7 @@ Feldspar
 				<div class="detailed">
 					<dt>
 						<span class=""
-							><span class="ref-title">Advice From A Friend</span> <span class="ref-book-page"><span class="ref-book">CSR</span> <span class="ref-page">109</span></span></span
+							><span class="ref-title">Advice From A Friend</span> <span class="ref-book-page"><span class="ref-book">CSR</span><span class="ref-page">109</span></span></span
 						>
 					</dt>
 					<dd><span class="action">Action.</span></dd>
@@ -98,22 +98,14 @@ Feldspar
 				<div class="detailed">
 					<dt>
 						<span class=""
-							><span class="ref-title">Bash</span> <span class="ref-book-page"><span class="ref-book">CSR</span> <span class="ref-page">112</span></span></span
+							><span class="ref-title">Bash</span> <span class="ref-book-page"><span class="ref-book">CSR</span><span class="ref-page">112</span></span></span
 						>
 					</dt>
 				</div>
 				<div class="detailed">
 					<dt>
 						<span class=""
-							><span class="ref-title">Combat Prowess</span> <span class="ref-book-page"><span class="ref-book">CSR</span> <span class="ref-page">120</span></span></span
-						>
-					</dt>
-					<dd><span class="enabler">Enabler.</span></dd>
-				</div>
-				<div class="detailed">
-					<dt>
-						<span class=""
-							><span class="ref-title">Courageous</span> <span class="ref-book-page"><span class="ref-book">CSR</span> <span class="ref-page">122</span></span></span
+							><span class="ref-title">Combat Prowess</span> <span class="ref-book-page"><span class="ref-book">CSR</span><span class="ref-page">120</span></span></span
 						>
 					</dt>
 					<dd><span class="enabler">Enabler.</span></dd>
@@ -121,7 +113,7 @@ Feldspar
 				<div class="detailed">
 					<dt>
 						<span class=""
-							><span class="ref-title">Friendly Help</span> <span class="ref-book-page"><span class="ref-book">CSR</span> <span class="ref-page">143</span></span></span
+							><span class="ref-title">Courageous</span> <span class="ref-book-page"><span class="ref-book">CSR</span><span class="ref-page">122</span></span></span
 						>
 					</dt>
 					<dd><span class="enabler">Enabler.</span></dd>
@@ -129,7 +121,7 @@ Feldspar
 				<div class="detailed">
 					<dt>
 						<span class=""
-							><span class="ref-title">Improved Edge</span> <span class="ref-book-page"><span class="ref-book">CSR</span> <span class="ref-page">151</span></span></span
+							><span class="ref-title">Friendly Help</span> <span class="ref-book-page"><span class="ref-book">CSR</span><span class="ref-page">143</span></span></span
 						>
 					</dt>
 					<dd><span class="enabler">Enabler.</span></dd>
@@ -137,7 +129,15 @@ Feldspar
 				<div class="detailed">
 					<dt>
 						<span class=""
-							><span class="ref-title">Trained Without Armor</span> <span class="ref-book-page"><span class="ref-book">CSR</span> <span class="ref-page">193</span></span></span
+							><span class="ref-title">Improved Edge</span> <span class="ref-book-page"><span class="ref-book">CSR</span><span class="ref-page">151</span></span></span
+						>
+					</dt>
+					<dd><span class="enabler">Enabler.</span></dd>
+				</div>
+				<div class="detailed">
+					<dt>
+						<span class=""
+							><span class="ref-title">Trained Without Armor</span> <span class="ref-book-page"><span class="ref-book">CSR</span><span class="ref-page">193</span></span></span
 						>
 					</dt>
 					<dd><span class="enabler">Enabler.</span></dd>
