@@ -34,7 +34,7 @@ export class CypherPcStats extends ABookTemplate<CypherPlayerCharacterInfo> {
 		return html(
 			<span class={className} data-endl>
 				<span class="ref-title">{title}</span>
-				<span class="ref-book-page" data-if-children>
+				<span class="ref-book-page" data-if-children data-trim>
 					<span class="ref-book" data-if-present={bookRef}>{bookRef?.book}</span>
 					<span class="ref-page" data-if-present={bookRef}>{bookRef?.page}</span>
 				</span>
