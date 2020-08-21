@@ -7,24 +7,33 @@ document.addEventListener('DOMContentLoaded', function onDomContentLoaded() {
             return;
         }
         var isBlock = spoilerEl.classList.contains('block') || ['blockquote', 'div'].includes(spoilerEl.tagName.toLowerCase());
-        var warningType = isBlock ? 'DIV' : 'SPAN';
-        var checkboxEl = document.createElement('INPUT');
-        var labelEl = document.createElement('LABEL');
+        var warningType = isBlock ? 'DETAILS' : 'SPAN';
         var warningEl = document.createElement(warningType);
-        checkboxEl.type = 'checkbox';
-        checkboxEl.classList.add('spoiler-checkbox');
-        labelEl.classList.add('spoiler-label');
-        warningEl.classList.add('spoiler-warning');
         if (isBlock) {
+            var summaryEl = document.createElement('SUMMARY');
+            summaryEl.appendChild(document.createTextNode('Spoiler'));
+            warningEl.appendChild(summaryEl);
             warningEl.classList.add('block');
-            labelEl.classList.add('block');
+            parentElement.insertBefore(warningEl, spoilerEl);
+            parentElement.removeChild(spoilerEl);
+            warningEl.appendChild(spoilerEl);
+            summaryEl.classList.add('spoiler-warning');
         }
-        warningEl.append(document.createTextNode(' (spoiler) '));
-        parentElement.insertBefore(labelEl, spoilerEl);
-        parentElement.removeChild(spoilerEl);
-        labelEl.appendChild(checkboxEl);
-        labelEl.appendChild(warningEl);
-        labelEl.appendChild(spoilerEl);
+        else {
+            var labelEl = document.createElement('LABEL');
+            var checkboxEl = document.createElement('INPUT');
+            checkboxEl.type = 'checkbox';
+            checkboxEl.classList.add('spoiler-checkbox');
+            labelEl.appendChild(checkboxEl);
+            labelEl.classList.add('spoiler-label');
+            labelEl.classList.add('block');
+            warningEl.append(document.createTextNode(' (spoiler) '));
+            parentElement.insertBefore(labelEl, spoilerEl);
+            parentElement.removeChild(spoilerEl);
+            labelEl.appendChild(warningEl);
+            labelEl.appendChild(spoilerEl);
+            warningEl.classList.add('spoiler-warning');
+        }
     });
     document.querySelectorAll('.fullscreen-able').forEach(function (fullscreenAble) {
         fullscreenAble.addEventListener('click', function () {

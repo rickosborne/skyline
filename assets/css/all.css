@@ -84,6 +84,26 @@ object, svg {
   cursor: pointer;
 }
 
+ul > li {
+  list-style-type: disc;
+}
+
+li ul > li {
+  list-style-type: circle;
+}
+
+li li ul > li {
+  list-style-type: square;
+}
+
+ol > li {
+  list-style-type: decimal;
+}
+
+li ol > li {
+  list-style-type: lower-roman;
+}
+
 body {
   max-width: 60em;
   margin: 0 auto;
@@ -553,12 +573,36 @@ code {
   font-weight: 400;
 }
 
-.spoiler-label .spoiler-warning {
+.spoiler-warning {
   background-color: #333;
-  color: #666;
+  color: #fff;
 }
-.spoiler-label .spoiler-checkbox {
+
+.spoiler-checkbox {
   background-color: rgba(0, 0, 0, 0.1);
+}
+
+details[open] .spoiler-warning {
+  background-color: var(--dusk-blue);
+}
+
+details .spoiler-warning {
+  user-select: none;
+  cursor: pointer;
+}
+
+details > summary.spoiler-warning::before {
+  content: "▶ ";
+  display: inline-block;
+  width: 1.5em;
+  color: #ccc;
+}
+
+details[open] > summary.spoiler-warning::before {
+  content: "▼ ";
+  display: inline-block;
+  width: 1.5em;
+  color: #ddd;
 }
 
 .fullscreen-able svg:fullscreen {

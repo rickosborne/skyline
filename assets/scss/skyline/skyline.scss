@@ -240,15 +240,35 @@ code {
 	font-weight: 400;
 }
 
-.spoiler-label {
-	.spoiler-warning {
-		background-color: #333;
-		color: #666;
-	}
+.spoiler-warning {
+	background-color: #333;
+	color: #fff;
+}
 
-	.spoiler-checkbox {
-		background-color: rgba(0, 0, 0, 0.1);
-	}
+.spoiler-checkbox {
+	background-color: rgba(0, 0, 0, 0.1);
+}
+
+details[open] .spoiler-warning {
+	background-color: var(--dusk-blue);
+}
+
+details .spoiler-warning {
+	user-select: none;
+	cursor: pointer;
+}
+
+details > summary.spoiler-warning::before {
+	content: "▶ ";
+	display: inline-block;
+	width: 1.5em;
+	color: #ccc;
+}
+details[open] > summary.spoiler-warning::before {
+	content: "▼ ";
+	display: inline-block;
+	width: 1.5em;
+	color: #ddd;
 }
 
 .fullscreen-able svg:fullscreen {
