@@ -2,11 +2,44 @@
 <html lang="{{ site.lang | default: "en-US" }}">
 <head>
 	<meta charset="UTF-8">
-
-	{% seo %}
+	{%- assign pageTitle = page.title | default: "" -%}
+	{%- if pageTitle == "" -%}
+		{%- assign headEnds = content | split: "</h" -%}
+		{%- for headEnd in headEnds -%}
+			{%- assign headParts = headEnd | split: "<h" -%}
+			{%- for headPart in headParts -%}
+				{%- assign headPartPrefix = headPart | strip | slice: 0, 1 -%}
+				{%- if headPartPrefix == "1" or headPartPrefix == "2" or headPartPrefix == "3" or headPartPrefix == "4" or headPartPrefix == "5" or headPartPrefix == "6" -%}
+					{%- if pageTitle == "" -%}
+						{%- assign headPartLength = headPart | size -%}
+						{%- assign pageTitle = headPart | slice: 2, headPartLength | strip_html | strip -%}
+					{%- endif -%}
+				{%- endif %}
+			{%- endfor -%}
+		{%- endfor -%}
+	{%- endif -%}
+	{%- assign paraEnds = content | split: "</p>" -%}
+	{%- assign description = "" -%}
+	{%- for paraEnd in paraEnds -%}
+		{%- assign paraParts = paraEnd | split: "<p" -%}
+		{%- for paraPart in paraParts -%}
+	    {%- assign paraPartPrefix = paraPart | strip | slice: 0, 1 -%}
+	    {%- if paraPartPrefix == ">" -%}
+				{%- assign paraPartLength = paraPart | size -%}
+				{%- assign descriptionLength = description | size -%}
+				{%- if descriptionLength < 120 and paraPartLength > 10 -%}
+					{%- assign descriptionPart = paraPart | slice: 1, paraPartLength | strip_html | strip -%}
+					{%- capture description %}{{ description }} {{ descriptionPart | replace: "
+", " " }}{% endcapture -%}
+				{%- endif -%}
+			{%- endif -%}
+		{%- endfor -%}
+	{%- endfor -%}
+	<title>{{ pageTitle }} | {{ site.title }}</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="theme-color" content="#157878">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="description" content="{{ description | strip }}">
 	<link rel="stylesheet" href="{{ '/assets/css/all.css?v=' | append: site.github.build_revision | relative_url }}">
 </head>
 <body class="{% for tag in page.tags %}{{ tag | slugify }} {% endfor %}{% if page.state %}state-{{ page.state | slugify }}{% endif %} {% if page.location %}loc-{{ page.location | replace: "'", "" | slugify }}{% endif %}">

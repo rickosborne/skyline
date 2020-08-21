@@ -1,0 +1,319 @@
+
+// Exo 2 is a little too computer-y.  (Yeah, I know.  The irony is not lost on me.)
+//@import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&display=swap');
+// Signika is okay ... but a little too tight.
+//@import url('https://fonts.googleapis.com/css2?family=Signika:wght@200;300;400;500;600;700&display=swap');
+// Recursive is a little too visually distracting for large blocks of text.
+//@import url('https://fonts.googleapis.com/css2?family=Recursive:slnt,wght,MONO@-15..0,300..1000,0..1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@250;350;450;550;650;750&display=swap');
+// Used for Focus/AR/code, and for Cypher stat blocks
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap');
+// Open Sans is a little too plain
+//@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&display=swap');
+// Noto Serif is a strong contender
+//@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+// .. but Noto Sans doesn't have the weight options to balance Noto Serif
+//@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+html {
+	background-color: #333;
+}
+
+body {
+	font-family: 'Roboto Slab', "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	//font-variation-settings: var(--mono), var(--casl), var(--wght), var(--slnt), var(--CRSV);
+	font-weight: var(--weight-normal);
+	font-size: 120%;
+	color: var(--midnight-blue);
+	background: white url(../img/noise-512.jpg);
+	line-height: var(--cadence);
+}
+
+.site-header, .site-footer {
+	background-color: var(--evening-blue);
+}
+
+.site-footer {
+	background-image: linear-gradient(0deg, var(--evening-blue), var(--dusk-blue));
+	color: var(--noon-blue-50);
+	text-align: right;
+	font-size: 90%;
+
+	a, a:visited {
+		color: var(--noon-blue-50);
+		text-decoration: none;
+	}
+
+	a:hover, a:focus {
+		background-color: var(--noon-blue-50);
+		color: var(--night-blue);
+	}
+}
+
+.site-header {
+	background-image: linear-gradient(180deg, var(--evening-blue), var(--dusk-blue));
+
+	.project-name {
+		border-right: thin solid rgba(255, 255, 255, 0.5);
+		text-transform: capitalize;
+		color: white;
+		font-weight: var(--weight-light);
+		letter-spacing: 0.04em;
+		font-size: 3rem;
+		line-height: var(--cadence-double);
+
+		a {
+			color: white;
+			font-weight: var(--weight-light);
+			text-decoration: none;
+
+			&:hover {
+				background-color: inherit;
+			}
+		}
+	}
+
+	.project-tagline {
+		color: var(--barely-blue);
+		font-size: calc(0.75 * var(--cadence));
+		line-height: var(--cadence);
+		font-weight: var(--weight-light);
+	}
+}
+
+#pre-page {
+	background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0));
+}
+
+#post-page {
+	background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0));
+}
+
+h1, h2, h3, h4, h5, h6 {
+	letter-spacing: -0.04em;
+	line-height: var(--cadence-double);
+}
+
+h1 {
+	color: var(--evening-blue);
+	border-bottom: thin solid var(--evening-blue-25);
+	font-weight: var(--weight-heavy);
+	font-size: 1.5rem;
+}
+h2 {
+	color: var(--dusk-blue);
+	border-bottom: thin solid var(--dusk-blue-25);
+	font-weight: var(--weight-heavy);
+	font-size: 1.4rem;
+}
+h3 {
+	color: var(--night-blue);
+	font-weight: var(--weight-heavy);
+	font-size: 1.3rem;
+}
+h4 {
+	color: var(--night-blue);
+	font-weight: var(--weight-bold);
+	font-style: italic;
+	font-size: 1.3rem;
+}
+
+blockquote {
+	color: var(--night-blue);
+	background-color: var(--noon-blue-10);
+	border-left: var(--cadence-quarter) solid var(--noon-blue-25);
+}
+
+.narrator-note {
+	color: var(--dusk-green);
+	background-color: var(--dusk-green-5);
+	border-left-color: var(--dusk-green-25);
+}
+
+blockquote, .narrator-note {
+	header {
+		color: var(--night-green);
+		font-weight: var(--weight-bold);
+	}
+}
+
+
+#breadcrumbs {
+	background-color: rgba(0, 0, 0, 0.2);
+	background-image: linear-gradient(180deg, var(--dusk-blue) 20%, var(--night-blue) 100%);
+
+	&, & a {
+		color: var(--noon-blue-50);
+	}
+
+	.breadcrumb-list {
+		.breadcrumb {
+			a {
+				font-weight: var(--weight-light);
+				color: var(--noon-blue);
+				text-decoration: none;
+
+				&::before {
+					content: " \25BA ";
+				}
+
+				&:hover, &:focus {
+					background-color: rgba(255, 255, 255, 0.1);
+					text-decoration: underline;
+					color: var(--barely-blue);
+				}
+			}
+		}
+	}
+}
+
+#next {
+	a {
+		background-color: var(--noon-blue);
+
+		&, &:visited {
+			color: var(--night-blue);
+		}
+
+		&:hover, &:focus {
+			color: var(--barely-blue);
+			background-color: var(--morning-blue);
+
+			.next-title {
+				text-decoration: underline;
+			}
+		}
+	}
+}
+
+a {
+	color: var(--dusk-blue);
+	//font-variation-settings: var(--wght-bolder);
+	font-weight: var(--weight-boldish);
+}
+
+a:visited {
+	color: var(--night-blue);
+}
+
+a:hover {
+	color: var(--dusk-blue);
+	background-color: var(--noon-blue);
+}
+
+strong, th {
+	//font-variation-settings: var(--wght-bolder);
+	font-weight: var(--weight-bold);
+}
+
+em {
+	//font-variation-settings: var(--slnt-most);
+	font-style: italic;
+}
+
+.story-links {
+	.story-link {
+		border-left-color: var(--morning-orange);
+	}
+}
+
+.story-link {
+	border-left: var(--cadence-quarter) solid var(--morning-orange-50);
+
+	&:hover, &:visited:hover {
+		text-decoration: none;
+		background-color: var(--morning-orange-25);
+		border-left-color: var(--morning-orange);
+		color: var(--night-orange);
+	}
+
+	&, &:visited {
+		color: var(--dusk-orange);
+		background-color: var(--morning-orange-5);
+	}
+}
+
+code {
+	color: var(--dusk-blue);
+	background-color: var(--dusk-blue-5);
+	font-family: Roboto, "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-weight: 400;
+}
+
+.spoiler-label {
+	.spoiler-warning {
+		background-color: #333;
+		color: #666;
+	}
+
+	.spoiler-checkbox {
+		background-color: rgba(0, 0, 0, 0.1);
+	}
+}
+
+.fullscreen-able svg:fullscreen {
+	background-color: white;
+}
+
+.stat-block {
+	table.stats {
+		th, td {
+			text-align: center;
+		}
+	}
+
+	table.loot-list {
+		.loot-percent, .loot-qty {
+			text-align: right;
+		}
+
+		th {
+			text-align: left;
+			text-transform: uppercase;
+			font-size: 80%;
+			color: rgba(0, 0, 0, 0.4);
+		}
+
+		tbody {
+			tr {
+				border-top: thin solid rgba(128, 128, 128, 0.1);
+			}
+		}
+	}
+
+	dl {
+		.detailed {
+			dt {
+				font-style: italic;
+				font-weight: var(--weight-bold);
+			}
+		}
+	}
+}
+
+
+@media (max-width: 40rem) {
+	:root {
+		--cadence: 1.5rem;
+	}
+
+	body {
+		font-size: 100%;
+	}
+
+	.site-header {
+		.project-name {
+			font-size: 2rem;
+		}
+	}
+}
+
+@media (min-width: 50rem) {
+	.guide {
+		.main-content {
+			h1, h2, h3, h4, h5, h6 {
+				border-bottom: thin solid var(--dusk-blue-5);
+			}
+		}
+	}
+}

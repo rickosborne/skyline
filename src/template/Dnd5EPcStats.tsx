@@ -1,9 +1,6 @@
-import * as fs from "fs";
-import * as path from "path";
 import {h} from "preact";
-import * as YAML from "yaml";
-import {Book, ComplexScore, Dnd5EPlayerCharacter, PlayerCharacter} from "../schema/book";
-import {ATemplate} from "./ATemplate";
+import {ComplexScore, Dnd5EPlayerCharacter, PlayerCharacter} from "../schema/book";
+import {ABookTemplate} from "./ABookTemplate";
 import {html} from "./hypertext";
 import {DND5E_SENSES, DND5E_STATS, ifLines, LOOKUPS, toWords} from "./util";
 
@@ -12,21 +9,17 @@ export interface PlayerCharacterInfo {
 	hzd: PlayerCharacter;
 }
 
-export class Dnd5EPcStats extends ATemplate<PlayerCharacterInfo> {
+export class Dnd5EPcStats extends ABookTemplate<PlayerCharacterInfo> {
+	public static readonly TEMPLATE_ID = "dnd5e-pc-stats";
+
 	canRender(dataType: string, templateId: string, params: Record<string, string>): boolean {
-		return dataType === "book" && templateId === "dnd5e-pc-stats";
+		return super.canRender(dataType, templateId, params) && templateId === Dnd5EPcStats.TEMPLATE_ID;
 	}
 
 	convert(data: any, params: Record<string, string>): PlayerCharacterInfo {
-		const book = data as Book;
 		const characterName = params.character;
-		if (characterName == null) {
-			throw new Error(`No Character Name given in template params: ${JSON.stringify(params)}`);
-		}
-		const hzd = (book.playerCharacter || [] as PlayerCharacter[]).find(pc => pc.name === characterName);
-		if (hzd == null) {
-			throw new Error(`HZD Character not found: ${characterName}`);
-		}
+		const book = this.bookFromAny(data);
+		const hzd = this.playerCharacterNamed(characterName, book);
 		const dnd5e = (book.adapter?.dnd5e?.playerCharacter || [] as Dnd5EPlayerCharacter[]).find(pc => pc.name === characterName);
 		if (dnd5e == null) {
 			throw new Error(`5E Character not found: ${characterName}`);
@@ -42,21 +35,13 @@ export class Dnd5EPcStats extends ATemplate<PlayerCharacterInfo> {
 		return typeof score == 'number' ? score : score.effective;
 	}
 
-	getData(dataType: string, dataName: string, params: Record<string, string>): object | undefined {
-		if (dataType !== 'book') {
-			return undefined;
-		}
-		const text = fs.readFileSync(path.join(__dirname, "..", "..", "story", dataName, "book.yaml"), {encoding: "utf8"});
-		return YAML.parse(text);
-	}
-
 	render(data: PlayerCharacterInfo): string {
 		// noinspection HtmlDeprecatedTag
 		return ifLines([
 			html(<h2>{data.hzd.name}</h2>),
 			data.dnd5e.link != null && data.dnd5e.link.characterDndBeyond != null ? html(
 				<p><a href={data.dnd5e.link.characterDndBeyond.href}
-							rel="external">{data.dnd5e.link.characterDndBeyond.title}</a></p>
+					rel="external">{data.dnd5e.link.characterDndBeyond.title}</a></p>
 			) : '',
 			html(
 				<div class="dnd5e-pc-block stat-block">
@@ -67,7 +52,7 @@ export class Dnd5EPcStats extends ATemplate<PlayerCharacterInfo> {
 						<p class="size-and-type">
 							<em>{data.dnd5e.race} ({data.hzd.tribe}),
 								<a href={data.dnd5e.class.href} rel="external"
-									 title={data.dnd5e.class.title + " on D&D Beyond"}>{data.dnd5e.class.title}</a>,
+									title={data.dnd5e.class.title + " on D&D Beyond"}>{data.dnd5e.class.title}</a>,
 								Level {data.dnd5e.level}</em>
 						</p>
 						<section class="stats">
@@ -198,20 +183,25 @@ export class Dnd5EPcStats extends ATemplate<PlayerCharacterInfo> {
 									// noinspection HtmlDeprecatedTag
 									return html(
 										<tr>
-											<td class="type"><abbr title={type} class={type.toLowerCase()}>{attack.hands + 'H&nbsp;' + type[0]}</abbr></td>
+											<td class="type">
+												<abbr title={type} class={type.toLowerCase()}>{attack.hands + 'H&nbsp;' + type[0]}</abbr>
+											</td>
 											<td class="attack">{attack.title}</td>
 											<td class="range">
-												<abbr title="Reach" data-if-present={attack.reachFeet}>
-													<span class="scalar reach">{attack.reachFeet}</span> <span class="measure">ft.</span>
+												<abbr title="Reach" data-if-present={attack.reachFeet} data-space>
+													<span class="scalar reach" data-trim>{attack.reachFeet}</span>
+													<span class="measure">ft.</span>
 												</abbr>
-												<abbr data-if-present={attack.rangeFeet} title="Range">
-													<span class="scalar range">{attack.rangeFeet}{rangeMax}</span> <span class="measure">ft.</span>
+												<abbr data-if-present={attack.rangeFeet} title="Range" data-space>
+													<span class="scalar range" data-trim>{attack.rangeFeet}{rangeMax}</span>
+													<span class="measure">ft.</span>
 												</abbr>
 											</td>
-											<td class="hit">{typeof attack.toHit === 'string' ? attack.toHit : `${attack.toHit.stat} ${attack.toHit.num}`}</td>
+											<td class="hit">
+												{typeof attack.toHit === 'string' ? attack.toHit : `${attack.toHit.stat} ${attack.toHit.num}`}
+											</td>
 											<td class="damage">
-												<abbr title={attack.damage.type}
-															class={attack.damage.type.toLowerCase()}>{String(attack.damage.roll).replace(/\s+/g, '&nbsp;')}</abbr>
+												<abbr title={attack.damage.type} class={attack.damage.type.toLowerCase()} data-space>{String(attack.damage.roll).replace(/\s+/g, '&nbsp;')}</abbr>
 											</td>
 											<td class="notes">{ifLines([attack.note], ', ')}</td>
 										</tr>

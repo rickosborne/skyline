@@ -19,6 +19,8 @@ const IF_CHILDREN = "data-if-children";
 const IF_PRESENT = "data-if-present";
 const IF_SIBLINGS = "data-if-siblings";
 const DATA_SPACE = "data-space";
+const DATA_ENDL = "data-endl";
+const DATA_TRIM = "data-trim";
 const DATA_MARKDOWN = "data-markdown";
 
 const REMOVED = [
@@ -26,6 +28,8 @@ const REMOVED = [
 	IF_PRESENT,
 	IF_SIBLINGS,
 	DATA_SPACE,
+	DATA_ENDL,
+	DATA_TRIM,
 	"children"
 ];
 
@@ -41,14 +45,15 @@ const VOID_TAGS = [
 
 export function html(
 	jsx: JSX.Element | string | number | boolean | undefined,
-	nested: boolean = false
+	nested: boolean = false,
+	parentDelim: string = '',
 ): string {
 	if (!realElement(jsx)) {
 		return stringify(jsx);
 	}
 	const props = jsx.props || {};
 	const unwrap = !!props["data-unwrap"];
-	const delim = props[DATA_SPACE] ? " " : "";
+	const delim = props[DATA_ENDL] ? "\n" : props[DATA_SPACE] ? " " : props[DATA_TRIM] ? '' : parentDelim;
 	const onlyIfChildren = !!props[IF_CHILDREN] || unwrap;
 	if (IF_PRESENT in props) {
 		const ifPresent = props[IF_PRESENT];
@@ -68,7 +73,7 @@ export function html(
 		const rendered = (Array.isArray(children) ? children : [children])
 			.map(child => ({
 				mustKeep: realElement(child) && child.props != null ? !child.props[IF_SIBLINGS] : stringify(child) !== "",
-				rendered: html(child, true),
+				rendered: html(child, true, delim),
 			}));
 		if (rendered.findIndex(child => child.mustKeep && child.rendered !== '') >= 0) {
 			innerHtml = rendered
