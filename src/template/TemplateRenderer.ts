@@ -4,6 +4,7 @@ import * as path from "path";
 import {ARenderer} from "../ARenderer";
 import {ATemplate} from "./ATemplate";
 import {CypherCreature} from "./CypherCreature";
+import {CypherPcStats} from "./CypherPcStats";
 import {Dnd5ENpcStats} from "./Dnd5ENpcStats";
 import {Dnd5EPcStats} from "./Dnd5EPcStats";
 import {PlantUmlRenderer} from "./PlantUmlRenderer";
@@ -12,6 +13,7 @@ const TYPED_TEMPLATES: ATemplate<any>[] = [
 	new Dnd5ENpcStats(),
 	new Dnd5EPcStats(),
 	new CypherCreature(),
+	new CypherPcStats(),
 	new PlantUmlRenderer(),
 ];
 

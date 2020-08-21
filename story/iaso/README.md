@@ -27,6 +27,7 @@ Top-level sections:
   * [Artifacts](590-artifacts.md)
 * [Adapters](600-adapters.md)
   * [D&D 5E](605-5e.md)
+  * [Cypher System](620-cypher.md)
 * Appendices
   * [Errata](940-errata.md)
   * [Author's Notes](950-author-notes.md)

@@ -1,0 +1,99 @@
+// Okay, so this seems a little crazy, right?
+// This is the principal source file.
+// But the Ruby Sass is slow AF, so we need Dart Sass to actually do the compilation.
+// But Dart Sass doesn't understand Jekyll front matter.
+// So we compile this file to assets/css/all.css
+// It's dumb ... but it works.
+
+:root {
+	// In general, blues are used for most shading.
+	// For text, blues are used for read-along blocks.
+	--barely-blue: hsl(208, 80%, 99%);
+	--noon-blue: hsl(208, 80%, 88%);
+	--morning-blue: hsl(208, 80%, 66%);
+	--evening-blue: hsl(208, 80%, 44%);
+	--dusk-blue: hsl(208, 80%, 33%);
+	--night-blue: hsl(208, 80%, 22%);
+	--midnight-blue: hsl(208, 80%, 11%);
+
+	--noon-blue-50: hsla(208, 80%, 88%, 0.5);
+	--noon-blue-25: hsla(208, 80%, 88%, 0.25);
+	--noon-blue-10: hsla(208, 80%, 88%, 0.10);
+	--noon-blue-5: hsla(208, 80%, 88%, 0.05);
+	--evening-blue-50: hsla(208, 80%, 44%, 0.5);
+	--evening-blue-25: hsla(208, 80%, 44%, 0.25);
+	--dusk-blue-25: hsla(208, 80%, 33%, 0.25);
+	--dusk-blue-10: hsla(208, 80%, 33%, 0.1);
+	--dusk-blue-5: hsla(208, 80%, 33%, 0.05);
+	--morning-blue-5: hsla(208, 80%, 66%, 0.05);
+	--morning-blue-25: hsla(208, 80%, 66%, 0.25);
+
+	// For text, oranges are used for Story Links.
+	--barely-orange: hsl(32, 80%, 99%);
+	--noon-orange: hsl(32, 80%, 88%);
+	--morning-orange: hsl(32, 80%, 66%);
+	--evening-orange: hsl(32, 80%, 44%);
+	--dusk-orange: hsl(32, 80%, 33%);
+	--night-orange: hsl(32, 80%, 22%);
+	--midnight-orange: hsl(32, 80%, 11%);
+
+	--morning-orange-50: hsla(32, 80%, 66%, 0.50);
+	--morning-orange-25: hsla(32, 80%, 66%, 0.25);
+	--morning-orange-5: hsla(32, 80%, 66%, 0.05);
+	--evening-orange-25: hsl(32, 80%, 44%, 0.25);
+
+
+	// For text, greens are used for Narrator Note blocks.
+	--barely-green: hsl(96, 80%, 99%);
+	--noon-green: hsl(96, 80%, 77%);
+	--morning-green: hsl(96, 80%, 55%);
+	--evening-green: hsl(96, 80%, 44%);
+	--dusk-green: hsl(96, 80%, 33%);
+	--night-green: hsl(96, 80%, 22%);
+	--midnight-green: hsl(96, 80%, 11%);
+
+	--dusk-green-50: hsla(96, 80%, 33%, 0.5);
+	--dusk-green-25: hsla(96, 80%, 33%, 0.25);
+	--dusk-green-10: hsla(96, 80%, 33%, 0.1);
+	--dusk-green-5: hsla(96, 80%, 33%, 0.05);
+
+	--cadence: 1.75rem;
+	--cadence-half: calc(var(--cadence) * 0.5);
+	--cadence-quarter: calc(var(--cadence) * 0.25);
+	--cadence-double: calc(var(--cadence) * 2);
+	--cadence-negative: calc(-1 * var(--cadence));
+	--cadence-half-negative: calc(-1 * var(--cadence-half));
+	--cadence-quarter-negative: calc(-1 * var(--cadence-quarter));
+
+	--weight-normal: 350;
+	--weight-light: calc(var(--weight-normal) - 100);
+	--weight-boldish: calc(var(--weight-normal) + 100);
+	--weight-bold: calc(var(--weight-normal) + 200);
+	--weight-heavy: calc(var(--weight-normal) + 300);
+}
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	border: none;
+	text-indent: 0;
+	outline: none;
+	font-weight: var(--weight-normal);
+	font-style: normal;
+	list-style: none;
+}
+
+table {
+	display: table;
+	width: auto;
+}
+
+object, svg {
+	max-width: 100%;
+	height: auto;
+}
+
+.fullscreen-able {
+	cursor: pointer;
+}

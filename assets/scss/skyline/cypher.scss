@@ -1,0 +1,458 @@
+@use "vars";
+
+.cypher-stat-block {
+	padding-bottom: var(--cadence-half);
+	border-bottom: thick solid var(--night-green);
+	color: var(--midnight-green);
+	font-size: 1.1rem;
+	font-family: Roboto, "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-weight: 400;
+
+
+	.title {
+		background-color: var(--night-green);
+		background-image: linear-gradient(to bottom, var(--night-green), var(--dusk-green));
+		display: flex;
+		margin: 0.5rem 0;
+		color: white;
+		padding: 0.5em;
+		border-radius: 0.5em 0.5em 0.5em 0;
+		font-weight: var(--weight-bold);
+		//font-variation-settings: var(--wght-bolder);
+		font-size: 1.3rem;
+		line-height: var(--cadence-double);
+		text-shadow: black 0 0 0.25em;
+		column-span: all;
+
+		h3 {
+			text-transform: uppercase;
+			flex-grow: 1;
+			color: white;
+			margin: 0;
+			letter-spacing: 0.05em;
+		}
+	}
+
+	.stats-tab {
+		margin: -0.5em 0 0.5em 0;
+		padding-bottom: 0.25em;
+		background-color: var(--dusk-green);
+		border-radius: 0 0 0.5em 0.5em;
+		color: white;
+		text-shadow: black 0 0 0.125em;
+	}
+
+	table.stats {
+		margin: 0;
+
+		th, td {
+			abbr[title] {
+				text-decoration: none;
+				border-bottom: none;
+			}
+		}
+	}
+
+	h4 {
+		color: var(--night-green);
+		//font-variation-settings: var(--slnt);
+		font-style: italic;
+		border-bottom: thin solid var(--dusk-green);
+		text-transform: uppercase;
+		min-height: auto;
+		line-height: 1.3em;
+		margin: 1.3em 0 0 0;
+	}
+
+	strong {
+		color: var(--night-green);
+	}
+
+	p {
+		text-indent: -1em;
+		padding-left: 1em;
+		margin: 0.65em 0;
+		line-height: 1.3em;
+	}
+
+	table p {
+		padding-left: 0;
+		text-indent: 0;
+	}
+
+	&:before {
+		margin: -0.55em -0.55em 0.5em -0.55em;
+	}
+
+	dl {
+		.detailed {
+			dt {
+				font-style: normal;
+
+				&::after {
+					content: ": ";
+				}
+			}
+		}
+	}
+}
+
+.cypher-pc-stat-block {
+	article {
+		display: grid;
+		grid-template:
+		"name   name    name   might   cyphers"
+	  "summary   summary   summary   might   cyphers"
+	  "tier   effort   xp   might   cyphers"
+	  "stats   stats   stats   speed   cyphers"
+	  "recovery  recovery  recovery  speed equipment"
+	  "abilities  abilities  abilities intellect  equipment"
+		"abilities abilities abilities intellect equipment"
+		"abilities abilities abilities attacks equipment"
+	;
+		grid-template-columns: 1fr 1fr 1fr 3fr 3fr;
+		grid-gap: var(--cadence-half);
+		border: thin solid #eee;
+		background: linear-gradient(0, var(--noon-blue-10), var(--noon-blue-5));
+		padding: var(--cadence-half);
+	}
+
+	.block {
+		border: thin solid var(--morning-blue-25);
+		border-radius: var(--cadence-half);
+
+		.value {
+			font-size: 200%;
+			display: block;
+			text-align: center;
+			line-height: var(--cadence-double);
+		}
+	}
+
+	.block .label, .stat .label, .stat .legend, .block .legend {
+		background: linear-gradient(0, transparent, var(--morning-blue-5));
+		text-align: center;
+		color: var(--evening-blue);
+		text-transform: uppercase;
+		font-family: vars.$font-sans;
+		font-size: 90%;
+	}
+
+	.stat .legend, .block .legend {
+		background: linear-gradient(180deg, transparent, var(--morning-blue-5));
+	}
+
+	.name {
+		grid-area: name;
+
+		h3 {
+			font-size: 150%;
+			line-height: var(--cadence-double);
+			margin-bottom: 0;
+		}
+	}
+
+	.ref-book-page {
+		color: rgba(0, 0, 0, 0.25);
+
+		&::before {
+			content: "(";
+		}
+		&::after {
+			content: ")";
+		}
+
+		.ref-page::before {
+			content: "·";
+		}
+	}
+
+	.summary {
+		grid-area: summary;
+
+		.ref-title {
+			font-weight: var(--weight-bold);
+		}
+	}
+
+	.summary-focus::after {
+		content: ".";
+	}
+
+	.tier {
+		grid-area: tier;
+	}
+
+	.effort {
+		grid-area: effort;
+	}
+
+	.xp {
+		grid-area: xp;
+	}
+
+	.stats {
+		grid-area: stats;
+		display: grid;
+		grid-template: "might speed intellect";
+		grid-gap: 0;
+
+		.stat {
+			display: grid;
+			grid-template:
+				"title        title"
+				"pool-value   edge-value"
+				"pool-legend  edge-legend"
+			;
+			grid-gap: 0;
+		}
+
+		.might, .speed {
+			border-right: thin solid var(--morning-blue-25);
+		}
+
+		.label {
+			grid-area: title;
+		}
+
+		.legend {
+			text-align: center;
+		}
+
+		.pool.value {
+			grid-area: pool-value;
+		}
+
+		.pool.legend {
+			grid-area: pool-legend;
+		}
+
+		.edge.value {
+			grid-area: edge-value;
+		}
+
+		.edge.legend {
+			grid-area: edge-legend;
+		}
+	}
+
+	.recovery {
+		grid-area: recovery;
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+
+		.label {
+			margin: 0 var(--cadence-half-negative);
+		}
+
+		.rolls {
+			border-right: thin solid var(--morning-blue-25);
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+
+			.label, .plus {
+				grid-column: 1 / span 2;
+			}
+		}
+
+		.plus {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+			column-gap: var(--cadence-half);
+
+			.label {
+				background: none;
+				text-align: right;
+				margin: 0;
+			}
+
+			.value {
+				font-size: inherit;
+				font-weight: var(--weight-bold);
+				line-height: inherit;
+				text-align: left;
+			}
+		}
+
+		.rolls, .damage-track {
+			padding: 0 var(--cadence-half);
+		}
+
+		.action, .hour, .minutes, .hours, .impaired, .debilitated {
+			&::before {
+				content: "⃞ ";
+			}
+		}
+	}
+
+	.special-abilities {
+		grid-area: abilities;
+
+		dl {
+			padding: var(--cadence-half);
+		}
+		dt {
+			display: inline;
+
+			.ref-title {
+				font-weight: var(--weight-bold);
+			}
+		}
+		dd {
+			display: inline;
+
+			&::before {
+				content: ": ";
+			}
+		}
+	}
+
+	.advancement {
+		grid-area: advancement;
+		display: none;
+	}
+
+	.might {
+		grid-area: might;
+	}
+
+	.intellect {
+		grid-area: intellect;
+	}
+
+	.speed {
+		grid-area: speed;
+	}
+
+	.attacks {
+		grid-area: attacks;
+
+		.modifier, .damage {
+			text-align: center;
+		}
+
+		.attacks-list {
+			text-align: left;
+		}
+	}
+
+	.cyphers {
+		display: grid;
+		grid-area: cyphers;
+		grid-template:
+			"label"
+			"details"
+			"legend"
+		;
+		grid-template-rows: auto 1fr auto;
+
+		.label {
+			grid-area: label;
+		}
+
+		.cyphers-list {
+			grid-area: details;
+		}
+
+		.limit {
+			grid-area: legend;
+		}
+	}
+
+	.equipment {
+		grid-area: equipment;
+		display: grid;
+		grid-template:
+			"label label"
+		  "list list"
+		  "armor currency"
+		;
+		grid-template-rows: auto 1fr auto;
+		grid-template-columns: 1fr 1fr;
+
+		.label {
+			grid-area: label;
+		}
+
+		.armor {
+			grid-area: armor;
+		}
+
+		.currency {
+			grid-area: currency;
+		}
+
+		.equipment-list {
+			grid-area: list;
+			padding: var(--cadence-half);
+		}
+	}
+
+	table {
+		margin: 0;
+		width: 100%;
+
+		.label {
+			th {
+				font-weight: var(--weight-normal);
+			}
+		}
+
+		th, td {
+			padding: 0;
+		}
+
+		tbody td {
+			border-top: thin solid var(--dusk-blue-10);
+		}
+
+		td:first-child {
+			padding-left: var(--cadence-quarter);
+		}
+	}
+
+	.skills {
+		.skill-stat {
+			text-align: left;
+
+			&::before {
+				content: "Skills\00A0·\00A0";
+			}
+		}
+	}
+
+	.trained, .specialized, .inability {
+		&.no {
+			color: var(--dusk-blue-25);
+		}
+	}
+}
+
+@media (max-width: 48rem) {
+	.cypher-stat-block .title {
+		border-bottom-right-radius: 0;
+	}
+}
+
+@media (max-width: 60rem) {
+	.cypher-pc-stat-block {
+		article {
+			display: grid;
+			grid-template:
+				"name name name"
+				"summary summary summary"
+				"tier effort xp"
+				"stats stats stats"
+				"recovery recovery recovery"
+				"abilities abilities abilities"
+				"might might might"
+				"speed speed speed"
+				"intellect intellect intellect"
+				"attacks attacks attacks"
+				"cyphers cyphers cyphers"
+				"equipment equipment equipment"
+			;
+			grid-template-columns: 1fr 1fr 1fr;
+		}
+	}
+}

@@ -62,7 +62,7 @@ export class Dnd5ENpcStats extends ATemplate<Machine> {
 							<p class="hp" data-space>
 								<strong>Hit Points:</strong>
 								<span class="roll-average">{data.adapter.dnd5e.hp.average}</span>
-								<span class="roll-dice">({data.adapter.dnd5e.hp.roll})</span>
+								<span class="roll-dice" data-trim>({data.adapter.dnd5e.hp.roll})</span>
 							</p>
 							<p class="speed" data-space>
 								<strong>Speed:</strong>

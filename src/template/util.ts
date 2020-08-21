@@ -1,6 +1,7 @@
 import * as fs from "fs";
 import * as path from "path";
 import * as YAML from "yaml";
+import {CypherStat} from "../schema/book";
 
 export function ifLines<S extends string | undefined | null | string[]>(
 	obj: S | S[],
@@ -79,10 +80,23 @@ export interface DND5ESense {
 }
 
 export const DND5E_SENSES: DND5ESense[] = [
-	{title: "Perception", modifies: 'WIS'},
-	{title: "Investigation", modifies: 'INT'},
-	{title: "Insight", modifies: 'WIS'},
+	{title: "Perception", modifies: "WIS"},
+	{title: "Investigation", modifies: "INT"},
+	{title: "Insight", modifies: "WIS"},
 ];
 
 export const LOOKUPS = getLookups();
 
+export const CYPHER_STAT_TITLES: Record<keyof CypherStat, string> = {
+	Might: "Might",
+	Speed: "Speed",
+	Intellect: "Intellect",
+};
+
+export const CYPHER_STAT_ATTR = Object.keys(CYPHER_STAT_TITLES);
+
+export const CYPHER_STATS: Array<{ attr: string; title: string }> = Object.entries(CYPHER_STAT_TITLES)
+	.map(([attr, title]) => ({
+		attr,
+		title,
+	}));
