@@ -97,3 +97,23 @@ object, svg {
 .fullscreen-able {
 	cursor: pointer;
 }
+
+ul>li {
+	list-style-type: disc;
+}
+
+li ul>li {
+	list-style-type: circle;
+}
+
+li li ul>li {
+	list-style-type: square;
+}
+
+ol>li {
+	list-style-type: decimal;
+}
+
+li ol>li {
+	list-style-type: lower-roman;
+}
