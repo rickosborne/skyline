@@ -5,7 +5,8 @@ State: Exploring
 
 ## 150
 
-Read aloud:
+{:.avoid-break-after}
+Read to everyone:
 
 > A pair of metal doors sag, misaligned in their tracks.
 > The split between them emits a teal glow in a slow flashing pattern.
@@ -15,7 +16,8 @@ Prying the door open is straightforward, requiring the equivalent of strength ch
 If multiple people work on it together, no roll is required.
 One of the people opening the door slices a hand in the effort (even if it's on a lever or pry bar), taking Light damage.
 
-Read aloud:
+{:.avoid-break-after}
+Read to everyone:
 
 > The room is clearly some kind of workshop: storage cabinets line the walls, including several which have fallen to the ground and spilled their contents across the floor.
 > Counter tops around the room are covered in what might be instruments or tools, but nothing familiar.

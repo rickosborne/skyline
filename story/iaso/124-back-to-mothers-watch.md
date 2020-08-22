@@ -1,6 +1,7 @@
 ## 124
 
-Read aloud:
+{:.avoid-break-after}
+Read to everyone:
 
 > The journey back to Mother's Watch is uneventful, and just as straightforward as Olara said.
 >

@@ -201,6 +201,7 @@
 	.name {
 		grid-area: name;
 		display: flex;
+		width: max-content;
 
 		h3 {
 			font-family: Roboto, 'Alegreya Sans', 'Noto Sans', 'Myriad Pro', Calibri, Helvetica, Arial, sans-serif;
@@ -212,6 +213,8 @@
 		}
 	}
 	.size-and-type {
+		width: max-content;
+		justify-self: right;
 		grid-area: sizetype;
 		text-align: right;
 		//line-height: var(--cadence-double);

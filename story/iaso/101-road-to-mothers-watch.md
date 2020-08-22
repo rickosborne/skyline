@@ -6,7 +6,8 @@ tags:
 
 ## 101: The Road to Mother's Watch
 
-Read aloud:
+{:.avoid-break-after}
+Read to everyone:
 
 > Just before dawn the road is clear, and the air has a slight chill.
 > The temperature stays comfortable even as the sun rises over the mountains to the east.

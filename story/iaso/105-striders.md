@@ -1,6 +1,7 @@
 ## 105
 
-Read aloud:
+{:.avoid-break-after}
+Read to everyone:
 
 > You've finally convinced Pren to get on the cart when a familiar high-pitched whinny sounds from just a dozen strides away.
 > With everyone focused on Pren, no one noticed the Striders approaching. 

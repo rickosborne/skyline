@@ -1,6 +1,7 @@
 ## 103
 
-Read aloud:
+{:.avoid-break-after}
+Read to everyone:
 
 > You get into a rhythm: working together to fell a tree, then to cut off all the limbs, then to segment the tree into workable lengths, loading the segments on the carts, and so on. 
 > But everyone is careful and diligent, so each tree takes about an hour.

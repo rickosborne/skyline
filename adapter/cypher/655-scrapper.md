@@ -1,7 +1,7 @@
 <!-- +template machine scrapper cypher-creature -->
 
-<h2>Scrapper</h2>
-<p>For additional flavor, see the <a href="https://horizon.fandom.com/wiki/Scrapper" rel="external">Horizon Wiki on Scrapper</a>.</p>
+<h1>Scrapper</h1>
+<p class="col-span-all">For additional flavor, see the <a href="https://horizon.fandom.com/wiki/Scrapper" rel="external">Horizon Wiki on Scrapper</a>.</p>
 <div class="cypher-stat-block stat-block">
 	<article>
 		<header class="title">

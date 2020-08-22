@@ -5,7 +5,8 @@ State: Exploring
 
 ## 186
 
-Read aloud:
+{:.avoid-break-after}
+Read to everyone:
 
 > You decide you don't know enough about this talking machine to trust it just yet.
 > IASO does not try to change your mind.

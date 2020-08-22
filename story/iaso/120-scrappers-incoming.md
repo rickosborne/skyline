@@ -1,6 +1,7 @@
 ## 120
 
-Read aloud:
+{:.avoid-break-after}
+Read to everyone:
 
 > The Scrappers come over the hill to the northeast, with just enough glare from the sun on the Horizon to cost you all several seconds of confusion.
 > Even more unlucky, you realize this isn't just a trio: you've counted a half dozen before you turn and run the other way.

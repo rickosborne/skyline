@@ -46,7 +46,7 @@ export class CypherPcStats extends ABookTemplate<CypherPlayerCharacterInfo> {
 		const {cypher, hzd} = data;
 		// noinspection HtmlDeprecatedTag
 		return ifLines([
-			html(<h2>{hzd.name}</h2>),
+			html(<h1>{hzd.name}</h1>),
 			html(
 				<div class="block cypher-pc-stat-block">
 					<article>

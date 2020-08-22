@@ -117,3 +117,11 @@ ol>li {
 li ol>li {
 	list-style-type: lower-roman;
 }
+
+em, em * {
+	font-style: italic;
+}
+
+strong, strong * {
+	font-weight: var(--weight-bold);
+}

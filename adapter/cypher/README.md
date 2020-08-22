@@ -13,3 +13,7 @@ Eventually:
   * [Thunderjaw](675-thunderjaw.md)
   * [Watcher](681-watcher.md)
 * [Legal](980-legal.md)
+
+## Printable
+
+The entire module is available as a single print-friendly page: [Skyline Adapter for the Cypher System (printable)](print.md).

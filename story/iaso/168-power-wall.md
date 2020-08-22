@@ -5,7 +5,8 @@ State: Exploring
 
 ## 168
 
-Read aloud:
+{:.avoid-break-after}
+Read to everyone:
 
 > The metal door in front of you looks plain and inert to the naked eye.
 > Through the Focus, you can see a bright blue ring, with one quadrant in an even brighter pink, glowing in the center.

@@ -1,6 +1,7 @@
 ## 191
 
-Read aloud:
+{:.avoid-break-after}
+Read to everyone:
 
 > Teb is visibly disappointed when you tell him you're not interested in checking on Olara.
 > He shakes his head, but recovers quickly.

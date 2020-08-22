@@ -8,7 +8,7 @@ breadcrumbs:
 
 <!-- +template book iaso cypher-pc-stats character="Yenever Feldspar" -->
 
-<h2>Yenever Feldspar</h2>
+<h1>Yenever Feldspar</h1>
 <div class="block cypher-pc-stat-block">
 	<article>
 		<header class="name">

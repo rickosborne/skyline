@@ -8,7 +8,7 @@ breadcrumbs:
 
 <!-- +template book iaso dnd5e-pc-stats character="Van" -->
 
-<h2>Van</h2>
+<h1>Van</h1>
 <p><a href="https://ddb.ac/characters/32281052/pnE9Lz" rel="external">Van on D&D Beyond</a></p>
 <div class="dnd5e-pc-block stat-block">
 	<article>

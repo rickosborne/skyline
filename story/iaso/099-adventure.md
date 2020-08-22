@@ -3,7 +3,7 @@ tags:
 - guide
 ---
 
-# Begin your adventure!
+## Begin your adventure!
 
 Before you begin, ensure you're ready:
 
@@ -12,3 +12,5 @@ Before you begin, ensure you're ready:
 
 {:.story-links}
 [Your story begins in Mother's Crown](100-mothers-crown.md){:.story-link.story-link-continue}
+
+# Story Entries
