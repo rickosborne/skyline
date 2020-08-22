@@ -1,4 +1,4 @@
-## Adapters
+# Adapters
 
 TODO
 

@@ -1,6 +1,7 @@
 ## 136
 
-Read aloud:
+{:.avoid-break-after}
+Read to everyone:
 
 > It's already been a long day and you're exhausted from your trip.
 > You do your best to persuade Olara to wait until morning.

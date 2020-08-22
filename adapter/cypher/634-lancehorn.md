@@ -1,7 +1,7 @@
 <!-- +template machine lancehorn cypher-creature -->
 
-<h2>Lancehorn</h2>
-<p>For additional flavor, see the <a href="https://horizon.fandom.com/wiki/Lancehorn" rel="external">Horizon Wiki on Lancehorn</a>.</p>
+<h1>Lancehorn</h1>
+<p class="col-span-all">For additional flavor, see the <a href="https://horizon.fandom.com/wiki/Lancehorn" rel="external">Horizon Wiki on Lancehorn</a>.</p>
 <div class="cypher-stat-block stat-block">
 	<article>
 		<header class="title">

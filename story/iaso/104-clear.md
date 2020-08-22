@@ -1,6 +1,7 @@
 ## 104
 
-Read aloud:
+{:.avoid-break-after}
+Read to everyone:
 
 > The silver discs adhere to Pren's skin without making a sound, against his unmoving chest.
 > Within seconds of them being attached, Pren's Focus label switches to `CARDIAC ARREST`.

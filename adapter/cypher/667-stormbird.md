@@ -1,7 +1,7 @@
 <!-- +template machine stormbird cypher-creature -->
 
-<h2>Stormbird</h2>
-<p>For additional flavor, see the <a href="https://horizon.fandom.com/wiki/Stormbird" rel="external">Horizon Wiki on Stormbird</a>.</p>
+<h1>Stormbird</h1>
+<p class="col-span-all">For additional flavor, see the <a href="https://horizon.fandom.com/wiki/Stormbird" rel="external">Horizon Wiki on Stormbird</a>.</p>
 <div class="cypher-stat-block stat-block">
 	<article>
 		<header class="title">

@@ -44,6 +44,5 @@ Thorn's full character sheet is available in the [Adapter](600-adapters.md) for 
 
 #### Personality Questions
 
-{:.col-span-all}
 * Why is Thorn so secretive about their background?
 * What would it take for Thorn to share something truly personal?

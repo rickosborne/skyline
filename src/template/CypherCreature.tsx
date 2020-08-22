@@ -30,9 +30,9 @@ export class CypherCreature extends ATemplate<Machine> {
 
 	render(data: Machine, params: Record<string, string>): string {
 		return ifLines([
-			html(<h2>{data.title}</h2>),
+			html(<h1>{data.title}</h1>),
 			ifPresent(data?.link?.horizonWiki, hw => html(
-				<p>For additional flavor, see the <a href={hw} rel="external">Horizon Wiki on {data.title}</a>.</p>
+				<p class="col-span-all">For additional flavor, see the <a href={hw} rel="external">Horizon Wiki on {data.title}</a>.</p>
 			)),
 			html(
 				<div class="cypher-stat-block stat-block">

@@ -45,6 +45,5 @@ Drake's full character sheet is available in the [Adapter](600-adapters.md) for 
 
 #### Personality Questions
 
-{:.col-span-all}
 * How does Drake see old age?  What are they doing then?
 * Has Drake come to terms with their parents' deaths in the Red Raids?

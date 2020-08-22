@@ -104,6 +104,14 @@ li ol > li {
   list-style-type: lower-roman;
 }
 
+em, em * {
+  font-style: italic;
+}
+
+strong, strong * {
+  font-weight: var(--weight-bold);
+}
+
 body {
   max-width: 60em;
   margin: 0 auto;
@@ -120,7 +128,7 @@ table th, table td {
   padding: var(--cadence-quarter) var(--cadence-half);
 }
 
-ul {
+ul, ol {
   padding-left: var(--cadence);
 }
 
@@ -221,6 +229,7 @@ blockquote header, .narrator-note header {
   padding: 0;
 }
 #breadcrumbs .breadcrumb-list .breadcrumb {
+  list-style: none;
   margin: 0;
   padding: 0 1em;
 }
@@ -486,7 +495,7 @@ blockquote {
   border-left-color: var(--dusk-green-25);
 }
 
-blockquote header, .narrator-note header {
+.narrator-note header {
   color: var(--night-green);
   font-weight: var(--weight-bold);
 }
@@ -784,6 +793,7 @@ details[open] > summary.spoiler-warning::before {
 .dnd5e-pc-block .name {
   grid-area: name;
   display: flex;
+  width: max-content;
 }
 .dnd5e-pc-block .name h3 {
   font-family: Roboto, "Alegreya Sans", "Noto Sans", "Myriad Pro", Calibri, Helvetica, Arial, sans-serif;
@@ -794,6 +804,8 @@ details[open] > summary.spoiler-warning::before {
   min-height: inherit;
 }
 .dnd5e-pc-block .size-and-type {
+  width: max-content;
+  justify-self: right;
   grid-area: sizetype;
   text-align: right;
   margin: 0 0 0 var(--cadence);
@@ -996,7 +1008,7 @@ details[open] > summary.spoiler-warning::before {
   letter-spacing: 0.05em;
 }
 .cypher-stat-block .stats-tab {
-  margin: -0.5em 0 0.5em 0;
+  margin: -0.5rem 0 0.5rem 0;
   padding-bottom: 0.25em;
   background-color: var(--dusk-green);
   border-radius: 0 0 0.5em 0.5em;
@@ -1291,5 +1303,245 @@ details[open] > summary.spoiler-warning::before {
     display: grid;
     grid-template: "name name name" "summary summary summary" "tier effort xp" "stats stats stats" "recovery recovery recovery" "abilities abilities abilities" "might might might" "speed speed speed" "intellect intellect intellect" "attacks attacks attacks" "cyphers cyphers cyphers" "equipment equipment equipment";
     grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+@page {
+  size: letter;
+  margin: 0;
+}
+.print-module {
+  --cadence: 1.1rem;
+  max-width: 100%;
+  font-size: 9.5pt;
+  color: black;
+}
+.print-module .site-header, .print-module #breadcrumbs, .print-module #pre-page, .print-module .site-footer, .print-module #print-module-top-link, .print-module summary.spoiler-warning, .print-module #page {
+  display: none;
+}
+.print-module .page {
+  width: 8.5in;
+  height: 11in;
+  padding: 0.5in;
+  background-color: white;
+  overflow: hidden;
+  display: grid;
+  grid-template: "header" "body" "footer";
+  grid-template-rows: minmax(0, auto) minmax(0, 1fr) minmax(0, auto);
+  position: relative;
+}
+.print-module .page.page-odd {
+  padding-left: 0.75in;
+}
+.print-module .page.page-even {
+  padding-right: 0.75in;
+}
+.print-module .page .page-header {
+  grid-area: header;
+  max-width: 7.25in;
+  margin-bottom: var(--cadence-half);
+}
+.print-module .page .page-body {
+  grid-area: body;
+  width: 7.25in;
+  max-height: 10in;
+  max-width: 7.25in;
+  column-width: 3.5in;
+  column-count: 2;
+  column-gap: 0.25in;
+  column-fill: auto;
+  z-index: 2;
+}
+.print-module .page .page-body > :first-child {
+  margin-top: 0;
+}
+.print-module .page .page-body > :last-child {
+  margin-bottom: 0;
+}
+.print-module .page .page-body > * {
+  break-inside: avoid;
+}
+.print-module .page .page-footer {
+  grid-area: footer;
+  font-size: 90%;
+  font-family: Roboto, "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #333;
+  max-width: 7.5in;
+}
+.print-module .page .page-footer :first-child {
+  border-top: thin solid #ccc;
+}
+.print-module .page .page-number {
+  --hex-size: 2rem;
+  --sqrt-3: 0.577350269189626;
+  position: absolute;
+  top: -0.25in;
+  width: calc(var(--hex-size) * 2.0 / var(--sqrt-3));
+  height: calc(var(--hex-size) * 4.0);
+  z-index: 1;
+}
+.print-module .page .page-number .page-number-hex {
+  margin-top: var(--hex-size);
+  width: calc(var(--hex-size) * 2.0 / var(--sqrt-3));
+  height: calc(var(--hex-size) * 2.0);
+  background-color: var(--noon-blue-25);
+  position: relative;
+}
+.print-module .page .page-number .page-number-hex::before {
+  content: " ";
+  width: 0;
+  height: 0;
+  border-bottom: var(--hex-size) solid var(--noon-blue-25);
+  border-left: calc(var(--hex-size) / var(--sqrt-3)) solid transparent;
+  border-right: calc(var(--hex-size) / var(--sqrt-3)) solid transparent;
+  position: absolute;
+  top: calc(var(--hex-size) * -1.0);
+}
+.print-module .page .page-number .page-number-hex::after {
+  content: "";
+  width: 0;
+  position: absolute;
+  bottom: calc(var(--hex-size) * -1.0);
+  border-top: var(--hex-size) solid var(--noon-blue-25);
+  border-left: calc(var(--hex-size) / var(--sqrt-3)) solid transparent;
+  border-right: calc(var(--hex-size) / var(--sqrt-3)) solid transparent;
+}
+.print-module .page .page-number .page-number-value {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: white;
+  text-shadow: 0 0 0.25em var(--evening-blue);
+  font-weight: var(--weight-bold);
+  text-align: center;
+  font-size: 200%;
+  line-height: calc(var(--hex-size) * 4.0);
+  background: radial-gradient(circle, var(--evening-blue-25), transparent, transparent);
+}
+.print-module h1, .print-module h2, .print-module h3, .print-module h4, .print-module h5, .print-module h6 {
+  break-after: avoid;
+  font-family: Roboto, "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  min-height: unset;
+  line-height: calc(var(--cadence) * 1.5);
+}
+.print-module .avoid-break-after {
+  break-after: avoid-column;
+}
+.print-module h1, .print-module .stat-block {
+  column-span: all;
+}
+.print-module h3 {
+  margin-bottom: 0;
+}
+.print-module h4 {
+  font-size: 1.1rem;
+  font-style: normal;
+  color: var(--dusk-blue);
+}
+.print-module h1 + p, .print-module h1 + h2 {
+  margin-top: 0;
+}
+.print-module h2 + p, .print-module h3 + p {
+  margin-top: var(--cadence-half);
+}
+.print-module a[data-footnote-number] {
+  text-decoration: none;
+}
+.print-module a[data-footnote-number]::after {
+  content: " [" attr(data-footnote-number) "]";
+}
+.print-module a[data-page-ref] {
+  text-decoration: none;
+}
+.print-module a[data-page-ref]::after {
+  content: " (page " attr(data-page-ref) ")";
+  opacity: 50%;
+  font-weight: var(--weight-normal);
+}
+.print-module .page-odd .page-number {
+  right: -0.25in;
+}
+.print-module .page-even .page-number {
+  left: -0.25in;
+}
+.print-module .story-links {
+  column-span: inherit;
+}
+.print-module .story-link + .story-link {
+  padding-top: 0;
+}
+.print-module .hanging-indent {
+  padding-left: var(--cadence-half);
+  text-indent: var(--cadence-half-negative);
+}
+.print-module .blockquote-part {
+  color: var(--night-blue);
+  background-color: var(--noon-blue-10);
+  border-left: var(--cadence-quarter) solid var(--noon-blue-25);
+  padding: var(--cadence) var(--cadence-half);
+  margin: 0;
+  break-inside: avoid;
+}
+.print-module .blockquote-part > * {
+  margin: 0;
+}
+.print-module .narrator-note {
+  border-left: var(--cadence-quarter) solid var(--dusk-green-25);
+}
+.print-module .blockquote-part + .blockquote-part {
+  margin-top: 0;
+  padding-top: 0;
+}
+.print-module .cypher-pc-stat-block {
+  column-span: all;
+}
+.print-module .dnd5e-pc-block {
+  box-shadow: none;
+  background-color: white;
+  margin-top: var(--cadence-half);
+}
+.print-module .dnd5e-pc-block .detailed {
+  margin: var(--cadence-quarter) 0;
+}
+.print-module .dnd5e-pc-block .attack, .print-module .dnd5e-pc-block .range {
+  white-space: nowrap;
+}
+.print-module .dnd5e-pc-block .size-and-type {
+  font-size: 1.1em;
+}
+.print-module .dnd5e-pc-block .size-and-type a[data-footnote-number] {
+  font-weight: var(--weight-normal);
+  color: black;
+}
+.print-module .dnd5e-pc-block .size-and-type a[data-footnote-number]::after {
+  content: none;
+}
+.print-module.cypher-module .cypher-stat-block {
+  font-size: inherit;
+}
+.print-module.cypher-module .cypher-stat-block article {
+  column-gap: var(--cadence);
+}
+.print-module.cypher-module .cypher-stat-block .detailed {
+  margin: 0;
+  padding-left: var(--cadence-half);
+  text-indent: var(--cadence-half-negative);
+}
+.print-module.cypher-module .cypher-stat-block table {
+  margin-top: 0;
+}
+
+@media screen {
+  .print-module {
+    background-color: #444;
+  }
+  .print-module #pages {
+    background-color: #555;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .print-module #pages .page {
+    margin: 0.125in;
   }
 }

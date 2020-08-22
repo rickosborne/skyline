@@ -5,7 +5,8 @@ State: Exploring
 
 ## 134
 
-Read aloud:
+{:.avoid-break-after}
+Read to everyone:
 
 > You press the flat of the half-dome MAU against the matching circle shown in your Focus.
 > IASO says, "Thank you.  This will take a few moments."

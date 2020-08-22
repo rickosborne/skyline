@@ -1,6 +1,7 @@
 ## 106
 
-Read aloud:
+{:.avoid-break-after}
+Read to everyone:
 
 > With the Striders down, you can finally make the trip back to Mother's Watch.
 > Pren swears he's fine, and the Focus does not disagree, but you decide to come back another time for the remainder of the lumber.

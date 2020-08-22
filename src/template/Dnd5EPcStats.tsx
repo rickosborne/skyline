@@ -38,7 +38,7 @@ export class Dnd5EPcStats extends ABookTemplate<PlayerCharacterInfo> {
 	render(data: PlayerCharacterInfo): string {
 		// noinspection HtmlDeprecatedTag
 		return ifLines([
-			html(<h2>{data.hzd.name}</h2>),
+			html(<h1>{data.hzd.name}</h1>),
 			data.dnd5e.link != null && data.dnd5e.link.characterDndBeyond != null ? html(
 				<p><a href={data.dnd5e.link.characterDndBeyond.href}
 					rel="external">{data.dnd5e.link.characterDndBeyond.title}</a></p>

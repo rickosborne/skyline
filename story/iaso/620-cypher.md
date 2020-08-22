@@ -1,4 +1,4 @@
-## Cypher System Adapter
+# Cypher System Adapter
 
 This section includes guidance and details for using the Cypher System with this module.
 It's not intended to be read start to finish.

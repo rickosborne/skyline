@@ -1,6 +1,7 @@
 ## 102
 
-Read aloud:
+{:.avoid-break-after}
+Read to everyone:
 
 > The entrance to Olara's cave sneaks up on you.
 > There are no visible markings on the trail, nor are there any braziers at the entrance.

@@ -51,6 +51,5 @@ Van's full character sheet is available in the [Adapter](600-adapters.md) for yo
 
 #### Personality Questions
 
-{:.col-span-all}
 * What is one story Van loves to tell to all who will listen?
 * What is the first thing Van notices upon meeting a new person?

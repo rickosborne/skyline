@@ -5,7 +5,8 @@ State: Exploring
 
 ## 173
 
-Read aloud:
+{:.avoid-break-after}
+Read to everyone:
 
 > A cloud of bats flies past you as you crouch in the cave.
 > Oddly, they come from a dark area below you, and off to your side.

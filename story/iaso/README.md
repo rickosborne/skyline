@@ -34,6 +34,10 @@ Top-level sections:
   * [Credits](960-credits.md)
   * [Legal](980-legal.md)
 
+## Printable
+
+The entire module is available as a single print-friendly page: [IASO (printable)](print.md).
+
 ## Remaining Work
 
 * [IASO Milestone on GitHub](https://github.com/rickosborne/skyline/milestone/1)

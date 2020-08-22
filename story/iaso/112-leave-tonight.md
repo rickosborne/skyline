@@ -1,6 +1,7 @@
 ## 112
 
-Read aloud:
+{:.avoid-break-after}
+Read to everyone:
 
 > Following Olara, you make your way around the base of All-Mother Mountain.
 > There is some moonlight, but much of the journey is below the tree line, making for slow progress.
@@ -26,7 +27,8 @@ A large boulder blocks sight of the entrance until you're almost inside it.
 There are otherwise no trail markings, fires, or any sort of indicators.
 The entrance isn't much more than a crack in the mountain face, barely wide enough to admit you one person at a time.
 
-Read aloud:
+{:.avoid-break-after}
+Read to everyone:
 
 > Olara calls out in a soft voice as she steps into the darkness.
 > "Brom?  I'm back.  I'm safe.  I brought some friends to stay with us for the night."

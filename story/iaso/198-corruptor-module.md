@@ -4,7 +4,8 @@ Location:
 
 ## 198
 
-Read aloud:
+{:.avoid-break-after}
+Read to everyone:
 
 > Looking to unload the machine parts you've gathered, you head back toward the main gate.
 > A merchant is jammed into a corner of the courtyard, complaining about not having enough space to show his wares.

@@ -45,6 +45,5 @@ Yenever's full character sheet is available in the [Adapter](600-adapters.md) fo
 
 #### Personality Questions
 
-{:.col-span-all}
 * What events led Yen to be exiled from the Tenakth?
 * What is one thing that might get them to go back?

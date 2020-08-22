@@ -1,7 +1,7 @@
 <!-- +template machine thunderjaw cypher-creature -->
 
-<h2>Thunderjaw</h2>
-<p>For additional flavor, see the <a href="https://horizon.fandom.com/wiki/Thunderjaw" rel="external">Horizon Wiki on Thunderjaw</a>.</p>
+<h1>Thunderjaw</h1>
+<p class="col-span-all">For additional flavor, see the <a href="https://horizon.fandom.com/wiki/Thunderjaw" rel="external">Horizon Wiki on Thunderjaw</a>.</p>
 <div class="cypher-stat-block stat-block">
 	<article>
 		<header class="title">

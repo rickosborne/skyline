@@ -1,7 +1,11 @@
+---
+title: Fireclaw stats for the Cypher System
+---
+
 <!-- +template machine fireclaw cypher-creature -->
 
-<h2>Fireclaw</h2>
-<p>For additional flavor, see the <a href="https://horizon.fandom.com/wiki/Fireclaw" rel="external">Horizon Wiki on Fireclaw</a>.</p>
+<h1>Fireclaw</h1>
+<p class="col-span-all">For additional flavor, see the <a href="https://horizon.fandom.com/wiki/Fireclaw" rel="external">Horizon Wiki on Fireclaw</a>.</p>
 <div class="cypher-stat-block stat-block">
 	<article>
 		<header class="title">

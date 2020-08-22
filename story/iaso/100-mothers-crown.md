@@ -5,9 +5,10 @@ tags:
 - story
 ---
 
-# 100: Mother's Crown
+## 100: Mother's Crown
 
-Read the following aloud to everyone:
+{:.avoid-break-after}
+Read to everyone:
 
 > The Buried Shadow has been defeated, but the cost was high.
 > The Nora have opened their borders, for the first time in generations.

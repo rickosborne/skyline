@@ -8,6 +8,7 @@ import {CypherPcStats} from "./CypherPcStats";
 import {Dnd5ENpcStats} from "./Dnd5ENpcStats";
 import {Dnd5EPcStats} from "./Dnd5EPcStats";
 import {PlantUmlRenderer} from "./PlantUmlRenderer";
+import {PrintModuleTemplate} from "./PrintModuleTemplate";
 
 const TYPED_TEMPLATES: ATemplate<any>[] = [
 	new Dnd5ENpcStats(),
@@ -15,6 +16,7 @@ const TYPED_TEMPLATES: ATemplate<any>[] = [
 	new CypherCreature(),
 	new CypherPcStats(),
 	new PlantUmlRenderer(),
+	new PrintModuleTemplate(),
 ];
 
 export class TemplateRenderer extends ARenderer {
@@ -50,8 +52,10 @@ export class TemplateRenderer extends ARenderer {
 	): void {
 		const relativePath = path.join(dir, fileName);
 		const original = fs.readFileSync(relativePath, {encoding: "utf8"});
+		let templateCount = 0;
 		const updated = original.replace(this.templateRE, (entire, startTag, dataType, dataName, templateId, keyVals, body, endTag) => {
 			// console.log(`Template: path=${relativePath}: dataType=${dataType} dataName=${dataName} templateId=${templateId}`);
+			templateCount++;
 			const kv: Record<string, string> = {};
 			let match;
 			const re = /\s*(\w+)=(?:"([^"]*)"|(\S+))/g;
@@ -84,6 +88,9 @@ export class TemplateRenderer extends ARenderer {
 			}
 			return entire;
 		});
+		if (templateCount === 0 && original.match(/\+template/)) {
+			throw new Error(`Template brackets busted in ${relativePath}`);
+		}
 		if (updated !== original) {
 			console.log(`Updated: ${relativePath}`);
 			fs.writeFileSync(relativePath, updated, {encoding: "utf8"});

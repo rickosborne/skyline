@@ -1,6 +1,7 @@
 ## 121
 
-Read aloud:
+{:.avoid-break-after}
+Read to everyone:
 
 > Crouched in the trees, you see a cluster of Scrappers coming in from the north.
 > But this group isn't just two or three — it's easily a dozen strong.

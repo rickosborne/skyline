@@ -6,7 +6,7 @@ next:
   href: 042-fighter
 ---
 
-### Starter Characters
+# Starter Characters
 
 If your players have already created their characters, skip ahead to [Chapter 1](101-road-to-mothers-watch.md).
 This section contains a number of pre-made characters to help new players jump in without as much setup.

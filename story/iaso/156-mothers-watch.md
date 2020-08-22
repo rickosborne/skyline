@@ -2,7 +2,8 @@
 
 ### Mother's Watch
 
-Read aloud:
+{:.avoid-break-after}
+Read to everyone:
 
 > Mother's Watch is quite different from what it was even a few weeks ago.
 > The Eclipse attacks killed many of the Braves, and no small number of others.

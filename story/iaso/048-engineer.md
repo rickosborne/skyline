@@ -48,6 +48,5 @@ Haldred's full character sheet is available in the [Adapter](600-adapters.md) fo
 
 #### Personality Questions
 
-{:.col-span-all}
 * Has Haldred accepted their hearing loss, or do they hold onto the vague possibility that some Old One device found in some delve will suddenly make things easier again?
 * How has Haldred's accident affected their engineering process?  For example, has it become more cautious or less so?

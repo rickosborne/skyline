@@ -1,6 +1,7 @@
 ## 108
 
-Read aloud:
+{:.avoid-break-after}
+Read to everyone:
 
 > As you approach the exit, you can again hear the continued whine of shredding metal.
 > Listening for a moment, you also hear the rhythmic thumps of at least one additional machine patrolling the area above you.
