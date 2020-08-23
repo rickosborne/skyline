@@ -1,8 +1,8 @@
 <!-- +template machine scrapper dnd5e-npc-stats -->
 
 <h2>Scrapper</h2>
-<p>Scrappers are modified from the stock <a href="https://www.dndbeyond.com/monsters/hyena" rel="external">Hyena</a>. For additional flavor, see the <a href="https://horizon.fandom.com/wiki/Scrapper" rel="external">Horizon Wiki on Scrapper</a>.</p>
-<div class="dnd5e-stat-block stat-block">
+<p class="col-span-all">Scrappers are modified from the stock <a href="https://www.dndbeyond.com/monsters/hyena" rel="external">Hyena</a>. For additional flavor, see the <a href="https://horizon.fandom.com/wiki/Scrapper" rel="external">Horizon Wiki on Scrapper</a>.</p>
+<div class="dnd5e-stat-block stat-block col-span-all">
 	<article>
 		<header class="name-and-size">
 			<h3 class="title"><span class="word" markdown="1">

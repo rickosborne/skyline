@@ -1,8 +1,8 @@
 <!-- +template machine watcher dnd5e-npc-stats -->
 
 <h2>Watcher</h2>
-<p>Watchers are modified from the stock <a href="https://www.dndbeyond.com/monsters/deinonychus" rel="external">Deinonychus</a>. For additional flavor, see the <a href="https://horizon.fandom.com/wiki/Watcher" rel="external">Horizon Wiki on Watcher</a>.</p>
-<div class="dnd5e-stat-block stat-block">
+<p class="col-span-all">Watchers are modified from the stock <a href="https://www.dndbeyond.com/monsters/deinonychus" rel="external">Deinonychus</a>. For additional flavor, see the <a href="https://horizon.fandom.com/wiki/Watcher" rel="external">Horizon Wiki on Watcher</a>.</p>
+<div class="dnd5e-stat-block stat-block col-span-all">
 	<article>
 		<header class="name-and-size">
 			<h3 class="title"><span class="word" markdown="1">

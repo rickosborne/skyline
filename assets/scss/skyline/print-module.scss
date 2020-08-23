@@ -50,10 +50,10 @@
 			width: 7.25in;
 			max-height: 10in;
 			max-width: 7.25in;
-			column-width: 3.5in;
-			column-count: 2;
-			column-gap: 0.25in;
-			column-fill: auto;
+			//column-width: 3.5in;
+			//column-count: 2;
+			//column-gap: 0.25in;
+			//column-fill: auto;
 			z-index: 2;
 
 			&>:first-child {
@@ -66,6 +66,58 @@
 
 			&>* {
 				break-inside: avoid;
+			}
+
+			//&>.col-span-all {
+			//	margin-left: 1.25in;
+			//}
+
+			.columned-wrapper {
+				display: grid;
+				grid-template-areas: "left right gutter";
+				grid-template-columns: minmax(2.875in, 1fr) minmax(2.875in, 1fr) minmax(auto, 1in);
+				grid-gap: 0.25in;
+				--gutter-padding: 0.0625in;
+				--gutter-color: var(--dusk-blue);
+				--gutter-border: var(--dusk-blue-10);
+
+				.columned-gutter {
+					grid-area: gutter;
+					position: relative;
+
+					.aside {
+						position: absolute;
+						padding-left: var(--gutter-padding);
+						border-left: thin solid var(--gutter-border);
+						font-family: vars.$font-sans;
+						font-size: 90%;
+
+						&, & a {
+							color: var(--gutter-color);
+						}
+					}
+				}
+				.columned-left {
+					grid-area: left;
+				}
+				.columned-right {
+					grid-area: right;
+				}
+			}
+
+			&.empty-gutters {
+				.columned-gutter {
+					display: none;
+				}
+
+				.columned-wrapper {
+					grid-template-areas: "left right";
+					grid-template-columns: 3.5in 3.5in;
+				}
+
+				&>.col-span-all {
+					margin-left: 0;
+				}
 			}
 		}
 		.page-footer {
@@ -189,6 +241,42 @@
 		.page-number {
 			right: -0.25in;
 		}
+		.page-body {
+			.columned-wrapper {
+				grid-template-areas: "gutter left right";
+				grid-template-columns: minmax(auto, 1in) minmax(2.875in, 1fr) minmax(2.875in, 1fr);
+
+				.columned-gutter {
+					.aside {
+						text-align: right;
+						border-left: none;
+						border-right: thin solid var(--gutter-border);
+						padding-left: 0;
+						padding-right: var(--gutter-padding);
+					}
+				}
+			}
+
+			//&>.col-span-all {
+			//	margin-right: 1.25in;
+			//	margin-left: 0;
+			//}
+
+			&.empty-gutters {
+				.columned-gutter {
+					display: none;
+				}
+
+				.columned-wrapper {
+					grid-template-areas: "left right";
+					grid-template-columns: 3.5in 3.5in;
+				}
+
+				&>.col-span-all {
+					margin-right: 0;
+				}
+			}
+		}
 	}
 
 	.page-even {
@@ -269,7 +357,7 @@
 			font-size: inherit;
 
 			article {
-				column-gap: var(--cadence);
+				// column-gap: var(--cadence);
 			}
 
 			.detailed {

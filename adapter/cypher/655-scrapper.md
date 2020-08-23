@@ -2,7 +2,7 @@
 
 <h1>Scrapper</h1>
 <p class="col-span-all">For additional flavor, see the <a href="https://horizon.fandom.com/wiki/Scrapper" rel="external">Horizon Wiki on Scrapper</a>.</p>
-<div class="cypher-stat-block stat-block">
+<div class="cypher-stat-block stat-block col-span-all">
 	<article>
 		<header class="title">
 			<h3><span class="word" markdown="1">

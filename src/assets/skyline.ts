@@ -1,4 +1,6 @@
 // Skyline.js
+
+
 document.addEventListener("DOMContentLoaded", function onDomContentLoaded() {
 	document.querySelectorAll(".spoiler").forEach(spoilerEl => {
 		const parentElement = spoilerEl.parentElement;
@@ -54,6 +56,9 @@ const DATA_SOURCE_FILE = "data-source-file";
 const DATA_PAGE_REF = "data-page-ref";
 const DATA_PAGE_OF = "data-page-of";
 const AVOID_BREAK_AFTER = "avoid-break-after";
+const COL_SPAN_ALL = "col-span-all";
+const DATA_GUTTER_NUM = "data-gutter-num";
+const DATA_GUTTER_REF = "data-gutter-ref";
 
 class DocHelper {
 	public documentSeemsOkay = true;
@@ -156,7 +161,7 @@ class DocHelper {
 	unwrap(wrapper: Element, eachChild: (childNode: ChildNode, index: number, count: number) => ChildNode = c => c) {
 		const children: ChildNode[] = [];
 		wrapper.childNodes.forEach(childNode => {
-			if (childNode.nodeType === Node.ELEMENT_NODE || (childNode.nodeType === Node.TEXT_NODE && (childNode.textContent?.trim() || "").length > 0)) {
+			if (Block.isElementOrNonEmptyText(childNode)) {
 				children.push(childNode);
 			}
 		});
@@ -175,97 +180,478 @@ class DocHelper {
 	}
 }
 
+enum AppendBlockResult {
+	Appended = "Appended",
+	Full = "Full",
+	Skipped = "Skipped",
+}
 
-class PageManager {
-	private nextPageNumber: number = 1;
-	private readonly pages: Map<string, TargetPage> = new Map<string, TargetPage>();
-	private readonly pagesEl: HTMLDivElement;
+enum MoveLastToNextResult {
+	Moved = "Moved",
+	CannotMove = "CannotMove",
+	NoLast = "NoLast",
+	WouldBeEmpty = "WouldBeEmpty",
+}
 
-	constructor(
-		private readonly doc: DocHelper,
+abstract class Block {
+	public readonly identifier: string;
+
+	protected constructor(
+		identifier: string,
 	) {
-		this.pagesEl = doc.findOrCreate("#pages", p => {
-			p.id = "pages";
-			document.body.prepend(p);
-		});
+		this.identifier = `${this.constructor.name}:${identifier}`;
 	}
 
-	createPage(): TargetPage {
-		const pageNumber = this.nextPageNumber++;
-		const page = this.doc.div("page", pageNumber % 2 ? "page-odd" : "page-even");
+	abstract get lastAppendedElement(): HTMLElement | undefined;
+
+	abstract get outerElement(): HTMLElement;
+
+	static collectLinkedTo(node: ChildNode): ChildNode[] {
+		const linked: ChildNode[] = [node];
+		const nonEl: ChildNode[] = [];
+		const parent = node.parentNode;
+		if (parent == null) {
+			return linked;
+		}
+		let current = node.previousSibling;
+		while (current != null) {
+			if (current.nodeType === Node.ELEMENT_NODE) {
+				const el = current as HTMLElement;
+				if (el.classList.contains(AVOID_BREAK_AFTER) && parent.firstElementChild !== el) {
+					linked.push(...nonEl, current);
+					nonEl.splice(0, nonEl.length);
+					current = current.previousSibling;
+				} else {
+					current = null;
+				}
+			} else {
+				nonEl.push(current);
+				current = current.previousSibling;
+			}
+		}
+		return linked;
+	}
+
+	static elementsOf(nodes: ChildNode[]): HTMLElement[] {
+		return nodes.filter(n => n.nodeType === Node.ELEMENT_NODE) as HTMLElement[];
+	}
+
+	static elementsOrTextOf(nodes: ChildNode[]): ChildNode[] {
+		return nodes.filter(node => this.isElementOrNonEmptyText(node));
+	}
+
+	static isAside(...nodes: ChildNode[]): boolean {
+		return this.elementsOf(nodes).find(el => el.classList.contains("aside")) != null; // || el.tagName.toUpperCase() === "ASIDE") != null;
+	}
+
+	static isElementOrNonEmptyText(node: ChildNode): boolean {
+		return node.nodeType === Node.ELEMENT_NODE || (node.nodeType === Node.TEXT_NODE && (node.textContent?.trim() || "").length > 0);
+	}
+
+	static needsSpanAll(...nodes: ChildNode[]): boolean {
+		return this.elementsOf(nodes).find(el => {
+			return el.classList.contains(COL_SPAN_ALL);
+		}) != null;
+	}
+
+	abstract appendNode(doc: DocHelper, ...nodes: ChildNode[]): AppendBlockResult;
+
+	abstract isEmpty(): boolean;
+
+	abstract moveFrom(doc: DocHelper, linked: ChildNode[], prevWriteBlock: Block): AppendBlockResult;
+
+	abstract moveLastToNext(doc: DocHelper): MoveLastToNextResult;
+
+	abstract wouldBeEmptyIfDetached(els: ChildNode[]): boolean;
+}
+
+class DivBlock extends Block {
+	constructor(
+		protected readonly div: HTMLDivElement,
+		identifier: string,
+	) {
+		super(identifier);
+	}
+
+	get lastAppendedElement(): HTMLElement | undefined {
+		return this.div.lastElementChild == null ? undefined : this.div.lastElementChild as HTMLElement;
+	}
+
+	get outerElement(): HTMLElement {
+		return this.div;
+	}
+
+	static buildDiv(doc: DocHelper, identifier: string, ...classNames: string[]): DivBlock {
+		return new DivBlock(doc.div(...classNames), identifier);
+	}
+
+	appendNode(doc: DocHelper, ...nodes: ChildNode[]): AppendBlockResult {
+		// if (this.isFull) {
+		// 	console.log(`appendNode ${this.identifier} is full`);
+		// 	return AppendBlockResult.Full;
+		// }
+		// console.debug('DivBlock appendNode', nodes);
+		nodes.forEach(node => {
+			this.div.appendChild(node);
+		});
+		return AppendBlockResult.Appended;
+	}
+
+	isEmpty(): boolean {
+		return this.div.childElementCount === 0;
+	}
+
+	moveFrom(doc: DocHelper, linked: ChildNode[], prevWriteBlock: Block): AppendBlockResult {
+		// console.debug(`moveFrom ${this.identifier} (${this.div.className}) <- ${prevWriteBlock.identifier}`, linked);
+		linked.reverse().forEach(node => {
+			node.parentNode?.removeChild(node);
+			this.div.appendChild(node);
+		});
+		return AppendBlockResult.Appended;
+	}
+
+	moveLastToNext(doc: DocHelper): MoveLastToNextResult {
+		return MoveLastToNextResult.CannotMove;
+	}
+
+	wouldBeEmptyIfDetached(els: ChildNode[]): boolean {
+		return this.div.firstElementChild != null && els.includes(this.div.firstElementChild);
+	}
+}
+
+class WideBlock extends DivBlock {
+	static buildWide(doc: DocHelper, identifier: string, ...classNames: string[]): WideBlock {
+		const withSpan = classNames.includes(COL_SPAN_ALL) ? classNames : [COL_SPAN_ALL].concat(...classNames);
+		return new WideBlock(doc.div(...withSpan), identifier);
+	}
+
+	appendNode(doc: DocHelper, ...nodes: ChildNode[]): AppendBlockResult {
+		if (!Block.needsSpanAll(nodes[nodes.length - 1])) {
+			return AppendBlockResult.Full;
+		}
+		return super.appendNode(doc, ...nodes);
+	}
+}
+
+abstract class MultiTargetBlock<W extends Block> extends Block {
+	protected constructor(
+		protected readonly wrapper: HTMLDivElement,
+		protected writeBlock: W | undefined,
+		identifier: string,
+	) {
+		super(identifier);
+	}
+
+	get lastAppendedElement(): HTMLElement | undefined {
+		return this.writeBlock == null ? undefined : this.writeBlock.lastAppendedElement;
+	}
+
+	abstract get lastWriteBlock(): W | undefined;
+
+	get outerElement(): HTMLElement {
+		return this.wrapper;
+	}
+
+	appendNode(doc: DocHelper, ...nodes: ChildNode[]): AppendBlockResult {
+		let writer = this.writerForNodes(...nodes);
+		if (writer == null) {
+			const el = Block.elementsOf(nodes)[0];
+			// console.debug(`appendNode ${this.identifier} No writer yet. Trying to build one for`, el);
+			writer = this.buildBlockForEl(doc, el);
+			if (writer == null) {
+				console.error(`appendNode ${this.identifier} No writer to append to`, nodes);
+				return AppendBlockResult.Full;
+			}
+		}
+		// console.debug(`appendNode ${this.identifier} delegating to ${this.writeBlock.identifier}`);
+		return writer.appendNode(doc, ...nodes);
+	}
+
+	abstract buildBlockForEl(doc: DocHelper, el: HTMLElement): W | undefined;
+
+	moveFrom(doc: DocHelper, linked: ChildNode[], prevWriteBlock: Block): AppendBlockResult {
+		if (this.writeBlock == null) {
+			console.error(`moveFrom ${this.identifier} missing writer`);
+			return AppendBlockResult.Skipped;
+		}
+		return this.writeBlock.moveFrom(doc, linked, prevWriteBlock);
+	}
+
+	moveLastToNext(doc: DocHelper, withMoved?: (moved: ChildNode[], fromBlock: W, toBlock: W) => void): MoveLastToNextResult {
+		const last = this.lastAppendedElement;
+		if (last == null) {
+			// console.error(`moveLastToNext ${this.identifier} no last`);
+			return MoveLastToNextResult.NoLast;
+		}
+		if (this.writeBlock == null) {
+			// console.error(`moveLastToNext ${this.identifier} no writer`);
+			return MoveLastToNextResult.CannotMove;
+		}
+		// if (this.writeBlock.isFull) {
+		// 	console.error(`moveLastToNext ${this.identifier} full: ${this.writeBlock.identifier}`);
+		// 	return MoveLastToNextResult.CannotMove;
+		// }
+		const prevWriteBlock = this.writeBlock;
+		const prevDidMove = prevWriteBlock.moveLastToNext(doc);
+		// console.debug(`moveLastToNext ${this.identifier} got ${prevDidMove} from ${prevWriteBlock.identifier}`);
+		if (prevDidMove === MoveLastToNextResult.Moved || prevDidMove === MoveLastToNextResult.WouldBeEmpty) {
+			return prevDidMove;
+		}
+		const linked = Block.collectLinkedTo(last);
+		if (prevWriteBlock.wouldBeEmptyIfDetached(linked)) {
+			// console.debug(`moveLastToNext ${this.identifier}: would be empty according to ${prevWriteBlock.identifier}`);
+			return MoveLastToNextResult.WouldBeEmpty;
+		}
+		const nextWriteBlock = this.buildBlockForEl(doc, last);
+		if (nextWriteBlock == null) {
+			// console.debug(`moveLastToNext ${this.identifier}: no next`);
+			return MoveLastToNextResult.CannotMove;
+		}
+		// console.debug(`${this.identifier}.moveLastToNext ${prevWriteBlock.identifier} => ${nextWriteBlock.identifier}`);
+		const didAppend = nextWriteBlock.moveFrom(doc, linked, prevWriteBlock);
+		this.writeBlock = nextWriteBlock;
+		// console.debug(`moveLastToNext ${this.identifier} didAppend ${didAppend}, writer: ${prevWriteBlock.identifier} -> ${nextWriteBlock.identifier}`);
+		switch (didAppend) {
+			case AppendBlockResult.Appended:
+				if (withMoved != null) {
+					withMoved(linked, prevWriteBlock, nextWriteBlock);
+				}
+				return MoveLastToNextResult.Moved;
+			case AppendBlockResult.Full:
+				console.error("Unexpectedly full block which supposedly wasn't", this.writeBlock.identifier);
+				return MoveLastToNextResult.CannotMove;
+			default:
+				throw new Error(`Unhandled AppendBlockResult type: ${didAppend}`);
+		}
+	}
+
+	wouldBeEmptyIfDetached(els: ChildNode[]): boolean {
+		return this.writeBlock == null || this.writeBlock.wouldBeEmptyIfDetached(els);
+	}
+
+	writerForNodes(...nodes: ChildNode[]): W | undefined {
+		return this.writeBlock;
+	}
+}
+
+class ColumnedBlock extends MultiTargetBlock<DivBlock> {
+	public readonly lastWriteBlock: DivBlock;
+	private nextGutterNumber = 1;
+
+	constructor(
+		wrapper: HTMLDivElement,
+		protected readonly left: DivBlock,
+		protected readonly right: DivBlock,
+		protected readonly gutter: DivBlock,
+		identifier: string,
+	) {
+		super(wrapper, left, identifier);
+		this.lastWriteBlock = right;
+	}
+
+	static buildColumned(doc: DocHelper, identifier: string, ...classNames: string[]): ColumnedBlock {
+		const wrapper = doc.div("columned-wrapper", ...classNames);
+		const left = DivBlock.buildDiv(doc, `${identifier}.left`, "columned-left");
+		const right = DivBlock.buildDiv(doc, `${identifier}.right`, "columned-right");
+		const gutter = DivBlock.buildDiv(doc, `${identifier}.gutter`, "columned-gutter");
+		wrapper.appendChild(left.outerElement);
+		wrapper.appendChild(right.outerElement);
+		wrapper.appendChild(gutter.outerElement);
+		return new ColumnedBlock(wrapper, left, right, gutter, identifier);
+	}
+
+	appendNode(doc: DocHelper, ...nodes: ChildNode[]): AppendBlockResult {
+		const prevEl = this.lastAppendedElement;
+		const didAppend = super.appendNode(doc, ...nodes);
+		if (didAppend === AppendBlockResult.Appended && prevEl != null && Block.isAside(...nodes)) {
+			const gutterId = String(this.nextGutterNumber++);
+			prevEl.setAttribute(DATA_GUTTER_REF, gutterId);
+			Block.elementsOf(nodes).forEach(el => el.setAttribute(DATA_GUTTER_NUM, gutterId));
+		}
+		return didAppend;
+	}
+
+	buildBlockForEl(doc: DocHelper, el: HTMLElement): DivBlock | undefined {
+		if (Block.isAside(el)) {
+			if (this.lastAppendedElement != null) {
+			}
+			return this.gutter;
+		} else if (this.writeBlock === this.left) {
+			// console.debug(`buildBlockForEl ${this.identifier} Moving to right column`, el);
+			this.writeBlock = this.right;
+			return this.right;
+		}
+		return undefined;
+	}
+
+	isEmpty(): boolean {
+		return this.left.isEmpty() && this.right.isEmpty() && this.gutter.isEmpty();
+	}
+
+	writerForNodes(...nodes: ChildNode[]): DivBlock | undefined {
+		return Block.isAside(...nodes) ? this.gutter : this.writeBlock;
+	}
+}
+
+class PageManager extends MultiTargetBlock<PageBlock> {
+	public lastWriteBlock: PageBlock;
+	private nextPageNumber: number;
+	private readonly pages: PageBlock[];
+
+	constructor(
+		wrapper: HTMLDivElement,
+		firstPage: PageBlock,
+		identifier: string,
+	) {
+		super(wrapper, firstPage, identifier);
+		this.lastWriteBlock = firstPage;
+		this.pages = [firstPage];
+		this.nextPageNumber = this.pages.length + 1;
+	}
+
+	static buildPageManager(doc: DocHelper, identifier: string, ...classNames: string[]): PageManager {
+		const pagesEl = doc.findOrCreate("#pages", p => {
+			p.id = "pages";
+			p.classList.add(...classNames);
+			document.body.prepend(p);
+		});
+		const firstPage = PageBlock.buildPage(doc, 1);
+		pagesEl.appendChild(firstPage.outerElement);
+		return new PageManager(pagesEl, firstPage, identifier);
+	}
+
+	buildBlockForEl(doc: DocHelper, el: HTMLElement): PageBlock | undefined {
+		// console.debug(`buildBlockForEl ${this.identifier} for `, el);
+		const page = PageBlock.buildPage(doc, this.nextPageNumber++);
+		this.pages.push(page);
+		this.lastWriteBlock = page;
+		this.wrapper.appendChild(page.outerElement);
+		return page;
+	}
+
+	isEmpty(): boolean {
+		return this.pages.length === 0 || this.pages[0].isEmpty();
+	}
+
+	moveLastToNext(doc: DocHelper): MoveLastToNextResult {
+		return super.moveLastToNext(doc, (moved, fromBlock, toBlock) => {
+			Block.elementsOf(moved).forEach(el => {
+				doc.extractFootnotes(el).forEach(footnote => {
+					toBlock.takeFootnote(footnote);
+				});
+			});
+		});
+	}
+}
+
+type PageBodyBlock = WideBlock | ColumnedBlock;
+
+class PageBlock extends Block {
+	protected readonly blocks: Array<PageBodyBlock> = [];
+	protected writeBlock: PageBodyBlock | undefined;
+
+	constructor(
+		protected readonly wrapper: HTMLDivElement,
+		protected readonly head: HTMLDivElement,
+		public readonly body: HTMLDivElement,
+		protected readonly foot: HTMLDivElement,
+		identifier: string,
+	) {
+		super(identifier);
+	}
+
+	get lastAppendedElement(): HTMLElement | undefined {
+		return this.writeBlock == null ? undefined : this.writeBlock.lastAppendedElement;
+	}
+
+	get outerElement(): HTMLElement {
+		return this.wrapper;
+	}
+
+	static buildPage(doc: DocHelper, pageNumber: number, ...classNames: string[]): PageBlock {
+		// console.debug(`New page: ${pageNumber}`);
+		const page = doc.div("page", pageNumber % 2 ? "page-odd" : "page-even", ...classNames);
 		page.id = `page-${pageNumber}`;
 		page.setAttribute(DATA_PAGE_NUMBER, String(pageNumber));
-		this.pagesEl.appendChild(page);
 		const pageNumberDiv = document.createElement("DIV") as HTMLDivElement;
 		pageNumberDiv.classList.add("page-number");
-		pageNumberDiv.appendChild(this.doc.div("page-number-hex"));
-		const pageNumberValue = this.doc.div("page-number-value");
+		pageNumberDiv.appendChild(doc.div("page-number-hex"));
+		const pageNumberValue = doc.div("page-number-value");
 		pageNumberValue.appendChild(document.createTextNode(String(pageNumber)));
 		pageNumberDiv.appendChild(pageNumberValue);
-		const head = this.doc.div("page-header");
-		const body = this.doc.div("page-body");
-		const foot = this.doc.div("page-footer");
+		const head = doc.div("page-header");
+		const body = doc.div("page-body");
+		const foot = doc.div("page-footer");
 		page.appendChild(pageNumberDiv);
 		page.appendChild(body);
 		page.appendChild(head);
 		page.appendChild(foot);
-		const newPage = {
-			page,
-			head,
-			body,
-			foot,
-			num: pageNumber,
-		};
-		this.pages.set(page.id, newPage);
-		return newPage;
+		return new PageBlock(page, head, body, foot, page.id);
 	}
 
-	findOrCreateLastPage(): TargetPage {
-		const targetPage: HTMLDivElement | null = document.querySelector(".page:last-child");
-		if (targetPage == null) {
-			return this.createPage();
-		} else {
-			const foundPage = this.pages.get(targetPage.id);
-			if (foundPage == null) {
-				throw new Error(`Lost track of page: ${targetPage.id}`);
-			}
-			return foundPage;
+	appendNode(doc: DocHelper, ...nodes: ChildNode[]): AppendBlockResult {
+		// console.debug('Page.appendNode', nodes);
+		const keep = Block.elementsOrTextOf(nodes);
+		if (keep.length === 0) {
+			return AppendBlockResult.Skipped;
 		}
+		const spanAll = !Block.isAside(...nodes) && Block.needsSpanAll(...nodes);
+		let block: PageBodyBlock | undefined = this.writeBlock;
+		if (block == null || (block instanceof WideBlock && !spanAll) || (block instanceof ColumnedBlock && spanAll)) {
+			block = spanAll ? WideBlock.buildWide(doc, `${this.identifier}[${this.blocks.length}].wide`) : ColumnedBlock.buildColumned(doc, `${this.identifier}[${this.blocks.length}].columned`);
+			this.blocks.push(block);
+			this.body.appendChild(block.outerElement);
+			this.writeBlock = block;
+		}
+		const didAppend = block.appendNode(doc, ...nodes);
+		if (didAppend === AppendBlockResult.Appended) {
+			Block.elementsOf(nodes).forEach(el => {
+				doc.extractFootnotes(el).forEach(footnote => {
+					footnote.parentNode?.removeChild(footnote);
+					this.foot.appendChild(footnote);
+				});
+			});
+		}
+		return didAppend;
 	}
 
-	moveToNewPage(oldPage: TargetPage, movedEl: Element, newPage: TargetPage = this.createPage()): TargetPage {
-		// push to next page
-		const footnotes = this.doc.extractFootnotes(movedEl);
-		oldPage.body.removeChild(movedEl);
-		newPage.body.prepend(movedEl);
-		footnotes.forEach(footnote => {
-			const parent = footnote.parentNode;
-			if (parent != null && parent !== newPage.foot) {
-				parent.removeChild(footnote);
-				newPage.foot.appendChild(footnote);
-			} else if (parent == null) {
-				newPage.foot.appendChild(footnote);
-			}
-		});
-		return newPage;
+	isEmpty(): boolean {
+		return this.blocks.length == 0 || this.blocks[0].isEmpty();
+	}
+
+	moveFrom(doc: DocHelper, linked: ChildNode[], prevWriteBlock: Block): AppendBlockResult {
+		linked.forEach(n => n.parentNode?.removeChild(n));
+		return this.appendNode(doc, ...linked);
+	}
+
+	moveLastToNext(doc: DocHelper): MoveLastToNextResult {
+		if (this.writeBlock instanceof ColumnedBlock) {
+			// try to add to the existing block
+			// console.debug(`moveLastToNext ${this.identifier} to existing ColumnedBlock`);
+			return this.writeBlock.moveLastToNext(doc);
+		}
+		// wide blocks need a new page
+		return MoveLastToNextResult.CannotMove;
+	}
+
+	takeFootnote(footnote: HTMLDivElement): void {
+		footnote.parentNode?.removeChild(footnote);
+		this.foot.appendChild(footnote);
+	}
+
+	wouldBeEmptyIfDetached(els: ChildNode[]): boolean {
+		return this.writeBlock != null && this.writeBlock.wouldBeEmptyIfDetached(els) && this.blocks[0] === this.writeBlock;
 	}
 }
 
-interface TargetPage {
-	body: HTMLDivElement;
-	foot: HTMLDivElement;
-	head: HTMLDivElement;
-	num: number;
-	page: HTMLDivElement;
-}
-
+const PAGE_BREAK_BEFORE = "page-break-before";
 window.addEventListener("load", () => {
 	if (!document.body.classList.contains("print-module")) {
-		console.log("Not a printable module.");
+		// console.info("Not a printable module.");
 		return;
 	}
 	const docHelper = new DocHelper(document);
-	const pageManager = new PageManager(docHelper);
+	const pageManager = PageManager.buildPageManager(docHelper, "$");
 	let reflowTimer: NodeJS.Timeout;
 
 	function stop(err?: string) {
@@ -276,7 +662,6 @@ window.addEventListener("load", () => {
 			clearInterval(reflowTimer)
 		}
 	}
-
 
 	function removeOldMainContent() {
 		const mainContent = document.getElementById("page");
@@ -306,48 +691,39 @@ window.addEventListener("load", () => {
 		});
 	}
 
-	function reflowPrintModule() {
-		let target = pageManager.findOrCreateLastPage();
+	function reflowPrintModule(): void {
 		const content = document.getElementById("content");
 		if (content == null) {
 			stop("No #content");
 			return;
 		}
-		const lastContent = target.body.lastElementChild;
-		if (lastContent != null) {
+		const lastContent = pageManager.lastAppendedElement;
+		const lastPageBody = pageManager.lastWriteBlock.body;
+		if (lastContent != null && lastPageBody != null) {
+			// console.debug("Inspecting last content", lastContent);
 			const lastContentBounds = lastContent.getBoundingClientRect();
-			const lastBodyBounds = target.body.getBoundingClientRect();
+			const lastBodyBounds = lastPageBody.getBoundingClientRect();
 			const fromBottom = lastBodyBounds.bottom - lastContentBounds.bottom;
+			// const reasons: string[] = [];
 			let move = false;
 			if (fromBottom < 0) {
-				console.debug("Below bottom", fromBottom, lastContent);
+				// reasons.push(`Below Bottom ${fromBottom}`);
 				move = true;
 			}
 			const fromRight = lastBodyBounds.right - lastContentBounds.right;
 			if (fromRight < 0) {
-				console.debug("Past right", fromRight, lastContent);
+				// reasons.push(`Past Right ${fromRight}`);
 				move = true;
 			}
-			if (lastContent.classList.contains("page-break-before")) {
-				console.debug("Declared break", lastContent);
+			if (lastContent.classList.contains(PAGE_BREAK_BEFORE)) {
+				// reasons.push(`Declared break`);
 				move = true;
 			}
-			if (move && lastContent !== target.body.firstElementChild) {
-				const oldTarget = target;
-				target = pageManager.moveToNewPage(target, lastContent);
-				do {
-					const lastChild = oldTarget.body.lastChild;
-					if (lastChild == null || lastChild.nodeType !== Node.ELEMENT_NODE) {
-						break;
-					}
-					const lastEl = lastChild as Element;
-					if (!lastEl.classList.contains(AVOID_BREAK_AFTER) || oldTarget.body.firstElementChild === lastEl) {
-						break;  // oh, the humanity
-					}
-					console.debug(`Avoiding break after`, lastEl);
-					pageManager.moveToNewPage(oldTarget, lastEl, target);
-				} while (true);
-				return;  // continue with reflow after the browser catches up.
+			if (move) {
+				// console.debug("Moving", reasons, lastContent);
+				pageManager.moveLastToNext(docHelper);
+			} else {
+				// console.debug("Seems okay", lastContent);
 			}
 		}
 		let nextContent = content.firstChild;
@@ -355,25 +731,58 @@ window.addEventListener("load", () => {
 			stop();
 			removeOldMainContent();
 			fixPageRefs();
+			// document.querySelectorAll('.page-body').forEach(body => {
+			// 	let allEmpty = true;
+			// 	body.querySelectorAll(".columned-gutter").forEach(g => allEmpty = allEmpty && (g.childElementCount === 0));
+			// 	if (allEmpty) {
+			// 		body.classList.add('empty-gutters');
+			// 	}
+			// });
+			document.querySelectorAll(".page").forEach(page => {
+				page.querySelectorAll(`[${DATA_GUTTER_NUM}]`).forEach(aside => {
+					const gutterId = aside.getAttribute(DATA_GUTTER_NUM) || "";
+					const target = page.querySelector(`[${DATA_GUTTER_REF}="${gutterId}"]`);
+					const wrapper = target == null ? null : docHelper.nearestAncestorLike(target, el => el.classList.contains("columned-wrapper"));
+					console.log("Repositioning", aside, target);
+					if (target == null || wrapper == null) {
+						console.error(`Lost track of gutter target ${gutterId}`);
+						return;
+					}
+					const targetRect = target.getBoundingClientRect();
+					const bodyRect = wrapper.getBoundingClientRect();
+					const asideRect = aside.getBoundingClientRect();
+					let fromTopOfTarget = 0;
+					console.debug(`target body aside`, targetRect, bodyRect, asideRect);
+					if (asideRect.height < targetRect.height) {
+						fromTopOfTarget = (targetRect.height - asideRect.height) / 2;
+						console.debug("centering", fromTopOfTarget);
+					}
+					const fromTopOfBody = targetRect.top - bodyRect.top;
+					console.debug(`fromTopOfBody`, fromTopOfBody);
+					// asideRect.top += fromTopOfTarget + fromTopOfBody;
+					(aside as HTMLElement).style.top = Math.max(0, (fromTopOfTarget + fromTopOfBody)) + "px";
+				});
+			});
 			return;
 		}
 		content.removeChild(nextContent);
 		if (nextContent.nodeType === Node.COMMENT_NODE) {
 			return;
 		}
-		target.body.appendChild(nextContent);
-		if (nextContent.nodeType === Node.ELEMENT_NODE) {
-			let nextElement = nextContent as HTMLElement;
-			docHelper.extractFootnotes(nextElement).forEach(footnote => {
-				target.foot.appendChild(footnote);
-			});
-		}
+		pageManager.appendNode(docHelper, nextContent);
 	}
 
+	// Avoid dialogue breaks
+	document.querySelectorAll("blockquote, details").forEach(bq => {
+		const prev = bq.previousElementSibling;
+		if (prev != null && prev.tagName.toUpperCase() === "P" && prev.lastChild != null && prev.lastChild.textContent != null && prev.lastChild.textContent.endsWith(":")) {
+			prev.classList.add(AVOID_BREAK_AFTER);
+		}
+	});
+	// Make H1s start a new page
+	document.querySelectorAll("h1").forEach(h1 => h1.classList.add(COL_SPAN_ALL, PAGE_BREAK_BEFORE))
 	// Avoid lonesome headers
 	document.querySelectorAll("h1, h2, h3, h4, h5, h6").forEach(h => h.classList.add(AVOID_BREAK_AFTER));
-	// Make H1s start a new page
-	document.querySelectorAll("h1").forEach(h1 => h1.classList.add("page-break-before"));
 	// Unwrap source files
 	document.querySelectorAll(`[${DATA_SOURCE_FILE}]`).forEach(wrapper => docHelper.unwrapSourceWrapper(wrapper));
 	// Open all spoilers

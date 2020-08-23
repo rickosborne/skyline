@@ -48,7 +48,7 @@ export class CypherPcStats extends ABookTemplate<CypherPlayerCharacterInfo> {
 		return ifLines([
 			html(<h1>{hzd.name}</h1>),
 			html(
-				<div class="block cypher-pc-stat-block">
+				<div class="block cypher-pc-stat-block col-span-all">
 					<article>
 						<header class="name">
 							<h3 class="title">{toWords(hzd.name)}</h3>

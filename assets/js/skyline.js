@@ -1,5 +1,25 @@
 "use strict";
 // Skyline.js
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __spreadArrays = (this && this.__spreadArrays) || function () {
+    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+    for (var r = Array(s), k = 0, i = 0; i < il; i++)
+        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+            r[k] = a[j];
+    return r;
+};
 document.addEventListener("DOMContentLoaded", function onDomContentLoaded() {
     document.querySelectorAll(".spoiler").forEach(function (spoilerEl) {
         var parentElement = spoilerEl.parentElement;
@@ -55,6 +75,9 @@ var DATA_SOURCE_FILE = "data-source-file";
 var DATA_PAGE_REF = "data-page-ref";
 var DATA_PAGE_OF = "data-page-of";
 var AVOID_BREAK_AFTER = "avoid-break-after";
+var COL_SPAN_ALL = "col-span-all";
+var DATA_GUTTER_NUM = "data-gutter-num";
+var DATA_GUTTER_REF = "data-gutter-ref";
 var DocHelper = /** @class */ (function () {
     function DocHelper(document) {
         this.document = document;
@@ -153,8 +176,7 @@ var DocHelper = /** @class */ (function () {
         if (eachChild === void 0) { eachChild = function (c) { return c; }; }
         var children = [];
         wrapper.childNodes.forEach(function (childNode) {
-            var _a;
-            if (childNode.nodeType === Node.ELEMENT_NODE || (childNode.nodeType === Node.TEXT_NODE && (((_a = childNode.textContent) === null || _a === void 0 ? void 0 : _a.trim()) || "").length > 0)) {
+            if (Block.isElementOrNonEmptyText(childNode)) {
                 children.push(childNode);
             }
         });
@@ -174,86 +196,501 @@ var DocHelper = /** @class */ (function () {
     };
     return DocHelper;
 }());
-var PageManager = /** @class */ (function () {
-    function PageManager(doc) {
-        this.doc = doc;
-        this.nextPageNumber = 1;
-        this.pages = new Map();
-        this.pagesEl = doc.findOrCreate("#pages", function (p) {
+var AppendBlockResult;
+(function (AppendBlockResult) {
+    AppendBlockResult["Appended"] = "Appended";
+    AppendBlockResult["Full"] = "Full";
+    AppendBlockResult["Skipped"] = "Skipped";
+})(AppendBlockResult || (AppendBlockResult = {}));
+var MoveLastToNextResult;
+(function (MoveLastToNextResult) {
+    MoveLastToNextResult["Moved"] = "Moved";
+    MoveLastToNextResult["CannotMove"] = "CannotMove";
+    MoveLastToNextResult["NoLast"] = "NoLast";
+    MoveLastToNextResult["WouldBeEmpty"] = "WouldBeEmpty";
+})(MoveLastToNextResult || (MoveLastToNextResult = {}));
+var Block = /** @class */ (function () {
+    function Block(identifier) {
+        this.identifier = this.constructor.name + ":" + identifier;
+    }
+    Block.collectLinkedTo = function (node) {
+        var linked = [node];
+        var nonEl = [];
+        var parent = node.parentNode;
+        if (parent == null) {
+            return linked;
+        }
+        var current = node.previousSibling;
+        while (current != null) {
+            if (current.nodeType === Node.ELEMENT_NODE) {
+                var el = current;
+                if (el.classList.contains(AVOID_BREAK_AFTER) && parent.firstElementChild !== el) {
+                    linked.push.apply(linked, __spreadArrays(nonEl, [current]));
+                    nonEl.splice(0, nonEl.length);
+                    current = current.previousSibling;
+                }
+                else {
+                    current = null;
+                }
+            }
+            else {
+                nonEl.push(current);
+                current = current.previousSibling;
+            }
+        }
+        return linked;
+    };
+    Block.elementsOf = function (nodes) {
+        return nodes.filter(function (n) { return n.nodeType === Node.ELEMENT_NODE; });
+    };
+    Block.elementsOrTextOf = function (nodes) {
+        var _this = this;
+        return nodes.filter(function (node) { return _this.isElementOrNonEmptyText(node); });
+    };
+    Block.isAside = function () {
+        var nodes = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            nodes[_i] = arguments[_i];
+        }
+        return this.elementsOf(nodes).find(function (el) { return el.classList.contains("aside"); }) != null; // || el.tagName.toUpperCase() === "ASIDE") != null;
+    };
+    Block.isElementOrNonEmptyText = function (node) {
+        var _a;
+        return node.nodeType === Node.ELEMENT_NODE || (node.nodeType === Node.TEXT_NODE && (((_a = node.textContent) === null || _a === void 0 ? void 0 : _a.trim()) || "").length > 0);
+    };
+    Block.needsSpanAll = function () {
+        var nodes = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            nodes[_i] = arguments[_i];
+        }
+        return this.elementsOf(nodes).find(function (el) {
+            return el.classList.contains(COL_SPAN_ALL);
+        }) != null;
+    };
+    return Block;
+}());
+var DivBlock = /** @class */ (function (_super) {
+    __extends(DivBlock, _super);
+    function DivBlock(div, identifier) {
+        var _this = _super.call(this, identifier) || this;
+        _this.div = div;
+        return _this;
+    }
+    Object.defineProperty(DivBlock.prototype, "lastAppendedElement", {
+        get: function () {
+            return this.div.lastElementChild == null ? undefined : this.div.lastElementChild;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(DivBlock.prototype, "outerElement", {
+        get: function () {
+            return this.div;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    DivBlock.buildDiv = function (doc, identifier) {
+        var classNames = [];
+        for (var _i = 2; _i < arguments.length; _i++) {
+            classNames[_i - 2] = arguments[_i];
+        }
+        return new DivBlock(doc.div.apply(doc, classNames), identifier);
+    };
+    DivBlock.prototype.appendNode = function (doc) {
+        var _this = this;
+        var nodes = [];
+        for (var _i = 1; _i < arguments.length; _i++) {
+            nodes[_i - 1] = arguments[_i];
+        }
+        // if (this.isFull) {
+        // 	console.log(`appendNode ${this.identifier} is full`);
+        // 	return AppendBlockResult.Full;
+        // }
+        // console.debug('DivBlock appendNode', nodes);
+        nodes.forEach(function (node) {
+            _this.div.appendChild(node);
+        });
+        return AppendBlockResult.Appended;
+    };
+    DivBlock.prototype.isEmpty = function () {
+        return this.div.childElementCount === 0;
+    };
+    DivBlock.prototype.moveFrom = function (doc, linked, prevWriteBlock) {
+        var _this = this;
+        // console.debug(`moveFrom ${this.identifier} (${this.div.className}) <- ${prevWriteBlock.identifier}`, linked);
+        linked.reverse().forEach(function (node) {
+            var _a;
+            (_a = node.parentNode) === null || _a === void 0 ? void 0 : _a.removeChild(node);
+            _this.div.appendChild(node);
+        });
+        return AppendBlockResult.Appended;
+    };
+    DivBlock.prototype.moveLastToNext = function (doc) {
+        return MoveLastToNextResult.CannotMove;
+    };
+    DivBlock.prototype.wouldBeEmptyIfDetached = function (els) {
+        return this.div.firstElementChild != null && els.includes(this.div.firstElementChild);
+    };
+    return DivBlock;
+}(Block));
+var WideBlock = /** @class */ (function (_super) {
+    __extends(WideBlock, _super);
+    function WideBlock() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    WideBlock.buildWide = function (doc, identifier) {
+        var _a;
+        var classNames = [];
+        for (var _i = 2; _i < arguments.length; _i++) {
+            classNames[_i - 2] = arguments[_i];
+        }
+        var withSpan = classNames.includes(COL_SPAN_ALL) ? classNames : (_a = [COL_SPAN_ALL]).concat.apply(_a, classNames);
+        return new WideBlock(doc.div.apply(doc, withSpan), identifier);
+    };
+    WideBlock.prototype.appendNode = function (doc) {
+        var nodes = [];
+        for (var _i = 1; _i < arguments.length; _i++) {
+            nodes[_i - 1] = arguments[_i];
+        }
+        if (!Block.needsSpanAll(nodes[nodes.length - 1])) {
+            return AppendBlockResult.Full;
+        }
+        return _super.prototype.appendNode.apply(this, __spreadArrays([doc], nodes));
+    };
+    return WideBlock;
+}(DivBlock));
+var MultiTargetBlock = /** @class */ (function (_super) {
+    __extends(MultiTargetBlock, _super);
+    function MultiTargetBlock(wrapper, writeBlock, identifier) {
+        var _this = _super.call(this, identifier) || this;
+        _this.wrapper = wrapper;
+        _this.writeBlock = writeBlock;
+        return _this;
+    }
+    Object.defineProperty(MultiTargetBlock.prototype, "lastAppendedElement", {
+        get: function () {
+            return this.writeBlock == null ? undefined : this.writeBlock.lastAppendedElement;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(MultiTargetBlock.prototype, "outerElement", {
+        get: function () {
+            return this.wrapper;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    MultiTargetBlock.prototype.appendNode = function (doc) {
+        var nodes = [];
+        for (var _i = 1; _i < arguments.length; _i++) {
+            nodes[_i - 1] = arguments[_i];
+        }
+        var writer = this.writerForNodes.apply(this, nodes);
+        if (writer == null) {
+            var el = Block.elementsOf(nodes)[0];
+            // console.debug(`appendNode ${this.identifier} No writer yet. Trying to build one for`, el);
+            writer = this.buildBlockForEl(doc, el);
+            if (writer == null) {
+                console.error("appendNode " + this.identifier + " No writer to append to", nodes);
+                return AppendBlockResult.Full;
+            }
+        }
+        // console.debug(`appendNode ${this.identifier} delegating to ${this.writeBlock.identifier}`);
+        return writer.appendNode.apply(writer, __spreadArrays([doc], nodes));
+    };
+    MultiTargetBlock.prototype.moveFrom = function (doc, linked, prevWriteBlock) {
+        if (this.writeBlock == null) {
+            console.error("moveFrom " + this.identifier + " missing writer");
+            return AppendBlockResult.Skipped;
+        }
+        return this.writeBlock.moveFrom(doc, linked, prevWriteBlock);
+    };
+    MultiTargetBlock.prototype.moveLastToNext = function (doc, withMoved) {
+        var last = this.lastAppendedElement;
+        if (last == null) {
+            // console.error(`moveLastToNext ${this.identifier} no last`);
+            return MoveLastToNextResult.NoLast;
+        }
+        if (this.writeBlock == null) {
+            // console.error(`moveLastToNext ${this.identifier} no writer`);
+            return MoveLastToNextResult.CannotMove;
+        }
+        // if (this.writeBlock.isFull) {
+        // 	console.error(`moveLastToNext ${this.identifier} full: ${this.writeBlock.identifier}`);
+        // 	return MoveLastToNextResult.CannotMove;
+        // }
+        var prevWriteBlock = this.writeBlock;
+        var prevDidMove = prevWriteBlock.moveLastToNext(doc);
+        // console.debug(`moveLastToNext ${this.identifier} got ${prevDidMove} from ${prevWriteBlock.identifier}`);
+        if (prevDidMove === MoveLastToNextResult.Moved || prevDidMove === MoveLastToNextResult.WouldBeEmpty) {
+            return prevDidMove;
+        }
+        var linked = Block.collectLinkedTo(last);
+        if (prevWriteBlock.wouldBeEmptyIfDetached(linked)) {
+            // console.debug(`moveLastToNext ${this.identifier}: would be empty according to ${prevWriteBlock.identifier}`);
+            return MoveLastToNextResult.WouldBeEmpty;
+        }
+        var nextWriteBlock = this.buildBlockForEl(doc, last);
+        if (nextWriteBlock == null) {
+            // console.debug(`moveLastToNext ${this.identifier}: no next`);
+            return MoveLastToNextResult.CannotMove;
+        }
+        // console.debug(`${this.identifier}.moveLastToNext ${prevWriteBlock.identifier} => ${nextWriteBlock.identifier}`);
+        var didAppend = nextWriteBlock.moveFrom(doc, linked, prevWriteBlock);
+        this.writeBlock = nextWriteBlock;
+        // console.debug(`moveLastToNext ${this.identifier} didAppend ${didAppend}, writer: ${prevWriteBlock.identifier} -> ${nextWriteBlock.identifier}`);
+        switch (didAppend) {
+            case AppendBlockResult.Appended:
+                if (withMoved != null) {
+                    withMoved(linked, prevWriteBlock, nextWriteBlock);
+                }
+                return MoveLastToNextResult.Moved;
+            case AppendBlockResult.Full:
+                console.error("Unexpectedly full block which supposedly wasn't", this.writeBlock.identifier);
+                return MoveLastToNextResult.CannotMove;
+            default:
+                throw new Error("Unhandled AppendBlockResult type: " + didAppend);
+        }
+    };
+    MultiTargetBlock.prototype.wouldBeEmptyIfDetached = function (els) {
+        return this.writeBlock == null || this.writeBlock.wouldBeEmptyIfDetached(els);
+    };
+    MultiTargetBlock.prototype.writerForNodes = function () {
+        var nodes = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            nodes[_i] = arguments[_i];
+        }
+        return this.writeBlock;
+    };
+    return MultiTargetBlock;
+}(Block));
+var ColumnedBlock = /** @class */ (function (_super) {
+    __extends(ColumnedBlock, _super);
+    function ColumnedBlock(wrapper, left, right, gutter, identifier) {
+        var _this = _super.call(this, wrapper, left, identifier) || this;
+        _this.left = left;
+        _this.right = right;
+        _this.gutter = gutter;
+        _this.nextGutterNumber = 1;
+        _this.lastWriteBlock = right;
+        return _this;
+    }
+    ColumnedBlock.buildColumned = function (doc, identifier) {
+        var classNames = [];
+        for (var _i = 2; _i < arguments.length; _i++) {
+            classNames[_i - 2] = arguments[_i];
+        }
+        var wrapper = doc.div.apply(doc, __spreadArrays(["columned-wrapper"], classNames));
+        var left = DivBlock.buildDiv(doc, identifier + ".left", "columned-left");
+        var right = DivBlock.buildDiv(doc, identifier + ".right", "columned-right");
+        var gutter = DivBlock.buildDiv(doc, identifier + ".gutter", "columned-gutter");
+        wrapper.appendChild(left.outerElement);
+        wrapper.appendChild(right.outerElement);
+        wrapper.appendChild(gutter.outerElement);
+        return new ColumnedBlock(wrapper, left, right, gutter, identifier);
+    };
+    ColumnedBlock.prototype.appendNode = function (doc) {
+        var nodes = [];
+        for (var _i = 1; _i < arguments.length; _i++) {
+            nodes[_i - 1] = arguments[_i];
+        }
+        var prevEl = this.lastAppendedElement;
+        var didAppend = _super.prototype.appendNode.apply(this, __spreadArrays([doc], nodes));
+        if (didAppend === AppendBlockResult.Appended && prevEl != null && Block.isAside.apply(Block, nodes)) {
+            var gutterId_1 = String(this.nextGutterNumber++);
+            prevEl.setAttribute(DATA_GUTTER_REF, gutterId_1);
+            Block.elementsOf(nodes).forEach(function (el) { return el.setAttribute(DATA_GUTTER_NUM, gutterId_1); });
+        }
+        return didAppend;
+    };
+    ColumnedBlock.prototype.buildBlockForEl = function (doc, el) {
+        if (Block.isAside(el)) {
+            if (this.lastAppendedElement != null) {
+            }
+            return this.gutter;
+        }
+        else if (this.writeBlock === this.left) {
+            // console.debug(`buildBlockForEl ${this.identifier} Moving to right column`, el);
+            this.writeBlock = this.right;
+            return this.right;
+        }
+        return undefined;
+    };
+    ColumnedBlock.prototype.isEmpty = function () {
+        return this.left.isEmpty() && this.right.isEmpty() && this.gutter.isEmpty();
+    };
+    ColumnedBlock.prototype.writerForNodes = function () {
+        var nodes = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            nodes[_i] = arguments[_i];
+        }
+        return Block.isAside.apply(Block, nodes) ? this.gutter : this.writeBlock;
+    };
+    return ColumnedBlock;
+}(MultiTargetBlock));
+var PageManager = /** @class */ (function (_super) {
+    __extends(PageManager, _super);
+    function PageManager(wrapper, firstPage, identifier) {
+        var _this = _super.call(this, wrapper, firstPage, identifier) || this;
+        _this.lastWriteBlock = firstPage;
+        _this.pages = [firstPage];
+        _this.nextPageNumber = _this.pages.length + 1;
+        return _this;
+    }
+    PageManager.buildPageManager = function (doc, identifier) {
+        var classNames = [];
+        for (var _i = 2; _i < arguments.length; _i++) {
+            classNames[_i - 2] = arguments[_i];
+        }
+        var pagesEl = doc.findOrCreate("#pages", function (p) {
+            var _a;
             p.id = "pages";
+            (_a = p.classList).add.apply(_a, classNames);
             document.body.prepend(p);
         });
+        var firstPage = PageBlock.buildPage(doc, 1);
+        pagesEl.appendChild(firstPage.outerElement);
+        return new PageManager(pagesEl, firstPage, identifier);
+    };
+    PageManager.prototype.buildBlockForEl = function (doc, el) {
+        // console.debug(`buildBlockForEl ${this.identifier} for `, el);
+        var page = PageBlock.buildPage(doc, this.nextPageNumber++);
+        this.pages.push(page);
+        this.lastWriteBlock = page;
+        this.wrapper.appendChild(page.outerElement);
+        return page;
+    };
+    PageManager.prototype.isEmpty = function () {
+        return this.pages.length === 0 || this.pages[0].isEmpty();
+    };
+    PageManager.prototype.moveLastToNext = function (doc) {
+        return _super.prototype.moveLastToNext.call(this, doc, function (moved, fromBlock, toBlock) {
+            Block.elementsOf(moved).forEach(function (el) {
+                doc.extractFootnotes(el).forEach(function (footnote) {
+                    toBlock.takeFootnote(footnote);
+                });
+            });
+        });
+    };
+    return PageManager;
+}(MultiTargetBlock));
+var PageBlock = /** @class */ (function (_super) {
+    __extends(PageBlock, _super);
+    function PageBlock(wrapper, head, body, foot, identifier) {
+        var _this = _super.call(this, identifier) || this;
+        _this.wrapper = wrapper;
+        _this.head = head;
+        _this.body = body;
+        _this.foot = foot;
+        _this.blocks = [];
+        return _this;
     }
-    PageManager.prototype.createPage = function () {
-        var pageNumber = this.nextPageNumber++;
-        var page = this.doc.div("page", pageNumber % 2 ? "page-odd" : "page-even");
+    Object.defineProperty(PageBlock.prototype, "lastAppendedElement", {
+        get: function () {
+            return this.writeBlock == null ? undefined : this.writeBlock.lastAppendedElement;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(PageBlock.prototype, "outerElement", {
+        get: function () {
+            return this.wrapper;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    PageBlock.buildPage = function (doc, pageNumber) {
+        var classNames = [];
+        for (var _i = 2; _i < arguments.length; _i++) {
+            classNames[_i - 2] = arguments[_i];
+        }
+        // console.debug(`New page: ${pageNumber}`);
+        var page = doc.div.apply(doc, __spreadArrays(["page", pageNumber % 2 ? "page-odd" : "page-even"], classNames));
         page.id = "page-" + pageNumber;
         page.setAttribute(DATA_PAGE_NUMBER, String(pageNumber));
-        this.pagesEl.appendChild(page);
         var pageNumberDiv = document.createElement("DIV");
         pageNumberDiv.classList.add("page-number");
-        pageNumberDiv.appendChild(this.doc.div("page-number-hex"));
-        var pageNumberValue = this.doc.div("page-number-value");
+        pageNumberDiv.appendChild(doc.div("page-number-hex"));
+        var pageNumberValue = doc.div("page-number-value");
         pageNumberValue.appendChild(document.createTextNode(String(pageNumber)));
         pageNumberDiv.appendChild(pageNumberValue);
-        var head = this.doc.div("page-header");
-        var body = this.doc.div("page-body");
-        var foot = this.doc.div("page-footer");
+        var head = doc.div("page-header");
+        var body = doc.div("page-body");
+        var foot = doc.div("page-footer");
         page.appendChild(pageNumberDiv);
         page.appendChild(body);
         page.appendChild(head);
         page.appendChild(foot);
-        var newPage = {
-            page: page,
-            head: head,
-            body: body,
-            foot: foot,
-            num: pageNumber,
-        };
-        this.pages.set(page.id, newPage);
-        return newPage;
+        return new PageBlock(page, head, body, foot, page.id);
     };
-    PageManager.prototype.findOrCreateLastPage = function () {
-        var targetPage = document.querySelector(".page:last-child");
-        if (targetPage == null) {
-            return this.createPage();
+    PageBlock.prototype.appendNode = function (doc) {
+        var _this = this;
+        var nodes = [];
+        for (var _i = 1; _i < arguments.length; _i++) {
+            nodes[_i - 1] = arguments[_i];
         }
-        else {
-            var foundPage = this.pages.get(targetPage.id);
-            if (foundPage == null) {
-                throw new Error("Lost track of page: " + targetPage.id);
-            }
-            return foundPage;
+        // console.debug('Page.appendNode', nodes);
+        var keep = Block.elementsOrTextOf(nodes);
+        if (keep.length === 0) {
+            return AppendBlockResult.Skipped;
         }
+        var spanAll = !Block.isAside.apply(Block, nodes) && Block.needsSpanAll.apply(Block, nodes);
+        var block = this.writeBlock;
+        if (block == null || (block instanceof WideBlock && !spanAll) || (block instanceof ColumnedBlock && spanAll)) {
+            block = spanAll ? WideBlock.buildWide(doc, this.identifier + "[" + this.blocks.length + "].wide") : ColumnedBlock.buildColumned(doc, this.identifier + "[" + this.blocks.length + "].columned");
+            this.blocks.push(block);
+            this.body.appendChild(block.outerElement);
+            this.writeBlock = block;
+        }
+        var didAppend = block.appendNode.apply(block, __spreadArrays([doc], nodes));
+        if (didAppend === AppendBlockResult.Appended) {
+            Block.elementsOf(nodes).forEach(function (el) {
+                doc.extractFootnotes(el).forEach(function (footnote) {
+                    var _a;
+                    (_a = footnote.parentNode) === null || _a === void 0 ? void 0 : _a.removeChild(footnote);
+                    _this.foot.appendChild(footnote);
+                });
+            });
+        }
+        return didAppend;
     };
-    PageManager.prototype.moveToNewPage = function (oldPage, movedEl, newPage) {
-        if (newPage === void 0) { newPage = this.createPage(); }
-        // push to next page
-        var footnotes = this.doc.extractFootnotes(movedEl);
-        oldPage.body.removeChild(movedEl);
-        newPage.body.prepend(movedEl);
-        footnotes.forEach(function (footnote) {
-            var parent = footnote.parentNode;
-            if (parent != null && parent !== newPage.foot) {
-                parent.removeChild(footnote);
-                newPage.foot.appendChild(footnote);
-            }
-            else if (parent == null) {
-                newPage.foot.appendChild(footnote);
-            }
-        });
-        return newPage;
+    PageBlock.prototype.isEmpty = function () {
+        return this.blocks.length == 0 || this.blocks[0].isEmpty();
     };
-    return PageManager;
-}());
+    PageBlock.prototype.moveFrom = function (doc, linked, prevWriteBlock) {
+        linked.forEach(function (n) { var _a; return (_a = n.parentNode) === null || _a === void 0 ? void 0 : _a.removeChild(n); });
+        return this.appendNode.apply(this, __spreadArrays([doc], linked));
+    };
+    PageBlock.prototype.moveLastToNext = function (doc) {
+        if (this.writeBlock instanceof ColumnedBlock) {
+            // try to add to the existing block
+            // console.debug(`moveLastToNext ${this.identifier} to existing ColumnedBlock`);
+            return this.writeBlock.moveLastToNext(doc);
+        }
+        // wide blocks need a new page
+        return MoveLastToNextResult.CannotMove;
+    };
+    PageBlock.prototype.takeFootnote = function (footnote) {
+        var _a;
+        (_a = footnote.parentNode) === null || _a === void 0 ? void 0 : _a.removeChild(footnote);
+        this.foot.appendChild(footnote);
+    };
+    PageBlock.prototype.wouldBeEmptyIfDetached = function (els) {
+        return this.writeBlock != null && this.writeBlock.wouldBeEmptyIfDetached(els) && this.blocks[0] === this.writeBlock;
+    };
+    return PageBlock;
+}(Block));
+var PAGE_BREAK_BEFORE = "page-break-before";
 window.addEventListener("load", function () {
     var _a;
     if (!document.body.classList.contains("print-module")) {
-        console.log("Not a printable module.");
+        // console.info("Not a printable module.");
         return;
     }
     var docHelper = new DocHelper(document);
-    var pageManager = new PageManager(docHelper);
+    var pageManager = PageManager.buildPageManager(docHelper, "$");
     var reflowTimer;
     function stop(err) {
         if (err != null) {
@@ -291,47 +728,39 @@ window.addEventListener("load", function () {
         });
     }
     function reflowPrintModule() {
-        var target = pageManager.findOrCreateLastPage();
         var content = document.getElementById("content");
         if (content == null) {
             stop("No #content");
             return;
         }
-        var lastContent = target.body.lastElementChild;
-        if (lastContent != null) {
+        var lastContent = pageManager.lastAppendedElement;
+        var lastPageBody = pageManager.lastWriteBlock.body;
+        if (lastContent != null && lastPageBody != null) {
+            // console.debug("Inspecting last content", lastContent);
             var lastContentBounds = lastContent.getBoundingClientRect();
-            var lastBodyBounds = target.body.getBoundingClientRect();
+            var lastBodyBounds = lastPageBody.getBoundingClientRect();
             var fromBottom = lastBodyBounds.bottom - lastContentBounds.bottom;
+            // const reasons: string[] = [];
             var move = false;
             if (fromBottom < 0) {
-                console.debug("Below bottom", fromBottom, lastContent);
+                // reasons.push(`Below Bottom ${fromBottom}`);
                 move = true;
             }
             var fromRight = lastBodyBounds.right - lastContentBounds.right;
             if (fromRight < 0) {
-                console.debug("Past right", fromRight, lastContent);
+                // reasons.push(`Past Right ${fromRight}`);
                 move = true;
             }
-            if (lastContent.classList.contains("page-break-before")) {
-                console.debug("Declared break", lastContent);
+            if (lastContent.classList.contains(PAGE_BREAK_BEFORE)) {
+                // reasons.push(`Declared break`);
                 move = true;
             }
-            if (move && lastContent !== target.body.firstElementChild) {
-                var oldTarget = target;
-                target = pageManager.moveToNewPage(target, lastContent);
-                do {
-                    var lastChild = oldTarget.body.lastChild;
-                    if (lastChild == null || lastChild.nodeType !== Node.ELEMENT_NODE) {
-                        break;
-                    }
-                    var lastEl = lastChild;
-                    if (!lastEl.classList.contains(AVOID_BREAK_AFTER) || oldTarget.body.firstElementChild === lastEl) {
-                        break; // oh, the humanity
-                    }
-                    console.debug("Avoiding break after", lastEl);
-                    pageManager.moveToNewPage(oldTarget, lastEl, target);
-                } while (true);
-                return; // continue with reflow after the browser catches up.
+            if (move) {
+                // console.debug("Moving", reasons, lastContent);
+                pageManager.moveLastToNext(docHelper);
+            }
+            else {
+                // console.debug("Seems okay", lastContent);
             }
         }
         var nextContent = content.firstChild;
@@ -339,24 +768,57 @@ window.addEventListener("load", function () {
             stop();
             removeOldMainContent();
             fixPageRefs();
+            // document.querySelectorAll('.page-body').forEach(body => {
+            // 	let allEmpty = true;
+            // 	body.querySelectorAll(".columned-gutter").forEach(g => allEmpty = allEmpty && (g.childElementCount === 0));
+            // 	if (allEmpty) {
+            // 		body.classList.add('empty-gutters');
+            // 	}
+            // });
+            document.querySelectorAll(".page").forEach(function (page) {
+                page.querySelectorAll("[" + DATA_GUTTER_NUM + "]").forEach(function (aside) {
+                    var gutterId = aside.getAttribute(DATA_GUTTER_NUM) || "";
+                    var target = page.querySelector("[" + DATA_GUTTER_REF + "=\"" + gutterId + "\"]");
+                    var wrapper = target == null ? null : docHelper.nearestAncestorLike(target, function (el) { return el.classList.contains("columned-wrapper"); });
+                    console.log("Repositioning", aside, target);
+                    if (target == null || wrapper == null) {
+                        console.error("Lost track of gutter target " + gutterId);
+                        return;
+                    }
+                    var targetRect = target.getBoundingClientRect();
+                    var bodyRect = wrapper.getBoundingClientRect();
+                    var asideRect = aside.getBoundingClientRect();
+                    var fromTopOfTarget = 0;
+                    console.debug("target body aside", targetRect, bodyRect, asideRect);
+                    if (asideRect.height < targetRect.height) {
+                        fromTopOfTarget = (targetRect.height - asideRect.height) / 2;
+                        console.debug("centering", fromTopOfTarget);
+                    }
+                    var fromTopOfBody = targetRect.top - bodyRect.top;
+                    console.debug("fromTopOfBody", fromTopOfBody);
+                    // asideRect.top += fromTopOfTarget + fromTopOfBody;
+                    aside.style.top = Math.max(0, (fromTopOfTarget + fromTopOfBody)) + "px";
+                });
+            });
             return;
         }
         content.removeChild(nextContent);
         if (nextContent.nodeType === Node.COMMENT_NODE) {
             return;
         }
-        target.body.appendChild(nextContent);
-        if (nextContent.nodeType === Node.ELEMENT_NODE) {
-            var nextElement = nextContent;
-            docHelper.extractFootnotes(nextElement).forEach(function (footnote) {
-                target.foot.appendChild(footnote);
-            });
-        }
+        pageManager.appendNode(docHelper, nextContent);
     }
+    // Avoid dialogue breaks
+    document.querySelectorAll("blockquote, details").forEach(function (bq) {
+        var prev = bq.previousElementSibling;
+        if (prev != null && prev.tagName.toUpperCase() === "P" && prev.lastChild != null && prev.lastChild.textContent != null && prev.lastChild.textContent.endsWith(":")) {
+            prev.classList.add(AVOID_BREAK_AFTER);
+        }
+    });
+    // Make H1s start a new page
+    document.querySelectorAll("h1").forEach(function (h1) { return h1.classList.add(COL_SPAN_ALL, PAGE_BREAK_BEFORE); });
     // Avoid lonesome headers
     document.querySelectorAll("h1, h2, h3, h4, h5, h6").forEach(function (h) { return h.classList.add(AVOID_BREAK_AFTER); });
-    // Make H1s start a new page
-    document.querySelectorAll("h1").forEach(function (h1) { return h1.classList.add("page-break-before"); });
     // Unwrap source files
     document.querySelectorAll("[" + DATA_SOURCE_FILE + "]").forEach(function (wrapper) { return docHelper.unwrapSourceWrapper(wrapper); });
     // Open all spoilers

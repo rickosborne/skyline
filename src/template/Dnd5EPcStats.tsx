@@ -40,11 +40,11 @@ export class Dnd5EPcStats extends ABookTemplate<PlayerCharacterInfo> {
 		return ifLines([
 			html(<h1>{data.hzd.name}</h1>),
 			data.dnd5e.link != null && data.dnd5e.link.characterDndBeyond != null ? html(
-				<p><a href={data.dnd5e.link.characterDndBeyond.href}
+				<p class="col-span-all"><a href={data.dnd5e.link.characterDndBeyond.href}
 					rel="external">{data.dnd5e.link.characterDndBeyond.title}</a></p>
 			) : '',
 			html(
-				<div class="dnd5e-pc-block stat-block">
+				<div class="dnd5e-pc-block stat-block col-span-all">
 					<article>
 						<header class="name">
 							<h3 class="title">{toWords(data.hzd.name)}</h3>

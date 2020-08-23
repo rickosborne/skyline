@@ -6,6 +6,9 @@ To that end, one or more players without a Narrator should feel comfortable read
 But if your group has a Narrator, great!
 They're on book duty!
 
+{:.aside}
+When referring to the world, Skyline modules will use _Horizon_ to mean any canon from the video games, and _Skyline_ for anything extra we've added. 
+
 This adventure takes place shortly after the final events in the _Horizon: Zero Dawn_ video game.
 If you haven't completed that game, getting you up to speed is beyond the scope of this module, sorry!
 You should play the video game first!
@@ -29,5 +32,5 @@ After that you'll jump around quite a bit.
 Like similar branching narrative systems, you will occasionally be faced with choices which direct you where to go next.
 Here's your first branching point:
 
-If this is the group's first time playing a tabletop _Horizon_ module, continue on to [Starting Out](022-starting-out.md).
+If this is the group's first time playing a tabletop _Skyline_ module, continue on to [Starting Out](022-starting-out.md).
 Otherwise, since you've played before and already have characters, skip ahead to [Hooks](025-hooks.md).
