@@ -78,6 +78,7 @@ var AVOID_BREAK_AFTER = "avoid-break-after";
 var COL_SPAN_ALL = "col-span-all";
 var DATA_GUTTER_NUM = "data-gutter-num";
 var DATA_GUTTER_REF = "data-gutter-ref";
+var PAGE_BREAK_BEFORE = "page-break-before";
 var DocHelper = /** @class */ (function () {
     function DocHelper(document) {
         this.document = document;
@@ -303,11 +304,6 @@ var DivBlock = /** @class */ (function (_super) {
         for (var _i = 1; _i < arguments.length; _i++) {
             nodes[_i - 1] = arguments[_i];
         }
-        // if (this.isFull) {
-        // 	console.log(`appendNode ${this.identifier} is full`);
-        // 	return AppendBlockResult.Full;
-        // }
-        // console.debug('DivBlock appendNode', nodes);
         nodes.forEach(function (node) {
             _this.div.appendChild(node);
         });
@@ -417,10 +413,6 @@ var MultiTargetBlock = /** @class */ (function (_super) {
             // console.error(`moveLastToNext ${this.identifier} no writer`);
             return MoveLastToNextResult.CannotMove;
         }
-        // if (this.writeBlock.isFull) {
-        // 	console.error(`moveLastToNext ${this.identifier} full: ${this.writeBlock.identifier}`);
-        // 	return MoveLastToNextResult.CannotMove;
-        // }
         var prevWriteBlock = this.writeBlock;
         var prevDidMove = prevWriteBlock.moveLastToNext(doc);
         // console.debug(`moveLastToNext ${this.identifier} got ${prevDidMove} from ${prevWriteBlock.identifier}`);
@@ -682,24 +674,91 @@ var PageBlock = /** @class */ (function (_super) {
     };
     return PageBlock;
 }(Block));
-var PAGE_BREAK_BEFORE = "page-break-before";
+var RenderingTask = /** @class */ (function () {
+    function RenderingTask(title) {
+        this.title = title;
+    }
+    RenderingTask.prototype.finish = function () {
+    };
+    RenderingTask.prototype.prepare = function () {
+    };
+    return RenderingTask;
+}());
+var OnceTask = /** @class */ (function (_super) {
+    __extends(OnceTask, _super);
+    function OnceTask(title, task, isComplete, estimatedCompletion) {
+        if (isComplete === void 0) { isComplete = false; }
+        if (estimatedCompletion === void 0) { estimatedCompletion = isComplete ? 1.0 : 0; }
+        var _this = _super.call(this, title) || this;
+        _this.task = task;
+        _this.isComplete = isComplete;
+        _this.estimatedCompletion = 0;
+        _this.estimatedCompletion = estimatedCompletion;
+        return _this;
+    }
+    OnceTask.prototype.step = function () {
+        this.errorMessage = this.task() || undefined;
+        this.isComplete = true;
+        this.estimatedCompletion = 1.0;
+    };
+    return OnceTask;
+}(RenderingTask));
+var RenderingTaskManager = /** @class */ (function () {
+    function RenderingTaskManager() {
+        var tasks = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            tasks[_i] = arguments[_i];
+        }
+        this.tasks = tasks;
+    }
+    RenderingTaskManager.prototype.start = function () {
+        var todo = this.tasks.slice();
+        var startTime = Date.now();
+        var lastTask;
+        function nextTask() {
+            var task = todo[0];
+            if (task == null) {
+                console.debug("Done after " + (Date.now() - startTime) / 1000);
+                return;
+            }
+            if (lastTask !== task) {
+                console.debug("Prepare " + task.title);
+                task.prepare();
+            }
+            lastTask = task;
+            var okay = false;
+            try {
+                task.step();
+                if (task.errorMessage == null) {
+                    okay = true;
+                }
+                else {
+                    console.error("Task " + task.title + " failed: ", task.errorMessage);
+                }
+            }
+            catch (e) {
+                console.error("Task " + task.title + " threw: ", e);
+            }
+            finally {
+                if (task.isComplete) {
+                    task.finish();
+                    todo.shift();
+                }
+                if (okay) {
+                    setTimeout(nextTask, 1);
+                }
+            }
+        }
+        setTimeout(nextTask, 1);
+    };
+    return RenderingTaskManager;
+}());
 window.addEventListener("load", function () {
-    var _a;
     if (!document.body.classList.contains("print-module")) {
         // console.info("Not a printable module.");
         return;
     }
     var docHelper = new DocHelper(document);
-    var pageManager = PageManager.buildPageManager(docHelper, "$");
-    var reflowTimer;
-    function stop(err) {
-        if (err != null) {
-            console.error(err);
-        }
-        if (reflowTimer != null) {
-            clearInterval(reflowTimer);
-        }
-    }
     function removeOldMainContent() {
         var mainContent = document.getElementById("page");
         if (mainContent != null && mainContent.parentNode != null) {
@@ -727,119 +786,148 @@ window.addEventListener("load", function () {
             el.setAttribute(DATA_PAGE_REF, pageRef || "?");
         });
     }
-    function reflowPrintModule() {
-        var content = document.getElementById("content");
-        if (content == null) {
-            stop("No #content");
-            return;
+    function adjustGutterItems() {
+        document.querySelectorAll(".page").forEach(function (page) {
+            page.querySelectorAll("[" + DATA_GUTTER_NUM + "]").forEach(function (aside) {
+                var gutterId = aside.getAttribute(DATA_GUTTER_NUM) || "";
+                var target = page.querySelector("[" + DATA_GUTTER_REF + "=\"" + gutterId + "\"]");
+                var wrapper = target == null ? null : docHelper.nearestAncestorLike(target, function (el) { return el.classList.contains("columned-wrapper"); });
+                console.log("Repositioning", aside, target);
+                if (target == null || wrapper == null) {
+                    console.error("Lost track of gutter target " + gutterId);
+                    return;
+                }
+                var targetRect = target.getBoundingClientRect();
+                var bodyRect = wrapper.getBoundingClientRect();
+                var asideRect = aside.getBoundingClientRect();
+                var fromTopOfTarget = 0;
+                console.debug("target body aside", targetRect, bodyRect, asideRect);
+                if (asideRect.height < targetRect.height) {
+                    fromTopOfTarget = (targetRect.height - asideRect.height) / 2;
+                    console.debug("centering", fromTopOfTarget);
+                }
+                var fromTopOfBody = targetRect.top - bodyRect.top;
+                console.debug("fromTopOfBody", fromTopOfBody);
+                // asideRect.top += fromTopOfTarget + fromTopOfBody;
+                aside.style.top = Math.max(0, (fromTopOfTarget + fromTopOfBody)) + "px";
+            });
+        });
+    }
+    // noinspection JSUnusedLocalSymbols
+    function markEmptyGutters() {
+        document.querySelectorAll(".page-body").forEach(function (body) {
+            var allEmpty = true;
+            body.querySelectorAll(".columned-gutter").forEach(function (g) { return allEmpty = allEmpty && (g.childElementCount === 0); });
+            if (allEmpty) {
+                body.classList.add("empty-gutters");
+            }
+        });
+    }
+    var ReflowTask = /** @class */ (function (_super) {
+        __extends(ReflowTask, _super);
+        function ReflowTask() {
+            var _this = _super.call(this, "Render print layout.") || this;
+            _this.estimatedCompletion = 0;
+            _this.isComplete = false;
+            _this.pageManager = PageManager.buildPageManager(docHelper, "$");
+            _this.todo = [];
+            _this.totalCount = 0;
+            return _this;
         }
-        var lastContent = pageManager.lastAppendedElement;
-        var lastPageBody = pageManager.lastWriteBlock.body;
-        if (lastContent != null && lastPageBody != null) {
-            // console.debug("Inspecting last content", lastContent);
-            var lastContentBounds = lastContent.getBoundingClientRect();
-            var lastBodyBounds = lastPageBody.getBoundingClientRect();
-            var fromBottom = lastBodyBounds.bottom - lastContentBounds.bottom;
-            // const reasons: string[] = [];
-            var move = false;
-            if (fromBottom < 0) {
-                // reasons.push(`Below Bottom ${fromBottom}`);
-                move = true;
+        ReflowTask.prototype.prepare = function () {
+            var _a;
+            var _b;
+            var content = document.getElementById("content");
+            if (content == null) {
+                this.errorMessage = "No #content";
+                return;
             }
-            var fromRight = lastBodyBounds.right - lastContentBounds.right;
-            if (fromRight < 0) {
-                // reasons.push(`Past Right ${fromRight}`);
-                move = true;
+            var allChildren = [];
+            content.childNodes.forEach(function (child) { return allChildren.push(child); });
+            (_a = this.todo).push.apply(_a, allChildren.filter(function (child) {
+                return child.nodeType === Node.ELEMENT_NODE || (child.nodeType === Node.TEXT_NODE && child.textContent != null && child.textContent.length > 0);
+            }));
+            (_b = content.parentNode) === null || _b === void 0 ? void 0 : _b.removeChild(content);
+            this.totalCount = this.todo.length;
+        };
+        ReflowTask.prototype.step = function () {
+            var lastContent = this.pageManager.lastAppendedElement;
+            var lastPageBody = this.pageManager.lastWriteBlock.body;
+            if (lastContent != null && lastPageBody != null) {
+                // console.debug("Inspecting last content", lastContent);
+                var lastContentBounds = lastContent.getBoundingClientRect();
+                var lastBodyBounds = lastPageBody.getBoundingClientRect();
+                var fromBottom = lastBodyBounds.bottom - lastContentBounds.bottom;
+                // const reasons: string[] = [];
+                var move = false;
+                if (fromBottom < 0) {
+                    // reasons.push(`Below Bottom ${fromBottom}`);
+                    move = true;
+                }
+                var fromRight = lastBodyBounds.right - lastContentBounds.right;
+                if (fromRight < 0) {
+                    // reasons.push(`Past Right ${fromRight}`);
+                    move = true;
+                }
+                if (lastContent.classList.contains(PAGE_BREAK_BEFORE)) {
+                    // reasons.push(`Declared break`);
+                    move = true;
+                }
+                if (move) {
+                    // console.debug("Moving", reasons, lastContent);
+                    this.pageManager.moveLastToNext(docHelper);
+                }
+                else {
+                    // console.debug("Seems okay", lastContent);
+                }
             }
-            if (lastContent.classList.contains(PAGE_BREAK_BEFORE)) {
-                // reasons.push(`Declared break`);
-                move = true;
-            }
-            if (move) {
-                // console.debug("Moving", reasons, lastContent);
-                pageManager.moveLastToNext(docHelper);
+            var nextContent = this.todo.shift();
+            if (nextContent == null) {
+                this.isComplete = true;
+                this.estimatedCompletion = 1.0;
             }
             else {
-                // console.debug("Seems okay", lastContent);
+                this.pageManager.appendNode(docHelper, nextContent);
+                this.estimatedCompletion = 1.0 - (this.todo.length / this.totalCount);
             }
-        }
-        var nextContent = content.firstChild;
-        if (nextContent == null) {
-            stop();
-            removeOldMainContent();
-            fixPageRefs();
-            // document.querySelectorAll('.page-body').forEach(body => {
-            // 	let allEmpty = true;
-            // 	body.querySelectorAll(".columned-gutter").forEach(g => allEmpty = allEmpty && (g.childElementCount === 0));
-            // 	if (allEmpty) {
-            // 		body.classList.add('empty-gutters');
-            // 	}
-            // });
-            document.querySelectorAll(".page").forEach(function (page) {
-                page.querySelectorAll("[" + DATA_GUTTER_NUM + "]").forEach(function (aside) {
-                    var gutterId = aside.getAttribute(DATA_GUTTER_NUM) || "";
-                    var target = page.querySelector("[" + DATA_GUTTER_REF + "=\"" + gutterId + "\"]");
-                    var wrapper = target == null ? null : docHelper.nearestAncestorLike(target, function (el) { return el.classList.contains("columned-wrapper"); });
-                    console.log("Repositioning", aside, target);
-                    if (target == null || wrapper == null) {
-                        console.error("Lost track of gutter target " + gutterId);
-                        return;
-                    }
-                    var targetRect = target.getBoundingClientRect();
-                    var bodyRect = wrapper.getBoundingClientRect();
-                    var asideRect = aside.getBoundingClientRect();
-                    var fromTopOfTarget = 0;
-                    console.debug("target body aside", targetRect, bodyRect, asideRect);
-                    if (asideRect.height < targetRect.height) {
-                        fromTopOfTarget = (targetRect.height - asideRect.height) / 2;
-                        console.debug("centering", fromTopOfTarget);
-                    }
-                    var fromTopOfBody = targetRect.top - bodyRect.top;
-                    console.debug("fromTopOfBody", fromTopOfBody);
-                    // asideRect.top += fromTopOfTarget + fromTopOfBody;
-                    aside.style.top = Math.max(0, (fromTopOfTarget + fromTopOfBody)) + "px";
-                });
-            });
-            return;
-        }
-        content.removeChild(nextContent);
-        if (nextContent.nodeType === Node.COMMENT_NODE) {
-            return;
-        }
-        pageManager.appendNode(docHelper, nextContent);
-    }
-    // Avoid dialogue breaks
-    document.querySelectorAll("blockquote, details").forEach(function (bq) {
-        var prev = bq.previousElementSibling;
-        if (prev != null && prev.tagName.toUpperCase() === "P" && prev.lastChild != null && prev.lastChild.textContent != null && prev.lastChild.textContent.endsWith(":")) {
-            prev.classList.add(AVOID_BREAK_AFTER);
-        }
-    });
-    // Make H1s start a new page
-    document.querySelectorAll("h1").forEach(function (h1) { return h1.classList.add(COL_SPAN_ALL, PAGE_BREAK_BEFORE); });
-    // Avoid lonesome headers
-    document.querySelectorAll("h1, h2, h3, h4, h5, h6").forEach(function (h) { return h.classList.add(AVOID_BREAK_AFTER); });
-    // Unwrap source files
-    document.querySelectorAll("[" + DATA_SOURCE_FILE + "]").forEach(function (wrapper) { return docHelper.unwrapSourceWrapper(wrapper); });
-    // Open all spoilers
-    document.querySelectorAll("details").forEach(function (details) { return details.open = true; });
-    // Unwrap all block quotes
-    document.querySelectorAll("blockquote").forEach(function (bq) {
-        docHelper.unwrap(bq, function (child, index, count) {
-            var wrapper = docHelper.div("blockquote-part");
-            if (index === 0) {
-                wrapper.classList.add("blockquote-start");
+        };
+        return ReflowTask;
+    }(RenderingTask));
+    var taskManager = new RenderingTaskManager(new OnceTask("Clean up screen-centric structures, part 1.", function () {
+        var _a;
+        var moduleLinkParent = docHelper.moduleLink.parentNode;
+        moduleLinkParent === null || moduleLinkParent === void 0 ? void 0 : moduleLinkParent.removeChild(docHelper.moduleLink);
+        (_a = moduleLinkParent === null || moduleLinkParent === void 0 ? void 0 : moduleLinkParent.parentNode) === null || _a === void 0 ? void 0 : _a.removeChild(moduleLinkParent);
+        document.body.appendChild(docHelper.moduleLink);
+    }), new OnceTask("Identify major sections.", function () {
+        document.querySelectorAll("[" + DATA_SOURCE_FILE + "]").forEach(function (wrapper) { return docHelper.unwrapSourceWrapper(wrapper); });
+    }), new OnceTask("Identify block quote introductions.", function () {
+        document.querySelectorAll("blockquote, details").forEach(function (bq) {
+            var prev = bq.previousElementSibling;
+            if (prev != null && prev.tagName.toUpperCase() === "P" && prev.lastChild != null && prev.lastChild.textContent != null && prev.lastChild.textContent.endsWith(":")) {
+                prev.classList.add(AVOID_BREAK_AFTER);
             }
-            if (index === count) {
-                wrapper.classList.add("blockquote-end");
-            }
-            wrapper.appendChild(child);
-            return wrapper;
         });
-    });
-    var moduleLinkParent = docHelper.moduleLink.parentNode;
-    moduleLinkParent === null || moduleLinkParent === void 0 ? void 0 : moduleLinkParent.removeChild(docHelper.moduleLink);
-    (_a = moduleLinkParent === null || moduleLinkParent === void 0 ? void 0 : moduleLinkParent.parentNode) === null || _a === void 0 ? void 0 : _a.removeChild(moduleLinkParent);
-    document.body.appendChild(docHelper.moduleLink);
-    reflowTimer = setInterval(reflowPrintModule, 1);
+    }), new OnceTask("Add page breaks at major headings.", function () {
+        document.querySelectorAll("h1").forEach(function (h1) { return h1.classList.add(COL_SPAN_ALL, PAGE_BREAK_BEFORE); });
+    }), new OnceTask("Ensure headings are not orphaned.", function () {
+        document.querySelectorAll("h1, h2, h3, h4, h5, h6").forEach(function (h) { return h.classList.add(AVOID_BREAK_AFTER); });
+    }), new OnceTask("Reveal all spoilers.", function () {
+        document.querySelectorAll("details").forEach(function (details) { return details.open = true; });
+    }), new OnceTask("Let block quotes span columns and pages.", function () {
+        document.querySelectorAll("blockquote").forEach(function (bq) {
+            docHelper.unwrap(bq, function (child, index, count) {
+                var wrapper = docHelper.div("blockquote-part");
+                if (index === 0) {
+                    wrapper.classList.add("blockquote-start");
+                }
+                if (index === count) {
+                    wrapper.classList.add("blockquote-end");
+                }
+                wrapper.appendChild(child);
+                return wrapper;
+            });
+        });
+    }), new ReflowTask(), new OnceTask("Clean up screen-centric structures, part 2.", function () { return removeOldMainContent(); }), new OnceTask("Fix up page references.", function () { return fixPageRefs(); }), new OnceTask("Mark pages with empty gutters.", function () { return markEmptyGutters(); }), new OnceTask("Relocate sidebar blocks.", function () { return adjustGutterItems(); }));
+    taskManager.start();
 });

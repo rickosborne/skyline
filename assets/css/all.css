@@ -1369,8 +1369,10 @@ details[open] > summary.spoiler-warning::before {
   grid-area: gutter;
   position: relative;
 }
-.print-module .page .page-body .columned-wrapper .columned-gutter .aside {
+.print-module .page .page-body .columned-wrapper .columned-gutter.absolute .aside {
   position: absolute;
+}
+.print-module .page .page-body .columned-wrapper .columned-gutter .aside {
   padding-left: var(--gutter-padding);
   border-left: thin solid var(--gutter-border);
   font-family: Roboto, "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;

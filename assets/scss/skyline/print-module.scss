@@ -85,8 +85,11 @@
 					grid-area: gutter;
 					position: relative;
 
-					.aside {
+					&.absolute .aside {
 						position: absolute;
+					}
+
+					.aside {
 						padding-left: var(--gutter-padding);
 						border-left: thin solid var(--gutter-border);
 						font-family: vars.$font-sans;

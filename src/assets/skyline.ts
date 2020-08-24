@@ -59,6 +59,7 @@ const AVOID_BREAK_AFTER = "avoid-break-after";
 const COL_SPAN_ALL = "col-span-all";
 const DATA_GUTTER_NUM = "data-gutter-num";
 const DATA_GUTTER_REF = "data-gutter-ref";
+const PAGE_BREAK_BEFORE = "page-break-before";
 
 class DocHelper {
 	public documentSeemsOkay = true;
@@ -286,11 +287,6 @@ class DivBlock extends Block {
 	}
 
 	appendNode(doc: DocHelper, ...nodes: ChildNode[]): AppendBlockResult {
-		// if (this.isFull) {
-		// 	console.log(`appendNode ${this.identifier} is full`);
-		// 	return AppendBlockResult.Full;
-		// }
-		// console.debug('DivBlock appendNode', nodes);
 		nodes.forEach(node => {
 			this.div.appendChild(node);
 		});
@@ -387,10 +383,6 @@ abstract class MultiTargetBlock<W extends Block> extends Block {
 			// console.error(`moveLastToNext ${this.identifier} no writer`);
 			return MoveLastToNextResult.CannotMove;
 		}
-		// if (this.writeBlock.isFull) {
-		// 	console.error(`moveLastToNext ${this.identifier} full: ${this.writeBlock.identifier}`);
-		// 	return MoveLastToNextResult.CannotMove;
-		// }
 		const prevWriteBlock = this.writeBlock;
 		const prevDidMove = prevWriteBlock.moveLastToNext(doc);
 		// console.debug(`moveLastToNext ${this.identifier} got ${prevDidMove} from ${prevWriteBlock.identifier}`);
@@ -644,24 +636,104 @@ class PageBlock extends Block {
 	}
 }
 
-const PAGE_BREAK_BEFORE = "page-break-before";
+abstract class RenderingTask {
+	protected constructor(
+		public readonly title: string,
+	) {
+	}
+
+	abstract get errorMessage(): string | undefined;
+
+	abstract get estimatedCompletion(): number;
+
+	abstract get isComplete(): boolean;
+
+	finish(): void {
+	}
+
+	prepare(): void {
+	}
+
+	abstract step(): void;
+}
+
+class OnceTask extends RenderingTask {
+	public errorMessage: string | undefined;
+	public estimatedCompletion: number = 0;
+
+	constructor(
+		title: string,
+		protected readonly task: () => string | undefined | void,
+		public isComplete: boolean = false,
+		estimatedCompletion: number = isComplete ? 1.0 : 0,
+	) {
+		super(title);
+		this.estimatedCompletion = estimatedCompletion;
+	}
+
+	step(): void {
+		this.errorMessage = this.task() || undefined;
+		this.isComplete = true;
+		this.estimatedCompletion = 1.0;
+	}
+}
+
+class RenderingTaskManager {
+	protected readonly tasks: RenderingTask[];
+
+	constructor(
+		...tasks: RenderingTask[]
+	) {
+		this.tasks = tasks;
+	}
+
+	public start() {
+		const todo = this.tasks.slice();
+		const startTime = Date.now();
+		let lastTask: RenderingTask | undefined;
+
+		function nextTask(): void {
+			const task = todo[0];
+			if (task == null) {
+				console.debug(`Done after ${(Date.now() - startTime) / 1000}`);
+				return;
+			}
+			if (lastTask !== task) {
+				console.debug(`Prepare ${task.title}`);
+				task.prepare();
+			}
+			lastTask = task;
+			let okay: boolean = false;
+			try {
+				task.step();
+				if (task.errorMessage == null) {
+					okay = true;
+				} else {
+					console.error(`Task ${task.title} failed: `, task.errorMessage);
+				}
+			} catch (e) {
+				console.error(`Task ${task.title} threw: `, e);
+			} finally {
+				if (task.isComplete) {
+					task.finish();
+					todo.shift();
+				}
+				if (okay) {
+					setTimeout(nextTask, 1);
+				}
+			}
+		}
+
+		setTimeout(nextTask, 1);
+	}
+}
+
 window.addEventListener("load", () => {
 	if (!document.body.classList.contains("print-module")) {
 		// console.info("Not a printable module.");
 		return;
 	}
 	const docHelper = new DocHelper(document);
-	const pageManager = PageManager.buildPageManager(docHelper, "$");
-	let reflowTimer: NodeJS.Timeout;
-
-	function stop(err?: string) {
-		if (err != null) {
-			console.error(err);
-		}
-		if (reflowTimer != null) {
-			clearInterval(reflowTimer)
-		}
-	}
 
 	function removeOldMainContent() {
 		const mainContent = document.getElementById("page");
@@ -691,120 +763,161 @@ window.addEventListener("load", () => {
 		});
 	}
 
-	function reflowPrintModule(): void {
-		const content = document.getElementById("content");
-		if (content == null) {
-			stop("No #content");
-			return;
-		}
-		const lastContent = pageManager.lastAppendedElement;
-		const lastPageBody = pageManager.lastWriteBlock.body;
-		if (lastContent != null && lastPageBody != null) {
-			// console.debug("Inspecting last content", lastContent);
-			const lastContentBounds = lastContent.getBoundingClientRect();
-			const lastBodyBounds = lastPageBody.getBoundingClientRect();
-			const fromBottom = lastBodyBounds.bottom - lastContentBounds.bottom;
-			// const reasons: string[] = [];
-			let move = false;
-			if (fromBottom < 0) {
-				// reasons.push(`Below Bottom ${fromBottom}`);
-				move = true;
-			}
-			const fromRight = lastBodyBounds.right - lastContentBounds.right;
-			if (fromRight < 0) {
-				// reasons.push(`Past Right ${fromRight}`);
-				move = true;
-			}
-			if (lastContent.classList.contains(PAGE_BREAK_BEFORE)) {
-				// reasons.push(`Declared break`);
-				move = true;
-			}
-			if (move) {
-				// console.debug("Moving", reasons, lastContent);
-				pageManager.moveLastToNext(docHelper);
-			} else {
-				// console.debug("Seems okay", lastContent);
-			}
-		}
-		let nextContent = content.firstChild;
-		if (nextContent == null) {
-			stop();
-			removeOldMainContent();
-			fixPageRefs();
-			// document.querySelectorAll('.page-body').forEach(body => {
-			// 	let allEmpty = true;
-			// 	body.querySelectorAll(".columned-gutter").forEach(g => allEmpty = allEmpty && (g.childElementCount === 0));
-			// 	if (allEmpty) {
-			// 		body.classList.add('empty-gutters');
-			// 	}
-			// });
-			document.querySelectorAll(".page").forEach(page => {
-				page.querySelectorAll(`[${DATA_GUTTER_NUM}]`).forEach(aside => {
-					const gutterId = aside.getAttribute(DATA_GUTTER_NUM) || "";
-					const target = page.querySelector(`[${DATA_GUTTER_REF}="${gutterId}"]`);
-					const wrapper = target == null ? null : docHelper.nearestAncestorLike(target, el => el.classList.contains("columned-wrapper"));
-					console.log("Repositioning", aside, target);
-					if (target == null || wrapper == null) {
-						console.error(`Lost track of gutter target ${gutterId}`);
-						return;
-					}
-					const targetRect = target.getBoundingClientRect();
-					const bodyRect = wrapper.getBoundingClientRect();
-					const asideRect = aside.getBoundingClientRect();
-					let fromTopOfTarget = 0;
-					console.debug(`target body aside`, targetRect, bodyRect, asideRect);
-					if (asideRect.height < targetRect.height) {
-						fromTopOfTarget = (targetRect.height - asideRect.height) / 2;
-						console.debug("centering", fromTopOfTarget);
-					}
-					const fromTopOfBody = targetRect.top - bodyRect.top;
-					console.debug(`fromTopOfBody`, fromTopOfBody);
-					// asideRect.top += fromTopOfTarget + fromTopOfBody;
-					(aside as HTMLElement).style.top = Math.max(0, (fromTopOfTarget + fromTopOfBody)) + "px";
-				});
+	function adjustGutterItems() {
+		document.querySelectorAll(".page").forEach(page => {
+			page.querySelectorAll(`[${DATA_GUTTER_NUM}]`).forEach(aside => {
+				const gutterId = aside.getAttribute(DATA_GUTTER_NUM) || "";
+				const target = page.querySelector(`[${DATA_GUTTER_REF}="${gutterId}"]`);
+				const wrapper = target == null ? null : docHelper.nearestAncestorLike(target, el => el.classList.contains("columned-wrapper"));
+				console.log("Repositioning", aside, target);
+				if (target == null || wrapper == null) {
+					console.error(`Lost track of gutter target ${gutterId}`);
+					return;
+				}
+				const targetRect = target.getBoundingClientRect();
+				const bodyRect = wrapper.getBoundingClientRect();
+				const asideRect = aside.getBoundingClientRect();
+				let fromTopOfTarget = 0;
+				console.debug(`target body aside`, targetRect, bodyRect, asideRect);
+				if (asideRect.height < targetRect.height) {
+					fromTopOfTarget = (targetRect.height - asideRect.height) / 2;
+					console.debug("centering", fromTopOfTarget);
+				}
+				const fromTopOfBody = targetRect.top - bodyRect.top;
+				console.debug(`fromTopOfBody`, fromTopOfBody);
+				// asideRect.top += fromTopOfTarget + fromTopOfBody;
+				(aside as HTMLElement).style.top = Math.max(0, (fromTopOfTarget + fromTopOfBody)) + "px";
 			});
-			return;
-		}
-		content.removeChild(nextContent);
-		if (nextContent.nodeType === Node.COMMENT_NODE) {
-			return;
-		}
-		pageManager.appendNode(docHelper, nextContent);
+		});
 	}
 
-	// Avoid dialogue breaks
-	document.querySelectorAll("blockquote, details").forEach(bq => {
-		const prev = bq.previousElementSibling;
-		if (prev != null && prev.tagName.toUpperCase() === "P" && prev.lastChild != null && prev.lastChild.textContent != null && prev.lastChild.textContent.endsWith(":")) {
-			prev.classList.add(AVOID_BREAK_AFTER);
-		}
-	});
-	// Make H1s start a new page
-	document.querySelectorAll("h1").forEach(h1 => h1.classList.add(COL_SPAN_ALL, PAGE_BREAK_BEFORE))
-	// Avoid lonesome headers
-	document.querySelectorAll("h1, h2, h3, h4, h5, h6").forEach(h => h.classList.add(AVOID_BREAK_AFTER));
-	// Unwrap source files
-	document.querySelectorAll(`[${DATA_SOURCE_FILE}]`).forEach(wrapper => docHelper.unwrapSourceWrapper(wrapper));
-	// Open all spoilers
-	document.querySelectorAll("details").forEach(details => details.open = true);
-	// Unwrap all block quotes
-	document.querySelectorAll("blockquote").forEach((bq: HTMLElement) => {
-		docHelper.unwrap(bq, (child, index, count) => {
-			const wrapper = docHelper.div("blockquote-part");
-			if (index === 0) {
-				wrapper.classList.add("blockquote-start");
+	// noinspection JSUnusedLocalSymbols
+	function markEmptyGutters() {
+		document.querySelectorAll(".page-body").forEach(body => {
+			let allEmpty = true;
+			body.querySelectorAll(".columned-gutter").forEach(g => allEmpty = allEmpty && (g.childElementCount === 0));
+			if (allEmpty) {
+				body.classList.add("empty-gutters");
 			}
-			if (index === count) {
-				wrapper.classList.add("blockquote-end");
-			}
-			wrapper.appendChild(child);
-			return wrapper;
-		})
-	});
+		});
+	}
 
-	const moduleLinkParent = docHelper.moduleLink.parentNode;
-	moduleLinkParent?.removeChild(docHelper.moduleLink);
-	moduleLinkParent?.parentNode?.removeChild(moduleLinkParent);
-	document.body.appendChild(docHelper.moduleLink);
-	reflowTimer = setInterval(reflowPrintModule, 1);
+	class ReflowTask extends RenderingTask {
+		public errorMessage: string | undefined;
+		public estimatedCompletion: number = 0;
+		public isComplete: boolean = false;
+		protected readonly pageManager: PageManager = PageManager.buildPageManager(docHelper, "$");
+		protected readonly todo: ChildNode[] = [];
+		protected totalCount: number = 0;
+
+		constructor() {
+			super("Render print layout.");
+		}
+
+		prepare() {
+			const content = document.getElementById("content");
+			if (content == null) {
+				this.errorMessage = "No #content";
+				return;
+			}
+			const allChildren: ChildNode[] = [];
+			content.childNodes.forEach(child => allChildren.push(child));
+			this.todo.push(...allChildren.filter(child => {
+				return child.nodeType === Node.ELEMENT_NODE || (child.nodeType === Node.TEXT_NODE && child.textContent != null && child.textContent.length > 0);
+			}));
+			content.parentNode?.removeChild(content);
+			this.totalCount = this.todo.length;
+		}
+
+		step(): void {
+			const lastContent = this.pageManager.lastAppendedElement;
+			const lastPageBody = this.pageManager.lastWriteBlock.body;
+			if (lastContent != null && lastPageBody != null) {
+				// console.debug("Inspecting last content", lastContent);
+				const lastContentBounds = lastContent.getBoundingClientRect();
+				const lastBodyBounds = lastPageBody.getBoundingClientRect();
+				const fromBottom = lastBodyBounds.bottom - lastContentBounds.bottom;
+				// const reasons: string[] = [];
+				let move = false;
+				if (fromBottom < 0) {
+					// reasons.push(`Below Bottom ${fromBottom}`);
+					move = true;
+				}
+				const fromRight = lastBodyBounds.right - lastContentBounds.right;
+				if (fromRight < 0) {
+					// reasons.push(`Past Right ${fromRight}`);
+					move = true;
+				}
+				if (lastContent.classList.contains(PAGE_BREAK_BEFORE)) {
+					// reasons.push(`Declared break`);
+					move = true;
+				}
+				if (move) {
+					// console.debug("Moving", reasons, lastContent);
+					this.pageManager.moveLastToNext(docHelper);
+				} else {
+					// console.debug("Seems okay", lastContent);
+				}
+			}
+			let nextContent = this.todo.shift();
+			if (nextContent == null) {
+				this.isComplete = true;
+				this.estimatedCompletion = 1.0;
+			} else {
+				this.pageManager.appendNode(docHelper, nextContent);
+				this.estimatedCompletion = 1.0 - (this.todo.length / this.totalCount);
+			}
+		}
+	}
+
+	const taskManager = new RenderingTaskManager(
+		new OnceTask("Clean up screen-centric structures, part 1.", () => {
+			const moduleLinkParent = docHelper.moduleLink.parentNode;
+			moduleLinkParent?.removeChild(docHelper.moduleLink);
+			moduleLinkParent?.parentNode?.removeChild(moduleLinkParent);
+			document.body.appendChild(docHelper.moduleLink);
+		}),
+		new OnceTask("Identify major sections.", () => {
+			document.querySelectorAll(`[${DATA_SOURCE_FILE}]`).forEach(wrapper => docHelper.unwrapSourceWrapper(wrapper));
+		}),
+		new OnceTask("Identify block quote introductions.", () => {
+			document.querySelectorAll("blockquote, details").forEach(bq => {
+				const prev = bq.previousElementSibling;
+				if (prev != null && prev.tagName.toUpperCase() === "P" && prev.lastChild != null && prev.lastChild.textContent != null && prev.lastChild.textContent.endsWith(":")) {
+					prev.classList.add(AVOID_BREAK_AFTER);
+				}
+			});
+		}),
+		new OnceTask("Add page breaks at major headings.", () => {
+			document.querySelectorAll("h1").forEach(h1 => h1.classList.add(COL_SPAN_ALL, PAGE_BREAK_BEFORE))
+		}),
+		new OnceTask("Ensure headings are not orphaned.", () => {
+			document.querySelectorAll("h1, h2, h3, h4, h5, h6").forEach(h => h.classList.add(AVOID_BREAK_AFTER));
+		}),
+		new OnceTask("Reveal all spoilers.", () => {
+			document.querySelectorAll("details").forEach(details => details.open = true);
+		}),
+		new OnceTask("Let block quotes span columns and pages.", () => {
+			document.querySelectorAll("blockquote").forEach((bq: HTMLElement) => {
+				docHelper.unwrap(bq, (child, index, count) => {
+					const wrapper = docHelper.div("blockquote-part");
+					if (index === 0) {
+						wrapper.classList.add("blockquote-start");
+					}
+					if (index === count) {
+						wrapper.classList.add("blockquote-end");
+					}
+					wrapper.appendChild(child);
+					return wrapper;
+				})
+			});
+		}),
+		new ReflowTask(),
+		new OnceTask("Clean up screen-centric structures, part 2.", () => removeOldMainContent()),
+		new OnceTask("Fix up page references.", () => fixPageRefs()),
+		new OnceTask("Mark pages with empty gutters.", () => markEmptyGutters()),
+		new OnceTask("Relocate sidebar blocks.", () => adjustGutterItems()),
+	);
+
+	taskManager.start();
 });
