@@ -789,6 +789,7 @@ window.addEventListener("load", function () {
     function adjustGutterItems() {
         document.querySelectorAll(".page").forEach(function (page) {
             page.querySelectorAll("[" + DATA_GUTTER_NUM + "]").forEach(function (aside) {
+                var _a;
                 var gutterId = aside.getAttribute(DATA_GUTTER_NUM) || "";
                 var target = page.querySelector("[" + DATA_GUTTER_REF + "=\"" + gutterId + "\"]");
                 var wrapper = target == null ? null : docHelper.nearestAncestorLike(target, function (el) { return el.classList.contains("columned-wrapper"); });
@@ -810,6 +811,7 @@ window.addEventListener("load", function () {
                 console.debug("fromTopOfBody", fromTopOfBody);
                 // asideRect.top += fromTopOfTarget + fromTopOfBody;
                 aside.style.top = Math.max(0, (fromTopOfTarget + fromTopOfBody)) + "px";
+                (_a = aside.parentElement) === null || _a === void 0 ? void 0 : _a.classList.add('absolute'); // for now
             });
         });
     }
@@ -820,6 +822,9 @@ window.addEventListener("load", function () {
             body.querySelectorAll(".columned-gutter").forEach(function (g) { return allEmpty = allEmpty && (g.childElementCount === 0); });
             if (allEmpty) {
                 body.classList.add("empty-gutters");
+            }
+            else {
+                body.classList.add("full-gutters");
             }
         });
     }

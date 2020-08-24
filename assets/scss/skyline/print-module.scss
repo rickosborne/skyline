@@ -68,9 +68,9 @@
 				break-inside: avoid;
 			}
 
-			//&>.col-span-all {
-			//	margin-left: 1.25in;
-			//}
+			&.full-gutters h1 {
+				margin-right: 1.25in;
+			}
 
 			.columned-wrapper {
 				display: grid;
@@ -260,10 +260,10 @@
 				}
 			}
 
-			//&>.col-span-all {
-			//	margin-right: 1.25in;
-			//	margin-left: 0;
-			//}
+			&.full-gutters h1 {
+				margin-left: 1.25in;
+				margin-right: 0;
+			}
 
 			&.empty-gutters {
 				.columned-gutter {

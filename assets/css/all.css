@@ -1356,6 +1356,9 @@ details[open] > summary.spoiler-warning::before {
 .print-module .page .page-body > * {
   break-inside: avoid;
 }
+.print-module .page .page-body.full-gutters h1 {
+  margin-right: 1.25in;
+}
 .print-module .page .page-body .columned-wrapper {
   display: grid;
   grid-template-areas: "left right gutter";
@@ -1509,6 +1512,10 @@ details[open] > summary.spoiler-warning::before {
   border-right: thin solid var(--gutter-border);
   padding-left: 0;
   padding-right: var(--gutter-padding);
+}
+.print-module .page-odd .page-body.full-gutters h1 {
+  margin-left: 1.25in;
+  margin-right: 0;
 }
 .print-module .page-odd .page-body.empty-gutters .columned-gutter {
   display: none;

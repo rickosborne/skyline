@@ -787,6 +787,7 @@ window.addEventListener("load", () => {
 				console.debug(`fromTopOfBody`, fromTopOfBody);
 				// asideRect.top += fromTopOfTarget + fromTopOfBody;
 				(aside as HTMLElement).style.top = Math.max(0, (fromTopOfTarget + fromTopOfBody)) + "px";
+				aside.parentElement?.classList.add('absolute');  // for now
 			});
 		});
 	}
@@ -798,6 +799,8 @@ window.addEventListener("load", () => {
 			body.querySelectorAll(".columned-gutter").forEach(g => allEmpty = allEmpty && (g.childElementCount === 0));
 			if (allEmpty) {
 				body.classList.add("empty-gutters");
+			} else {
+				body.classList.add("full-gutters");
 			}
 		});
 	}
