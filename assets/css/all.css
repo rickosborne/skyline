@@ -1311,7 +1311,28 @@ details[open] > summary.spoiler-warning::before {
 }
 .print-module {
   --cadence: 1.1rem;
-  max-width: 100%;
+  --page-width: 8.5in;
+  --page-height: 11in;
+  --page-margin: 0;
+  --page-padding: 0.5in;
+  --page-binding-offset: 0.25in;
+  --page-column-gap: 0.25in;
+  --gutter-print-width: 1in;
+  --gutter-padding: 0.0625in;
+  --page-inner-padding: calc(var(--page-padding) + var(--page-binding-offset));
+  --page-horizontal-padding: calc(var(--page-padding) + var(--page-inner-padding));
+  --page-vertical-padding: calc(var(--page-padding) * 2.0);
+  --page-print-width: calc(var(--page-width) - var(--page-horizontal-padding));
+  --page-print-height: calc(var(--page-height) - var(--page-vertical-padding));
+  --gutter-reserve-width: calc(var(--gutter-print-width) + var(--page-column-gap));
+  --body-non-gutter-width: calc(var(--page-print-width) - var(--gutter-reserve-width));
+  --body-2col-width-total: calc(var(--body-non-gutter-width) - var(--page-column-gap));
+  --body-2col-width-each: calc(var(--body-2col-width-total) / 2.0);
+  --body-2col-width-non-gutter-total: calc(var(--page-print-width) - var(--page-column-gap));
+  --body-2col-width-non-gutter-each: calc(var(--body-2col-width-non-gutter-total) / 2.0);
+  --gutter-color: var(--dusk-blue);
+  --gutter-border: var(--dusk-blue-10);
+  max-width: unset;
   font-size: 9.5pt;
   color: black;
 }
@@ -1319,9 +1340,9 @@ details[open] > summary.spoiler-warning::before {
   display: none;
 }
 .print-module .page {
-  width: 8.5in;
-  height: 11in;
-  padding: 0.5in;
+  width: var(--page-width);
+  height: var(--page-height);
+  padding: var(--page-padding);
   background-color: white;
   overflow: hidden;
   display: grid;
@@ -1330,21 +1351,21 @@ details[open] > summary.spoiler-warning::before {
   position: relative;
 }
 .print-module .page.page-odd {
-  padding-left: 0.75in;
+  padding-left: var(--page-inner-padding);
 }
 .print-module .page.page-even {
-  padding-right: 0.75in;
+  padding-right: var(--page-inner-padding);
 }
 .print-module .page .page-header {
   grid-area: header;
-  max-width: 7.25in;
+  max-width: var(--page-print-width);
   margin-bottom: var(--cadence-half);
 }
 .print-module .page .page-body {
   grid-area: body;
-  width: 7.25in;
-  max-height: 10in;
-  max-width: 7.25in;
+  width: var(--page-print-width);
+  max-height: var(--page-print-height);
+  max-width: var(--page-print-width);
   z-index: 2;
 }
 .print-module .page .page-body > :first-child {
@@ -1357,16 +1378,13 @@ details[open] > summary.spoiler-warning::before {
   break-inside: avoid;
 }
 .print-module .page .page-body.full-gutters h1 {
-  margin-right: 1.25in;
+  margin-right: var(--gutter-reserve-width);
 }
 .print-module .page .page-body .columned-wrapper {
   display: grid;
   grid-template-areas: "left right gutter";
-  grid-template-columns: minmax(2.875in, 1fr) minmax(2.875in, 1fr) minmax(auto, 1in);
-  grid-gap: 0.25in;
-  --gutter-padding: 0.0625in;
-  --gutter-color: var(--dusk-blue);
-  --gutter-border: var(--dusk-blue-10);
+  grid-template-columns: minmax(var(--body-2col-width-each), 1fr) minmax(var(--body-2col-width-each), 1fr) minmax(auto, var(--gutter-print-width));
+  grid-gap: var(--page-column-gap);
 }
 .print-module .page .page-body .columned-wrapper .columned-gutter {
   grid-area: gutter;
@@ -1395,7 +1413,7 @@ details[open] > summary.spoiler-warning::before {
 }
 .print-module .page .page-body.empty-gutters .columned-wrapper {
   grid-template-areas: "left right";
-  grid-template-columns: 3.5in 3.5in;
+  grid-template-columns: var(--body-2col-width-non-gutter-each) var(--body-2col-width-non-gutter-each);
 }
 .print-module .page .page-body.empty-gutters > .col-span-all {
   margin-left: 0;
@@ -1405,7 +1423,7 @@ details[open] > summary.spoiler-warning::before {
   font-size: 90%;
   font-family: Roboto, "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #333;
-  max-width: 7.5in;
+  max-width: var(--page-print-width);
 }
 .print-module .page .page-footer :first-child {
   border-top: thin solid #ccc;
@@ -1528,7 +1546,7 @@ details[open] > summary.spoiler-warning::before {
   margin-right: 0;
 }
 .print-module .page-even .page-number {
-  left: -0.25in;
+  left: calc(var(--page-binding-offset) * -1);
 }
 .print-module .story-links {
   column-span: inherit;
@@ -1596,7 +1614,9 @@ details[open] > summary.spoiler-warning::before {
 
 @media screen {
   .print-module {
+    --page-margin: 0.125in;
     background-color: #444;
+    min-width: calc(var(--page-width) + var(--page-margin) + var(--page-margin));
   }
   .print-module #pages {
     background-color: #555;
@@ -1604,6 +1624,6 @@ details[open] > summary.spoiler-warning::before {
     flex-wrap: wrap;
   }
   .print-module #pages .page {
-    margin: 0.125in;
+    margin: var(--page-margin);
   }
 }
