@@ -7,7 +7,30 @@
 
 .print-module {
 	--cadence: 1.1rem;
-	max-width: 100%;
+	--page-width: 8.5in;
+	--page-height: 11in;
+	--page-margin: 0;  // outside the page — overridden for screen
+	--page-padding: 0.5in;  // general inside padding
+	--page-binding-offset: 0.25in;  // additional padding on the inner side
+	--page-column-gap: 0.25in;  // space between columns
+	--gutter-print-width: 1in;  // printable width of a gutter column, if present
+	--gutter-padding: 0.0625in;  // one-sided space between gutter and border
+	--page-inner-padding: calc(var(--page-padding) + var(--page-binding-offset));  // (0.75in) effective padding on the inner side
+	--page-horizontal-padding: calc(var(--page-padding) + var(--page-inner-padding));  // (1.25in) total padding for left & right
+	--page-vertical-padding: calc(var(--page-padding) * 2.0);  // (1.0in) total padding for top and bottom
+	--page-print-width: calc(var(--page-width) - var(--page-horizontal-padding));  // (7.25in) effective width of print area
+	--page-print-height: calc(var(--page-height) - var(--page-vertical-padding));  // (10.0in) effective height of print area
+	--gutter-reserve-width: calc(var(--gutter-print-width) + var(--page-column-gap));  // (1.25in) space reserved for a gutter column, if needed
+	--body-non-gutter-width: calc(var(--page-print-width) - var(--gutter-reserve-width));  // (6.0in) effective width of any body text that's not in a gutter
+	--body-2col-width-total: calc(var(--body-non-gutter-width) - var(--page-column-gap));  // (5.75in) effective print area of non-gutter body
+	--body-2col-width-each: calc(var(--body-2col-width-total) / 2.0);  // (2.875in) effective print area for each of 2 columns
+	--body-2col-width-non-gutter-total: calc(var(--page-print-width) - var(--page-column-gap));  // (7.0in) effective print area of body with gutter hidden
+	--body-2col-width-non-gutter-each: calc(var(--body-2col-width-non-gutter-total) / 2.0);  // (3.5in) effective print area of each of 2 columns with gutter hidden
+
+	--gutter-color: var(--dusk-blue);
+	--gutter-border: var(--dusk-blue-10);
+
+	max-width: unset;
 	font-size: 9.5pt;
 	color: black;
 
@@ -16,9 +39,9 @@
 	}
 
 	.page {
-		width: 8.5in;
-		height: 11in;
-		padding: 0.5in;
+		width: var(--page-width);
+		height: var(--page-height);
+		padding: var(--page-padding);
 		background-color: white;
 		overflow: hidden;
 		display: grid;
@@ -31,25 +54,25 @@
 		position: relative;
 
 		&.page-odd {
-			padding-left: 0.75in;
+			padding-left: var(--page-inner-padding);
 		}
 
 		&.page-even {
-			padding-right: 0.75in;
+			padding-right: var(--page-inner-padding);
 		}
 
 		.page-header {
 			grid-area: header;
-			max-width: 7.25in;
+			max-width: var(--page-print-width);
 
 			margin-bottom: var(--cadence-half);
 			//border-bottom: thin solid var(--evening-blue-25);
 		}
 		.page-body {
 			grid-area: body;
-			width: 7.25in;
-			max-height: 10in;
-			max-width: 7.25in;
+			width: var(--page-print-width);
+			max-height: var(--page-print-height);
+			max-width: var(--page-print-width);
 			//column-width: 3.5in;
 			//column-count: 2;
 			//column-gap: 0.25in;
@@ -69,17 +92,14 @@
 			}
 
 			&.full-gutters h1 {
-				margin-right: 1.25in;
+				margin-right: var(--gutter-reserve-width);
 			}
 
 			.columned-wrapper {
 				display: grid;
 				grid-template-areas: "left right gutter";
-				grid-template-columns: minmax(2.875in, 1fr) minmax(2.875in, 1fr) minmax(auto, 1in);
-				grid-gap: 0.25in;
-				--gutter-padding: 0.0625in;
-				--gutter-color: var(--dusk-blue);
-				--gutter-border: var(--dusk-blue-10);
+				grid-template-columns: minmax(var(--body-2col-width-each), 1fr) minmax(var(--body-2col-width-each), 1fr) minmax(auto, var(--gutter-print-width));
+				grid-gap: var(--page-column-gap);
 
 				.columned-gutter {
 					grid-area: gutter;
@@ -115,7 +135,7 @@
 
 				.columned-wrapper {
 					grid-template-areas: "left right";
-					grid-template-columns: 3.5in 3.5in;
+					grid-template-columns: var(--body-2col-width-non-gutter-each) var(--body-2col-width-non-gutter-each);
 				}
 
 				&>.col-span-all {
@@ -128,7 +148,7 @@
 			font-size: 90%;
 			font-family: vars.$font-sans;
 			color: #333;
-			max-width: 7.5in;
+			max-width: var(--page-print-width);
 
 			:first-child {
 				border-top: thin solid #ccc;
@@ -284,7 +304,7 @@
 
 	.page-even {
 		.page-number {
-			left: -0.25in;
+			left: calc(var(--page-binding-offset) * -1);
 		}
 	}
 
@@ -378,7 +398,9 @@
 
 @media screen {
 	.print-module {
+		--page-margin: 0.125in;
 		background-color: #444;
+		min-width: calc(var(--page-width) + var(--page-margin) + var(--page-margin));
 
 		#pages {
 			background-color: #555;
@@ -386,7 +408,7 @@
 			flex-wrap: wrap;
 
 			.page {
-				margin: 0.125in;
+				margin: var(--page-margin);
 			}
 		}
 	}
