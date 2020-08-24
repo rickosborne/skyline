@@ -1,8 +1,8 @@
 <!-- +template machine fireclaw dnd5e-npc-stats -->
 
 <h2>Fireclaw</h2>
-<p>For additional flavor, see the <a href="https://horizon.fandom.com/wiki/Fireclaw" rel="external">Horizon Wiki on Fireclaw</a>.</p>
-<div class="dnd5e-stat-block stat-block">
+<p class="col-span-all">For additional flavor, see the <a href="https://horizon.fandom.com/wiki/Fireclaw" rel="external">Horizon Wiki on Fireclaw</a>.</p>
+<div class="dnd5e-stat-block stat-block col-span-all">
 	<article>
 		<header class="name-and-size">
 			<h3 class="title"><span class="word" markdown="1">

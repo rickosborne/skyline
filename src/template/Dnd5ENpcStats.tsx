@@ -37,7 +37,7 @@ export class Dnd5ENpcStats extends ATemplate<Machine> {
 		return ifLines([
 			html(<h2>{data.title}</h2>),
 			html(
-				<p data-if-children data-space>
+				<p data-if-children data-space class="col-span-all">
 					<marquee data-unwrap data-if-present={data.adapter.dnd5e.basedOn} data-space>
 						{data.plural} are modified from the stock
 						<a href={data.adapter.dnd5e.basedOn?.href} rel="external">{data.adapter.dnd5e.basedOn?.title}</a>.
@@ -49,7 +49,7 @@ export class Dnd5ENpcStats extends ATemplate<Machine> {
 				</p>
 			),
 			html(
-				<div class="dnd5e-stat-block stat-block">
+				<div class="dnd5e-stat-block stat-block col-span-all">
 					<article>
 						<header class="name-and-size">
 							<h3 class="title">{toWords(data.title)}</h3>

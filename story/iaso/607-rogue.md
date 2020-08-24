@@ -12,8 +12,8 @@ next:
 <!-- +template book iaso dnd5e-pc-stats character="Thorn" -->
 
 <h1>Thorn</h1>
-<p><a href="https://ddb.ac/characters/32275948/SRFX29" rel="external">Thorn on D&D Beyond</a></p>
-<div class="dnd5e-pc-block stat-block">
+<p class="col-span-all"><a href="https://ddb.ac/characters/32275948/SRFX29" rel="external">Thorn on D&D Beyond</a></p>
+<div class="dnd5e-pc-block stat-block col-span-all">
 	<article>
 		<header class="name">
 			<h3 class="title"><span class="word" markdown="1">

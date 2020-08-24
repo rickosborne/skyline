@@ -35,7 +35,7 @@ export class CypherCreature extends ATemplate<Machine> {
 				<p class="col-span-all">For additional flavor, see the <a href={hw} rel="external">Horizon Wiki on {data.title}</a>.</p>
 			)),
 			html(
-				<div class="cypher-stat-block stat-block">
+				<div class="cypher-stat-block stat-block col-span-all">
 					<article>
 						<header class="title">
 							<h3>{toWords(data.title)}</h3>
