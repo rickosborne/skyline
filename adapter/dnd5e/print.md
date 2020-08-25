@@ -11,7 +11,7 @@ tags:
 
 <a href="{{ '/adapter/dnd5e' | relative_url }}" id="print-module-top-link" data-source-name="adapter/dnd5e"></a>
 
-{% assign fileNames = "010-front-matter|015-synopsis|020-introduction|100-basics|200-classes|210-using-5e-classes|250-skyline-classes|253-brave|256-prowler|259-forager|262-archaeologist|600-machines|626-fireclaw|634-lancehorn|655-scrapper|667-stormbird|675-thunderjaw|681-watcher|900-appendices|940-errata|950-author-notes|955-author-bio|960-credits|980-legal" | split: "|" %}
+{% assign fileNames = "010-front-matter|015-synopsis|020-introduction|100-basics|200-classes|210-using-5e-classes|250-skyline-classes|253-brave|256-prowler|259-forager|262-archaeologist|265-weaver|400-npc|600-machines|605-crucibles|610-behemoth|612-bellowback|614-broadhead|616-charger|618-control-tower|620-corruptor|622-deathbringer|626-fireclaw|628-frostclaw|630-glinthawk|632-grazer|634-lancehorn|636-longleg|640-metal-devil|643-ravager|646-rockbreaker|649-sawtooth|652-scorcher|655-scrapper|658-shell-walker|661-snapmaw|664-stalker|667-stormbird|670-strider|672-tallneck|675-thunderjaw|678-trampler|681-watcher|690-forbidden-west|695-creating-your-own|900-appendices|940-errata|950-author-notes|955-author-bio|960-credits|980-legal" | split: "|" %}
 {% for fileName in fileNames %}
 
 <div data-source-file="{{ fileName }}">

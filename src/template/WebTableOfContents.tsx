@@ -37,18 +37,32 @@ export class WebTableOfContents extends AFilesTemplate<TableOfContents, ContentI
 	}
 
 	render(data: TableOfContents, params: Record<string, string>, originalBody: string): string {
-		return data.items.map(item => {
-			if (item.title.match(/^\d+/) && !item.title.startsWith('100')) {
-				return undefined;
-			}
-			return "  ".repeat(item.indentLevel - 1) +
-				"* " +
-				(item.startOfStory ? "Story entry point: " : "") +
-				"[" + item.title + "](" + item.link + ")" +
-				(item.titleIsSpoiler ? '{:.spoiler}' : '') +
-				(item.description == null ? '' : ` <span class="description">${item.description}</span>`) +
-				(item.notStarted ? ' (not started yet)' : (item.todoCount > 0 ? ' (started, unfinished)' : ''));
-		}).filter(l => l != null).join("\n");
+		let completionTotal = 0;
+		let completionParts = 0;
+		const toc = data.items
+			.map(item => {
+				completionTotal++;
+				if (item.title.match(/^\d+/) && !item.title.startsWith('100')) {
+					return undefined;
+				}
+				if (item.notStarted) {
+					// nothing
+				} else if (item.todoCount > 0) {
+					completionParts += 0.5;
+				} else {
+					completionParts++;
+				}
+				return "  ".repeat(item.indentLevel - 1) +
+					"* " +
+					(item.startOfStory ? "Story entry point: " : "") +
+					"[" + item.title + "](" + item.link + ")" +
+					(item.titleIsSpoiler ? '{:.spoiler}' : '') +
+					(item.description == null ? '' : ` <span class="description">${item.description}</span>`) +
+					(item.notStarted ? ' (not started yet)' : (item.todoCount > 0 ? ' (started, unfinished)' : ''));
+			})
+			.filter(l => l != null)
+			.join("\n");
+		return `_Estimated module completion: **~${Math.round(100.0 * completionParts / completionTotal)}%**._\n\n${toc}`;
 	}
 
 	renderData(dataName: string, params: Record<string, string>, items: ContentItem[]): TableOfContents {

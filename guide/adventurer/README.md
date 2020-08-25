@@ -6,6 +6,8 @@ This directory contains guidance and tips for the non-narrating players (adventu
 
 <!-- +template files guide/adventurer web-table-of-contents -->
 
+_Estimated module completion: **~25%**._
+
 * [Adventurer's Guide](010-front-matter.md)
   * [Introduction](015-introduction.md) (not started yet)
 * [Skills](300-skills.md) (started, unfinished)
