@@ -18,12 +18,12 @@ TODO
   * [Forager](259-forager.md) (not started yet)
   * [Archaeologist](262-archaeologist.md) (not started yet)
 * [Machines](600-machines.md)
-  * [Fireclaw](626-fireclaw.md) (started, unfinished)
-  * [Lancehorn](634-lancehorn.md) (started, unfinished)
-  * [Scrapper](655-scrapper.md) (started, unfinished)
-  * [Stormbird](667-stormbird.md) (started, unfinished)
-  * [Thunderjaw](675-thunderjaw.md) (started, unfinished)
-  * [Watcher](681-watcher.md)
+        * [Components](626-fireclaw.md) (started, unfinished)
+        * [Actions](634-lancehorn.md) (started, unfinished)
+        * [Actions](655-scrapper.md) (started, unfinished)
+        * [Components](667-stormbird.md) (started, unfinished)
+        * [Components](675-thunderjaw.md) (started, unfinished)
+        * [Actions](681-watcher.md)
 * [Appendices](900-appendices.md)
   * [Errata](940-errata.md) (not started yet)
   * [Author's Notes](950-author-notes.md) (not started yet)
@@ -32,3 +32,7 @@ TODO
   * [Legal](980-legal.md) (not started yet)
 
 <!-- -template files adapter/dnd5e web-table-of-contents -->
+
+## Printable
+
+The entire module is available as a single print-friendly page: [Skyline Adapter for the D&D 5E System (printable)](print.md).

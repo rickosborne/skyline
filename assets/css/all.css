@@ -1563,6 +1563,10 @@ details[open] > summary.spoiler-warning::before {
 .print-module .page-even .page-footer {
   margin-left: var(--hex-width);
 }
+.print-module .stat-block article {
+  column-width: 15rem;
+  column-gap: var(--cadence);
+}
 .print-module .story-links {
   column-span: inherit;
 }
