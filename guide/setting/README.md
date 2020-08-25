@@ -8,6 +8,8 @@ People who have played through the video game will already be familiar with this
 
 <!-- +template files guide/setting web-table-of-contents -->
 
+_Estimated module completion: **~9%**._
+
 * [Skyline Setting Guide](010-front-matter.md)
   * [Introduction](015-introduction.md) (not started yet)
   * [Synopsis](020-synopsis.md) (not started yet)

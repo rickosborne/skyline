@@ -9,6 +9,8 @@ TODO
 
 <!-- +template files guide/narrator web-table-of-contents -->
 
+_Estimated module completion: **~11%**._
+
 * [Narrator's Guide](010-front-matter.md) (not started yet)
   * [Introduction](015-introduction.md) (not started yet)
   * [Magic in Skyline](230-magic.md)

@@ -7,6 +7,8 @@ It can be played by a single player or by a small group, with or without a narra
 
 <!-- +template files story/iaso web-table-of-contents -->
 
+_Estimated module completion: **~48%**._
+
 * [IASO](010-front-matter.md)
   * [Synopsis](015-synopsis.md)
   * [Introduction](020-introduction.md)
