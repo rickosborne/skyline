@@ -1,3 +1,9 @@
+---
+title: Lancehorn stats for the Cypher System
+tags:
+- full-width
+---
+
 <!-- +template machine lancehorn cypher-creature -->
 
 <h1>Lancehorn</h1>

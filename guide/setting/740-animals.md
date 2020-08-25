@@ -1,9 +1,14 @@
-### Animals
+---
+tags:
+- not-started
+---
+
+## Animals
 
 Most fauna have not yet been reintroduced into the ecosystem.
 The largest animals seen in the wild are boar and goats, both roughly thigh-high to a human.
 
-Species in the wild currently include: badger, boar, fox, goat, goose, owl, rabbit, rat, salmon, squirrel, turkey.
+Species in the wild currently include: badger, bat, boar, fox, goat, goose, owl, rabbit, rat, salmon, squirrel, turkey.
 
 For hunting purposes, most wild animals can be taken down with a single successful hit.
 Boar and goats might take an additional hit if the narrative requires it.

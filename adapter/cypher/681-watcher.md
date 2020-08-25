@@ -1,3 +1,9 @@
+---
+title: Watcher stats for the Cypher System
+tags:
+- full-width
+---
+
 <!-- +template machine watcher cypher-creature -->
 
 <h1>Watcher</h1>

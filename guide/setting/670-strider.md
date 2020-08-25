@@ -1,1 +1,6 @@
-#### Strider
+---
+tags:
+- not-started
+---
+
+## Strider

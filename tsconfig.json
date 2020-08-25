@@ -1,6 +1,7 @@
 {
 	"compilerOptions": {
 		"alwaysStrict": true,
+		"downlevelIteration": true,
 		"jsx": "react",
 		"jsxFactory": "h",
 		"lib": [

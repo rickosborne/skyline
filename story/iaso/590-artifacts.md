@@ -1,4 +1,4 @@
-### Artifacts of the Old Ones
+## Artifacts of the Old Ones
 
 When searching through ruins of the Old Ones, make a percentile roll and receive the corresponding object from the following table.
 For each ruin, each player may make one roll.

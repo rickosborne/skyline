@@ -10,7 +10,7 @@ next:
   href: 050-monk
 ---
 
-### Haldred
+## Haldred
 
 _Oseram, engineer_
 

@@ -1,4 +1,9 @@
-### Creating your own group of people
+---
+tags:
+- not-started
+---
+
+## Creating your own group of people
 
 An entire discussion of the sociological factors of why people create social groups is beyond the scope of this document, but at the risk of oversimplifying and being reductive:
 

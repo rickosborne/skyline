@@ -1,1 +1,6 @@
-## Beliefs
+---
+tags:
+- not-started
+---
+
+# Beliefs

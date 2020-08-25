@@ -1,3 +1,8 @@
+---
+tags:
+- title-is-spoiler
+---
+
 ## Pren
 
 {:.avoid-break-after}

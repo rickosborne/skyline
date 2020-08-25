@@ -1,5 +1,7 @@
 ---
 title: Fireclaw stats for the Cypher System
+tags:
+- full-width
 ---
 
 <!-- +template machine fireclaw cypher-creature -->

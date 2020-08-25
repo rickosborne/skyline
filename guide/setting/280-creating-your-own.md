@@ -1,4 +1,4 @@
-### Creating your own AI
+## Creating your own AI
 
 Most AI constructs in Horizon are, effectively, NPCs with a single driving motivation.
 GAIA's purpose is to restart life.
