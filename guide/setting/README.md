@@ -82,3 +82,7 @@ People who have played through the video game will already be familiar with this
   * [Legal](980-legal.md) (not started yet)
 
 <!-- -template files guide/setting web-table-of-contents -->
+
+## Printable
+
+The entire module is available as a single print-friendly page: [Skyline Setting Guide (printable)](print.md).

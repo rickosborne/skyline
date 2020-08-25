@@ -35,9 +35,9 @@ export class Dnd5ENpcStats extends ATemplate<Machine> {
 	render(data: Machine): string {
 		// noinspection HtmlDeprecatedTag
 		return ifLines([
-			html(<h2>{data.title}</h2>),
+			html(<h2 class="col-span-all">{data.title}</h2>),
 			html(
-				<p data-if-children data-space class="col-span-all">
+				<p data-if-children data-space class="col-span-all avoid-break-after">
 					<marquee data-unwrap data-if-present={data.adapter.dnd5e.basedOn} data-space>
 						{data.plural} are modified from the stock
 						<a href={data.adapter.dnd5e.basedOn?.href} rel="external">{data.adapter.dnd5e.basedOn?.title}</a>.

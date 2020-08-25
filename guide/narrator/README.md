@@ -20,3 +20,7 @@ TODO
   * [Legal](980-legal.md) (not started yet)
 
 <!-- -template files guide/narrator web-table-of-contents -->
+
+## Printable
+
+The entire module is available as a single print-friendly page: [Skyline Narrator Guide (printable)](print.md).

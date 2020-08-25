@@ -1,7 +1,13 @@
+---
+title: Stormbird stats for the D&D 5E System
+tags:
+- full-width
+---
+
 <!-- +template machine stormbird dnd5e-npc-stats -->
 
-<h2>Stormbird</h2>
-<p class="col-span-all">For additional flavor, see the <a href="https://horizon.fandom.com/wiki/Stormbird" rel="external">Horizon Wiki on Stormbird</a>.</p>
+<h2 class="col-span-all">Stormbird</h2>
+<p class="col-span-all avoid-break-after">For additional flavor, see the <a href="https://horizon.fandom.com/wiki/Stormbird" rel="external">Horizon Wiki on Stormbird</a>.</p>
 <div class="dnd5e-stat-block stat-block col-span-all">
 	<article>
 		<header class="name-and-size">

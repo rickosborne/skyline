@@ -1,7 +1,13 @@
+---
+title: Scrapper stats for the D&D 5E System
+tags:
+- full-width
+---
+
 <!-- +template machine scrapper dnd5e-npc-stats -->
 
-<h2>Scrapper</h2>
-<p class="col-span-all">Scrappers are modified from the stock <a href="https://www.dndbeyond.com/monsters/hyena" rel="external">Hyena</a>. For additional flavor, see the <a href="https://horizon.fandom.com/wiki/Scrapper" rel="external">Horizon Wiki on Scrapper</a>.</p>
+<h2 class="col-span-all">Scrapper</h2>
+<p class="col-span-all avoid-break-after">Scrappers are modified from the stock <a href="https://www.dndbeyond.com/monsters/hyena" rel="external">Hyena</a>. For additional flavor, see the <a href="https://horizon.fandom.com/wiki/Scrapper" rel="external">Horizon Wiki on Scrapper</a>.</p>
 <div class="dnd5e-stat-block stat-block col-span-all">
 	<article>
 		<header class="name-and-size">

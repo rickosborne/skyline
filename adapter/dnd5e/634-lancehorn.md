@@ -1,7 +1,13 @@
+---
+title: Lancehorn stats for the D&D 5E System
+tags:
+- full-width
+---
+
 <!-- +template machine lancehorn dnd5e-npc-stats -->
 
-<h2>Lancehorn</h2>
-<p class="col-span-all">Lancehorns are modified from the stock <a href="https://www.dndbeyond.com/monsters/deer" rel="external">Deer</a>. For additional flavor, see the <a href="https://horizon.fandom.com/wiki/Lancehorn" rel="external">Horizon Wiki on Lancehorn</a>.</p>
+<h2 class="col-span-all">Lancehorn</h2>
+<p class="col-span-all avoid-break-after">Lancehorns are modified from the stock <a href="https://www.dndbeyond.com/monsters/deer" rel="external">Deer</a>. For additional flavor, see the <a href="https://horizon.fandom.com/wiki/Lancehorn" rel="external">Horizon Wiki on Lancehorn</a>.</p>
 <div class="dnd5e-stat-block stat-block col-span-all">
 	<article>
 		<header class="name-and-size">

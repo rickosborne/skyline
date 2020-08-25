@@ -22,3 +22,7 @@ This directory contains guidance and tips for the non-narrating players (adventu
   * [Legal](980-legal.md) (not started yet)
 
 <!-- -template files guide/adventurer web-table-of-contents -->
+
+## Printable
+
+The entire module is available as a single print-friendly page: [Skyline Adventurer Guide (printable)](print.md).
