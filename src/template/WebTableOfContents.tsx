@@ -54,11 +54,10 @@ export class WebTableOfContents extends AFilesTemplate<TableOfContents, ContentI
 				}
 				return "  ".repeat(item.indentLevel - 1) +
 					"* " +
-					(item.startOfStory ? "Story entry point: " : "") +
-					"[" + item.title + "](" + item.link + ")" +
-					(item.titleIsSpoiler ? '{:.spoiler}' : '') +
+					(item.startOfStory ? "_Story entry point:_ " : "") +
+					(item.notStarted ? item.title : "[" + item.title + "](" + item.link + ")" + (item.titleIsSpoiler ? '{:.spoiler}' : '')) +
 					(item.description == null ? '' : ` <span class="description">${item.description}</span>`) +
-					(item.notStarted ? ' (not started yet)' : (item.todoCount > 0 ? ' (started, unfinished)' : ''));
+					(item.notStarted ? ' _(not started yet)_' : (item.todoCount > 0 ? ' _(started, unfinished)_' : ''));
 			})
 			.filter(l => l != null)
 			.join("\n");
