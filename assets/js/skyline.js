@@ -67,12 +67,9 @@ document.addEventListener("DOMContentLoaded", function onDomContentLoaded() {
     });
 });
 var DATA_FOOTNOTE_ID = "data-footnote-id";
-var DATA_FOOTNOTE_NUMBER = "data-footnote-number";
-var DATA_LINK_ID = "data-link-id";
 var DATA_PAGE_NUMBER = "data-page-number";
 var DATA_SOURCE = "data-source";
 var DATA_SOURCE_FILE = "data-source-file";
-var DATA_PAGE_REF = "data-page-ref";
 var DATA_PAGE_OF = "data-page-of";
 var AVOID_BREAK_AFTER = "avoid-break-after";
 var COL_SPAN_ALL = "col-span-all";
@@ -83,7 +80,6 @@ var DocHelper = /** @class */ (function () {
     function DocHelper(document) {
         this.document = document;
         this.documentSeemsOkay = true;
-        this.nextElementNumber = 1;
         this.nextFootnoteNumber = 1;
         this.homeLink = this.document.getElementById("link-home");
         if (this.homeLink == null) {
@@ -113,25 +109,28 @@ var DocHelper = /** @class */ (function () {
             .map(function (link) {
             var footnoteId = link.getAttribute(DATA_FOOTNOTE_ID);
             if (footnoteId != null) {
-                return document.getElementById(footnoteId);
+                var footnote_1 = document.getElementById(footnoteId);
+                if (footnote_1 != null) {
+                    // console.debug(`Found existing footnote`, footnote);
+                    return footnote_1;
+                }
             }
-            var href = link.href;
-            if (href.startsWith(_this.moduleLink.href)) {
-                var ref = href
-                    .replace(_this.moduleLink.href, "")
-                    .replace(".md", "")
-                    .replace(/^\//, "");
-                link.setAttribute(DATA_PAGE_REF, "####");
-                link.setAttribute(DATA_PAGE_OF, ref);
+            if (link.classList.contains('page-ref')) {
                 return undefined;
             }
+            // console.log(`Making a new footnote for`, link);
             var footnoteNumber = _this.nextFootnoteNumber++;
+            var href = link.href;
             var footnote = _this.div("footnote");
             footnote.id = "fn" + footnoteNumber;
+            if (href.startsWith(_this.homeLink.href)) {
+                href = href.replace(/\.md$/, '.html');
+            }
             footnote.appendChild(document.createTextNode(footnoteNumber + ".\u00A0" + href));
-            footnote.setAttribute(DATA_LINK_ID, _this.identify(link));
             link.setAttribute(DATA_FOOTNOTE_ID, footnote.id);
-            link.setAttribute(DATA_FOOTNOTE_NUMBER, String(footnoteNumber));
+            link.querySelectorAll('.footnote-bracket').forEach(function (bracket) {
+                bracket.innerHTML = "&nbsp;[" + footnoteNumber + "]";
+            });
             return footnote;
         })
             .filter(function (fn) { return fn != null; });
@@ -144,11 +143,15 @@ var DocHelper = /** @class */ (function () {
             return d;
         })();
     };
-    DocHelper.prototype.identify = function (el) {
-        if (el.id != null) {
-            return el.id;
+    DocHelper.prototype.html = function (originalEl) {
+        var configurers = [];
+        for (var _i = 1; _i < arguments.length; _i++) {
+            configurers[_i - 1] = arguments[_i];
         }
-        return (el.id = "ae" + this.nextElementNumber++);
+        return configurers.reduce(function (prev, configurer) {
+            var maybeNew = configurer(originalEl);
+            return maybeNew == null || !(maybeNew instanceof Element) ? originalEl : maybeNew;
+        }, originalEl);
     };
     DocHelper.prototype.nearestAncestorLike = function (el, predicate) {
         while (el != null) {
@@ -226,7 +229,7 @@ var Block = /** @class */ (function () {
             if (current.nodeType === Node.ELEMENT_NODE) {
                 var el = current;
                 if (el.classList.contains(AVOID_BREAK_AFTER) && parent.firstElementChild !== el) {
-                    linked.push.apply(linked, __spreadArrays(nonEl, [current]));
+                    linked.unshift.apply(linked, __spreadArrays([current], nonEl));
                     nonEl.splice(0, nonEl.length);
                     current = current.previousSibling;
                 }
@@ -235,7 +238,7 @@ var Block = /** @class */ (function () {
                 }
             }
             else {
-                nonEl.push(current);
+                nonEl.unshift(current);
                 current = current.previousSibling;
             }
         }
@@ -315,7 +318,7 @@ var DivBlock = /** @class */ (function (_super) {
     DivBlock.prototype.moveFrom = function (doc, linked, prevWriteBlock) {
         var _this = this;
         // console.debug(`moveFrom ${this.identifier} (${this.div.className}) <- ${prevWriteBlock.identifier}`, linked);
-        linked.reverse().forEach(function (node) {
+        linked.forEach(function (node) {
             var _a;
             (_a = node.parentNode) === null || _a === void 0 ? void 0 : _a.removeChild(node);
             _this.div.appendChild(node);
@@ -401,6 +404,7 @@ var MultiTargetBlock = /** @class */ (function (_super) {
             console.error("moveFrom " + this.identifier + " missing writer");
             return AppendBlockResult.Skipped;
         }
+        console.debug("MultiTargetBlock.moveFrom", linked);
         return this.writeBlock.moveFrom(doc, linked, prevWriteBlock);
     };
     MultiTargetBlock.prototype.moveLastToNext = function (doc, withMoved) {
@@ -709,12 +713,17 @@ var RenderingTaskManager = /** @class */ (function () {
         for (var _i = 0; _i < arguments.length; _i++) {
             tasks[_i] = arguments[_i];
         }
+        this.listeners = [];
         this.tasks = tasks;
     }
+    RenderingTaskManager.prototype.addListener = function (listener) {
+        this.listeners.push(listener);
+    };
     RenderingTaskManager.prototype.start = function () {
         var todo = this.tasks.slice();
         var startTime = Date.now();
         var lastTask;
+        var manager = this;
         function nextTask() {
             var task = todo[0];
             if (task == null) {
@@ -722,7 +731,8 @@ var RenderingTaskManager = /** @class */ (function () {
                 return;
             }
             if (lastTask !== task) {
-                console.debug("Prepare " + task.title);
+                // console.debug(`Prepare ${task.title}`);
+                manager.listeners.forEach(function (l) { return l(task.title, 0); });
                 task.prepare();
             }
             lastTask = task;
@@ -730,17 +740,21 @@ var RenderingTaskManager = /** @class */ (function () {
             try {
                 task.step();
                 if (task.errorMessage == null) {
+                    manager.listeners.forEach(function (l) { return l(task.title, task.estimatedCompletion); });
                     okay = true;
                 }
                 else {
+                    manager.listeners.forEach(function (l) { return l(task.title, task.estimatedCompletion, task.errorMessage); });
                     console.error("Task " + task.title + " failed: ", task.errorMessage);
                 }
             }
             catch (e) {
+                manager.listeners.forEach(function (l) { return l(task.title, task.estimatedCompletion, task.errorMessage); });
                 console.error("Task " + task.title + " threw: ", e);
             }
             finally {
                 if (task.isComplete) {
+                    manager.listeners.forEach(function (l) { return l(task.title, 1.0); });
                     task.finish();
                     todo.shift();
                 }
@@ -759,75 +773,6 @@ window.addEventListener("load", function () {
         return;
     }
     var docHelper = new DocHelper(document);
-    function removeOldMainContent() {
-        var mainContent = document.getElementById("page");
-        if (mainContent != null && mainContent.parentNode != null) {
-            mainContent.parentNode.removeChild(mainContent);
-        }
-    }
-    function fixPageRefs() {
-        var cache = {};
-        document.querySelectorAll("[" + DATA_PAGE_OF + "]").forEach(function (el) {
-            var sourceName = el.getAttribute(DATA_PAGE_OF) || "";
-            var pageRef = cache[sourceName];
-            if (pageRef == null) {
-                var topEl = document.querySelector("[data-source=\"" + sourceName + "\"]");
-                if (topEl == null) {
-                    console.error("Missing a page-ref/data-source: ", sourceName);
-                }
-                else {
-                    pageRef = docHelper.pageWith(topEl);
-                    if (pageRef == null) {
-                        console.error("No ref for page", sourceName);
-                    }
-                    cache[sourceName] = pageRef;
-                }
-            }
-            el.setAttribute(DATA_PAGE_REF, pageRef || "?");
-        });
-    }
-    function adjustGutterItems() {
-        document.querySelectorAll(".page").forEach(function (page) {
-            page.querySelectorAll("[" + DATA_GUTTER_NUM + "]").forEach(function (aside) {
-                var _a;
-                var gutterId = aside.getAttribute(DATA_GUTTER_NUM) || "";
-                var target = page.querySelector("[" + DATA_GUTTER_REF + "=\"" + gutterId + "\"]");
-                var wrapper = target == null ? null : docHelper.nearestAncestorLike(target, function (el) { return el.classList.contains("columned-wrapper"); });
-                console.log("Repositioning", aside, target);
-                if (target == null || wrapper == null) {
-                    console.error("Lost track of gutter target " + gutterId);
-                    return;
-                }
-                var targetRect = target.getBoundingClientRect();
-                var bodyRect = wrapper.getBoundingClientRect();
-                var asideRect = aside.getBoundingClientRect();
-                var fromTopOfTarget = 0;
-                console.debug("target body aside", targetRect, bodyRect, asideRect);
-                if (asideRect.height < targetRect.height) {
-                    fromTopOfTarget = (targetRect.height - asideRect.height) / 2;
-                    console.debug("centering", fromTopOfTarget);
-                }
-                var fromTopOfBody = targetRect.top - bodyRect.top;
-                console.debug("fromTopOfBody", fromTopOfBody);
-                // asideRect.top += fromTopOfTarget + fromTopOfBody;
-                aside.style.top = Math.max(0, (fromTopOfTarget + fromTopOfBody)) + "px";
-                (_a = aside.parentElement) === null || _a === void 0 ? void 0 : _a.classList.add('absolute'); // for now
-            });
-        });
-    }
-    // noinspection JSUnusedLocalSymbols
-    function markEmptyGutters() {
-        document.querySelectorAll(".page-body").forEach(function (body) {
-            var allEmpty = true;
-            body.querySelectorAll(".columned-gutter").forEach(function (g) { return allEmpty = allEmpty && (g.childElementCount === 0); });
-            if (allEmpty) {
-                body.classList.add("empty-gutters");
-            }
-            else {
-                body.classList.add("full-gutters");
-            }
-        });
-    }
     var ReflowTask = /** @class */ (function (_super) {
         __extends(ReflowTask, _super);
         function ReflowTask() {
@@ -898,7 +843,37 @@ window.addEventListener("load", function () {
         };
         return ReflowTask;
     }(RenderingTask));
-    var taskManager = new RenderingTaskManager(new OnceTask("Clean up screen-centric structures, part 1.", function () {
+    var taskManager = new RenderingTaskManager(new OnceTask("Prepare print rendering overlay", function () {
+        var printRender = docHelper.html(docHelper.div("print-render"), function (printRender) {
+            var renderTitle = docHelper.div("print-render-title");
+            renderTitle.appendChild(document.createTextNode("Preparing for Print/PDF"));
+            printRender.appendChild(renderTitle);
+            var renderProgress = docHelper.div("print-render-progress");
+            var renderStatus = docHelper.div("print-render-status");
+            renderStatus.innerText = "...";
+            renderProgress.appendChild(renderStatus);
+            var renderPercent = docHelper.div("print-render-percent");
+            renderProgress.appendChild(renderPercent);
+            printRender.appendChild(renderProgress);
+            var renderMessage = docHelper.div("print-render-message");
+            renderMessage.appendChild(document.createTextNode("One moment, please, while the module is made print-ready.  This usually takes under 15 seconds."));
+            printRender.appendChild(renderMessage);
+            taskManager.addListener(function (taskTitle, estimatedCompletion, errorMessage) {
+                if (errorMessage != null) {
+                    renderStatus.innerText = taskTitle;
+                    renderMessage.innerText = errorMessage;
+                    renderMessage.classList.add("error");
+                }
+                else {
+                    renderPercent.innerText = Math.floor(estimatedCompletion * 100) + "%";
+                    renderStatus.innerText = taskTitle;
+                }
+            });
+        });
+        var renderMask = docHelper.div("print-render-mask");
+        renderMask.appendChild(printRender);
+        document.body.appendChild(renderMask);
+    }), new OnceTask("Clean up screen-centric structures, part 1.", function () {
         var _a;
         var moduleLinkParent = docHelper.moduleLink.parentNode;
         moduleLinkParent === null || moduleLinkParent === void 0 ? void 0 : moduleLinkParent.removeChild(docHelper.moduleLink);
@@ -933,6 +908,114 @@ window.addEventListener("load", function () {
                 return wrapper;
             });
         });
-    }), new ReflowTask(), new OnceTask("Clean up screen-centric structures, part 2.", function () { return removeOldMainContent(); }), new OnceTask("Fix up page references.", function () { return fixPageRefs(); }), new OnceTask("Mark pages with empty gutters.", function () { return markEmptyGutters(); }), new OnceTask("Relocate sidebar blocks.", function () { return adjustGutterItems(); }));
+    }), new OnceTask("Expand links to page references.", function () {
+        // Because Firefox makes any css::after content print like butt for some reason.
+        document.querySelectorAll("a[href]").forEach(function (link) {
+            var href = link.href;
+            if (href.startsWith(docHelper.moduleLink.href)) {
+                var refSpan = document.createElement("SPAN");
+                refSpan.innerText = " (page\u00a0####)";
+                link.appendChild(refSpan);
+                var ref = href
+                    .replace(docHelper.moduleLink.href, "")
+                    .replace(".md", "")
+                    .replace(/^\//, "");
+                if (ref !== '') {
+                    refSpan.setAttribute(DATA_PAGE_OF, ref);
+                    link.classList.add('page-ref');
+                }
+            }
+            else {
+                var footnoteSpan = document.createElement("SPAN");
+                footnoteSpan.classList.add('footnote-bracket');
+                footnoteSpan.innerHTML = "&nbsp;[##]";
+                link.appendChild(footnoteSpan);
+                if (!(link.rel || '').includes("external")) {
+                    link.rel = "external";
+                }
+            }
+        });
+    }), new ReflowTask(), new OnceTask("Clean up screen-centric structures, part 2.", function () {
+        var mainContent = document.getElementById("page");
+        if (mainContent != null && mainContent.parentNode != null) {
+            mainContent.parentNode.removeChild(mainContent);
+        }
+    }), new OnceTask("Fix up page references.", function () {
+        var cache = {};
+        document.querySelectorAll("[" + DATA_PAGE_OF + "]").forEach(function (el) {
+            var sourceName = el.getAttribute(DATA_PAGE_OF) || "";
+            var pageRef = cache[sourceName];
+            if (pageRef == null) {
+                var topEl = document.querySelector("[data-source=\"" + sourceName + "\"]");
+                if (topEl == null) {
+                    console.error("Missing a page-ref/data-source: ", sourceName);
+                }
+                else {
+                    pageRef = docHelper.pageWith(topEl);
+                    if (pageRef == null) {
+                        console.error("No ref for page", sourceName);
+                    }
+                    cache[sourceName] = pageRef;
+                }
+            }
+            var numberedPage = docHelper.nearestAncestorLike(el, function (e) { return e.getAttribute(DATA_PAGE_NUMBER) != null; });
+            var currentPageNumber = numberedPage === null || numberedPage === void 0 ? void 0 : numberedPage.getAttribute(DATA_PAGE_NUMBER);
+            if (currentPageNumber === pageRef) {
+                el.classList.add('same-page');
+            }
+            if (el.tagName.toUpperCase() !== 'A') {
+                el.innerHTML = " (page\u00A0" + pageRef + ")";
+            }
+        });
+    }), new OnceTask("Mark pages with empty gutters.", function () { return void (document
+        .querySelectorAll(".page-body")
+        .forEach(function (body) {
+        var allEmpty = true;
+        body.querySelectorAll(".columned-gutter").forEach(function (g) { return allEmpty = allEmpty && (g.childElementCount === 0); });
+        body.classList.add(allEmpty ? "empty-gutters" : "full-gutters");
+    })); }), new OnceTask("Relocate sidebar blocks.", function () {
+        document.querySelectorAll(".page").forEach(function (page) {
+            page.querySelectorAll("[" + DATA_GUTTER_NUM + "]").forEach(function (aside) {
+                var _a;
+                var gutterId = aside.getAttribute(DATA_GUTTER_NUM) || "";
+                var target = page.querySelector("[" + DATA_GUTTER_REF + "=\"" + gutterId + "\"]");
+                var wrapper = target == null ? null : docHelper.nearestAncestorLike(target, function (el) { return el.classList.contains("columned-wrapper"); });
+                // console.log("Repositioning", aside, target);
+                if (target == null || wrapper == null) {
+                    console.error("Lost track of gutter target " + gutterId);
+                    return;
+                }
+                var targetRect = target.getBoundingClientRect();
+                var bodyRect = wrapper.getBoundingClientRect();
+                var asideRect = aside.getBoundingClientRect();
+                var fromTopOfTarget = 0;
+                // console.debug(`target body aside`, targetRect, bodyRect, asideRect);
+                if (asideRect.height < targetRect.height) {
+                    fromTopOfTarget = (targetRect.height - asideRect.height) / 2;
+                    // console.debug("centering", fromTopOfTarget);
+                }
+                var fromTopOfBody = targetRect.top - bodyRect.top;
+                // console.debug(`fromTopOfBody`, fromTopOfBody);
+                // asideRect.top += fromTopOfTarget + fromTopOfBody;
+                aside.style.top = Math.max(0, (fromTopOfTarget + fromTopOfBody)) + "px";
+                (_a = aside.parentElement) === null || _a === void 0 ? void 0 : _a.classList.add("absolute"); // for now
+            });
+        });
+    }), new OnceTask("Everything looks okay!", function () {
+        var renderMask = document.querySelector(".print-render-mask");
+        if (renderMask != null) {
+            renderMask.classList.add("print-render-done");
+            var renderMessage = renderMask.querySelector(".print-render-message");
+            if (renderMessage != null) {
+                renderMessage.innerText = "Tap or click to clear this message, then use your browser to print as normal.";
+            }
+            renderMask.addEventListener("click", function (e) {
+                e.preventDefault();
+                e.cancelBubble = true;
+                document.body.removeChild(renderMask);
+            });
+        }
+        document.body.appendChild(docHelper.html(docHelper.div("ready-to-print"), function (d) { return d.id = "ready-to-print"; }));
+    }));
     taskManager.start();
 });

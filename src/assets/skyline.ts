@@ -48,12 +48,9 @@ document.addEventListener("DOMContentLoaded", function onDomContentLoaded() {
 });
 
 const DATA_FOOTNOTE_ID = "data-footnote-id";
-const DATA_FOOTNOTE_NUMBER = "data-footnote-number";
-const DATA_LINK_ID = "data-link-id";
 const DATA_PAGE_NUMBER = "data-page-number";
 const DATA_SOURCE = "data-source";
 const DATA_SOURCE_FILE = "data-source-file";
-const DATA_PAGE_REF = "data-page-ref";
 const DATA_PAGE_OF = "data-page-of";
 const AVOID_BREAK_AFTER = "avoid-break-after";
 const COL_SPAN_ALL = "col-span-all";
@@ -65,7 +62,6 @@ class DocHelper {
 	public documentSeemsOkay = true;
 	public readonly homeLink: HTMLAnchorElement;
 	public readonly moduleLink: HTMLAnchorElement;
-	private nextElementNumber = 1;
 	private nextFootnoteNumber: number = 1;
 
 	constructor(
@@ -95,26 +91,28 @@ class DocHelper {
 			.map(link => {
 				let footnoteId = link.getAttribute(DATA_FOOTNOTE_ID);
 				if (footnoteId != null) {
-					return document.getElementById(footnoteId) as HTMLDivElement;
+					const footnote = document.getElementById(footnoteId);
+					if (footnote != null) {
+						// console.debug(`Found existing footnote`, footnote);
+						return footnote as HTMLDivElement;
+					}
 				}
-				const href = link.href;
-				if (href.startsWith(this.moduleLink.href)) {
-					const ref = href
-						.replace(this.moduleLink.href, "")
-						.replace(".md", "")
-						.replace(/^\//, "")
-					;
-					link.setAttribute(DATA_PAGE_REF, "####");
-					link.setAttribute(DATA_PAGE_OF, ref);
+				if (link.classList.contains('page-ref')) {
 					return undefined;
 				}
+				// console.log(`Making a new footnote for`, link);
 				const footnoteNumber = this.nextFootnoteNumber++;
+				let href = link.href;
 				const footnote = this.div("footnote");
 				footnote.id = `fn${footnoteNumber}`;
+				if (href.startsWith(this.homeLink.href)) {
+					href = href.replace(/\.md$/, '.html');
+				}
 				footnote.appendChild(document.createTextNode(`${footnoteNumber}.\u00a0${href}`));
-				footnote.setAttribute(DATA_LINK_ID, this.identify(link));
 				link.setAttribute(DATA_FOOTNOTE_ID, footnote.id);
-				link.setAttribute(DATA_FOOTNOTE_NUMBER, String(footnoteNumber));
+				link.querySelectorAll('.footnote-bracket').forEach((bracket: HTMLElement) => {
+					bracket.innerHTML = `&nbsp;[${footnoteNumber}]`;
+				});
 				return footnote;
 			})
 			.filter(fn => fn != null) as HTMLDivElement[];
@@ -128,11 +126,11 @@ class DocHelper {
 		})();
 	}
 
-	identify(el: HTMLElement): string {
-		if (el.id != null) {
-			return el.id;
-		}
-		return (el.id = `ae${this.nextElementNumber++}`);
+	html<E extends Element>(originalEl: E, ...configurers: ((el: E) => any)[]): E {
+		return configurers.reduce((prev, configurer) => {
+			const maybeNew = configurer(originalEl);
+			return maybeNew == null || !(maybeNew instanceof Element) ? originalEl : (maybeNew as E);
+		}, originalEl);
 	}
 
 	nearestAncestorLike(el: Element | undefined, predicate: (anc: Element) => boolean): Element | undefined {
@@ -219,14 +217,14 @@ abstract class Block {
 			if (current.nodeType === Node.ELEMENT_NODE) {
 				const el = current as HTMLElement;
 				if (el.classList.contains(AVOID_BREAK_AFTER) && parent.firstElementChild !== el) {
-					linked.push(...nonEl, current);
+					linked.unshift(current, ...nonEl);
 					nonEl.splice(0, nonEl.length);
 					current = current.previousSibling;
 				} else {
 					current = null;
 				}
 			} else {
-				nonEl.push(current);
+				nonEl.unshift(current);
 				current = current.previousSibling;
 			}
 		}
@@ -299,7 +297,7 @@ class DivBlock extends Block {
 
 	moveFrom(doc: DocHelper, linked: ChildNode[], prevWriteBlock: Block): AppendBlockResult {
 		// console.debug(`moveFrom ${this.identifier} (${this.div.className}) <- ${prevWriteBlock.identifier}`, linked);
-		linked.reverse().forEach(node => {
+		linked.forEach(node => {
 			node.parentNode?.removeChild(node);
 			this.div.appendChild(node);
 		});
@@ -370,6 +368,7 @@ abstract class MultiTargetBlock<W extends Block> extends Block {
 			console.error(`moveFrom ${this.identifier} missing writer`);
 			return AppendBlockResult.Skipped;
 		}
+		console.debug(`MultiTargetBlock.moveFrom`, linked);
 		return this.writeBlock.moveFrom(doc, linked, prevWriteBlock);
 	}
 
@@ -678,7 +677,10 @@ class OnceTask extends RenderingTask {
 	}
 }
 
+type RenderingTaskListener = (taskTitle: string, estimatedCompletion: number, errorMessage?: string | undefined) => void;
+
 class RenderingTaskManager {
+	protected readonly listeners: RenderingTaskListener[] = [];
 	protected readonly tasks: RenderingTask[];
 
 	constructor(
@@ -687,10 +689,15 @@ class RenderingTaskManager {
 		this.tasks = tasks;
 	}
 
+	public addListener(listener: RenderingTaskListener): void {
+		this.listeners.push(listener);
+	}
+
 	public start() {
 		const todo = this.tasks.slice();
 		const startTime = Date.now();
 		let lastTask: RenderingTask | undefined;
+		const manager = this;
 
 		function nextTask(): void {
 			const task = todo[0];
@@ -699,7 +706,8 @@ class RenderingTaskManager {
 				return;
 			}
 			if (lastTask !== task) {
-				console.debug(`Prepare ${task.title}`);
+				// console.debug(`Prepare ${task.title}`);
+				manager.listeners.forEach(l => l(task.title, 0));
 				task.prepare();
 			}
 			lastTask = task;
@@ -707,14 +715,18 @@ class RenderingTaskManager {
 			try {
 				task.step();
 				if (task.errorMessage == null) {
+					manager.listeners.forEach(l => l(task.title, task.estimatedCompletion));
 					okay = true;
 				} else {
+					manager.listeners.forEach(l => l(task.title, task.estimatedCompletion, task.errorMessage));
 					console.error(`Task ${task.title} failed: `, task.errorMessage);
 				}
 			} catch (e) {
+				manager.listeners.forEach(l => l(task.title, task.estimatedCompletion, task.errorMessage));
 				console.error(`Task ${task.title} threw: `, e);
 			} finally {
 				if (task.isComplete) {
+					manager.listeners.forEach(l => l(task.title, 1.0));
 					task.finish();
 					todo.shift();
 				}
@@ -734,76 +746,6 @@ window.addEventListener("load", () => {
 		return;
 	}
 	const docHelper = new DocHelper(document);
-
-	function removeOldMainContent() {
-		const mainContent = document.getElementById("page");
-		if (mainContent != null && mainContent.parentNode != null) {
-			mainContent.parentNode.removeChild(mainContent);
-		}
-	}
-
-	function fixPageRefs() {
-		const cache: Record<string, string> = {};
-		document.querySelectorAll(`[${DATA_PAGE_OF}]`).forEach(el => {
-			const sourceName = el.getAttribute(DATA_PAGE_OF) || "";
-			let pageRef: string = cache[sourceName];
-			if (pageRef == null) {
-				const topEl = document.querySelector(`[data-source="${sourceName}"]`);
-				if (topEl == null) {
-					console.error(`Missing a page-ref/data-source: `, sourceName);
-				} else {
-					pageRef = docHelper.pageWith(topEl);
-					if (pageRef == null) {
-						console.error(`No ref for page`, sourceName);
-					}
-					cache[sourceName] = pageRef;
-				}
-			}
-			el.setAttribute(DATA_PAGE_REF, pageRef || "?");
-		});
-	}
-
-	function adjustGutterItems() {
-		document.querySelectorAll(".page").forEach(page => {
-			page.querySelectorAll(`[${DATA_GUTTER_NUM}]`).forEach(aside => {
-				const gutterId = aside.getAttribute(DATA_GUTTER_NUM) || "";
-				const target = page.querySelector(`[${DATA_GUTTER_REF}="${gutterId}"]`);
-				const wrapper = target == null ? null : docHelper.nearestAncestorLike(target, el => el.classList.contains("columned-wrapper"));
-				console.log("Repositioning", aside, target);
-				if (target == null || wrapper == null) {
-					console.error(`Lost track of gutter target ${gutterId}`);
-					return;
-				}
-				const targetRect = target.getBoundingClientRect();
-				const bodyRect = wrapper.getBoundingClientRect();
-				const asideRect = aside.getBoundingClientRect();
-				let fromTopOfTarget = 0;
-				console.debug(`target body aside`, targetRect, bodyRect, asideRect);
-				if (asideRect.height < targetRect.height) {
-					fromTopOfTarget = (targetRect.height - asideRect.height) / 2;
-					console.debug("centering", fromTopOfTarget);
-				}
-				const fromTopOfBody = targetRect.top - bodyRect.top;
-				console.debug(`fromTopOfBody`, fromTopOfBody);
-				// asideRect.top += fromTopOfTarget + fromTopOfBody;
-				(aside as HTMLElement).style.top = Math.max(0, (fromTopOfTarget + fromTopOfBody)) + "px";
-				aside.parentElement?.classList.add('absolute');  // for now
-			});
-		});
-	}
-
-	// noinspection JSUnusedLocalSymbols
-	function markEmptyGutters() {
-		document.querySelectorAll(".page-body").forEach(body => {
-			let allEmpty = true;
-			body.querySelectorAll(".columned-gutter").forEach(g => allEmpty = allEmpty && (g.childElementCount === 0));
-			if (allEmpty) {
-				body.classList.add("empty-gutters");
-			} else {
-				body.classList.add("full-gutters");
-			}
-		});
-	}
 
 	class ReflowTask extends RenderingTask {
 		public errorMessage: string | undefined;
@@ -874,6 +816,36 @@ window.addEventListener("load", () => {
 	}
 
 	const taskManager = new RenderingTaskManager(
+		new OnceTask("Prepare print rendering overlay", () => {
+			const printRender = docHelper.html(docHelper.div("print-render"), printRender => {
+				const renderTitle = docHelper.div("print-render-title");
+				renderTitle.appendChild(document.createTextNode("Preparing for Print/PDF"));
+				printRender.appendChild(renderTitle);
+				const renderProgress = docHelper.div("print-render-progress");
+				const renderStatus = docHelper.div("print-render-status");
+				renderStatus.innerText = "...";
+				renderProgress.appendChild(renderStatus);
+				const renderPercent = docHelper.div("print-render-percent");
+				renderProgress.appendChild(renderPercent);
+				printRender.appendChild(renderProgress);
+				const renderMessage = docHelper.div("print-render-message");
+				renderMessage.appendChild(document.createTextNode("One moment, please, while the module is made print-ready.  This usually takes under 15 seconds."));
+				printRender.appendChild(renderMessage);
+				taskManager.addListener((taskTitle: string, estimatedCompletion: number, errorMessage: string | undefined) => {
+					if (errorMessage != null) {
+						renderStatus.innerText = taskTitle;
+						renderMessage.innerText = errorMessage;
+						renderMessage.classList.add("error");
+					} else {
+						renderPercent.innerText = Math.floor(estimatedCompletion * 100) + "%";
+						renderStatus.innerText = taskTitle;
+					}
+				});
+			});
+			const renderMask = docHelper.div("print-render-mask");
+			renderMask.appendChild(printRender);
+			document.body.appendChild(renderMask);
+		}),
 		new OnceTask("Clean up screen-centric structures, part 1.", () => {
 			const moduleLinkParent = docHelper.moduleLink.parentNode;
 			moduleLinkParent?.removeChild(docHelper.moduleLink);
@@ -915,11 +887,120 @@ window.addEventListener("load", () => {
 				})
 			});
 		}),
+		new OnceTask("Expand links to page references.", () => {
+			// Because Firefox makes any css::after content print like butt for some reason.
+			document.querySelectorAll("a[href]").forEach((link: HTMLAnchorElement): void => {
+				const href = link.href;
+				if (href.startsWith(docHelper.moduleLink.href)) {
+					const refSpan = document.createElement("SPAN");
+					refSpan.innerText = " (page\u00a0####)";
+					link.appendChild(refSpan);
+					const ref = href
+						.replace(docHelper.moduleLink.href, "")
+						.replace(".md", "")
+						.replace(/^\//, "")
+					;
+					if (ref !== '') {
+						refSpan.setAttribute(DATA_PAGE_OF, ref);
+						link.classList.add('page-ref');
+					}
+				} else {
+					const footnoteSpan = document.createElement("SPAN");
+					footnoteSpan.classList.add('footnote-bracket');
+					footnoteSpan.innerHTML = `&nbsp;[##]`;
+					link.appendChild(footnoteSpan);
+					if (!(link.rel || '').includes("external")) {
+						link.rel = "external"
+					}
+				}
+			});
+		}),
 		new ReflowTask(),
-		new OnceTask("Clean up screen-centric structures, part 2.", () => removeOldMainContent()),
-		new OnceTask("Fix up page references.", () => fixPageRefs()),
-		new OnceTask("Mark pages with empty gutters.", () => markEmptyGutters()),
-		new OnceTask("Relocate sidebar blocks.", () => adjustGutterItems()),
+		new OnceTask("Clean up screen-centric structures, part 2.", () => {
+			const mainContent = document.getElementById("page");
+			if (mainContent != null && mainContent.parentNode != null) {
+				mainContent.parentNode.removeChild(mainContent);
+			}
+		}),
+		new OnceTask("Fix up page references.", () => {
+			const cache: Record<string, string> = {};
+			document.querySelectorAll(`[${DATA_PAGE_OF}]`).forEach(el => {
+				const sourceName = el.getAttribute(DATA_PAGE_OF) || "";
+				let pageRef: string = cache[sourceName];
+				if (pageRef == null) {
+					const topEl = document.querySelector(`[data-source="${sourceName}"]`);
+					if (topEl == null) {
+						console.error(`Missing a page-ref/data-source: `, sourceName);
+					} else {
+						pageRef = docHelper.pageWith(topEl);
+						if (pageRef == null) {
+							console.error(`No ref for page`, sourceName);
+						}
+						cache[sourceName] = pageRef;
+					}
+				}
+				const numberedPage = docHelper.nearestAncestorLike(el, e => e.getAttribute(DATA_PAGE_NUMBER) != null);
+				const currentPageNumber = numberedPage?.getAttribute(DATA_PAGE_NUMBER);
+				if (currentPageNumber === pageRef) {
+					el.classList.add('same-page');
+				}
+				if (el.tagName.toUpperCase() !== 'A') {
+					el.innerHTML = ` (page\u00a0${pageRef})`;
+				}
+			});
+		}),
+		new OnceTask("Mark pages with empty gutters.", () => void (document
+			.querySelectorAll(".page-body")
+			.forEach((body: Element) => {
+				let allEmpty = true;
+				body.querySelectorAll(".columned-gutter").forEach(g => allEmpty = allEmpty && (g.childElementCount === 0));
+				body.classList.add(allEmpty ? "empty-gutters" : "full-gutters");
+			}))),
+		new OnceTask("Relocate sidebar blocks.", () => {
+			document.querySelectorAll(".page").forEach(page => {
+				page.querySelectorAll(`[${DATA_GUTTER_NUM}]`).forEach(aside => {
+					const gutterId = aside.getAttribute(DATA_GUTTER_NUM) || "";
+					const target = page.querySelector(`[${DATA_GUTTER_REF}="${gutterId}"]`);
+					const wrapper = target == null ? null : docHelper.nearestAncestorLike(target, el => el.classList.contains("columned-wrapper"));
+					// console.log("Repositioning", aside, target);
+					if (target == null || wrapper == null) {
+						console.error(`Lost track of gutter target ${gutterId}`);
+						return;
+					}
+					const targetRect = target.getBoundingClientRect();
+					const bodyRect = wrapper.getBoundingClientRect();
+					const asideRect = aside.getBoundingClientRect();
+					let fromTopOfTarget = 0;
+					// console.debug(`target body aside`, targetRect, bodyRect, asideRect);
+					if (asideRect.height < targetRect.height) {
+						fromTopOfTarget = (targetRect.height - asideRect.height) / 2;
+						// console.debug("centering", fromTopOfTarget);
+					}
+					const fromTopOfBody = targetRect.top - bodyRect.top;
+					// console.debug(`fromTopOfBody`, fromTopOfBody);
+					// asideRect.top += fromTopOfTarget + fromTopOfBody;
+					(aside as HTMLElement).style.top = Math.max(0, (fromTopOfTarget + fromTopOfBody)) + "px";
+					aside.parentElement?.classList.add("absolute");  // for now
+				});
+			});
+		}),
+		new OnceTask("Everything looks okay!", () => {
+			const renderMask = document.querySelector(".print-render-mask");
+			if (renderMask != null) {
+				renderMask.classList.add("print-render-done");
+				const renderMessage = renderMask.querySelector(".print-render-message");
+				if (renderMessage != null) {
+					(renderMessage as HTMLElement).innerText = "Tap or click to clear this message, then use your browser to print as normal.";
+				}
+				renderMask.addEventListener("click", e => {
+					e.preventDefault();
+					e.cancelBubble = true;
+					document.body.removeChild(renderMask);
+				});
+			}
+			document.body.appendChild(docHelper.html(docHelper.div("ready-to-print"),
+				d => d.id = "ready-to-print"));
+		}),
 	);
 
 	taskManager.start();

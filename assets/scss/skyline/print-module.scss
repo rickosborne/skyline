@@ -30,9 +30,22 @@
 	--gutter-color: var(--dusk-blue);
 	--gutter-border: var(--dusk-blue-10);
 
+	--hex-size: 1rem;
+	--sqrt-3: 0.577350269189626;
+	--hex-width-half: calc(var(--hex-size) / var(--sqrt-3));
+	--hex-width: calc(var(--hex-width-half) * 2.0);
+	--hex-height-half: calc(var(--hex-size) * 2.0);
+	--hex-height: calc(var(--hex-height-half) * 2.0);
+
 	max-width: unset;
 	font-size: 9.5pt;
 	color: black;
+
+	// Safari-specific rules.
+	@supports (-webkit-hyphens:none) {
+		/* Safari adds footer margins that throw off the page layout, and then ignores all page break rules.  Thanks, Apple! */
+		--page-height: 10.25in;
+	}
 
 	.site-header, #breadcrumbs, #pre-page, .site-footer, #print-module-top-link, summary.spoiler-warning, #page {
 		display: none;
@@ -52,6 +65,10 @@
 		;
 		grid-template-rows: minmax(0, auto) minmax(0, 1fr) minmax(0, auto);
 		position: relative;
+		break-inside: avoid;
+		page-break-inside: avoid;
+		page-break-after: always;
+		break-after: page;
 
 		&.page-odd {
 			padding-left: var(--page-inner-padding);
@@ -155,17 +172,16 @@
 			}
 		}
 		.page-number {
-			--hex-size: 2rem;
-			--sqrt-3: 0.577350269189626;
 			position: absolute;
-			top: -0.25in;
-			width: calc(var(--hex-size) * 2.0 / var(--sqrt-3));
-			height: calc(var(--hex-size) * 4.0);
+			bottom: 0.25in;
+			width: var(--hex-width);
+			height: var(--hex-height);
 			z-index: 1;
+			overflow: hidden;
 
 			.page-number-hex {
 				margin-top: var(--hex-size);
-				width: calc(var(--hex-size) * 2.0 / var(--sqrt-3));
+				width: var(--hex-width);
 				height: calc(var(--hex-size) * 2.0);
 				background-color: var(--noon-blue-25);
 				position: relative;
@@ -175,8 +191,8 @@
 					width: 0;
 					height: 0;
 					border-bottom: var(--hex-size) solid var(--noon-blue-25);
-					border-left: calc(var(--hex-size) / var(--sqrt-3)) solid transparent;
-					border-right: calc(var(--hex-size) / var(--sqrt-3)) solid transparent;
+					border-left: var(--hex-width-half) solid transparent;
+					border-right: var(--hex-width-half) solid transparent;
 					position: absolute;
 					top: calc(var(--hex-size) * -1.0);
 				}
@@ -187,8 +203,8 @@
 					position: absolute;
 					bottom: calc(var(--hex-size) * -1.0);
 					border-top: var(--hex-size) solid var(--noon-blue-25);
-					border-left: calc(var(--hex-size) / var(--sqrt-3)) solid transparent;
-					border-right: calc(var(--hex-size) / var(--sqrt-3)) solid transparent;
+					border-left: var(--hex-width-half) solid transparent;
+					border-right: var(--hex-width-half) solid transparent;
 				}
 			}
 
@@ -203,8 +219,8 @@
 				font-weight: var(--weight-bold);
 				text-align: center;
 				font-size: 200%;
-				line-height: calc(var(--hex-size) * 4.0);
-				background: radial-gradient(circle, var(--evening-blue-25), transparent, transparent);
+				line-height: var(--hex-height);
+				//background: radial-gradient(circle, var(--evening-blue-25), transparent, transparent);
 			}
 		}
 	}
@@ -242,27 +258,24 @@
 		margin-top: var(--cadence-half);
 	}
 
-	a[data-footnote-number] {
+	a[rel="external"], a[data-page-of], a.page-ref {
 		text-decoration: none;
-
-		&::after {
-			content: "\00A0[" attr(data-footnote-number) "]";
-		}
 	}
 
-	a[data-page-ref] {
-		text-decoration: none;
+	span.same-page {
+		display: none;
+	}
 
-		&::after {
-			content: " (page\00A0" attr(data-page-ref) ")";
-			opacity: 50%;
-			font-weight: var(--weight-normal);
-		}
+	abbr {
+		text-decoration: none;
 	}
 
 	.page-odd {
 		.page-number {
-			right: -0.25in;
+			right: 0.25in;
+		}
+		.page-footer {
+			margin-right: var(--hex-width);
 		}
 		.page-body {
 			.columned-wrapper {
@@ -304,7 +317,10 @@
 
 	.page-even {
 		.page-number {
-			left: calc(var(--page-binding-offset) * -1);
+			left: 0.25in;
+		}
+		.page-footer {
+			margin-left: var(--hex-width);
 		}
 	}
 
@@ -345,6 +361,7 @@
 
 	.cypher-pc-stat-block {
 		column-span: all;
+
 	}
 
 	.dnd5e-pc-block {
@@ -409,6 +426,110 @@
 
 			.page {
 				margin: var(--page-margin);
+			}
+		}
+	}
+}
+
+.print-render-mask {
+	position: fixed;
+	top: 0;
+	right: 0;
+	left: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index: 1000;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	font-size: 150%;
+	font-family: vars.$font-sans;
+	line-height: 1.5em;
+
+	&.print-render-done {
+		.print-render {
+			background-color: #cfc;
+
+			.print-render-message {
+				font-weight: bold;
+				color: #090;
+			}
+
+			.print-render-progress {
+				color: rgba(0, 0, 0, 0.2);
+			}
+		}
+	}
+
+	.print-render {
+		position: fixed;
+		width: 25em;
+		background-color: #eee;
+		justify-self: center;
+		margin: auto auto;
+		color: rgba(0, 0, 0, 0.8);
+		padding: 1.5em;
+		box-shadow: 0 0 1.5em black;
+		display: flex;
+		flex-direction: column;
+
+		.print-render-title {
+			color: rgba(0, 0, 0, 0.4);
+			border-bottom: thin solid rgba(0, 0, 0, 0.4);
+			padding-bottom: 0.75em;
+			margin-bottom: 1.5em;
+		}
+
+		.print-render-progress {
+			display: flex;
+			flex-direction: row;
+		}
+
+		.print-render-status {
+			flex-grow: 1;
+		}
+
+		.print-render-percent {
+			font-size: 150%;
+			font-weight: bold;
+			justify-self: end;
+		}
+
+		.print-render-message {
+			border-top: thin solid rgba(0, 0, 0, 0.4);
+			padding-top: 0.75em;
+			margin-top: 1.5em;
+			color: rgba(0, 0, 0, 0.3);
+		}
+	}
+
+	.error {
+		color: red;
+		font-weight: bold;
+	}
+}
+
+@media print {
+	.print-render-mask {
+		display: none;
+	}
+
+	// Firefox doesn't print background gradients well.
+	@supports (-moz-appearance:none) {
+		.cypher-stat-block {
+			.title {
+				background-image: none;
+			}
+		}
+		.cypher-pc-stat-block {
+			article {
+				background-image: none;
+				background-color: var(--noon-blue-5);
+			}
+
+			.block .label, .stat .label, .stat .legend, .block .legend, .stat .legend, .block .legend {
+				background-image: none;
 			}
 		}
 	}
