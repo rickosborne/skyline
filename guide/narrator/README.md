@@ -9,17 +9,17 @@ TODO
 
 <!-- +template files guide/narrator web-table-of-contents -->
 
-_Estimated module completion: **~11%**._
+_Estimated module completion: **~22%**._
 
-* [Narrator's Guide](010-front-matter.md) (not started yet)
-  * [Introduction](015-introduction.md) (not started yet)
+* [Narrator's Guide](010-front-matter.md)
+  * Introduction _(not started yet)_
   * [Magic in Skyline](230-magic.md)
-* [Appendices](900-appendices.md) (not started yet)
-  * [Errata](940-errata.md) (not started yet)
-  * [Author's Notes](950-author-notes.md) (not started yet)
-  * [Author's Biography](955-author-bio.md) (not started yet)
-  * [Credits](960-credits.md) (not started yet)
-  * [Legal](980-legal.md) (not started yet)
+* Appendices _(not started yet)_
+  * Errata _(not started yet)_
+  * Author's Notes _(not started yet)_
+  * Author's Biography _(not started yet)_
+  * Credits _(not started yet)_
+  * Legal _(not started yet)_
 
 <!-- -template files guide/narrator web-table-of-contents -->
 

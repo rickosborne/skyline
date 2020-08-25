@@ -14,16 +14,16 @@ _Estimated module completion: **~48%**._
   * [Introduction](020-introduction.md)
   * [Starting Out](022-starting-out.md)
   * [Hooks](025-hooks.md)
-  * [Background](030-background.md) (started, unfinished)
+  * [Background](030-background.md) _(started, unfinished)_
 * [Starter Characters](040-starter-characters.md)
   * [Yenever Feldspar](042-fighter.md)
   * [Thorn](044-rogue.md)
   * [Drake](046-ranger.md)
   * [Haldred](048-engineer.md)
   * [Van](050-monk.md)
-  * [Additional Character Options](060-additional-character-options.md) (started, unfinished)
+  * [Additional Character Options](060-additional-character-options.md) _(started, unfinished)_
   * [Begin your adventure!](099-adventure.md)
-* Story entry point: [100: Mother's Crown](100-mothers-crown.md)
+* _Story entry point:_ [100: Mother's Crown](100-mothers-crown.md)
 * [Non-Player Characters](400-npc.md)
   * [Arund](405-arund.md){:.spoiler}
   * [Pren](450-pren.md){:.spoiler}
@@ -32,7 +32,7 @@ _Estimated module completion: **~48%**._
   * [Mother's Watch Ruins](510-mothers-watch-ruins.md){:.spoiler}
   * [Mother's Watch](515-mothers-watch.md)
   * [Artifacts of the Old Ones](590-artifacts.md)
-* [Adapters](600-adapters.md) (started, unfinished)
+* [Adapters](600-adapters.md) _(started, unfinished)_
 * [D&D, 5th Edition Adapter](605-5e.md)
   * [Yenever Feldspar](606-barbarian.md)
   * [Thorn](607-rogue.md)
