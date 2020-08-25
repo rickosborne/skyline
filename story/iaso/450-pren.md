@@ -1,5 +1,6 @@
 ## Pren
 
+{:.avoid-break-after}
 _Nora, tradesperson in Mother's Watch, he/him_
 
 {:.hanging-indent}

@@ -1,5 +1,6 @@
 ## Arund
 
+{:.avoid-break-after}
 _Oseram, merchant in Mother's Watch, he/him_
 
 {:.hanging-indent}

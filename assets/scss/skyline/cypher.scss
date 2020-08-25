@@ -428,13 +428,13 @@
 	}
 }
 
-@media (max-width: 48rem) {
+@media screen and (max-width: 48rem) {
 	.cypher-stat-block .title {
 		border-bottom-right-radius: 0;
 	}
 }
 
-@media (max-width: 60rem) {
+@media screen and (max-width: 60rem) {
 	.cypher-pc-stat-block {
 		article {
 			display: grid;

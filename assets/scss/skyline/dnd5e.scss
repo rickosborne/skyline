@@ -413,7 +413,7 @@
 	}
 }
 
-@media (max-width: 50rem) {
+@media screen and (max-width: 50rem) {
 	.dnd5e-pc-block {
 		article {
 			grid-template:
@@ -434,7 +434,7 @@
 	}
 }
 
-@media (max-width: 40rem) {
+@media screen and (max-width: 40rem) {
 	.dnd5e-pc-block {
 		article {
 			grid-template:
