@@ -11,7 +11,7 @@ tags:
 
 <a href="{{ '/adapter/cypher' | relative_url }}" id="print-module-top-link" data-source-name="adapter/cypher"></a>
 
-{% assign fileNames = "005-cover|626-fireclaw|634-lancehorn|655-scrapper|667-stormbird|675-thunderjaw|681-watcher|980-legal" | split: "|" %}
+{% assign fileNames = "005-cover|600-machines|626-fireclaw|634-lancehorn|655-scrapper|667-stormbird|675-thunderjaw|681-watcher|980-legal" | split: "|" %}
 {% for fileName in fileNames %}
 
 <div data-source-file="{{ fileName }}">

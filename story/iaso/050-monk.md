@@ -10,7 +10,7 @@ next:
   href: 060-additional-character-options
 ---
 
-### Van
+## Van
 
 _Banuk, historian_
 

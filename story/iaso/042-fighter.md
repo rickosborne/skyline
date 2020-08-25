@@ -10,7 +10,7 @@ next:
   href: 044-rogue
 ---
 
-### Yenever Feldspar
+## Yenever Feldspar
 
 _Tenakth, fighter_
 

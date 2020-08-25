@@ -1,3 +1,9 @@
+---
+title: Scrapper stats for the Cypher System
+tags:
+- full-width
+---
+
 <!-- +template machine scrapper cypher-creature -->
 
 <h1>Scrapper</h1>

@@ -10,7 +10,7 @@ next:
   href: 046-ranger
 ---
 
-### Thorn
+## Thorn
 
 _unknown, rogue_
 

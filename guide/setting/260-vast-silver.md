@@ -1,2 +1,7 @@
-### VAST SILVER
+---
+tags:
+- not-started
+---
+
+## VAST SILVER
 

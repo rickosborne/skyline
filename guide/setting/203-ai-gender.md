@@ -1,4 +1,4 @@
-### A quick note on AI gender pronouns
+## A quick note on AI gender pronouns
 
 From Rick Osborne, the author:
 

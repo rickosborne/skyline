@@ -1,3 +1,9 @@
+---
+title: Thunderjaw stats for the Cypher System
+tags:
+- full-width
+---
+
 <!-- +template machine thunderjaw cypher-creature -->
 
 <h1>Thunderjaw</h1>

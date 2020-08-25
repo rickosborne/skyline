@@ -1,4 +1,9 @@
-### Mother's Watch Ruins
+---
+tags:
+- title-is-spoiler
+---
+
+## Mother's Watch Ruins
 
 Points of interest:
 

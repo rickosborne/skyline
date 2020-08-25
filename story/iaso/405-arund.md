@@ -1,3 +1,8 @@
+---
+tags:
+- title-is-spoiler
+---
+
 ## Arund
 
 {:.avoid-break-after}

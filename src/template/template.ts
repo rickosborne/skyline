@@ -10,7 +10,8 @@ const ROOT_PATH = path.normalize(path.join(__dirname, "..", "..")) + "/";
 
 const sourceDirs = [
 	"adapter",
-	"story/iaso",
+	"guide",
+	"story",
 	"CONTRIBUTING.md"
 ];
 

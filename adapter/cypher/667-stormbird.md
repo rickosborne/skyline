@@ -1,3 +1,9 @@
+---
+title: Stormbird stats for the Cypher System
+tags:
+- full-width
+---
+
 <!-- +template machine stormbird cypher-creature -->
 
 <h1>Stormbird</h1>

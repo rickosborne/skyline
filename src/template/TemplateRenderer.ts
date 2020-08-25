@@ -9,6 +9,7 @@ import {Dnd5ENpcStats} from "./Dnd5ENpcStats";
 import {Dnd5EPcStats} from "./Dnd5EPcStats";
 import {PlantUmlRenderer} from "./PlantUmlRenderer";
 import {PrintModuleTemplate} from "./PrintModuleTemplate";
+import {WebTableOfContents} from "./WebTableOfContents";
 
 const TYPED_TEMPLATES: ATemplate<any>[] = [
 	new Dnd5ENpcStats(),
@@ -17,6 +18,7 @@ const TYPED_TEMPLATES: ATemplate<any>[] = [
 	new CypherPcStats(),
 	new PlantUmlRenderer(),
 	new PrintModuleTemplate(),
+	new WebTableOfContents(),
 ];
 
 export class TemplateRenderer extends ARenderer {

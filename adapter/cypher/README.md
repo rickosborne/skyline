@@ -2,10 +2,12 @@
 
 TODO
 
-Eventually:
+## Table of Contents
 
-* [Cover](005-cover.md)
-* Machines
+<!-- +template files adapter/cypher web-table-of-contents -->
+
+* [Skyline Adapter for the Cypher System](005-cover.md) (started, unfinished)
+* [Machines](600-machines.md)
   * [Fireclaw](626-fireclaw.md)
   * [Lancehorn](634-lancehorn.md)
   * [Scrapper](655-scrapper.md)
@@ -13,6 +15,8 @@ Eventually:
   * [Thunderjaw](675-thunderjaw.md)
   * [Watcher](681-watcher.md)
 * [Legal](980-legal.md)
+
+<!-- -template files adapter/cypher web-table-of-contents -->
 
 ## Printable
 

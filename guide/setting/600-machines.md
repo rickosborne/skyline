@@ -1,4 +1,4 @@
-## Machines
+# Machines
 
 In the Horizon setting, the ecological niche filled by megafauna is instead filled by robotic machines in the form of animals.
 These machines were originally designed as docile and safe to be around, with animal shapes to put humans at ease.
