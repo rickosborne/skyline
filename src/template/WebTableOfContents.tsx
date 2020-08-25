@@ -68,7 +68,7 @@ export class WebTableOfContents extends AFilesTemplate<TableOfContents, ContentI
 		if ((headingMatch = file.match(/(?:^|\n)(#+)\s+([^\r\n]+)/s))) {
 			headingLevel = headingMatch[1].length;
 			title = headingMatch[2];
-		} else if ((headingMatch = file.match(/<h(\d)>(.+?)</))) {
+		} else if ((headingMatch = file.match(/<h(\d)[^>]*>(.+?)</))) {
 			headingLevel = Number(headingMatch[1]);
 			title = headingMatch[2];
 		}
@@ -79,7 +79,7 @@ export class WebTableOfContents extends AFilesTemplate<TableOfContents, ContentI
 				titleIsSpoiler = (frontMatter.tags || []).includes('title-is-spoiler');
 				isStoryStart = (frontMatter.state || '') === 'Start';
 				notStarted = (frontMatter.tags || []).includes('not-started');
-				if ((frontMatter.tags || []).includes('full-width')) {
+				if ((frontMatter.tags || []).includes('full-width') && headingLevel === 1) {
 					headingLevel++;    // because character sheets
 				}
 				description = frontMatter.description;
