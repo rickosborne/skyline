@@ -16,7 +16,7 @@ People who have played through the video game will already be familiar with this
   * [A quick note on AI gender pronouns](203-ai-gender.md)
   * [GAIA](205-gaia.md) (not started yet)
   * [HADES](210-hades.md) (not started yet)
-    * [HEPHAESTUS](215-hephaestus.md) (not started yet)
+  * [HEPHAESTUS](215-hephaestus.md) (not started yet)
   * [DEMETER](220-demeter.md) (not started yet)
   * [APOLLO](225-apollo.md) (not started yet)
   * [ARTEMIS](230-artemis.md) (not started yet)
