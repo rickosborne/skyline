@@ -1,3 +1,8 @@
+---
+tags:
+- story
+---
+
 ## 146
 
 The fading light hides the look of concern which has overtaken the face of your deaf party member, but everyone notices when they stop walking, shush everyone, and crouch to put their hand on the ground.

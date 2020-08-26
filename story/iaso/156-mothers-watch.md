@@ -1,6 +1,10 @@
-## 156
+---
+location: Mother's Watch
+tags:
+- story
+---
 
-### Mother's Watch
+## 156: Mother's Watch
 
 {:.avoid-break-after}
 Read to everyone:

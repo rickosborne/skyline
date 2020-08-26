@@ -1,3 +1,9 @@
+---
+location: All-Mother Mountain
+tags:
+- story
+---
+
 ## 106
 
 {:.avoid-break-after}

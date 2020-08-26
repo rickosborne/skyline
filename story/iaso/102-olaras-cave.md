@@ -1,4 +1,11 @@
-## 102
+---
+location: The home of Olara and Brom
+state: Location
+tags:
+- story
+---
+
+## 102: Olara & Brom
 
 {:.avoid-break-after}
 Read to everyone:

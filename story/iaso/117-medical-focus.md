@@ -1,6 +1,8 @@
 ---
-Location: Mother's Watch Ruins
-State: Exploring
+location: Mother's Watch Ruins
+state: Exploring
+tags:
+- story
 ---
 
 ## 117

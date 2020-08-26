@@ -1,3 +1,8 @@
+---
+tags:
+- story
+---
+
 ## 141
 
 One of you steps away, around the boulder and a few dozen steps down the trail.

@@ -1,14 +1,17 @@
 ---
-Location: Mother's Watch Ruins
-State: Exploring
+location: Mother's Watch Ruins
+state: Exploring
+tags:
+- story
+hiddenLink: 150-the-blinking-light.md
 ---
 
-## 173
+## 173: Mother's Watch Ruins
 
 {:.avoid-break-after}
 Read to everyone:
 
-> A cloud of bats flies past you as you crouch in the cave.
+> A cloud of bats screeches past you as you crouch in the cave.
 > Oddly, they come from a dark area below you, and off to your side.
 > Below the sharp scent of guano and bat is a damp, metallic smell.
 >

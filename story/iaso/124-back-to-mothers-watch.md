@@ -1,3 +1,8 @@
+---
+tags:
+- story
+---
+
 ## 124
 
 {:.avoid-break-after}

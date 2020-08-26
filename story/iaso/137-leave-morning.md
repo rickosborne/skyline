@@ -1,3 +1,8 @@
+---
+tags:
+- story
+---
+
 ## 137
 
 Teb's map is clear, but he's right — the path around the base of the mountain is slow going.

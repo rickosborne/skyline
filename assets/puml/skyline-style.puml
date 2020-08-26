@@ -25,4 +25,7 @@ skinparam {
 	CloudBorderColor #dddddd
 	CloudBackgroundColor #eeeeee
 	ArrowColor #cccccc
+
+	ActivityBackgroundColor #C8E2F9
+	ActivityBorderColor #C8E2F9
 }
