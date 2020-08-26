@@ -7,7 +7,7 @@ It can be played by a single player or by a small group, with or without a narra
 
 <!-- +template files story/iaso web-table-of-contents -->
 
-_Estimated module completion: **~48%**._
+_Estimated module completion: **~46%**._
 
 * [IASO](010-front-matter.md)
   * [Synopsis](015-synopsis.md)
@@ -31,7 +31,8 @@ _Estimated module completion: **~48%**._
   * [Mother's Cradle](505-mothers-cradle.md){:.spoiler}
   * [Mother's Watch Ruins](510-mothers-watch-ruins.md){:.spoiler}
   * [Mother's Watch](515-mothers-watch.md)
-  * [Artifacts of the Old Ones](590-artifacts.md)
+  * [Story Graph](580-story-graph.md)
+* [Artifacts of the Old Ones](590-artifacts.md)
 * [Adapters](600-adapters.md) _(started, unfinished)_
 * [D&D, 5th Edition Adapter](605-5e.md)
   * [Yenever Feldspar](606-barbarian.md)
@@ -42,6 +43,10 @@ _Estimated module completion: **~48%**._
 * [Cypher System Adapter](620-cypher.md)
   * [Yenever Feldspar](621-barbarian.md)
 * [Errata](940-errata.md)
+* Author Notes _(not started yet)_
+* Author Bio _(not started yet)_
+  * Credits _(not started yet)_
+  * Legal _(not started yet)_
 
 <!-- -template files story/iaso web-table-of-contents -->
 

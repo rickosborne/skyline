@@ -275,6 +275,15 @@ details[open] > summary.spoiler-warning::before {
 	background-color: white;
 }
 
+.story-graph {
+	img {
+		display: block;
+		height: auto;
+		max-width: 100%;
+		margin: 0 auto;
+	}
+}
+
 .stat-block {
 	table.stats {
 		th, td {

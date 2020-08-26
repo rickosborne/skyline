@@ -1,0 +1,85 @@
+@startuml
+
+' title IASO Story Graph
+
+skinparam {
+	DefaultFontName Roboto Condensed
+	DefaultFontSize 16
+	shadowing false
+	
+	ArrowColor #cccccc
+	BackgroundColor #ffffff
+	
+	ActivityBackgroundColor #C8E2F9
+	ActivityBorderColor #C8E2F9
+
+  ActivityBackgroundColor<<NotStarted>> #ffff99
+  ActivityBorderColor<<NotStarted>> #ffff99
+  ActivityBackgroundColor<<TODO>> #eeffcc
+  ActivityBorderColor<<TODO>> #eeffcc
+  ActivityBackgroundColor<<OptionalEncounter>> #F9E2C8
+  ActivityBorderColor<<OptionalEncounter>> #F9E2C8
+  ActivityBackgroundColor<<Encounter>> #EEAD63
+  ActivityBorderColor<<Encounter>> #EEAD63
+  ActivityBackgroundColor<<Travel>> #BBF395
+  ActivityBorderColor<<Travel>> #BBF395
+	LegendBackgroundColor transparent
+	LegendBorderColor transparent
+	LegendBorderThickness 0
+}
+
+(*) --> "100: Mother's Crown" as e100 
+e100 -r-> "101: The Road to Mother's Watch" as e101 <<Travel>>
+e101 -l-> "146" as e146 
+e101 --> "147" as e147 
+e101 --> "162" as e162 <<NotStarted>>
+"102: Olara & Brom" as e102  -l-> "141" as e141 
+e102 --> "142" as e142 <<NotStarted>>
+"103: Forest Near Mother's Watch" as e103  -r-> "104" as e104 
+e104 -r-> "105" as e105 <<Encounter>>
+e105 -r-> "106" as e106 
+e106 -r-> "198" as e198 
+"107" as e107  -r-> "108" as e108 <<OptionalEncounter>>
+e108 -r-> "156: Mother's Watch" as e156 
+"112" as e112 <<OptionalEncounter>> -l-> "123" as e123 <<NotStarted>>
+e112 --> "124" as e124 
+"117" as e117  -r-> "118" as e118 
+e118 -r-> "168" as e168 
+"120" as e120  -r-> "173: Mother's Watch Ruins" as e173 
+"121" as e121  -r-> e173
+e123 -r-> e124
+e124 -r-> e103
+"129: Teb" as e129  -l-> e112
+e129 --> "136" as e136 
+"134" as e134  -r-> e107
+e136 -l-> "137" as e137 
+e136 --> "191" as e191 <<Travel>>
+e137 -r-> e102
+e141 -r-> e142
+e146 -l-> e121
+e146 --> e120
+e147 -l-> e121
+e147 --> e120
+"150" as e150  -l-> e117
+e150 --> e118
+e156 -r-> e129
+e168 -l-> e134
+e168 --> "186" as e186 
+e173 --> e150
+e186 -r-> e107
+e191 -r-> e103
+e198 -r-> "199" as e199 
+e199 --> (*)
+
+legend
+|= Type |= Description |
+|<#C8E2F9> (Other) | Story |
+|<#ffff99> Not Started | Story, needs to be written |
+|<#eeffcc> TODO | Story, not finished |
+|<#BBF395> Travel | Party travel |
+|<#EEAD63> Encounter | Combat encounter, required |
+|<#F9E2C8> Optional Encounter | Combat encounter, optional |
+endlegend
+
+
+@enduml

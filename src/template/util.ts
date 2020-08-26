@@ -1,3 +1,4 @@
+import * as childProcess from "child_process";
 import * as fs from "fs";
 import * as path from "path";
 import * as YAML from "yaml";
@@ -32,6 +33,27 @@ export function toWords(text: string): string {
 	return text.split(/\s+/g)
 		.map(w => `<span class="word" markdown="1">${w}</span>`)
 		.join(" ");
+}
+
+export function svgFromPlantUml(
+	plantUml: string,
+	removeXmlHeader: boolean = true,
+	removeSize: boolean = true,
+): string {
+	let svg = childProcess
+		.execSync(`plantuml -tsvg -nometadata -p`, {
+			input: plantUml,
+			encoding: "utf8"
+		});
+	if (removeXmlHeader) {
+		svg = svg.replace(/<\?xml.*?\?>/s, "");
+	}
+	if (removeSize) {
+		svg = svg.replace(/<svg.*?>/s, svg => svg
+			.replace(/\s+(width|height|style)="[^"]*"/g, "")
+		);
+	}
+	return svg.replace(/<!--.+?-->/gs, "")
 }
 
 export interface Lookups {

@@ -1,6 +1,8 @@
 import * as fs from "fs";
 import * as path from "path";
+import * as YAML from "yaml";
 import {ATemplate} from "./ATemplate";
+import {FrontMatter} from "./FrontMatter";
 
 export interface RenderFileRequest<C> {
 	context: C | undefined;
@@ -13,6 +15,12 @@ export interface RenderFileRequest<C> {
 export interface RenderFileResult<F, C> {
 	context: C;
 	file: F | undefined;
+}
+
+export interface Hyperlink {
+	classNames?: string[];
+	href: string;
+	title: string;
 }
 
 export abstract class AFilesTemplate<T extends object, F, C> extends ATemplate<T> {
@@ -54,12 +62,50 @@ export abstract class AFilesTemplate<T extends object, F, C> extends ATemplate<T
 			.filter(f => f != null));
 	}
 
+	protected getFrontMatter(file: string): FrontMatter | undefined {
+		const frontMatterMatch = file.match(/^---\n(.+?)\n---\n/s);
+		if (frontMatterMatch != null) {
+			return YAML.parse(frontMatterMatch[1]) as FrontMatter;
+		}
+		return undefined;
+	}
+
+	protected getTitle(file: string): { title: string | undefined; headingLevel: number | undefined; } {
+		let headingMatch: RegExpMatchArray | null;
+		let title: string | undefined;
+		let headingLevel: number | undefined;
+		if ((headingMatch = file.match(/(?:^|\n)(#+)\s+([^\r\n]+)/s))) {
+			headingLevel = headingMatch[1].length;
+			title = headingMatch[2];
+		} else if ((headingMatch = file.match(/<h(\d)[^>]*>(.+?)</))) {
+			headingLevel = Number(headingMatch[1]);
+			title = headingMatch[2];
+		}
+		return {headingLevel, title};
+	}
+
 	initialRenderFileContext(): C | undefined {
 		return undefined;
 	}
 
 	public isPrintable(fileName: string): boolean {
 		return !!fileName.match(/^\d+-/);
+	}
+
+	readLinks(file: string): Hyperlink[] {
+		const links: Hyperlink[] = [];
+		for (let match of file.matchAll(/\[(.+?)]\((.+?)\)(?:{:\.(.+?)})/g)) {
+			links.push({
+				title: match[1],
+				href: match[2],
+				classNames: match[3] == null ? undefined : match[3].split('.'),
+			});
+		}
+		return links;
+	}
+
+	readModuleFile(request: RenderFileRequest<any>): string {
+		return fs.readFileSync(path.join(request.modulePath, request.fileName), {encoding: "utf8"});
 	}
 
 	abstract renderData(dataName: string, params: Record<string, string>, files: F[]): T;

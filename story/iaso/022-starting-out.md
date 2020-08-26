@@ -15,7 +15,9 @@ If you have not already picked or created characters, do the following:
 The starter characters each have a set of starting gear, so you won't need to worry about finding weapons, armor, or tools before you start your adventure.
 
 {:.aside}
-The starting gear for most tabletop RPG characters will be fine — you shouldn't need anything special for this module. 
+The starting gear for most tabletop RPG characters will be fine — you shouldn't need anything special for this module.
+
+Narrators may want to glance at the [Story Graph](580-story-graph.md) to get a feel for the flow of the module.
+It has spoilers! 
 
 Start your adventure by skipping ahead to the Adventure section's first entry: [100](100-mothers-crown.md).
-

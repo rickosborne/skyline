@@ -1,3 +1,9 @@
+---
+state: Encounter (Optional)
+tags:
+- story
+---
+
 ## 112
 
 {:.avoid-break-after}

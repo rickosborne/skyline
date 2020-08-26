@@ -1,5 +1,7 @@
 ---
-State: Done
+state: Done
+tags:
+- story
 ---
 
 ## 199

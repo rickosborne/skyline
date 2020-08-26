@@ -1,3 +1,8 @@
+---
+tags:
+- story
+---
+
 ## 147
 
 The fading light hides the look of concern which has overtaken the face of your blind party member, but everyone notices when they stop walking, shush everyone, and turn their head to get the wind out of their ears.

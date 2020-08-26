@@ -9,6 +9,7 @@ import {Dnd5ENpcStats} from "./Dnd5ENpcStats";
 import {Dnd5EPcStats} from "./Dnd5EPcStats";
 import {PlantUmlRenderer} from "./PlantUmlRenderer";
 import {PrintModuleTemplate} from "./PrintModuleTemplate";
+import {StoryGraphPlantUml} from "./StoryGraphPlantUml";
 import {WebTableOfContents} from "./WebTableOfContents";
 
 const TYPED_TEMPLATES: ATemplate<any>[] = [
@@ -19,6 +20,7 @@ const TYPED_TEMPLATES: ATemplate<any>[] = [
 	new PlantUmlRenderer(),
 	new PrintModuleTemplate(),
 	new WebTableOfContents(),
+	new StoryGraphPlantUml(),
 ];
 
 export class TemplateRenderer extends ARenderer {

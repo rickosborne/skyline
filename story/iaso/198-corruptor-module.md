@@ -1,5 +1,8 @@
 ---
-Location: 
+state: Commerce
+location: Mother's Watch
+tags:
+- story
 ---
 
 ## 198

@@ -1,9 +1,8 @@
-import * as childProcess from "child_process";
-import * as console from "console";
 import * as crypto from "crypto";
 import * as fs from "fs";
 import * as path from "path";
 import {ATemplate} from "./ATemplate";
+import {svgFromPlantUml} from "./util";
 
 interface PlantUmlData {
 	fileDir: string;
@@ -65,17 +64,7 @@ export class PlantUmlRenderer extends ATemplate<PlantUmlData> {
 			// console.debug(`PlantUML is up to date: ${params.hash}`);
 			return originalBody;
 		}
-		let svg = childProcess
-			.execSync(`plantuml -tsvg -nometadata -p`, {
-				input: data.uml,
-				encoding: "utf8"
-			})
-			.replace(/<\?xml.*?\?>/s, "")
-			.replace(/<svg.*?>/s, svg => svg
-				.replace(/\s+(width|height|style)="[^"]*"/g, "")
-			)
-			.replace(/<!--.+?-->/gs, '')
-		;
+		let svg = svgFromPlantUml(data.uml);
 		// console.log(`Params ${JSON.stringify(params)}`);
 		if (!!params.link) {
 			svg = `<div class="fullscreen-svg fullscreen-able">${svg}</div>`;
