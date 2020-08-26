@@ -618,7 +618,7 @@ details[open] > summary.spoiler-warning::before {
   background-color: white;
 }
 
-.story-graph img {
+.story-graph img, .story-graph svg {
   display: block;
   height: auto;
   max-width: 100%;

@@ -22,6 +22,7 @@ export interface Entry {
 
 export interface Story {
 	entries: Entry[];
+	modulePath: string;
 	slug: string;
 	title: string;
 }
@@ -45,15 +46,29 @@ export class StoryGraphPlantUml extends AFilesTemplate<Story, Entry, undefined> 
 
 	render(story: Story, params: Record<string, string>, originalBody: string): string {
 		const pumlPath = path.join(this.ROOT_PATH, `${this.PUML_PATH}${story.slug}${this.PUML_EXT}`);
-		const svgPath = path.join(this.ROOT_PATH, `${this.ASSET_PATH}${story.slug}${this.ASSET_EXT}`);
+		const assetPath = `${this.ASSET_PATH}${story.slug}${this.ASSET_EXT}`;
+		const svgPath = path.join(this.ROOT_PATH, assetPath);
 		const originalPuml = fs.existsSync(pumlPath) ? fs.readFileSync(pumlPath, {encoding: "utf8"}) : undefined;
 		const updatedPuml = this.renderPuml(story);
+		// let needsSvgRerender = false;
 		if (originalPuml !== updatedPuml || !fs.existsSync(svgPath)) {
 			fs.writeFileSync(pumlPath, updatedPuml, {encoding: "utf8"});
-			const svg = svgFromPlantUml(updatedPuml, false, false);
-			fs.writeFileSync(svgPath, svg, {encoding: "utf8"});
+			// needsSvgRerender = true;
 		}
-		return `{:.story-graph.col-span-all}\n![Story graph for the module]({{ "/${this.ASSET_PATH}${story.slug}${this.ASSET_EXT}" | relative_url }})`;
+		// if (!fs.existsSync(svgPath)) {
+		// 	needsSvgRerender = true;
+		// }
+		// if (needsSvgRerender) {
+		// 	const svg = svgFromPlantUml(updatedPuml, false, false, true);
+		// 	const originalSvg = fs.existsSync(svgPath) ? fs.readFileSync(svgPath, {encoding: "utf8"}) : '';
+		// 	if (originalSvg !== svg) {
+		// 		fs.writeFileSync(svgPath, svg, {encoding: "utf8"});
+		// 		console.log(`Write: ${assetPath}`);
+		// 	}
+		// }
+		const svg = svgFromPlantUml(updatedPuml, false, true, true);
+		return `<div class="story-graph col-span-all">${svg}</div>`;
+		// return `{:.story-graph.col-span-all}\n![Story graph for the module]({{ "/${this.ASSET_PATH}${story.slug}${this.ASSET_EXT}" | relative_url }})`;
 	}
 
 	renderData(dataName: string, params: Record<string, string>, entries: Entry[]): Story {
@@ -80,6 +95,7 @@ export class StoryGraphPlantUml extends AFilesTemplate<Story, Entry, undefined> 
 		}, {inStory: false, entries: []} as { inStory: boolean; entries: Entry[] }).entries;
 		return {
 			entries: storyEntries,
+			modulePath: dataName,
 			slug,
 			title: storyTitle,
 		};
@@ -117,6 +133,7 @@ export class StoryGraphPlantUml extends AFilesTemplate<Story, Entry, undefined> 
 
 	protected renderPuml(story: Story): string {
 		const rendered: Record<string, string> = {};
+		// const linkBase = `https://rickosborne.github.io/skyline/${story.modulePath}/`;
 
 		function stereotype(entry: Entry): string {
 			if (entry.notStarted) {
@@ -139,10 +156,11 @@ export class StoryGraphPlantUml extends AFilesTemplate<Story, Entry, undefined> 
 				return existing;
 			}
 			rendered[entry.fileName] = `e${entry.num}`;
+			const link = entry.fileName.replace('.md', '.html');
 			if (entry.frontMatter == null) {
-				return `"${entry.num}" as e${entry.num} ${stereotype(entry)}`;
+				return `"[[${link} ${entry.num}]] as e${entry.num}" ${stereotype(entry)}`;
 			}
-			return `"${entry.title}" as e${entry.num} ${stereotype(entry)}`;
+			return `"[[${link} ${entry.title}]]" as e${entry.num} ${stereotype(entry)}`;
 		}
 
 		const entryByHref = story.entries.reduce((nbh, entry) => {
@@ -177,6 +195,9 @@ skinparam {
 	DefaultFontName Roboto Condensed
 	DefaultFontSize 16
 	shadowing false
+	HyperlinkUnderline false
+	HyperlinkColor #000000
+
 	
 	ArrowColor #cccccc
 	BackgroundColor #ffffff

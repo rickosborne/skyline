@@ -3,6 +3,9 @@ location: Mother's Watch Ruins
 state: Exploring
 tags:
 - story
+next:
+  title: 118
+  href: 118-focus.md
 ---
 
 ## 117

@@ -1,6 +1,9 @@
 ---
 tags:
 - guide
+next:
+  title: "100: Mother's Crown"
+  href: 100-mothers-crown.md
 ---
 
 ## Begin your adventure!

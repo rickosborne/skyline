@@ -1,6 +1,9 @@
 ---
 tags:
 - story
+next:
+  title: 105
+  href: 105-striders.md
 ---
 
 ## 104
