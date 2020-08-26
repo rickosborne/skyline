@@ -31,4 +31,4 @@ You're too tired from a long day of walking, so you yell that you'll catch up, k
 {:.story-links.story-links-one}
 [If you have anyone in your party who is deaf, continue on with entry 146.](146-scrappers-deaf.md){:.story-link.story-link-if}
 [If anyone in your party is blind, continue on with entry 147.](147-striders-blind.md){:.story-link.story-link-elseif}
-[Otherwise, continue with entry 162.](162-striders-surprise.md){:.story-link.story-link-else}
+[Otherwise, continue with entry 162.](162-scrappers-surprise.md){:.story-link.story-link-else}

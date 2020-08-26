@@ -2,6 +2,9 @@
 tags:
 - story
 - not-started
+next:
+  title: "124: Mother's Watch"
+  href: 124-back-to-mothers-watch.md
 ---
 
 ## 123

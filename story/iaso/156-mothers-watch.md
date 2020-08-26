@@ -2,6 +2,9 @@
 location: Mother's Watch
 tags:
 - story
+next:
+  title: "129: Teb"
+  href: 129-teb.md
 ---
 
 ## 156: Mother's Watch

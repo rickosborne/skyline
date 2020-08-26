@@ -2,6 +2,9 @@
 state: Encounter (Optional)
 tags:
 - story
+next:
+  title: "156: Mother's Watch"
+  href: 156-mothers-watch.md
 ---
 
 ## 108

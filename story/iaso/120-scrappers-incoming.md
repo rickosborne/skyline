@@ -1,6 +1,9 @@
 ---
 tags:
 - story
+next:
+  title: 173
+  href: 173-ruins-entrance.md
 ---
 
 ## 120

@@ -2,6 +2,9 @@
 state: Travel
 tags:
 - story
+next:
+  title: 103
+  href: 103-cardiac-event.md
 ---
 
 ## 191

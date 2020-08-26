@@ -1,6 +1,9 @@
 ---
 tags:
 - story
+next:
+  title: 104
+  href: 104-clear.md
 ---
 
 ## 103: Forest Near Mother's Watch

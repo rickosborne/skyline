@@ -3,6 +3,7 @@ import * as fs from "fs";
 import * as path from "path";
 import * as YAML from "yaml";
 import {CypherStat} from "../schema/book";
+import * as Prettier from "prettier";
 
 export function ifLines<S extends string | undefined | null | string[]>(
 	obj: S | S[],
@@ -39,21 +40,28 @@ export function svgFromPlantUml(
 	plantUml: string,
 	removeXmlHeader: boolean = true,
 	removeSize: boolean = true,
+	format: boolean = false,
 ): string {
 	let svg = childProcess
 		.execSync(`plantuml -tsvg -nometadata -p`, {
 			input: plantUml,
 			encoding: "utf8"
-		});
+		})
+		.replace(/<!--.+?-->/gs, "")
+	;
 	if (removeXmlHeader) {
 		svg = svg.replace(/<\?xml.*?\?>/s, "");
 	}
 	if (removeSize) {
-		svg = svg.replace(/<svg.*?>/s, svg => svg
+		svg = svg.replace(/<svg[^>]*>/s, svg => svg
 			.replace(/\s+(width|height|style)="[^"]*"/g, "")
 		);
 	}
-	return svg.replace(/<!--.+?-->/gs, "")
+	if (format) {
+		// @ts-ignore
+		svg = Prettier.format(svg, {parser: "xml"});
+	}
+	return svg;
 }
 
 export interface Lookups {

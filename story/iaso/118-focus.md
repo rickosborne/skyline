@@ -3,6 +3,9 @@ location: Mother's Watch Ruins
 state: Exploring
 tags:
 - story
+next:
+  title: 168
+  href: 168-power-wall.md
 ---
 
 ## 118

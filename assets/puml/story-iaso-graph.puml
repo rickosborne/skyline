@@ -6,6 +6,9 @@ skinparam {
 	DefaultFontName Roboto Condensed
 	DefaultFontSize 16
 	shadowing false
+	HyperlinkUnderline false
+	HyperlinkColor #000000
+
 	
 	ArrowColor #cccccc
 	BackgroundColor #ffffff
@@ -28,47 +31,48 @@ skinparam {
 	LegendBorderThickness 0
 }
 
-(*) --> "100: Mother's Crown" as e100 
-e100 -r-> "101: The Road to Mother's Watch" as e101 <<Travel>>
-e101 -l-> "146" as e146 
-e101 --> "147" as e147 
-e101 --> "162" as e162 <<NotStarted>>
-"102: Olara & Brom" as e102  -l-> "141" as e141 
-e102 --> "142" as e142 <<NotStarted>>
-"103: Forest Near Mother's Watch" as e103  -r-> "104" as e104 
-e104 -r-> "105" as e105 <<Encounter>>
-e105 -r-> "106" as e106 
-e106 -r-> "198" as e198 
-"107" as e107  -r-> "108" as e108 <<OptionalEncounter>>
-e108 -r-> "156: Mother's Watch" as e156 
-"112" as e112 <<OptionalEncounter>> -l-> "123" as e123 <<NotStarted>>
-e112 --> "124" as e124 
-"117" as e117  -r-> "118" as e118 
-e118 -r-> "168" as e168 
-"120" as e120  -r-> "173: Mother's Watch Ruins" as e173 
-"121" as e121  -r-> e173
+(*) --> "[[100-mothers-crown.html 100: Mother's Crown]]" as e100 
+e100 -r-> "[[101-road-to-mothers-watch.html 101: The Road to Mother's Watch]]" as e101 <<Travel>>
+e101 -l-> "[[146-scrappers-deaf.html 146]]" as e146 
+e101 --> "[[147-striders-blind.html 147]]" as e147 
+e101 --> "[[162-scrappers-surprise.html 162]]" as e162 
+"[[102-olaras-cave.html 102: Olara & Brom]]" as e102  -l-> "[[141-iaso-brom.html 141]]" as e141 
+e102 --> "[[142-back-down.html 142]]" as e142 <<NotStarted>>
+"[[103-cardiac-event.html 103: Forest Near Mother's Watch]]" as e103  -r-> "[[104-clear.html 104]]" as e104 
+e104 -r-> "[[105-striders.html 105]]" as e105 <<Encounter>>
+e105 -r-> "[[106-all-mother-mountain.html 106]]" as e106 
+e106 -r-> "[[198-corruptor-module.html 198]]" as e198 
+"[[107-lab.html 107]]" as e107  -r-> "[[108-exit.html 108]]" as e108 <<OptionalEncounter>>
+e108 -r-> "[[156-mothers-watch.html 156: Mother's Watch]]" as e156 
+"[[112-leave-tonight.html 112]]" as e112 <<OptionalEncounter>> -l-> "[[123-iaso-brom-olara.html 123]]" as e123 <<NotStarted>>
+e112 --> "[[124-back-to-mothers-watch.html 124]]" as e124 
+"[[117-medical-focus.html 117]]" as e117  -r-> "[[118-focus.html 118]]" as e118 
+e118 -r-> "[[168-power-wall.html 168]]" as e168 
+"[[120-scrappers-incoming.html 120]]" as e120  -r-> "[[173-ruins-entrance.html 173: Mother's Watch Ruins]]" as e173 
+"[[121-scrappers-treeline.html 121]]" as e121  -r-> e173
 e123 -r-> e124
 e124 -r-> e103
-"129: Teb" as e129  -l-> e112
-e129 --> "136" as e136 
-"134" as e134  -r-> e107
-e136 -l-> "137" as e137 
-e136 --> "191" as e191 <<Travel>>
+"[[129-teb.html 129: Teb]]" as e129  -l-> e112
+e129 --> "[[136-leave-tomorrow.html 136]]" as e136 
+"[[134-synchronize.html 134]]" as e134  -r-> e107
+e136 -l-> "[[137-leave-morning.html 137]]" as e137 
+e136 --> "[[191-not-interested.html 191]]" as e191 <<Travel>>
 e137 -r-> e102
 e141 -r-> e142
 e146 -l-> e121
 e146 --> e120
 e147 -l-> e121
 e147 --> e120
-"150" as e150  -l-> e117
+"[[150-the-blinking-light.html 150]]" as e150  -l-> e117
 e150 --> e118
 e156 -r-> e129
+e162 -r-> e173
 e168 -l-> e134
-e168 --> "186" as e186 
+e168 --> "[[186-no-synchronize.html 186]]" as e186 
 e173 --> e150
 e186 -r-> e107
 e191 -r-> e103
-e198 -r-> "199" as e199 
+e198 -r-> "[[199-what-next.html 199]]" as e199 
 e199 --> (*)
 
 legend

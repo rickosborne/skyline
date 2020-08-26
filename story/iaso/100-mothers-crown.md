@@ -3,6 +3,9 @@ location: Mother's Crown
 state: Start
 tags:
 - story
+next:
+  title: "101: The Road to Mother's Watch"
+  href: 101-road-to-mothers-watch.md
 ---
 
 ## 100: Mother's Crown
