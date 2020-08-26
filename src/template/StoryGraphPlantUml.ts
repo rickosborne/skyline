@@ -163,8 +163,12 @@ export class StoryGraphPlantUml extends AFilesTemplate<Story, Entry, undefined> 
 			return `"[[${link} ${entry.title}]]" as e${entry.num} ${stereotype(entry)}`;
 		}
 
+		let anyNotStarted: boolean = false;
+		let anyTodo: boolean = false;
 		const entryByHref = story.entries.reduce((nbh, entry) => {
 			nbh[entry.fileName] = entry;
+			anyNotStarted = anyNotStarted || entry.notStarted;
+			anyTodo = anyTodo || entry.todo;
 			return nbh;
 		}, {} as Record<string, Entry>);
 		const startEntry = story.entries.find(e => e.frontMatter?.state === State.Start);
@@ -177,10 +181,14 @@ export class StoryGraphPlantUml extends AFilesTemplate<Story, Entry, undefined> 
 			}) : from.links)
 				.filter(l => l.classNames?.includes("story-link") && entryByHref[l.href] != null)
 				.map(l => {
+					const target = entryByHref[l.href];
 					const left = titleOf(from);
+					const right = titleOf(target);
 					const classNames = l.classNames || [];
-					const arrow = classNames.includes("story-link-if") || classNames.includes("story-link-elsif") ? "-l->" : classNames.includes("story-link-continue") ? '-r->' : "-->";
-					const right = titleOf(entryByHref[l.href]);
+					const arrow = target.title.includes(':') ?
+						'-->' : (classNames.includes("story-link-if") || classNames.includes("story-link-elsif")) ?
+						"->" : classNames.includes("story-link-continue") ?
+								'->' : "-->";
 					return `${left} ${arrow} ${right}`;
 				}))
 			.join("\n");
@@ -226,9 +234,7 @@ ${endArrow}
 
 legend
 |= Type |= Description |
-|<#C8E2F9> (Other) | Story |
-|<#ffff99> Not Started | Story, needs to be written |
-|<#eeffcc> TODO | Story, not finished |
+|<#C8E2F9> (Other) | Story |${anyNotStarted ? '\n|<#ffff99> Not Started | Story, needs to be written |' : ''}${anyTodo ? '\n|<#eeffcc> TODO | Story, not finished |' : ''}
 |<#BBF395> Travel | Party travel |
 |<#EEAD63> Encounter | Combat encounter, required |
 |<#F9E2C8> Optional Encounter | Combat encounter, optional |

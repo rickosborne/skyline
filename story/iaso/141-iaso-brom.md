@@ -2,8 +2,8 @@
 tags:
 - story
 next:
-  title: 142
-  href: 142-back-down.md
+  title: 124
+  href: 124-back-to-mothers-watch.md
 ---
 
 ## 141
@@ -21,4 +21,4 @@ Attempts to get Brom to wear a Focus or Sensor Pad will be met with hostility fr
 Olara's patience eventually wears thin, and the party heads back down the mountain.
 
 {:.story-links}
-[Continue on to entry 142.](142-back-down.md){:.story-link.story-link-continue}
+[Continue on to entry 124.](124-back-to-mothers-watch.md){:.story-link.story-link-continue}

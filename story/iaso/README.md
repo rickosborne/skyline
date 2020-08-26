@@ -31,7 +31,7 @@ _Estimated module completion: **~46%**._
   * [Mother's Cradle](505-mothers-cradle.md){:.spoiler}
   * [Mother's Watch Ruins](510-mothers-watch-ruins.md){:.spoiler}
   * [Mother's Watch](515-mothers-watch.md)
-  * [Story Graph](580-story-graph.md) _(started, unfinished)_
+  * [Story Graph](580-story-graph.md)
 * [Artifacts of the Old Ones](590-artifacts.md)
 * [Adapters](600-adapters.md) _(started, unfinished)_
 * [D&D, 5th Edition Adapter](605-5e.md)
