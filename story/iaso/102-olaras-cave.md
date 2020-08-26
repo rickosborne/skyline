@@ -42,4 +42,4 @@ Should you encounter her again, her attitude toward you will be cold and distant
 
 {:.story-links.story-links-one}
 [If you brought IASO, and a member of your party could step back around the boulder while the others talk, continue on to entry 141.](141-iaso-brom.md){:.story-link.story-link-if}
-[Otherwise, wish the two well and head back down the mountain with entry 142.](142-back-down.md){:.story-link.story-link-else}
+[Otherwise, wish the two well and head back down the mountain with entry 124.](124-back-to-mothers-watch.md){:.story-link.story-link-else}

@@ -1,4 +1,5 @@
 ---
+state: Travel
 tags:
 - story
 next:
@@ -14,7 +15,7 @@ Read to everyone:
 > The journey back to Mother's Watch is uneventful, and just as straightforward as Olara said.
 >
 > Finding Teb at Mother's Watch, he tells you there's a group of a half-dozen people who went out to get lumber for the next lodge.
-> You help would save a good deal of time.
+> Your help would save a good deal of time.
 > He points to the stone wall to the east and tells you to follow it around for maybe ten minutes.
 
 If you have any Nora in your party, they will gather Medicinal Salvebrush berries along the trip, giving them to any injured party members, including the one who hurt their hand on the door the previous night.
