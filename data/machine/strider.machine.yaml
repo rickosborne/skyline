@@ -1,0 +1,171 @@
+$schema: ../schema/machine.schema.json
+id: strider
+title: Strider
+plural: Strider
+lang: en-US
+overrideSource: PSI
+link:
+  horizonWiki: https://horizon.fandom.com/wiki/Strider
+size: Small
+role: Acquisition
+variant:
+  base:
+    hp: 105
+    challengeLevel: 5
+  corrupted:
+    hp: 158
+    challengeLevel: 12
+action:
+  - id: charge
+    title: Charge
+    description: The Strider closes the distance and rams an enemy.
+    effect: true
+  - id: doubleStrike
+    title: Double Strike
+    description: The Strider rears back and kicks with both front legs.
+    attack: true
+    effect: false
+  - id: hindLegKick
+    title: Hind Leg Kick
+    description: The Strider kicks out with both hind legs.
+    attack: true
+    effect: false
+  - id: rodeoKick
+    title: Rodeo Kick
+    description: The Strider bucks, making multiple kicks in a circle.
+    attack: true
+    effect: false
+  - id: spinKick
+    title: Spin Kick
+    description: The Strider spins, reversing direction with a twin rear kick.
+    attack: true
+    effect: false
+component:
+  body:
+    title: Body
+    damagePercent: 100
+    remove: false
+    loot:
+      - id: metalShards
+        title: Metal Shards
+        percent: 100
+        quantity: 19
+      - id: wire
+        title: Wire
+        percent: 100
+        quantity:
+          min: 9
+          max: 19
+      - id: machineCoreSmall
+        title: Machine Core, Small
+        percent: 40
+        quantity: 1
+      - id: striderHeart
+        title: Strider Heart
+        percent: 40
+        quantity: 1
+      - id: striderLens
+        title: Strider Lens
+        percent: 40
+        quantity: 1
+  blazeCanister:
+    title: Blaze Canister
+    explode:
+      element: fire
+      rangeFeet: 30
+    damage:
+      all: 2
+    targetDifficulty: Moderate
+    damagePercent: 25
+    remove: true
+    loot:
+      - id: blaze
+        title: Blaze
+        percent: 40
+        quantity: 1
+adapter:
+  dnd5e:
+    action:
+      charge:
+        description:
+          - For every 15 ft. the machine moved this round before hitting with an attack, the attack does +2 damage but is -1 to hit.
+          - Targets of medium or smaller size must make a DC 12 Dexterity saving throw or be knocked [prone](https://www.dndbeyond.com/compendium/rules/basic-rules/appendix-a-conditions#Prone).
+      doubleStrike:
+        reachFeet: 5
+        target: 1
+        melee: true
+        toHit: "+4"
+        onHit:
+          - type: bludgeoning
+            roll: 2d4
+            average: 5
+      hindLegKick:
+        reachFeet: 5
+        target: 1
+        melee: true
+        toHit: "+3"
+        onHit:
+          - type: bludgeoning
+            roll: 2d4 + 1
+            average: 6
+      rodeoKick:
+        toHit: "+2"
+        description: Targets all creatures within reach.
+        target: all
+        reachFeet: 5
+        melee: true
+        onHit:
+          - type: bludgeoning
+            roll: 2d4
+            average: 5
+      spinKick:
+        reachFeet: 5
+        target: 1
+        melee: true
+        toHit: "+3"
+        onHit:
+          - type: bludgeoning
+            roll: 2d4 + 2
+            average: 7
+    armor:
+      num: 10
+      type: Light
+    attr:
+      STR:
+        score: 18
+        bonus: "+4"
+      DEX:
+        score: 10
+        bonus: "+0"
+      CON:
+        score: 12
+        bonus: "+1"
+      INT:
+        score: 2
+        bonus: "-4"
+      WIS:
+        score: 11
+        bonus: "+0"
+      CHA:
+        score: 7
+        bonus: "-2"
+    speedFeet: 40
+    hitDie: 10
+    basedOn:
+      title: Draft Horse
+      href: https://www.dndbeyond.com/monsters/draft-horse
+    passive:
+      Perception: 10
+    hp:
+      average: 19
+      roll: 3d10 + 3
+    challenge:
+      rating: "1/4"
+      xp: 50
+  cypher:
+    damage: 1
+    level: 1
+    health: 4
+    target: 3
+    armor: 0
+    movement: Short

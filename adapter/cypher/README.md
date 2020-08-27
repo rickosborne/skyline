@@ -6,7 +6,7 @@ TODO
 
 <!-- +template files adapter/cypher web-table-of-contents -->
 
-_Estimated module completion: **~20%**._
+_Estimated module completion: **~23%**._
 
 * [Skyline Adapter for the Cypher System](005-cover.md) _(started, unfinished)_
 * Basics _(not started yet)_
@@ -45,9 +45,9 @@ _Estimated module completion: **~20%**._
   * [Scrapper](655-scrapper.md)
   * Shell-Walker _(not started yet)_
   * Snapmaw _(not started yet)_
-  * Stalker _(not started yet)_
+  * [Stalker](664-stalker.md) _(started, unfinished)_
   * [Stormbird](667-stormbird.md)
-  * Strider _(not started yet)_
+  * [Strider](670-strider.md)
   * Tallneck _(not started yet)_
   * [Thunderjaw](675-thunderjaw.md)
   * Trampler _(not started yet)_

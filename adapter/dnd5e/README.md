@@ -6,7 +6,7 @@ TODO
 
 <!-- +template files adapter/dnd5e web-table-of-contents -->
 
-_Estimated module completion: **~17%**._
+_Estimated module completion: **~20%**._
 
 * [D&D 5E Adapter for Skyline](010-front-matter.md)
   * Synopsis _(not started yet)_
@@ -44,9 +44,9 @@ _Estimated module completion: **~17%**._
   * [Scrapper](655-scrapper.md) _(started, unfinished)_
   * Shell-Walker _(not started yet)_
   * Snapmaw _(not started yet)_
-  * Stalker _(not started yet)_
+  * [Stalker](664-stalker.md) _(started, unfinished)_
   * [Stormbird](667-stormbird.md) _(started, unfinished)_
-  * Strider _(not started yet)_
+  * [Strider](670-strider.md)
   * Tallneck _(not started yet)_
   * [Thunderjaw](675-thunderjaw.md) _(started, unfinished)_
   * Trampler _(not started yet)_
