@@ -142,10 +142,6 @@ adapter:
         description:
           - For every 15 ft. the Lancehorn moved this round before hitting with an attack, the attack does +2 damage but is -1 to hit.
           - Targets of medium or smaller size must make a DC 14 Dexterity saving throw or be knocked [prone](https://www.dndbeyond.com/compendium/rules/basic-rules/appendix-a-conditions#Prone).
-        onHit:
-          - type: piercing
-            average: 13
-            roll: 2d8 + 4
       goreAndFlip:
         melee: true
         toHit: "+2"
