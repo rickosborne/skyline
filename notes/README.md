@@ -7,6 +7,7 @@ This directory contains unstructured notes — items meant to be tracked, but no
 * [To-Do Items](TODO.md) — The junk drawer.
 * [Style](style.md) — Unstructured style guidance for creators working on Skyline content.
 * [Code](code.md) — Coding projects needed for automation
+* [Maps](maps.md) — Thoughts on how to make maps work without being an artist.
 
 ## Misc
 
