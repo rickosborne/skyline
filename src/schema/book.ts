@@ -52,6 +52,10 @@ export type CypherCypherLevel = number;
 export type CypherCyphers = CypherCypher[];
 export type CypherCypherLimit = number;
 export type CypherEffort = number;
+/**
+ * Count
+ */
+export type Count = number;
 export type CypherEquipmentList = CypherEquipment[];
 export type ExactNumber = number;
 export type DiceRoll = string;
@@ -59,6 +63,7 @@ export type CypherStatBase = number;
 export type CypherStatEdge = number;
 export type CypherStatPool = number;
 export type CypherTier = number;
+export type CypherWeaponAbilityHindered = boolean;
 export type CypherPlayerCharacters = CypherPlayerCharacter[];
 /**
  * Other Actions
@@ -277,6 +282,7 @@ export interface CypherPlayerCharacter {
   stat: CypherStat;
   summary: CypherCharacterSummary;
   tier: CypherTier;
+  weapon?: CypherWeaponAbilities;
 }
 export interface CypherAttack {
   damage: CypherAttackDamage;
@@ -289,6 +295,7 @@ export interface CypherCypher {
   title: Title;
 }
 export interface CypherEquipment {
+  count?: Count;
   note?: Notes & (string | string[]);
   title: Title;
 }
@@ -311,6 +318,17 @@ export interface CypherStatSummary {
   edge?: CypherStatEdge;
   note?: Notes & (string | string[]);
   pool: CypherStatPool;
+}
+export interface CypherWeaponAbilities {
+  [k: string]: CypherWeaponAbility;
+}
+/**
+ * This interface was referenced by `CypherWeaponAbilities`'s JSON-Schema definition
+ * via the `patternProperty` ".*".
+ */
+export interface CypherWeaponAbility {
+  familiarity?: CypherFamiliarity;
+  hindered?: CypherWeaponAbilityHindered;
 }
 /**
  * D&D 5E specifics

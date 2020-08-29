@@ -22,6 +22,7 @@ const DATA_SPACE = "data-space";
 const DATA_ENDL = "data-endl";
 const DATA_TRIM = "data-trim";
 const DATA_MARKDOWN = "data-markdown";
+const DATA_NBSP = "data-nbsp";
 
 const REMOVED = [
 	IF_CHILDREN,
@@ -30,6 +31,7 @@ const REMOVED = [
 	DATA_SPACE,
 	DATA_ENDL,
 	DATA_TRIM,
+	DATA_NBSP,
 	"children"
 ];
 
@@ -42,7 +44,6 @@ const VOID_TAGS = [
 	'hr'
 ];
 
-
 export function html(
 	jsx: JSX.Element | string | number | boolean | undefined,
 	nested: boolean = false,
@@ -53,7 +54,7 @@ export function html(
 	}
 	const props = jsx.props || {};
 	const unwrap = !!props["data-unwrap"];
-	const delim = props[DATA_ENDL] ? "\n" : props[DATA_SPACE] ? " " : props[DATA_TRIM] ? '' : parentDelim;
+	const delim = props[DATA_NBSP] ? "&nbsp;" : props[DATA_ENDL] ? "\n" : props[DATA_SPACE] ? " " : props[DATA_TRIM] ? '' : parentDelim;
 	const onlyIfChildren = !!props[IF_CHILDREN] || unwrap;
 	if (IF_PRESENT in props) {
 		const ifPresent = props[IF_PRESENT];
@@ -84,6 +85,9 @@ export function html(
 		} else {
 			innerHtml = "";
 		}
+	}
+	if (props[DATA_NBSP]) {
+		innerHtml = innerHtml.replace(/\s+/g, '&nbsp;');
 	}
 	if (onlyIfChildren && innerHtml.match(/^\s*$/s)) {
 		return "";

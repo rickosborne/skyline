@@ -7,7 +7,7 @@ It can be played by a single player or by a small group, with or without a narra
 
 <!-- +template files story/iaso web-table-of-contents -->
 
-_Estimated module completion: **~46%**._
+_Estimated module completion: **~49%**._
 
 * [IASO](010-front-matter.md)
   * [Synopsis](015-synopsis.md)
@@ -42,6 +42,10 @@ _Estimated module completion: **~46%**._
   * [Van](610-monk.md)
 * [Cypher System Adapter](620-cypher.md)
   * [Yenever Feldspar](621-barbarian.md)
+  * [Thorn](622-rogue.md)
+  * [Drake](623-brave.md)
+  * [Haldred](624-explorer.md)
+  * [Van](625-speaker.md)
 * [Errata](940-errata.md)
 * Author Notes _(not started yet)_
 * Author Bio _(not started yet)_

@@ -4,35 +4,33 @@ tags:
 breadcrumbs:
 - title: Cypher System Adapter
   href: 620-cypher
-next:
-  title: Thorn
-  href: 622-rogue.md
-title: Yenever Feldspar (Tenakth Melee Warrior)
+prev:
+  title: Haldred
+  href: 624-explorer.md
+title: Van (Banuk Speaker)
 ---
 
-<!-- +template book iaso cypher-pc-stats character="Yenever Feldspar" -->
+<!-- +template book iaso cypher-pc-stats character="Van" -->
 
-<h1>Yenever Feldspar</h1>
-<div class="block cypher-pc-stat-block col-span-all mostly-might">
+<h1>Van</h1>
+<div class="block cypher-pc-stat-block col-span-all mostly-intellect">
 	<article>
 		<header class="name">
 			<h3 class="title"><span class="word" markdown="1">
-Yenever
-</span> <span class="word" markdown="1">
-Feldspar
+Van
 </span></h3>
 		</header>
 		<div class="summary">
 			<span class="summary-is-a">is a</span>
 			<span class="summary-descriptor"
-				><span class="ref-title">strong</span> <span class="ref-book-page"><span class="ref-book">CSR</span><span class="ref-page">56</span></span></span
+				><span class="ref-title">Inquisitive</span> <span class="ref-book-page"><span class="ref-book">CSR</span><span class="ref-page">49</span></span></span
 			>
 			<span class="summary-type"
-				><span class="ref-title">Tenakth warrior</span> <span class="ref-book-page"><span class="ref-book">CSR</span><span class="ref-page">20</span></span></span
+				><span class="ref-title">Banuk speaker</span> <span class="ref-book-page"><span class="ref-book">CSR</span><span class="ref-page">30</span></span></span
 			>
 			<span class="summary-who">who</span>
 			<span class="summary-focus"
-				><span class="ref-title">helps their friends</span> <span class="ref-book-page"><span class="ref-book">CSR</span><span class="ref-page">69</span></span></span
+				><span class="ref-title">Needs no weapon</span> <span class="ref-book-page"><span class="ref-book">CSR</span><span class="ref-page">73</span></span></span
 			>
 		</div>
 		<section class="tier block">
@@ -50,21 +48,21 @@ Feldspar
 		<section class="stats block">
 			<div class="stat might">
 				<header class="label">Might</header>
-				<div class="pool value"><abbr title="Base 13, +4 from Strong">17</abbr></div>
+				<div class="pool value">10</div>
 				<div class="pool legend">Pool</div>
 				<div class="edge value">1</div>
 				<div class="edge legend">Edge</div>
 			</div>
 			<div class="stat speed">
 				<header class="label">Speed</header>
-				<div class="pool value">10</div>
+				<div class="pool value">11</div>
 				<div class="pool legend">Pool</div>
 				<div class="edge value">1</div>
 				<div class="edge legend">Edge</div>
 			</div>
 			<div class="stat intellect">
 				<header class="label">Intellect</header>
-				<div class="pool value">11</div>
+				<div class="pool value"><abbr title="Base 13, +4 from Inquisitive">17</abbr></div>
 				<div class="pool legend">Pool</div>
 				<div class="edge value">1</div>
 				<div class="edge legend">Edge</div>
@@ -94,63 +92,63 @@ Feldspar
 				<div class="detailed">
 					<dt>
 						<span class=""
-							><span class="ref-title">Advice From A Friend</span> <span class="ref-book-page"><span class="ref-book">CSR</span><span class="ref-page">109</span></span></span
+							><span class="ref-title">Anecdote</span> <span class="ref-book-page"><span class="ref-book">CSR</span><span class="ref-page">109</span></span></span
 						>
 					</dt>
-					<dd><span class="action">Action.</span></dd>
+					<dd><span class="cost">2 Intellect points</span></dd>
 				</div>
 				<div class="detailed">
 					<dt>
 						<span class=""
-							><span class="ref-title">Bash</span> <span class="ref-book-page"><span class="ref-book">CSR</span><span class="ref-page">112</span></span></span
+							><span class="ref-title">Enthrall</span> <span class="ref-book-page"><span class="ref-book">CSR</span><span class="ref-page">136</span></span></span
 						>
 					</dt>
 				</div>
 				<div class="detailed">
 					<dt>
 						<span class=""
-							><span class="ref-title">Combat Prowess</span> <span class="ref-book-page"><span class="ref-book">CSR</span><span class="ref-page">120</span></span></span
+							><span class="ref-title">Fists of Fury</span> <span class="ref-book-page"><span class="ref-book">CSR</span><span class="ref-page">140</span></span></span
 						>
 					</dt>
 					<dd><span class="enabler">Enabler.</span></dd>
 				</div>
 				<div class="detailed">
 					<dt>
-						<span class=""
-							><span class="ref-title">Courageous</span> <span class="ref-book-page"><span class="ref-book">CSR</span><span class="ref-page">122</span></span></span
-						>
+						<span class=""><span class="ref-title">Flesh of Stone</span> </span>
 					</dt>
 					<dd><span class="enabler">Enabler.</span></dd>
 				</div>
 				<div class="detailed">
 					<dt>
 						<span class=""
-							><span class="ref-title">Friendly Help</span> <span class="ref-book-page"><span class="ref-book">CSR</span><span class="ref-page">143</span></span></span
+							><span class="ref-title">Hear or notice dangers</span> <span class="ref-book-page"><span class="ref-book">CSR</span><span class="ref-page">49</span></span></span
 						>
 					</dt>
-					<dd><span class="enabler">Enabler.</span></dd>
+					<dd><span class="familiarity">Inability.</span></dd>
 				</div>
 				<div class="detailed">
 					<dt>
 						<span class=""
-							><span class="ref-title">Improved Edge</span> <span class="ref-book-page"><span class="ref-book">CSR</span><span class="ref-page">151</span></span></span
+							><span class="ref-title">Initiative actions</span> <span class="ref-book-page"><span class="ref-book">CSR</span><span class="ref-page">49</span></span></span
 						>
 					</dt>
-					<dd><span class="enabler">Enabler.</span></dd>
+					<dd><span class="familiarity">Inability.</span></dd>
 				</div>
 				<div class="detailed">
 					<dt>
 						<span class=""
-							><span class="ref-title">Trained Without Armor</span> <span class="ref-book-page"><span class="ref-book">CSR</span><span class="ref-page">193</span></span></span
+							><span class="ref-title">Spin Identity</span> <span class="ref-book-page"><span class="ref-book">CSR</span><span class="ref-page">185</span></span></span
 						>
 					</dt>
-					<dd><span class="enabler">Enabler.</span></dd>
+					<dd><span class="cost">2 Intellect points</span> <span class="action">Action.</span></dd>
 				</div>
 				<div class="detailed">
 					<dt>
-						<span class=""><span class="ref-title">Weapons</span> </span>
+						<span class=""
+							><span class="ref-title">Understanding</span> <span class="ref-book-page"><span class="ref-book">CSR</span><span class="ref-page">194</span></span></span
+						>
 					</dt>
-					<dd><span class="familiarity">Practiced.</span> <span class="enabler">Enabler.</span></dd>
+					<dd><span class="cost">1 Intellect point</span></dd>
 				</div>
 			</dl>
 		</section>
@@ -172,20 +170,7 @@ Feldspar
 						<th><abbr title="Inability">I</abbr></th>
 					</tr>
 				</thead>
-				<tbody>
-					<tr>
-						<td class="title">All actions involving breaking inanimate objects</td>
-						<td class="trained yes">T</td>
-						<td class="specialized no">-</td>
-						<td class="inability no">-</td>
-					</tr>
-					<tr>
-						<td class="title">All jumping actions</td>
-						<td class="trained yes">T</td>
-						<td class="specialized no">-</td>
-						<td class="inability no">-</td>
-					</tr>
-				</tbody>
+				<tbody></tbody>
 			</table>
 		</section>
 		<section class="block skills speed">
@@ -211,7 +196,20 @@ Feldspar
 						<th><abbr title="Inability">I</abbr></th>
 					</tr>
 				</thead>
-				<tbody></tbody>
+				<tbody>
+					<tr>
+						<td class="title">Geography, history</td>
+						<td class="trained yes">T</td>
+						<td class="specialized no">-</td>
+						<td class="inability no">-</td>
+					</tr>
+					<tr>
+						<td class="title">Learning something new</td>
+						<td class="trained yes">T</td>
+						<td class="specialized no">-</td>
+						<td class="inability no">-</td>
+					</tr>
+				</tbody>
 			</table>
 		</section>
 		<section class="attacks block">
@@ -225,29 +223,14 @@ Feldspar
 				</thead>
 				<tbody>
 					<tr>
-						<td class="title">Battleaxe 1H</td>
+						<td class="title">Tonfa</td>
 						<td class="modifier"></td>
-						<td class="damage">4</td>
+						<td class="damage">2</td>
 					</tr>
 					<tr>
-						<td class="title">Battleaxe 2H</td>
+						<td class="title">Unarmed</td>
 						<td class="modifier"></td>
-						<td class="damage">6</td>
-					</tr>
-					<tr>
-						<td class="title">Greataxe 2H</td>
-						<td class="modifier"></td>
-						<td class="damage">6</td>
-					</tr>
-					<tr>
-						<td class="title">Javelin 1H Ranged</td>
-						<td class="modifier"></td>
-						<td class="damage">4</td>
-					</tr>
-					<tr>
-						<td class="title">Javelin 1H/2H Melee/Ranged</td>
-						<td class="modifier"></td>
-						<td class="damage">4</td>
+						<td class="damage">2</td>
 					</tr>
 				</tbody>
 			</table>
@@ -271,20 +254,25 @@ Feldspar
 				<header class="legend">Shards</header>
 			</div>
 			<dl class="equipment-list">
-				<div class="detailed"><dt>Battleaxe</dt></div>
+				<div class="detailed">
+					<dt>Books</dt>
+					<dd><span class="count">×3</span></dd>
+				</div>
 				<div class="detailed">
 					<dt>Expensive item</dt>
-					<dd><span class="count">×1</span></dd>
+					<dd><span class="count">×2</span></dd>
 				</div>
-				<div class="detailed"><dt>Greataxe</dt></div>
 				<div class="detailed">
 					<dt>Inexpensive item</dt>
 					<dd><span class="count">×4</span></dd>
 				</div>
-				<div class="detailed"><dt>Javelin</dt></div>
 				<div class="detailed">
 					<dt>Moderate priced item</dt>
 					<dd><span class="count">×2</span></dd>
+				</div>
+				<div class="detailed">
+					<dt>Tonfa</dt>
+					<dd><span class="notes">Light, 2 damage.</span></dd>
 				</div>
 			</dl>
 		</section>

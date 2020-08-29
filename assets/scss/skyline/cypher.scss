@@ -103,11 +103,11 @@
 		grid-template:
 		"name   name    name   might   cyphers"
 	  "summary   summary   summary   might   cyphers"
-	  "tier   effort   xp   might   cyphers"
+	  "tier   effort   xp   speed   cyphers"
 	  "stats   stats   stats   speed   cyphers"
-	  "recovery  recovery  recovery  speed equipment"
+	  "recovery  recovery  recovery  intellect equipment"
 	  "abilities  abilities  abilities intellect  equipment"
-		"abilities abilities abilities intellect equipment"
+		"abilities abilities abilities attacks equipment"
 		"abilities abilities abilities attacks equipment"
 	;
 		grid-template-columns: 1fr 1fr 1fr 3fr 3fr;
@@ -280,7 +280,7 @@
 
 		.action, .hour, .minutes, .hours, .impaired, .debilitated {
 			&::before {
-				content: "⃞ ";
+				content: "⃞\00A0";
 			}
 		}
 	}
@@ -369,6 +369,21 @@
 		;
 		grid-template-rows: auto 1fr auto;
 		grid-template-columns: 1fr 1fr;
+
+		.detailed {
+			dt {
+				//font-weight: var(--weight-bold);
+				display: inline;
+			}
+
+			dd {
+				display: inline;
+
+				&::before {
+					content: ": ";
+				}
+			}
+		}
 
 		.label {
 			grid-area: label;
