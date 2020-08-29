@@ -7,7 +7,7 @@ It can be played by a single player or by a small group, with or without a narra
 
 <!-- +template files story/iaso web-table-of-contents -->
 
-_Estimated module completion: **~50%**._
+_Estimated module completion: **~55%**._
 
 * [IASO](010-front-matter.md)
   * [Synopsis](015-synopsis.md)
@@ -47,10 +47,10 @@ _Estimated module completion: **~50%**._
   * [Haldred](624-explorer.md)
   * [Van](625-speaker.md)
 * [Errata](940-errata.md)
-* Author Notes _(not started yet)_
-* Author Bio _(not started yet)_
-  * Credits _(not started yet)_
-  * Legal _(not started yet)_
+  * [Author Notes](950-author-notes.md)
+  * [Author Bio](955-author-bio.md)
+  * [Credits](960-credits.md)
+  * [Legal](980-legal.md)
 
 <!-- -template files story/iaso web-table-of-contents -->
 
