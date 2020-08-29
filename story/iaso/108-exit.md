@@ -4,7 +4,7 @@ tags:
 - story
 next:
   title: "156: Mother's Watch"
-  href: 156-mothers-watch.md
+  href: 156-mothers-watch
 ---
 
 ## 108

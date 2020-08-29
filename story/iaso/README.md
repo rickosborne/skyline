@@ -7,14 +7,14 @@ It can be played by a single player or by a small group, with or without a narra
 
 <!-- +template files story/iaso web-table-of-contents -->
 
-_Estimated module completion: **~49%**._
+_Estimated module completion: **~50%**._
 
 * [IASO](010-front-matter.md)
   * [Synopsis](015-synopsis.md)
   * [Introduction](020-introduction.md)
   * [Starting Out](022-starting-out.md)
   * [Hooks](025-hooks.md)
-  * [Background](030-background.md) _(started, unfinished)_
+  * [Background](030-background.md)
 * [Starter Characters](040-starter-characters.md)
   * [Yenever Feldspar](042-fighter.md)
   * [Thorn](044-rogue.md)

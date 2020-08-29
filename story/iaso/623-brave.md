@@ -6,10 +6,10 @@ breadcrumbs:
   href: 620-cypher
 prev:
   title: Thorn
-  href: 622-rogue.md
+  href: 622-rogue
 next:
   title: Haldred
-  href: 624-explorer.md
+  href: 624-explorer
 title: Drake (Nora Ranged Warrior)
 ---
 

@@ -3,7 +3,7 @@ tags:
 - story
 next:
   title: 105
-  href: 105-striders.md
+  href: 105-striders
 ---
 
 ## 104

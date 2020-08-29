@@ -4,7 +4,7 @@ tags:
 - story
 next:
   title: 198
-  href: 198-corruptor-module.md
+  href: 198-corruptor-module
 ---
 
 ## 106

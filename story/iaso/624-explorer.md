@@ -6,10 +6,10 @@ breadcrumbs:
   href: 620-cypher
 prev:
   title: Drake
-  href: 623-brave.md
+  href: 623-brave
 next:
   title: Van
-  href: 625-speaker.md
+  href: 625-speaker
 title: Haldred (Oseram Explorer)
 ---
 

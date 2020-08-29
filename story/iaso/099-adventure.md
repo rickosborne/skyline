@@ -3,7 +3,7 @@ tags:
 - guide
 next:
   title: "100: Mother's Crown"
-  href: 100-mothers-crown.md
+  href: 100-mothers-crown
 ---
 
 ## Begin your adventure!

@@ -5,7 +5,7 @@ tags:
 - story
 next:
   title: 199
-  href: 199-what-next.md
+  href: 199-what-next
 ---
 
 ## 198
