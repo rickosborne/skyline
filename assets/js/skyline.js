@@ -123,7 +123,7 @@ var DocHelper = /** @class */ (function () {
             var href = link.href;
             var footnote = _this.div("footnote");
             footnote.id = "fn" + footnoteNumber;
-            if (href.startsWith(_this.homeLink.href)) {
+            if (typeof href === 'string' && href.startsWith(_this.homeLink.href)) {
                 href = href.replace(/\.md$/, '.html');
             }
             footnote.appendChild(document.createTextNode(footnoteNumber + ".\u00A0" + href));
@@ -912,7 +912,7 @@ window.addEventListener("load", function () {
         // Because Firefox makes any css::after content print like butt for some reason.
         document.querySelectorAll("a[href]").forEach(function (link) {
             var href = link.href;
-            if (href.startsWith(docHelper.moduleLink.href)) {
+            if (typeof href === 'string' && href.startsWith(docHelper.moduleLink.href)) {
                 var refSpan = document.createElement("SPAN");
                 refSpan.innerText = " (page\u00a0####)";
                 link.appendChild(refSpan);
