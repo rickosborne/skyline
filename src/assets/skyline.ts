@@ -53,6 +53,7 @@ const DATA_SOURCE = "data-source";
 const DATA_SOURCE_FILE = "data-source-file";
 const DATA_PAGE_OF = "data-page-of";
 const AVOID_BREAK_AFTER = "avoid-break-after";
+const AVOID_BREAK_BEFORE = "avoid-break-before";
 const COL_SPAN_ALL = "col-span-all";
 const DATA_GUTTER_NUM = "data-gutter-num";
 const DATA_GUTTER_REF = "data-gutter-ref";
@@ -80,10 +81,14 @@ class DocHelper {
 		}
 	}
 
-	div(...classNames: string[]) {
-		const div = this.document.createElement("DIV") as HTMLDivElement;
-		div.classList.add(...classNames);
-		return div;
+	tag<E extends HTMLElement = HTMLElement>(tagName: string, ...classNames: string[]): E {
+		const tag = this.document.createElement(tagName) as HTMLElement;
+		tag.classList.add(...classNames.filter(cn => cn != null && cn.trim().length > 0));
+		return tag as E;
+	}
+
+	div(...classNames: string[]): HTMLDivElement {
+		return this.tag<HTMLDivElement>('DIV', ...classNames);
 	}
 
 	extractFootnotes(d: Element,): HTMLDivElement[] {
@@ -212,17 +217,19 @@ abstract class Block {
 		if (parent == null) {
 			return linked;
 		}
+		let previous: HTMLElement | undefined = undefined;
 		let current = node.previousSibling;
 		while (current != null) {
 			if (current.nodeType === Node.ELEMENT_NODE) {
 				const el = current as HTMLElement;
-				if (el.classList.contains(AVOID_BREAK_AFTER) && parent.firstElementChild !== el) {
+				if ((el.classList.contains(AVOID_BREAK_AFTER) || (previous != null && previous.classList.contains(AVOID_BREAK_BEFORE))) && parent.firstElementChild !== el) {
 					linked.unshift(current, ...nonEl);
 					nonEl.splice(0, nonEl.length);
 					current = current.previousSibling;
 				} else {
 					current = null;
 				}
+				previous = el;
 			} else {
 				nonEl.unshift(current);
 				current = current.previousSibling;
@@ -724,6 +731,7 @@ class RenderingTaskManager {
 			} catch (e) {
 				manager.listeners.forEach(l => l(task.title, task.estimatedCompletion, task.errorMessage));
 				console.error(`Task ${task.title} threw: `, e);
+				throw e;
 			} finally {
 				if (task.isComplete) {
 					manager.listeners.forEach(l => l(task.title, 1.0));
@@ -875,7 +883,7 @@ window.addEventListener("load", () => {
 		new OnceTask("Let block quotes span columns and pages.", () => {
 			document.querySelectorAll("blockquote").forEach((bq: HTMLElement) => {
 				docHelper.unwrap(bq, (child, index, count) => {
-					const wrapper = docHelper.div("blockquote-part");
+					const wrapper = docHelper.tag("BLOCKQUOTE", ...(bq.className || '').split(/\s+/g).concat("blockquote-part"));
 					if (index === 0) {
 						wrapper.classList.add("blockquote-start");
 					}

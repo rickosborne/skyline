@@ -72,6 +72,7 @@ var DATA_SOURCE = "data-source";
 var DATA_SOURCE_FILE = "data-source-file";
 var DATA_PAGE_OF = "data-page-of";
 var AVOID_BREAK_AFTER = "avoid-break-after";
+var AVOID_BREAK_BEFORE = "avoid-break-before";
 var COL_SPAN_ALL = "col-span-all";
 var DATA_GUTTER_NUM = "data-gutter-num";
 var DATA_GUTTER_REF = "data-gutter-ref";
@@ -93,15 +94,22 @@ var DocHelper = /** @class */ (function () {
             this.documentSeemsOkay = false;
         }
     }
-    DocHelper.prototype.div = function () {
+    DocHelper.prototype.tag = function (tagName) {
         var _a;
+        var classNames = [];
+        for (var _i = 1; _i < arguments.length; _i++) {
+            classNames[_i - 1] = arguments[_i];
+        }
+        var tag = this.document.createElement(tagName);
+        (_a = tag.classList).add.apply(_a, classNames.filter(function (cn) { return cn != null && cn.trim().length > 0; }));
+        return tag;
+    };
+    DocHelper.prototype.div = function () {
         var classNames = [];
         for (var _i = 0; _i < arguments.length; _i++) {
             classNames[_i] = arguments[_i];
         }
-        var div = this.document.createElement("DIV");
-        (_a = div.classList).add.apply(_a, classNames);
-        return div;
+        return this.tag.apply(this, __spreadArrays(['DIV'], classNames));
     };
     DocHelper.prototype.extractFootnotes = function (d) {
         var _this = this;
@@ -224,11 +232,12 @@ var Block = /** @class */ (function () {
         if (parent == null) {
             return linked;
         }
+        var previous = undefined;
         var current = node.previousSibling;
         while (current != null) {
             if (current.nodeType === Node.ELEMENT_NODE) {
                 var el = current;
-                if (el.classList.contains(AVOID_BREAK_AFTER) && parent.firstElementChild !== el) {
+                if ((el.classList.contains(AVOID_BREAK_AFTER) || (previous != null && previous.classList.contains(AVOID_BREAK_BEFORE))) && parent.firstElementChild !== el) {
                     linked.unshift.apply(linked, __spreadArrays([current], nonEl));
                     nonEl.splice(0, nonEl.length);
                     current = current.previousSibling;
@@ -236,6 +245,7 @@ var Block = /** @class */ (function () {
                 else {
                     current = null;
                 }
+                previous = el;
             }
             else {
                 nonEl.unshift(current);
@@ -751,6 +761,7 @@ var RenderingTaskManager = /** @class */ (function () {
             catch (e) {
                 manager.listeners.forEach(function (l) { return l(task.title, task.estimatedCompletion, task.errorMessage); });
                 console.error("Task " + task.title + " threw: ", e);
+                throw e;
             }
             finally {
                 if (task.isComplete) {
@@ -897,7 +908,7 @@ window.addEventListener("load", function () {
     }), new OnceTask("Let block quotes span columns and pages.", function () {
         document.querySelectorAll("blockquote").forEach(function (bq) {
             docHelper.unwrap(bq, function (child, index, count) {
-                var wrapper = docHelper.div("blockquote-part");
+                var wrapper = docHelper.tag.apply(docHelper, __spreadArrays(["BLOCKQUOTE"], (bq.className || '').split(/\s+/g).concat("blockquote-part")));
                 if (index === 0) {
                     wrapper.classList.add("blockquote-start");
                 }
