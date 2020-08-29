@@ -9,3 +9,5 @@ Gemfile
 Gemfile.lock
 uml/*.puml
 uml/*.uml
+
+.media/
