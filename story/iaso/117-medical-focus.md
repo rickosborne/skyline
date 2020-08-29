@@ -5,7 +5,7 @@ tags:
 - story
 next:
   title: 118
-  href: 118-focus.md
+  href: 118-focus
 ---
 
 ## 117

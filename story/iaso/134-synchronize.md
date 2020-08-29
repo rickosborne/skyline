@@ -5,7 +5,7 @@ tags:
 - story
 next:
   title: 107
-  href: 107-lab.md
+  href: 107-lab
 ---
 
 ## 134

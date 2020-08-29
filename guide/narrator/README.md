@@ -9,11 +9,12 @@ TODO
 
 <!-- +template files guide/narrator web-table-of-contents -->
 
-_Estimated module completion: **~22%**._
+_Estimated module completion: **~30%**._
 
 * [Narrator's Guide](010-front-matter.md)
   * Introduction _(not started yet)_
   * [Magic in Skyline](230-magic.md)
+  * [Human-vs-Human Combat in Skyline](250-human-combat.md)
 * Appendices _(not started yet)_
   * Errata _(not started yet)_
   * Author's Notes _(not started yet)_

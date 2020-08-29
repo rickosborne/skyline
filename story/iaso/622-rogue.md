@@ -6,10 +6,10 @@ breadcrumbs:
   href: 620-cypher
 prev:
   title: Yenever Feldspar
-  href: 621-barbarian.md
+  href: 621-barbarian
 next:
   title: Drake
-  href: 622-brave.md
+  href: 622-brave
 title: Thorn (Infiltrator)
 ---
 

@@ -4,7 +4,7 @@ tags:
 - story
 next:
   title: 106
-  href: 106-all-mother-mountain.md
+  href: 106-all-mother-mountain
 ---
 
 ## 105

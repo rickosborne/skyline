@@ -6,7 +6,7 @@ breadcrumbs:
   href: 620-cypher
 prev:
   title: Haldred
-  href: 624-explorer.md
+  href: 624-explorer
 title: Van (Banuk Speaker)
 ---
 

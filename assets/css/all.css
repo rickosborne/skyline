@@ -308,6 +308,18 @@ blockquote header, .narrator-note header {
   text-indent: -1.5rem;
 }
 
+.align-right {
+  text-align: right;
+}
+
+blockquote + blockquote {
+  padding-top: 0;
+}
+
+.signature {
+  font-size: 200%;
+}
+
 .stat-block table.stats, .stat-block table.loot-list {
   margin: var(--cadence-half) 0;
   border: none;

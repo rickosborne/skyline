@@ -3,7 +3,7 @@ tags:
 - story
 next:
   title: 102
-  href: 102-olaras-cave.md
+  href: 102-olaras-cave
 ---
 
 ## 137

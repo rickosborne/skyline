@@ -4,7 +4,7 @@ tags:
 - story
 next:
   title: Olara and Brom
-  href: 113-olara-and-brom-night.md
+  href: 113-olara-and-brom-night
 ---
 
 ## 112

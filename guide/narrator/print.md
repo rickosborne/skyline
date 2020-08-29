@@ -11,7 +11,7 @@ tags:
 
 <a href="{{ '/guide/narrator' | relative_url }}" id="print-module-top-link" data-source-name="guide/narrator"></a>
 
-{% assign fileNames = "010-front-matter|015-introduction|230-magic|900-appendices|940-errata|950-author-notes|955-author-bio|960-credits|980-legal" | split: "|" %}
+{% assign fileNames = "010-front-matter|015-introduction|230-magic|250-human-combat|900-appendices|940-errata|950-author-notes|955-author-bio|960-credits|980-legal" | split: "|" %}
 {% for fileName in fileNames %}
 
 <div data-source-file="{{ fileName }}">

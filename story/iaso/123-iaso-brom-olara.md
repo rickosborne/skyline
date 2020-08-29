@@ -3,7 +3,7 @@ tags:
 - story
 next:
   title: "124: Mother's Watch"
-  href: 124-back-to-mothers-watch.md
+  href: 124-back-to-mothers-watch
 ---
 
 ## 123

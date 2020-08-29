@@ -5,7 +5,7 @@ tags:
 - story
 next:
   title: 168
-  href: 168-power-wall.md
+  href: 168-power-wall
 ---
 
 ## 118

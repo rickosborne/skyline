@@ -3,7 +3,7 @@ tags:
 - story
 next:
   title: 173
-  href: 173-ruins-entrance.md
+  href: 173-ruins-entrance
 ---
 
 ## 120

@@ -5,7 +5,7 @@ tags:
 - story
 next:
   title: "101: The Road to Mother's Watch"
-  href: 101-road-to-mothers-watch.md
+  href: 101-road-to-mothers-watch
 ---
 
 ## 100: Mother's Crown

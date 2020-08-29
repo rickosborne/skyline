@@ -6,7 +6,7 @@ breadcrumbs:
   href: 620-cypher
 next:
   title: Thorn
-  href: 622-rogue.md
+  href: 622-rogue
 title: Yenever Feldspar (Tenakth Melee Warrior)
 ---
 

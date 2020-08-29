@@ -4,7 +4,7 @@ tags:
 - title-is-spoiler
 next:
   title: Cave Entrance
-  href: 173-ruins-entrance.md
+  href: 173-ruins-entrance
 ---
 
 ## 162
