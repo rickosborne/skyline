@@ -277,6 +277,13 @@
 					"items": {
 						"additionalProperties": false,
 						"properties": {
+							"count": {
+								"default": 1,
+								"description": "Count",
+								"minimum": 0,
+								"title": "Count",
+								"type": "integer"
+							},
 							"note": {
 								"$ref": "skyline.schema.json#/definitions/note"
 							},
@@ -340,6 +347,41 @@
 					"minimum": 1,
 					"title": "Cypher Tier",
 					"type": "integer"
+				},
+				"weapon": {
+					"type": "object",
+					"additionalProperties": false,
+					"title": "Cypher Weapon Abilities",
+					"propertyNames": {
+						"type": "string",
+						"enum": [
+							"heavy",
+							"light",
+							"medium"
+						]
+					},
+					"patternProperties": {
+						".*": {
+							"type": "object",
+							"additionalProperties": false,
+							"title": "Cypher Weapon Ability",
+							"properties": {
+								"familiarity": {
+									"$ref": "#/definitions/familiarity"
+								},
+								"hindered": {
+									"type": "boolean",
+									"default": false,
+									"title": "Cypher Weapon Ability Hindered"
+								}
+							}
+						}
+					},
+					"required": [
+						"heavy",
+						"light",
+						"medium"
+					]
 				}
 			},
 			"required": [

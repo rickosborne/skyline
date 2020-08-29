@@ -56,13 +56,27 @@ adapter:
               book: CSR
               page: 122
         effort: 1
+        attack:
+          - title: Battleaxe 1H
+            damage: 4
+          - title: Battleaxe 2H
+            damage: 6
+          - title: Greataxe 2H
+            damage: 6
+          - title: Javelin 1H/2H Melee/Ranged
+            damage: 4
+          - title: Javelin 1H Ranged
+            damage: 4
         equipment:
-          - title: Battleaxe (1H/2H)
-          - title: Greataxe (2H)
-          - title: Javelin (1H/2H, Melee, Ranged)
-          - title: Expensive item (1)
-          - title: Moderate priced item (2)
-          - title: Inexpensive item (4)
+          - title: Battleaxe
+          - title: Greataxe
+          - title: Javelin
+          - title: Expensive item
+            count: 1
+          - title: Moderate priced item
+            count: 2
+          - title: Inexpensive item
+            count: 4
         cypherLimit: 2
         skill:
           - title: All actions involving breaking inanimate objects
@@ -79,7 +93,7 @@ adapter:
             pool: 17
             base: 13
             note:
-              - "+4 from Strong (CSR 56)"
+              - "+4 from Strong"
           Speed:
             pool: 10
         summary:
@@ -95,6 +109,423 @@ adapter:
           focusRef:
             book: CSR
             page: 69
+        tier: 1
+      - name: Thorn
+        summary:
+          noun: person of unknown origins
+          adjective: Clever
+          descriptorRef:
+            book: CSR
+            page: 41
+          verb: Infiltrates
+          focusRef:
+            book: CSR
+            page: 70
+        stat:
+          Intellect:
+            note: "+2 from Clever"
+            base: 16
+            pool: 18
+            edge: 1
+          Speed:
+            pool: 10
+          Might:
+            pool: 8
+        skill:
+          - title: Lies or trickery, performing or sensing, or evaluating the probable success
+            trained: true
+            pool: Intellect
+          - title: Disguise
+            trained: true
+            pool: Intellect
+          - title: Stealth
+            trained: true
+            pool: Intellect
+          - title: Defense against mental attacks
+            trained: true
+            pool: Intellect
+          - title: Identifying or assessing danger, lies, quality, importance, function, or power
+            trained: true
+            pool: Intellect
+        ability:
+          - title: Stealth Skills
+            bookRef:
+              book: CSR
+              page: 186
+            enabler: true
+            note: From Infiltrates.
+          - title: Sense Attitudes
+            bookRef:
+              book: CSR
+              page: 181
+            note: From Infiltrates.
+            enabler: true
+          - title: Contact
+            bookRef:
+              book: CSR
+              page: 41
+          - title: Spin Identity
+            bookRef:
+              book: CSR
+              page: 185
+            action: true
+            cost:
+              pool: Intellect
+              num: 2
+          - title: Understanding
+            bookRef:
+              book: CSR
+              page: 194
+            action: true
+            cost:
+              pool: Intellect
+              num: 1
+          - title: Assassin Strike
+            bookRef:
+              book: CSR
+              page: 110
+            enabler: true
+            cost:
+              pool: Intellect
+              num: 5
+            note: Deal 9 additional damage when attacking a creature unaware of your presence.
+          - title: Surprise Attack
+            bookRef:
+              book: CSR
+              page: 188
+            enabler: true
+            note: Deal 2 additional damage when attacking from stealth, or before your opponent has acted.
+          - title: Lore, knowledge, or understanding
+            familiarity: Inability
+        equipment:
+          - title: Disguise kit
+          - title: Knife
+            count: 3
+          - title: Expensive item
+            count: 3
+          - title: Moderately-priced item
+            count: 2
+          - title: Inexpensive item
+            count: 4
+        effort: 1
+        tier: 1
+        attack:
+          - title: Knife, Melee/Ranged
+            damage: 2
+      - name: Drake
+        summary:
+          noun: Nora warrior
+          adjective: Rugged
+          descriptorRef:
+            book: CSR
+            page: 55
+          verb: Hunts
+          focusRef:
+            book: CSR
+            page: 69
+        stat:
+          Intellect:
+            pool: 9
+          Speed:
+            pool: 12
+            edge: 1
+          Might:
+            pool: 13
+            edge: 1
+        effort: 1
+        weapon:
+          light:
+            familiarity: Practiced
+          medium:
+            familiarity: Practiced
+          heavy:
+            familiarity: Practiced
+        equipment:
+          - title: Light or Medium Armor (+1)
+            note: From Practiced in Armor.
+          - title: Explorer's pack
+            note: From Rugged.
+          - title: Bow
+          - title: Spear
+          - title: Expensive item
+            count: 1
+          - title: Moderate priced item
+            count: 2
+          - title: Inexpensive item
+            count: 4
+        attack:
+          - title: Bow, Heavy Ranged
+            damage: 6
+          - title: Spear, 1H Ranged
+            damage: 4
+          - title: Spear, 2H Melee
+            damage: 6
+        tier: 1
+        ability:
+          - title: Weapons
+            enabler: true
+          - title: Combat Prowess
+            bookRef:
+              book: CSR
+              page: 120
+            note: Add +1 damage to ranged weapon attacks.
+            enabler: true
+          - title: Overwatch
+            bookRef:
+              book: CSR
+              page: 168
+            cost:
+              pool: Intellect
+              num: 1
+            action: true
+          - title: Improved Edge
+            bookRef:
+              book: CSR
+              page: 151
+            enabler: true
+            note: Improved Speed.
+          - title: Practiced in Armor
+            bookRef:
+              book: CSR
+              page: 171
+            enabler: true
+            note: Reduce the Speed cost for armor by 1.
+          - title: Attack Flourish
+            enabler: true
+            note: "One creature you choose within short range who can see you gains an asset to its next task if taken within a round or two."
+            bookRef:
+              book: CSR
+              page: 111
+          - title: Tracker
+            enabler: true
+            bookRef:
+              book: CSR
+              page: 193
+          - title: Charm, persuasion, etiquette, deception
+            familiarity: Inability
+            bookRef:
+              book: CSR
+              page: 55
+        skill:
+          - title: Following and identifying tracks
+            trained: true
+            pool: Intellect
+          - title: Climbing, jumping, running, swimming
+            trained: true
+            pool: Might
+          - title: Training, riding, or placating animals or machines
+            trained: true
+            pool: Intellect
+          - title: Identifying or using natural plants
+            trained: true
+            pool: Intellect
+      - name: Haldred
+        summary:
+          noun: Oseram explorer
+          typeRef:
+            page: 27
+            book: CSR
+          descriptorRef:
+            page: 52
+            book: CSR
+          adjective: Mechanical
+          verb: Crafts Unique Objects
+          focusRef:
+            book: CSR
+            page: 66
+        ability:
+          - title: Decipher
+            cost:
+              pool: Intellect
+              num: 1
+            action: true
+            bookRef:
+              book: CSR
+              page: 126
+          - title: Endurance
+            enabler: true
+            bookRef:
+              book: CSR
+              page: 134
+          - title: Knowledge Skills
+            enabler: true
+            bookRef:
+              book: CSR
+              page: 157
+          - title: Practiced With All Weapons
+            enabler: true
+            bookRef:
+              book: CSR
+              page: 171
+          - title: Crafter
+            enabler: true
+            familiarity: Trained
+            bookRef:
+              book: CSR
+              page: 122
+            note: Crafting traps and slings.
+          - title: Master Identifier
+            enabler: true
+            familiarity: Trained
+            bookRef:
+              book: CSR
+              page: 160
+            note: Identifying the function of any kind of device.
+        skill:
+          - title: Archaeology
+            pool: Intellect
+          - title: History
+            pool: Intellect
+          - title: All actions involving identifying or understanding machines
+            pool: Intellect
+        tier: 1
+        cypherLimit: 2
+        effort: 1
+        weapon:
+          light:
+            familiarity: Practiced
+          medium:
+            familiarity: Practiced
+          heavy:
+            familiarity: Practiced
+        stat:
+          Might:
+            pool: 12
+            edge: 1
+          Speed:
+            pool: 10
+          Intellect:
+            base: 12
+            pool: 14
+            note: "+2 from Mechanical"
+        equipment:
+          - title: Sling
+            note: Light, 2 damage.
+          - title: Expensive item
+            count: 2
+          - title: Moderate priced item
+            count: 2
+          - title: Inexpensive item
+            count: 4
+          - title: Machine tools
+        attack:
+          - title: Freeze Bomb, Ranged
+            damage: 4
+          - title: Fire Bomb, Ranged
+            damage: 4
+          - title: Shock Bomb, Ranged
+            damage: 4
+          - title: Freeze Trap
+            damage: 6
+          - title: Fire Trap
+            damage: 6
+          - title: Shock Trap
+            damage: 6
+      - name: Van
+        summary:
+          noun: Banuk speaker
+          typeRef:
+            book: CSR
+            page: 30
+          descriptorRef:
+            book: CSR
+            page: 49
+          adjective: Inquisitive
+          verb: Needs no weapon
+          focusRef:
+            book: CSR
+            page: 73
+        effort: 1
+        stat:
+          Might:
+            pool: 10
+          Speed:
+            pool: 11
+          Intellect:
+            base: 13
+            pool: 17
+            note: "+4 from Inquisitive"
+            edge: 1
+        cypherLimit: 2
+        equipment:
+          - title: Tonfa
+            note: Light, 2 damage.
+          - title: Expensive item
+            count: 2
+          - title: Moderate priced item
+            count: 2
+          - title: Inexpensive item
+            count: 4
+          - title: Books
+            count: 3
+        attack:
+          - title: Tonfa
+            damage: 2
+          - title: Unarmed
+            damage: 2
+        weapon:
+          light:
+            familiarity: Practiced
+          medium:
+            familiarity: Inability
+          heavy:
+            familiarity: Inability
+            hindered: true
+        ability:
+          - title: Anecdote
+            bookRef:
+              book: CSR
+              page: 109
+            cost:
+              pool: Intellect
+              num: 2
+          - title: Enthrall
+            bookRef:
+              book: CSR
+              page: 136
+          - title: Spin Identity
+            bookRef:
+              book: CSR
+              page: 185
+            action: true
+            cost:
+              pool: Intellect
+              num: 2
+          - title: Understanding
+            bookRef:
+              book: CSR
+              page: 194
+            cost:
+              pool: Intellect
+              num: 1
+          - title: Fists of Fury
+            enabler: true
+            note: Unarmed attacks inflict 2 additional damage.
+            bookRef:
+              book: CSR
+              page: 140
+          - title: Flesh of Stone
+            enabler: true
+            note: You have +1 to Armor if you do not wear any.
+          - title: Hear or notice dangers
+            familiarity: Inability
+            note: From Inquisitive
+            bookRef:
+              book: CSR
+              page: 49
+          - title: Initiative actions
+            familiarity: Inability
+            note: From Inquisitive
+            bookRef:
+              book: CSR
+              page: 49
+        skill:
+          - title: Learning something new
+            trained: true
+            pool: Intellect
+          - title: Geography, history
+            trained: true
+            pool: Intellect
         tier: 1
   dnd5e:
     playerCharacter:

@@ -1,8 +1,8 @@
 import {h} from "preact";
-import {CypherBookReference, CypherPlayerCharacter, CypherStat, PlayerCharacter} from "../schema/book";
+import {CypherBookReference, CypherPlayerCharacter, CypherStat, CypherStatAbbr, PlayerCharacter} from "../schema/book";
 import {ABookTemplate} from "./ABookTemplate";
 import {html} from "./hypertext";
-import {CYPHER_STAT_TITLES, ifLines, toWords} from "./util";
+import {CYPHER_STAT_TITLES, ifLines, ifPresent, toWords} from "./util";
 
 export interface CypherPlayerCharacterInfo {
 	cypher: CypherPlayerCharacter;
@@ -44,11 +44,22 @@ export class CypherPcStats extends ABookTemplate<CypherPlayerCharacterInfo> {
 
 	render(data: CypherPlayerCharacterInfo, params: Record<string, string>): string {
 		const {cypher, hzd} = data;
+		const mostly = Object.entries((cypher.skill || []).map(s => s.pool).reduce((t, s) => {
+			t[s]++;
+			return t;
+		}, {Intellect: 0, Might: 0, Speed: 0} as Record<CypherStatAbbr, number>)).reduce((best, [stat, count]) => {
+			if (count > best.count) {
+				return {stat, count};
+			} else {
+				return best;
+			}
+		}, {stat: "Intellect" as CypherStatAbbr, count: 0}).stat.toLowerCase();
+		const classNames = `block cypher-pc-stat-block col-span-all mostly-${mostly}`;
 		// noinspection HtmlDeprecatedTag
 		return ifLines([
 			html(<h1>{hzd.name}</h1>),
 			html(
-				<div class="block cypher-pc-stat-block col-span-all">
+				<div class={classNames}>
 					<article>
 						<header class="name">
 							<h3 class="title">{toWords(hzd.name)}</h3>
@@ -86,10 +97,10 @@ export class CypherPcStats extends ABookTemplate<CypherPlayerCharacterInfo> {
 									<div class="label">1d6 +</div>
 									<div class="value">{cypher.recovery?.roll || '1'}</div>
 								</div>
-								<div class="action">1 Action</div>
-								<div class="hour">1 Hour</div>
-								<div class="minutes">10 Mins</div>
-								<div class="hours">10 Hours</div>
+								<div class="action"><abbr title="1 Action">1A</abbr></div>
+								<div class="hour"><abbr title="1 Hour">1H</abbr></div>
+								<div class="minutes"><abbr title="10 Minutes">10M</abbr></div>
+								<div class="hours"><abbr title="10 Hours">10H</abbr></div>
 							</div>
 							<div class="damage-track">
 								<header class="label">Damage Track</header>
@@ -212,7 +223,8 @@ export class CypherPcStats extends ABookTemplate<CypherPlayerCharacterInfo> {
 								{ifLines((cypher.equipment || []).sort(this.sortByTitle()).map(equipment => html(
 									<div class="detailed">
 										<dt>{equipment.title}</dt>
-										<dd>
+										<dd data-space data-if-children>
+											{ifPresent(equipment.count, c => html(<span class="count">&times;{c}</span>))}
 											<span class="notes" data-if-children>{ifLines([equipment.note])}</span>
 										</dd>
 									</div>

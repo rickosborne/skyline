@@ -1063,7 +1063,7 @@ details[open] > summary.spoiler-warning::before {
 
 .cypher-pc-stat-block article {
   display: grid;
-  grid-template: "name   name    name   might   cyphers" "summary   summary   summary   might   cyphers" "tier   effort   xp   might   cyphers" "stats   stats   stats   speed   cyphers" "recovery  recovery  recovery  speed equipment" "abilities  abilities  abilities intellect  equipment" "abilities abilities abilities intellect equipment" "abilities abilities abilities attacks equipment";
+  grid-template: "name   name    name   might   cyphers" "summary   summary   summary   might   cyphers" "tier   effort   xp   speed   cyphers" "stats   stats   stats   speed   cyphers" "recovery  recovery  recovery  intellect equipment" "abilities  abilities  abilities intellect  equipment" "abilities abilities abilities attacks equipment" "abilities abilities abilities attacks equipment";
   grid-template-columns: 1fr 1fr 1fr 3fr 3fr;
   grid-gap: var(--cadence-half);
   border: thin solid #eee;
@@ -1197,7 +1197,7 @@ details[open] > summary.spoiler-warning::before {
   padding: 0 var(--cadence-half);
 }
 .cypher-pc-stat-block .recovery .action::before, .cypher-pc-stat-block .recovery .hour::before, .cypher-pc-stat-block .recovery .minutes::before, .cypher-pc-stat-block .recovery .hours::before, .cypher-pc-stat-block .recovery .impaired::before, .cypher-pc-stat-block .recovery .debilitated::before {
-  content: "⃞ ";
+  content: "⃞ ";
 }
 .cypher-pc-stat-block .special-abilities {
   grid-area: abilities;
@@ -1260,6 +1260,15 @@ details[open] > summary.spoiler-warning::before {
   grid-template: "label label" "list list" "armor currency";
   grid-template-rows: auto 1fr auto;
   grid-template-columns: 1fr 1fr;
+}
+.cypher-pc-stat-block .equipment .detailed dt {
+  display: inline;
+}
+.cypher-pc-stat-block .equipment .detailed dd {
+  display: inline;
+}
+.cypher-pc-stat-block .equipment .detailed dd::before {
+  content: ": ";
 }
 .cypher-pc-stat-block .equipment .label {
   grid-area: label;
