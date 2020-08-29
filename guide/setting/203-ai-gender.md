@@ -16,5 +16,5 @@ A note from Rick Osborne, the author:
 > If my usage here is misaligned with how you choose to use pronouns around your game table, I am truly sorry.
 >You should feel free to use the pronouns which make the most sense to you and your group, and should not consider my usage in these modules normative.
 
-{:.align-right.signature}
+{:.align-right.signature.avoid-break-before}
 > -R
