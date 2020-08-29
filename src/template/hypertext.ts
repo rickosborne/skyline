@@ -41,7 +41,8 @@ const REMOVED_IF_FALSY = [
 
 const VOID_TAGS = [
 	'br',
-	'hr'
+	'hr',
+	'img'
 ];
 
 export function html(

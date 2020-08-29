@@ -8,6 +8,7 @@
 	},
 	"description": "Tabletop role-playing game modules unofficially set in the world of Horizon.",
 	"devDependencies": {
+		"@jimp/png": "^0.16.0",
 		"@prettier/plugin-xml": "^0.11.0",
 		"@types/chai": "^4.2.12",
 		"@types/chalk": "^2.2.0",
@@ -23,6 +24,8 @@
 		"json-schema-to-typescript": "^9.1.1",
 		"loglevel": "^1.7.0",
 		"mocha": "^8.1.0",
+		"jimp": "^0.14.0",
+		"potrace": "^2.1.8",
 		"preact": "^10.4.7",
 		"prettier": "^2.0.5",
 		"ts-node": "^8.10.2",

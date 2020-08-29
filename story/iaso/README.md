@@ -29,7 +29,7 @@ _Estimated module completion: **~55%**._
   * [Pren](450-pren.md){:.spoiler}
 * [Maps & Tables](500-maps-tables.md)
   * [Mother's Cradle](505-mothers-cradle.md){:.spoiler}
-  * [Mother's Watch Ruins](510-mothers-watch-ruins.md){:.spoiler}
+  * [Mother's Watch Ruins](510-mothers-watch-ruins.md){:.spoiler} _(started, unfinished)_
   * [Mother's Watch](515-mothers-watch.md)
   * [Story Graph](580-story-graph.md)
 * [Artifacts of the Old Ones](590-artifacts.md)

@@ -184,3 +184,14 @@ export function uniqueReducer<T>(comparator: Comparator<T> = (a, b) => a === b):
 		return prev;
 	};
 }
+
+export async function replaceAsync<F extends (...args: any[]) => (string | Promise<string>)>(text: string, regExp: RegExp, fn: F): Promise<string> {
+	const promises: Promise<string>[] = [];
+	text.replace(regExp, (match, ...extra) => {
+		const result = fn(match, ...extra);
+		promises.push(result instanceof Promise ? result : Promise.resolve(result));
+		return "";
+	});
+	const results = await Promise.all(promises);
+	return text.replace(regExp, () => results.shift() as string);
+}
