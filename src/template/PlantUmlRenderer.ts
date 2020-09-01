@@ -12,9 +12,11 @@ interface PlantUmlData {
 }
 
 export class PlantUmlRenderer extends ATemplate<PlantUmlData> {
+	public readonly dataType = "plantuml";
+
 	canRender(dataType: string, templateId: string, params: Record<string, string>): boolean {
 		// console.log(`canRender ${dataType} -- ${templateId} -- ${JSON.stringify(params)}`);
-		return dataType === "plantuml";
+		return dataType === this.dataType;
 	}
 
 	convert(data: any, params: Record<string, string>): PlantUmlData {

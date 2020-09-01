@@ -28,4 +28,10 @@ skinparam {
 
 	ActivityBackgroundColor #C8E2F9
 	ActivityBorderColor #C8E2F9
+
+	RectangleBackgroundColor #C8E2F9
+	RectangleBorderColor #C8E2F9
+
+	EntityBackgroundColor #C8E2F9
+	EntityBorderColor #C8E2F9
 }

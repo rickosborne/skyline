@@ -1,0 +1,163 @@
+@startuml
+title Development Data Pipeline
+ 
+hide circle
+skinparam {
+	DefaultFontName Roboto Condensed
+	DefaultFontSize 16
+	shadowing false
+	' --barely-blue: hsl(208, 80%, 99%); #FAFDFE
+	' --noon-blue: hsl(208, 80%, 88%); #C8E2F9
+	' --morning-blue: hsl(208, 80%, 66%); #63ADEE
+	' --barely-orange: hsl(32, 80%, 99%); #FEFDFA
+	' --noon-orange: hsl(32, 80%, 88%); #F9E2C8
+	' --morning-orange: hsl(32, 80%, 66%); #EEAD63
+	' --evening-orange: hsl(32, 80%, 44%); #CA7616
+	' --barely-green: hsl(96, 80%, 99%); #FCFEFA
+	' --noon-green: hsl(96, 80%, 77%); #BBF395
+	' --morning-green: hsl(96, 80%, 55%); #7AE830
+	FileBorderColor #dddddd
+	FileBackgroundColor #eeeeee
+	ComponentBorderColor #dddddd
+	ComponentBackgroundColor #eeeeee
+	CloudBorderColor #dddddd
+	CloudBackgroundColor #eeeeee
+	ArrowColor #cccccc
+	ActivityBackgroundColor #C8E2F9
+	ActivityBorderColor #C8E2F9
+	RectangleBackgroundColor #C8E2F9
+	RectangleBorderColor #C8E2F9
+	EntityBackgroundColor #C8E2F9
+	EntityBorderColor #C8E2F9
+}
+ 
+rectangle BookDataLoader
+rectangle CypherCharacterFromBook
+rectangle CypherMachineRenderer
+rectangle DND5ECharacterFromBook
+rectangle DND5EMachineRenderer
+rectangle FileReader
+rectangle MachineDataLoader
+rectangle MarkdownFileReader
+rectangle PlantUmlFileReader
+rectangle RenderedTemplateSaver
+rectangle SourceDirectoryProvider
+rectangle SourceDirectoryWatcher
+rectangle SourceFileFromDirectory
+rectangle SourceFileListFromDirectory
+rectangle TableOfContentsItemsCollector
+rectangle TemplateBlockExtractor
+rectangle BookTemplateBlockLoader
+rectangle CypherPcRenderer
+rectangle DND5EPcRenderer
+rectangle MachineTemplateBlockLoader
+rectangle MarkdownFilesFromDirectory
+rectangle PlantUmlTemplateRenderer
+rectangle PrintTemplateRenderer
+rectangle StoryGraphFromDirectory
+rectangle TableOfContentsRenderer
+entity "BookData" as BookData
+entity "BookTemplateBlock" as BookTemplateBlock
+entity "CypherCharacterData" as CypherCharacterData
+entity "DND5ECharacterData" as DND5ECharacterData
+entity "FileText" as FileText
+entity "MachineData" as MachineData
+entity "MachineTemplateBlock" as MachineTemplateBlock
+entity "MarkdownFile" as MarkdownFile
+entity "MarkdownFileList" as MarkdownFileList
+entity "OperationBase" as OperationBase
+entity "OperationBase" as OperationBase
+entity "OperationBase" as OperationBase
+entity "PlantUmlFile" as PlantUmlFile
+entity "RenderedBookTemplateBlock" as RenderedBookTemplateBlock
+entity "RenderedHasTemplateBlock" as RenderedHasTemplateBlock
+entity "RenderedMachineTemplateBlock" as RenderedMachineTemplateBlock
+entity "RenderedPlantUmlTemplateBlock" as RenderedPlantUmlTemplateBlock
+entity "RenderedStoryGraphFiles" as RenderedStoryGraphFiles
+entity "RenderedTableOfContentsBlock" as RenderedTableOfContentsBlock
+entity "RenderedTemplateBlock" as RenderedTemplateBlock
+entity "RenderedTemplateBlock" as RenderedTemplateBlock
+entity "RenderedTemplateBlock" as RenderedTemplateBlock
+entity "RenderedTemplateBlock" as RenderedTemplateBlock
+entity "RenderedTemplateBlock" as RenderedTemplateBlock
+entity "RenderedTemplateBlock" as RenderedTemplateBlock
+entity "RenderedTemplateBlock" as RenderedTemplateBlock
+entity "SourceDirectory" as SourceDirectory
+entity "SourceDirectoryFileListOperation" as SourceDirectoryFileListOperation
+entity "SourceDirectoryOperation" as SourceDirectoryOperation
+entity "SourceFileOperation" as SourceFileOperation
+entity "TableOfContentsItems" as TableOfContentsItems
+entity "TemplateBlock" as TemplateBlock
+RenderedTemplateBlock <.. RenderedBookTemplateBlock : extends
+RenderedTemplateBlock <.. RenderedHasTemplateBlock : extends
+RenderedTemplateBlock <.. RenderedMachineTemplateBlock : extends
+RenderedTemplateBlock <.. RenderedPlantUmlTemplateBlock : extends
+RenderedTemplateBlock <.. RenderedStoryGraphFiles : extends
+RenderedTemplateBlock <.. RenderedTableOfContentsBlock : extends
+OperationBase <.. SourceDirectoryFileListOperation : extends
+OperationBase <.. SourceDirectoryOperation : extends
+OperationBase <.. SourceFileOperation : extends
+FileText --> BookDataLoader
+BookDataLoader --> BookData
+BookData --> CypherCharacterFromBook
+CypherCharacterFromBook --> CypherCharacterData
+MachineTemplateBlock --> CypherMachineRenderer
+CypherMachineRenderer --> RenderedMachineTemplateBlock
+BookData --> DND5ECharacterFromBook
+DND5ECharacterFromBook --> DND5ECharacterData
+MachineTemplateBlock --> DND5EMachineRenderer
+DND5EMachineRenderer --> RenderedMachineTemplateBlock
+SourceFileOperation --> FileReader
+FileReader --> FileText
+FileText --> MachineDataLoader
+MachineDataLoader --> MachineData
+FileText --> MarkdownFileReader
+MarkdownFileReader --> MarkdownFile
+FileText --> PlantUmlFileReader
+PlantUmlFileReader --> PlantUmlFile
+RenderedBookTemplateBlock --> RenderedTemplateSaver
+RenderedHasTemplateBlock --> RenderedTemplateSaver
+RenderedMachineTemplateBlock --> RenderedTemplateSaver
+RenderedPlantUmlTemplateBlock --> RenderedTemplateSaver
+RenderedStoryGraphFiles --> RenderedTemplateSaver
+RenderedTableOfContentsBlock --> RenderedTemplateSaver
+RenderedTemplateBlock --> RenderedTemplateSaver
+SourceDirectoryProvider --> SourceDirectory
+SourceDirectory --> SourceDirectoryWatcher
+SourceDirectoryWatcher --> SourceDirectoryOperation
+SourceDirectoryFileListOperation --> SourceFileFromDirectory
+SourceFileFromDirectory --> SourceFileOperation
+SourceDirectoryOperation --> SourceFileListFromDirectory
+SourceFileListFromDirectory --> SourceDirectoryFileListOperation
+MarkdownFileList --> TableOfContentsItemsCollector
+TableOfContentsItemsCollector --> TableOfContentsItems
+MarkdownFile --> TemplateBlockExtractor
+TemplateBlockExtractor --> TemplateBlock
+BookData --> BookTemplateBlockLoader
+TemplateBlock --> BookTemplateBlockLoader
+BookTemplateBlockLoader --> BookTemplateBlock
+CypherCharacterData --> CypherPcRenderer
+BookTemplateBlock --> CypherPcRenderer
+CypherPcRenderer --> RenderedBookTemplateBlock
+DND5ECharacterData --> DND5EPcRenderer
+BookTemplateBlock --> DND5EPcRenderer
+DND5EPcRenderer --> RenderedBookTemplateBlock
+MachineData --> MachineTemplateBlockLoader
+TemplateBlock --> MachineTemplateBlockLoader
+MachineTemplateBlockLoader --> MachineTemplateBlock
+SourceDirectoryFileListOperation --> MarkdownFilesFromDirectory
+MarkdownFile --> MarkdownFilesFromDirectory
+MarkdownFilesFromDirectory --> MarkdownFileList
+TemplateBlock --> PlantUmlTemplateRenderer
+PlantUmlFile --> PlantUmlTemplateRenderer
+PlantUmlTemplateRenderer --> RenderedPlantUmlTemplateBlock
+TemplateBlock --> PrintTemplateRenderer
+SourceDirectoryFileListOperation --> PrintTemplateRenderer
+PrintTemplateRenderer --> RenderedHasTemplateBlock
+MarkdownFileList --> StoryGraphFromDirectory
+TemplateBlock --> StoryGraphFromDirectory
+StoryGraphFromDirectory --> RenderedStoryGraphFiles
+TemplateBlock --> TableOfContentsRenderer
+TableOfContentsItems --> TableOfContentsRenderer
+TableOfContentsRenderer --> RenderedTableOfContentsBlock
+@enduml
