@@ -1,7 +1,7 @@
 import {BookData, BookDataType, DND5ECharacterData, DND5ECharacterDataType} from "../type/BookData";
 import {Transformer} from "./Transformer";
 
-export class DND5ECharacterFromBook extends Transformer<BookData, DND5ECharacterData> {
+export class DND5ECharacterReader extends Transformer<BookData, DND5ECharacterData> {
 	constructor() {
 		super(BookDataType, DND5ECharacterDataType);
 	}

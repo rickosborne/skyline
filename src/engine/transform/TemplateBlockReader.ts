@@ -1,9 +1,8 @@
-import {FileText, FileTextType} from "../type/FileText";
 import {MarkdownFile, MarkdownFileType} from "../type/MarkdownFile";
 import {TEMPLATE_REGEXP, TemplateBlock, TemplateBlockType} from "../type/TemplateBlock";
 import {Transformer} from "./Transformer";
 
-export class TemplateBlockExtractor extends Transformer<MarkdownFile, TemplateBlock> {
+export class TemplateBlockReader extends Transformer<MarkdownFile, TemplateBlock> {
 	constructor() {
 		super(MarkdownFileType, TemplateBlockType);
 	}

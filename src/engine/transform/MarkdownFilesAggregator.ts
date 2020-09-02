@@ -8,7 +8,7 @@ import {
 } from "../type/SourceDirectory";
 import {BiTransformer} from "./Transformer";
 
-export class MarkdownFilesFromDirectory extends BiTransformer<OperationBase<SourceDirectoryFileList>, MarkdownFile, MarkdownFileList> {
+export class MarkdownFilesAggregator extends BiTransformer<OperationBase<SourceDirectoryFileList>, MarkdownFile, MarkdownFileList> {
 	private readonly files: Map<string, Map<string, MarkdownFile>> = new Map<string, Map<string, MarkdownFile>>();
 
 	constructor() {

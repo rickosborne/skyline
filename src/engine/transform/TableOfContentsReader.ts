@@ -7,7 +7,7 @@ import {SourceFile} from "../type/SourceFile";
 import {MarkdownContentItem, TableOfContentsItems, TableOfContentsItemsType} from "../type/TableOfContents";
 import {Transformer} from "./Transformer";
 
-export class TableOfContentsItemsCollector extends Transformer<MarkdownFileList, TableOfContentsItems> {
+export class TableOfContentsReader extends Transformer<MarkdownFileList, TableOfContentsItems> {
 	constructor() {
 		super(MarkdownFileListType, TableOfContentsItemsType);
 	}

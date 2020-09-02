@@ -1,45 +1,27 @@
 import {WebTableOfContents} from "../../template/WebTableOfContents";
-import {SourceDirectoryType} from "../type/SourceDirectory";
 import {
-	FILES_DATA_TYPE,
+	RenderedTableOfContentsTemplateBlockType,
 	TableOfContentsBlock,
-	TableOfContentsBlockType,
-	TableOfContentsItems,
-	TableOfContentsItemsType,
-	WEB_TOC_TEMPLATE_ID
+	TableOfContentsBlockType
 } from "../type/TableOfContents";
-import {
-	RenderedTemplateBlock,
-	RenderedTemplateBlockType,
-	TemplateBlock,
-	TemplateBlockType
-} from "../type/TemplateBlock";
-import {BiTransformer} from "./Transformer";
+import {RenderedTemplateBlock} from "../type/TemplateBlock";
+import {Transformer} from "./Transformer";
 
-export class TableOfContentsRenderer extends BiTransformer<TemplateBlock, TableOfContentsItems, RenderedTemplateBlock<TableOfContentsBlock>> {
+export class TableOfContentsRenderer extends Transformer<TableOfContentsBlock, RenderedTemplateBlock<TableOfContentsBlock>> {
 	protected readonly webTableOfContents: WebTableOfContents = new WebTableOfContents();
 
 	constructor() {
-		super(TemplateBlockType, TableOfContentsItemsType, RenderedTemplateBlockType(TableOfContentsBlockType));
+		super(TableOfContentsBlockType, RenderedTableOfContentsTemplateBlockType);
 	}
 
-	protected matchLeftRight(templateBlock: TemplateBlock, contentsItems: TableOfContentsItems): boolean {
-		return templateBlock.dataType === FILES_DATA_TYPE &&
-			templateBlock.templateId === WEB_TOC_TEMPLATE_ID &&
-			SourceDirectoryType.equals(contentsItems.markdownFileList.fileListOperation.item.sourceDirectory, templateBlock.markdownFile.fileText.file.directory);
-	}
-
-	protected onInputs(templateBlock: TemplateBlock, items: TableOfContentsItems): void {
+	onInput(source: TableOfContentsBlock): void {
 		const renderedText = this.webTableOfContents.render({
-			items: items.contentItems,
-		}, templateBlock.keyValue, templateBlock.body);
-		if (renderedText.trim() !== templateBlock.body.trim()) {
+			items: source.items.contentItems,
+		}, source.templateBlock.keyValue, source.templateBlock.body);
+		if (renderedText.trim() !== source.templateBlock.body.trim()) {
 			this.notify({
 				renderedText,
-				source: {
-					items,
-					templateBlock
-				},
+				source,
 			});
 		}
 	}

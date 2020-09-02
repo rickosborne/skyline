@@ -6,7 +6,7 @@ import {SourceFile, SourceFileOperationType} from "../type/SourceFile";
 import {fileInDirectory} from "../util/FileInDirectory";
 import {Transformer} from "./Transformer";
 
-export class SourceFileFromDirectory extends Transformer<OperationBase<SourceDirectoryFileList>, OperationBase<SourceFile>> {
+export class FilesFromDirectory extends Transformer<OperationBase<SourceDirectoryFileList>, OperationBase<SourceFile>> {
 	private readonly watchers: { dir: SourceDirectory; watcher: fs.FSWatcher }[] = [];
 
 	constructor() {

@@ -9,8 +9,10 @@ export interface CypherPlayerCharacterInfo {
 	hzd: PlayerCharacter;
 }
 
+export const CYPHER_PC_TEMPLATE_ID: 'cypher-pc-stats' = 'cypher-pc-stats';
+
 export class CypherPcStats extends ABookTemplate<CypherPlayerCharacterInfo> {
-	public static readonly TEMPLATE_ID = 'cypher-pc-stats';
+	public static readonly TEMPLATE_ID = CYPHER_PC_TEMPLATE_ID;
 
 	canRender(dataType: string, templateId: string, params: Record<string, string>): boolean {
 		return super.canRender(dataType, templateId, params) && templateId === CypherPcStats.TEMPLATE_ID;

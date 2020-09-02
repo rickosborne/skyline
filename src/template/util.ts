@@ -1,9 +1,10 @@
 import * as childProcess from "child_process";
 import * as fs from "fs";
 import * as path from "path";
-import * as YAML from "yaml";
-import {CypherStat} from "../schema/book";
 import * as Prettier from "prettier";
+import * as YAML from "yaml";
+import {Comparator} from "../engine/type/Type";
+import {CypherStat} from "../schema/book";
 import {Hyperlink} from "./AFilesTemplate";
 import {FrontMatter} from "./FrontMatter";
 
@@ -169,8 +170,17 @@ export function readLinks(file: string): Hyperlink[] {
 		links.push({
 			title: match[1],
 			href: match[2],
-			classNames: match[3] == null ? undefined : match[3].split('.'),
+			classNames: match[3] == null ? undefined : match[3].split("."),
 		});
 	}
 	return links;
+}
+
+export function uniqueReducer<T>(comparator: Comparator<T> = (a, b) => a === b): (prev: T[], cur: T) => T[] {
+	return (prev: T[], cur: T): T[] => {
+		if (prev.findIndex(t => comparator(cur, t)) < 0) {
+			prev.push(cur);
+		}
+		return prev;
+	};
 }

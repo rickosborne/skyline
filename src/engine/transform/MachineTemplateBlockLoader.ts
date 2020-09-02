@@ -1,37 +1,38 @@
 import {
-	MACHINE_DATA_TYPE,
 	MachineData,
+	MachineDataTemplateBlock,
 	MachineDataType,
-	MachineTemplateBlock,
-	MachineTemplateBlockType
+	MachineTemplateBlock
 } from "../type/MachineTemplateBlock";
-import {TemplateBlock, TemplateBlockType} from "../type/TemplateBlock";
+import {Type} from "../type/Type";
 import {BiTransformer} from "./Transformer";
 
-export class MachineTemplateBlockLoader extends BiTransformer<MachineData, TemplateBlock, MachineTemplateBlock> {
-	constructor() {
-		super(
-			MachineDataType,
-			TemplateBlockType,
-			MachineTemplateBlockType,
-		);
+export class MachineTemplateBlockLoader<T extends MachineTemplateBlock, M extends MachineDataTemplateBlock<T>> extends BiTransformer<MachineData, T, M> {
+	constructor(
+		public readonly inRightType: Type<T>,
+		public readonly outType: Type<M>,
+	) {
+		super(MachineDataType, inRightType, outType);
 	}
 
-	protected matchLeftRight(machineData: MachineData, templateBlock: TemplateBlock): boolean {
-		// console.debug(`${this} matchLeftRight ${MachineDataType.stringify(machineData)} <=> ${TemplateBlockType.stringify(templateBlock)}`);
-		return templateBlock.dataType === MACHINE_DATA_TYPE && templateBlock.dataName === machineData.fileText.file.baseName;
+	protected matchLeftRight(machineData: MachineData, templateBlock: T): boolean {
+		return templateBlock.dataName === machineData.fileText.file.baseName;
 	}
 
-	onInputRight(templateBlock: TemplateBlock): void {
-		if (templateBlock.dataType === MACHINE_DATA_TYPE) {
+	onInputRight(templateBlock: T): void {
+		if (this.inRightType.isInstance(templateBlock)) {
 			super.onInputRight(templateBlock);
 		}
 	}
 
-	protected onInputs(machineData: MachineData, templateBlock: TemplateBlock): void {
+	protected onInputs(machineData: MachineData, templateBlock: T): void {
 		this.notify({
 			machineData,
 			templateBlock
-		});
+		} as M);
+	}
+
+	toString(): string {
+		return this.inRightType.name + "Loader";
 	}
 }

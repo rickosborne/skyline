@@ -4,6 +4,8 @@ export type Comparator<T> = (a: T, b: T) => boolean;
 export type Stringifier<T> = (item: T) => string;
 
 export class Type<T> {
+	public readonly subtypes: Type<T>[] = [];
+
 	protected constructor(
 		public readonly name: string,
 		public readonly isInstance: IsInstance<T>,
@@ -28,12 +30,19 @@ export class Type<T> {
 		return new Type<T>(name, isInstance, equals, hasChanged, stringify);
 	}
 
+	public cast(item: any): T {
+		if (this.isInstance(item)) {
+			return item;
+		}
+		throw new Error(`Illegal cast to ${this.name}: ${JSON.stringify(item, null, 2)}`);
+	}
+
 	public isAssignableFrom(otherType: Type<any> | undefined): boolean {
 		return otherType === this || (otherType != null && otherType.parent != null && this.isAssignableFrom(otherType.parent));
 	}
 
 	public subtype<U extends T>(name: string, isInstance: IsInstance<U>, equals: Comparator<U>, hasChanged: Comparator<U>, stringify: Stringifier<U>): Type<U> {
-		return new Type<U>(
+		const subtype = new Type<U>(
 			name,
 			(item: any): item is U => isInstance(item) && this.isInstance(item),
 			(a, b) => equals(a, b) && this.equals(a, b),
@@ -41,6 +50,8 @@ export class Type<T> {
 			stringify,
 			this
 		);
+		this.subtypes.push(subtype);
+		return subtype;
 	}
 
 	public toString(): string {

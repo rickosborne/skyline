@@ -3,7 +3,7 @@ import {FileText, FileTextType} from "../type/FileText";
 import {HeadingLevel, MarkdownFile, MarkdownFileType} from "../type/MarkdownFile";
 import {Transformer} from "./Transformer";
 
-export class MarkdownFileReader extends Transformer<FileText, MarkdownFile> {
+export class FileTextToMarkdown extends Transformer<FileText, MarkdownFile> {
 	constructor() {
 		super(FileTextType, MarkdownFileType);
 	}

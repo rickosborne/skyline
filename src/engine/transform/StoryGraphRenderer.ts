@@ -1,7 +1,12 @@
 import * as path from "path";
 import {Story, StoryGraphPlantUml} from "../../template/StoryGraphPlantUml";
 import {MarkdownFileList, MarkdownFileListType} from "../type/MarkdownFile";
-import {StoryGraphFiles, StoryGraphFilesType} from "../type/StoryGraph";
+import {
+	StoryGraphFiles,
+	StoryGraphFilesType,
+	StoryGraphTemplateBlock,
+	StoryGraphTemplateBlockType
+} from "../type/StoryGraph";
 import {
 	RenderedTemplateBlock,
 	RenderedTemplateBlockType,
@@ -11,24 +16,18 @@ import {
 import {ROOT_PATH} from "../util/RootPath";
 import {BiTransformer} from "./Transformer";
 
-export class StoryGraphFromDirectory extends BiTransformer<MarkdownFileList, TemplateBlock, RenderedTemplateBlock<StoryGraphFiles>> {
+export class StoryGraphRenderer extends BiTransformer<MarkdownFileList, StoryGraphTemplateBlock, RenderedTemplateBlock<StoryGraphFiles>> {
 	private readonly renderer = new StoryGraphPlantUml();
 
 	constructor() {
-		super(MarkdownFileListType, TemplateBlockType, RenderedTemplateBlockType(StoryGraphFilesType));
+		super(MarkdownFileListType, StoryGraphTemplateBlockType, RenderedTemplateBlockType(StoryGraphFilesType));
 	}
 
-	protected matchLeftRight(markdownFileList: MarkdownFileList, templateBlock: TemplateBlock): boolean {
+	protected matchLeftRight(markdownFileList: MarkdownFileList, templateBlock: StoryGraphTemplateBlock): boolean {
 		return templateBlock.dataName === markdownFileList.fileListOperation.item.sourceDirectory.pathFromRoot;
 	}
 
-	onInputRight(templateBlock: TemplateBlock) {
-		if (templateBlock.dataType === this.renderer.DATA_TYPE && templateBlock.templateId === this.renderer.TEMPLATE_ID) {
-			super.onInputRight(templateBlock);
-		}
-	}
-
-	protected onInputs(markdownFileList: MarkdownFileList, templateBlock: TemplateBlock): void {
+	protected onInputs(markdownFileList: MarkdownFileList, templateBlock: StoryGraphTemplateBlock): void {
 		const modulePath = path.join(ROOT_PATH, templateBlock.dataName);
 		const allEntries = markdownFileList.markdownFiles.map(markdownFile => this.renderer.renderEntry(markdownFile.fileText.text, templateBlock.dataName, modulePath, markdownFile.fileText.file.fileName, templateBlock.keyValue));
 		const entries = this.renderer.extractStoryEntries(allEntries);

@@ -1,4 +1,5 @@
-import {ifLines} from "../template/util";
+import {ifLines, uniqueReducer} from "../template/util";
+import {identifiesType, isIdentifier} from "./transform/SubtypeIdentifier";
 import {BiTransformer, Publisher, Transformer} from "./transform/Transformer";
 import {Consumer, Type} from "./type/Type";
 import * as fs from 'fs';
@@ -91,8 +92,12 @@ export class Coordinator {
 					types[type.name] = type;
 				}
 				return types;
-			}, {} as Record<string, Type<any>>)).flatMap(t => t.lineage).sort((a, b) => a.name.localeCompare(b.name));
-		const sortPublishers: (a: Publisher<any>, b: Publisher<any>) => number = (a, b) => a.constructor.name.localeCompare(b.constructor.name);
+			}, {} as Record<string, Type<any>>))
+			.flatMap(t => t.lineage)
+			.reduce(uniqueReducer(), [])
+			.sort((a, b) => a.name.localeCompare(b.name))
+		;
+		const sortPublishers: (a: Publisher<any>, b: Publisher<any>) => number = (a, b) => a.toString().localeCompare(b.toString());
 		const subtypes = types.reduce((m, t) => {
 			let s = m.get(t);
 			if (s == null) {
@@ -110,24 +115,27 @@ export class Coordinator {
 			}
 			return m;
 		}, new Map<Type<any>, Set<Type<any>>>());
+		const subtypesOf = (t: Type<any>, identifies: Type<any> | undefined): Type<any>[] => {
+			return identifies != null ? [t] : [t].concat(...t.subtypes);
+		};
 		return ifLines([
 			"@startuml",
 			"title Development Data Pipeline",
 			" ",
 			style.split(/\n+/g),
 			" ",
-			this.transformers.sort(sortPublishers).map(t => `rectangle ${t.constructor.name}`),
-			this.bitransformers.sort(sortPublishers).map(t => `rectangle ${t.constructor.name}`),
+			this.transformers.sort(sortPublishers).map(t => `rectangle ${t}`),
+			this.bitransformers.sort(sortPublishers).map(t => `rectangle ${t}`),
 			types.map(t => `entity "${t}" as ${typeName(t)}`),
 			types.filter(t => t.parent != null).map(t => `${typeName(t.parent)} <.. ${typeName(t)} : extends`),
 			this.transformers.sort(sortPublishers).flatMap(t => [
-				t.inType == null ? "" : Array.from(subtypes.get(t.inType) as Set<Type<any>>).map(type => `${typeName(type)} --> ${t.constructor.name}`).join("\n"),
-				t.outType == null ? "" : `${t.constructor.name} --> ${typeName(t.outType)}`,
+				t.inType == null ? "" : Array.from(subtypesOf(t.inType, identifiesType(t))).map(type => `${typeName(type)} --> ${t}`).join("\n"),
+				t.outType == null ? "" : `${t} --> ${typeName(t.outType)}`,
 			]),
 			this.bitransformers.sort(sortPublishers).flatMap(t => [
-				t.inLeftType == null ? "" : Array.from(subtypes.get(t.inLeftType) as Set<Type<any>>).map(type => `${typeName(type)} --> ${t.constructor.name}`).join("\n"),
-				t.inRightType == null ? "" : Array.from(subtypes.get(t.inRightType) as Set<Type<any>>).map(type => `${typeName(type)} --> ${t.constructor.name}`).join("\n"),
-				t.outType == null ? "" : `${t.constructor.name} --> ${typeName(t.outType)}`,
+				t.inLeftType == null ? "" : Array.from(subtypesOf(t.inLeftType, undefined)).map(type => `${typeName(type)} --> ${t}`).join("\n"),
+				t.inRightType == null ? "" : Array.from(subtypesOf(t.inRightType, undefined)).map(type => `${typeName(type)} --> ${t}`).join("\n"),
+				t.outType == null ? "" : `${t} --> ${typeName(t.outType)}`,
 			]),
 			"@enduml",
 		]);

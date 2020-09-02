@@ -1,10 +1,10 @@
 import * as fs from "fs";
-import {Transformer} from "./Transformer";
 import {FileText, FileTextType} from "../type/FileText";
 import {isCreated, isReplay, isUpdated, OperationBase} from "../type/Operation";
 import {SourceFile, SourceFileOperationType} from "../type/SourceFile";
+import {Transformer} from "./Transformer";
 
-export class FileReader extends Transformer<OperationBase<SourceFile>, FileText> {
+export class SourceFileOperationToFileText extends Transformer<OperationBase<SourceFile>, FileText> {
 	constructor() {
 		super(SourceFileOperationType, FileTextType);
 	}

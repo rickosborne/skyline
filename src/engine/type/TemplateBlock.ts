@@ -1,5 +1,5 @@
 import {MarkdownFile, MarkdownFileType} from "./MarkdownFile";
-import {Type} from "./Type";
+import {Comparator, IsInstance, Stringifier, Type} from "./Type";
 import equal = require("fast-deep-equal");
 
 export const TEMPLATE_REGEXP = /(?<startTag><!--\s+\+template\s+(?<dataType>\S+)\s+(?<dataName>\S+)\s+(?<templateId>\S+)\s+(?<keyValuePairs>.+?\s+)?-->)(?<body>.*)(?<endTag><!--\s+-template\s+\2\s+\3\s+\4\s+-->)/s;
@@ -31,19 +31,32 @@ export const TemplateBlockType = Type.from("TemplateBlock", (item: any): item is
 	item => `${MarkdownFileType.stringify(item.markdownFile)} template ${item.dataType} ${item.dataName} ${item.templateId} ${JSON.stringify(item.keyValue)}`,
 );
 
-export interface HasTemplateBlock {
-	templateBlock: TemplateBlock;
+export interface HasTemplateBlock<T extends TemplateBlock> {
+	templateBlock: T;
 }
 
 export const HasTemplateBlockType = Type.from("HasTemplateBlock",
-	(item: any): item is HasTemplateBlock => TemplateBlockType.isInstance(item.templateBlock),
+	(item: any): item is HasTemplateBlock<any> => TemplateBlockType.isInstance(item.templateBlock),
 	(a, b) => TemplateBlockType.equals(a.templateBlock, b.templateBlock),
 	(a, b) => TemplateBlockType.hasChanged(a.templateBlock, b.templateBlock),
 	item => TemplateBlockType.stringify(item.templateBlock),
 );
 
+export const HasTemplateBlockSubtype = <T extends TemplateBlock, H extends HasTemplateBlock<T>>(
+	type: Type<T>,
+	name: string,
+	isInstance?: IsInstance<H>,
+	equals?: Comparator<H>,
+	hasChanged?: Comparator<H>,
+	stringify?: Stringifier<H>,
+): Type<H> => HasTemplateBlockType.subtype(name,
+	(item: any): item is H => item != null && type.isInstance(item.templateBlock) && (isInstance == null || isInstance(item)),
+	(a, b) => type.equals(a.templateBlock, b.templateBlock) && (equals == null || equals(a as H, b as H)),
+	(a, b) => type.hasChanged(a.templateBlock, b.templateBlock) || (hasChanged != null && hasChanged(a as H, b as H)),
+	item => stringify == null ? type.stringify(item.templateBlock) : stringify(item),
+) as Type<H>;
 
-export interface RenderedTemplateBlock<T extends HasTemplateBlock> {
+export interface RenderedTemplateBlock<T extends HasTemplateBlock<any>> {
 	renderedText: string;
 	source: T;
 	startTag?: string;
@@ -59,7 +72,7 @@ export const RenderedTemplateBlockAnyType = Type.from("RenderedTemplateBlock", (
 	}
 );
 
-export const RenderedTemplateBlockType = <T extends HasTemplateBlock>(
+export const RenderedTemplateBlockType = <T extends HasTemplateBlock<any>>(
 	sourceType: Type<T>,
 ) => RenderedTemplateBlockAnyType.subtype(
 	`Rendered${sourceType.name}`,

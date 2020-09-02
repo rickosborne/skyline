@@ -27,13 +27,16 @@ export interface Story {
 	title: string;
 }
 
+export const STORY_GRAPH_DATA_TYPE: string = "story-graph-files";
+export const STORY_GRAPH_TEMPLATE_ID: string = "story-graph-plantuml";
+
 export class StoryGraphPlantUml extends AFilesTemplate<Story, Entry, undefined> {
 	public readonly ASSET_EXT = ".svg";
 	public readonly ASSET_PATH = "assets/img/";
-	public readonly DATA_TYPE = "story-graph-files";
+	public readonly DATA_TYPE = STORY_GRAPH_DATA_TYPE;
 	public readonly PUML_EXT = ".puml";
 	public readonly PUML_PATH = "assets/puml/";
-	public readonly TEMPLATE_ID = "story-graph-plantuml";
+	public readonly TEMPLATE_ID = STORY_GRAPH_TEMPLATE_ID;
 
 	convert(data: any, params: Record<string, string>): Story {
 		const story = data as Story;

@@ -1,10 +1,10 @@
 import * as YAML from "yaml";
 import {Machine} from "../../schema/machine";
-import {Transformer} from "./Transformer";
 import {FileText, FileTextType} from "../type/FileText";
 import {MachineData, MachineDataType} from "../type/MachineTemplateBlock";
+import {Transformer} from "./Transformer";
 
-export class MachineDataLoader extends Transformer<FileText, MachineData> {
+export class FileTextToMachineData extends Transformer<FileText, MachineData> {
 	constructor() {
 		super(FileTextType, MachineDataType);
 	}

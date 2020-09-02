@@ -1,29 +1,43 @@
 import {Coordinator} from "./Coordinator";
-import {BookDataLoader} from "./transform/BookDataLoader";
-import {BookTemplateBlockLoader} from "./transform/BookTemplateBlockLoader";
-import {CypherCharacterFromBook} from "./transform/CypherCharacterFromBook";
+import {CypherCharacterJoiner} from "./transform/CypherCharacterJoiner";
+import {CypherCharacterReader} from "./transform/CypherCharacterReader";
+import {CypherCharacterRenderer} from "./transform/CypherCharacterRenderer";
 import {CypherMachineRenderer} from "./transform/CypherMachineRenderer";
-import {CypherPcRenderer} from "./transform/CypherPcRenderer";
-import {DND5ECharacterFromBook} from "./transform/DND5ECharacterFromBookCharacter";
+import {DND5ECharacterJoiner} from "./transform/DND5ECharacterJoiner";
+import {DND5ECharacterReader} from "./transform/DND5ECharacterReader";
+import {DND5ECharacterRenderer} from "./transform/DND5ECharacterRenderer";
 import {DND5EMachineRenderer} from "./transform/DND5EMachineRenderer";
-import {DND5EPcRenderer} from "./transform/DND5EPcRenderer";
-import {FileReader} from "./transform/FileReader";
-import {MachineDataLoader} from "./transform/MachineDataLoader";
+import {FileListFromDirectory} from "./transform/FileListFromDirectory";
+import {FilesFromDirectory} from "./transform/FilesFromDirectory";
+import {FileTextToBookData} from "./transform/FileTextToBookData";
+import {FileTextToMachineData} from "./transform/FileTextToMachineData";
+import {FileTextToMarkdown} from "./transform/FileTextToMarkdown";
+import {FileTextToPlantUml} from "./transform/FileTextToPlantUml";
 import {MachineTemplateBlockLoader} from "./transform/MachineTemplateBlockLoader";
-import {MarkdownFileReader} from "./transform/MarkdownFileReader";
-import {MarkdownFilesFromDirectory} from "./transform/MarkdownFilesFromDirectory";
-import {PlantUmlFileReader} from "./transform/PlantUmlFileReader";
+import {MarkdownFilesAggregator} from "./transform/MarkdownFilesAggregator";
 import {PlantUmlTemplateRenderer} from "./transform/PlantUmlTemplateRenderer";
 import {PrintTemplateRenderer} from "./transform/PrintTemplateRenderer";
 import {RenderedTemplateSaver} from "./transform/RenderedTemplateSaver";
 import {SourceDirectoryProvider} from "./transform/SourceDirectoryProvider";
 import {SourceDirectoryWatcher} from "./transform/SourceDirectoryWatcher";
-import {SourceFileFromDirectory} from "./transform/SourceFileFromDirectory";
-import {SourceFileListFromDirectory} from "./transform/SourceFileListFromDirectory";
-import {StoryGraphFromDirectory} from "./transform/StoryGraphFromDirectory";
-import {TableOfContentsItemsCollector} from "./transform/TableOfContentsItemsCollector";
+import {SourceFileOperationToFileText} from "./transform/SourceFileOperationToFileText";
+import {StoryGraphRenderer} from "./transform/StoryGraphRenderer";
+import {SubtypeIdentifier} from "./transform/SubtypeIdentifier";
+import {TableOfContentsJoiner} from "./transform/TableOfContentsJoiner";
+import {TableOfContentsReader} from "./transform/TableOfContentsReader";
 import {TableOfContentsRenderer} from "./transform/TableOfContentsRenderer";
-import {TemplateBlockExtractor} from "./transform/TemplateBlockExtractor";
+import {TemplateBlockReader} from "./transform/TemplateBlockReader";
+import {CypherCharacterTemplateBlockType, DND5ECharacterTemplateBlockType} from "./type/BookData";
+import {
+	CypherMachineDataTemplateBlockType,
+	CypherMachineTemplateBlockType,
+	DND5EMachineDataTemplateBlockType,
+	DND5EMachineTemplateBlockType
+} from "./type/MachineTemplateBlock";
+import {PlantUmlTemplateBlockType} from "./type/PlantUmlFile";
+import {PrintTemplateBlockType} from "./type/PrintTemplateBlock";
+import {StoryGraphTemplateBlockType} from "./type/StoryGraph";
+import {TemplateBlockType} from "./type/TemplateBlock";
 
 new Coordinator()
 	.add(new SourceDirectoryProvider(
@@ -50,28 +64,40 @@ new Coordinator()
 		"story/iaso",
 	))
 	// .add(new BookCharacterDataLoader())
-	.add(new BookDataLoader())
-	.add(new CypherCharacterFromBook())
+	.add(new CypherCharacterReader())
 	.add(new CypherMachineRenderer())
-	.add(new DND5ECharacterFromBook())
+	.add(new CypherCharacterRenderer())
+	.add(new DND5ECharacterReader())
+	.add(new DND5ECharacterRenderer())
 	.add(new DND5EMachineRenderer())
-	.add(new FileReader())
-	.add(new MachineDataLoader())
-	.add(new MarkdownFileReader())
-	.add(new PlantUmlFileReader())
+	.add(new FileListFromDirectory())
+	.add(new FilesFromDirectory())
+	.add(new FileTextToBookData())
+	.add(new FileTextToMachineData())
+	.add(new FileTextToMarkdown())
+	.add(new FileTextToPlantUml())
 	.add(new RenderedTemplateSaver())
 	.add(new SourceDirectoryWatcher())
-	.add(new SourceFileFromDirectory())
-	.add(new SourceFileListFromDirectory())
-	.add(new TableOfContentsItemsCollector())
-	.add(new TemplateBlockExtractor())
-	.addBi(new BookTemplateBlockLoader())
-	.addBi(new CypherPcRenderer())
-	.addBi(new DND5EPcRenderer())
-	.addBi(new MachineTemplateBlockLoader())
-	.addBi(new MarkdownFilesFromDirectory())
+	.add(new SourceFileOperationToFileText())
+	.add(new TableOfContentsReader())
+	.add(new TableOfContentsRenderer())
+	.add(new TemplateBlockReader())
+
+	.add(new SubtypeIdentifier(TemplateBlockType, CypherCharacterTemplateBlockType))
+	.add(new SubtypeIdentifier(TemplateBlockType, CypherMachineTemplateBlockType))
+	.add(new SubtypeIdentifier(TemplateBlockType, DND5ECharacterTemplateBlockType))
+	.add(new SubtypeIdentifier(TemplateBlockType, DND5EMachineTemplateBlockType))
+	.add(new SubtypeIdentifier(TemplateBlockType, PrintTemplateBlockType))
+	.add(new SubtypeIdentifier(TemplateBlockType, PlantUmlTemplateBlockType))
+	.add(new SubtypeIdentifier(TemplateBlockType, StoryGraphTemplateBlockType))
+
+	.addBi(new CypherCharacterJoiner())
+	.addBi(new DND5ECharacterJoiner())
+	.addBi(new MachineTemplateBlockLoader(CypherMachineTemplateBlockType, CypherMachineDataTemplateBlockType))
+	.addBi(new MachineTemplateBlockLoader(DND5EMachineTemplateBlockType, DND5EMachineDataTemplateBlockType))
+	.addBi(new MarkdownFilesAggregator())
 	.addBi(new PlantUmlTemplateRenderer())
 	.addBi(new PrintTemplateRenderer())
-	.addBi(new StoryGraphFromDirectory())
-	.addBi(new TableOfContentsRenderer())
+	.addBi(new StoryGraphRenderer())
+	.addBi(new TableOfContentsJoiner())
 	.start();

@@ -5,9 +5,12 @@ export interface PrintModule {
 	fileBaseNames: string[];
 }
 
+export const PRINT_DATA_TYPE: "module" = "module";
+export const PRINT_TEMPLATE_ID: "print-module" = "print-module";
+
 export class PrintModuleTemplate extends AFilesTemplate<PrintModule, string, undefined> {
-	public readonly DATA_TYPE = "module";
-	public readonly TEMPLATE_ID = "print-module";
+	public readonly DATA_TYPE = PRINT_DATA_TYPE;
+	public readonly TEMPLATE_ID = PRINT_TEMPLATE_ID;
 
 	convert(data: any, params: Record<string, string>): PrintModule {
 		const printModule: PrintModule = data;

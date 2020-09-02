@@ -9,7 +9,7 @@ import {
 import {fileInDirectory} from "../util/FileInDirectory";
 import {Transformer} from "./Transformer";
 
-export class SourceFileListFromDirectory extends Transformer<OperationBase<SourceDirectory>, OperationBase<SourceDirectoryFileList>> {
+export class FileListFromDirectory extends Transformer<OperationBase<SourceDirectory>, OperationBase<SourceDirectoryFileList>> {
 	constructor() {
 		super(SourceDirectoryOperationType, SourceDirectoryFileListOperationType);
 	}

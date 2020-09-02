@@ -4,7 +4,7 @@ import {BookData, BookDataType} from "../type/BookData";
 import {FileText, FileTextType} from "../type/FileText";
 import {Transformer} from "./Transformer";
 
-export class BookDataLoader extends Transformer<FileText, BookData> {
+export class FileTextToBookData extends Transformer<FileText, BookData> {
 	constructor() {
 		super(FileTextType, BookDataType);
 	}

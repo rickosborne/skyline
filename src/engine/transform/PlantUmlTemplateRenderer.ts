@@ -1,28 +1,29 @@
 import * as crypto from "crypto";
 import {PlantUmlRenderer} from "../../template/PlantUmlRenderer";
-import {PlantUmlFile, PlantUmlFileType, PlantUmlTemplateBlock, PlantUmlTemplateBlockType} from "../type/PlantUmlFile";
 import {
-	RenderedTemplateBlock,
-	RenderedTemplateBlockType,
-	TemplateBlock,
-	TemplateBlockType
-} from "../type/TemplateBlock";
+	PlantUmlDataBlock,
+	PlantUmlFile,
+	PlantUmlFileType,
+	PlantUmlTemplateBlock,
+	PlantUmlTemplateBlockType,
+	RenderedPlantUmlDataBlockType
+} from "../type/PlantUmlFile";
+import {RenderedTemplateBlock} from "../type/TemplateBlock";
 import {BiTransformer} from "./Transformer";
 
-export class PlantUmlTemplateRenderer extends BiTransformer<TemplateBlock, PlantUmlFile, RenderedTemplateBlock<PlantUmlTemplateBlock>> {
+export class PlantUmlTemplateRenderer extends BiTransformer<PlantUmlTemplateBlock, PlantUmlFile, RenderedTemplateBlock<PlantUmlDataBlock>> {
 	private readonly plantRenderer = new PlantUmlRenderer();
 
 	constructor() {
-		super(TemplateBlockType, PlantUmlFileType, RenderedTemplateBlockType(PlantUmlTemplateBlockType));
+		super(PlantUmlTemplateBlockType, PlantUmlFileType, RenderedPlantUmlDataBlockType);
 	}
 
-	protected matchLeftRight(templateBlock: TemplateBlock, plantUmlFile: PlantUmlFile): boolean {
-		return templateBlock.dataType === this.plantRenderer.dataType &&
-			plantUmlFile.fileText.file.directory.pathFromRoot === "assets/puml" &&
+	protected matchLeftRight(templateBlock: PlantUmlTemplateBlock, plantUmlFile: PlantUmlFile): boolean {
+		return plantUmlFile.fileText.file.directory.pathFromRoot === "assets/puml" &&
 			plantUmlFile.fileText.file.fileName === `${templateBlock.dataName}.puml`;
 	}
 
-	protected onInputs(templateBlock: TemplateBlock, plantUmlFile: PlantUmlFile): void {
+	protected onInputs(templateBlock: PlantUmlTemplateBlock, plantUmlFile: PlantUmlFile): void {
 		const link = !!templateBlock.keyValue.link;
 		const hash = crypto.createHash("sha256")
 			.update(plantUmlFile.fileText.text)

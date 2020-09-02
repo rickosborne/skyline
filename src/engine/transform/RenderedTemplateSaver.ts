@@ -6,7 +6,7 @@ export class RenderedTemplateSaver extends Transformer<RenderedTemplateBlock<any
 		super(RenderedTemplateBlockAnyType, undefined);
 	}
 
-	onInput(input: RenderedTemplateBlock<HasTemplateBlock>): void {
+	onInput(input: RenderedTemplateBlock<HasTemplateBlock<any>>): void {
 		const templateBlock = input.source.templateBlock;
 		const replacement = [
 			input.startTag || templateBlock.startTag,
