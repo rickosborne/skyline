@@ -17,6 +17,9 @@ export const SourceDirectoryType = Type.from("SourceDirectory", (item: any): ite
 	(a, b) => a.pathFromRoot !== b.pathFromRoot || a.fullPath !== b.fullPath || a.fileName !== b.fileName,
 	item => item.pathFromRoot,
 );
+
+export type SourceDirectoryOperation = OperationBase<SourceDirectory>;
+
 export const SourceDirectoryOperationType = OperationBaseType.subtype("SourceDirectoryOperation", (item: any): item is OperationBase<SourceDirectory> => item != null &&
 	SourceDirectoryType.isInstance(item.item),
 	(a, b) => SourceDirectoryType.equals(a.item, b.item),

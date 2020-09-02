@@ -1,5 +1,6 @@
 import * as equal from "fast-deep-equal";
 import * as fs from "fs";
+import * as path from "path";
 import {Operation, OperationBase} from "../type/Operation";
 import {
 	SourceDirectory,
@@ -42,10 +43,14 @@ export class FilesFromDirectory extends Transformer<SourceDirectoryFileListOpera
 						console.debug(`[${this}] change ${fileName}`);
 						break;
 					case "rename":
-						if (!fileName.endsWith("~")) {
-							console.debug(`[${this}] rename ${fileName}`);
+						if (fileName.endsWith("~")) {  // temp files created by IntelliJ
+							return;
 						}
-						return;
+						const fullPath = path.join(dir.fullPath, fileName);
+						const isFile = fs.existsSync(fullPath) && fs.statSync(fullPath).isFile();
+						operation = isFile ? Operation.Updated : Operation.Deleted;
+						console.debug(`[${this}] rename ${fileName}: ${operation}`);
+						break;
 					default:
 						throw new Error(`Unknown event type "${watchEvent}" for file "${fileName}" while watching "${dir.fullPath}".`);
 				}
