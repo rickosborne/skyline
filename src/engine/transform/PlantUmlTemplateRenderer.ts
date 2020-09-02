@@ -1,48 +1,33 @@
 import * as crypto from "crypto";
 import {PlantUmlRenderer} from "../../template/PlantUmlRenderer";
-import {
-	PlantUmlDataBlock,
-	PlantUmlFile,
-	PlantUmlFileType,
-	PlantUmlTemplateBlock,
-	PlantUmlTemplateBlockType,
-	RenderedPlantUmlDataBlockType
-} from "../type/PlantUmlFile";
+import {HasPlantUmlTemplateBlockType, PlantUmlDataBlock, RenderedPlantUmlDataBlockType} from "../type/PlantUmlFile";
 import {RenderedTemplateBlock} from "../type/TemplateBlock";
-import {BiTransformer} from "./Transformer";
+import {Transformer} from "./Transformer";
 
-export class PlantUmlTemplateRenderer extends BiTransformer<PlantUmlTemplateBlock, PlantUmlFile, RenderedTemplateBlock<PlantUmlDataBlock>> {
+export class PlantUmlTemplateRenderer extends Transformer<PlantUmlDataBlock, RenderedTemplateBlock<PlantUmlDataBlock>> {
 	private readonly plantRenderer = new PlantUmlRenderer();
 
 	constructor() {
-		super(PlantUmlTemplateBlockType, PlantUmlFileType, RenderedPlantUmlDataBlockType);
+		super(HasPlantUmlTemplateBlockType, RenderedPlantUmlDataBlockType);
 	}
 
-	protected matchLeftRight(templateBlock: PlantUmlTemplateBlock, plantUmlFile: PlantUmlFile): boolean {
-		return plantUmlFile.fileText.file.directory.pathFromRoot === "assets/puml" &&
-			plantUmlFile.fileText.file.fileName === `${templateBlock.dataName}.puml`;
-	}
-
-	protected onInputs(templateBlock: PlantUmlTemplateBlock, plantUmlFile: PlantUmlFile): void {
-		const link = !!templateBlock.keyValue.link;
+	onInput(source: PlantUmlDataBlock): void {
+		const link = !!source.templateBlock.keyValue.link;
 		const hash = crypto.createHash("sha256")
-			.update(plantUmlFile.fileText.text)
+			.update(source.plantUmlFile.fileText.text)
 			.update(String(link))
 			.digest("hex");
 		const renderedText = this.plantRenderer.render({
-			fileDir: plantUmlFile.fileText.file.directory.fullPath,
-			fileName: plantUmlFile.fileText.file.fileName,
+			fileDir: source.plantUmlFile.fileText.file.directory.fullPath,
+			fileName: source.plantUmlFile.fileText.file.fileName,
 			hash,
-			uml: plantUmlFile.fileText.text,
-		}, templateBlock.keyValue, templateBlock.body)
-		if (renderedText.trim() !== templateBlock.body.trim()) {
+			uml: source.plantUmlFile.fileText.text,
+		}, source.templateBlock.keyValue, source.templateBlock.body)
+		if (renderedText.trim() !== source.templateBlock.body.trim()) {
 			this.notify({
 				renderedText,
-				source: {
-					plantUmlFile,
-					templateBlock,
-				},
-				startTag: `<!-- +template ${templateBlock.dataType} ${templateBlock.dataName} * hash="${hash}"${link ? " link=1" : ""} -->`,
+				source,
+				startTag: `<!-- +template ${source.templateBlock.dataType} ${source.templateBlock.dataName} * hash="${hash}"${link ? " link=1" : ""} -->`,
 			});
 		}
 	}

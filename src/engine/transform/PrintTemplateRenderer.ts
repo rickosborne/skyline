@@ -1,40 +1,28 @@
 import {PrintModuleTemplate} from "../../template/PrintModuleTemplate";
-import {isCreated, isReplay, isUpdated, OperationBase} from "../type/Operation";
-import {PrintTemplateBlock, PrintTemplateBlockType, RenderedPrintTemplateBlockType} from "../type/PrintTemplateBlock";
 import {
-	SourceDirectoryFileList,
-	SourceDirectoryFileListOperationType,
-	SourceDirectoryType
-} from "../type/SourceDirectory";
+	HasPrintTemplateBlock,
+	HasPrintTemplateBlockType,
+	PrintTemplateBlock,
+	RenderedPrintTemplateBlockType
+} from "../type/PrintTemplateBlock";
 import {HasTemplateBlock, RenderedTemplateBlock} from "../type/TemplateBlock";
-import {BiTransformer} from "./Transformer";
+import {Transformer} from "./Transformer";
 
-export class PrintTemplateRenderer extends BiTransformer<PrintTemplateBlock, OperationBase<SourceDirectoryFileList>, RenderedTemplateBlock<HasTemplateBlock<PrintTemplateBlock>>> {
+export class PrintTemplateRenderer extends Transformer<HasPrintTemplateBlock, RenderedTemplateBlock<HasTemplateBlock<PrintTemplateBlock>>> {
 	private readonly printRenderer = new PrintModuleTemplate();
 
 	constructor() {
-		super(PrintTemplateBlockType, SourceDirectoryFileListOperationType, RenderedPrintTemplateBlockType);
+		super(HasPrintTemplateBlockType, RenderedPrintTemplateBlockType);
 	}
 
-	protected matchLeftRight(templateBlock: PrintTemplateBlock, fileListOperation: OperationBase<SourceDirectoryFileList>): boolean {
-		return SourceDirectoryType.equals(templateBlock.markdownFile.fileText.file.directory, fileListOperation.item.sourceDirectory) &&
-			(isCreated(fileListOperation) || isUpdated(fileListOperation) || isReplay(fileListOperation))
-			;
-	}
-
-	protected onInputs(templateBlock: PrintTemplateBlock, fileListOperation: OperationBase<SourceDirectoryFileList>): void {
+	onInput(printBlock: HasPrintTemplateBlock): void {
 		const renderedText = this.printRenderer.render({
-			dataName: templateBlock.dataName,
-			fileBaseNames: fileListOperation.item.fileList
-				.map(sourceFile => sourceFile.baseName)
-				.sort()
-				.filter(fileName => fileName.match(/^\d+-/)),
-		}, templateBlock.keyValue, templateBlock.body);
-		if (renderedText.trim() !== templateBlock.body.trim()) {
+			dataName: printBlock.templateBlock.dataName,
+			fileBaseNames: printBlock.fileBaseNames,
+		}, printBlock.templateBlock.keyValue, printBlock.templateBlock.body);
+		if (renderedText.trim() !== printBlock.templateBlock.body.trim()) {
 			this.notify({
-				source: {
-					templateBlock
-				},
+				source: printBlock,
 				renderedText,
 			});
 		}

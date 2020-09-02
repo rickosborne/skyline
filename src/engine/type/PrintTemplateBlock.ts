@@ -1,5 +1,12 @@
 import {PRINT_DATA_TYPE, PRINT_TEMPLATE_ID} from "../../template/PrintModuleTemplate";
-import {HasTemplateBlockSubtype, RenderedTemplateBlockType, TemplateBlock, TemplateBlockType} from "./TemplateBlock";
+import {
+	HasTemplateBlock,
+	HasTemplateBlockSubtype,
+	RenderedTemplateBlockType,
+	TemplateBlock,
+	TemplateBlockType
+} from "./TemplateBlock";
+import equal = require("fast-deep-equal");
 
 export interface PrintTemplateBlock extends TemplateBlock {
 	dataType: typeof PRINT_DATA_TYPE;
@@ -13,5 +20,14 @@ export const PrintTemplateBlockType = TemplateBlockType.subtype("PrintTemplateBl
 	item => TemplateBlockType.stringify(item),
 );
 
-export const HasPrintTemplateBlockType = HasTemplateBlockSubtype(PrintTemplateBlockType, "HasPrintTemplateBlock");
+export interface HasPrintTemplateBlock extends HasTemplateBlock<PrintTemplateBlock> {
+	fileBaseNames: string[];
+}
+
+export const HasPrintTemplateBlockType = HasTemplateBlockSubtype(PrintTemplateBlockType,
+	"HasPrintTemplateBlock",
+	(item: any): item is HasPrintTemplateBlock => item != null && Array.isArray(item.fileBaseNames),
+	(a, b) => true,
+	(a, b) => !equal(a.fileBaseNames, b.fileBaseNames),
+);
 export const RenderedPrintTemplateBlockType = RenderedTemplateBlockType(HasPrintTemplateBlockType);

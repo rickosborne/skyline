@@ -15,12 +15,15 @@ import {FileTextToMarkdown} from "./transform/FileTextToMarkdown";
 import {FileTextToPlantUml} from "./transform/FileTextToPlantUml";
 import {MachineTemplateBlockLoader} from "./transform/MachineTemplateBlockLoader";
 import {MarkdownFilesAggregator} from "./transform/MarkdownFilesAggregator";
+import {PlantUmlJoiner} from "./transform/PlantUmlJoiner";
 import {PlantUmlTemplateRenderer} from "./transform/PlantUmlTemplateRenderer";
+import {PrintBlockJoiner} from "./transform/PrintBlockJoiner";
 import {PrintTemplateRenderer} from "./transform/PrintTemplateRenderer";
 import {RenderedTemplateSaver} from "./transform/RenderedTemplateSaver";
 import {SourceDirectoryProvider} from "./transform/SourceDirectoryProvider";
 import {SourceDirectoryWatcher} from "./transform/SourceDirectoryWatcher";
 import {SourceFileOperationToFileText} from "./transform/SourceFileOperationToFileText";
+import {StoryGraphJoiner} from "./transform/StoryGraphJoiner";
 import {StoryGraphRenderer} from "./transform/StoryGraphRenderer";
 import {SubtypeIdentifier} from "./transform/SubtypeIdentifier";
 import {TableOfContentsJoiner} from "./transform/TableOfContentsJoiner";
@@ -76,9 +79,12 @@ new Coordinator()
 	.add(new FileTextToMachineData())
 	.add(new FileTextToMarkdown())
 	.add(new FileTextToPlantUml())
+	.add(new PlantUmlTemplateRenderer())
+	.add(new PrintTemplateRenderer())
 	.add(new RenderedTemplateSaver())
 	.add(new SourceDirectoryWatcher())
 	.add(new SourceFileOperationToFileText())
+	.add(new StoryGraphRenderer())
 	.add(new TableOfContentsReader())
 	.add(new TableOfContentsRenderer())
 	.add(new TemplateBlockReader())
@@ -96,8 +102,8 @@ new Coordinator()
 	.addBi(new MachineTemplateBlockLoader(CypherMachineTemplateBlockType, CypherMachineDataTemplateBlockType))
 	.addBi(new MachineTemplateBlockLoader(DND5EMachineTemplateBlockType, DND5EMachineDataTemplateBlockType))
 	.addBi(new MarkdownFilesAggregator())
-	.addBi(new PlantUmlTemplateRenderer())
-	.addBi(new PrintTemplateRenderer())
-	.addBi(new StoryGraphRenderer())
+	.addBi(new PlantUmlJoiner())
+	.addBi(new PrintBlockJoiner())
+	.addBi(new StoryGraphJoiner())
 	.addBi(new TableOfContentsJoiner())
 	.start();

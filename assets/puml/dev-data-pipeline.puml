@@ -48,11 +48,14 @@ rectangle FileTextToMachineData
 rectangle FileTextToMarkdown
 rectangle FileTextToPlantUml
 rectangle PlantUmlTemplateBlockIdentifier
+rectangle PlantUmlTemplateRenderer
 rectangle PrintTemplateBlockIdentifier
+rectangle PrintTemplateRenderer
 rectangle RenderedTemplateSaver
 rectangle SourceDirectoryProvider
 rectangle SourceDirectoryWatcher
 rectangle SourceFileOperationToFileText
+rectangle StoryGraphRenderer
 rectangle StoryGraphTemplateBlockIdentifier
 rectangle TableOfContentsReader
 rectangle TableOfContentsRenderer
@@ -62,9 +65,9 @@ rectangle CypherMachineTemplateBlockLoader
 rectangle DND5ECharacterJoiner
 rectangle DND5EMachineTemplateBlockLoader
 rectangle MarkdownFilesAggregator
-rectangle PlantUmlTemplateRenderer
-rectangle PrintTemplateRenderer
-rectangle StoryGraphRenderer
+rectangle PlantUmlJoiner
+rectangle PrintBlockJoiner
+rectangle StoryGraphJoiner
 rectangle TableOfContentsJoiner
 entity "BookData" as BookData
 entity "BookTemplateBlock" as BookTemplateBlock
@@ -79,6 +82,8 @@ entity "DND5ECharacterTemplateBlock" as DND5ECharacterTemplateBlock
 entity "DND5EMachineDataTemplateBlock" as DND5EMachineDataTemplateBlock
 entity "DND5EMachineTemplateBlock" as DND5EMachineTemplateBlock
 entity "FileText" as FileText
+entity "HasPlantUmlTemplateBlock" as HasPlantUmlTemplateBlock
+entity "HasPrintTemplateBlock" as HasPrintTemplateBlock
 entity "HasTemplateBlock" as HasTemplateBlock
 entity "MachineData" as MachineData
 entity "MachineTemplateBlock" as MachineTemplateBlock
@@ -101,6 +106,7 @@ entity "SourceDirectory" as SourceDirectory
 entity "SourceDirectoryFileListOperation" as SourceDirectoryFileListOperation
 entity "SourceDirectoryOperation" as SourceDirectoryOperation
 entity "SourceFileOperation" as SourceFileOperation
+entity "StoryGraphFiles" as StoryGraphFiles
 entity "StoryGraphTemplateBlock" as StoryGraphTemplateBlock
 entity "TableOfContentsBlock" as TableOfContentsBlock
 entity "TableOfContentsItems" as TableOfContentsItems
@@ -115,6 +121,8 @@ HasTemplateBlock <.. DND5ECharacterDataTemplateBlock : extends
 BookTemplateBlock <.. DND5ECharacterTemplateBlock : extends
 HasTemplateBlock <.. DND5EMachineDataTemplateBlock : extends
 MachineTemplateBlock <.. DND5EMachineTemplateBlock : extends
+HasTemplateBlock <.. HasPlantUmlTemplateBlock : extends
+HasTemplateBlock <.. HasPrintTemplateBlock : extends
 TemplateBlock <.. MachineTemplateBlock : extends
 TemplateBlock <.. PlantUmlTemplateBlock : extends
 TemplateBlock <.. PrintTemplateBlock : extends
@@ -129,6 +137,7 @@ RenderedTemplateBlock <.. RenderedTableOfContentsBlock : extends
 OperationBase <.. SourceDirectoryFileListOperation : extends
 OperationBase <.. SourceDirectoryOperation : extends
 OperationBase <.. SourceFileOperation : extends
+HasTemplateBlock <.. StoryGraphFiles : extends
 HasTemplateBlock <.. TableOfContentsBlock : extends
 TemplateBlock <.. TableOfContentsTemplateBlock : extends
 BookData --> CypherCharacterReader
@@ -165,8 +174,12 @@ FileText --> FileTextToPlantUml
 FileTextToPlantUml --> PlantUmlFile
 TemplateBlock --> PlantUmlTemplateBlockIdentifier
 PlantUmlTemplateBlockIdentifier --> PlantUmlTemplateBlock
+HasPlantUmlTemplateBlock --> PlantUmlTemplateRenderer
+PlantUmlTemplateRenderer --> RenderedHasPlantUmlTemplateBlock
 TemplateBlock --> PrintTemplateBlockIdentifier
 PrintTemplateBlockIdentifier --> PrintTemplateBlock
+HasPrintTemplateBlock --> PrintTemplateRenderer
+PrintTemplateRenderer --> RenderedHasPrintTemplateBlock
 RenderedTemplateBlock --> RenderedTemplateSaver
 RenderedCypherCharacterDataTemplateBlock --> RenderedTemplateSaver
 RenderedDND5ECharacterDataTemplateBlock --> RenderedTemplateSaver
@@ -181,6 +194,8 @@ SourceDirectory --> SourceDirectoryWatcher
 SourceDirectoryWatcher --> SourceDirectoryOperation
 SourceFileOperation --> SourceFileOperationToFileText
 SourceFileOperationToFileText --> FileText
+StoryGraphFiles --> StoryGraphRenderer
+StoryGraphRenderer --> RenderedStoryGraphFiles
 TemplateBlock --> StoryGraphTemplateBlockIdentifier
 StoryGraphTemplateBlockIdentifier --> StoryGraphTemplateBlock
 MarkdownFileList --> TableOfContentsReader
@@ -204,15 +219,15 @@ DND5EMachineTemplateBlockLoader --> DND5EMachineDataTemplateBlock
 SourceDirectoryFileListOperation --> MarkdownFilesAggregator
 MarkdownFile --> MarkdownFilesAggregator
 MarkdownFilesAggregator --> MarkdownFileList
-PlantUmlTemplateBlock --> PlantUmlTemplateRenderer
-PlantUmlFile --> PlantUmlTemplateRenderer
-PlantUmlTemplateRenderer --> RenderedHasPlantUmlTemplateBlock
-PrintTemplateBlock --> PrintTemplateRenderer
-SourceDirectoryFileListOperation --> PrintTemplateRenderer
-PrintTemplateRenderer --> RenderedHasPrintTemplateBlock
-MarkdownFileList --> StoryGraphRenderer
-StoryGraphTemplateBlock --> StoryGraphRenderer
-StoryGraphRenderer --> RenderedStoryGraphFiles
+PlantUmlTemplateBlock --> PlantUmlJoiner
+PlantUmlFile --> PlantUmlJoiner
+PlantUmlJoiner --> HasPlantUmlTemplateBlock
+PrintTemplateBlock --> PrintBlockJoiner
+SourceDirectoryFileListOperation --> PrintBlockJoiner
+PrintBlockJoiner --> HasPrintTemplateBlock
+MarkdownFileList --> StoryGraphJoiner
+StoryGraphTemplateBlock --> StoryGraphJoiner
+StoryGraphJoiner --> StoryGraphFiles
 TableOfContentsTemplateBlock --> TableOfContentsJoiner
 TableOfContentsItems --> TableOfContentsJoiner
 TableOfContentsJoiner --> TableOfContentsBlock
