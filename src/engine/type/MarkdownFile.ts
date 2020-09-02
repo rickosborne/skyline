@@ -54,9 +54,9 @@ export interface MarkdownFile {
 
 export const MarkdownFileType = Type.from("MarkdownFile",
 	(item: any): item is MarkdownFile => item != null &&
-		typeof item.fullText === "string" &&
+		FileTextType.isInstance(item.fileText) &&
 		(item.firstHeading == null || HeadingType.isInstance(item.firstHeading)) &&
-		SourceFileType.isInstance(item.sourceFile),
+		FrontMatterType.isInstance(item.frontMatter),
 	(a, b) => FileTextType.equals(a.fileText, b.fileText),
 	(a, b) => (a.firstHeading != null && b.firstHeading != null && HeadingType.hasChanged(a.firstHeading, b.firstHeading)) ||
 		((a.firstHeading != null || b.firstHeading != null) && b.firstHeading !== a.firstHeading) ||

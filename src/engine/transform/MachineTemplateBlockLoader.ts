@@ -22,6 +22,8 @@ export class MachineTemplateBlockLoader<T extends MachineTemplateBlock, M extend
 	onInputRight(templateBlock: T): void {
 		if (this.inRightType.isInstance(templateBlock)) {
 			super.onInputRight(templateBlock);
+		} else {
+			console.warn(`[${this}] Not a ${this.inRightType}: ${JSON.stringify(templateBlock, null, 2)}`);
 		}
 	}
 

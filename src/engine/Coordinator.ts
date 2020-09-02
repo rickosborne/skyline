@@ -1,91 +1,135 @@
+import * as fs from "fs";
+import * as path from "path";
 import {ifLines, uniqueReducer} from "../template/util";
-import {identifiesType, isIdentifier} from "./transform/SubtypeIdentifier";
 import {BiTransformer, Publisher, Transformer} from "./transform/Transformer";
 import {Consumer, Type} from "./type/Type";
-import * as fs from 'fs';
-import * as path from 'path';
 import {ROOT_PATH} from "./util/RootPath";
 
-export class Bridge<T> {
-	private readonly cache: T[] = [];
+const typeName = (type: Type<any> | undefined): string => type == null ? "" : type.name.replace(/\W+/g, "");
+
+export type InTransform<I> = Transformer<I, any> | BiTransformer<I, any, any> | BiTransformer<any, I, any>;
+
+export class Bridge<O extends I, I, BT extends InTransform<I>> {
+	private readonly cache: I[] = [];
 
 	protected constructor(
-		public readonly type: Type<T>,
-		public readonly source: Publisher<T>,
-		public readonly sink: Consumer<T>,
-		public readonly sinkName: string,
+		public readonly outType: Type<O>,
+		public readonly inType: Type<I>,
+		public readonly source: Publisher<O>,
+		public readonly sink: InTransform<I>,
+		public readonly consumer: Consumer<I>,
 	) {
 	}
 
-	public onItem(item: T): void {
-		const existingIndex = this.cache.findIndex(cached => this.type.equals(cached, item));
+	public static ofType<O extends I, I, BT extends InTransform<I>>(
+		outType: Type<O>,
+		inType: Type<I>,
+		source: Publisher<O>,
+		sink: BT,
+		sinkSelector: (sink: BT) => Consumer<I>,
+	): Bridge<O, I, BT> {
+		const consumer = sinkSelector(sink).bind(sink);
+		const bridge = new Bridge(outType, inType, source, sink, consumer);
+		// source.addListener(bridge.onItem.bind(bridge));
+		const listenerFactory = new Function("sink", `return function to${sink.toString().replace(/[^a-z]+/ig, "")}(input) { return sink(input); }`);
+		const listener = listenerFactory(consumer);
+		source.addListener(listener);
+		return bridge;
+	}
+
+	public onItem(item: I): void {
+		const existingIndex = this.cache.findIndex(cached => this.inType.equals(cached, item));
 		if (existingIndex < 0) {
 			// console.debug(`[${this.source}:${this.type}:${this.sinkName}] New: ${this.type.stringify(item)}`);
 			this.cache.push(item);
 		} else {
 			const existing = this.cache[existingIndex];
-			if (!this.type.hasChanged(existing, item)) {
+			if (!this.inType.hasChanged(existing, item)) {
 				// console.debug(`[${this.source}:${this.type}:${this.sinkName}] No change: ${this.type.stringify(item)}`);
 				return;
 			}
 			// console.debug(`[${this.source}:${this.type}:${this.sinkName}] Updated: ${this.type.stringify(item)}`);
 			this.cache.splice(existingIndex, 1, item);
 		}
-		this.sink(item);
+		this.consumer(item);
 	}
 
-	public static ofType<T>(
-		type: Type<T>,
-		source: Publisher<T>,
-		sink: Consumer<T>,
-		sinkName: string,
-	): Bridge<T> {
-		const bridge = new Bridge(type, source, sink, sinkName);
-		source.addListener(bridge.onItem.bind(bridge));
-		return bridge;
+	toPlantUmlArrow(): string[] {
+		return [
+			`${this.source} --> ${typeName(this.outType)}`,
+			`${typeName(this.inType)} --> ${this.sink}`,
+			this.inType != this.outType ? `${typeName(this.outType)} --> ${this.sink}` : ''
+			// `${this.source} --> ${this.sink} : ${this.outType}`
+		].filter(l => l.length > 0);
 	}
 }
 
 export class Coordinator {
 	private readonly bitransformers: BiTransformer<any, any, any>[] = [];
+	private readonly bridges: Bridge<any, any, any>[] = [];
 	private readonly transformers: Transformer<any, any>[] = [];
 
 	public add(transformer: Transformer<any, any>): this {
+		this.transformers.forEach(other => {
+			this.bridgeOne(transformer, other, t => t.inType, t => t.outType, t => t.onInput);
+			this.bridgeOne(other, transformer, t => t.inType, t => t.outType, t => t.onInput);
+		});
+		this.bitransformers.forEach(other => {
+			this.bridgeOne(transformer, other, t => t.inType, t => t.outType, t => t.onInput);
+			this.bridgeOne(other, transformer, t => t.inLeftType, t => t.outType, t => t.onInputLeft);
+			this.bridgeOne(other, transformer, t => t.inRightType, t => t.outType, t => t.onInputRight);
+		});
 		this.transformers.push(transformer);
 		return this;
 	}
 
 	public addBi(bitransformer: BiTransformer<any, any, any>): this {
+		this.transformers.forEach(other => {
+			this.bridgeOne(other, bitransformer, t => t.inType, t => t.outType, t => t.onInput);
+			this.bridgeOne(bitransformer, other, t => t.inLeftType, t => t.outType, t => t.onInputLeft);
+			this.bridgeOne(bitransformer, other, t => t.inRightType, t => t.outType, t => t.onInputRight);
+		});
+		this.bitransformers.forEach(other => {
+			this.bridgeOne(bitransformer, other, t => t.inLeftType, t => t.outType, t => t.onInputLeft);
+			this.bridgeOne(bitransformer, other, t => t.inRightType, t => t.outType, t => t.onInputRight);
+			this.bridgeOne(other, bitransformer, t => t.inLeftType, t => t.outType, t => t.onInputLeft);
+			this.bridgeOne(other, bitransformer, t => t.inRightType, t => t.outType, t => t.onInputRight);
+		});
 		this.bitransformers.push(bitransformer);
 		return this;
 	}
 
-	protected linkTo<T>(name: string, inType: Type<T>, sinkName: string, sink: (input: T) => void, noOutput: Set<Publisher<any>>, gotInput: () => void): void {
-		this.transformers.filter(t => inType.isAssignableFrom(t.outType)).forEach(source => {
-			gotInput();
-			noOutput.delete(source);
-			console.info(`Pipe: (${inType.name}) ${source} => ${name}`);
-			Bridge.ofType(inType, source, sink, sinkName);
-		});
-		this.bitransformers.filter(t => inType.isAssignableFrom(t.outType)).forEach(source => {
-			gotInput();
-			noOutput.delete(source);
-			console.info(`Pipe: (${inType.name}) ${source} => ${name}`);
-			Bridge.ofType(inType, source, sink, sinkName);
-		});
+	private bridgeOne<T extends Transformer<any, any> | BiTransformer<any, any, any>>(
+		consumerTransformer: T,
+		publisherTransformer: Publisher<any>,
+		inTypeMapper: (transformer: T) => Type<any> | undefined,
+		outTypeMapper: (publisher: Publisher<any>) => Type<any> | undefined,
+		consumerMapper: (transformer: T) => Consumer<any>,
+	) {
+		const inType = inTypeMapper(consumerTransformer);
+		const outType = outTypeMapper(publisherTransformer);
+		if (publisherTransformer instanceof Transformer && publisherTransformer.inType === inType) {
+			return;
+		}
+		if (inType != null && outType != null && inType.isAssignableFrom(outType)) {
+			console.debug(`[${this}] Bridge (${outType}) ${publisherTransformer} => ${consumerTransformer} (${inType})`)
+			this.bridges.push(Bridge.ofType(outType, inType, publisherTransformer, consumerTransformer, consumerMapper));
+		}
 	}
 
-	private ensureEmpty<T>(items: Set<T>, messageBuilder: (item: T) => string): boolean {
-		if (items.size === 0) {
-			return false;
-		}
-		items.forEach(item => console.error(messageBuilder(item)));
-		return true;
+	public start(): void {
+		const uml = this.toPlantUml();
+		fs.writeFile(path.join(ROOT_PATH, "assets", "puml", "dev-data-pipeline.puml"), uml, {encoding: "utf8"}, (err) => {
+			if (err) {
+				throw err;
+			}
+		});
+		this.transformers.forEach(transformer => transformer.start());
+		this.bitransformers.forEach(bitransformer => bitransformer.start());
 	}
 
 	public toPlantUml(): string {
-		const style = fs.readFileSync(path.join(ROOT_PATH, "assets", "puml", "skyline-style.puml"), {encoding: 'utf8'});
-		const typeName = (type: Type<any> | undefined): string => type == null ? "" : type.name.replace(/\W+/g, '');
+		const style = fs.readFileSync(path.join(ROOT_PATH, "assets", "puml", "skyline-style.puml"), {encoding: "utf8"});
 		const types = Object.values((this.transformers.flatMap(t => [t.inType, t.outType])).concat(this.bitransformers.flatMap(t => [t.inLeftType, t.inRightType, t.outType]))
 			.reduce((types, type) => {
 				if (type != null) {
@@ -98,26 +142,6 @@ export class Coordinator {
 			.sort((a, b) => a.name.localeCompare(b.name))
 		;
 		const sortPublishers: (a: Publisher<any>, b: Publisher<any>) => number = (a, b) => a.toString().localeCompare(b.toString());
-		const subtypes = types.reduce((m, t) => {
-			let s = m.get(t);
-			if (s == null) {
-				s = new Set<Type<any>>();
-				m.set(t, s);
-			}
-			s.add(t);
-			if (t.parent != null) {
-				s = m.get(t.parent);
-				if (s == null) {
-					s = new Set<Type<any>>();
-					m.set(t.parent, s);
-				}
-				s.add(t);
-			}
-			return m;
-		}, new Map<Type<any>, Set<Type<any>>>());
-		const subtypesOf = (t: Type<any>, identifies: Type<any> | undefined): Type<any>[] => {
-			return identifies != null ? [t] : [t].concat(...t.subtypes);
-		};
 		return ifLines([
 			"@startuml",
 			"title Development Data Pipeline",
@@ -128,56 +152,12 @@ export class Coordinator {
 			this.bitransformers.sort(sortPublishers).map(t => `rectangle ${t}`),
 			types.map(t => `entity "${t}" as ${typeName(t)}`),
 			types.filter(t => t.parent != null).map(t => `${typeName(t.parent)} <.. ${typeName(t)} : extends`),
-			this.transformers.sort(sortPublishers).flatMap(t => [
-				t.inType == null ? "" : Array.from(subtypesOf(t.inType, identifiesType(t))).map(type => `${typeName(type)} --> ${t}`).join("\n"),
-				t.outType == null ? "" : `${t} --> ${typeName(t.outType)}`,
-			]),
-			this.bitransformers.sort(sortPublishers).flatMap(t => [
-				t.inLeftType == null ? "" : Array.from(subtypesOf(t.inLeftType, undefined)).map(type => `${typeName(type)} --> ${t}`).join("\n"),
-				t.inRightType == null ? "" : Array.from(subtypesOf(t.inRightType, undefined)).map(type => `${typeName(type)} --> ${t}`).join("\n"),
-				t.outType == null ? "" : `${t} --> ${typeName(t.outType)}`,
-			]),
+			this.bridges.flatMap(bridge => bridge.toPlantUmlArrow()).reduce(uniqueReducer(), []).sort(),
 			"@enduml",
 		]);
 	}
 
-	public start(): void {
-		const uml = this.toPlantUml();
-		fs.writeFile(path.join(ROOT_PATH, "assets", "puml", "dev-data-pipeline.puml"), uml, {encoding: 'utf8'}, (err) => {
-			if (err) {
-				throw err;
-			}
-		});
-		const noInput = new Set<Transformer<any, any>>();
-		const noLeftInput = new Set<BiTransformer<any, any, any>>();
-		const noRightInput = new Set<BiTransformer<any, any, any>>();
-		const noOutput = new Set<Publisher<any>>();
-		for (let sink of this.transformers) {
-			if (sink.inType == null) {
-				noInput.delete(sink);
-			} else {
-				this.linkTo(sink.toString(), sink.inType, sink.toString(), sink.onInput.bind(sink), noOutput, () => noInput.delete(sink));
-			}
-			if (sink.outType == null) {
-				noOutput.delete(sink);
-			}
-		}
-		for (let sink of this.bitransformers) {
-			this.linkTo(sink.toString(), sink.inLeftType, sink.toString() + ":L", sink.onInputLeft.bind(sink), noOutput, () => noLeftInput.delete(sink));
-			this.linkTo(sink.toString(), sink.inRightType, sink.toString() + ":R", sink.onInputRight.bind(sink), noOutput, () => noRightInput.delete(sink));
-			if (sink.outType == null) {
-				noOutput.delete(sink);
-			}
-		}
-		let problems = this.ensureEmpty(noInput, t => `No sources found for ${t.inType?.name}: ${t}`) ||
-			this.ensureEmpty(noLeftInput, t => `No sources found for ${t.inLeftType.name}: ${t}`) ||
-			this.ensureEmpty(noRightInput, t => `No source found for ${t.inRightType.name}: ${t}`) ||
-			this.ensureEmpty(noOutput, t => `No sinks found for ${t.outType?.name}: ${t}`)
-		;
-		if (problems) {
-			throw new Error(`Fix your data pipeline.`);
-		}
-		this.transformers.forEach(transformer => transformer.start());
-		this.bitransformers.forEach(bitransformer => bitransformer.start());
+	public toString() {
+		return this.constructor.name;
 	}
 }

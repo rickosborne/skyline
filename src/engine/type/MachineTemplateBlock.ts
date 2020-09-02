@@ -26,7 +26,7 @@ export interface MachineTemplateBlock extends TemplateBlock {
 }
 
 export const MachineTemplateBlockType = TemplateBlockType.subtype("MachineTemplateBlock",
-	(item: any): item is MachineTemplateBlock => item != null && item.dataType === MACHINE_DATA_TYPE && TemplateBlockType.isInstance(item),
+	(item: any): item is MachineTemplateBlock => item != null && item.dataType === MACHINE_DATA_TYPE,
 	(a, b) => a.dataType === b.dataType,
 	(a, b) => a.dataType !== b.dataType,
 	item => TemplateBlockType.stringify(item),

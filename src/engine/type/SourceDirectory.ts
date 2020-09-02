@@ -37,6 +37,9 @@ export const SourceDirectoryFileListType = Type.from("SourceDirectoryFileList",
 	(a, b) => equal(a.fileList, b.fileList),
 	item => SourceDirectoryType.stringify(item.sourceDirectory) + "#" + item.fileList.length,
 );
+
+export type SourceDirectoryFileListOperation = OperationBase<SourceDirectoryFileList>;
+
 export const SourceDirectoryFileListOperationType = OperationBaseType.subtype("SourceDirectoryFileListOperation",
 	(item: any): item is OperationBase<SourceDirectoryFileList> => item != null &&
 		SourceDirectoryFileListType.isInstance(item.item),

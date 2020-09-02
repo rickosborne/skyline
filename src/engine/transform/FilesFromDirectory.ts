@@ -1,12 +1,17 @@
 import * as equal from "fast-deep-equal";
 import * as fs from "fs";
 import {Operation, OperationBase} from "../type/Operation";
-import {SourceDirectory, SourceDirectoryFileList, SourceDirectoryFileListOperationType} from "../type/SourceDirectory";
-import {SourceFile, SourceFileOperationType} from "../type/SourceFile";
+import {
+	SourceDirectory,
+	SourceDirectoryFileList,
+	SourceDirectoryFileListOperation,
+	SourceDirectoryFileListOperationType
+} from "../type/SourceDirectory";
+import {SourceFileOperation, SourceFileOperationType} from "../type/SourceFile";
 import {fileInDirectory} from "../util/FileInDirectory";
 import {Transformer} from "./Transformer";
 
-export class FilesFromDirectory extends Transformer<OperationBase<SourceDirectoryFileList>, OperationBase<SourceFile>> {
+export class FilesFromDirectory extends Transformer<SourceDirectoryFileListOperation, SourceFileOperation> {
 	private readonly watchers: { dir: SourceDirectory; watcher: fs.FSWatcher }[] = [];
 
 	constructor() {
@@ -34,7 +39,13 @@ export class FilesFromDirectory extends Transformer<OperationBase<SourceDirector
 				switch (watchEvent) {
 					case "change":
 						operation = Operation.Updated;
+						console.debug(`[${this}] change ${fileName}`);
 						break;
+					case "rename":
+						if (!fileName.endsWith("~")) {
+							console.debug(`[${this}] rename ${fileName}`);
+						}
+						return;
 					default:
 						throw new Error(`Unknown event type "${watchEvent}" for file "${fileName}" while watching "${dir.fullPath}".`);
 				}

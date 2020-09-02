@@ -22,6 +22,9 @@ export const SourceFileType = Type.from("SourceFile", (item: any): item is Sourc
 	(a, b) => a.baseName !== b.baseName || a.extension !== b.extension || a.fileName !== b.fileName || a.fullPath !== b.fullPath || a.pathFromRoot !== b.pathFromRoot || SourceDirectoryType.hasChanged(a.directory, b.directory),
 	item => item.pathFromRoot,
 );
+
+export type SourceFileOperation = OperationBase<SourceFile>;
+
 export const SourceFileOperationType = OperationBaseType.subtype("SourceFileOperation", (item: any): item is OperationBase<SourceFile> => item != null &&
 	SourceFileType.isInstance(item.item),
 	(a, b) => a.operation === b.operation && SourceFileType.equals(a.item, b.item),
