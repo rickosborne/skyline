@@ -1,12 +1,13 @@
+import {HasTemplateBlock, RenderedTemplateBlock, RenderedTemplateBlockType} from "../type/TemplateBlock";
 import {Transformer} from "./Transformer";
-import {HasTemplateBlock, RenderedTemplateBlock, RenderedTemplateBlockAnyType} from "../type/TemplateBlock";
 
 export class RenderedTemplateSaver extends Transformer<RenderedTemplateBlock<any>, undefined> {
 	constructor() {
-		super(RenderedTemplateBlockAnyType, undefined);
+		super(RenderedTemplateBlockType, undefined);
 	}
 
 	onInput(input: RenderedTemplateBlock<HasTemplateBlock<any>>): void {
+		RenderedTemplateBlockType.stringify(1234 as unknown as RenderedTemplateBlock<any>);
 		const templateBlock = input.source.templateBlock;
 		const replacement = [
 			input.startTag || templateBlock.startTag,

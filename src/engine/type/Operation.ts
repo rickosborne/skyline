@@ -1,16 +1,19 @@
-import {Type} from "./Type";
+import {Type, TypeBuilder} from "./Type";
 
 export enum Operation {
-  Replay = "Replay",
-  Created = "Created",
-  Updated = "Updated",
-  Deleted = "Deleted",
-  Renamed = "Renamed",
+	Replay = "Replay",
+	Created = "Created",
+	Updated = "Updated",
+	Deleted = "Deleted",
+	Renamed = "Renamed",
 }
 
-export interface OperationBase<T> {
-  item: T;
-  operation: Operation;
+export interface HasOperation {
+	operation: Operation;
+}
+
+export interface OperationBase<T> extends HasOperation {
+	item: T;
 }
 
 export type ReplayItem<T> = OperationBase<T> & { operation: Operation.Replay; };
@@ -23,10 +26,11 @@ export const isCreated = <T>(op: OperationBase<T>): op is CreatedItem<T> => op.o
 export const isUpdated = <T>(op: OperationBase<T>): op is UpdatedItem<T> => op.operation === Operation.Updated;
 export const isDeleted = <T>(op: OperationBase<T>): op is DeletedItem<T> => op.operation === Operation.Deleted;
 export const isRenamed = <T>(op: OperationBase<T>): op is RenamedItem<T> => op.operation === Operation.Renamed;
-export const OperationBaseType = Type.from("OperationBase", (item: any): item is OperationBase<any> => item != null &&
-	item.operation != null &&
-	"item" in item,
-	(a, b) => a.operation == b.operation,
-	(a, b) => a.operation !== b.operation,
-	() => {throw new Error(`Cannot stringify unparameterized OperationBase`)},
-);
+
+export const HasOperationType = Type.novel<HasOperation>(item => item.operation)
+	.withScalarField<HasOperation, "operation", Operation>("operation", (op: any): op is Operation => Type.isString(op))
+	.withName("HasOperation");
+
+export const operationBaseSubtype = <O extends OperationBase<T>, T>(type: Type<T>): TypeBuilder<O> => HasOperationType.toBuilder()
+	.withTypedField<O, "item", T>("item", type)
+	.withParent(HasOperationType);

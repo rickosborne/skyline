@@ -1,13 +1,13 @@
 import {StoryGraphPlantUml} from "../../template/StoryGraphPlantUml";
-import {StoryGraphFiles, StoryGraphFilesType} from "../type/StoryGraph";
-import {RenderedTemplateBlock, RenderedTemplateBlockType} from "../type/TemplateBlock";
+import {RenderedStoryGraphFilesType, StoryGraphFiles, StoryGraphFilesType} from "../type/StoryGraph";
+import {RenderedTemplateBlock} from "../type/TemplateBlock";
 import {Transformer} from "./Transformer";
 
 export class StoryGraphRenderer extends Transformer<StoryGraphFiles, RenderedTemplateBlock<StoryGraphFiles>> {
 	private readonly renderer = new StoryGraphPlantUml();
 
 	constructor() {
-		super(StoryGraphFilesType, RenderedTemplateBlockType(StoryGraphFilesType));
+		super(StoryGraphFilesType, RenderedStoryGraphFilesType);
 	}
 
 	onInput(source: StoryGraphFiles): void {

@@ -4,14 +4,12 @@ import {DND5E_PC_TEMPLATE_ID} from "../../template/Dnd5EPcStats";
 import {FileText, FileTextType} from "./FileText";
 import {
 	HasTemplateBlock,
-	HasTemplateBlockSubtype,
 	HasTemplateBlockType,
-	RenderedTemplateBlockType,
+	renderedTemplateBlockSubtype,
 	TemplateBlock,
 	TemplateBlockType
 } from "./TemplateBlock";
 import {Type} from "./Type";
-import equal = require("fast-deep-equal");
 
 export const BOOK_DATA_TYPE = "book";
 
@@ -20,25 +18,19 @@ export interface BookData {
 	fileText: FileText;
 }
 
-export const BookDataType = Type.from("BookData", (item: any): item is BookData => item != null &&
-	FileTextType.isInstance(item.fileText) &&
-	typeof item.book != null,
-	(a, b) => FileTextType.equals(a.fileText, b.fileText),
-	(a, b) => !equal(a.book, b.book),
-	item => item.book.title,
-);
+export const BookDataType = FileTextType.toBuilder()
+	.wrappedAs<BookData, "fileText">("fileText")
+	.withScalarField<BookData, "book", Book>("book", Type.isNotNull)
+	.withName("BookData");
 
 export interface BookTemplateBlock extends TemplateBlock {
 	dataType: typeof BOOK_DATA_TYPE;
 }
 
-export const BookTemplateBlockType = TemplateBlockType.subtype(
-	"BookTemplateBlock",
-	(item: any): item is BookTemplateBlock => item != null && item.dataType === BOOK_DATA_TYPE,
-	(a, b) => a.dataType === b.dataType,
-	(a, b) => a.dataType !== b.dataType,
-	item => TemplateBlockType.stringify(item),
-);
+export const BookTemplateBlockType: Type<BookTemplateBlock> = TemplateBlockType.toBuilder()
+	.withFixed<BookTemplateBlock, "dataType", typeof BOOK_DATA_TYPE>("dataType", BOOK_DATA_TYPE)
+	.withParent(TemplateBlockType)
+	.withName("BookTemplateBlock");
 
 export interface CypherCharacterData {
 	bookData: BookData;
@@ -46,15 +38,13 @@ export interface CypherCharacterData {
 	hzd: PlayerCharacter;
 }
 
-export const CypherCharacterDataType = Type.from("CypherCharacterData", (item: any): item is CypherCharacterData => item != null &&
-	BookDataType.isInstance(item.bookData) &&
-	item.hzd != null &&
-	item.cypher != null,
-	(a, b) => a.hzd.name === b.hzd.name && BookDataType.equals(a.bookData, b.bookData),
-	(a, b) => BookDataType.hasChanged(a.bookData, b.bookData) || !equal(a.cypher, b.cypher) || !equal(a.hzd, b.hzd),
-	item => item.hzd.name,
-);
+const characterDataTypeBuilder = <T extends { bookData: BookData; hzd: PlayerCharacter }>() => BookDataType.toBuilder()
+	.wrappedAs<T, "bookData">("bookData")
+	.withScalarField<T, "hzd", PlayerCharacter>("hzd", Type.isNotNull);
 
+export const CypherCharacterDataType: Type<CypherCharacterData> = characterDataTypeBuilder()
+	.withScalarField<CypherCharacterData, "cypher", CypherPlayerCharacter>("cypher", Type.isNotNull)
+	.withName("CypherCharacterData");
 
 export interface DND5ECharacterData {
 	bookData: BookData;
@@ -62,67 +52,45 @@ export interface DND5ECharacterData {
 	hzd: PlayerCharacter;
 }
 
-export const DND5ECharacterDataType = Type.from("DND5ECharacterData", (item: any): item is DND5ECharacterData => item != null &&
-	BookDataType.isInstance(item.bookData) &&
-	item.hzd != null &&
-	item.dnd5e != null,
-	(a, b) => a.hzd.name === b.hzd.name && BookDataType.equals(a.bookData, b.bookData),
-	(a, b) => BookDataType.hasChanged(a.bookData, b.bookData) || !equal(a.dnd5e, b.dnd5e) || !equal(a.hzd, b.hzd),
-	item => item.hzd.name,
-);
+export const DND5ECharacterDataType = characterDataTypeBuilder()
+	.withScalarField<DND5ECharacterData, "dnd5e", Dnd5EPlayerCharacter>("dnd5e", Type.isNotNull)
+	.withName("DND5ECharacterData");
 
 export interface DND5ECharacterTemplateBlock extends BookTemplateBlock {
 	templateId: typeof DND5E_PC_TEMPLATE_ID;
 }
 
-export const DND5ECharacterTemplateBlockType = BookTemplateBlockType.subtype(
-	"DND5ECharacterTemplateBlock",
-	(item: any): item is DND5ECharacterTemplateBlock => item != null && item.templateId === DND5E_PC_TEMPLATE_ID,
-	(a, b) => a.templateId === b.templateId,
-	(a, b) => a.templateId !== b.templateId,
-	item => BookTemplateBlockType.stringify(item),
-);
+export const DND5ECharacterTemplateBlockType = BookTemplateBlockType.toBuilder()
+	.withFixed<DND5ECharacterTemplateBlock, "templateId", typeof DND5E_PC_TEMPLATE_ID>("templateId", DND5E_PC_TEMPLATE_ID)
+	.withName("DND5ECharacterTemplateBlock");
 
 export interface CypherCharacterTemplateBlock extends BookTemplateBlock {
 	templateId: typeof CYPHER_PC_TEMPLATE_ID;
 }
 
-export const CypherCharacterTemplateBlockType = BookTemplateBlockType.subtype(
-	"CypherCharacterTemplateBlock",
-	(item: any): item is CypherCharacterTemplateBlock => item != null && item.templateId === CYPHER_PC_TEMPLATE_ID,
-	(a, b) => a.templateId === b.templateId,
-	(a, b) => a.templateId !== b.templateId,
-	item => BookTemplateBlockType.stringify(item),
-);
+export const CypherCharacterTemplateBlockType: Type<CypherCharacterTemplateBlock> = BookTemplateBlockType.toBuilder()
+	.withFixed<CypherCharacterTemplateBlock, "templateId", typeof CYPHER_PC_TEMPLATE_ID>("templateId", CYPHER_PC_TEMPLATE_ID)
+	.withName("CypherCharacterTemplateBlock")
 
 export interface CharacterDataTemplateBlock<C, B extends BookTemplateBlock> extends HasTemplateBlock<B> {
 	characterData: C;
 }
 
+export const characterDataTemplateBlock = <T extends CharacterDataTemplateBlock<C, B>, C, B extends BookTemplateBlock>(name: string, type: Type<C>): Type<T> => HasTemplateBlockType.toBuilder()
+	.withTypedField<T, "characterData", C>("characterData", type)
+	.withParent(HasTemplateBlockType)
+	.withName(name);
+
 export interface CypherCharacterDataTemplateBlock extends CharacterDataTemplateBlock<CypherCharacterData, CypherCharacterTemplateBlock> {
 }
 
-export const CypherCharacterDataTemplateBlockType = HasTemplateBlockSubtype(
-	CypherCharacterTemplateBlockType,
-	"CypherCharacterDataTemplateBlock",
-	(item: any): item is CypherCharacterDataTemplateBlock => item != null && CypherCharacterDataType.isInstance(item.characterData),
-	(a, b) => CypherCharacterDataType.equals(a.characterData, b.characterData),
-	(a, b) => CypherCharacterDataType.hasChanged(a.characterData, b.characterData),
-	item => CypherCharacterDataType.stringify(item.characterData) + " " + HasTemplateBlockType.stringify(item),
-);
+export const CypherCharacterDataTemplateBlockType = characterDataTemplateBlock<CypherCharacterDataTemplateBlock, CypherCharacterData, CypherCharacterTemplateBlock>("CypherCharacterDataTemplateBlock", CypherCharacterDataType);
 
-export const RenderedCypherCharacterDataType = RenderedTemplateBlockType(CypherCharacterDataTemplateBlockType);
+export const RenderedCypherCharacterDataType = renderedTemplateBlockSubtype(CypherCharacterDataTemplateBlockType).withName("RenderedCypherCharacter");
 
 export interface DND5ECharacterDataTemplateBlock extends CharacterDataTemplateBlock<DND5ECharacterData, DND5ECharacterTemplateBlock> {
 }
 
-export const DND5ECharacterDataTemplateBlockType = HasTemplateBlockSubtype(
-	DND5ECharacterTemplateBlockType,
-	"DND5ECharacterDataTemplateBlock",
-	(item: any): item is DND5ECharacterDataTemplateBlock => item != null && DND5ECharacterDataType.isInstance(item.characterData),
-	(a, b) => DND5ECharacterDataType.equals(a.characterData, b.characterData),
-	(a, b) => DND5ECharacterDataType.hasChanged(a.characterData, b.characterData),
-	item => DND5ECharacterDataType.stringify(item.characterData) + " " + HasTemplateBlockType.stringify(item),
-);
+export const DND5ECharacterDataTemplateBlockType = characterDataTemplateBlock<DND5ECharacterDataTemplateBlock, DND5ECharacterData, DND5ECharacterTemplateBlock>("DND5ECharacterDataTemplateBlock", DND5ECharacterDataType);
 
-export const RenderedDND5ECharacterDataType = RenderedTemplateBlockType(DND5ECharacterDataTemplateBlockType);
+export const RenderedDND5ECharacterDataType = renderedTemplateBlockSubtype(DND5ECharacterDataTemplateBlockType).withName("RenderedDND5ECharacter");

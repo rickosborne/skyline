@@ -70,7 +70,6 @@ rectangle PrintBlockJoiner
 rectangle StoryGraphJoiner
 rectangle TableOfContentsJoiner
 entity "BookData" as BookData
-entity "BookTemplateBlock" as BookTemplateBlock
 entity "CypherCharacterData" as CypherCharacterData
 entity "CypherCharacterDataTemplateBlock" as CypherCharacterDataTemplateBlock
 entity "CypherCharacterTemplateBlock" as CypherCharacterTemplateBlock
@@ -82,25 +81,25 @@ entity "DND5ECharacterTemplateBlock" as DND5ECharacterTemplateBlock
 entity "DND5EMachineDataTemplateBlock" as DND5EMachineDataTemplateBlock
 entity "DND5EMachineTemplateBlock" as DND5EMachineTemplateBlock
 entity "FileText" as FileText
-entity "HasPlantUmlTemplateBlock" as HasPlantUmlTemplateBlock
-entity "HasPrintTemplateBlock" as HasPrintTemplateBlock
+entity "HasOperation" as HasOperation
 entity "HasTemplateBlock" as HasTemplateBlock
 entity "MachineData" as MachineData
 entity "MachineTemplateBlock" as MachineTemplateBlock
 entity "MarkdownFile" as MarkdownFile
 entity "MarkdownFileList" as MarkdownFileList
-entity "OperationBase" as OperationBase
+entity "PlantUmlDataBlock" as PlantUmlDataBlock
 entity "PlantUmlFile" as PlantUmlFile
 entity "PlantUmlTemplateBlock" as PlantUmlTemplateBlock
+entity "PrintDataBlock" as PrintDataBlock
 entity "PrintTemplateBlock" as PrintTemplateBlock
-entity "RenderedCypherCharacterDataTemplateBlock" as RenderedCypherCharacterDataTemplateBlock
-entity "RenderedCypherMachineDataTemplateBlock" as RenderedCypherMachineDataTemplateBlock
-entity "RenderedDND5ECharacterDataTemplateBlock" as RenderedDND5ECharacterDataTemplateBlock
-entity "RenderedDND5EMachineDataTemplateBlock" as RenderedDND5EMachineDataTemplateBlock
-entity "RenderedHasPlantUmlTemplateBlock" as RenderedHasPlantUmlTemplateBlock
-entity "RenderedHasPrintTemplateBlock" as RenderedHasPrintTemplateBlock
-entity "RenderedStoryGraphFiles" as RenderedStoryGraphFiles
-entity "RenderedTableOfContentsBlock" as RenderedTableOfContentsBlock
+entity "RenderedCypherCharacter" as RenderedCypherCharacter
+entity "RenderedCypherMachine" as RenderedCypherMachine
+entity "RenderedDND5ECharacter" as RenderedDND5ECharacter
+entity "RenderedDND5EMachine" as RenderedDND5EMachine
+entity "RenderedPlantUml" as RenderedPlantUml
+entity "RenderedPrint" as RenderedPrint
+entity "RenderedStoryGraph" as RenderedStoryGraph
+entity "RenderedTableOfContents" as RenderedTableOfContents
 entity "RenderedTemplateBlock" as RenderedTemplateBlock
 entity "SourceDirectory" as SourceDirectory
 entity "SourceDirectoryFileListOperation" as SourceDirectoryFileListOperation
@@ -112,45 +111,45 @@ entity "TableOfContentsBlock" as TableOfContentsBlock
 entity "TableOfContentsItems" as TableOfContentsItems
 entity "TableOfContentsTemplateBlock" as TableOfContentsTemplateBlock
 entity "TemplateBlock" as TemplateBlock
-TemplateBlock <.. BookTemplateBlock : extends
-HasTemplateBlock <.. CypherCharacterDataTemplateBlock : extends
-BookTemplateBlock <.. CypherCharacterTemplateBlock : extends
-HasTemplateBlock <.. CypherMachineDataTemplateBlock : extends
-MachineTemplateBlock <.. CypherMachineTemplateBlock : extends
-HasTemplateBlock <.. DND5ECharacterDataTemplateBlock : extends
-BookTemplateBlock <.. DND5ECharacterTemplateBlock : extends
-HasTemplateBlock <.. DND5EMachineDataTemplateBlock : extends
-MachineTemplateBlock <.. DND5EMachineTemplateBlock : extends
-HasTemplateBlock <.. HasPlantUmlTemplateBlock : extends
-HasTemplateBlock <.. HasPrintTemplateBlock : extends
-TemplateBlock <.. MachineTemplateBlock : extends
-TemplateBlock <.. PlantUmlTemplateBlock : extends
-TemplateBlock <.. PrintTemplateBlock : extends
-RenderedTemplateBlock <.. RenderedCypherCharacterDataTemplateBlock : extends
-RenderedTemplateBlock <.. RenderedCypherMachineDataTemplateBlock : extends
-RenderedTemplateBlock <.. RenderedDND5ECharacterDataTemplateBlock : extends
-RenderedTemplateBlock <.. RenderedDND5EMachineDataTemplateBlock : extends
-RenderedTemplateBlock <.. RenderedHasPlantUmlTemplateBlock : extends
-RenderedTemplateBlock <.. RenderedHasPrintTemplateBlock : extends
-RenderedTemplateBlock <.. RenderedStoryGraphFiles : extends
-RenderedTemplateBlock <.. RenderedTableOfContentsBlock : extends
-OperationBase <.. SourceDirectoryFileListOperation : extends
-OperationBase <.. SourceDirectoryOperation : extends
-OperationBase <.. SourceFileOperation : extends
-HasTemplateBlock <.. StoryGraphFiles : extends
-HasTemplateBlock <.. TableOfContentsBlock : extends
-TemplateBlock <.. TableOfContentsTemplateBlock : extends
+HasTemplateBlock <.. CypherCharacterDataTemplateBlock
+TemplateBlock <.. CypherCharacterTemplateBlock
+HasTemplateBlock <.. CypherMachineDataTemplateBlock
+MachineTemplateBlock <.. CypherMachineTemplateBlock
+HasTemplateBlock <.. DND5ECharacterDataTemplateBlock
+TemplateBlock <.. DND5ECharacterTemplateBlock
+HasTemplateBlock <.. DND5EMachineDataTemplateBlock
+MachineTemplateBlock <.. DND5EMachineTemplateBlock
+TemplateBlock <.. MachineTemplateBlock
+HasTemplateBlock <.. PlantUmlDataBlock
+TemplateBlock <.. PlantUmlTemplateBlock
+HasTemplateBlock <.. PrintDataBlock
+TemplateBlock <.. PrintTemplateBlock
+RenderedTemplateBlock <.. RenderedCypherCharacter
+RenderedTemplateBlock <.. RenderedCypherMachine
+RenderedTemplateBlock <.. RenderedDND5ECharacter
+RenderedTemplateBlock <.. RenderedDND5EMachine
+RenderedTemplateBlock <.. RenderedPlantUml
+RenderedTemplateBlock <.. RenderedPrint
+RenderedTemplateBlock <.. RenderedStoryGraph
+RenderedTemplateBlock <.. RenderedTableOfContents
+HasOperation <.. SourceDirectoryFileListOperation
+HasOperation <.. SourceDirectoryOperation
+HasOperation <.. SourceFileOperation
+HasTemplateBlock <.. StoryGraphFiles
+TemplateBlock <.. StoryGraphTemplateBlock
+HasTemplateBlock <.. TableOfContentsBlock
+TemplateBlock <.. TableOfContentsTemplateBlock
 BookData --> CypherCharacterReader
 BookData --> DND5ECharacterReader
 CypherCharacterData --> CypherCharacterJoiner
 CypherCharacterDataTemplateBlock --> CypherCharacterRenderer
 CypherCharacterJoiner --> CypherCharacterDataTemplateBlock
 CypherCharacterReader --> CypherCharacterData
-CypherCharacterRenderer --> RenderedCypherCharacterDataTemplateBlock
+CypherCharacterRenderer --> RenderedCypherCharacter
 CypherCharacterTemplateBlock --> CypherCharacterJoiner
 CypherCharacterTemplateBlockIdentifier --> CypherCharacterTemplateBlock
 CypherMachineDataTemplateBlock --> CypherMachineRenderer
-CypherMachineRenderer --> RenderedCypherMachineDataTemplateBlock
+CypherMachineRenderer --> RenderedCypherMachine
 CypherMachineTemplateBlock --> CypherMachineTemplateBlockLoader
 CypherMachineTemplateBlockIdentifier --> CypherMachineTemplateBlock
 CypherMachineTemplateBlockLoader --> CypherMachineDataTemplateBlock
@@ -158,11 +157,11 @@ DND5ECharacterData --> DND5ECharacterJoiner
 DND5ECharacterDataTemplateBlock --> DND5ECharacterRenderer
 DND5ECharacterJoiner --> DND5ECharacterDataTemplateBlock
 DND5ECharacterReader --> DND5ECharacterData
-DND5ECharacterRenderer --> RenderedDND5ECharacterDataTemplateBlock
+DND5ECharacterRenderer --> RenderedDND5ECharacter
 DND5ECharacterTemplateBlock --> DND5ECharacterJoiner
 DND5ECharacterTemplateBlockIdentifier --> DND5ECharacterTemplateBlock
 DND5EMachineDataTemplateBlock --> DND5EMachineRenderer
-DND5EMachineRenderer --> RenderedDND5EMachineDataTemplateBlock
+DND5EMachineRenderer --> RenderedDND5EMachine
 DND5EMachineTemplateBlock --> DND5EMachineTemplateBlockLoader
 DND5EMachineTemplateBlockIdentifier --> DND5EMachineTemplateBlock
 DND5EMachineTemplateBlockLoader --> DND5EMachineDataTemplateBlock
@@ -176,8 +175,6 @@ FileTextToMachineData --> MachineData
 FileTextToMarkdown --> MarkdownFile
 FileTextToPlantUml --> PlantUmlFile
 FilesFromDirectory --> SourceFileOperation
-HasPlantUmlTemplateBlock --> PlantUmlTemplateRenderer
-HasPrintTemplateBlock --> PrintTemplateRenderer
 MachineData --> CypherMachineTemplateBlockLoader
 MachineData --> DND5EMachineTemplateBlockLoader
 MarkdownFile --> MarkdownFilesAggregator
@@ -185,23 +182,25 @@ MarkdownFile --> TemplateBlockReader
 MarkdownFileList --> StoryGraphJoiner
 MarkdownFileList --> TableOfContentsReader
 MarkdownFilesAggregator --> MarkdownFileList
+PlantUmlDataBlock --> PlantUmlTemplateRenderer
 PlantUmlFile --> PlantUmlJoiner
-PlantUmlJoiner --> HasPlantUmlTemplateBlock
+PlantUmlJoiner --> PlantUmlDataBlock
 PlantUmlTemplateBlock --> PlantUmlJoiner
 PlantUmlTemplateBlockIdentifier --> PlantUmlTemplateBlock
-PlantUmlTemplateRenderer --> RenderedHasPlantUmlTemplateBlock
-PrintBlockJoiner --> HasPrintTemplateBlock
+PlantUmlTemplateRenderer --> RenderedPlantUml
+PrintBlockJoiner --> PrintDataBlock
+PrintDataBlock --> PrintTemplateRenderer
 PrintTemplateBlock --> PrintBlockJoiner
 PrintTemplateBlockIdentifier --> PrintTemplateBlock
-PrintTemplateRenderer --> RenderedHasPrintTemplateBlock
-RenderedCypherCharacterDataTemplateBlock --> RenderedTemplateSaver
-RenderedCypherMachineDataTemplateBlock --> RenderedTemplateSaver
-RenderedDND5ECharacterDataTemplateBlock --> RenderedTemplateSaver
-RenderedDND5EMachineDataTemplateBlock --> RenderedTemplateSaver
-RenderedHasPlantUmlTemplateBlock --> RenderedTemplateSaver
-RenderedHasPrintTemplateBlock --> RenderedTemplateSaver
-RenderedStoryGraphFiles --> RenderedTemplateSaver
-RenderedTableOfContentsBlock --> RenderedTemplateSaver
+PrintTemplateRenderer --> RenderedPrint
+RenderedCypherCharacter --> RenderedTemplateSaver
+RenderedCypherMachine --> RenderedTemplateSaver
+RenderedDND5ECharacter --> RenderedTemplateSaver
+RenderedDND5EMachine --> RenderedTemplateSaver
+RenderedPlantUml --> RenderedTemplateSaver
+RenderedPrint --> RenderedTemplateSaver
+RenderedStoryGraph --> RenderedTemplateSaver
+RenderedTableOfContents --> RenderedTemplateSaver
 RenderedTemplateBlock --> RenderedTemplateSaver
 SourceDirectory --> SourceDirectoryWatcher
 SourceDirectoryFileListOperation --> FilesFromDirectory
@@ -214,14 +213,14 @@ SourceFileOperation --> SourceFileOperationToFileText
 SourceFileOperationToFileText --> FileText
 StoryGraphFiles --> StoryGraphRenderer
 StoryGraphJoiner --> StoryGraphFiles
-StoryGraphRenderer --> RenderedStoryGraphFiles
+StoryGraphRenderer --> RenderedStoryGraph
 StoryGraphTemplateBlock --> StoryGraphJoiner
 StoryGraphTemplateBlockIdentifier --> StoryGraphTemplateBlock
 TableOfContentsBlock --> TableOfContentsRenderer
 TableOfContentsItems --> TableOfContentsJoiner
 TableOfContentsJoiner --> TableOfContentsBlock
 TableOfContentsReader --> TableOfContentsItems
-TableOfContentsRenderer --> RenderedTableOfContentsBlock
+TableOfContentsRenderer --> RenderedTableOfContents
 TemplateBlock --> CypherCharacterTemplateBlockIdentifier
 TemplateBlock --> CypherMachineTemplateBlockIdentifier
 TemplateBlock --> DND5ECharacterTemplateBlockIdentifier

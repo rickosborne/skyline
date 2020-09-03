@@ -1,5 +1,5 @@
 import {
-	HasPlantUmlTemplateBlockType,
+	PlantUmlDataBlockType,
 	PlantUmlDataBlock,
 	PlantUmlFile,
 	PlantUmlFileType,
@@ -11,7 +11,7 @@ import {BiTransformer} from "./Transformer";
 export class PlantUmlJoiner extends BiTransformer<PlantUmlTemplateBlock, PlantUmlFile, PlantUmlDataBlock> {
 
 	constructor() {
-		super(PlantUmlTemplateBlockType, PlantUmlFileType, HasPlantUmlTemplateBlockType);
+		super(PlantUmlTemplateBlockType, PlantUmlFileType, PlantUmlDataBlockType);
 	}
 
 	protected matchLeftRight(templateBlock: PlantUmlTemplateBlock, plantUmlFile: PlantUmlFile): boolean {

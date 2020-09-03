@@ -1,6 +1,6 @@
 import * as crypto from "crypto";
 import {PlantUmlRenderer} from "../../template/PlantUmlRenderer";
-import {HasPlantUmlTemplateBlockType, PlantUmlDataBlock, RenderedPlantUmlDataBlockType} from "../type/PlantUmlFile";
+import {PlantUmlDataBlockType, PlantUmlDataBlock, RenderedPlantUmlDataBlockType} from "../type/PlantUmlFile";
 import {RenderedTemplateBlock} from "../type/TemplateBlock";
 import {Transformer} from "./Transformer";
 
@@ -8,7 +8,7 @@ export class PlantUmlTemplateRenderer extends Transformer<PlantUmlDataBlock, Ren
 	private readonly plantRenderer = new PlantUmlRenderer();
 
 	constructor() {
-		super(HasPlantUmlTemplateBlockType, RenderedPlantUmlDataBlockType);
+		super(PlantUmlDataBlockType, RenderedPlantUmlDataBlockType);
 	}
 
 	onInput(source: PlantUmlDataBlock): void {

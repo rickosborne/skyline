@@ -1,35 +1,34 @@
 import {Story, STORY_GRAPH_DATA_TYPE, STORY_GRAPH_TEMPLATE_ID} from "../../template/StoryGraphPlantUml";
 import {MarkdownFileList, MarkdownFileListType} from "./MarkdownFile";
-import {HasTemplateBlock, HasTemplateBlockType, TemplateBlock, TemplateBlockType} from "./TemplateBlock";
+import {
+	HasTemplateBlock,
+	hasTemplateBlockSubtype,
+	renderedTemplateBlockSubtype,
+	TemplateBlock,
+	TemplateBlockType
+} from "./TemplateBlock";
 import {Type} from "./Type";
-import equal = require("fast-deep-equal");
 
 export interface StoryGraphTemplateBlock extends TemplateBlock {
 	dataType: typeof STORY_GRAPH_DATA_TYPE;
 	templateId: typeof STORY_GRAPH_TEMPLATE_ID;
 }
 
-export const StoryGraphTemplateBlockType = Type.from("StoryGraphTemplateBlock",
-	(item: any): item is StoryGraphTemplateBlock => item != null &&
-		item.dataType === STORY_GRAPH_DATA_TYPE &&
-		item.templateId === STORY_GRAPH_TEMPLATE_ID &&
-		TemplateBlockType.isInstance(item),
-	(a, b) => TemplateBlockType.equals(a, b),
-	(a, b) => TemplateBlockType.hasChanged(a, b),
-	item => TemplateBlockType.stringify(item),
-);
+export const StoryGraphTemplateBlockType = TemplateBlockType.toBuilder()
+	.withFixed("dataType", STORY_GRAPH_DATA_TYPE)
+	.withFixed("templateId", STORY_GRAPH_TEMPLATE_ID)
+	.withParent(TemplateBlockType)
+	.withName<StoryGraphTemplateBlock>("StoryGraphTemplateBlock");
 
 export interface StoryGraphFiles extends HasTemplateBlock<any> {
 	markdownFileList: MarkdownFileList;
 	story: Story;
 }
 
-export const StoryGraphFilesType = HasTemplateBlockType.subtype("StoryGraphFiles",
-	(item: any): item is StoryGraphFiles => item != null &&
-		MarkdownFileListType.isInstance(item.markdownFileList) &&
-		item.story != null,
-	(a, b) => MarkdownFileListType.equals(a.markdownFileList, b.markdownFileList),
-	(a, b) => MarkdownFileListType.hasChanged(a.markdownFileList, b.markdownFileList) ||
-		!equal(a.story, b.story),
-	item => MarkdownFileListType.stringify(item.markdownFileList) + " " + HasTemplateBlockType.stringify(item),
-);
+export const StoryGraphFilesType = hasTemplateBlockSubtype(StoryGraphTemplateBlockType)
+	.withTypedField<StoryGraphFiles, "markdownFileList", MarkdownFileList>("markdownFileList", MarkdownFileListType)
+	.withScalarField<StoryGraphFiles, "story", Story>("story", Type.isNotNull)
+	.withName<StoryGraphFiles>("StoryGraphFiles")
+;
+
+export const RenderedStoryGraphFilesType = renderedTemplateBlockSubtype(StoryGraphFilesType).withName("RenderedStoryGraph");

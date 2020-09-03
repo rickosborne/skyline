@@ -1,21 +1,21 @@
 import {PrintModuleTemplate} from "../../template/PrintModuleTemplate";
 import {
-	HasPrintTemplateBlock,
-	HasPrintTemplateBlockType,
+	PrintDataBlock,
+	PrintDataBlockType,
 	PrintTemplateBlock,
 	RenderedPrintTemplateBlockType
 } from "../type/PrintTemplateBlock";
 import {HasTemplateBlock, RenderedTemplateBlock} from "../type/TemplateBlock";
 import {Transformer} from "./Transformer";
 
-export class PrintTemplateRenderer extends Transformer<HasPrintTemplateBlock, RenderedTemplateBlock<HasTemplateBlock<PrintTemplateBlock>>> {
+export class PrintTemplateRenderer extends Transformer<PrintDataBlock, RenderedTemplateBlock<HasTemplateBlock<PrintTemplateBlock>>> {
 	private readonly printRenderer = new PrintModuleTemplate();
 
 	constructor() {
-		super(HasPrintTemplateBlockType, RenderedPrintTemplateBlockType);
+		super(PrintDataBlockType, RenderedPrintTemplateBlockType);
 	}
 
-	onInput(printBlock: HasPrintTemplateBlock): void {
+	onInput(printBlock: PrintDataBlock): void {
 		const renderedText = this.printRenderer.render({
 			dataName: printBlock.templateBlock.dataName,
 			fileBaseNames: printBlock.fileBaseNames,

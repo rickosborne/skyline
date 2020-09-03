@@ -1,8 +1,6 @@
 import {State} from "../../template/FrontMatter";
 import {matchCount} from "../../template/util";
 import {MarkdownFile, MarkdownFileList, MarkdownFileListType} from "../type/MarkdownFile";
-import {OperationBase} from "../type/Operation";
-import {SourceDirectoryFileList, SourceDirectoryType} from "../type/SourceDirectory";
 import {SourceFile} from "../type/SourceFile";
 import {MarkdownContentItem, TableOfContentsItems, TableOfContentsItemsType} from "../type/TableOfContents";
 import {Transformer} from "./Transformer";
@@ -24,11 +22,6 @@ export class TableOfContentsReader extends Transformer<MarkdownFileList, TableOf
 
 	protected isPrintable(sourceFile: SourceFile): boolean {
 		return !!sourceFile.fileName.match(/^\d+-/);
-	}
-
-	protected matchLeftRight(fileList: OperationBase<SourceDirectoryFileList>, markdownFile: MarkdownFile): boolean {
-		return SourceDirectoryType.equals(markdownFile.fileText.file.directory, fileList.item.sourceDirectory)
-			&& this.isPrintable(markdownFile.fileText.file);
 	}
 
 	onInput(markdownFileList: MarkdownFileList): void {

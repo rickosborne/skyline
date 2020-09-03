@@ -1,4 +1,4 @@
-import {OperationBase, OperationBaseType} from "./Operation";
+import {OperationBase, operationBaseSubtype} from "./Operation";
 import {SourceDirectory, SourceDirectoryType} from "./SourceDirectory";
 import {Type} from "./Type";
 
@@ -11,27 +11,35 @@ export interface SourceFile {
 	pathFromRoot: string;
 }
 
-export const SourceFileType = Type.from("SourceFile", (item: any): item is SourceFile => item != null &&
-	SourceDirectoryType.isInstance(item.directory) &&
-	typeof item.baseName === "string" &&
-	typeof item.extension === "string" &&
-	typeof item.fileName === "string" &&
-	typeof item.fullPath === "string" &&
-	typeof item.pathFromRoot === "string",
-	(a, b) => a.pathFromRoot === b.pathFromRoot,
-	(a, b) => a.baseName !== b.baseName || a.extension !== b.extension || a.fileName !== b.fileName || a.fullPath !== b.fullPath || a.pathFromRoot !== b.pathFromRoot || SourceDirectoryType.hasChanged(a.directory, b.directory),
-	item => item.pathFromRoot,
-);
+export const SourceFileType = Type.novel<SourceFile>(item => item.pathFromRoot)
+	.withScalarField<SourceFile, "fileName", string>("fileName", Type.isString)
+	.withScalarField<SourceFile, "extension", string>("extension", Type.isString)
+	.withScalarField<SourceFile, "baseName", string>("baseName", Type.isString)
+	.withScalarField<SourceFile, "fullPath", string>("fullPath", Type.isString)
+	.withScalarField<SourceFile, "pathFromRoot", string>("pathFromRoot", Type.isString)
+	.withTypedField<SourceFile, "directory", SourceDirectory>("directory", SourceDirectoryType)
+	.withName<SourceFile>("SourceFile");
 
 export type SourceFileOperation = OperationBase<SourceFile>;
 
-export const SourceFileOperationType = OperationBaseType.subtype("SourceFileOperation", (item: any): item is OperationBase<SourceFile> => item != null &&
-	SourceFileType.isInstance(item.item),
-	(a, b) => a.operation === b.operation && SourceFileType.equals(a.item, b.item),
-	(a, b) => SourceFileType.hasChanged(a.item, b.item),
-	item => `${item.operation}:${SourceFileType.stringify(item.item)}`,
-);
+export const SourceFileOperationType = operationBaseSubtype(SourceDirectoryType)
+	.withName<SourceFileOperation>("SourceFileOperation");
 
 export function sortFilesByName(a: SourceFile, b: SourceFile): number {
 	return a.fileName.localeCompare(b.fileName);
 }
+
+export interface SourceDirectoryFileList {
+	fileList: SourceFile[];
+	sourceDirectory: SourceDirectory;
+}
+
+export const SourceDirectoryFileListType = Type.novel<SourceDirectoryFileList>(item => SourceDirectoryType.stringify(item.sourceDirectory))
+	.withTypedList<SourceDirectoryFileList, "fileList", SourceFile>("fileList", SourceFileType)
+	.withTypedField<SourceDirectoryFileList, "sourceDirectory", SourceDirectory>("sourceDirectory", SourceDirectoryType)
+	.withName("SourceDirectoryFileList");
+
+export type SourceDirectoryFileListOperation = OperationBase<SourceDirectoryFileList>;
+
+export const SourceDirectoryFileListOperationType: Type<SourceDirectoryFileListOperation> = operationBaseSubtype(SourceDirectoryFileListType)
+	.withName("SourceDirectoryFileListOperation");

@@ -1,33 +1,29 @@
 import {PRINT_DATA_TYPE, PRINT_TEMPLATE_ID} from "../../template/PrintModuleTemplate";
 import {
 	HasTemplateBlock,
-	HasTemplateBlockSubtype,
-	RenderedTemplateBlockType,
+	hasTemplateBlockSubtype,
+	renderedTemplateBlockSubtype,
 	TemplateBlock,
 	TemplateBlockType
 } from "./TemplateBlock";
-import equal = require("fast-deep-equal");
 
 export interface PrintTemplateBlock extends TemplateBlock {
 	dataType: typeof PRINT_DATA_TYPE;
 	templateId: typeof PRINT_TEMPLATE_ID;
 }
 
-export const PrintTemplateBlockType = TemplateBlockType.subtype("PrintTemplateBlock",
-	(item: any): item is PrintTemplateBlock => item != null && item.dataType === PRINT_DATA_TYPE && item.templateId === PRINT_TEMPLATE_ID,
-	(a, b) => a.dataType === b.dataType && a.templateId === b.templateId,
-	(a, b) => a.dataType !== b.dataType || a.templateId !== b.templateId,
-	item => TemplateBlockType.stringify(item),
-);
+export const PrintTemplateBlockType = TemplateBlockType.toBuilder()
+	.withFixed("dataType", PRINT_DATA_TYPE)
+	.withFixed("templateId", PRINT_TEMPLATE_ID)
+	.withParent(TemplateBlockType)
+	.withName<PrintTemplateBlock>("PrintTemplateBlock");
 
-export interface HasPrintTemplateBlock extends HasTemplateBlock<PrintTemplateBlock> {
+export interface PrintDataBlock extends HasTemplateBlock<PrintTemplateBlock> {
 	fileBaseNames: string[];
 }
 
-export const HasPrintTemplateBlockType = HasTemplateBlockSubtype(PrintTemplateBlockType,
-	"HasPrintTemplateBlock",
-	(item: any): item is HasPrintTemplateBlock => item != null && Array.isArray(item.fileBaseNames),
-	(a, b) => true,
-	(a, b) => !equal(a.fileBaseNames, b.fileBaseNames),
-);
-export const RenderedPrintTemplateBlockType = RenderedTemplateBlockType(HasPrintTemplateBlockType);
+export const PrintDataBlockType = hasTemplateBlockSubtype(PrintTemplateBlockType)
+	.withScalarField<PrintDataBlock, "fileBaseNames", string[]>("fileBaseNames", (item: any): item is string[] => Array.isArray(item))
+	.withName("PrintDataBlock")
+;
+export const RenderedPrintTemplateBlockType = renderedTemplateBlockSubtype(PrintDataBlockType).withName("RenderedPrint");

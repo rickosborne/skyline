@@ -1,11 +1,7 @@
 import * as fs from "fs";
 import {isCreated, isDeleted, isRenamed, isReplay, isUpdated} from "../type/Operation";
-import {
-	SourceDirectoryFileListOperation,
-	SourceDirectoryFileListOperationType,
-	SourceDirectoryOperation,
-	SourceDirectoryOperationType
-} from "../type/SourceDirectory";
+import {SourceDirectoryOperation, SourceDirectoryOperationType} from "../type/SourceDirectory";
+import {SourceDirectoryFileListOperation, SourceDirectoryFileListOperationType} from "../type/SourceFile";
 import {fileInDirectory} from "../util/FileInDirectory";
 import {Transformer} from "./Transformer";
 

@@ -1,17 +1,17 @@
 import {CypherCreature} from "../../template/CypherCreature";
 import {
-	CYPHER_MACHINE_TEMPLATE_ID,
 	CypherMachineDataTemplateBlock,
-	CypherMachineDataTemplateBlockType
+	CypherMachineDataTemplateBlockType,
+	RenderedCypherMachineDataTemplateBlockType
 } from "../type/MachineTemplateBlock";
-import {RenderedTemplateBlock, RenderedTemplateBlockType} from "../type/TemplateBlock";
+import {RenderedTemplateBlock} from "../type/TemplateBlock";
 import {Transformer} from "./Transformer";
 
 export class CypherMachineRenderer extends Transformer<CypherMachineDataTemplateBlock, RenderedTemplateBlock<CypherMachineDataTemplateBlock>> {
 	private readonly cypherCreature = new CypherCreature();
 
 	constructor() {
-		super(CypherMachineDataTemplateBlockType, RenderedTemplateBlockType(CypherMachineDataTemplateBlockType));
+		super(CypherMachineDataTemplateBlockType, RenderedCypherMachineDataTemplateBlockType);
 	}
 
 	onInput(machineTemplateBlock: CypherMachineDataTemplateBlock): void {

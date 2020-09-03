@@ -1,14 +1,14 @@
 import * as equal from "fast-deep-equal";
 import * as fs from "fs";
 import * as path from "path";
-import {Operation, OperationBase} from "../type/Operation";
+import {Operation} from "../type/Operation";
+import {SourceDirectory} from "../type/SourceDirectory";
 import {
-	SourceDirectory,
-	SourceDirectoryFileList,
 	SourceDirectoryFileListOperation,
-	SourceDirectoryFileListOperationType
-} from "../type/SourceDirectory";
-import {SourceFileOperation, SourceFileOperationType} from "../type/SourceFile";
+	SourceDirectoryFileListOperationType,
+	SourceFileOperation,
+	SourceFileOperationType
+} from "../type/SourceFile";
 import {fileInDirectory} from "../util/FileInDirectory";
 import {Transformer} from "./Transformer";
 
@@ -19,7 +19,7 @@ export class FilesFromDirectory extends Transformer<SourceDirectoryFileListOpera
 		super(SourceDirectoryFileListOperationType, SourceFileOperationType);
 	}
 
-	onInput(input: OperationBase<SourceDirectoryFileList>): void {
+	onInput(input: SourceDirectoryFileListOperation): void {
 		input.item.fileList.forEach(sourceFile => this.notify({
 			item: sourceFile,
 			operation: input.operation,

@@ -1,14 +1,13 @@
 import {ContentItem} from "../../template/WebTableOfContents";
-import {MarkdownFile, MarkdownFileList, MarkdownFileListType} from "./MarkdownFile";
+import {MarkdownFile, MarkdownFileList, MarkdownFileListType, MarkdownFileType} from "./MarkdownFile";
 import {
 	HasTemplateBlock,
-	HasTemplateBlockSubtype,
-	HasTemplateBlockType, RenderedTemplateBlockType,
+	hasTemplateBlockSubtype,
+	renderedTemplateBlockSubtype,
 	TemplateBlock,
 	TemplateBlockType
 } from "./TemplateBlock";
 import {Type} from "./Type";
-import equal = require("fast-deep-equal");
 
 export const FILES_DATA_TYPE: "files" = "files";
 export const WEB_TOC_TEMPLATE_ID: "web-table-of-contents" = "web-table-of-contents";
@@ -17,41 +16,45 @@ export interface MarkdownContentItem extends ContentItem {
 	markdownFile: MarkdownFile;
 }
 
+export const MarkdownContentItemType = Type.novel<MarkdownContentItem>(item => MarkdownFileType.stringify(item.markdownFile))
+	.withTypedField<MarkdownContentItem, "markdownFile", MarkdownFile>("markdownFile", MarkdownFileType)
+	.withOptionalScalarField<MarkdownContentItem, "description", string>("description", Type.isString)
+	.withScalarField<MarkdownContentItem, "indentLevel", number>("indentLevel", Type.isNumber)
+	.withScalarField<MarkdownContentItem, "link", string>("link", Type.isString)
+	.withScalarField<MarkdownContentItem, "notStarted", boolean>("notStarted", Type.isBoolean)
+	.withScalarField<MarkdownContentItem, "startOfStory", boolean>("startOfStory", Type.isBoolean)
+	.withScalarField<MarkdownContentItem, "title", string>("title", Type.isString)
+	.withScalarField<MarkdownContentItem, "titleIsSpoiler", boolean>("titleIsSpoiler", Type.isBoolean)
+	.withScalarField<MarkdownContentItem, "todoCount", number>("todoCount", Type.isNumber)
+	.withName("MarkdownContentItem");
+
 export interface TableOfContentsTemplateBlock extends TemplateBlock {
 	dataType: typeof FILES_DATA_TYPE;
 	templateId: typeof WEB_TOC_TEMPLATE_ID;
 }
 
-export const TableOfContentsTemplateBlockType = TemplateBlockType.subtype(
-	"TableOfContentsTemplateBlock",
-	(item: any): item is TableOfContentsTemplateBlock => item != null && item.dataType === FILES_DATA_TYPE && item.templateId === WEB_TOC_TEMPLATE_ID,
-	(a, b) => a.dataType === b.dataType && a.templateId === b.templateId,
-	(a, b) => a.dataType !== b.dataType || a.templateId !== b.templateId,
-	item => TemplateBlockType.stringify(item),
-);
+export const TableOfContentsTemplateBlockType = TemplateBlockType.toBuilder()
+	.withFixed("dataType", FILES_DATA_TYPE)
+	.withFixed("templateId", WEB_TOC_TEMPLATE_ID)
+	.withParent(TemplateBlockType)
+	.withName<TableOfContentsTemplateBlock>("TableOfContentsTemplateBlock");
 
 export interface TableOfContentsItems {
 	contentItems: MarkdownContentItem[];
 	markdownFileList: MarkdownFileList;
 }
 
-export const TableOfContentsItemsType = Type.from("TableOfContentsItems",
-	(item: any): item is TableOfContentsItems => item != null && Array.isArray(item.contentItems) && MarkdownFileListType.isInstance(item.markdownFileList),
-	(a, b) => MarkdownFileListType.equals(a.markdownFileList, b.markdownFileList),
-	(a, b) => !equal(a.contentItems, b.contentItems),
-	item => `${MarkdownFileListType.stringify(item.markdownFileList)}#${item.contentItems.length}`,
-);
+export const TableOfContentsItemsType = MarkdownFileListType.toBuilder()
+	.wrappedAs<TableOfContentsItems, "markdownFileList">("markdownFileList")
+	.withTypedList<TableOfContentsItems, "contentItems", MarkdownContentItem>("contentItems", MarkdownContentItemType)
+	.withName<TableOfContentsItems>("TableOfContentsItems");
 
 export interface TableOfContentsBlock extends HasTemplateBlock<TableOfContentsTemplateBlock> {
 	items: TableOfContentsItems;
 }
 
-export const TableOfContentsBlockType = HasTemplateBlockSubtype<TableOfContentsTemplateBlock, TableOfContentsBlock>(
-	TableOfContentsTemplateBlockType,
-	"TableOfContentsBlock",
-	(item: any): item is TableOfContentsBlock => TableOfContentsItemsType.isInstance(item.items),
-	(a, b) => TableOfContentsItemsType.equals(a.items, b.items),
-	(a, b) => TableOfContentsItemsType.hasChanged(a.items, b.items),
-);
+export const TableOfContentsBlockType = hasTemplateBlockSubtype(TableOfContentsTemplateBlockType)
+	.withTypedField<TableOfContentsBlock, "items", TableOfContentsItems>("items", TableOfContentsItemsType)
+	.withName("TableOfContentsBlock");
 
-export const RenderedTableOfContentsTemplateBlockType = RenderedTemplateBlockType(TableOfContentsBlockType);
+export const RenderedTableOfContentsTemplateBlockType = renderedTemplateBlockSubtype(TableOfContentsBlockType).withName("RenderedTableOfContents");

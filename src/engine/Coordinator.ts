@@ -30,7 +30,6 @@ export class Bridge<O extends I, I, BT extends InTransform<I>> {
 	): Bridge<O, I, BT> {
 		const consumer = sinkSelector(sink).bind(sink);
 		const bridge = new Bridge(outType, inType, source, sink, consumer);
-		// source.addListener(bridge.onItem.bind(bridge));
 		const listenerFactory = new Function("sink", `return function to${sink.toString().replace(/[^a-z]+/ig, "")}(input) { return sink(input); }`);
 		const listener = listenerFactory(consumer);
 		source.addListener(listener);
@@ -151,7 +150,7 @@ export class Coordinator {
 			this.transformers.sort(sortPublishers).map(t => `rectangle ${t}`),
 			this.bitransformers.sort(sortPublishers).map(t => `rectangle ${t}`),
 			types.map(t => `entity "${t}" as ${typeName(t)}`),
-			types.filter(t => t.parent != null).map(t => `${typeName(t.parent)} <.. ${typeName(t)} : extends`),
+			types.filter(t => t.parent != null).map(t => `${typeName(t.parent)} <.. ${typeName(t)}`),
 			this.bridges.flatMap(bridge => bridge.toPlantUmlArrow()).reduce(uniqueReducer(), []).sort(),
 			"@enduml",
 		]);

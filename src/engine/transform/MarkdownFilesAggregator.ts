@@ -1,14 +1,10 @@
 import {MarkdownFile, MarkdownFileList, MarkdownFileListType, MarkdownFileType} from "../type/MarkdownFile";
-import {isCreated, isReplay, isUpdated, OperationBase} from "../type/Operation";
-import {
-	SourceDirectory,
-	SourceDirectoryFileList,
-	SourceDirectoryFileListOperationType,
-	SourceDirectoryType
-} from "../type/SourceDirectory";
+import {isCreated, isReplay, isUpdated} from "../type/Operation";
+import {SourceDirectory, SourceDirectoryType} from "../type/SourceDirectory";
+import {SourceDirectoryFileListOperation, SourceDirectoryFileListOperationType} from "../type/SourceFile";
 import {BiTransformer} from "./Transformer";
 
-export class MarkdownFilesAggregator extends BiTransformer<OperationBase<SourceDirectoryFileList>, MarkdownFile, MarkdownFileList> {
+export class MarkdownFilesAggregator extends BiTransformer<SourceDirectoryFileListOperation, MarkdownFile, MarkdownFileList> {
 	private readonly files: Map<string, Map<string, MarkdownFile>> = new Map<string, Map<string, MarkdownFile>>();
 
 	constructor() {
@@ -24,11 +20,11 @@ export class MarkdownFilesAggregator extends BiTransformer<OperationBase<SourceD
 		return dirMap;
 	}
 
-	protected matchLeftRight(fileListOperation: OperationBase<SourceDirectoryFileList>, markdownFile: MarkdownFile): boolean {
+	protected matchLeftRight(fileListOperation: SourceDirectoryFileListOperation, markdownFile: MarkdownFile): boolean {
 		return SourceDirectoryType.equals(fileListOperation.item.sourceDirectory, markdownFile.fileText.file.directory);
 	}
 
-	onInputLeft(fileListOperation: OperationBase<SourceDirectoryFileList>) {
+	onInputLeft(fileListOperation: SourceDirectoryFileListOperation) {
 		if (isCreated(fileListOperation) || isUpdated(fileListOperation) || isReplay(fileListOperation)) {
 			super.onInputLeft(fileListOperation);
 		} else {
@@ -41,7 +37,7 @@ export class MarkdownFilesAggregator extends BiTransformer<OperationBase<SourceD
 		super.onInputRight(markdownFile);
 	}
 
-	protected onInputs(fileListOperation: OperationBase<SourceDirectoryFileList>, markdownFile: MarkdownFile): void {
+	protected onInputs(fileListOperation: SourceDirectoryFileListOperation, markdownFile: MarkdownFile): void {
 		const dirFiles = this.dirFiles(fileListOperation.item.sourceDirectory);
 		const markdownFiles = fileListOperation.item.fileList.map(sourceFile => dirFiles.get(sourceFile.pathFromRoot));
 		const emptyCount = markdownFiles.reduce((p, c) => c == null ? (p + 1) : p, 0);

@@ -6,10 +6,7 @@ export interface FileText {
 	text: string;
 }
 
-export const FileTextType = Type.from("FileText", (item: any): item is FileText => item != null &&
-	typeof item.text === "string" &&
-	SourceFileType.isInstance(item.file),
-	(a, b) => SourceFileType.equals(a.file, b.file),
-	(a, b) => a.text !== b.text || SourceFileType.hasChanged(a.file, b.file),
-	item => SourceFileType.stringify(item.file),
-);
+export const FileTextType: Type<FileText> = SourceFileType.toBuilder()
+	.wrappedAs<FileText, "file">("file")
+	.withScalarField<FileText, "text", string>("text", Type.isString)
+	.withName("FileText");
