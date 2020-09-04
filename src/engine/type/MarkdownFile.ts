@@ -37,9 +37,10 @@ export interface Heading {
 	text: string;
 }
 
-export const HeadingType = Type.novel<Heading>(h => `h${h.level}. ${h.text}`)
-	.withScalarField<Heading, "level", HeadingLevel>("level", (level: any): level is HeadingLevel => Type.isNumber(level))
-	.withScalarField<Heading, "text", string>("text", Type.isString)
+export const HeadingType = Type.novel<Heading>()
+	.withStringify(h => `h${h.level}. ${h.text}`)
+	.withScalarField("level", (level: any): level is HeadingLevel => Type.isNumber(level))
+	.withScalarField("text", Type.isString)
 	.withName("Heading");
 
 export interface MarkdownFile {
@@ -48,10 +49,10 @@ export interface MarkdownFile {
 	frontMatter?: FrontMatter;
 }
 
-export const MarkdownFileType = FileTextType.toBuilder()
-	.wrappedAs<MarkdownFile, "fileText">("fileText")
-	.withOptionalTypedField<MarkdownFile, "firstHeading", Heading>("firstHeading", HeadingType)
-	.withOptionalTypedField<MarkdownFile, "frontMatter", FrontMatter>("frontMatter", FrontMatterType, false)
+export const MarkdownFileType = Type.novel<MarkdownFile>()
+	.withTypedField("fileText", FileTextType)
+	.withOptionalTypedField("firstHeading", HeadingType)
+	.withOptionalTypedField("frontMatter", FrontMatterType)
 	.withName("MarkdownFile")
 ;
 
@@ -60,7 +61,8 @@ export interface MarkdownFileList {
 	markdownFiles: MarkdownFile[];
 }
 
-export const MarkdownFileListType: Type<MarkdownFileList> = SourceDirectoryFileListOperationType.toBuilder()
-	.wrappedAs<MarkdownFileList, "fileListOperation">("fileListOperation")
-	.withTypedList<MarkdownFileList, "markdownFiles", MarkdownFile>("markdownFiles", MarkdownFileType)
+export const MarkdownFileListType = Type.novel<MarkdownFileList>()
+	.withTypedField("fileListOperation", SourceDirectoryFileListOperationType)
+	.withTypedList("markdownFiles", MarkdownFileType)
+	.withStringify(item => SourceDirectoryFileListOperationType.stringify(item.fileListOperation))
 	.withName("MarkdownFileList");

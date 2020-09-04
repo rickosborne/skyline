@@ -7,10 +7,11 @@ export interface SourceDirectory {
 	pathFromRoot: string;
 }
 
-export const SourceDirectoryType = Type.novel<SourceDirectory>(item => item.pathFromRoot)
-	.withScalarField<SourceDirectory, "fileName", string>("fileName", Type.isString)
-	.withScalarField<SourceDirectory, "fullPath", string>("fullPath", Type.isString)
-	.withScalarField<SourceDirectory, "pathFromRoot", string>("pathFromRoot", Type.isString)
+export const SourceDirectoryType = Type.novel<SourceDirectory>()
+	.withScalarField("fileName", Type.isString)
+	.withScalarField("fullPath", Type.isString)
+	.withScalarField("pathFromRoot", Type.isString)
+	.withStringify(item => item.pathFromRoot)
 	.withName("SourceDirectory");
 
 export type SourceDirectoryOperation = OperationBase<SourceDirectory>;

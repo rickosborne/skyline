@@ -27,10 +27,10 @@ export const isUpdated = <T>(op: OperationBase<T>): op is UpdatedItem<T> => op.o
 export const isDeleted = <T>(op: OperationBase<T>): op is DeletedItem<T> => op.operation === Operation.Deleted;
 export const isRenamed = <T>(op: OperationBase<T>): op is RenamedItem<T> => op.operation === Operation.Renamed;
 
-export const HasOperationType = Type.novel<HasOperation>(item => item.operation)
-	.withScalarField<HasOperation, "operation", Operation>("operation", (op: any): op is Operation => Type.isString(op))
+export const HasOperationType = Type.novel<HasOperation>()
+	.withScalarField("operation", (op: any): op is Operation => Type.isString(op))
+	.withStringify(item => item.operation)
 	.withName("HasOperation");
 
-export const operationBaseSubtype = <O extends OperationBase<T>, T>(type: Type<T>): TypeBuilder<O> => HasOperationType.toBuilder()
-	.withTypedField<O, "item", T>("item", type)
-	.withParent(HasOperationType);
+export const operationBaseSubtype = <O extends OperationBase<T>, T>(type: Type<T>): TypeBuilder<O> => HasOperationType.toBuilder<O>()
+	.withTypedField("item", type);

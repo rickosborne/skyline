@@ -11,19 +11,20 @@ export interface SourceFile {
 	pathFromRoot: string;
 }
 
-export const SourceFileType = Type.novel<SourceFile>(item => item.pathFromRoot)
-	.withScalarField<SourceFile, "fileName", string>("fileName", Type.isString)
-	.withScalarField<SourceFile, "extension", string>("extension", Type.isString)
-	.withScalarField<SourceFile, "baseName", string>("baseName", Type.isString)
-	.withScalarField<SourceFile, "fullPath", string>("fullPath", Type.isString)
-	.withScalarField<SourceFile, "pathFromRoot", string>("pathFromRoot", Type.isString)
-	.withTypedField<SourceFile, "directory", SourceDirectory>("directory", SourceDirectoryType)
-	.withName<SourceFile>("SourceFile");
+export const SourceFileType = Type.novel<SourceFile>()
+	.withScalarField("fileName", Type.isString)
+	.withScalarField("extension", Type.isString)
+	.withScalarField("baseName", Type.isString)
+	.withScalarField("fullPath", Type.isString)
+	.withScalarField("pathFromRoot", Type.isString)
+	.withTypedField("directory", SourceDirectoryType)
+	.withStringify(item => item.pathFromRoot)
+	.withName("SourceFile");
 
 export type SourceFileOperation = OperationBase<SourceFile>;
 
-export const SourceFileOperationType = operationBaseSubtype(SourceDirectoryType)
-	.withName<SourceFileOperation>("SourceFileOperation");
+export const SourceFileOperationType = operationBaseSubtype<SourceFileOperation, SourceFile>(SourceFileType)
+	.withName("SourceFileOperation");
 
 export function sortFilesByName(a: SourceFile, b: SourceFile): number {
 	return a.fileName.localeCompare(b.fileName);
@@ -34,9 +35,10 @@ export interface SourceDirectoryFileList {
 	sourceDirectory: SourceDirectory;
 }
 
-export const SourceDirectoryFileListType = Type.novel<SourceDirectoryFileList>(item => SourceDirectoryType.stringify(item.sourceDirectory))
-	.withTypedList<SourceDirectoryFileList, "fileList", SourceFile>("fileList", SourceFileType)
-	.withTypedField<SourceDirectoryFileList, "sourceDirectory", SourceDirectory>("sourceDirectory", SourceDirectoryType)
+export const SourceDirectoryFileListType = Type.novel<SourceDirectoryFileList>()
+	.withTypedList("fileList", SourceFileType)
+	.withTypedField("sourceDirectory", SourceDirectoryType)
+	.withStringify(item => SourceDirectoryType.stringify(item.sourceDirectory))
 	.withName("SourceDirectoryFileList");
 
 export type SourceDirectoryFileListOperation = OperationBase<SourceDirectoryFileList>;

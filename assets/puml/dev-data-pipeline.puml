@@ -70,6 +70,7 @@ rectangle PrintBlockJoiner
 rectangle StoryGraphJoiner
 rectangle TableOfContentsJoiner
 entity "BookData" as BookData
+entity "BookTemplateBlock" as BookTemplateBlock
 entity "CypherCharacterData" as CypherCharacterData
 entity "CypherCharacterDataTemplateBlock" as CypherCharacterDataTemplateBlock
 entity "CypherCharacterTemplateBlock" as CypherCharacterTemplateBlock
@@ -111,12 +112,13 @@ entity "TableOfContentsBlock" as TableOfContentsBlock
 entity "TableOfContentsItems" as TableOfContentsItems
 entity "TableOfContentsTemplateBlock" as TableOfContentsTemplateBlock
 entity "TemplateBlock" as TemplateBlock
+TemplateBlock <.. BookTemplateBlock
 HasTemplateBlock <.. CypherCharacterDataTemplateBlock
-TemplateBlock <.. CypherCharacterTemplateBlock
+BookTemplateBlock <.. CypherCharacterTemplateBlock
 HasTemplateBlock <.. CypherMachineDataTemplateBlock
 MachineTemplateBlock <.. CypherMachineTemplateBlock
 HasTemplateBlock <.. DND5ECharacterDataTemplateBlock
-TemplateBlock <.. DND5ECharacterTemplateBlock
+BookTemplateBlock <.. DND5ECharacterTemplateBlock
 HasTemplateBlock <.. DND5EMachineDataTemplateBlock
 MachineTemplateBlock <.. DND5EMachineTemplateBlock
 TemplateBlock <.. MachineTemplateBlock

@@ -16,16 +16,17 @@ export interface MarkdownContentItem extends ContentItem {
 	markdownFile: MarkdownFile;
 }
 
-export const MarkdownContentItemType = Type.novel<MarkdownContentItem>(item => MarkdownFileType.stringify(item.markdownFile))
-	.withTypedField<MarkdownContentItem, "markdownFile", MarkdownFile>("markdownFile", MarkdownFileType)
-	.withOptionalScalarField<MarkdownContentItem, "description", string>("description", Type.isString)
-	.withScalarField<MarkdownContentItem, "indentLevel", number>("indentLevel", Type.isNumber)
-	.withScalarField<MarkdownContentItem, "link", string>("link", Type.isString)
-	.withScalarField<MarkdownContentItem, "notStarted", boolean>("notStarted", Type.isBoolean)
-	.withScalarField<MarkdownContentItem, "startOfStory", boolean>("startOfStory", Type.isBoolean)
-	.withScalarField<MarkdownContentItem, "title", string>("title", Type.isString)
-	.withScalarField<MarkdownContentItem, "titleIsSpoiler", boolean>("titleIsSpoiler", Type.isBoolean)
-	.withScalarField<MarkdownContentItem, "todoCount", number>("todoCount", Type.isNumber)
+export const MarkdownContentItemType = Type.novel<MarkdownContentItem>()
+	.withTypedField("markdownFile", MarkdownFileType)
+	.withOptionalScalarField("description")
+	.withScalarField("indentLevel", Type.isNumber)
+	.withScalarField("link", Type.isString)
+	.withScalarField("notStarted", Type.isBoolean)
+	.withScalarField("startOfStory", Type.isBoolean)
+	.withScalarField("title", Type.isString)
+	.withScalarField("titleIsSpoiler", Type.isBoolean)
+	.withScalarField("todoCount", Type.isNumber)
+	.withStringify(item => MarkdownFileType.stringify(item.markdownFile))
 	.withName("MarkdownContentItem");
 
 export interface TableOfContentsTemplateBlock extends TemplateBlock {
@@ -33,28 +34,28 @@ export interface TableOfContentsTemplateBlock extends TemplateBlock {
 	templateId: typeof WEB_TOC_TEMPLATE_ID;
 }
 
-export const TableOfContentsTemplateBlockType = TemplateBlockType.toBuilder()
+export const TableOfContentsTemplateBlockType = TemplateBlockType.toBuilder<TableOfContentsTemplateBlock>()
 	.withFixed("dataType", FILES_DATA_TYPE)
 	.withFixed("templateId", WEB_TOC_TEMPLATE_ID)
 	.withParent(TemplateBlockType)
-	.withName<TableOfContentsTemplateBlock>("TableOfContentsTemplateBlock");
+	.withName("TableOfContentsTemplateBlock");
 
 export interface TableOfContentsItems {
 	contentItems: MarkdownContentItem[];
 	markdownFileList: MarkdownFileList;
 }
 
-export const TableOfContentsItemsType = MarkdownFileListType.toBuilder()
-	.wrappedAs<TableOfContentsItems, "markdownFileList">("markdownFileList")
-	.withTypedList<TableOfContentsItems, "contentItems", MarkdownContentItem>("contentItems", MarkdownContentItemType)
-	.withName<TableOfContentsItems>("TableOfContentsItems");
+export const TableOfContentsItemsType = Type.novel<TableOfContentsItems>()
+	.withTypedField("markdownFileList", MarkdownFileListType)
+	.withTypedList("contentItems", MarkdownContentItemType)
+	.withName("TableOfContentsItems");
 
 export interface TableOfContentsBlock extends HasTemplateBlock<TableOfContentsTemplateBlock> {
 	items: TableOfContentsItems;
 }
 
-export const TableOfContentsBlockType = hasTemplateBlockSubtype(TableOfContentsTemplateBlockType)
-	.withTypedField<TableOfContentsBlock, "items", TableOfContentsItems>("items", TableOfContentsItemsType)
+export const TableOfContentsBlockType = hasTemplateBlockSubtype<TableOfContentsTemplateBlock, TableOfContentsBlock>(TableOfContentsTemplateBlockType)
+	.withTypedField("items", TableOfContentsItemsType)
 	.withName("TableOfContentsBlock");
 
 export const RenderedTableOfContentsTemplateBlockType = renderedTemplateBlockSubtype(TableOfContentsBlockType).withName("RenderedTableOfContents");

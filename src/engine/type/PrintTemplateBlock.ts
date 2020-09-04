@@ -6,24 +6,24 @@ import {
 	TemplateBlock,
 	TemplateBlockType
 } from "./TemplateBlock";
+import {Type} from "./Type";
 
 export interface PrintTemplateBlock extends TemplateBlock {
 	dataType: typeof PRINT_DATA_TYPE;
 	templateId: typeof PRINT_TEMPLATE_ID;
 }
 
-export const PrintTemplateBlockType = TemplateBlockType.toBuilder()
+export const PrintTemplateBlockType = TemplateBlockType.toBuilder<PrintTemplateBlock>()
 	.withFixed("dataType", PRINT_DATA_TYPE)
 	.withFixed("templateId", PRINT_TEMPLATE_ID)
-	.withParent(TemplateBlockType)
-	.withName<PrintTemplateBlock>("PrintTemplateBlock");
+	.withName("PrintTemplateBlock");
 
 export interface PrintDataBlock extends HasTemplateBlock<PrintTemplateBlock> {
 	fileBaseNames: string[];
 }
 
-export const PrintDataBlockType = hasTemplateBlockSubtype(PrintTemplateBlockType)
-	.withScalarField<PrintDataBlock, "fileBaseNames", string[]>("fileBaseNames", (item: any): item is string[] => Array.isArray(item))
-	.withName("PrintDataBlock")
-;
+export const PrintDataBlockType = hasTemplateBlockSubtype<PrintTemplateBlock, PrintDataBlock>(PrintTemplateBlockType)
+	.withScalarField("fileBaseNames", Type.isArray)
+	.withName("PrintDataBlock");
+
 export const RenderedPrintTemplateBlockType = renderedTemplateBlockSubtype(PrintDataBlockType).withName("RenderedPrint");

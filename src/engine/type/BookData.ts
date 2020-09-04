@@ -18,18 +18,18 @@ export interface BookData {
 	fileText: FileText;
 }
 
-export const BookDataType = FileTextType.toBuilder()
-	.wrappedAs<BookData, "fileText">("fileText")
-	.withScalarField<BookData, "book", Book>("book", Type.isNotNull)
+export const BookDataType = Type.novel<BookData>()
+	.withTypedField("fileText", FileTextType)
+	.withScalarField("book")
+	.withStringify(item => FileTextType.stringify(item.fileText))
 	.withName("BookData");
 
 export interface BookTemplateBlock extends TemplateBlock {
 	dataType: typeof BOOK_DATA_TYPE;
 }
 
-export const BookTemplateBlockType: Type<BookTemplateBlock> = TemplateBlockType.toBuilder()
-	.withFixed<BookTemplateBlock, "dataType", typeof BOOK_DATA_TYPE>("dataType", BOOK_DATA_TYPE)
-	.withParent(TemplateBlockType)
+export const BookTemplateBlockType = TemplateBlockType.toBuilder<BookTemplateBlock>()
+	.withFixed("dataType", BOOK_DATA_TYPE)
 	.withName("BookTemplateBlock");
 
 export interface CypherCharacterData {
@@ -38,12 +38,13 @@ export interface CypherCharacterData {
 	hzd: PlayerCharacter;
 }
 
-const characterDataTypeBuilder = <T extends { bookData: BookData; hzd: PlayerCharacter }>() => BookDataType.toBuilder()
-	.wrappedAs<T, "bookData">("bookData")
-	.withScalarField<T, "hzd", PlayerCharacter>("hzd", Type.isNotNull);
+const characterDataTypeBuilder = <T extends { bookData: BookData; hzd: PlayerCharacter }>() => Type.novel<T>()
+	.withTypedField("bookData", BookDataType)
+	.withScalarField("hzd")
+	.withStringify(item => item.hzd.name);
 
-export const CypherCharacterDataType: Type<CypherCharacterData> = characterDataTypeBuilder()
-	.withScalarField<CypherCharacterData, "cypher", CypherPlayerCharacter>("cypher", Type.isNotNull)
+export const CypherCharacterDataType = characterDataTypeBuilder<CypherCharacterData>()
+	.withScalarField("cypher")
 	.withName("CypherCharacterData");
 
 export interface DND5ECharacterData {
@@ -52,32 +53,32 @@ export interface DND5ECharacterData {
 	hzd: PlayerCharacter;
 }
 
-export const DND5ECharacterDataType = characterDataTypeBuilder()
-	.withScalarField<DND5ECharacterData, "dnd5e", Dnd5EPlayerCharacter>("dnd5e", Type.isNotNull)
+export const DND5ECharacterDataType = characterDataTypeBuilder<DND5ECharacterData>()
+	.withScalarField("dnd5e")
 	.withName("DND5ECharacterData");
 
 export interface DND5ECharacterTemplateBlock extends BookTemplateBlock {
 	templateId: typeof DND5E_PC_TEMPLATE_ID;
 }
 
-export const DND5ECharacterTemplateBlockType = BookTemplateBlockType.toBuilder()
-	.withFixed<DND5ECharacterTemplateBlock, "templateId", typeof DND5E_PC_TEMPLATE_ID>("templateId", DND5E_PC_TEMPLATE_ID)
+export const DND5ECharacterTemplateBlockType = BookTemplateBlockType.toBuilder<DND5ECharacterTemplateBlock>()
+	.withFixed("templateId", DND5E_PC_TEMPLATE_ID)
 	.withName("DND5ECharacterTemplateBlock");
 
 export interface CypherCharacterTemplateBlock extends BookTemplateBlock {
 	templateId: typeof CYPHER_PC_TEMPLATE_ID;
 }
 
-export const CypherCharacterTemplateBlockType: Type<CypherCharacterTemplateBlock> = BookTemplateBlockType.toBuilder()
-	.withFixed<CypherCharacterTemplateBlock, "templateId", typeof CYPHER_PC_TEMPLATE_ID>("templateId", CYPHER_PC_TEMPLATE_ID)
+export const CypherCharacterTemplateBlockType = BookTemplateBlockType.toBuilder<CypherCharacterTemplateBlock>()
+	.withFixed("templateId", CYPHER_PC_TEMPLATE_ID)
 	.withName("CypherCharacterTemplateBlock")
 
 export interface CharacterDataTemplateBlock<C, B extends BookTemplateBlock> extends HasTemplateBlock<B> {
 	characterData: C;
 }
 
-export const characterDataTemplateBlock = <T extends CharacterDataTemplateBlock<C, B>, C, B extends BookTemplateBlock>(name: string, type: Type<C>): Type<T> => HasTemplateBlockType.toBuilder()
-	.withTypedField<T, "characterData", C>("characterData", type)
+export const characterDataTemplateBlock = <T extends CharacterDataTemplateBlock<C, B>, C, B extends BookTemplateBlock>(name: string, type: Type<C>): Type<T> => HasTemplateBlockType.toBuilder<T>()
+	.withTypedField("characterData", type)
 	.withParent(HasTemplateBlockType)
 	.withName(name);
 

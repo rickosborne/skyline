@@ -15,31 +15,32 @@ export interface TemplateBlock {
 	templateId: string;
 }
 
-export const TemplateBlockType: Type<TemplateBlock> = Type.novel<TemplateBlock>(item => `${MarkdownFileType.stringify(item.markdownFile)} template ${item.dataType} ${item.dataName} ${item.templateId} ${JSON.stringify(item.keyValue)}`)
-	.withScalarField<TemplateBlock, "body", string>("body", Type.isString)
-	.withScalarField<TemplateBlock, "dataName", string>("dataName", Type.isString)
-	.withScalarField<TemplateBlock, "dataType", string>("dataType", Type.isString)
-	.withScalarField<TemplateBlock, "endTag", string>("endTag", Type.isString)
-	.withScalarField<TemplateBlock, "entireBlock", string>("entireBlock", Type.isString)
-	.withScalarField<TemplateBlock, "keyValue", Record<string, string>>("keyValue", Type.isNotNull)
-	.withTypedField<TemplateBlock, "markdownFile", MarkdownFile>("markdownFile", MarkdownFileType)
-	.withScalarField<TemplateBlock, "startTag", string>("startTag", Type.isString)
-	.withScalarField<TemplateBlock, "templateId", string>("templateId", Type.isString)
+export const TemplateBlockType: Type<TemplateBlock> = Type.novel<TemplateBlock>()
+	.withScalarField("body", Type.isString)
+	.withScalarField("dataName", Type.isString)
+	.withScalarField("dataType", Type.isString)
+	.withScalarField("endTag", Type.isString)
+	.withScalarField("entireBlock", Type.isString)
+	.withScalarField("keyValue", Type.isNotNull)
+	.withTypedField("markdownFile", MarkdownFileType)
+	.withScalarField("startTag", Type.isString)
+	.withScalarField("templateId", Type.isString)
+	.withStringify(item => `${MarkdownFileType.stringify(item.markdownFile)} template ${item.dataType} ${item.dataName} ${item.templateId} ${JSON.stringify(item.keyValue)}`)
 	.withName("TemplateBlock");
 
 export interface HasTemplateBlock<T extends TemplateBlock> {
 	templateBlock: T;
 }
 
-export const HasTemplateBlockType = Type.novel<HasTemplateBlock<any>>(() => {
-	throw new Error("Cannot stringify HasTemplateBlock");
-})
+export const HasTemplateBlockType = Type.novel<HasTemplateBlock<any>>()
+	.withScalarField("templateBlock")
+	.withStringify(() => {
+		throw new Error("Cannot stringify HasTemplateBlock");
+	})
 	.withName("HasTemplateBlock");
 
-export const hasTemplateBlockSubtype = <T extends TemplateBlock, H extends HasTemplateBlock<T>>(type: Type<T>): TypeBuilder<H> => type.toBuilder()
-	.wrappedAs<H, "templateBlock">("templateBlock")
-	.withParent(HasTemplateBlockType)
-;
+export const hasTemplateBlockSubtype = <T extends TemplateBlock, H extends HasTemplateBlock<T>>(type: Type<T>): TypeBuilder<H> => HasTemplateBlockType.toBuilder<H>()
+	.withTypedField("templateBlock", type);
 
 export interface RenderedTemplateBlock<T extends HasTemplateBlock<any>> {
 	renderedText: string;
@@ -47,15 +48,16 @@ export interface RenderedTemplateBlock<T extends HasTemplateBlock<any>> {
 	startTag?: string;
 }
 
-export const RenderedTemplateBlockType = Type.novel<RenderedTemplateBlock<HasTemplateBlock<TemplateBlock>>>(() => {
-	throw new Error(`Cannot stringify unparameterized RenderedTemplateBlock`);
-})
-	.withScalarField<RenderedTemplateBlock<any>, "renderedText", string>("renderedText", Type.isString)
-	.withOptionalScalarField<RenderedTemplateBlock<any>, "startTag", string>("startTag", Type.isString)
+export const RenderedTemplateBlockType = Type.novel<RenderedTemplateBlock<HasTemplateBlock<TemplateBlock>>>()
+	.withScalarField("renderedText", Type.isString)
+	.withOptionalScalarField("startTag", Type.isString)
+	.withScalarField("source")
+	.withStringify(() => {
+		throw new Error(`Cannot stringify unparameterized RenderedTemplateBlock`);
+	})
 	.withName("RenderedTemplateBlock");
 
-export const renderedTemplateBlockSubtype = <T extends TemplateBlock, H extends HasTemplateBlock<T>, R extends RenderedTemplateBlock<H>>(hasTemplateType: Type<H>): TypeBuilder<R> => hasTemplateType.toBuilder()
-	.wrappedAs<R, "source">("source")
-	.withScalarField<R, "renderedText", string>("renderedText", Type.isString)
-	.withOptionalScalarField<R, "startTag", string>("startTag", Type.isString)
-	.withParent(RenderedTemplateBlockType);
+export const renderedTemplateBlockSubtype = <T extends TemplateBlock, H extends HasTemplateBlock<T>, R extends RenderedTemplateBlock<H>>(hasTemplateType: Type<H>): TypeBuilder<R> => RenderedTemplateBlockType.toBuilder<R>()
+	.withTypedField("source", hasTemplateType)
+	.withScalarField("renderedText", Type.isString)
+	.withOptionalScalarField("startTag", Type.isString);

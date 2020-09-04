@@ -6,7 +6,8 @@ export interface FileText {
 	text: string;
 }
 
-export const FileTextType: Type<FileText> = SourceFileType.toBuilder()
-	.wrappedAs<FileText, "file">("file")
-	.withScalarField<FileText, "text", string>("text", Type.isString)
+export const FileTextType = Type.novel<FileText>()
+	.withTypedField("file", SourceFileType)
+	.withScalarField("text", Type.isString, null)
+	.withStringify(item => SourceFileType.stringify(item.file))
 	.withName("FileText");

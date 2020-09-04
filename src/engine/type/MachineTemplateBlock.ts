@@ -1,8 +1,8 @@
 import {Machine} from "../../schema/machine";
 import {FileText, FileTextType} from "./FileText";
 import {
-	HasTemplateBlock, hasTemplateBlockSubtype,
-	HasTemplateBlockType,
+	HasTemplateBlock,
+	hasTemplateBlockSubtype,
 	renderedTemplateBlockSubtype,
 	TemplateBlock,
 	TemplateBlockType
@@ -18,25 +18,25 @@ export interface MachineData {
 	machine: Machine;
 }
 
-export const MachineDataType: Type<MachineData> = FileTextType.toBuilder()
-	.wrappedAs<MachineData, "fileText">("fileText")
-	.withScalarField<MachineData, "machine", Machine>("machine", Type.isNotNull)
+export const MachineDataType = Type.novel<MachineData>()
+	.withTypedField("fileText", FileTextType)
+	.withScalarField("machine")
+	.withStringify(item => FileTextType.stringify(item.fileText))
 	.withName("MachineData");
 
 export interface MachineTemplateBlock extends TemplateBlock {
 	dataType: typeof MACHINE_DATA_TYPE;
 }
 
-export const MachineTemplateBlockType: Type<MachineTemplateBlock> = TemplateBlockType.toBuilder()
+export const MachineTemplateBlockType = TemplateBlockType.toBuilder<MachineTemplateBlock>()
 	.withFixed("dataType", MACHINE_DATA_TYPE)
-	.withParent(TemplateBlockType)
 	.withName("MachineTemplateBlock");
 
 export interface CypherMachineTemplateBlock extends MachineTemplateBlock {
 	templateId: typeof CYPHER_MACHINE_TEMPLATE_ID;
 }
 
-export const CypherMachineTemplateBlockType: Type<CypherMachineTemplateBlock> = MachineTemplateBlockType.toBuilder()
+export const CypherMachineTemplateBlockType = MachineTemplateBlockType.toBuilder<CypherMachineTemplateBlock>()
 	.withFixed("templateId", CYPHER_MACHINE_TEMPLATE_ID)
 	.withParent(MachineTemplateBlockType)
 	.withName("CypherMachineTemplateBlock");
@@ -45,10 +45,9 @@ export interface MachineDataTemplateBlock<T extends MachineTemplateBlock> extend
 	machineData: MachineData;
 }
 
-export const machineDataTemplateBlockSubtype: <M extends MachineTemplateBlock>(type: Type<M>, name: string) => Type<MachineDataTemplateBlock<M>> = <M extends MachineTemplateBlock, T extends MachineDataTemplateBlock<M>>(type: Type<M>, name: string): Type<T> => hasTemplateBlockSubtype(type)
-	.withTypedField<T, "machineData", MachineData>("machineData", MachineDataType)
-	.withTypedField<T, "templateBlock", M>("templateBlock", type)
-	.withParent(HasTemplateBlockType)
+export const machineDataTemplateBlockSubtype: <M extends MachineTemplateBlock>(type: Type<M>, name: string) => Type<MachineDataTemplateBlock<M>> = <M extends MachineTemplateBlock, T extends MachineDataTemplateBlock<M>>(type: Type<M>, name: string): Type<T> => hasTemplateBlockSubtype<M, T>(type)
+	.withTypedField("machineData", MachineDataType)
+	.withTypedField("templateBlock", type)
 	.withName(name);
 
 export interface CypherMachineDataTemplateBlock extends MachineDataTemplateBlock<CypherMachineTemplateBlock> {
@@ -63,10 +62,9 @@ export interface DND5EMachineTemplateBlock extends MachineTemplateBlock {
 	templateId: typeof DND5E_MACHINE_TEMPLATE_ID;
 }
 
-export const DND5EMachineTemplateBlockType = MachineTemplateBlockType.toBuilder()
+export const DND5EMachineTemplateBlockType = MachineTemplateBlockType.toBuilder<DND5EMachineTemplateBlock>()
 	.withFixed("templateId", DND5E_MACHINE_TEMPLATE_ID)
-	.withParent(MachineTemplateBlockType)
-	.withName<DND5EMachineTemplateBlock>("DND5EMachineTemplateBlock");
+	.withName("DND5EMachineTemplateBlock");
 
 export interface DND5EMachineDataTemplateBlock extends MachineDataTemplateBlock<DND5EMachineTemplateBlock> {
 	machineData: MachineData;

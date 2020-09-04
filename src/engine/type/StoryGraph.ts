@@ -14,21 +14,21 @@ export interface StoryGraphTemplateBlock extends TemplateBlock {
 	templateId: typeof STORY_GRAPH_TEMPLATE_ID;
 }
 
-export const StoryGraphTemplateBlockType = TemplateBlockType.toBuilder()
+export const StoryGraphTemplateBlockType = TemplateBlockType.toBuilder<StoryGraphTemplateBlock>()
 	.withFixed("dataType", STORY_GRAPH_DATA_TYPE)
 	.withFixed("templateId", STORY_GRAPH_TEMPLATE_ID)
 	.withParent(TemplateBlockType)
-	.withName<StoryGraphTemplateBlock>("StoryGraphTemplateBlock");
+	.withName("StoryGraphTemplateBlock");
 
 export interface StoryGraphFiles extends HasTemplateBlock<any> {
 	markdownFileList: MarkdownFileList;
 	story: Story;
 }
 
-export const StoryGraphFilesType = hasTemplateBlockSubtype(StoryGraphTemplateBlockType)
-	.withTypedField<StoryGraphFiles, "markdownFileList", MarkdownFileList>("markdownFileList", MarkdownFileListType)
-	.withScalarField<StoryGraphFiles, "story", Story>("story", Type.isNotNull)
-	.withName<StoryGraphFiles>("StoryGraphFiles")
+export const StoryGraphFilesType = hasTemplateBlockSubtype<StoryGraphTemplateBlock, StoryGraphFiles>(StoryGraphTemplateBlockType)
+	.withTypedField("markdownFileList", MarkdownFileListType)
+	.withScalarField("story", Type.isNotNull)
+	.withName("StoryGraphFiles")
 ;
 
 export const RenderedStoryGraphFilesType = renderedTemplateBlockSubtype(StoryGraphFilesType).withName("RenderedStoryGraph");

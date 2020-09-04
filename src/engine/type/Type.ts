@@ -4,177 +4,240 @@ export type Consumer<T> = (item: T) => void;
 export type IsInstance<T> = (item: any) => item is T;
 export type Comparator<T> = (a: T, b: T) => boolean;
 export type Stringifier<T> = (item: T) => string;
+export type ArrayField<T, K extends string & keyof T> = T[K] extends Array<infer V> ? V : never;
 
 export type Override<Type, Key extends keyof Type, Value extends Type[Key]> = {
 	[Prop in Key]: Value;
 };
 
-interface ScalarField<T, V> {
-	readonly accessor: (item: T) => V;
-	readonly equals?: Comparator<V>;
-	readonly fixedValue?: V;
-	readonly hasChanged?: Comparator<V>;
-	readonly isInstance?: IsInstance<V>;
-	readonly name: string;
-	readonly stringify?: Stringifier<V>;
-}
-
-export class TypeBuilder<T> {
+export class TypeField<T, V> {
 	constructor(
-		public readonly startType: Type<T>,
+		readonly name: string,
+		readonly accessor: (item: T) => V,
+		readonly optional: boolean = false,
+		readonly fixedValue?: V,
+		readonly isInstance?: IsInstance<V>,
+		readonly equals?: Comparator<V>,
+		readonly hasChanged?: Comparator<V>,
+		readonly stringify?: Stringifier<V>,
+		readonly valueType?: Type<V>,
+		readonly isArray: boolean = false,
+		readonly itemType?: Type<V extends (infer I)[] ? I : never>
 	) {
 	}
 
-	public withFixed<U extends T & Override<T, K, V>, K extends string & keyof T, V extends T[K]>(key: K, value: V): TypeBuilder<U> {
-		let fieldIndex = this.startType.scalarFields.findIndex(sf => sf.name === key);
-		const scalarField: ScalarField<U, V> = {
-			name: key,
-			equals: (a, b) => a === b && b === value,
-			hasChanged: (a, b) => a !== value || b != value,
-			isInstance: (item: any): item is V => item === value,
-			fixedValue: value,
-			accessor: (item: U) => item[key],
-		};
-		const scalarFields = fieldIndex < 0 ? [scalarField].concat(...this.startType.scalarFields) : this.startType.scalarFields.slice().splice(fieldIndex, 1, scalarField);
-		return new TypeBuilder<U>(Type.from<U>(
-			"",
-			(item: any): item is U => item != null && item[key] === value && this.startType.isInstance(item),
-			(a, b) => a[key] === b[key] && this.startType.equals(a, b),
-			(a, b) => a[key] !== b[key] || this.startType.hasChanged(a, b),
-			item => this.startType.stringify(item),
-			this.startType.parent,
-			scalarFields,
+	public static build<T, V>(
+		name: string,
+		accessor: (item: T) => V,
+		optional: boolean = false,
+		fixedValue?: V,
+		isInstance?: IsInstance<V>,
+		equals?: Comparator<V>,
+		hasChanged?: Comparator<V>,
+		stringify?: Stringifier<V>,
+		valueType?: Type<V>,
+		isArray: boolean = false,
+		itemType?: Type<V extends (infer I)[] ? I : never>
+	): TypeField<T, V> {
+		return new Function("TypeField", "name", "accessor", "optional", "fixedValue", "isInstance", "equals", "hasChanged", "stringify", "valueType", "isArray", "itemType", `
+		class ${name} extends TypeField {
+			constructor(name, accessor, optional, fixedValue, isInstance, equals, hasChanged, stringify, valueType, isArray, itemType) {
+				super(name, accessor, optional, fixedValue, isInstance, equals, hasChanged, stringify, valueType, isArray, itemType);
+			}
+		}
+		return new ${name}(name, accessor, optional, fixedValue, isInstance, equals, hasChanged, stringify, valueType, isArray, itemType);
+		`)(TypeField, name, accessor, optional, fixedValue, isInstance, equals, hasChanged, stringify, valueType, isArray, itemType);
+	}
+
+	public getValues(...items: T[]): V[] {
+		return items.map(item => this.accessor(item));
+	}
+
+	public parentEquals(a: T, b: T): boolean {
+		if (this.equals == null) {
+			return true;
+		}
+		const [aValue, bValue] = this.getValues(a, b);
+		return this.equals(aValue, bValue);
+	}
+
+	public parentHasChanged(a: T, b: T): boolean {
+		if (this.hasChanged == null) {
+			return false;
+		}
+		const [aValue, bValue] = this.getValues(a, b);
+		return this.hasChanged(aValue, bValue);
+	}
+
+	public parentIsInstance(item: any): boolean {
+		if (item == null) {
+			return false;
+		}
+		const [value] = this.getValues(item);
+		if (this.fixedValue !== undefined) {
+			return this.fixedValue === value;
+		} else if (this.optional && value == null) {
+			return true;
+		} else if (this.isInstance != null) {
+			return this.isInstance(value);
+		} else {
+			return true;
+		}
+	}
+
+	public parentStringify(item: T): string | undefined {
+		return this.stringify != null ? this.stringify(this.accessor(item)) : undefined;
+	}
+}
+
+export class TypeBuilder<T, U = {}> {
+	constructor(
+		private readonly fields: TypeField<T, any>[] = [],
+		private parent: Type<any> | undefined = undefined,
+		private stringify: Stringifier<T> | undefined = undefined,
+	) {
+	}
+
+	protected addField<Z>(field: TypeField<T, any>): TypeBuilder<T, Z> {
+		let fieldIndex = this.fields.findIndex(sf => sf.name === field.name);
+		if (fieldIndex >= 0) {
+			this.fields.splice(fieldIndex, 1, field);
+		} else {
+			this.fields.push(field);
+		}
+		return this as TypeBuilder<T, unknown> as TypeBuilder<T, Z>;
+	}
+
+	public withFixed<K extends string & keyof Z & keyof T, V extends T[K], Z extends U & { [P in K]: V }>(
+		key: K,
+		value: V,
+		stringify?: Stringifier<Z[K]>
+	): TypeBuilder<T, Z> {
+		return this.addField<Z>(TypeField.build<T, V>(
+			key,
+			item => item[key] as unknown as V,
+			false, value,
+			(v: any): v is V => v === value,
+			(a, b) => a === b && b === value,
+			(a, b) => a !== value || b != value,
+			stringify
 		));
 	}
 
-	withName<U extends T>(name: string): Type<U> {
-		return this.startType.withName(name) as Type<U>;
+	withName(name: string): U extends T ? Type<T> : never {
+		return Type.fromFields<T>(name, this.parent, this.fields) as U extends T ? Type<T> : never;
 	}
 
-	public withOptionalScalarField<O extends T & { [P in K]?: V }, K extends string & keyof O, V>(key: K, isInstance?: IsInstance<V>, equals?: Comparator<V>, hasChanged?: Comparator<V>, stringify?: Stringifier<V>): TypeBuilder<O> {
-		return new TypeBuilder<O>(Type.from<O>(
-			"",
-			(item: any): item is O => item != null && (isInstance == null || item[key] == null || isInstance(item[key])) && this.startType.isInstance(item),
-			(a, b) => (equals == null || a[key] == null || b[key] == null || equals(a[key] as V, b[key] as V)) && this.startType.equals(a, b),
-			(a, b) => (hasChanged == null ? equal(a[key], b[key]) : ((a[key] != null && b[key] != null && hasChanged(a[key] as V, b[key] as V)) || (a[key] == null && b[key] != null) || (a[key] != null && b[key] == null))) || this.startType.hasChanged(a, b),
-			item => stringify && item[key] != null ? stringify(item[key] as V) : this.startType.stringify(item),
-			this.startType.parent,
-			([{
-				name: key,
-				isInstance,
-				equals,
-				hasChanged,
-				stringify,
-				accessor: (item: O) => item[key]
-			}] as ScalarField<O, any>[]).concat(...this.startType.scalarFields),
-		));
-	}
-
-	public withOptionalTypedField<O extends T & { [P in K]?: V }, K extends string & keyof O, V>(key: K, valueType: Type<V>, callEquals: boolean = true): TypeBuilder<O> {
-		return new TypeBuilder<O>(Type.from<O>(
-			"",
-			(item: any): item is O => item != null && (item[key] == null || valueType.isInstance(item[key])) && this.startType.isInstance(item),
-			(a, b) => {
-				const aValue = a[key] as V | undefined;
-				const bValue = b[key] as V | undefined;
-				return (aValue == null && bValue == null) || (aValue != null && bValue != null && callEquals && valueType.equals(aValue, bValue)) && this.startType.equals(a, b);
-			},
-			(a, b) => {
-				const aValue = a[key] as V | undefined;
-				const bValue = b[key] as V | undefined;
-				return (aValue != null && bValue != null && valueType.hasChanged(aValue, bValue)) ||
-					(aValue == null && bValue != null) ||
-					(aValue != null && bValue == null) ||
-					this.startType.hasChanged(a, b);
-			},
-			item => item[key] == null ? this.startType.stringify(item) : valueType.stringify(item[key] as V),
-			this.startType.parent,
-			([{
-				name: key,
-				isInstance: (item: any): item is V => valueType.isInstance(item),
-				equals: (a, b) => valueType.equals(a, b),
-				hasChanged: (a, b) => valueType.hasChanged(a, b),
-				stringify: item => valueType.stringify(item),
-				accessor: (item: O) => item[key]
-			} as ScalarField<O, any>]).concat(...this.startType.scalarFields)));
-	}
-
-	public withParent(type: Type<any>): TypeBuilder<T> {
-		return new TypeBuilder<T>(this.startType.withParent(type));
-	}
-
-	public withScalarField<O extends T & { [P in K]: V }, K extends string & keyof O, V>(key: K, isInstance: IsInstance<V>, equals?: Comparator<V>, hasChanged?: Comparator<V>, stringify?: Stringifier<V>): TypeBuilder<O> {
-		return new TypeBuilder<O>(Type.from<O>(
-			"",
-			(item: any): item is O => item != null && isInstance(item[key]) && this.startType.isInstance(item),
-			(a, b) => (equals == null || equals(a[key], b[key])) && this.startType.equals(a, b),
-			(a, b) => (hasChanged == null ? equal(a[key], b[key]) : hasChanged(a[key], b[key])) || this.startType.hasChanged(a, b),
-			item => stringify ? stringify(item[key]) : this.startType.stringify(item),
-			this.startType.parent,
-			([{
-				name: key,
-				isInstance,
-				equals,
-				hasChanged,
-				stringify,
-				accessor: (item: O) => item[key]
-			}] as ScalarField<O, any>[]).concat(...this.startType.scalarFields),
-		));
-	}
-
-	public withTypedField<O extends T & { [P in K]: V }, K extends string & keyof O, V>(key: K, valueType: Type<V>): TypeBuilder<O> {
-		return new TypeBuilder<O>(Type.from<O>(
-			"",
-			(item: any): item is O => item != null && valueType.isInstance(item[key]) && this.startType.isInstance(item),
-			(a, b) => valueType.equals(a[key], b[key]) && this.startType.equals(a, b),
-			(a, b) => valueType.hasChanged(a[key], b[key]) || this.startType.hasChanged(a, b),
-			item => valueType.stringify(item[key]),
-			this.startType.parent,
-			([{
-				name: key,
-				isInstance: (item: any): item is V => valueType.isInstance(item),
-				equals: (a, b) => valueType.equals(a, b),
-				hasChanged: (a, b) => valueType.hasChanged(a, b),
-				stringify: item => valueType.stringify(item),
-				accessor: (item: O) => item[key]
-			} as ScalarField<O, any>]).concat(...this.startType.scalarFields),
-		));
-	}
-
-	withTypedList<O extends T & { [P in K]: V[] }, K extends string & keyof O, V>(key: K, itemType: Type<V>): TypeBuilder<O> {
-		return new TypeBuilder<O>(Type.from<O>(
-			"",
-			(item: any): item is O => item != null && Array.isArray(item[key]) && this.startType.isInstance(item),
-			(a, b) => this.startType.equals(a, b),
-			(a, b) => itemType.hasChangedAny(a[key], b[key]) || this.startType.hasChanged(a, b),
-			this.startType.stringify,
-			this.startType.parent,
-			([{
-				name: key,
-				isInstance: (item: any): item is V[] => Array.isArray(item) && item.find(i => !itemType.isInstance(i)) == null,
-				equals: (a, b) => !itemType.hasChangedAny(a, b),
-				hasChanged: (a, b) => itemType.hasChangedAny(a, b),
-				accessor: (item: O) => item[key]
-			} as ScalarField<O, V[]>]).concat(...this.startType.scalarFields),
-		));
-	}
-
-	public wrappedAs<O extends { [P in K]: T }, K extends string & keyof O>(key: K, equals ?: Comparator<O>, hasChanged ?: Comparator<O>, stringify ?: Stringifier<O>): TypeBuilder<O> {
-		return new TypeBuilder<O>(Type.from(
-			"",
-			(item: any): item is O => item != null && this.startType.isInstance(item[key]),
-			(a, b) => (equals == null || equals(a, b)) && this.startType.equals(a[key], b[key]),
-			(a, b) => (hasChanged != null && hasChanged(a, b)) || this.startType.hasChanged(a[key], b[key]),
-			item => stringify ? stringify(item) : this.startType.stringify(item[key]),
+	public withOptionalScalarField<K extends string & keyof Z & keyof T, V extends T[K], Z extends U & { [P in K]?: V }>(
+		key: K,
+		isInstance: IsInstance<V> | null = (v: any): v is V => v == null || isInstance == null || isInstance(v),
+		equals: Comparator<V> | null = (a, b) => equals == null || equals(a, b),
+		hasChanged: Comparator<V> = (a, b) => hasChanged != null && hasChanged(a, b),
+		stringify?: Stringifier<V>,
+	): TypeBuilder<T, Z> {
+		return this.addField<Z>(TypeField.build<T, V>(
+			key,
+			item => item[key] as unknown as V,
+			true,
 			undefined,
-			[{
-				name: key,
-				isInstance: (item: any): item is O => this.startType.isInstance(item),
-				equals,
-				hasChanged,
-				stringify,
-				accessor: item => item[key]
-			}]
+			isInstance == null ? undefined : isInstance,
+			equals == null ? undefined : equals,
+			hasChanged == null ? undefined : hasChanged,
+			stringify,
+		));
+	}
+
+	public withOptionalTypedField<K extends string & keyof Z & keyof T, V extends T[K], Z extends U & { [P in K]?: V }>(
+		key: K,
+		valueType: Type<V>,
+		isInstance: IsInstance<V> | null = null,
+		equals: Comparator<V> | null = null,
+		hasChanged: Comparator<V> | null = (a, b) => (a != null && b != null && valueType.hasChanged(a, b)) || (a == null && b != null) || (a != null && b == null),
+		stringify: Stringifier<V> | null = null,
+	): TypeBuilder<T, Z> {
+		return this.addField<Z>(TypeField.build<T, V>(
+			key,
+			item => item[key] as unknown as V,
+			true,
+			undefined,
+			isInstance == null ? undefined : isInstance,
+			equals == null ? undefined : equals,
+			hasChanged == null ? undefined : hasChanged,
+			stringify == null ? undefined : stringify,
+			valueType,
+		));
+	}
+
+	public withParent(type: Type<any>): this {
+		this.parent = type;
+		return this;
+	}
+
+	public withScalarField<K extends string & keyof Z & keyof T, V extends T[K], Z extends U & { [P in K]: V }>(
+		key: K,
+		isInstance: IsInstance<V> = Type.isNotNull,
+		equals: Comparator<V> | null = null,
+		hasChanged: Comparator<V> | null = (a, b) => !equal(a, b),
+		stringify?: Stringifier<V>
+	): TypeBuilder<T, Z> {
+		return this.addField<Z>(TypeField.build<T, V>(
+			key,
+			item => item[key] as unknown as V,
+			false,
+			undefined,
+			isInstance,
+			equals == null ? undefined : equals,
+			hasChanged == null ? undefined : hasChanged,
+			stringify
+		));
+	}
+
+	withStringify(stringify: Stringifier<T>): this {
+		this.stringify = stringify;
+		return this;
+	}
+
+	public withTypedField<K extends string & keyof Z & keyof T, V extends T[K], Z extends U & { [P in K]: V }>(
+		key: K,
+		valueType: Type<V>,
+		isInstance: IsInstance<V> | null = valueType.isInstance.bind(valueType),
+		equals: Comparator<V> | null = valueType.equals.bind(valueType),
+		hasChanged: Comparator<V> | null = valueType.hasChanged.bind(valueType),
+		stringify: Stringifier<V> | null = valueType.stringify.bind(valueType),
+	): TypeBuilder<T, Z> {
+		return this.addField<Z>(TypeField.build<T, V>(
+			key,
+			item => item[key] as unknown as V,
+			false,
+			undefined,
+			isInstance == null ? undefined : isInstance,
+			equals == null ? undefined : equals,
+			hasChanged == null ? undefined : hasChanged,
+			stringify == null ? undefined : stringify,
+			valueType,
+		));
+	}
+
+	withTypedList<K extends string & keyof Z & keyof T, V extends ArrayField<T, K>, Z extends U & { [P in K]: V[] }>(
+		key: K,
+		itemType: Type<V>,
+		isInstance: IsInstance<V[]> | null = (item: any): item is V[] => Type.isArray(item),
+		equals: Comparator<V[]> | null = null,
+		hasChanged: Comparator<V[]> | null = (a, b) => itemType.hasChangedAny(a, b),
+		stringify: Stringifier<V[]> | null = null,
+	): TypeBuilder<T, Z> {
+		return this.addField<Z>(TypeField.build<T, V[]>(
+			key,
+			item => item[key] as unknown as V[],
+			false,
+			undefined,
+			isInstance == null ? undefined : isInstance,
+			equals == null ? undefined : equals,
+			hasChanged == null ? undefined : hasChanged,
+			stringify == null ? undefined : stringify,
+			undefined,
+			true,
+			itemType,
 		));
 	}
 }
@@ -189,7 +252,7 @@ export class Type<T> {
 		public readonly hasChanged: Comparator<T>,
 		public readonly stringify: Stringifier<T>,
 		public readonly parent?: Type<any>,
-		public readonly scalarFields: ScalarField<T, any>[] = [],
+		public readonly scalarFields: TypeField<T, any>[] = [],
 	) {
 	}
 
@@ -204,9 +267,33 @@ export class Type<T> {
 		hasChanged: Comparator<T>,
 		stringify: Stringifier<T>,
 		parent?: Type<any>,
-		scalarFields?: ScalarField<T, any>[],
+		fields?: TypeField<T, any>[],
 	): Type<T> {
-		return new Type<T>(name, isInstance, equals, hasChanged, stringify, parent, scalarFields);
+		return new Function("Type", "name", "isInstance", "equals", "hasChanged", "stringify", "parent", "fields", `
+		class ${name} extends Type {
+			constructor(name, isInstance, equals, hasChanged, stringify, parent, fields) {
+				super(name, isInstance, equals, hasChanged, stringify, parent, fields);
+			}
+		}
+		return new ${name}(name, isInstance, equals, hasChanged, stringify, parent, fields);
+		`)(
+			Type,
+			name,
+			isInstance,
+			equals,
+			hasChanged,
+			stringify,
+			parent,
+			fields
+		);
+	}
+
+	public static fromFields<T>(name: string, parent: Type<any> | undefined, fields: TypeField<T, any>[]): Type<T> {
+		const isInstance: IsInstance<T> = (item: any): item is T => fields.find(field => !field.parentIsInstance(item)) != null;
+		const equals: Comparator<T> = (a, b) => fields.find(field => !field.parentEquals(a, b)) != null;
+		const hasChanged: Comparator<T> = (a, b) => fields.find(field => field.parentHasChanged(a, b)) != null;
+		const stringify: Stringifier<T> = item => fields.map(field => field.parentStringify(item)).filter(Type.isNotNull).join(" ");
+		return Type.from(name, isInstance, equals, hasChanged, stringify, parent, fields);
 	}
 
 	public static isArray(item: any): item is [] {
@@ -217,7 +304,7 @@ export class Type<T> {
 		return typeof item === "boolean";
 	}
 
-	public static isNotNull(item: any): item is any {
+	public static isNotNull<T>(item: T): item is (T extends null ? never : T) {
 		return item != null;
 	}
 
@@ -233,14 +320,8 @@ export class Type<T> {
 		return Array.isArray(item) && (item.find(i => !type.isInstance(i)) == null);
 	}
 
-	public static novel<T = {}>(stringify: Stringifier<T> = () => "?"): TypeBuilder<T> {
-		return new TypeBuilder<T>(Type.from<T>(
-			"",
-			Type.isNotNull,
-			(a, b) => a != null && b != null,
-			() => false,
-			stringify,
-		));
+	public static novel<T>(): TypeBuilder<T, {}> {
+		return new TypeBuilder<T>();
 	}
 
 	public cast(item: any): T {
@@ -261,54 +342,15 @@ export class Type<T> {
 		return otherType === this || (otherType != null && otherType.parent != null && this.isAssignableFrom(otherType.parent));
 	}
 
-	public toBuilder(): TypeBuilder<T> {
-		return new TypeBuilder<T>(this);
+	public toBuilder<U extends T = T>(): TypeBuilder<U, T> {
+		return new TypeBuilder<U, T>(
+			this.scalarFields.slice(),
+			this,
+			this.stringify,
+		);
 	}
 
 	public toString(): string {
 		return this.name;
-	}
-
-	public withName(name: string): Type<T> {
-		return new Function("Type", "name", "isInstance", "equals", "hasChanged", "stringify", "parent", "scalarFields", `
-		class ${name} extends Type {
-			constructor(name, isInstance, equals, hasChanged, stringify, parent, scalarFields) {
-				super(name, isInstance, equals, hasChanged, stringify, parent, scalarFields);
-			}
-		}
-		return new ${name}(name, isInstance, equals, hasChanged, stringify, parent, scalarFields);
-		`)(
-			Type,
-			name,
-			this.isInstance,
-			this.equals,
-			this.hasChanged,
-			this.stringify,
-			this.parent,
-			this.scalarFields.slice()
-		);
-		// return new Type<T>(
-		// 	name,
-		// 	this.isInstance,
-		// 	this.equals,
-		// 	this.hasChanged,
-		// 	this.stringify,
-		// 	this.parent,
-		// 	this.scalarFields.slice(),
-		// );
-	}
-
-	public withParent(newParent: Type<any>): Type<T> {
-		const subtype = new Type<T>(
-			this.name,
-			this.isInstance,
-			this.equals,
-			this.hasChanged,
-			this.stringify,
-			newParent,
-			this.scalarFields.slice(),
-		);
-		newParent.subtypes.push(subtype);
-		return subtype;
 	}
 }
