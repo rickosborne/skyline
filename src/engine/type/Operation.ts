@@ -28,9 +28,9 @@ export const isDeleted = <T>(op: OperationBase<T>): op is DeletedItem<T> => op.o
 export const isRenamed = <T>(op: OperationBase<T>): op is RenamedItem<T> => op.operation === Operation.Renamed;
 
 export const HasOperationType = Type.novel<HasOperation>()
-	.withScalarField("operation", (op: any): op is Operation => Type.isString(op))
+	.withScalarField("operation", (op: any): op is Operation => Type.isString(op), null, Type.strictNotEquals)
 	.withStringify(item => item.operation)
 	.withName("HasOperation");
 
-export const operationBaseSubtype = <O extends OperationBase<T>, T>(type: Type<T>): TypeBuilder<O> => HasOperationType.toBuilder<O>()
+export const operationBaseSubtype = <O extends OperationBase<T>, T>(type: Type<T>): TypeBuilder<O, {item: T}> => HasOperationType.toBuilder<O>()
 	.withTypedField("item", type);

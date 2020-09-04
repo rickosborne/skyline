@@ -90,7 +90,7 @@ export class TypeField<T, V> {
 	}
 }
 
-export class TypeBuilder<T, U = {}> {
+export class TypeBuilder<T, U> {
 	constructor(
 		private readonly fields: TypeField<T, any>[] = [],
 		private parent: Type<any> | undefined = undefined,
@@ -119,7 +119,7 @@ export class TypeBuilder<T, U = {}> {
 			false, value,
 			(v: any): v is V => v === value,
 			(a, b) => a === b && b === value,
-			(a, b) => a !== value || b != value,
+			(a, b) => a !== value || b !== value,
 			stringify
 		));
 	}
@@ -130,9 +130,9 @@ export class TypeBuilder<T, U = {}> {
 
 	public withOptionalScalarField<K extends string & keyof Z & keyof T, V extends T[K], Z extends U & { [P in K]?: V }>(
 		key: K,
-		isInstance: IsInstance<V> | null = (v: any): v is V => v == null || isInstance == null || isInstance(v),
-		equals: Comparator<V> | null = (a, b) => equals == null || equals(a, b),
-		hasChanged: Comparator<V> = (a, b) => hasChanged != null && hasChanged(a, b),
+		isInstance: IsInstance<V> | null = null,
+		equals: Comparator<V> | null = null,
+		hasChanged: Comparator<V> | null = (a, b) => !equal(a, b),
 		stringify?: Stringifier<V>,
 	): TypeBuilder<T, Z> {
 		return this.addField<Z>(TypeField.build<T, V>(
@@ -175,9 +175,9 @@ export class TypeBuilder<T, U = {}> {
 
 	public withScalarField<K extends string & keyof Z & keyof T, V extends T[K], Z extends U & { [P in K]: V }>(
 		key: K,
-		isInstance: IsInstance<V> = Type.isNotNull,
-		equals: Comparator<V> | null = null,
-		hasChanged: Comparator<V> | null = (a, b) => !equal(a, b),
+		isInstance: IsInstance<V>,
+		equals: Comparator<V> | null,
+		hasChanged: Comparator<V>,
 		stringify?: Stringifier<V>
 	): TypeBuilder<T, Z> {
 		return this.addField<Z>(TypeField.build<T, V>(
@@ -200,10 +200,10 @@ export class TypeBuilder<T, U = {}> {
 	public withTypedField<K extends string & keyof Z & keyof T, V extends T[K], Z extends U & { [P in K]: V }>(
 		key: K,
 		valueType: Type<V>,
-		isInstance: IsInstance<V> | null = valueType.isInstance.bind(valueType),
-		equals: Comparator<V> | null = valueType.equals.bind(valueType),
+		isInstance: IsInstance<V> | null = Type.isNotNull,
+		equals: Comparator<V> | null = null,
 		hasChanged: Comparator<V> | null = valueType.hasChanged.bind(valueType),
-		stringify: Stringifier<V> | null = valueType.stringify.bind(valueType),
+		stringify: Stringifier<V> | null = null,
 	): TypeBuilder<T, Z> {
 		return this.addField<Z>(TypeField.build<T, V>(
 			key,
@@ -260,6 +260,14 @@ export class Type<T> {
 		return this.parent == null ? [this] : ([this] as Type<any>[]).concat(...this.parent.lineage);
 	}
 
+	public static deepEquals(a: any, b: any): boolean {
+		return equal(a, b);
+	}
+
+	public static deepNotEquals(a: any, b: any): boolean {
+		return !equal(a, b);
+	}
+
 	public static from<T>(
 		name: string,
 		isInstance: IsInstance<T>,
@@ -289,9 +297,18 @@ export class Type<T> {
 	}
 
 	public static fromFields<T>(name: string, parent: Type<any> | undefined, fields: TypeField<T, any>[]): Type<T> {
-		const isInstance: IsInstance<T> = (item: any): item is T => fields.find(field => !field.parentIsInstance(item)) != null;
-		const equals: Comparator<T> = (a, b) => fields.find(field => !field.parentEquals(a, b)) != null;
-		const hasChanged: Comparator<T> = (a, b) => fields.find(field => field.parentHasChanged(a, b)) != null;
+		const isInstance: IsInstance<T> = (item: any): item is T => {
+			const mismatch = fields.find(field => !field.parentIsInstance(item));
+			return mismatch == null;
+		}
+		const equals: Comparator<T> = (a, b) => {
+			const mismatch = fields.find(field => !field.parentEquals(a, b));
+			return mismatch == null;
+		}
+		const hasChanged: Comparator<T> = (a, b) => {
+			const changed = fields.find(field => field.parentHasChanged(a, b));
+			return changed != null;
+		}
 		const stringify: Stringifier<T> = item => fields.map(field => field.parentStringify(item)).filter(Type.isNotNull).join(" ");
 		return Type.from(name, isInstance, equals, hasChanged, stringify, parent, fields);
 	}
@@ -308,11 +325,11 @@ export class Type<T> {
 		return item != null;
 	}
 
-	public static isNumber(item: any): item is number {
+	public static isNumber<N extends number>(item: any): item is N {
 		return typeof item === "number";
 	}
 
-	public static isString(item: any): item is string {
+	public static isString<S extends string>(item: any): item is S {
 		return typeof item === "string";
 	}
 
@@ -321,7 +338,15 @@ export class Type<T> {
 	}
 
 	public static novel<T>(): TypeBuilder<T, {}> {
-		return new TypeBuilder<T>();
+		return new TypeBuilder<T, {}>();
+	}
+
+	public static strictEquals<T>(a: T, b: T): boolean {
+		return a === b;
+	}
+
+	public static strictNotEquals<T>(a: T, b: T): boolean {
+		return a !== b;
 	}
 
 	public cast(item: any): T {

@@ -20,7 +20,7 @@ export interface BookData {
 
 export const BookDataType = Type.novel<BookData>()
 	.withTypedField("fileText", FileTextType)
-	.withScalarField("book")
+	.withScalarField("book", Type.isNotNull, null, Type.deepNotEquals)
 	.withStringify(item => FileTextType.stringify(item.fileText))
 	.withName("BookData");
 
@@ -40,11 +40,11 @@ export interface CypherCharacterData {
 
 const characterDataTypeBuilder = <T extends { bookData: BookData; hzd: PlayerCharacter }>() => Type.novel<T>()
 	.withTypedField("bookData", BookDataType)
-	.withScalarField("hzd")
+	.withScalarField("hzd", Type.isNotNull, null, Type.deepNotEquals)
 	.withStringify(item => item.hzd.name);
 
 export const CypherCharacterDataType = characterDataTypeBuilder<CypherCharacterData>()
-	.withScalarField("cypher")
+	.withScalarField("cypher", Type.isNotNull, null, Type.deepNotEquals)
 	.withName("CypherCharacterData");
 
 export interface DND5ECharacterData {
@@ -54,7 +54,7 @@ export interface DND5ECharacterData {
 }
 
 export const DND5ECharacterDataType = characterDataTypeBuilder<DND5ECharacterData>()
-	.withScalarField("dnd5e")
+	.withScalarField("dnd5e", Type.isNotNull, null, Type.deepNotEquals)
 	.withName("DND5ECharacterData");
 
 export interface DND5ECharacterTemplateBlock extends BookTemplateBlock {

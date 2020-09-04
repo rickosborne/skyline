@@ -8,9 +8,9 @@ export interface SourceDirectory {
 }
 
 export const SourceDirectoryType = Type.novel<SourceDirectory>()
-	.withScalarField("fileName", Type.isString)
-	.withScalarField("fullPath", Type.isString)
-	.withScalarField("pathFromRoot", Type.isString)
+	.withScalarField("fileName", Type.isString, Type.strictEquals, Type.strictNotEquals)
+	.withScalarField("fullPath", Type.isString, Type.strictEquals, Type.strictNotEquals)
+	.withScalarField("pathFromRoot", Type.isString, Type.strictEquals, Type.strictNotEquals)
 	.withStringify(item => item.pathFromRoot)
 	.withName("SourceDirectory");
 

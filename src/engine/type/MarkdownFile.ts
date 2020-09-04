@@ -39,8 +39,8 @@ export interface Heading {
 
 export const HeadingType = Type.novel<Heading>()
 	.withStringify(h => `h${h.level}. ${h.text}`)
-	.withScalarField("level", (level: any): level is HeadingLevel => Type.isNumber(level))
-	.withScalarField("text", Type.isString)
+	.withScalarField("level", Type.isNumber, null, Type.strictNotEquals)
+	.withScalarField("text", Type.isString, null, Type.strictNotEquals)
 	.withName("Heading");
 
 export interface MarkdownFile {
