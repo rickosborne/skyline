@@ -1,3 +1,4 @@
+import {EngineConfig} from "../EngineConfig";
 import {MarkdownFile, MarkdownFileList, MarkdownFileListType, MarkdownFileType} from "../type/MarkdownFile";
 import {isCreated, isReplay, isUpdated} from "../type/Operation";
 import {SourceDirectory, SourceDirectoryType} from "../type/SourceDirectory";
@@ -7,8 +8,8 @@ import {BiTransformer} from "./Transformer";
 export class MarkdownFilesAggregator extends BiTransformer<SourceDirectoryFileListOperation, MarkdownFile, MarkdownFileList> {
 	private readonly files: Map<string, Map<string, MarkdownFile>> = new Map<string, Map<string, MarkdownFile>>();
 
-	constructor() {
-		super(SourceDirectoryFileListOperationType, MarkdownFileType, MarkdownFileListType);
+	constructor(config: Partial<EngineConfig> = {}) {
+		super(SourceDirectoryFileListOperationType, MarkdownFileType, MarkdownFileListType, config);
 	}
 
 	protected dirFiles(directory: SourceDirectory): Map<string, MarkdownFile> {
@@ -49,7 +50,7 @@ export class MarkdownFilesAggregator extends BiTransformer<SourceDirectoryFileLi
 				fileListOperation,
 			});
 		} else {
-			console.debug(`[${this}] Waiting for ${emptyCount}`);
+			this.logger.debug(`Waiting for ${emptyCount}`);
 		}
 	}
 }

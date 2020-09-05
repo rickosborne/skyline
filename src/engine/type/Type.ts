@@ -1,16 +1,30 @@
 import equal = require("fast-deep-equal");
 import * as diff from 'diff';
+import {Logger} from "loglevel";
+import {buildConfig, configFromEnvironment, configureLogger} from "../EngineConfig";
 
 export type Consumer<T> = (item: T) => void;
+export type UniFunction<T, U> = (value: T) => U;
+export type BiConsumer<T, U> = (item: T, value: U) => void;
 export type IsInstance<T> = (item: any) => item is T;
 export type Comparator<T> = (a: T, b: T) => boolean;
 export type Stringifier<T> = (item: T) => string;
 export type ArrayField<T, K extends string & keyof T> = T[K] extends Array<infer V> ? V : never;
 export type ArrayItem<T> = T extends (infer I)[] ? I : T extends undefined ? undefined : never;
 
+export type Constructor<T> = {
+	new (...args: any[]): T;
+}
+
+export type UniConstructor<A, T> = {
+	new (arg: A, ...args: any[]): T;
+}
+
 export type Override<Type, Key extends keyof Type, Value extends Type[Key]> = {
 	[Prop in Key]: Value;
 };
+
+const config = buildConfig(configFromEnvironment());
 
 export abstract class Diff<T> {
 	protected constructor(
@@ -437,6 +451,7 @@ export class TypeBuilder<T, U> {
 
 export class Type<T> {
 	public readonly subtypes: Type<T>[] = [];
+	public readonly logger: Logger;
 
 	protected constructor(
 		public readonly name: string,
@@ -446,6 +461,7 @@ export class Type<T> {
 		public readonly parent?: Type<any>,
 		public readonly fields: TypeField<T, any>[] = [],
 	) {
+		this.logger = configureLogger(name, config);
 	}
 
 	public get lineage(): Type<any>[] {
@@ -492,6 +508,7 @@ export class Type<T> {
 		fields: TypeField<T, any>[],
 		stringify: Stringifier<T> = item => fields.map(field => field.parentStringify(item)).filter(Type.isNotNull).join(" ")
 	): Type<T> {
+		const logger = configureLogger(name, config);
 		const isInstance: IsInstance<T> = (item: any): item is T => {
 			const mismatch = fields.find(field => !field.parentIsInstance(item));
 			return mismatch == null;
@@ -506,7 +523,7 @@ export class Type<T> {
 			}
 			const diff = TypeDiff.forType(type, a, b);
 			if (diff.hasChanged()) {
-				console.debug(`[${name}] hasChanged "${aId}": ${diff}`);
+				logger.debug(`hasChanged "${aId}": ${diff}`);
 				return true;
 			}
 			return false;

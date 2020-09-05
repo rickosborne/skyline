@@ -1,3 +1,4 @@
+import {EngineConfig} from "../EngineConfig";
 import {
 	MachineData,
 	MachineDataTemplateBlock,
@@ -11,8 +12,9 @@ export class MachineTemplateBlockLoader<T extends MachineTemplateBlock, M extend
 	constructor(
 		public readonly inRightType: Type<T>,
 		public readonly outType: Type<M>,
+		config: Partial<EngineConfig> = {},
 	) {
-		super(MachineDataType, inRightType, outType);
+		super(MachineDataType, inRightType, outType, config);
 	}
 
 	protected matchLeftRight(machineData: MachineData, templateBlock: T): boolean {
@@ -23,7 +25,7 @@ export class MachineTemplateBlockLoader<T extends MachineTemplateBlock, M extend
 		if (this.inRightType.isInstance(templateBlock)) {
 			super.onInputRight(templateBlock);
 		} else {
-			console.warn(`[${this}] Not a ${this.inRightType}: ${JSON.stringify(templateBlock, null, 2)}`);
+			this.logger.warn(`Not a ${this.inRightType}: ${JSON.stringify(templateBlock, null, 2)}`);
 		}
 	}
 

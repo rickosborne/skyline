@@ -1,5 +1,6 @@
 import * as diff from "diff";
 import {Dnd5EPcStats} from "../../template/Dnd5EPcStats";
+import {EngineConfig} from "../EngineConfig";
 import {
 	DND5ECharacterDataTemplateBlock,
 	DND5ECharacterDataTemplateBlockType,
@@ -11,8 +12,8 @@ import {Transformer} from "./Transformer";
 export class DND5ECharacterRenderer extends Transformer<DND5ECharacterDataTemplateBlock, RenderedTemplateBlock<DND5ECharacterDataTemplateBlock>> {
 	private readonly dnd5EPcStats = new Dnd5EPcStats();
 
-	constructor() {
-		super(DND5ECharacterDataTemplateBlockType, RenderedDND5ECharacterDataType);
+	constructor(config: Partial<EngineConfig> = {}) {
+		super(DND5ECharacterDataTemplateBlockType, RenderedDND5ECharacterDataType, config);
 	}
 
 	onInput(source: DND5ECharacterDataTemplateBlock): void {
@@ -24,7 +25,7 @@ export class DND5ECharacterRenderer extends Transformer<DND5ECharacterDataTempla
 			dnd5e: source.characterData.dnd5e
 		});
 		if (renderedText.trim() !== source.templateBlock.body.trim()) {
-			console.debug(diff.createPatch(DND5ECharacterDataTemplateBlockType.identify(source) || "", source.templateBlock.body.trim(), renderedText.trim(), undefined, undefined, {
+			this.logger.debug(diff.createPatch(DND5ECharacterDataTemplateBlockType.identify(source) || "", source.templateBlock.body.trim(), renderedText.trim(), undefined, undefined, {
 				newlineIsToken: true,
 				ignoreWhitespace: true
 			}));

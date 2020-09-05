@@ -1,5 +1,6 @@
 import * as diff from "diff";
 import {CypherPcStats} from "../../template/CypherPcStats";
+import {EngineConfig} from "../EngineConfig";
 import {
 	BookTemplateBlock,
 	CypherCharacterData,
@@ -14,10 +15,11 @@ import {Transformer} from "./Transformer";
 export class CypherCharacterRenderer extends Transformer<CypherCharacterDataTemplateBlock, RenderedTemplateBlock<HasTemplateBlock<CypherCharacterTemplateBlock>>> {
 	private readonly cypherPcStats = new CypherPcStats();
 
-	constructor() {
+	constructor(config: Partial<EngineConfig> = {}) {
 		super(
 			CypherCharacterDataTemplateBlockType,
 			RenderedCypherCharacterDataType,
+			config,
 		);
 	}
 
@@ -34,7 +36,7 @@ export class CypherCharacterRenderer extends Transformer<CypherCharacterDataTemp
 			hzd: source.characterData.hzd,
 		}, source.templateBlock.keyValue);
 		if (renderedText.trim() !== source.templateBlock.body.trim()) {
-			console.debug(diff.createPatch(CypherCharacterDataTemplateBlockType.identify(source) || "", source.templateBlock.body.trim(), renderedText.trim(), undefined, undefined, {
+			this.logger.debug(diff.createPatch(CypherCharacterDataTemplateBlockType.identify(source) || "", source.templateBlock.body.trim(), renderedText.trim(), undefined, undefined, {
 				newlineIsToken: true,
 				ignoreWhitespace: true
 			}));

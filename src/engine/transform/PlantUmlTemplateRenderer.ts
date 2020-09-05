@@ -1,6 +1,7 @@
 import * as crypto from "crypto";
 import * as diff from "diff";
 import {PlantUmlRenderer} from "../../template/PlantUmlRenderer";
+import {EngineConfig} from "../EngineConfig";
 import {PlantUmlDataBlock, PlantUmlDataBlockType, RenderedPlantUmlDataBlockType} from "../type/PlantUmlFile";
 import {RenderedTemplateBlock} from "../type/TemplateBlock";
 import {Transformer} from "./Transformer";
@@ -8,8 +9,8 @@ import {Transformer} from "./Transformer";
 export class PlantUmlTemplateRenderer extends Transformer<PlantUmlDataBlock, RenderedTemplateBlock<PlantUmlDataBlock>> {
 	private readonly plantRenderer = new PlantUmlRenderer();
 
-	constructor() {
-		super(PlantUmlDataBlockType, RenderedPlantUmlDataBlockType);
+	constructor(config: Partial<EngineConfig> = {}) {
+		super(PlantUmlDataBlockType, RenderedPlantUmlDataBlockType, config);
 	}
 
 	onInput(source: PlantUmlDataBlock): void {
@@ -31,7 +32,7 @@ export class PlantUmlTemplateRenderer extends Transformer<PlantUmlDataBlock, Ren
 			uml: source.plantUmlFile.fileText.text,
 		}, source.templateBlock.keyValue, source.templateBlock.body)
 		if (renderedText.trim() !== source.templateBlock.body.trim()) {
-			console.debug(diff.createPatch(PlantUmlDataBlockType.identify(source) || "", source.templateBlock.body, renderedText, undefined, undefined, {ignoreWhitespace: true}));
+			this.logger.debug(diff.createPatch(PlantUmlDataBlockType.identify(source) || "", source.templateBlock.body, renderedText, undefined, undefined, {ignoreWhitespace: true}));
 			this.notify({
 				renderedText,
 				source,

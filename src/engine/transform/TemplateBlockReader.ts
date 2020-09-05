@@ -1,16 +1,17 @@
+import {EngineConfig} from "../EngineConfig";
 import {MarkdownFile, MarkdownFileType} from "../type/MarkdownFile";
 import {TEMPLATE_REGEXP, TemplateBlock, TemplateBlockType} from "../type/TemplateBlock";
 import {Transformer} from "./Transformer";
 
 export class TemplateBlockReader extends Transformer<MarkdownFile, TemplateBlock> {
-	constructor() {
-		super(MarkdownFileType, TemplateBlockType);
+	constructor(config: Partial<EngineConfig> = {}) {
+		super(MarkdownFileType, TemplateBlockType, config);
 	}
 
 	capture(groups: Record<string, string>, key: string): string {
 		const value = groups[key];
 		if (value == null) {
-			console.error(`Missing capture group ${key}`);
+			this.logger.error(`Missing capture group ${key}`);
 		}
 		return value;
 	}
@@ -32,7 +33,7 @@ export class TemplateBlockReader extends Transformer<MarkdownFile, TemplateBlock
 		for (let match of markdownFile.fileText.text.matchAll(TEMPLATE_REGEXP)) {
 			const groups = match.groups;
 			if (groups == null) {
-				console.error(`Missing capture groups: ${JSON.stringify(match)}`);
+				this.logger.error(`Missing capture groups: ${JSON.stringify(match)}`);
 				continue;
 			}
 			this.notify({

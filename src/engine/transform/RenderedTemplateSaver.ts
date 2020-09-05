@@ -1,10 +1,11 @@
+import {EngineConfig} from "../EngineConfig";
 import {HasTemplateBlock, RenderedTemplateBlock, RenderedTemplateBlockType} from "../type/TemplateBlock";
 import {Transformer} from "./Transformer";
 import * as diff from "diff";
 
 export class RenderedTemplateSaver extends Transformer<RenderedTemplateBlock<any>, undefined> {
-	constructor() {
-		super(RenderedTemplateBlockType, undefined);
+	constructor(config: Partial<EngineConfig> = {}) {
+		super(RenderedTemplateBlockType, undefined, config);
 	}
 
 	onInput(input: RenderedTemplateBlock<HasTemplateBlock<any>>): void {
@@ -20,15 +21,15 @@ export class RenderedTemplateSaver extends Transformer<RenderedTemplateBlock<any
 		].join("\n\n");
 		if (templateBlock.entireBlock !== replacement) {
 			const patch = diff.createPatch(RenderedTemplateBlockType.identify(input) || "", templateBlock.entireBlock, replacement, undefined, undefined, {newlineIsToken: true});
-			console.debug(patch);
+			this.logger.debug(patch);
 			const updatedFile = templateBlock.markdownFile.fileText.text.replace(templateBlock.entireBlock, replacement);
 			if (updatedFile !== templateBlock.markdownFile.fileText.text) {
-				console.debug(`[${this}] Update ${templateBlock.markdownFile.fileText.file.pathFromRoot} because ${templateBlock.dataType} + ${templateBlock.templateId}`)
+				this.logger.debug(`Update ${templateBlock.markdownFile.fileText.file.pathFromRoot} because ${templateBlock.dataType} + ${templateBlock.templateId}`)
 			} else {
-				console.error(`[${this}] Failed to replace ${templateBlock.markdownFile.fileText.file.pathFromRoot}`);
+				this.logger.error(`Failed to replace ${templateBlock.markdownFile.fileText.file.pathFromRoot}`);
 			}
 		} else {
-			console.debug(`[${this}] No change: ${templateBlock.markdownFile.fileText.file.pathFromRoot}`);
+			this.logger.debug(`No change: ${templateBlock.markdownFile.fileText.file.pathFromRoot}`);
 		}
 	}
 }

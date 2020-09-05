@@ -1,4 +1,5 @@
 import * as fs from "fs";
+import {EngineConfig} from "../EngineConfig";
 import {isCreated, isDeleted, isRenamed, isReplay, isUpdated} from "../type/Operation";
 import {SourceDirectoryOperation, SourceDirectoryOperationType} from "../type/SourceDirectory";
 import {SourceDirectoryFileListOperation, SourceDirectoryFileListOperationType} from "../type/SourceFile";
@@ -6,8 +7,8 @@ import {fileInDirectory} from "../util/FileInDirectory";
 import {Transformer} from "./Transformer";
 
 export class FileListFromDirectory extends Transformer<SourceDirectoryOperation, SourceDirectoryFileListOperation> {
-	constructor() {
-		super(SourceDirectoryOperationType, SourceDirectoryFileListOperationType);
+	constructor(config: Partial<EngineConfig> = {}) {
+		super(SourceDirectoryOperationType, SourceDirectoryFileListOperationType, config);
 	}
 
 	onInput(dirOp: SourceDirectoryOperation): void {
@@ -19,7 +20,7 @@ export class FileListFromDirectory extends Transformer<SourceDirectoryOperation,
 					throw err;
 				}
 				const fileList = entities.filter(ent => ent.isFile()).map(ent => fileInDirectory(ent.name, sourceDirectory));
-				// console.debug(`[${this}] updated ${dirOp.item.pathFromRoot} (${fileList.length})`);
+				this.logger.debug(`updated ${dirOp.item.pathFromRoot} (${fileList.length})`);
 				this.notify({
 					item: {
 						sourceDirectory,

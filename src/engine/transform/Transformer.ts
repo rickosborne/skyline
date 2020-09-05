@@ -1,11 +1,20 @@
+import {Logger} from "loglevel";
+import {buildConfig, configureLogger, EngineConfig} from "../EngineConfig";
 import {Consumer, Type} from "../type/Type";
 
 export abstract class Publisher<T> {
+	public readonly config: EngineConfig;
 	private readonly listeners: Consumer<T>[] = [];
+	public readonly logger: Logger;
+	public readonly name: string;
 
 	protected constructor(
 		public readonly outType: Type<T> | undefined,
+		config: Partial<EngineConfig> = {},
 	) {
+		this.name = this.constructor.name;
+		this.config = buildConfig(config);
+		this.logger = configureLogger(this.name, this.config);
 	}
 
 	public addListener(listener: Consumer<T>): void {
@@ -17,10 +26,11 @@ export abstract class Publisher<T> {
 	}
 
 	public start(): void {
+		this.logger.info("Start");
 	};
 
 	public toString(): string {
-		return this.constructor.name;
+		return this.name;
 	}
 }
 
@@ -30,8 +40,9 @@ export abstract class Transformer<T, U> extends Publisher<U> {
 	protected constructor(
 		public readonly inType: Type<T> | undefined,
 		outType: Type<U> | undefined,
+		config: Partial<EngineConfig> = {},
 	) {
-		super(outType);
+		super(outType, config);
 	}
 
 	protected hasChanged(item: T): boolean {
@@ -46,7 +57,7 @@ export abstract class Transformer<T, U> extends Publisher<U> {
 		if (existing == null) {
 			this.cache.set(id, item);
 		} else if (this.inType.hasChanged(existing, item)) {
-			console.debug(`[${this}] cache update: ${id}`)
+			this.logger.debug(`Cache update: ${id}`)
 			this.cache.set(id, item);
 		} else {
 			return false;
@@ -65,8 +76,9 @@ export abstract class BiTransformer<A, B, C> extends Publisher<C> {
 		public readonly inLeftType: Type<A>,
 		public readonly inRightType: Type<B>,
 		outType: Type<C> | undefined,
+		config: Partial<EngineConfig> = {},
 	) {
-		super(outType);
+		super(outType, config);
 	}
 
 	hasChanged<T>(item: T, type: Type<T>, items: Map<string, T>): boolean {
@@ -76,7 +88,7 @@ export abstract class BiTransformer<A, B, C> extends Publisher<C> {
 			if (existing == null) {
 				items.set(id, item);
 			} else if (type.hasChanged(existing, item)) {
-				console.debug(`[${this}] cache update: ${id}`);
+				this.logger.debug(`Cache update: ${id}`);
 				items.set(id, item);
 			} else {
 				return false;

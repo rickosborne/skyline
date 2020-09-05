@@ -1,8 +1,10 @@
 import * as fs from "fs";
+import {Logger} from "loglevel";
 import * as path from "path";
 import {ifLines, uniqueReducer} from "../template/util";
+import {buildConfig, configFromEnvironment, configureLogger, EngineConfig} from "./EngineConfig";
 import {BiTransformer, Publisher, Transformer} from "./transform/Transformer";
-import {Consumer, Type} from "./type/Type";
+import {Consumer, Type, UniConstructor, UniFunction} from "./type/Type";
 import {ROOT_PATH} from "./util/RootPath";
 
 const typeName = (type: Type<any> | undefined): string => type == null ? "" : type.name.replace(/\W+/g, "");
@@ -55,7 +57,7 @@ export class Bridge<O extends I, I, BT extends InTransform<I>> {
 		return [
 			`${this.source} --> ${typeName(this.outType)}`,
 			`${typeName(this.inType)} --> ${this.sink}`,
-			this.inType != this.outType ? `${typeName(this.outType)} --> ${this.sink}` : ''
+			this.inType != this.outType ? `${typeName(this.outType)} --> ${this.sink}` : ""
 			// `${this.source} --> ${this.sink} : ${this.outType}`
 		].filter(l => l.length > 0);
 	}
@@ -64,7 +66,17 @@ export class Bridge<O extends I, I, BT extends InTransform<I>> {
 export class Coordinator {
 	private readonly bitransformers: BiTransformer<any, any, any>[] = [];
 	private readonly bridges: Bridge<any, any, any>[] = [];
+	public readonly effectiveConfig: EngineConfig;
+	public readonly logger: Logger;
+	public readonly name: string = this.constructor.name;
 	private readonly transformers: Transformer<any, any>[] = [];
+
+	constructor(
+		public readonly suppliedConfig: Partial<EngineConfig> = configFromEnvironment(),
+	) {
+		this.effectiveConfig = buildConfig(suppliedConfig);
+		this.logger = configureLogger(this.constructor.name, this.effectiveConfig);
+	}
 
 	public add(transformer: Transformer<any, any>): this {
 		this.transformers.forEach(other => {
@@ -96,6 +108,15 @@ export class Coordinator {
 		return this;
 	}
 
+	public addPublisher(publisher: Publisher<any>): this {
+		if (publisher instanceof Transformer) {
+			return this.add(publisher);
+		} else if (publisher instanceof BiTransformer) {
+			return this.addBi(publisher);
+		}
+		throw new Error(`Unexpected publisher type: ${publisher.constructor.name}`);
+	}
+
 	private bridgeOne<T extends Transformer<any, any> | BiTransformer<any, any, any>>(
 		consumerTransformer: T,
 		publisherTransformer: Publisher<any>,
@@ -109,9 +130,17 @@ export class Coordinator {
 			return;
 		}
 		if (inType != null && outType != null && inType.isAssignableFrom(outType)) {
-			console.debug(`[${this}] Bridge (${outType}) ${publisherTransformer} => ${consumerTransformer} (${inType})`)
+			this.logger.debug(`Bridge (${outType}) ${publisherTransformer} => ${consumerTransformer} (${inType})`)
 			this.bridges.push(Bridge.ofType(outType, inType, publisherTransformer, consumerTransformer, consumerMapper));
 		}
+	}
+
+	public buildAndAdd(ctor: UniConstructor<Partial<EngineConfig>, Publisher<any>>, ...ctorArgs: any[]): this {
+		return this.addPublisher(new ctor(this.suppliedConfig, ...ctorArgs));
+	}
+
+	public configureAndAdd(configurer: UniFunction<Partial<EngineConfig>, Publisher<any>>): this {
+		return this.addPublisher(configurer(this.suppliedConfig));
 	}
 
 	public start(): void {
@@ -123,6 +152,7 @@ export class Coordinator {
 		});
 		this.transformers.forEach(transformer => transformer.start());
 		this.bitransformers.forEach(bitransformer => bitransformer.start());
+		this.logger.info("Started");
 	}
 
 	public toPlantUml(): string {
@@ -155,6 +185,6 @@ export class Coordinator {
 	}
 
 	public toString() {
-		return this.constructor.name;
+		return this.name;
 	}
 }

@@ -1,4 +1,5 @@
 import * as fs from "fs";
+import {EngineConfig} from "../EngineConfig";
 import {Operation} from "../type/Operation";
 import {
 	SourceDirectory,
@@ -9,8 +10,8 @@ import {
 import {Transformer} from "./Transformer";
 
 export class SourceDirectoryWatcher extends Transformer<SourceDirectory, SourceDirectoryOperation> {
-	constructor() {
-		super(SourceDirectoryType, SourceDirectoryOperationType);
+	constructor(config: Partial<EngineConfig> = {}) {
+		super(SourceDirectoryType, SourceDirectoryOperationType, config);
 	}
 
 	onInput(item: SourceDirectory): void {
@@ -23,7 +24,7 @@ export class SourceDirectoryWatcher extends Transformer<SourceDirectory, SourceD
 			if (fileName != null && fileName.endsWith("~")) {
 				return;
 			}
-			// console.debug(`[${this}] updated ${item.pathFromRoot} because ${fileName}`);
+			this.logger.debug(`Update ${item.pathFromRoot} because ${fileName}`);
 			this.notify({
 				item,
 				operation: Operation.Updated,

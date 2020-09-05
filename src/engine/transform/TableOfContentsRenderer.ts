@@ -1,5 +1,6 @@
 import * as diff from "diff";
 import {WebTableOfContents} from "../../template/WebTableOfContents";
+import {EngineConfig} from "../EngineConfig";
 import {
 	RenderedTableOfContentsTemplateBlockType,
 	TableOfContentsBlock,
@@ -11,8 +12,8 @@ import {Transformer} from "./Transformer";
 export class TableOfContentsRenderer extends Transformer<TableOfContentsBlock, RenderedTemplateBlock<TableOfContentsBlock>> {
 	protected readonly webTableOfContents: WebTableOfContents = new WebTableOfContents();
 
-	constructor() {
-		super(TableOfContentsBlockType, RenderedTableOfContentsTemplateBlockType);
+	constructor(config: Partial<EngineConfig> = {}) {
+		super(TableOfContentsBlockType, RenderedTableOfContentsTemplateBlockType, config);
 	}
 
 	onInput(source: TableOfContentsBlock): void {
@@ -23,7 +24,7 @@ export class TableOfContentsRenderer extends Transformer<TableOfContentsBlock, R
 			items: source.items.contentItems,
 		}, source.templateBlock.keyValue, source.templateBlock.body);
 		if (renderedText.trim() !== source.templateBlock.body.trim()) {
-			console.debug(diff.createPatch(TableOfContentsBlockType.identify(source) || "", source.templateBlock.body, renderedText, undefined, undefined, {ignoreWhitespace: true}));
+			this.logger.debug(diff.createPatch(TableOfContentsBlockType.identify(source) || "", source.templateBlock.body, renderedText, undefined, undefined, {ignoreWhitespace: true}));
 			this.notify({
 				renderedText,
 				source,

@@ -1,3 +1,4 @@
+import {EngineConfig} from "../EngineConfig";
 import {Type} from "../type/Type";
 import {Transformer} from "./Transformer";
 
@@ -11,22 +12,23 @@ export class SubtypeIdentifier<IN, OUT extends IN> extends Transformer<IN, OUT> 
 	constructor(
 		inType: Type<IN>,
 		outType: Type<OUT>,
+		config: Partial<EngineConfig> = {},
 	) {
-		super(inType, outType);
+		super(inType, outType, config);
 		this.identifies = outType;
 	}
 
 	onInput(input: IN): void {
-		if (this.outType?.isInstance(input)) {
+		if (this.identifies.isInstance(input)) {
 			if (!this.hasChanged(input)) {
 				return;
 			}
-			// console.debug(`[${this}] is ${this.outType}: ${this.outType?.stringify(input)}`);
+			this.logger.debug(`is ${this.outType}: ${this.identifies.stringify(input)}`);
 			this.notify(input);
 		}
 	}
 
 	toString(): string {
-		return this.outType?.name + "Identifier";
+		return this.identifies.name + "Identifier";
 	}
 }
