@@ -1,3 +1,4 @@
+import * as diff from "diff";
 import {Dnd5ENpcStats} from "../../template/Dnd5ENpcStats";
 import {
 	DND5EMachineDataTemplateBlock,
@@ -14,15 +15,16 @@ export class DND5EMachineRenderer extends Transformer<DND5EMachineDataTemplateBl
 		super(DND5EMachineDataTemplateBlockType, RenderedDND5EMachineDataTemplateBlockType);
 	}
 
-	onInput(machineTemplateBlock: DND5EMachineDataTemplateBlock): void {
-		if (!this.hasChanged(machineTemplateBlock)) {
+	onInput(source: DND5EMachineDataTemplateBlock): void {
+		if (!this.hasChanged(source)) {
 			return;
 		}
-		const renderedText = this.dnd5ENpcStats.render(machineTemplateBlock.machineData.machine);
-		if (renderedText.trim() !== machineTemplateBlock.templateBlock.body.trim()) {
+		const renderedText = this.dnd5ENpcStats.render(source.machineData.machine);
+		if (renderedText.trim() !== source.templateBlock.body.trim()) {
+			console.debug(diff.createPatch(DND5EMachineDataTemplateBlockType.identify(source) || "", source.templateBlock.body, renderedText, undefined, undefined, {ignoreWhitespace: true}));
 			this.notify({
-				renderedText: renderedText,
-				source: machineTemplateBlock
+				renderedText,
+				source,
 			});
 		}
 	}

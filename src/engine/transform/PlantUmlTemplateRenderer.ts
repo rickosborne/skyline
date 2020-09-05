@@ -1,6 +1,7 @@
 import * as crypto from "crypto";
+import * as diff from "diff";
 import {PlantUmlRenderer} from "../../template/PlantUmlRenderer";
-import {PlantUmlDataBlockType, PlantUmlDataBlock, RenderedPlantUmlDataBlockType} from "../type/PlantUmlFile";
+import {PlantUmlDataBlock, PlantUmlDataBlockType, RenderedPlantUmlDataBlockType} from "../type/PlantUmlFile";
 import {RenderedTemplateBlock} from "../type/TemplateBlock";
 import {Transformer} from "./Transformer";
 
@@ -20,6 +21,9 @@ export class PlantUmlTemplateRenderer extends Transformer<PlantUmlDataBlock, Ren
 			.update(source.plantUmlFile.fileText.text)
 			.update(String(link))
 			.digest("hex");
+		if (hash === source.templateBlock.keyValue.hash) {
+			return;
+		}
 		const renderedText = this.plantRenderer.render({
 			fileDir: source.plantUmlFile.fileText.file.directory.fullPath,
 			fileName: source.plantUmlFile.fileText.file.fileName,
@@ -27,6 +31,7 @@ export class PlantUmlTemplateRenderer extends Transformer<PlantUmlDataBlock, Ren
 			uml: source.plantUmlFile.fileText.text,
 		}, source.templateBlock.keyValue, source.templateBlock.body)
 		if (renderedText.trim() !== source.templateBlock.body.trim()) {
+			console.debug(diff.createPatch(PlantUmlDataBlockType.identify(source) || "", source.templateBlock.body, renderedText, undefined, undefined, {ignoreWhitespace: true}));
 			this.notify({
 				renderedText,
 				source,

@@ -19,7 +19,7 @@ export class FileListFromDirectory extends Transformer<SourceDirectoryOperation,
 					throw err;
 				}
 				const fileList = entities.filter(ent => ent.isFile()).map(ent => fileInDirectory(ent.name, sourceDirectory));
-				console.debug(`[${this}] updated ${dirOp.item.pathFromRoot} (${fileList.length})`);
+				// console.debug(`[${this}] updated ${dirOp.item.pathFromRoot} (${fileList.length})`);
 				this.notify({
 					item: {
 						sourceDirectory,

@@ -20,10 +20,11 @@ export class PrintModuleTemplate extends AFilesTemplate<PrintModule, string, und
 		throw new Error("Not a PrintModule");
 	}
 
-	render(data: PrintModule, params: Record<string, string>, originalBody: string): string {
+	render(data: PrintModule, params: Record<string, string>, originalBody: string, addGenerateDate: boolean = false): string {
 		return `
 <a href="{{ '/${data.dataName}' | relative_url }}" id="print-module-top-link" data-source-name="${data.dataName}"></a>
 
+${addGenerateDate ? `{% assign generateDate = "${new Date().toISOString()}" %}` : ""}
 {% assign fileNames = "${data.fileBaseNames.join("|")}" | split: "|" %}
 {% for fileName in fileNames %}
 

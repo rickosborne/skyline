@@ -8,8 +8,8 @@ export interface SourceDirectory {
 }
 
 export const SourceDirectoryType = Type.novel<SourceDirectory>()
-	.withScalarField("fileName", true, Type.isString, Type.strictEquals, Type.strictNotEquals)
-	.withScalarField("fullPath", true, Type.isString, Type.strictEquals, Type.strictNotEquals)
+	.withScalarField("fileName", false, Type.isString, Type.strictEquals, Type.strictNotEquals)
+	.withScalarField("fullPath", false, Type.isString, Type.strictEquals, Type.strictNotEquals)
 	.withScalarField("pathFromRoot", true, Type.isString, Type.strictEquals, Type.strictNotEquals)
 	.withStringify(item => item.pathFromRoot)
 	.withName("SourceDirectory");

@@ -1,3 +1,4 @@
+import * as diff from "diff";
 import {WebTableOfContents} from "../../template/WebTableOfContents";
 import {
 	RenderedTableOfContentsTemplateBlockType,
@@ -22,6 +23,7 @@ export class TableOfContentsRenderer extends Transformer<TableOfContentsBlock, R
 			items: source.items.contentItems,
 		}, source.templateBlock.keyValue, source.templateBlock.body);
 		if (renderedText.trim() !== source.templateBlock.body.trim()) {
+			console.debug(diff.createPatch(TableOfContentsBlockType.identify(source) || "", source.templateBlock.body, renderedText, undefined, undefined, {ignoreWhitespace: true}));
 			this.notify({
 				renderedText,
 				source,

@@ -1,3 +1,4 @@
+import * as diff from "diff";
 import {Dnd5EPcStats} from "../../template/Dnd5EPcStats";
 import {
 	DND5ECharacterDataTemplateBlock,
@@ -14,16 +15,23 @@ export class DND5ECharacterRenderer extends Transformer<DND5ECharacterDataTempla
 		super(DND5ECharacterDataTemplateBlockType, RenderedDND5ECharacterDataType);
 	}
 
-	onInput(dataTemplate: DND5ECharacterDataTemplateBlock): void {
-		if (!this.hasChanged(dataTemplate)) {
+	onInput(source: DND5ECharacterDataTemplateBlock): void {
+		if (!this.hasChanged(source)) {
 			return;
 		}
-		this.notify({
-			source: dataTemplate,
-			renderedText: this.dnd5EPcStats.render({
-				hzd: dataTemplate.characterData.hzd,
-				dnd5e: dataTemplate.characterData.dnd5e
-			}),
-		})
+		const renderedText = this.dnd5EPcStats.render({
+			hzd: source.characterData.hzd,
+			dnd5e: source.characterData.dnd5e
+		});
+		if (renderedText.trim() !== source.templateBlock.body.trim()) {
+			console.debug(diff.createPatch(DND5ECharacterDataTemplateBlockType.identify(source) || "", source.templateBlock.body.trim(), renderedText.trim(), undefined, undefined, {
+				newlineIsToken: true,
+				ignoreWhitespace: true
+			}));
+			this.notify({
+				source,
+				renderedText,
+			});
+		}
 	}
 }

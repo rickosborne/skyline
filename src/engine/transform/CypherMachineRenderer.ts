@@ -1,3 +1,4 @@
+import * as diff from "diff";
 import {CypherCreature} from "../../template/CypherCreature";
 import {
 	CypherMachineDataTemplateBlock,
@@ -14,15 +15,16 @@ export class CypherMachineRenderer extends Transformer<CypherMachineDataTemplate
 		super(CypherMachineDataTemplateBlockType, RenderedCypherMachineDataTemplateBlockType);
 	}
 
-	onInput(machineTemplateBlock: CypherMachineDataTemplateBlock): void {
-		if (!this.hasChanged(machineTemplateBlock)) {
+	onInput(source: CypherMachineDataTemplateBlock): void {
+		if (!this.hasChanged(source)) {
 			return;
 		}
-		const renderedText = this.cypherCreature.render(machineTemplateBlock.machineData.machine, machineTemplateBlock.templateBlock.keyValue);
-		if (renderedText.trim() !== machineTemplateBlock.templateBlock.body.trim()) {
+		const renderedText = this.cypherCreature.render(source.machineData.machine, source.templateBlock.keyValue);
+		if (renderedText.trim() !== source.templateBlock.body.trim()) {
+			console.debug(diff.createPatch(CypherMachineDataTemplateBlockType.identify(source) || "", source.templateBlock.body, renderedText, undefined, undefined, {ignoreWhitespace: true}));
 			this.notify({
-				renderedText: renderedText,
-				source: machineTemplateBlock
+				renderedText,
+				source,
 			});
 		}
 	}

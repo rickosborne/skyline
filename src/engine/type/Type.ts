@@ -14,6 +14,7 @@ export type Override<Type, Key extends keyof Type, Value extends Type[Key]> = {
 
 export abstract class Diff<T> {
 	protected constructor(
+		public readonly name: string,
 		public readonly before: T | undefined,
 		public readonly after: T | undefined,
 	) {
@@ -29,23 +30,23 @@ export abstract class Diff<T> {
 		} else if (this.after == null) {
 			return "<deleted> => <null>";
 		} else if (typeof this.before === "string" && typeof this.after === "string") {
-			return "Δ\n" + diff.diffLines(this.before, this.after, {newlineIsToken: true}).filter(change => change.added || change.removed).map(change => `${change.added ? "+" : change.removed ? "-" : " "}${change.value.replace(/\n/g, change.added ? "\n+" : change.removed ? "\n-" : "\n ")}`).join("\n");
+			return `${this.name}Δ\n` + diff.diffLines(this.before, this.after, {newlineIsToken: true}).filter(change => change.added || change.removed).map(change => `${change.added ? "+" : change.removed ? "-" : " "}${change.value.replace(/\n/g, change.added ? "\n+" : change.removed ? "\n-" : "\n ")}`).join("\n");
 		} else {
-			return `Δ${JSON.stringify(this.before).substr(0, 20)} => ${JSON.stringify(this.after).substr(0, 20)}`;
+			return `${this.name}Δ${JSON.stringify(this.before).substr(0, 20)} => ${JSON.stringify(this.after).substr(0, 20)}`;
 		}
 	}
 }
 
 export class RefDiff<V> extends Diff<V> {
 	public constructor(
-		public readonly name: string,
+		name: string,
 		public readonly type: Type<V>,
 		public readonly beforeId: string | undefined,
 		public readonly afterId: string | undefined,
 		before: V | undefined,
 		after: V | undefined,
 	) {
-		super(before, after);
+		super(name, before, after);
 	}
 
 	hasChanged(): boolean {
@@ -63,8 +64,9 @@ export class TypeDiff<T> extends Diff<T> {
 		before: T | undefined,
 		after: T | undefined,
 		public readonly fieldDiffs: Diff<any>[] = [],
+		name: string = type.name,
 	) {
-		super(before, after);
+		super(name, before, after);
 	}
 
 	public static forType<T>(type: Type<T>, before: T | undefined, after: T | undefined): TypeDiff<T> {
@@ -81,7 +83,7 @@ export class TypeDiff<T> extends Diff<T> {
 	}
 
 	toString(): string {
-		return `${this.type.name}Δ[${this.fieldDiffs.map(fd => fd.toString()).join(", ")}]`;
+		return `${this.name}Δ[${this.fieldDiffs.map(fd => fd.name).join(", ")}]`;
 	}
 }
 
@@ -93,7 +95,7 @@ export class TypeFieldDiff<T, V> extends Diff<V> {
 		after: V | undefined,
 		public readonly changed: boolean = true,
 	) {
-		super(before, after);
+		super(field.name, before, after);
 	}
 
 	static forTypeField<T, V>(type: Type<T>, field: TypeField<T, V>, before: T, after: T): Diff<V> {
@@ -127,21 +129,21 @@ export class TypeFieldDiff<T, V> extends Diff<V> {
 
 	toString(): string {
 		if (this.field.stringify == null) {
-			return `${this.field.name}: ${super.toString()}`;
+			return `${this.name}: ${super.toString()}`;
 		}
-		return `${this.field.name}: ${this.before == null ? "<null>" : this.field.stringify(this.before)} => ${this.after == null ? "<null>" : this.field.stringify(this.after)}`;
+		return `${this.name}: ${this.before == null ? "<null>" : this.field.stringify(this.before)} => ${this.after == null ? "<null>" : this.field.stringify(this.after)}`;
 	}
 }
 
 export class TypedArrayDiff<V> extends Diff<V[]> {
 	constructor(
-		public readonly name: string,
+		name: string,
 		public readonly type: Type<V>,
 		before: V[] | undefined,
 		after: V[] | undefined,
 		public readonly changed: Diff<V>[],
 	) {
-		super(before, after);
+		super(name, before, after);
 	}
 
 	public static forArrays<I>(name: string, type: Type<I>, before: I[] | undefined, after: I[] | undefined): TypedArrayDiff<I> {

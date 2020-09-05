@@ -29,7 +29,7 @@ export class StoryGraphJoiner extends BiTransformer<MarkdownFileList, StoryGraph
 			slug: templateBlock.dataName.replace(/[^a-zA-Z0-9]+/g, "-") + "-graph",
 			entries,
 			modulePath,
-			title: entries.find(e => e.title != null)?.title || "",
+			title: allEntries.find(e => e.title != null)?.title || "",
 		};
 		this.notify({
 			markdownFileList,

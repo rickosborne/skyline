@@ -181,6 +181,7 @@ MachineData --> CypherMachineTemplateBlockLoader
 MachineData --> DND5EMachineTemplateBlockLoader
 MarkdownFile --> MarkdownFilesAggregator
 MarkdownFile --> TemplateBlockReader
+MarkdownFileList --> PrintBlockJoiner
 MarkdownFileList --> StoryGraphJoiner
 MarkdownFileList --> TableOfContentsReader
 MarkdownFilesAggregator --> MarkdownFileList
@@ -207,7 +208,6 @@ RenderedTemplateBlock --> RenderedTemplateSaver
 SourceDirectory --> SourceDirectoryWatcher
 SourceDirectoryFileListOperation --> FilesFromDirectory
 SourceDirectoryFileListOperation --> MarkdownFilesAggregator
-SourceDirectoryFileListOperation --> PrintBlockJoiner
 SourceDirectoryOperation --> FileListFromDirectory
 SourceDirectoryProvider --> SourceDirectory
 SourceDirectoryWatcher --> SourceDirectoryOperation

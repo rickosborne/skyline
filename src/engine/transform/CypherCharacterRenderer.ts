@@ -1,3 +1,4 @@
+import * as diff from "diff";
 import {CypherPcStats} from "../../template/CypherPcStats";
 import {
 	BookTemplateBlock,
@@ -24,16 +25,23 @@ export class CypherCharacterRenderer extends Transformer<CypherCharacterDataTemp
 		return bookTemplateBlock.keyValue.character === cypherCharacterData.hzd.name;
 	}
 
-	onInput(data: CypherCharacterDataTemplateBlock): void {
-		if (!this.hasChanged(data)) {
+	onInput(source: CypherCharacterDataTemplateBlock): void {
+		if (!this.hasChanged(source)) {
 			return;
 		}
-		this.notify({
-			renderedText: this.cypherPcStats.render({
-				cypher: data.characterData.cypher,
-				hzd: data.characterData.hzd,
-			}, data.templateBlock.keyValue),
-			source: data,
-		});
+		const renderedText = this.cypherPcStats.render({
+			cypher: source.characterData.cypher,
+			hzd: source.characterData.hzd,
+		}, source.templateBlock.keyValue);
+		if (renderedText.trim() !== source.templateBlock.body.trim()) {
+			console.debug(diff.createPatch(CypherCharacterDataTemplateBlockType.identify(source) || "", source.templateBlock.body.trim(), renderedText.trim(), undefined, undefined, {
+				newlineIsToken: true,
+				ignoreWhitespace: true
+			}));
+			this.notify({
+				source,
+				renderedText,
+			});
+		}
 	}
 }

@@ -13,10 +13,10 @@ export interface SourceFile {
 
 export const SourceFileType = Type.novel<SourceFile>()
 	.withScalarField("fileName", true, Type.isString, Type.strictEquals, Type.strictNotEquals)
-	.withScalarField("extension", true, Type.isString, Type.strictEquals, Type.strictNotEquals)
-	.withScalarField("baseName", true, Type.isString, Type.strictEquals, Type.strictNotEquals)
-	.withScalarField("fullPath", true, Type.isString, Type.strictEquals, Type.strictNotEquals)
-	.withScalarField("pathFromRoot", true, Type.isString, Type.strictEquals, Type.strictNotEquals)
+	.withScalarField("extension", false, Type.isString, Type.strictEquals, Type.strictNotEquals)
+	.withScalarField("baseName", false, Type.isString, Type.strictEquals, Type.strictNotEquals)
+	.withScalarField("fullPath", false, Type.isString, Type.strictEquals, Type.strictNotEquals)
+	.withScalarField("pathFromRoot", false, Type.isString, Type.strictEquals, Type.strictNotEquals)
 	.withTypedField("directory", SourceDirectoryType)
 	.withStringify(item => item.pathFromRoot)
 	.withName("SourceFile");

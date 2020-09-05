@@ -1,3 +1,4 @@
+import * as diff from "diff";
 import {StoryGraphPlantUml} from "../../template/StoryGraphPlantUml";
 import {RenderedStoryGraphFilesType, StoryGraphFiles, StoryGraphFilesType} from "../type/StoryGraph";
 import {RenderedTemplateBlock} from "../type/TemplateBlock";
@@ -16,6 +17,7 @@ export class StoryGraphRenderer extends Transformer<StoryGraphFiles, RenderedTem
 		}
 		const renderedText = this.renderer.render(source.story, source.templateBlock.keyValue, source.templateBlock.body);
 		if (renderedText.trim() !== source.templateBlock.body.trim()) {
+			console.debug(diff.createPatch(StoryGraphFilesType.identify(source) || "", source.templateBlock.body, renderedText, undefined, undefined, {ignoreWhitespace: true}));
 			this.notify({
 				renderedText,
 				source: source,

@@ -39,13 +39,17 @@ export class MarkdownFilesAggregator extends BiTransformer<SourceDirectoryFileLi
 
 	protected onInputs(fileListOperation: SourceDirectoryFileListOperation, markdownFile: MarkdownFile): void {
 		const dirFiles = this.dirFiles(fileListOperation.item.sourceDirectory);
-		const markdownFiles = fileListOperation.item.fileList.map(sourceFile => dirFiles.get(sourceFile.pathFromRoot));
+		const markdownFiles = fileListOperation.item.fileList
+			.filter(sourceFile => sourceFile.fileName.endsWith(".md"))
+			.map(sourceFile => dirFiles.get(sourceFile.pathFromRoot));
 		const emptyCount = markdownFiles.reduce((p, c) => c == null ? (p + 1) : p, 0);
 		if (emptyCount === 0) {
 			this.notify({
 				markdownFiles: markdownFiles as MarkdownFile[],
 				fileListOperation,
 			});
+		} else {
+			console.debug(`[${this}] Waiting for ${emptyCount}`);
 		}
 	}
 }

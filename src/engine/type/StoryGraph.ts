@@ -27,7 +27,7 @@ export interface StoryGraphFiles extends HasTemplateBlock<any> {
 
 export const StoryGraphFilesType = hasTemplateBlockSubtype<StoryGraphTemplateBlock, StoryGraphFiles>(StoryGraphTemplateBlockType)
 	.withTypedField("markdownFileList", MarkdownFileListType)
-	.withScalarField("story", true, Type.isNotNull, (a: Story, b: Story) => a.modulePath === b.modulePath, Type.deepNotEquals)
+	.withScalarField("story", true, Type.isNotNull, (a: Story, b: Story) => a.modulePath === b.modulePath, Type.deepNotEquals, (story: Story) => story.title, (story: Story) => story.title)
 	.withName("StoryGraphFiles")
 ;
 
