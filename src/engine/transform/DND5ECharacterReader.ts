@@ -7,6 +7,9 @@ export class DND5ECharacterReader extends Transformer<BookData, DND5ECharacterDa
 	}
 
 	onInput(bookData: BookData): void {
+		if (!this.hasChanged(bookData)) {
+			return;
+		}
 		const dnd5eAdapter = bookData.book.adapter.dnd5e;
 		const pcs = bookData.book.playerCharacter;
 		if (dnd5eAdapter != null && pcs != null && Array.isArray(dnd5eAdapter.playerCharacter)) {

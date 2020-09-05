@@ -6,9 +6,6 @@ import equal = require("fast-deep-equal");
 
 export const FrontMatterType = Type.from("FrontMatter",
 	(item: any): item is FrontMatter => item != null,
-	() => {
-		throw new Error(`Unexpected call to FrontMatter.equals`);
-	},
 	(a, b) => !equal(a, b),
 	() => {
 		throw new Error(`Unexpected call to FrontMatter.stringify`)
@@ -39,8 +36,8 @@ export interface Heading {
 
 export const HeadingType = Type.novel<Heading>()
 	.withStringify(h => `h${h.level}. ${h.text}`)
-	.withScalarField("level", Type.isNumber, null, Type.strictNotEquals)
-	.withScalarField("text", Type.isString, null, Type.strictNotEquals)
+	.withScalarField("level", false, Type.isNumber, Type.isNotNull, Type.strictNotEquals)
+	.withScalarField("text", false, Type.isString, Type.isNotNull, Type.strictNotEquals)
 	.withName("Heading");
 
 export interface MarkdownFile {
@@ -53,6 +50,7 @@ export const MarkdownFileType = Type.novel<MarkdownFile>()
 	.withTypedField("fileText", FileTextType)
 	.withOptionalTypedField("firstHeading", HeadingType)
 	.withOptionalTypedField("frontMatter", FrontMatterType)
+	.withStringify(item => FileTextType.stringify(item.fileText))
 	.withName("MarkdownFile")
 ;
 

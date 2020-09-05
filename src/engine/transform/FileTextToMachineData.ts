@@ -11,6 +11,9 @@ export class FileTextToMachineData extends Transformer<FileText, MachineData> {
 
 	onInput(fileText: FileText): void {
 		if (fileText.file.fileName.endsWith(".machine.yaml")) {
+			if (!this.hasChanged(fileText)) {
+				return;
+			}
 			this.notify({
 				fileText,
 				machine: YAML.parse(fileText.text) as Machine,

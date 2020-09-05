@@ -25,6 +25,8 @@ export abstract class Publisher<T> {
 }
 
 export abstract class Transformer<T, U> extends Publisher<U> {
+	private readonly cache: Map<string, T> = new Map<string, T>();
+
 	protected constructor(
 		public readonly inType: Type<T> | undefined,
 		outType: Type<U> | undefined,
@@ -32,12 +34,32 @@ export abstract class Transformer<T, U> extends Publisher<U> {
 		super(outType);
 	}
 
+	protected hasChanged(item: T): boolean {
+		if (this.inType == null) {
+			return true;
+		}
+		const id = this.inType.identify(item);
+		if (id == null) {
+			return true;
+		}
+		const existing = this.cache.get(id);
+		if (existing == null) {
+			this.cache.set(id, item);
+		} else if (this.inType.hasChanged(existing, item)) {
+			console.debug(`[${this}] cache update: ${id}`)
+			this.cache.set(id, item);
+		} else {
+			return false;
+		}
+		return true;
+	}
+
 	public abstract onInput(input: T): void;
 }
 
 export abstract class BiTransformer<A, B, C> extends Publisher<C> {
-	private readonly lefts: A[] = [];
-	private readonly rights: B[] = [];
+	private readonly lefts: Map<string, A> = new Map<string, A>();
+	private readonly rights: Map<string, B> = new Map<string, B>();
 
 	protected constructor(
 		public readonly inLeftType: Type<A>,
@@ -47,17 +69,18 @@ export abstract class BiTransformer<A, B, C> extends Publisher<C> {
 		super(outType);
 	}
 
-	cache<T>(items: T[], item: T, type: Type<T>, predicate: (item: T) => boolean): boolean {
-		const existingIndex = items.findIndex(predicate);
-		if (existingIndex < 0) {
-			items.push(item);
-		} else {
-			const existing = items[existingIndex];
-			if (!type.hasChanged(existing, item)) {
-				// same
+	hasChanged<T>(item: T, type: Type<T>, items: Map<string, T>): boolean {
+		const id = type.identify(item);
+		if (id != null) {
+			const existing = items.get(id);
+			if (existing == null) {
+				items.set(id, item);
+			} else if (type.hasChanged(existing, item)) {
+				console.debug(`[${this}] cache update: ${id}`);
+				items.set(id, item);
+			} else {
 				return false;
 			}
-			items.splice(existingIndex, 1, item);
 		}
 		return true;
 	}
@@ -65,16 +88,22 @@ export abstract class BiTransformer<A, B, C> extends Publisher<C> {
 	protected abstract matchLeftRight(left: A, right: B): boolean;
 
 	public onInputLeft(left: A): void {
-		if (this.cache(this.lefts, left, this.inLeftType, otherA => this.inLeftType.equals(left, otherA))) {
-			const matches = this.rights.filter(right => this.matchLeftRight(left, right));
-			matches.forEach(right => this.onInputs(left, right));
+		if (this.hasChanged(left, this.inLeftType, this.lefts)) {
+			this.rights.forEach(right => {
+				if (this.matchLeftRight(left, right)) {
+					this.onInputs(left, right);
+				}
+			});
 		}
 	}
 
 	public onInputRight(right: B): void {
-		if (this.cache(this.rights, right, this.inRightType, otherB => this.inRightType.equals(right, otherB))) {
-			const matches = this.lefts.filter(left => this.matchLeftRight(left, right));
-			matches.forEach(left => this.onInputs(left, right));
+		if (this.hasChanged(right, this.inRightType, this.rights)) {
+			this.lefts.forEach(left => {
+				if (this.matchLeftRight(left, right)) {
+					this.onInputs(left, right);
+				}
+			})
 		}
 	}
 

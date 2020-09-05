@@ -26,6 +26,9 @@ export class TemplateBlockReader extends Transformer<MarkdownFile, TemplateBlock
 	}
 
 	onInput(markdownFile: MarkdownFile): void {
+		if (!this.hasChanged(markdownFile)) {
+			return;
+		}
 		for (let match of markdownFile.fileText.text.matchAll(TEMPLATE_REGEXP)) {
 			const groups = match.groups;
 			if (groups == null) {

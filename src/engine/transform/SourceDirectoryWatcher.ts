@@ -14,6 +14,7 @@ export class SourceDirectoryWatcher extends Transformer<SourceDirectory, SourceD
 	}
 
 	onInput(item: SourceDirectory): void {
+		// Intentionally do not cache these
 		this.notify({
 			item,
 			operation: Operation.Replay,

@@ -20,7 +20,7 @@ export interface MachineData {
 
 export const MachineDataType = Type.novel<MachineData>()
 	.withTypedField("fileText", FileTextType)
-	.withScalarField("machine", Type.isNotNull, null, Type.deepNotEquals)
+	.withScalarField("machine", true, Type.isNotNull, (a: Machine, b: Machine) => a.title === b.title, Type.deepNotEquals, (m: Machine) => m.title, (m: Machine) => m.title)
 	.withStringify(item => FileTextType.stringify(item.fileText))
 	.withName("MachineData");
 

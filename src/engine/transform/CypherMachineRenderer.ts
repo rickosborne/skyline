@@ -15,6 +15,9 @@ export class CypherMachineRenderer extends Transformer<CypherMachineDataTemplate
 	}
 
 	onInput(machineTemplateBlock: CypherMachineDataTemplateBlock): void {
+		if (!this.hasChanged(machineTemplateBlock)) {
+			return;
+		}
 		const renderedText = this.cypherCreature.render(machineTemplateBlock.machineData.machine, machineTemplateBlock.templateBlock.keyValue);
 		if (renderedText.trim() !== machineTemplateBlock.templateBlock.body.trim()) {
 			this.notify({

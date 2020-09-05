@@ -11,6 +11,7 @@ export class FileListFromDirectory extends Transformer<SourceDirectoryOperation,
 	}
 
 	onInput(dirOp: SourceDirectoryOperation): void {
+		// intentionally do not cache these
 		const sourceDirectory = dirOp.item;
 		if (isCreated(dirOp) || isUpdated(dirOp) || isReplay(dirOp) || isRenamed(dirOp)) {
 			fs.readdir(sourceDirectory.fullPath, {encoding: "utf8", withFileTypes: true}, (err, entities) => {

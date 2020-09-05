@@ -7,6 +7,9 @@ export class CypherCharacterReader extends Transformer<BookData, CypherCharacter
 	}
 
 	onInput(bookData: BookData): void {
+		if (!this.hasChanged(bookData)) {
+			return;
+		}
 		const cypherAdapter = bookData.book.adapter.cypher;
 		const pcs = bookData.book.playerCharacter;
 		if (cypherAdapter != null && pcs != null && Array.isArray(cypherAdapter.playerCharacter)) {

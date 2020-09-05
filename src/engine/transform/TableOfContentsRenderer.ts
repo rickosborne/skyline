@@ -15,6 +15,9 @@ export class TableOfContentsRenderer extends Transformer<TableOfContentsBlock, R
 	}
 
 	onInput(source: TableOfContentsBlock): void {
+		if (!this.hasChanged(source)) {
+			return;
+		}
 		const renderedText = this.webTableOfContents.render({
 			items: source.items.contentItems,
 		}, source.templateBlock.keyValue, source.templateBlock.body);

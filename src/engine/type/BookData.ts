@@ -20,7 +20,7 @@ export interface BookData {
 
 export const BookDataType = Type.novel<BookData>()
 	.withTypedField("fileText", FileTextType)
-	.withScalarField("book", Type.isNotNull, null, Type.deepNotEquals)
+	.withScalarField("book", false, Type.isNotNull, null, Type.deepNotEquals)
 	.withStringify(item => FileTextType.stringify(item.fileText))
 	.withName("BookData");
 
@@ -32,19 +32,27 @@ export const BookTemplateBlockType = TemplateBlockType.toBuilder<BookTemplateBlo
 	.withFixed("dataType", BOOK_DATA_TYPE)
 	.withName("BookTemplateBlock");
 
+export function hzdCharacterName(hzd: PlayerCharacter): string {
+	return hzd.name;
+}
+
+const characterDataTypeBuilder = <T extends { bookData: BookData; hzd: PlayerCharacter }>() => Type.novel<T>()
+	.withTypedField("bookData", BookDataType)
+	.withScalarField("hzd", true, Type.isNotNull, (a: PlayerCharacter, b: PlayerCharacter) => a.name === b.name, Type.deepNotEquals, hzdCharacterName, hzdCharacterName)
+	.withStringify(item => item.hzd.name);
+
 export interface CypherCharacterData {
 	bookData: BookData;
 	cypher: CypherPlayerCharacter;
 	hzd: PlayerCharacter;
 }
 
-const characterDataTypeBuilder = <T extends { bookData: BookData; hzd: PlayerCharacter }>() => Type.novel<T>()
-	.withTypedField("bookData", BookDataType)
-	.withScalarField("hzd", Type.isNotNull, null, Type.deepNotEquals)
-	.withStringify(item => item.hzd.name);
+export function cypherCharacterName(cypher: CypherPlayerCharacter): string {
+	return cypher.name;
+}
 
 export const CypherCharacterDataType = characterDataTypeBuilder<CypherCharacterData>()
-	.withScalarField("cypher", Type.isNotNull, null, Type.deepNotEquals)
+	.withScalarField("cypher", true, Type.isNotNull, (a: CypherPlayerCharacter, b: CypherPlayerCharacter) => a.name === b.name, Type.deepNotEquals, cypherCharacterName, cypherCharacterName)
 	.withName("CypherCharacterData");
 
 export interface DND5ECharacterData {
@@ -53,8 +61,12 @@ export interface DND5ECharacterData {
 	hzd: PlayerCharacter;
 }
 
+export function dnd5eCharacterName(dnd5e: Dnd5EPlayerCharacter): string {
+	return dnd5e.name;
+}
+
 export const DND5ECharacterDataType = characterDataTypeBuilder<DND5ECharacterData>()
-	.withScalarField("dnd5e", Type.isNotNull, null, Type.deepNotEquals)
+	.withScalarField("dnd5e", true, Type.isNotNull, (a: Dnd5EPlayerCharacter, b: Dnd5EPlayerCharacter) => a.name === b.name, Type.deepNotEquals, dnd5eCharacterName, dnd5eCharacterName)
 	.withName("DND5ECharacterData");
 
 export interface DND5ECharacterTemplateBlock extends BookTemplateBlock {

@@ -25,6 +25,9 @@ export class TableOfContentsReader extends Transformer<MarkdownFileList, TableOf
 	}
 
 	onInput(markdownFileList: MarkdownFileList): void {
+		if (!this.hasChanged(markdownFileList)) {
+			return;
+		}
 		const contentItems: MarkdownContentItem[] = markdownFileList.markdownFiles
 			.filter(markdownFile => this.isPrintable(markdownFile.fileText.file))
 			.map(markdownFile => ({

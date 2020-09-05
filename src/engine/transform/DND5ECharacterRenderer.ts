@@ -15,6 +15,9 @@ export class DND5ECharacterRenderer extends Transformer<DND5ECharacterDataTempla
 	}
 
 	onInput(dataTemplate: DND5ECharacterDataTemplateBlock): void {
+		if (!this.hasChanged(dataTemplate)) {
+			return;
+		}
 		this.notify({
 			source: dataTemplate,
 			renderedText: this.dnd5EPcStats.render({

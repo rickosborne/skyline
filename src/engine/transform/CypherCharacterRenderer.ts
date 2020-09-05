@@ -25,6 +25,9 @@ export class CypherCharacterRenderer extends Transformer<CypherCharacterDataTemp
 	}
 
 	onInput(data: CypherCharacterDataTemplateBlock): void {
+		if (!this.hasChanged(data)) {
+			return;
+		}
 		this.notify({
 			renderedText: this.cypherPcStats.render({
 				cypher: data.characterData.cypher,

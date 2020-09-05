@@ -23,7 +23,7 @@ export interface PrintDataBlock extends HasTemplateBlock<PrintTemplateBlock> {
 }
 
 export const PrintDataBlockType = hasTemplateBlockSubtype<PrintTemplateBlock, PrintDataBlock>(PrintTemplateBlockType)
-	.withScalarField("fileBaseNames", Type.isArray, null, Type.deepNotEquals)
+	.withScalarField("fileBaseNames", false, Type.isArray, null, Type.deepNotEquals)
 	.withName("PrintDataBlock");
 
 export const RenderedPrintTemplateBlockType = renderedTemplateBlockSubtype(PrintDataBlockType).withName("RenderedPrint");

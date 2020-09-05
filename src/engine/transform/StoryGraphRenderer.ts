@@ -11,6 +11,9 @@ export class StoryGraphRenderer extends Transformer<StoryGraphFiles, RenderedTem
 	}
 
 	onInput(source: StoryGraphFiles): void {
+		if (!this.hasChanged(source)) {
+			return;
+		}
 		const renderedText = this.renderer.render(source.story, source.templateBlock.keyValue, source.templateBlock.body);
 		if (renderedText.trim() !== source.templateBlock.body.trim()) {
 			this.notify({

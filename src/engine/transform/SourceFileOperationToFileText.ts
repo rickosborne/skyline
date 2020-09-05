@@ -11,6 +11,7 @@ export class SourceFileOperationToFileText extends Transformer<SourceFileOperati
 
 	onInput(fileOp: SourceFileOperation): void {
 		if (isCreated(fileOp) || isUpdated(fileOp) || isReplay(fileOp)) {
+			// we intentionally do not cache these
 			const file = fileOp.item;
 			const text = fs.readFileSync(file.fullPath, {encoding: "utf8"});
 			this.notify({

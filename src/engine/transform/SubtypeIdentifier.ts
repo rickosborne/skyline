@@ -18,6 +18,9 @@ export class SubtypeIdentifier<IN, OUT extends IN> extends Transformer<IN, OUT> 
 
 	onInput(input: IN): void {
 		if (this.outType?.isInstance(input)) {
+			if (!this.hasChanged(input)) {
+				return;
+			}
 			// console.debug(`[${this}] is ${this.outType}: ${this.outType?.stringify(input)}`);
 			this.notify(input);
 		}

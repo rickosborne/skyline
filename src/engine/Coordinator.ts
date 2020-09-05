@@ -10,7 +10,7 @@ const typeName = (type: Type<any> | undefined): string => type == null ? "" : ty
 export type InTransform<I> = Transformer<I, any> | BiTransformer<I, any, any> | BiTransformer<any, I, any>;
 
 export class Bridge<O extends I, I, BT extends InTransform<I>> {
-	private readonly cache: I[] = [];
+	private readonly cache: Map<string, I> = new Map<string, I>();
 
 	protected constructor(
 		public readonly outType: Type<O>,
@@ -37,18 +37,16 @@ export class Bridge<O extends I, I, BT extends InTransform<I>> {
 	}
 
 	public onItem(item: I): void {
-		const existingIndex = this.cache.findIndex(cached => this.inType.equals(cached, item));
-		if (existingIndex < 0) {
-			// console.debug(`[${this.source}:${this.type}:${this.sinkName}] New: ${this.type.stringify(item)}`);
-			this.cache.push(item);
-		} else {
-			const existing = this.cache[existingIndex];
-			if (!this.inType.hasChanged(existing, item)) {
-				// console.debug(`[${this.source}:${this.type}:${this.sinkName}] No change: ${this.type.stringify(item)}`);
+		const id = this.inType.identify(item);
+		if (id != null) {
+			const existing = this.cache.get(id);
+			if (existing == null) {
+				this.cache.set(id, item);
+			} else if (this.inType.hasChanged(existing, item)) {
+				this.cache.set(id, item);
+			} else {
 				return;
 			}
-			// console.debug(`[${this.source}:${this.type}:${this.sinkName}] Updated: ${this.type.stringify(item)}`);
-			this.cache.splice(existingIndex, 1, item);
 		}
 		this.consumer(item);
 	}

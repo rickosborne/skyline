@@ -15,7 +15,7 @@ export class PrintBlockJoiner extends BiTransformer<PrintTemplateBlock, SourceDi
 	}
 
 	protected matchLeftRight(templateBlock: PrintTemplateBlock, fileListOperation: SourceDirectoryFileListOperation): boolean {
-		const sameDirectory = SourceDirectoryType.equals(templateBlock.markdownFile.fileText.file.directory, fileListOperation.item.sourceDirectory);
+		const sameDirectory = SourceDirectoryType.identify(templateBlock.markdownFile.fileText.file.directory) === SourceDirectoryType.identify(fileListOperation.item.sourceDirectory);
 		return sameDirectory &&
 			(isCreated(fileListOperation) || isUpdated(fileListOperation) || isReplay(fileListOperation))
 			;

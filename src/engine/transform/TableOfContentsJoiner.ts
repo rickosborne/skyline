@@ -15,7 +15,7 @@ export class TableOfContentsJoiner extends BiTransformer<TableOfContentsTemplate
 	}
 
 	protected matchLeftRight(templateBlock: TableOfContentsTemplateBlock, contentsItems: TableOfContentsItems): boolean {
-		return SourceDirectoryType.equals(contentsItems.markdownFileList.fileListOperation.item.sourceDirectory, templateBlock.markdownFile.fileText.file.directory);
+		return SourceDirectoryType.identify(contentsItems.markdownFileList.fileListOperation.item.sourceDirectory) === SourceDirectoryType.identify(templateBlock.markdownFile.fileText.file.directory);
 	}
 
 	protected onInputs(templateBlock: TableOfContentsTemplateBlock, items: TableOfContentsItems): void {

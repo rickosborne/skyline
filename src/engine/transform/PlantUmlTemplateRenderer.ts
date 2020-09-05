@@ -12,6 +12,9 @@ export class PlantUmlTemplateRenderer extends Transformer<PlantUmlDataBlock, Ren
 	}
 
 	onInput(source: PlantUmlDataBlock): void {
+		if (!this.hasChanged(source)) {
+			return;
+		}
 		const link = !!source.templateBlock.keyValue.link;
 		const hash = crypto.createHash("sha256")
 			.update(source.plantUmlFile.fileText.text)

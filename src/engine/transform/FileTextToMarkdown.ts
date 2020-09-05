@@ -12,6 +12,9 @@ export class FileTextToMarkdown extends Transformer<FileText, MarkdownFile> {
 		if (!fileText.file.fileName.endsWith(".md")) {
 			return;
 		}
+		if (!this.hasChanged(fileText)) {
+			return;
+		}
 		const frontMatter = getFrontMatter(fileText.text);
 		const header = getTitle(fileText.text);
 		const markdownFile: MarkdownFile = {

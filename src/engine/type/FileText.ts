@@ -8,6 +8,6 @@ export interface FileText {
 
 export const FileTextType = Type.novel<FileText>()
 	.withTypedField("file", SourceFileType)
-	.withScalarField("text", Type.isString, Type.isString, Type.strictNotEquals)
+	.withScalarField("text", false, Type.isString, Type.isString, Type.strictNotEquals)
 	.withStringify(item => SourceFileType.stringify(item.file))
 	.withName("FileText");

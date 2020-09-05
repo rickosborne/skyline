@@ -21,7 +21,7 @@ export class MarkdownFilesAggregator extends BiTransformer<SourceDirectoryFileLi
 	}
 
 	protected matchLeftRight(fileListOperation: SourceDirectoryFileListOperation, markdownFile: MarkdownFile): boolean {
-		return SourceDirectoryType.equals(fileListOperation.item.sourceDirectory, markdownFile.fileText.file.directory);
+		return SourceDirectoryType.identify(fileListOperation.item.sourceDirectory) === SourceDirectoryType.identify(markdownFile.fileText.file.directory);
 	}
 
 	onInputLeft(fileListOperation: SourceDirectoryFileListOperation) {

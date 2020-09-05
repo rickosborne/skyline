@@ -19,13 +19,13 @@ export interface MarkdownContentItem extends ContentItem {
 export const MarkdownContentItemType = Type.novel<MarkdownContentItem>()
 	.withTypedField("markdownFile", MarkdownFileType)
 	.withOptionalScalarField("description")
-	.withScalarField("indentLevel", Type.isNumber, null, Type.strictNotEquals)
-	.withScalarField("link", Type.isString, null, Type.strictNotEquals)
-	.withScalarField("notStarted", Type.isBoolean, null, Type.strictNotEquals)
-	.withScalarField("startOfStory", Type.isBoolean, null, Type.strictNotEquals)
-	.withScalarField("title", Type.isString, null, Type.strictNotEquals)
-	.withScalarField("titleIsSpoiler", Type.isBoolean, null, Type.strictNotEquals)
-	.withScalarField("todoCount", Type.isNumber, null, Type.strictNotEquals)
+	.withScalarField("indentLevel", false, Type.isNumber, null, Type.strictNotEquals)
+	.withScalarField("link", false, Type.isString, null, Type.strictNotEquals)
+	.withScalarField("notStarted", false, Type.isBoolean, null, Type.strictNotEquals)
+	.withScalarField("startOfStory", false, Type.isBoolean, null, Type.strictNotEquals)
+	.withScalarField("title", false, Type.isString, null, Type.strictNotEquals)
+	.withScalarField("titleIsSpoiler", false, Type.isBoolean, null, Type.strictNotEquals)
+	.withScalarField("todoCount", false, Type.isNumber, null, Type.strictNotEquals)
 	.withStringify(item => MarkdownFileType.stringify(item.markdownFile))
 	.withName("MarkdownContentItem");
 
@@ -48,6 +48,7 @@ export interface TableOfContentsItems {
 export const TableOfContentsItemsType = Type.novel<TableOfContentsItems>()
 	.withTypedField("markdownFileList", MarkdownFileListType)
 	.withTypedList("contentItems", MarkdownContentItemType)
+	.withStringify(item => MarkdownFileListType.stringify(item.markdownFileList) + "+" + item.contentItems.length)
 	.withName("TableOfContentsItems");
 
 export interface TableOfContentsBlock extends HasTemplateBlock<TableOfContentsTemplateBlock> {

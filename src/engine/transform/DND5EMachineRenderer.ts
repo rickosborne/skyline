@@ -15,6 +15,9 @@ export class DND5EMachineRenderer extends Transformer<DND5EMachineDataTemplateBl
 	}
 
 	onInput(machineTemplateBlock: DND5EMachineDataTemplateBlock): void {
+		if (!this.hasChanged(machineTemplateBlock)) {
+			return;
+		}
 		const renderedText = this.dnd5ENpcStats.render(machineTemplateBlock.machineData.machine);
 		if (renderedText.trim() !== machineTemplateBlock.templateBlock.body.trim()) {
 			this.notify({

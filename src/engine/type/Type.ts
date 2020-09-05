@@ -1,72 +1,250 @@
 import equal = require("fast-deep-equal");
+import * as diff from 'diff';
 
 export type Consumer<T> = (item: T) => void;
 export type IsInstance<T> = (item: any) => item is T;
 export type Comparator<T> = (a: T, b: T) => boolean;
 export type Stringifier<T> = (item: T) => string;
 export type ArrayField<T, K extends string & keyof T> = T[K] extends Array<infer V> ? V : never;
+export type ArrayItem<T> = T extends (infer I)[] ? I : T extends undefined ? undefined : never;
 
 export type Override<Type, Key extends keyof Type, Value extends Type[Key]> = {
 	[Prop in Key]: Value;
 };
 
+export abstract class Diff<T> {
+	protected constructor(
+		public readonly before: T | undefined,
+		public readonly after: T | undefined,
+	) {
+	}
+
+	hasChanged(): boolean {
+		return !equal(this.before, this.after);
+	}
+
+	toString(): string {
+		if (this.before == null) {
+			return this.after == null ? "<both null>" : "<null> => <new>";
+		} else if (this.after == null) {
+			return "<deleted> => <null>";
+		} else if (typeof this.before === "string" && typeof this.after === "string") {
+			return "Δ\n" + diff.diffLines(this.before, this.after, {newlineIsToken: true}).filter(change => change.added || change.removed).map(change => `${change.added ? "+" : change.removed ? "-" : " "}${change.value.replace(/\n/g, change.added ? "\n+" : change.removed ? "\n-" : "\n ")}`).join("\n");
+		} else {
+			return `Δ${JSON.stringify(this.before).substr(0, 20)} => ${JSON.stringify(this.after).substr(0, 20)}`;
+		}
+	}
+}
+
+export class RefDiff<V> extends Diff<V> {
+	public constructor(
+		public readonly name: string,
+		public readonly type: Type<V>,
+		public readonly beforeId: string | undefined,
+		public readonly afterId: string | undefined,
+		before: V | undefined,
+		after: V | undefined,
+	) {
+		super(before, after);
+	}
+
+	hasChanged(): boolean {
+		return true;
+	}
+
+	toString(): string {
+		return `${this.name}(${this.type.name}) idΔ: ${this.beforeId || "<null>"} => ${this.afterId || "<null>"}`;
+	}
+}
+
+export class TypeDiff<T> extends Diff<T> {
+	constructor(
+		public readonly type: Type<T>,
+		before: T | undefined,
+		after: T | undefined,
+		public readonly fieldDiffs: Diff<any>[] = [],
+	) {
+		super(before, after);
+	}
+
+	public static forType<T>(type: Type<T>, before: T | undefined, after: T | undefined): TypeDiff<T> {
+		return new TypeDiff<T>(
+			type,
+			before,
+			after,
+			type.fields.map(field => TypeFieldDiff.forTypeField(type, field, before, after)).filter(tfd => tfd.hasChanged()),
+		);
+	}
+
+	hasChanged(): boolean {
+		return this.fieldDiffs.length > 0;
+	}
+
+	toString(): string {
+		return `${this.type.name}Δ[${this.fieldDiffs.map(fd => fd.toString()).join(", ")}]`;
+	}
+}
+
+export class TypeFieldDiff<T, V> extends Diff<V> {
+	constructor(
+		public readonly parentType: Type<T>,
+		public readonly field: TypeField<T, V>,
+		before: V | undefined,
+		after: V | undefined,
+		public readonly changed: boolean = true,
+	) {
+		super(before, after);
+	}
+
+	static forTypeField<T, V>(type: Type<T>, field: TypeField<T, V>, before: T, after: T): Diff<V> {
+		const beforeValue = before == null ? undefined : field.accessor(before);
+		const afterValue = after == null ? undefined : field.accessor(after);
+		if (field.valueType != null) {
+			return TypeDiff.forType(field.valueType, beforeValue, afterValue);
+		} else if (field.itemType != null) {
+			return TypedArrayDiff.forArrays<V>(field.name, field.itemType as Type<V>, beforeValue as undefined, afterValue as undefined) as Diff<V>;
+		}
+		let hasChanged: boolean;
+		if (beforeValue == null || afterValue == null) {
+			hasChanged = beforeValue !== afterValue;
+		} else if (field.hasChanged != null) {
+			hasChanged = field.hasChanged(beforeValue, afterValue);
+		} else {
+			hasChanged = !equal(beforeValue, afterValue);
+		}
+		return new TypeFieldDiff<T, V>(
+			type,
+			field,
+			beforeValue,
+			afterValue,
+			hasChanged,
+		);
+	}
+
+	hasChanged(): boolean {
+		return this.changed;
+	}
+
+	toString(): string {
+		if (this.field.stringify == null) {
+			return `${this.field.name}: ${super.toString()}`;
+		}
+		return `${this.field.name}: ${this.before == null ? "<null>" : this.field.stringify(this.before)} => ${this.after == null ? "<null>" : this.field.stringify(this.after)}`;
+	}
+}
+
+export class TypedArrayDiff<V> extends Diff<V[]> {
+	constructor(
+		public readonly name: string,
+		public readonly type: Type<V>,
+		before: V[] | undefined,
+		after: V[] | undefined,
+		public readonly changed: Diff<V>[],
+	) {
+		super(before, after);
+	}
+
+	public static forArrays<I>(name: string, type: Type<I>, before: I[] | undefined, after: I[] | undefined): TypedArrayDiff<I> {
+		let changed: Diff<I>[];
+		if (before == null) {
+			changed = after == null ? [] : after.map(item => TypeDiff.forType(type, undefined, item));
+		} else if (after == null) {
+			changed = before.map(item => TypeDiff.forType(type, item, undefined));
+		} else {
+			changed = before.map((b, index) => {
+				const a = after[index];
+				const beforeId = type.identify(b);
+				const afterId = type.identify(a);
+				if (afterId === beforeId) {
+					return TypeDiff.forType(type, b, after[index]);
+				} else {
+					return new RefDiff<I>(name, type, beforeId, afterId, b, a);
+				}
+			});
+		}
+		return new TypedArrayDiff<I>(
+			name,
+			type,
+			before,
+			after,
+			changed.filter(d => d.hasChanged()),
+		);
+	}
+
+	hasChanged(): boolean {
+		return this.changed.length > 0;
+	}
+
+	toString(): string {
+		return `${this.name}[]Δ[${this.changed.map(c => c.toString()).join(", ")}]`;
+	}
+}
+
 export class TypeField<T, V> {
 	constructor(
-		readonly name: string,
-		readonly accessor: (item: T) => V,
-		readonly optional: boolean = false,
-		readonly fixedValue?: V,
-		readonly isInstance?: IsInstance<V>,
-		readonly equals?: Comparator<V>,
-		readonly hasChanged?: Comparator<V>,
-		readonly stringify?: Stringifier<V>,
-		readonly valueType?: Type<V>,
-		readonly isArray: boolean = false,
-		readonly itemType?: Type<V extends (infer I)[] ? I : never>
+		public readonly name: string,
+		public readonly partOfId: boolean,
+		public readonly accessor: (item: T) => V,
+		public readonly optional: boolean = false,
+		public readonly fixedValue?: V,
+		public readonly isInstance?: IsInstance<V>,
+		public readonly hasChanged?: Comparator<V>,
+		public readonly stringify?: Stringifier<V>,
+		public readonly valueType?: Type<V>,
+		public readonly isArray: boolean = false,
+		public readonly itemType?: Type<V extends (infer I)[] ? I : never>,
+		public readonly identifier?: (value: V) => string | undefined,
 	) {
 	}
 
 	public static build<T, V>(
 		name: string,
+		partOfId: boolean,
 		accessor: (item: T) => V,
 		optional: boolean = false,
 		fixedValue?: V,
 		isInstance?: IsInstance<V>,
-		equals?: Comparator<V>,
 		hasChanged?: Comparator<V>,
 		stringify?: Stringifier<V>,
 		valueType?: Type<V>,
 		isArray: boolean = false,
-		itemType?: Type<V extends (infer I)[] ? I : never>
+		itemType?: Type<V extends (infer I)[] ? I : never>,
+		identifier?: (item: V) => string | undefined,
 	): TypeField<T, V> {
-		return new Function("TypeField", "name", "accessor", "optional", "fixedValue", "isInstance", "equals", "hasChanged", "stringify", "valueType", "isArray", "itemType", `
+		return new Function("TypeField", "name", "partOfId", "accessor", "optional", "fixedValue", "isInstance", "hasChanged", "stringify", "valueType", "isArray", "itemType", "identifier", `
 		class ${name} extends TypeField {
-			constructor(name, accessor, optional, fixedValue, isInstance, equals, hasChanged, stringify, valueType, isArray, itemType) {
-				super(name, accessor, optional, fixedValue, isInstance, equals, hasChanged, stringify, valueType, isArray, itemType);
+			constructor(name, partOfId, accessor, optional, fixedValue, isInstance, hasChanged, stringify, valueType, isArray, itemType, identifier) {
+				super(name, partOfId, accessor, optional, fixedValue, isInstance, hasChanged, stringify, valueType, isArray, itemType, identifier);
 			}
 		}
-		return new ${name}(name, accessor, optional, fixedValue, isInstance, equals, hasChanged, stringify, valueType, isArray, itemType);
-		`)(TypeField, name, accessor, optional, fixedValue, isInstance, equals, hasChanged, stringify, valueType, isArray, itemType);
+		return new ${name}(name, partOfId, accessor, optional, fixedValue, isInstance, hasChanged, stringify, valueType, isArray, itemType, identifier);
+		`)(TypeField, name, partOfId, accessor, optional, fixedValue, isInstance, hasChanged, stringify, valueType, isArray, itemType, identifier);
 	}
 
 	public getValues(...items: T[]): V[] {
 		return items.map(item => this.accessor(item));
 	}
 
-	public parentEquals(a: T, b: T): boolean {
-		if (this.equals == null) {
-			return true;
+	public parentIdentify(item: T): string | undefined {
+		if (!this.partOfId) {
+			return undefined;
 		}
-		const [aValue, bValue] = this.getValues(a, b);
-		return this.equals(aValue, bValue);
-	}
-
-	public parentHasChanged(a: T, b: T): boolean {
-		if (this.hasChanged == null) {
-			return false;
+		const value = this.accessor(item);
+		if (this.identifier != null) {
+			return this.identifier(value);
+		} else if (this.valueType != null) {
+			return this.valueType.identify(value);
+		} else if (this.itemType != null) {
+			throw new Error(`[${this.name}] Should not be trying to identify an array: ${this.itemType.name}`);
+		} else if (this.stringify != null) {
+			return this.stringify(value);
+		} else if (typeof value === "number" || typeof value === "boolean") {
+			return String(value);
+		} else if (typeof value === "string") {
+			return value;
+		} else {
+			throw new Error(`[${this.name}] Cannot identify.`);
 		}
-		const [aValue, bValue] = this.getValues(a, b);
-		return this.hasChanged(aValue, bValue);
 	}
 
 	public parentIsInstance(item: any): boolean {
@@ -87,6 +265,10 @@ export class TypeField<T, V> {
 
 	public parentStringify(item: T): string | undefined {
 		return this.stringify != null ? this.stringify(this.accessor(item)) : undefined;
+	}
+
+	public toString(): string {
+		return this.name;
 	}
 }
 
@@ -115,17 +297,17 @@ export class TypeBuilder<T, U> {
 	): TypeBuilder<T, Z> {
 		return this.addField<Z>(TypeField.build<T, V>(
 			key,
+			true,
 			item => item[key] as unknown as V,
 			false, value,
 			(v: any): v is V => v === value,
-			(a, b) => a === b && b === value,
 			(a, b) => a !== value || b !== value,
 			stringify
 		));
 	}
 
 	withName(name: string): U extends T ? Type<T> : never {
-		return Type.fromFields<T>(name, this.parent, this.fields) as U extends T ? Type<T> : never;
+		return Type.fromFields<T>(name, this.parent, this.fields, this.stringify) as U extends T ? Type<T> : never;
 	}
 
 	public withOptionalScalarField<K extends string & keyof Z & keyof T, V extends T[K], Z extends U & { [P in K]?: V }>(
@@ -137,11 +319,11 @@ export class TypeBuilder<T, U> {
 	): TypeBuilder<T, Z> {
 		return this.addField<Z>(TypeField.build<T, V>(
 			key,
+			false,
 			item => item[key] as unknown as V,
 			true,
 			undefined,
 			isInstance == null ? undefined : isInstance,
-			equals == null ? undefined : equals,
 			hasChanged == null ? undefined : hasChanged,
 			stringify,
 		));
@@ -157,11 +339,11 @@ export class TypeBuilder<T, U> {
 	): TypeBuilder<T, Z> {
 		return this.addField<Z>(TypeField.build<T, V>(
 			key,
+			false,
 			item => item[key] as unknown as V,
 			true,
 			undefined,
 			isInstance == null ? undefined : isInstance,
-			equals == null ? undefined : equals,
 			hasChanged == null ? undefined : hasChanged,
 			stringify == null ? undefined : stringify,
 			valueType,
@@ -175,20 +357,26 @@ export class TypeBuilder<T, U> {
 
 	public withScalarField<K extends string & keyof Z & keyof T, V extends T[K], Z extends U & { [P in K]: V }>(
 		key: K,
+		partOfId: boolean,
 		isInstance: IsInstance<V>,
 		equals: Comparator<V> | null,
 		hasChanged: Comparator<V>,
-		stringify?: Stringifier<V>
+		stringify?: Stringifier<V>,
+		identifier?: (item: V) => string | undefined,
 	): TypeBuilder<T, Z> {
 		return this.addField<Z>(TypeField.build<T, V>(
 			key,
+			partOfId,
 			item => item[key] as unknown as V,
 			false,
 			undefined,
 			isInstance,
-			equals == null ? undefined : equals,
 			hasChanged == null ? undefined : hasChanged,
-			stringify
+			stringify,
+			undefined,
+			false,
+			undefined,
+			identifier,
 		));
 	}
 
@@ -200,21 +388,25 @@ export class TypeBuilder<T, U> {
 	public withTypedField<K extends string & keyof Z & keyof T, V extends T[K], Z extends U & { [P in K]: V }>(
 		key: K,
 		valueType: Type<V>,
+		partOfId: boolean = true,
 		isInstance: IsInstance<V> | null = Type.isNotNull,
-		equals: Comparator<V> | null = null,
 		hasChanged: Comparator<V> | null = valueType.hasChanged.bind(valueType),
 		stringify: Stringifier<V> | null = null,
+		identifier: (item: V) => (string | undefined) = valueType.identify.bind(valueType)
 	): TypeBuilder<T, Z> {
 		return this.addField<Z>(TypeField.build<T, V>(
 			key,
+			partOfId,
 			item => item[key] as unknown as V,
 			false,
 			undefined,
 			isInstance == null ? undefined : isInstance,
-			equals == null ? undefined : equals,
 			hasChanged == null ? undefined : hasChanged,
 			stringify == null ? undefined : stringify,
 			valueType,
+			false,
+			undefined,
+			identifier
 		));
 	}
 
@@ -222,17 +414,16 @@ export class TypeBuilder<T, U> {
 		key: K,
 		itemType: Type<V>,
 		isInstance: IsInstance<V[]> | null = (item: any): item is V[] => Type.isArray(item),
-		equals: Comparator<V[]> | null = null,
 		hasChanged: Comparator<V[]> | null = (a, b) => itemType.hasChangedAny(a, b),
 		stringify: Stringifier<V[]> | null = null,
 	): TypeBuilder<T, Z> {
 		return this.addField<Z>(TypeField.build<T, V[]>(
 			key,
+			false,
 			item => item[key] as unknown as V[],
 			false,
 			undefined,
 			isInstance == null ? undefined : isInstance,
-			equals == null ? undefined : equals,
 			hasChanged == null ? undefined : hasChanged,
 			stringify == null ? undefined : stringify,
 			undefined,
@@ -248,11 +439,10 @@ export class Type<T> {
 	protected constructor(
 		public readonly name: string,
 		public readonly isInstance: IsInstance<T>,
-		public readonly equals: Comparator<T>,
 		public readonly hasChanged: Comparator<T>,
 		public readonly stringify: Stringifier<T>,
 		public readonly parent?: Type<any>,
-		public readonly scalarFields: TypeField<T, any>[] = [],
+		public readonly fields: TypeField<T, any>[] = [],
 	) {
 	}
 
@@ -271,24 +461,22 @@ export class Type<T> {
 	public static from<T>(
 		name: string,
 		isInstance: IsInstance<T>,
-		equals: Comparator<T>,
 		hasChanged: Comparator<T>,
 		stringify: Stringifier<T>,
 		parent?: Type<any>,
 		fields?: TypeField<T, any>[],
 	): Type<T> {
-		return new Function("Type", "name", "isInstance", "equals", "hasChanged", "stringify", "parent", "fields", `
+		return new Function("Type", "name", "isInstance", "hasChanged", "stringify", "parent", "fields", `
 		class ${name} extends Type {
-			constructor(name, isInstance, equals, hasChanged, stringify, parent, fields) {
-				super(name, isInstance, equals, hasChanged, stringify, parent, fields);
+			constructor(name, isInstance, hasChanged, stringify, parent, fields) {
+				super(name, isInstance, hasChanged, stringify, parent, fields);
 			}
 		}
-		return new ${name}(name, isInstance, equals, hasChanged, stringify, parent, fields);
+		return new ${name}(name, isInstance, hasChanged, stringify, parent, fields);
 		`)(
 			Type,
 			name,
 			isInstance,
-			equals,
 			hasChanged,
 			stringify,
 			parent,
@@ -296,21 +484,33 @@ export class Type<T> {
 		);
 	}
 
-	public static fromFields<T>(name: string, parent: Type<any> | undefined, fields: TypeField<T, any>[]): Type<T> {
+	public static fromFields<T>(
+		name: string,
+		parent: Type<any> | undefined,
+		fields: TypeField<T, any>[],
+		stringify: Stringifier<T> = item => fields.map(field => field.parentStringify(item)).filter(Type.isNotNull).join(" ")
+	): Type<T> {
 		const isInstance: IsInstance<T> = (item: any): item is T => {
 			const mismatch = fields.find(field => !field.parentIsInstance(item));
 			return mismatch == null;
 		}
-		const equals: Comparator<T> = (a, b) => {
-			const mismatch = fields.find(field => !field.parentEquals(a, b));
-			return mismatch == null;
-		}
 		const hasChanged: Comparator<T> = (a, b) => {
-			const changed = fields.find(field => field.parentHasChanged(a, b));
-			return changed != null;
+			const aId = type.identify(a);
+			const bId = type.identify(b);
+			if (aId === "" || bId === "") {
+				throw new Error(`[${name}] identify is busted`);
+			} else if (aId !== bId) {
+				throw new Error(`[${name}] hasChanged ID mismatch: "${aId}" <> "${bId}"`);
+			}
+			const diff = TypeDiff.forType(type, a, b);
+			if (diff.hasChanged()) {
+				console.debug(`[${name}] hasChanged "${aId}": ${diff}`);
+				return true;
+			}
+			return false;
 		}
-		const stringify: Stringifier<T> = item => fields.map(field => field.parentStringify(item)).filter(Type.isNotNull).join(" ");
-		return Type.from(name, isInstance, equals, hasChanged, stringify, parent, fields);
+		const type = Type.from(name, isInstance, hasChanged, stringify, parent, fields);
+		return type;
 	}
 
 	public static isArray(item: any): item is [] {
@@ -363,13 +563,21 @@ export class Type<T> {
 		return a.find((aItem, index) => this.hasChanged(aItem, b[index])) != null;
 	}
 
+	identify(value: T): string | undefined {
+		const fieldIds = this.fields
+			.sort((a, b) => a.name.localeCompare(b.name))
+			.map(field => field.parentIdentify(value))
+			.filter(Type.isNotNull);
+		return fieldIds.length == 0 ? undefined : fieldIds.join(" ");
+	}
+
 	public isAssignableFrom(otherType: Type<any> | undefined): boolean {
 		return otherType === this || (otherType != null && otherType.parent != null && this.isAssignableFrom(otherType.parent));
 	}
 
 	public toBuilder<U extends T = T>(): TypeBuilder<U, T> {
 		return new TypeBuilder<U, T>(
-			this.scalarFields.slice(),
+			this.fields.slice(),
 			this,
 			this.stringify,
 		);

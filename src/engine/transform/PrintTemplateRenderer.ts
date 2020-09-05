@@ -16,6 +16,9 @@ export class PrintTemplateRenderer extends Transformer<PrintDataBlock, RenderedT
 	}
 
 	onInput(printBlock: PrintDataBlock): void {
+		if (!this.hasChanged(printBlock)) {
+			return;
+		}
 		const renderedText = this.printRenderer.render({
 			dataName: printBlock.templateBlock.dataName,
 			fileBaseNames: printBlock.fileBaseNames,

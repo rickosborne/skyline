@@ -20,6 +20,9 @@ export class FilesFromDirectory extends Transformer<SourceDirectoryFileListOpera
 	}
 
 	onInput(input: SourceDirectoryFileListOperation): void {
+		if (!this.hasChanged(input)) {
+			return;
+		}
 		input.item.fileList.forEach(sourceFile => this.notify({
 			item: sourceFile,
 			operation: input.operation,

@@ -9,6 +9,9 @@ export class FileTextToPlantUml extends Transformer<FileText, PlantUmlFile> {
 
 	onInput(fileText: FileText): void {
 		if (fileText.file.fileName.endsWith(".puml")) {
+			if (!this.hasChanged(fileText)) {
+				return;
+			}
 			this.notify({
 				fileText,
 			});

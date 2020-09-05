@@ -11,6 +11,9 @@ export class FileTextToBookData extends Transformer<FileText, BookData> {
 
 	onInput(fileText: FileText): void {
 		if (fileText.file.fileName === "book.yaml") {
+			if (!this.hasChanged(fileText)) {
+				return;
+			}
 			this.notify({
 				fileText,
 				book: YAML.parse(fileText.text) as Book,
