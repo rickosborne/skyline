@@ -5,9 +5,12 @@ export interface PrintModule {
 	fileBaseNames: string[];
 }
 
+export const PRINT_DATA_TYPE: "module" = "module";
+export const PRINT_TEMPLATE_ID: "print-module" = "print-module";
+
 export class PrintModuleTemplate extends AFilesTemplate<PrintModule, string, undefined> {
-	public readonly DATA_TYPE = "module";
-	public readonly TEMPLATE_ID = "print-module";
+	public readonly DATA_TYPE = PRINT_DATA_TYPE;
+	public readonly TEMPLATE_ID = PRINT_TEMPLATE_ID;
 
 	convert(data: any, params: Record<string, string>): PrintModule {
 		const printModule: PrintModule = data;
@@ -17,9 +20,11 @@ export class PrintModuleTemplate extends AFilesTemplate<PrintModule, string, und
 		throw new Error("Not a PrintModule");
 	}
 
-	render(data: PrintModule, params: Record<string, string>, originalBody: string): string {
+	render(data: PrintModule, params: Record<string, string>, originalBody: string, addGenerateDate: boolean = false): string {
 		return `
 <a href="{{ '/${data.dataName}' | relative_url }}" id="print-module-top-link" data-source-name="${data.dataName}"></a>
+
+${addGenerateDate ? `{% assign generateDate = "${new Date().toISOString()}" %}` : ""}
 
 {% assign fileNames = "${data.fileBaseNames.join("|")}" | split: "|" %}
 {% for fileName in fileNames %}
@@ -47,7 +52,7 @@ export class PrintModuleTemplate extends AFilesTemplate<PrintModule, string, und
 </div>
 
 {% endfor %}
-		`;
+		`.replace(/\n\n\n+/g, "\n\n");
 	}
 
 	renderData(dataName: string, params: Record<string, string>, fileBaseNames: string[]): PrintModule {

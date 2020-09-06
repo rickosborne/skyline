@@ -9,8 +9,10 @@ export interface PlayerCharacterInfo {
 	hzd: PlayerCharacter;
 }
 
+export const DND5E_PC_TEMPLATE_ID: "dnd5e-pc-stats" = "dnd5e-pc-stats";
+
 export class Dnd5EPcStats extends ABookTemplate<PlayerCharacterInfo> {
-	public static readonly TEMPLATE_ID = "dnd5e-pc-stats";
+	public static readonly TEMPLATE_ID = DND5E_PC_TEMPLATE_ID;
 
 	canRender(dataType: string, templateId: string, params: Record<string, string>): boolean {
 		return super.canRender(dataType, templateId, params) && templateId === Dnd5EPcStats.TEMPLATE_ID;

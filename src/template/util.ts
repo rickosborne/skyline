@@ -1,9 +1,12 @@
 import * as childProcess from "child_process";
 import * as fs from "fs";
 import * as path from "path";
-import * as YAML from "yaml";
-import {CypherStat} from "../schema/book";
 import * as Prettier from "prettier";
+import * as YAML from "yaml";
+import {Comparator} from "../engine/type/Type";
+import {CypherStat} from "../schema/book";
+import {Hyperlink} from "./AFilesTemplate";
+import {FrontMatter} from "./FrontMatter";
 
 export function ifLines<S extends string | undefined | null | string[]>(
 	obj: S | S[],
@@ -130,3 +133,54 @@ export const CYPHER_STATS: Array<{ attr: string; title: string }> = Object.entri
 		attr,
 		title,
 	}));
+
+export function getFrontMatter(file: string): FrontMatter | undefined {
+	const frontMatterMatch = file.match(/^---\n(.+?)\n---\n/s);
+	if (frontMatterMatch != null) {
+		return YAML.parse(frontMatterMatch[1]) as FrontMatter;
+	}
+	return undefined;
+}
+
+export function getTitle(file: string): { title: string | undefined; headingLevel: number | undefined; } {
+	let headingMatch: RegExpMatchArray | null;
+	let title: string | undefined;
+	let headingLevel: number | undefined;
+	if ((headingMatch = file.match(/(?:^|\n)(#+)\s+([^\r\n]+)/s))) {
+		headingLevel = headingMatch[1].length;
+		title = headingMatch[2];
+	} else if ((headingMatch = file.match(/<h(\d)[^>]*>(.+?)</))) {
+		headingLevel = Number(headingMatch[1]);
+		title = headingMatch[2];
+	}
+	return {headingLevel, title};
+}
+
+export function matchCount(body: string, regExp: RegExp): number {
+	let count = 0;
+	for (let match of body.matchAll(regExp)) {
+		count++;
+	}
+	return count;
+}
+
+export function readLinks(file: string): Hyperlink[] {
+	const links: Hyperlink[] = [];
+	for (let match of file.matchAll(/\[(.+?)]\((.+?)\)(?:{:\.(.+?)})/g)) {
+		links.push({
+			title: match[1],
+			href: match[2],
+			classNames: match[3] == null ? undefined : match[3].split("."),
+		});
+	}
+	return links;
+}
+
+export function uniqueReducer<T>(comparator: Comparator<T> = (a, b) => a === b): (prev: T[], cur: T) => T[] {
+	return (prev: T[], cur: T): T[] => {
+		if (prev.findIndex(t => comparator(cur, t)) < 0) {
+			prev.push(cur);
+		}
+		return prev;
+	};
+}

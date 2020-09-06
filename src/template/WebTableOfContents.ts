@@ -1,4 +1,5 @@
 import {AFilesTemplate, RenderFileRequest, RenderFileResult} from "./AFilesTemplate";
+import {getFrontMatter, getTitle} from "./util";
 
 export interface ContentItem {
 	description: string | undefined;
@@ -65,8 +66,8 @@ export class WebTableOfContents extends AFilesTemplate<TableOfContents, ContentI
 
 	renderFile(request: RenderFileRequest<Context>): RenderFileResult<ContentItem, Context> {
 		const file = this.readModuleFile(request);
-		const frontMatter = this.getFrontMatter(file);
-		const titleHeading = this.getTitle(file);
+		const frontMatter = getFrontMatter(file);
+		const titleHeading = getTitle(file);
 		let headingLevel = request.context?.previousHeadingLevel;
 		let description: string | undefined;
 		let title: string | undefined;

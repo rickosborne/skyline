@@ -3,7 +3,7 @@ import * as fs from "fs";
 import * as path from "path";
 import {AFilesTemplate, Hyperlink, RenderFileRequest, RenderFileResult} from "./AFilesTemplate";
 import {FrontMatter, State, Tag} from "./FrontMatter";
-import {svgFromPlantUml} from "./util";
+import {getFrontMatter, getTitle, readLinks, svgFromPlantUml} from "./util";
 
 export interface Entry {
 	dataName: string;
@@ -27,13 +27,16 @@ export interface Story {
 	title: string;
 }
 
+export const STORY_GRAPH_DATA_TYPE: string = "story-graph-files";
+export const STORY_GRAPH_TEMPLATE_ID: string = "story-graph-plantuml";
+
 export class StoryGraphPlantUml extends AFilesTemplate<Story, Entry, undefined> {
 	public readonly ASSET_EXT = ".svg";
 	public readonly ASSET_PATH = "assets/img/";
-	public readonly DATA_TYPE = "story-graph-files";
+	public readonly DATA_TYPE = STORY_GRAPH_DATA_TYPE;
 	public readonly PUML_EXT = ".puml";
 	public readonly PUML_PATH = "assets/puml/";
-	public readonly TEMPLATE_ID = "story-graph-plantuml";
+	public readonly TEMPLATE_ID = STORY_GRAPH_TEMPLATE_ID;
 
 	convert(data: any, params: Record<string, string>): Story {
 		const story = data as Story;
@@ -42,6 +45,28 @@ export class StoryGraphPlantUml extends AFilesTemplate<Story, Entry, undefined> 
 		}
 		console.error("Not a Story data structure!", data);
 		throw new Error("Not a Story data structure!");
+	}
+
+	public extractStoryEntries(entries: Entry[]) {
+		return entries.reduce((state, entry) => {
+			let isStory = false;
+			if (entry.frontMatter != null && entry.frontMatter.state === State.Start) {
+				state.inStory = true;
+				isStory = true;
+			} else if (entry.frontMatter != null && entry.frontMatter.state === State.Done) {
+				isStory = true;
+				state.inStory = false;
+			} else if (state.inStory) {
+				isStory = true;
+			}
+			if (isStory) {
+				state.entries.push(entry);
+				if (entry.frontMatter == null || entry.frontMatter.tags == null || !entry.frontMatter.tags.includes(Tag.Story)) {
+					throw new Error(`Entry ${entry.modulePath}/${entry.fileName} is missing a tag: ${Tag.Story}`);
+				}
+			}
+			return state;
+		}, {inStory: false, entries: []} as { inStory: boolean; entries: Entry[] }).entries;
 	}
 
 	render(story: Story, params: Record<string, string>, originalBody: string): string {
@@ -74,25 +99,7 @@ export class StoryGraphPlantUml extends AFilesTemplate<Story, Entry, undefined> 
 	renderData(dataName: string, params: Record<string, string>, entries: Entry[]): Story {
 		const slug = dataName.replace(/[^a-zA-Z0-9]+/g, "-") + "-graph";
 		const storyTitle = entries.find(e => e.title != null)?.title || "";
-		const storyEntries = entries.reduce((state, entry) => {
-			let isStory = false;
-			if (entry.frontMatter != null && entry.frontMatter.state === State.Start) {
-				state.inStory = true;
-				isStory = true;
-			} else if (entry.frontMatter != null && entry.frontMatter.state === State.Done) {
-				isStory = true;
-				state.inStory = false;
-			} else if (state.inStory) {
-				isStory = true;
-			}
-			if (isStory) {
-				state.entries.push(entry);
-				if (entry.frontMatter == null || entry.frontMatter.tags == null || !entry.frontMatter.tags.includes(Tag.Story)) {
-					throw new Error(`Entry ${entry.modulePath}/${entry.fileName} is missing a tag: ${Tag.Story}`);
-				}
-			}
-			return state;
-		}, {inStory: false, entries: []} as { inStory: boolean; entries: Entry[] }).entries;
+		const storyEntries = this.extractStoryEntries(entries);
 		return {
 			entries: storyEntries,
 			modulePath: dataName,
@@ -101,38 +108,44 @@ export class StoryGraphPlantUml extends AFilesTemplate<Story, Entry, undefined> 
 		};
 	}
 
-	renderFile(request: RenderFileRequest<undefined>): RenderFileResult<Entry, undefined> {
-		const file = this.readModuleFile(request);
-		const frontMatter = this.getFrontMatter(file);
-		const titleHeading = this.getTitle(file);
+	renderEntry(file: string, dataName: string, modulePath: string, fileName: string, params: Record<string, string>): Entry {
+		const frontMatter = getFrontMatter(file);
+		const titleHeading = getTitle(file);
+		const links = readLinks(file);
 		const title = titleHeading.title || frontMatter?.title;
 		if (title == null) {
-			throw new Error(`No title for file: ${request.modulePath}/${request.fileName}`);
+			throw new Error(`No title for file: ${modulePath}/${fileName}`);
 		}
-		const num = Number((request.fileName.match(/^(\d+)-/) || ["", "0"])[1]);
-		const links = this.readLinks(file);
+		const num = Number((fileName.match(/^(\d+)-/) || ["", "0"])[1]);
+
+		return {
+			dataName,
+			modulePath,
+			fileName,
+			frontMatter,
+			links,
+			notStarted: frontMatter != null && frontMatter.tags != null && frontMatter.tags.includes(Tag.NotStarted),
+			num,
+			params,
+			state: frontMatter?.state,
+			tags: frontMatter?.tags || [],
+			title,
+			todo: !!file.match(/\bTODO\b/),
+		};
+	}
+
+	renderFile(request: RenderFileRequest<undefined>): RenderFileResult<Entry, undefined> {
+		const file = this.readModuleFile(request);
 
 		return {
 			context: undefined,
-			file: {
-				dataName: request.dataName,
-				modulePath: request.modulePath,
-				fileName: request.fileName,
-				frontMatter,
-				links,
-				notStarted: frontMatter != null && frontMatter.tags != null && frontMatter.tags.includes(Tag.NotStarted),
-				num,
-				params: request.params,
-				state: frontMatter?.state,
-				tags: frontMatter?.tags || [],
-				title,
-				todo: !!file.match(/\bTODO\b/),
-			}
+			file: this.renderEntry(file, request.dataName, request.modulePath, request.fileName, request.params),
 		};
 	}
 
 	protected renderPuml(story: Story): string {
 		const rendered: Record<string, string> = {};
+
 		// const linkBase = `https://rickosborne.github.io/skyline/${story.modulePath}/`;
 
 		function stereotype(entry: Entry): string {
@@ -156,7 +169,7 @@ export class StoryGraphPlantUml extends AFilesTemplate<Story, Entry, undefined> 
 				return existing;
 			}
 			rendered[entry.fileName] = `e${entry.num}`;
-			const link = entry.fileName.replace('.md', '.html');
+			const link = entry.fileName.replace(".md", ".html");
 			if (entry.frontMatter == null) {
 				return `"[[${link} ${entry.num}]] as e${entry.num}" ${stereotype(entry)}`;
 			}
@@ -177,7 +190,7 @@ export class StoryGraphPlantUml extends AFilesTemplate<Story, Entry, undefined> 
 			.flatMap(from => (from.frontMatter != null && from.frontMatter.hiddenLink != null ? from.links.concat({
 				title: "",
 				href: from.frontMatter.hiddenLink,
-				classNames: ['story-link'],
+				classNames: ["story-link"],
 			}) : from.links)
 				.filter(l => l.classNames?.includes("story-link") && entryByHref[l.href] != null)
 				.map(l => {
@@ -185,10 +198,10 @@ export class StoryGraphPlantUml extends AFilesTemplate<Story, Entry, undefined> 
 					const left = titleOf(from);
 					const right = titleOf(target);
 					const classNames = l.classNames || [];
-					const arrow = target.title.includes(':') ?
-						'-->' : (classNames.includes("story-link-if") || classNames.includes("story-link-elsif")) ?
-						"->" : classNames.includes("story-link-continue") ?
-								'->' : "-->";
+					const arrow = target.title.includes(":") ?
+						"-->" : (classNames.includes("story-link-if") || classNames.includes("story-link-elsif")) ?
+							"->" : classNames.includes("story-link-continue") ?
+								"->" : "-->";
 					return `${left} ${arrow} ${right}`;
 				}))
 			.join("\n");
@@ -234,7 +247,7 @@ ${endArrow}
 
 legend
 |= Type |= Description |
-|<#C8E2F9> (Other) | Story |${anyNotStarted ? '\n|<#ffff99> Not Started | Story, needs to be written |' : ''}${anyTodo ? '\n|<#eeffcc> TODO | Story, not finished |' : ''}
+|<#C8E2F9> (Other) | Story |${anyNotStarted ? "\n|<#ffff99> Not Started | Story, needs to be written |" : ""}${anyTodo ? "\n|<#eeffcc> TODO | Story, not finished |" : ""}
 |<#BBF395> Travel | Party travel |
 |<#EEAD63> Encounter | Combat encounter, required |
 |<#F9E2C8> Optional Encounter | Combat encounter, optional |

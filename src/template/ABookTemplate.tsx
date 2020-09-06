@@ -4,8 +4,10 @@ import * as YAML from "yaml";
 import {Book, PlayerCharacter} from '../schema/book';
 import {ATemplate} from "./ATemplate";
 
+export const BOOK_DATA_TYPE: "book" = "book";
+
 export abstract class ABookTemplate<T> extends ATemplate<T> {
-	public static readonly DATA_TYPE = 'book';
+	public static readonly DATA_TYPE = BOOK_DATA_TYPE;
 
 	bookFromAny(data: any): Book {
 		const book: Book = data as Book;
@@ -38,7 +40,7 @@ export abstract class ABookTemplate<T> extends ATemplate<T> {
 		return hzd;
 	}
 
-	sortByTitle<T extends {title: string | undefined}>(): (a: T, b: T) => number {
+	sortByTitle<T extends { title: string | undefined }>(): (a: T, b: T) => number {
 		return (a, b) => (a.title || '').localeCompare(b.title || '');
 	}
 }
