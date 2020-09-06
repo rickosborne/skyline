@@ -58,7 +58,12 @@ export class MapRenderer extends ATemplate<MapData> {
 		// 	.replace(/\s+(width|height|style)="[^"]*"/g, "")
 		// );
 		// return `<!-- map data ${data.calculatedHash}\n${data.map.definition}\n-->\n\n${updatedSvg}`;
-		return `<!-- map data ${data.calculatedHash}\n${data.map.definition}\n-->\n\n${data.map.toSvg()}`;
+		const svg = data.map.toSvg();
+		const calculatedHash = crypto.createHash("sha256")
+			.update(data.map.definition)
+			.update(svg)
+			.digest("hex");
+		return `<!-- map data ${calculatedHash}\n${data.map.definition}\n-->\n\n${svg}`;
 		// return data.map.toDataUri().then(dataUri => {
 		// 	const updatedSvg = html(<img src={dataUri} alt={data.map.metadata.title} width="100%"/>);
 		// 	return `<!-- map data ${data.calculatedHash}\n${data.map.definition}\n-->\n\n${updatedSvg}`;

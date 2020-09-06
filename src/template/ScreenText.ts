@@ -88,20 +88,21 @@ export class ScreenText {
 		let bottom: number = this.lines.length - 1;
 		for (let i = top + 1; i <= bottom; i++) {
 			const line = this.lines[i];
-			const firstCharIsSpace = !!line.substr(left, 1).match(/^\s*$/);
+			const restOfLine = line.substr(left);
+			const firstCharIsSpace = !!restOfLine.substr(0, 1).match(/^\s*$/);
 			if (indented !== firstCharIsSpace) {
 				bottom = i - 1;
 				break;
 			}
-			if (indented && (indent === undefined) && (match = line.substr(left).match(/^\s*/))) {
+			if (indented && (indent === undefined) && (match = restOfLine.match(/^\s*/))) {
 				indent = match[0].length;
 			}
-			if (line.substr(left + (indent || 0)).match(/^(\s|$)/)) {
+			if (restOfLine.substr(indent || 0).match(/^(\s|$)/)) {
 				bottom = i - 1;
 				break;
 			}
-			const tripSpace = line.indexOf("   ");
-			const lineRight = tripSpace < 0 ? line.length : tripSpace;
+			const tripSpace = restOfLine.indexOf("   ");
+			const lineRight = tripSpace < 0 ? line.length : (left + tripSpace);
 			if (lineRight > right) {
 				right = lineRight;
 			}

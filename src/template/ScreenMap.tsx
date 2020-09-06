@@ -1,13 +1,14 @@
 import * as console from "console";
 // @ts-ignore
-import {h} from "preact";
-import {Type} from "../engine/type/Type";
+import {h, JSX} from "preact";
+import {Consumer, Type} from "../engine/type/Type";
 import {html} from "./hypertext";
 import {BlockLayoutItem, ScreenText} from "./ScreenText";
-import {hexFromNum, Tile, TileSet, TILE_SETS} from "./TileSet";
-import {arrayify, spinalCase} from "./util";
+import {hexFromNum, Tile, TILE_SETS, TileRenderer, TileSet} from "./TileSet";
+import {arrayify, renderCssRules, spinalCase} from "./util";
 // @ts-ignore
 const Jimp = require('potrace/node_modules/jimp');
+import * as CSS from "csstype";
 
 export interface Coordinate {
 	x: number;
@@ -23,6 +24,7 @@ export interface ScreenMapMetadata {
 
 export interface ScreenMapEnvironmentItem {
 	params?: Record<string, string>;
+	rotate?: number,
 	symbol: string;
 	type: string;
 }
@@ -35,6 +37,7 @@ export interface ScreenMapPointOfInterest {
 	overlay?: string;
 	rotate?: number;
 	story?: string;
+	symbol?: string;
 	tile?: string;
 	title: string;
 }
@@ -97,7 +100,10 @@ export class ScreenMap {
 					type: item.value,
 				};
 				if (item.params != null) {
-					env.params = item.params;
+					if (item.params.rotate !== "string") {
+						env.rotate = parseFloat(item.params.rotate);
+					}
+					// env.params = item.params;
 				}
 				return env;
 			},
@@ -118,7 +124,7 @@ export class ScreenMap {
 					if (item.params.rotate != null) {
 						poi.rotate = parseFloat(item.params.rotate);
 					}
-					(["icon", "link", "overlay", "story", "tile"] as (string & keyof ScreenMapPointOfInterest)[])
+					(["icon", "link", "overlay", "story", "symbol", "tile"] as (string & keyof ScreenMapPointOfInterest)[])
 						.filter(key => item.params?.[key] != null)
 						.forEach(key => (poi[key] as any) = item.params?.[key]);
 				}
@@ -158,7 +164,7 @@ export class ScreenMap {
 		);
 	}
 
-	protected getTilesAndEnvItemsBySymbol(): [TileSet, Record<string, Tile>, Record<string, ScreenMapEnvironmentItem>] {
+	protected getTilesAndEnvItemsBySymbol(): [TileSet, Record<string, Tile>, Record<string, ScreenMapEnvironmentItem>, Record<string, ScreenMapPointOfInterest>] {
 		const tileSet = this.tileSet;
 		const tiles = tileSet.tiles.reduce((tiles, tile) => {
 			tiles[tile.name] = tile;
@@ -168,7 +174,11 @@ export class ScreenMap {
 			envItems[envItem.symbol] = envItem;
 			return envItems;
 		}, {} as Record<string, ScreenMapEnvironmentItem>);
-		return [tileSet, tiles, envItemsBySymbol];
+		const poiBySymbol = this.points.reduce((points, poi) => {
+			points[poi.id] = poi;
+			return points;
+		}, {} as Record<string, ScreenMapPointOfInterest>);
+		return [tileSet, tiles, envItemsBySymbol, poiBySymbol];
 	}
 
 	public toDataUri(): Promise<string> {
@@ -199,11 +209,30 @@ export class ScreenMap {
 		return img;
 	}
 
+	public toPoiTable(): JSX.Element | undefined {
+		if (this.points.length === 0) {
+			return undefined;
+		}
+		return <figcaption class="points-of-interest avoid-break-before">
+			<header>Points of Interest</header>
+			<dl>
+				{this.points.map(point => <div class="detailed">
+					<dt class="poi-id">{point.id}</dt>
+					<dd class="poi-title">
+						{point.link == null ? <span class="poi-title">{point.title}</span> :
+							<a class="poi-link" data-old-href={`${point.link} | relative_url`} href="#">{point.title}: {point.link}</a>}
+					</dd>
+				</div>)}
+			</dl>
+		</figcaption>
+			;
+	}
+
 	public toSvg(): string {
 		const lines = this.mapLines; // scale3xText(this.mapLines);
 		const height = lines.length;
 		const width = Math.max(...lines.map(l => l.length));
-		const [tileSet, tiles, envItemsBySymbol] = this.getTilesAndEnvItemsBySymbol();
+		const [tileSet, tiles, envItemsBySymbol, poiBySymbol] = this.getTilesAndEnvItemsBySymbol();
 		// const spinalName = spinalCase(tileSet.name) + "-";
 		const showBackground = Jimp.intToRGBA(tileSet.backgroundColor).a != 0;
 		const tileStyles = tileSet.tiles.flatMap(tile => tile.toStyles == null ? "" : Object
@@ -214,14 +243,45 @@ export class ScreenMap {
 				.join("\n")}}`)
 			.join("\n"))
 			.join("\n");
+		const textAt = (coordinate: Coordinate, label: string, configurer?: Consumer<JSX.Element>) => {
+			const el =
+				<text x={coordinate.x - 0.025} y={coordinate.y + 0.05} fill={tileSet.poiColor} font-size="1px" text-anchor="middle" dominant-baseline="middle" class="poi">{label}</text>;
+			if (configurer != null) {
+				configurer(el);
+			}
+			return el;
+		};
+		const genericPoi = (coordinate: Coordinate, point: ScreenMapPointOfInterest) => <g>
+			<title>{point.title}</title>
+			<use href={`#${POI_ID_SUFFIX}`} x={coordinate.x} y={coordinate.y}/>
+			{textAt(coordinate, point.id)}
+		</g>;
+		const tileNameAt = (tx: number, ty: number) => {
+			const tileLine = lines[ty];
+			if (tileLine == null || tx < 0 || tx > (tileLine.length - 1)) {
+				return undefined;
+			}
+			const sym = tileLine.charAt(tx);
+			const e = envItemsBySymbol[sym];
+			return e == null ? undefined : e.type;
+		};
+		const renderer: TileRenderer = {
+			genericPoi,
+			textAt,
+			tileNameAt,
+		};
+		const topLevelStyles: Record<string, CSS.PropertiesHyphen> = {
+			".poi": {
+				"font-family": tileSet.poiFont,
+				"font-weight": "bold",
+				"cursor": "default",
+			}
+		}
 		const svg = html(
 			<svg viewBox={`0 0 ${width} ${height}`} xmlns="http://www.w3.org/2000/svg">
 				<style>
-					.poi {"{"}
-					font-family: {tileSet.poiFont};
-					font-weight: bold;
-					cursor: default;
-					{"}"}
+					{renderCssRules(topLevelStyles)}
+					{tileSet.tiles.map(tile => tile.toStyles == null ? undefined : renderCssRules(tile.toStyles())).filter(Type.isNotNull).join("\n")}
 				</style>
 				<defs>
 					{tileSet.tiles.map(tile => tile.toSvgSymbols == null ? html(
@@ -234,42 +294,43 @@ export class ScreenMap {
 				</defs>
 				<g>
 					{lines.flatMap((line, y) => {
-						const rects: string[] = [];
+						const rects: JSX.Element[] = [];
 						for (let x = 0; x < width; x++) {
-							const symbol = line.substr(x, 1);
-							const envItem = envItemsBySymbol[symbol];
+							let symbol = line.substr(x, 1);
+							const poiItem = poiBySymbol[symbol];
+							let envItem: ScreenMapEnvironmentItem | undefined;
 							let bgColor = tileSet.backgroundColor;
-							if (envItem != null) {
-								const tile = tiles[envItem.type];
-								if (tile == null) {
-									throw new Error(`No tile for environment item: ${JSON.stringify(envItem)}`);
+							let tile: Tile | undefined;
+							if (poiItem != null) {
+								if (poiItem.symbol != null) {
+									symbol = poiItem.symbol;
+								} else if (poiItem.tile != null) {
+									envItem = this.environment.find(e => e.type === poiItem.tile);
+									tile = tiles[poiItem.tile];
 								}
+							}
+							if (envItem == null && symbol != null) {
+								envItem = envItemsBySymbol[symbol];
+							}
+							if (envItem != null && tile == null) {
+								tile = tiles[envItem.type];
+							}
+							if (tile == null && envItem != null) {
+								throw new Error(`No tile for environment item: ${JSON.stringify(envItem)}`);
+							}
+							if (tile != null) {
 								bgColor = tile.color;
 								if (tile.toSvgElement != null) {
-									rects.push(html(tile.toSvgElement({x, y}, {
-										tileNameAt: (tx, ty) => {
-											const tileLine = lines[ty];
-											if (tileLine == null || tx < 0 || tx > (tileLine.length - 1)) {
-												return undefined;
-											}
-											const sym = tileLine.charAt(tx);
-											const e = envItemsBySymbol[sym];
-											return e == null ? undefined : e.type;
-										}
-									})))
+									rects.push(tile.toSvgElement({x, y}, renderer, envItem));
 								} else {
-									rects.push(html(
-										<use href={`#${spinalCase(tile.name)}`} x={x} y={y} data-data-symbol={symbol}/>
-									));
+									rects.push(<use href={`#${spinalCase(tile.name)}`} x={x} y={y}/>);
 								}
 							} else if (showBackground) {
-								rects.push(html(
-									<use href={`#${BACKGROUND_ID_SUFFIX}`} x={x} y={y}/>
-								));
+								rects.push(<use href={`#${BACKGROUND_ID_SUFFIX}`} x={x} y={y}/>);
 							}
 						}
 						return rects;
-					}).join("\n")}
+					})}
 				</g>
 				<g>
 					{this.points.map(point => {
@@ -279,19 +340,24 @@ export class ScreenMap {
 						} else {
 							coordinate = point.coordinates[0];
 						}
+						let envItem = point.symbol == null ? undefined : this.environment.find(e => e.symbol === point.symbol);
+						let tile = point.tile != null ? tiles[point.tile] : envItem != null ? tiles[envItem.type] : undefined;
 						const x = coordinate.x + 0.5;
 						const y = coordinate.y + 0.5;
-						return html(
-							<g>
-								<title>{point.title}</title>
-								<use href={`#${POI_ID_SUFFIX}`} x={x} y={y}/>
-								<text x={x} y={y} fill={tileSet.poiColor} font-size="1px" text-anchor="middle" dominant-baseline="middle" dx="-0.025" dy="0.05" class="poi">{point.id}</text>
-							</g>
-						);
+						const el = tileSet.svgElementFromPoint == null ? renderer.genericPoi({
+							x,
+							y
+						}, point) : tileSet.svgElementFromPoint(coordinate, renderer, point, envItem, tile);
+						return html(el);
 					}).filter(Type.isNotNull).join("\n")}
 				</g>
 			</svg>
 		);
-		return svg.replace("</style>", `${tileStyles}</style>`);
+		return html(
+			<figure>
+				{svg}
+				{this.toPoiTable()}
+			</figure>
+		);
 	}
 }

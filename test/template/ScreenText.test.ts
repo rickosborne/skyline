@@ -42,7 +42,7 @@ describe("ScreenText", () => {
 
 	it("finds the environment block", () => {
 		expect(outdoor.getBlockItems({header: "Environment", keyValueDelimiter: " "})).deep.equals(<BlockLayoutItems>{
-			bounds: {top: 4, right: 55, bottom: 13, left: 44},
+			bounds: {top: 4, right: 56, bottom: 13, left: 44},
 			items: [
 				{key: ";", value: "mountain",},
 				{key: "w", value: "river",},

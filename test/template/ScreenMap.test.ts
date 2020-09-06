@@ -6,7 +6,6 @@ import {
 	ScreenMapMetadata,
 	ScreenMapPointOfInterest
 } from "../../src/template/ScreenMap";
-import {ScreenText} from "../../src/template/ScreenText";
 
 const INDOOR = `
 
@@ -16,17 +15,18 @@ const INDOOR = `
       Scale: 5ft per point
                                                        Environment:
               +------------+                           . office floor
-             /:::w.......^..\\                          D office door
+             /:::w.......>..\\                          D office door
             |::1.........+...|                         + office wall
     +-------+w...........]...+-----+-----+----------+  - office wall
     |....................]...D.....D.....D.........c|  / office wall
     |....................]...+-----+^^+--+..........|  \\ office wall
     +-------+............]...|     |^^|22|..........|  | office wall
             |............+...|     |.....+----------+  ] railing
-             \\...........^../      +-----+             ^ stairs
+             \\...........>../      +-----+             ^ stairs  (rotate: 270)
               +------------+                           c crate
                                                        : rocks
                                                        w puddle
+                                                       > stairs
     Points of Interest:
     1. Entrance  (tile: office floor)
     2. Stairs to Level II  (tile: stairs; link: Mother's Watch Ruins, Level II)
@@ -41,7 +41,7 @@ describe("ScreenMap", () => {
 	}
 
 	it("parses the metadata", () => {
-		expect(outdoor.metadata).deep.equals(<ScreenMapMetadata> {
+		expect(outdoor.metadata).deep.equals(<ScreenMapMetadata>{
 			title: "Mother's Watch Ruins, Level I",
 			theme: "Old Ones Indoor Delve",
 			scaleValue: 5,
@@ -59,31 +59,37 @@ describe("ScreenMap", () => {
 			{symbol: "\\", type: "office wall"},
 			{symbol: "|", type: "office wall"},
 			{symbol: "]", type: "railing"},
-			{symbol: "^", type: "stairs"},
+			{symbol: "^", type: "stairs", rotate: 270},
 			{symbol: "c", type: "crate"},
 			{symbol: ":", type: "rocks"},
 			{symbol: "w", type: "puddle"},
+			{"symbol": ">", "type": "stairs"}
 		]);
 	});
 
 	it("parses the poi", () => {
 		expect(outdoor.points).deep.equals(<ScreenMapPointOfInterest[]>[
-			{id: "1", title: "Entrance", tile: "office floor"},
-			{id: "2", title: "Stairs to Level II", tile: "stairs", link: "Mother's Watch Ruins, Level II"}
+			{id: "1", title: "Entrance", tile: "office floor", "coordinates": [{"x": 11, "y": 2}]},
+			{
+				id: "2", title: "Stairs to Level II", tile: "stairs", link: "Mother's Watch Ruins, Level II", "coordinates": [
+					{"x": 35, "y": 6},
+					{"x": 36, "y": 6},
+				]
+			}
 		]);
 	});
 
 	it("extracts the map", () => {
 		expect(outdoor.mapLines).deep.equals([
 			"          +------------+",
-			"         /:::w.......^..\\",
+			"         /:::w.......>..\\",
 			"        |::1.........+...|",
 			"+-------+w...........]...+-----+-----+----------+",
 			"|....................]...D.....D.....D.........c|",
 			"|....................]...+-----+^^+--+..........|",
 			"+-------+............]...|     |^^|22|..........|",
 			"        |............+...|     |.....+----------+",
-			"         \\...........^../      +-----+",
+			"         \\...........>../      +-----+",
 			"          +------------+"
 		]);
 	});

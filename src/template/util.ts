@@ -1,4 +1,5 @@
 import * as childProcess from "child_process";
+import * as CSS from "csstype";
 import * as fs from "fs";
 import * as path from "path";
 import * as Prettier from "prettier";
@@ -258,4 +259,12 @@ export function scale3xText(s: string[]): string[] {
 		l.forEach(ll => result.push(ll.join("")));
 	}
 	return result;
+}
+
+export function renderCssRules(rules: Record<string, CSS.PropertiesHyphen>): string {
+	return Object.entries(rules).map(([selector, props]) => {
+		return `${selector} {${Object.entries(props).map(([key, value]) => {
+			return `${key}: ${value};`;
+		}).join("\n")}}`;
+	}).join("\n");
 }
