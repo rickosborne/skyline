@@ -1,4 +1,5 @@
 import * as Jimp from "jimp";
+import {lpad} from "../engine/EngineConfig";
 
 export enum TileLayer {
 	Background = "B",
@@ -8,11 +9,23 @@ export enum TileLayer {
 
 const B = TileLayer.Background;
 const I = TileLayer.Interact;
-const transparentBlack = Jimp.rgbaToInt(0, 0, 0, 0);
+// const transparentBlack = Jimp.rgbaToInt(0, 0, 0, 0);
 const transparentWhite = Jimp.rgbaToInt(255, 255, 255, 0);
 
 function rgb(red: number, blue: number, green: number): number {
 	return Jimp.rgbaToInt(red, green, blue, 255);
+}
+
+export function hexFromNum(rgb: number): string {
+	return `#${lpad(rgb.toString(16), 8, "0")}`;
+	// const rgba = Jimp.intToRGBA(rgb);
+	// if (rgba.a === 255) {
+	// 	return "transparent";
+	// } else if (rgba.a > 0) {
+	// 	return `#${lpad(rgba.r.toString(16), 2, "0")}${lpad(rgba.g.toString(16), 2, "0")}${lpad(rgba.b.toString(16), 2, "0")}${lpad(rgba.a.toString(16), 2, "0")}`;
+	// } else {
+	// 	return `#${lpad(rgba.r.toString(16), 2, "0")}${lpad(rgba.g.toString(16), 2, "0")}${lpad(rgba.b.toString(16), 2, "0")}`;
+	// }
 }
 
 export interface Tile {
@@ -24,10 +37,21 @@ export interface Tile {
 export interface TileSet {
 	backgroundColor: number;
 	name: string;
+	poiBackgroundColor: string;
+	poiBorderColor: string;
+	poiColor: string;
+	poiFont: string;
 	tiles: Tile[];
 }
 
+// noinspection SpellCheckingInspection
+export const FONT_SANS_DEFAULT = "Roboto, \"Open Sans\", \"Helvetica Neue\", Helvetica, Arial, sans-serif";
+
 export const OldOnesIndoorDelve: TileSet = {
+	poiBackgroundColor: "#ffff99",
+	poiBorderColor: "#999933",
+	poiColor: "#000000",
+	poiFont: FONT_SANS_DEFAULT,
 	backgroundColor: transparentWhite,
 	name: "Old Ones Indoor Delve",
 	tiles: [
@@ -42,6 +66,6 @@ export const OldOnesIndoorDelve: TileSet = {
 	],
 };
 
-export const TILESETS: TileSet[] = [
+export const TILE_SETS: TileSet[] = [
 	OldOnesIndoorDelve,
 ];

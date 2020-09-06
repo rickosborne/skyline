@@ -58,10 +58,11 @@ export class MapRenderer extends ATemplate<MapData> {
 		// 	.replace(/\s+(width|height|style)="[^"]*"/g, "")
 		// );
 		// return `<!-- map data ${data.calculatedHash}\n${data.map.definition}\n-->\n\n${updatedSvg}`;
-		return data.map.toDataUri().then(dataUri => {
-			const updatedSvg = html(<img src={dataUri} alt={data.map.metadata.title} width="100%"/>);
-			return `<!-- map data ${data.calculatedHash}\n${data.map.definition}\n-->\n\n${updatedSvg}`;
-		});
+		return `<!-- map data ${data.calculatedHash}\n${data.map.definition}\n-->\n\n${data.map.toSvg()}`;
+		// return data.map.toDataUri().then(dataUri => {
+		// 	const updatedSvg = html(<img src={dataUri} alt={data.map.metadata.title} width="100%"/>);
+		// 	return `<!-- map data ${data.calculatedHash}\n${data.map.definition}\n-->\n\n${updatedSvg}`;
+		// });
 	}
 
 }

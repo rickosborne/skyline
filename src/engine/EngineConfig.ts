@@ -69,7 +69,7 @@ export function ellipsize(str: string, len: number): string {
 	}
 }
 
-export function lpad(num: number, len: number, str: string): string {
+export function lpad(num: number | string, len: number, str: string): string {
 	const padded = `${str.repeat(len)}${num}`;
 	return padded.substr(padded.length - len);
 }

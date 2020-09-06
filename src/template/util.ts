@@ -3,6 +3,7 @@ import * as fs from "fs";
 import * as path from "path";
 import * as Prettier from "prettier";
 import * as YAML from "yaml";
+import {lpad} from "../engine/EngineConfig";
 import {Comparator, Consumer, IsInstance} from "../engine/type/Type";
 import {CypherStat} from "../schema/book";
 import {Hyperlink} from "./AFilesTemplate";
@@ -202,4 +203,55 @@ export function resolveAndDo<T>(value: T | Promise<T>, discriminator: IsInstance
 	} else {
 		value.then(v => consumer(v));
 	}
+}
+
+export function spinalCase(s: string): string {
+	return s
+		.replace(/\s+/g, "-")
+		.replace(/[^-A-Za-z0-9]/g, c => lpad(c.charCodeAt(0).toString(16), 2, "0"));
+}
+
+export function scale3xText(s: string[]): string[] {
+	const t = s.map(line => line.split(""));
+	const result: string[] = [];
+	for (let y = 0; y < s.length; y++) {
+		const line = t[y];
+		const lineBefore = t[y - 1] || line;
+		const lineAfter = t[y + 1] || line;
+		const l: string[][] = [[], [], []];
+		for (let x = 0; x < line.length; x++) {
+			const q = 1 + (3 * x);
+			const E = line[x];
+			const A = lineBefore[x - 1] || E;
+			const B = lineBefore[x] || E;
+			const C = lineBefore[x + 1] || E;
+			const D = line[x - 1] || E;
+			const F = line[x + 1] || E;
+			const G = lineAfter[x - 1] || E;
+			const H = lineAfter[x] || E;
+			const I = lineAfter[x + 1] || E;
+			const eqBD = B === D;
+			const eqHD = H === D;
+			const eqBF = B === F;
+			const eqHF = H === F;
+			const neqEG = E !== G;
+			const neqEA = E !== A;
+			const neqBH = B !== H;
+			const neqDF = D !== F;
+			const neqEC = E === C;
+			const neqEI = E !== I;
+			const baseline = neqBH && neqDF;
+			l[0][q-1] = baseline && eqBD ? B : E; // E === B && D !== H && B !== F ? D : E;
+			l[0][q] = baseline && ((eqBD && neqEC) || (eqBF && neqEA)) ? B : E; // (D === B && D !== H && B !== F && E !== C) || (B === F && B !== D && F !== H && E!=A) ? B : E;
+			l[0][q+1] = baseline && eqBF ? B : E; // B === F && B !== D && F !== H ? F : E;
+			l[1][q-1] = baseline && ((eqBD && neqEG) || (eqHD && neqEA)) ? D : E; // (H === D && H !== F && D !== B && E !== A) || (D === B && D !== H && B !== F && E !== G) ? D : E;
+			l[1][q] = E;
+			l[1][q+1] = baseline && ((eqBF && neqEI) || (eqHF && neqEC)) ? F : E; // (B === F && B !== D && F !== H && E !== I) || (F === H && F !== B && H != D && E !== C) ? F : E;
+			l[2][q-1] = baseline && eqHD ? H : E; // H === D && H !== F && D !== B ? D : E;
+			l[2][q] = baseline && ((eqHD && neqEI) || (eqHF && neqEG)) ? H : E; // (F === H && F !== B && H !== D && E !== G) || (H === D && H !== F && D !== B && E !== I) ? H : E;
+			l[2][q+1] = baseline && eqHF ? H : E; // F === H && F !== B && H !== D ? F : E;
+		}
+		l.forEach(ll => result.push(ll.join("")));
+	}
+	return result;
 }
