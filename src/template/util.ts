@@ -3,7 +3,7 @@ import * as fs from "fs";
 import * as path from "path";
 import * as Prettier from "prettier";
 import * as YAML from "yaml";
-import {Comparator} from "../engine/type/Type";
+import {Comparator, Consumer, IsInstance} from "../engine/type/Type";
 import {CypherStat} from "../schema/book";
 import {Hyperlink} from "./AFilesTemplate";
 import {FrontMatter} from "./FrontMatter";
@@ -194,4 +194,12 @@ export async function replaceAsync<F extends (...args: any[]) => (string | Promi
 	});
 	const results = await Promise.all(promises);
 	return text.replace(regExp, () => results.shift() as string);
+}
+
+export function resolveAndDo<T>(value: T | Promise<T>, discriminator: IsInstance<T>, consumer: Consumer<T>): void {
+	if (discriminator(value)) {
+		consumer(value);
+	} else {
+		value.then(v => consumer(v));
+	}
 }

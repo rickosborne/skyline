@@ -14,7 +14,7 @@ It's just a placeholder while I work on the map tech.
 
 <!-- +template map story/iaso/510-mothers-watch-ruins svg -->
 
-<!-- map data 3a8be3d829846adf4f0fd525f4c3762faed49ae5e796f718cf6f29109c303401
+<!-- map data 2de30a55f6d2ccba6cbc41ce2ae73802233f3812f0483e0148ba7a5ce555814e
 Map
   Title: Mother's Watch Ruins, Level I
   Theme: Old Ones Indoor Delve

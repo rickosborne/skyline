@@ -14,6 +14,7 @@ import {FileTextToMachineData} from "./transform/FileTextToMachineData";
 import {FileTextToMarkdown} from "./transform/FileTextToMarkdown";
 import {FileTextToPlantUml} from "./transform/FileTextToPlantUml";
 import {MachineTemplateBlockLoader} from "./transform/MachineTemplateBlockLoader";
+import {MapTemplateRenderer} from "./transform/MapTemplateRenderer";
 import {MarkdownFilesAggregator} from "./transform/MarkdownFilesAggregator";
 import {PlantUmlJoiner} from "./transform/PlantUmlJoiner";
 import {PlantUmlTemplateRenderer} from "./transform/PlantUmlTemplateRenderer";
@@ -37,6 +38,7 @@ import {
 	DND5EMachineDataTemplateBlockType,
 	DND5EMachineTemplateBlockType
 } from "./type/MachineTemplateBlock";
+import {MapTemplateBlockType} from "./type/Map";
 import {PlantUmlTemplateBlockType} from "./type/PlantUmlFile";
 import {PrintTemplateBlockType} from "./type/PrintTemplateBlock";
 import {StoryGraphTemplateBlockType} from "./type/StoryGraph";
@@ -81,6 +83,7 @@ new Coordinator()
 	.buildAndAdd(FileTextToMachineData)
 	.buildAndAdd(FileTextToMarkdown)
 	.buildAndAdd(FileTextToPlantUml)
+	.buildAndAdd(MapTemplateRenderer)
 	.buildAndAdd(MarkdownFilesAggregator)
 	.buildAndAdd(PlantUmlJoiner)
 	.buildAndAdd(PlantUmlTemplateRenderer)
@@ -100,6 +103,7 @@ new Coordinator()
 	.configureAndAdd(config => new SubtypeIdentifier(TemplateBlockType, CypherMachineTemplateBlockType, config))
 	.configureAndAdd(config => new SubtypeIdentifier(TemplateBlockType, DND5ECharacterTemplateBlockType, config))
 	.configureAndAdd(config => new SubtypeIdentifier(TemplateBlockType, DND5EMachineTemplateBlockType, config))
+	.configureAndAdd(config => new SubtypeIdentifier(TemplateBlockType, MapTemplateBlockType, config))
 	.configureAndAdd(config => new SubtypeIdentifier(TemplateBlockType, PrintTemplateBlockType, config))
 	.configureAndAdd(config => new SubtypeIdentifier(TemplateBlockType, PlantUmlTemplateBlockType, config))
 	.configureAndAdd(config => new SubtypeIdentifier(TemplateBlockType, StoryGraphTemplateBlockType, config))
