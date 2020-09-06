@@ -205,6 +205,10 @@ export function resolveAndDo<T>(value: T | Promise<T>, discriminator: IsInstance
 	}
 }
 
+export function arrayify<T>(maybe: T | T[]): T[] {
+	return Array.isArray(maybe) ? maybe : [maybe];
+}
+
 export function spinalCase(s: string): string {
 	return s
 		.replace(/\s+/g, "-")

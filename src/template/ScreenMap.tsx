@@ -5,7 +5,7 @@ import {Type} from "../engine/type/Type";
 import {html} from "./hypertext";
 import {BlockLayoutItem, ScreenText} from "./ScreenText";
 import {hexFromNum, Tile, TileSet, TILE_SETS} from "./TileSet";
-import {spinalCase} from "./util";
+import {arrayify, spinalCase} from "./util";
 // @ts-ignore
 const Jimp = require('potrace/node_modules/jimp');
 
@@ -204,26 +204,35 @@ export class ScreenMap {
 		const height = lines.length;
 		const width = Math.max(...lines.map(l => l.length));
 		const [tileSet, tiles, envItemsBySymbol] = this.getTilesAndEnvItemsBySymbol();
-		const spinalName = spinalCase(tileSet.name) + "-";
+		// const spinalName = spinalCase(tileSet.name) + "-";
 		const showBackground = Jimp.intToRGBA(tileSet.backgroundColor).a != 0;
-		return html(
-			<svg viewBox={`0 0 ${width} ${height}`} xmlns="http://www.w3.org/2000/svg" data-xmlns-xlink="http://www.w3.org/1999/xlink">
+		const tileStyles = tileSet.tiles.flatMap(tile => tile.toStyles == null ? "" : Object
+			.entries(tile.toStyles())
+			.map(([selector, props]) => `${selector} {${Object
+				.entries(props)
+				.map(([key, value]) => `${key}: ${value};`)
+				.join("\n")}}`)
+			.join("\n"))
+			.join("\n");
+		const svg = html(
+			<svg viewBox={`0 0 ${width} ${height}`} xmlns="http://www.w3.org/2000/svg">
 				<style>
 					.poi {"{"}
 					font-family: {tileSet.poiFont};
 					font-weight: bold;
+					cursor: default;
 					{"}"}
 				</style>
 				<defs>
-					{tileSet.tiles.map(tile => html(
-						<rect width={1} height={1} fill={hexFromNum(tile.color)} stroke="none" rx="0.1" ry="0.1" id={spinalName + spinalCase(tile.name)} title={tile.name}>
+					{tileSet.tiles.map(tile => tile.toSvgSymbols == null ? html(
+						<rect width={1} height={1} fill={hexFromNum(tile.color)} stroke="none" rx="0.1" ry="0.1" id={spinalCase(tile.name)}>
 							<title>{tile.name}</title>
 						</rect>
-					)).join("\n")}
-					<rect width={1} height={1} fill="transparent" id={spinalName + BACKGROUND_ID_SUFFIX}/>
-					<circle r={0.7} id={spinalName + POI_ID_SUFFIX} stroke-width={0.07} stroke={tileSet.poiBorderColor} fill={tileSet.poiBackgroundColor}/>
+					) : arrayify(tile.toSvgSymbols()).map(el => html(el)).join("\n")).join("\n")}
+					<rect width={1} height={1} fill="transparent" id={BACKGROUND_ID_SUFFIX}/>
+					<circle r={0.7} id={POI_ID_SUFFIX} stroke-width={0.07} stroke={tileSet.poiBorderColor} fill={tileSet.poiBackgroundColor}/>
 				</defs>
-				<g title="Tiles">
+				<g>
 					{lines.flatMap((line, y) => {
 						const rects: string[] = [];
 						for (let x = 0; x < width; x++) {
@@ -236,19 +245,33 @@ export class ScreenMap {
 									throw new Error(`No tile for environment item: ${JSON.stringify(envItem)}`);
 								}
 								bgColor = tile.color;
-								rects.push(html(
-									<use data-xlink-href={`#${spinalName + spinalCase(tile.name)}`} x={x} y={y} data-data-symbol={symbol}/>
-								));
+								if (tile.toSvgElement != null) {
+									rects.push(html(tile.toSvgElement({x, y}, {
+										tileNameAt: (tx, ty) => {
+											const tileLine = lines[ty];
+											if (tileLine == null || tx < 0 || tx > (tileLine.length - 1)) {
+												return undefined;
+											}
+											const sym = tileLine.charAt(tx);
+											const e = envItemsBySymbol[sym];
+											return e == null ? undefined : e.type;
+										}
+									})))
+								} else {
+									rects.push(html(
+										<use href={`#${spinalCase(tile.name)}`} x={x} y={y} data-data-symbol={symbol}/>
+									));
+								}
 							} else if (showBackground) {
 								rects.push(html(
-									<use data-xlink-href={`#${spinalName + BACKGROUND_ID_SUFFIX}`} x={x} y={y}/>
+									<use href={`#${BACKGROUND_ID_SUFFIX}`} x={x} y={y}/>
 								));
 							}
 						}
 						return rects;
 					}).join("\n")}
 				</g>
-				<g title="Points of Interest">
+				<g>
 					{this.points.map(point => {
 						let coordinate: Coordinate;
 						if (point.coordinates.length === 0) {
@@ -261,7 +284,7 @@ export class ScreenMap {
 						return html(
 							<g>
 								<title>{point.title}</title>
-								<use data-xlink-href={`#${spinalName + POI_ID_SUFFIX}`} x={x} y={y}/>
+								<use href={`#${POI_ID_SUFFIX}`} x={x} y={y}/>
 								<text x={x} y={y} fill={tileSet.poiColor} font-size="1px" text-anchor="middle" dominant-baseline="middle" dx="-0.025" dy="0.05" class="poi">{point.id}</text>
 							</g>
 						);
@@ -269,5 +292,6 @@ export class ScreenMap {
 				</g>
 			</svg>
 		);
+		return svg.replace("</style>", `${tileStyles}</style>`);
 	}
 }
