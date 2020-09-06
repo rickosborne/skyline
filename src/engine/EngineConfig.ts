@@ -1,9 +1,10 @@
-import {getLogger, levels, Logger, LoggingMethod, LogLevelDesc, LogLevelNumbers, RootLogger} from "loglevel";
-import * as process from "process";
 import * as chalk from "chalk";
+import {getLogger, levels, Logger, LoggingMethod, LogLevelDesc, LogLevelNumbers} from "loglevel";
+import * as process from "process";
 import {BiConsumer} from "./type/Type";
 
 export interface EngineConfig {
+	cacheBust: boolean;
 	logLevel: LogLevelDesc;
 	logLevels: Record<string, LogLevelDesc>;
 	watch: boolean;
@@ -11,6 +12,7 @@ export interface EngineConfig {
 }
 
 export const ENGINE_CONFIG_DEFAULT: EngineConfig = {
+	cacheBust: false,
 	logLevel: levels.WARN,
 	logLevels: {},
 	watch: false,
@@ -123,6 +125,7 @@ export function boolFrom(value: any): boolean {
 }
 
 export const ENGINE_CONFIG_PARAMS: Array<{ argName: string; envName: string; setter: BiConsumer<Partial<EngineConfig>, string>; }> = [
+	{argName: "--cache-bust", envName: "CACHE_BUST", setter: (config, value) => config.cacheBust = boolFrom(value)},
 	{argName: "--log-level", envName: "LOG_LEVEL", setter: (config, value) => config.logLevel = value as LogLevelDesc},
 	{argName: "--watch", envName: "WATCH", setter: (config, value) => config.watch = boolFrom(value)},
 	{argName: "--write", envName: "WRITE", setter: (config, value) => config.write = boolFrom(value)},

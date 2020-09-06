@@ -20,15 +20,17 @@ export class SourceDirectoryWatcher extends Transformer<SourceDirectory, SourceD
 			item,
 			operation: Operation.Replay,
 		});
-		fs.watch(item.fullPath, {recursive: false}, (watchEvent, fileName) => {
-			if (fileName != null && fileName.endsWith("~")) {
-				return;
-			}
-			this.logger.debug(`Update ${item.pathFromRoot} because ${fileName}`);
-			this.notify({
-				item,
-				operation: Operation.Updated,
+		if (this.config.watch) {
+			fs.watch(item.fullPath, {recursive: false}, (watchEvent, fileName) => {
+				if (fileName != null && fileName.endsWith("~")) {
+					return;
+				}
+				this.logger.debug(`Update ${item.pathFromRoot} because ${fileName}`);
+				this.notify({
+					item,
+					operation: Operation.Updated,
+				});
 			});
-		});
+		}
 	}
 }

@@ -33,7 +33,7 @@ export class FilesFromDirectory extends Transformer<SourceDirectoryFileListOpera
 
 	public watch(dir: SourceDirectory): void {
 		const existing = this.watchers.find(w => equal(w.dir, dir));
-		if (existing != null) {
+		if (existing != null || !this.config.watch) {
 			return;
 		}
 		this.logger.debug(`Watch: ${dir.pathFromRoot}`);

@@ -23,7 +23,9 @@ export class StoryGraphJoiner extends BiTransformer<MarkdownFileList, StoryGraph
 
 	protected onInputs(markdownFileList: MarkdownFileList, templateBlock: StoryGraphTemplateBlock): void {
 		const modulePath = path.join(ROOT_PATH, templateBlock.dataName);
-		const allEntries = markdownFileList.markdownFiles.map(markdownFile => this.renderer.renderEntry(markdownFile.fileText.text, templateBlock.dataName, modulePath, markdownFile.fileText.file.fileName, templateBlock.keyValue));
+		const allEntries = markdownFileList.markdownFiles
+			.filter(markdownFile => markdownFile.fileText.file.fileName.match(/^\d+-/))
+			.map(markdownFile => this.renderer.renderEntry(markdownFile.fileText.text, templateBlock.dataName, modulePath, markdownFile.fileText.file.fileName, templateBlock.keyValue));
 		const entries = this.renderer.extractStoryEntries(allEntries);
 		const story: Story = {
 			slug: templateBlock.dataName.replace(/[^a-zA-Z0-9]+/g, "-") + "-graph",

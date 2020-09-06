@@ -22,7 +22,7 @@ export class PrintTemplateRenderer extends Transformer<PrintDataBlock, RenderedT
 		const renderedText = this.printRenderer.render({
 			dataName: printBlock.templateBlock.dataName,
 			fileBaseNames: printBlock.fileBaseNames,
-		}, printBlock.templateBlock.keyValue, printBlock.templateBlock.body, true);
+		}, printBlock.templateBlock.keyValue, printBlock.templateBlock.body, this.config.cacheBust);
 		if (renderedText.trim() !== printBlock.templateBlock.body.trim()) {
 			this.notify({
 				source: printBlock,
