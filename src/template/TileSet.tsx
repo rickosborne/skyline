@@ -2,23 +2,38 @@ import * as CSS from "csstype";
 import * as Jimp from "jimp";
 import {h, JSX} from "preact";
 import {lpad} from "../engine/EngineConfig";
-import {Consumer, Type} from "../engine/type/Type";
-import {html} from "./hypertext";
+import {Consumer} from "../engine/type/Type";
 import {Coordinate, ScreenMapEnvironmentItem, ScreenMapPointOfInterest} from "./ScreenMap";
 
 export enum TileLayer {
 	Background = "B",
+	Overlay = "O",
 	Interact = "I",
-	Label = "L",
+	PointsOfInterest = "P",
 }
 
-const B = TileLayer.Background;
-const I = TileLayer.Interact;
-// const transparentBlack = Jimp.rgbaToInt(0, 0, 0, 0);
-const transparentWhite = Jimp.rgbaToInt(255, 255, 255, 0);
+export const TILE_LAYERS: TileLayer[] = [
+	TileLayer.Background,
+	TileLayer.Overlay,
+	TileLayer.Interact,
+	TileLayer.PointsOfInterest,
+];
 
-function rgb(red: number, green: number, blue: number): number {
+// const transparentBlack = Jimp.rgbaToInt(0, 0, 0, 0);
+export const transparentWhite = Jimp.rgbaToInt(255, 255, 255, 0);
+
+export function rgb(red: number, green: number, blue: number): number {
 	return Jimp.rgbaToInt(red, green, blue, 255);
+}
+
+export function hexFromRGB(red: number, green: number, blue: number, alpha?: number): string {
+	return [
+		"#",
+		lpad(red.toString(16), 2, "0"),
+		lpad(green.toString(16), 2, "0"),
+		lpad(blue.toString(16), 2, "0"),
+		alpha == null ? "" : lpad(alpha.toString(16), 2, "0"),
+	].join("");
 }
 
 export function hexFromNum(rgb: number): string {
@@ -34,7 +49,7 @@ export function hexFromNum(rgb: number): string {
 }
 
 export interface Tile {
-	color: number;
+	color: string;
 	layer: TileLayer;
 	name: string;
 	toStyles?: () => Record<string, CSS.PropertiesHyphen>;
@@ -51,6 +66,8 @@ export interface TileSet {
 	poiFont: string;
 	svgElementFromPoint?: (coordinate: Coordinate, renderer: TileRenderer, point: ScreenMapPointOfInterest, envItem?: ScreenMapEnvironmentItem, tile?: Tile) => JSX.Element;
 	tiles: Tile[];
+
+	isAmbient(symbol: string): boolean;
 }
 
 // noinspection SpellCheckingInspection
@@ -108,104 +125,3 @@ export function nineGridReduce(coordinate: Coordinate, renderer: TileRenderer, g
 	}, [] as string[]);
 }
 
-export const OldOnesIndoorDelve: TileSet = {
-	poiBackgroundColor: "#ffff99",
-	poiBorderColor: "#999933",
-	poiColor: "#000000",
-	poiFont: FONT_SANS_DEFAULT,
-	backgroundColor: transparentWhite,
-	name: "Old Ones Indoor Delve",
-	svgElementFromPoint: (coordinate, renderer, point, envItem, tile) => {
-		//  transform={`translate(${coordinate.x} ${coordinate.y} scale(2)`}
-		if (point.overlay === "crate") {
-			return <g>
-				<use href="#office-crate" x={coordinate.x - 0.5} y={coordinate.y - 0.5} width="2" height="2"/>
-				{renderer.textAt({x: coordinate.x + 0.5, y: coordinate.y + 0.5}, point.id)}
-			</g>;
-		} else {
-			return renderer.genericPoi(coordinate, point);
-		}
-	},
-	tiles: [
-		{name: "office floor", layer: B, color: rgb(128, 128, 128),},
-		{name: "office door", layer: I, color: rgb(160, 160, 160),},
-		{
-			name: "office wall", layer: B, color: rgb(96, 96, 96),
-			toSvgSymbols: () => [
-				// <path id="office-wall-n" d="M0,0 h1 L0.9,0.1 h-0.8 v0.8 L0,1 z" fill="black" stroke="none" />,
-				<rect id="office-wall-h" width="1" height="0.1" fill="black" stroke="none"/>,
-				<rect id="office-wall-v" width="0.1" height="1" fill="black" stroke="none"/>,
-				<rect id="office-wall-c" width="0.1" height="0.1" fill="black" stroke="none"/>,
-				<rect id="office-wall-b" x="0" y="0" width="1" height="1" fill="#333333"/>,
-			],
-			toSvgElement: (() => {
-				const walls: Record<string, JSX.Element> = {
-					"yes-n": <use href="#office-wall-h" x="0" y="0"/>,
-					"yes-e": <use href="#office-wall-v" x="0.9" y="0"/>,
-					"yes-s": <use href="#office-wall-h" x="0" y="0.9"/>,
-					"yes-w": <use href="#office-wall-v" x="0" y="0"/>,
-					"chip-ne": <use href="#office-wall-c" x="0.9" y="0"/>,
-					"chip-nw": <use href="#office-wall-c" x="0" y="0"/>,
-					"chip-se": <use href="#office-wall-c" x="0.9" y="0.9"/>,
-					"chip-sw": <use href="#office-wall-c" x="0" y="0.9"/>,
-				};
-				const grid = CARDINAL_POINTS.reduce((grid, dir) => {
-					grid[dir] = {
-						absent: {"office wall": `yes-${dir.toLowerCase()}`}
-					};
-					return grid;
-				}, {} as NineGridReduce);
-				return (coordinate: Coordinate, renderer: TileRenderer) => {
-					const wallNames = nineGridReduce(coordinate, renderer, grid);
-					DIAGONAL_POINTS_LOWER_HV.forEach(hv => {
-						if (!wallNames.includes(`yes-${hv.h}`) && !wallNames.includes(`yes-${hv.v}`) && wallNames.includes(`yes-${hv.c}`)) {
-							wallNames.push(`chip-${hv.c}`);
-						}
-					});
-					return <g transform={`translate(${coordinate.x} ${coordinate.y})`}>
-						<title>Wall</title>
-						<use href="#office-wall-b" x="0" y="0"/>
-						{wallNames.map(yes => walls[yes]).filter(Type.isNotNull).map(el => html(el)).join("\n")}
-					</g>;
-				}
-			})(),
-		},
-		{name: "railing", layer: B, color: rgb(192, 192, 192),},
-		{
-			name: "stairs", layer: I, color: rgb(208, 208, 208),
-			toSvgSymbols: () => [
-				<symbol id="office-stairs" viewBox="0 0 1 1">
-					<title>Stairs</title>
-					<rect x="0" y="0" width="0.2" height="1" fill="#999999" stroke="none"/>
-					<rect x="0.2" y="0" width="0.2" height="1" fill="#aaaaaa" stroke="none"/>
-					<rect x="0.4" y="0" width="0.2" height="1" fill="#bbbbbb" stroke="none"/>
-					<rect x="0.6" y="0" width="0.2" height="1" fill="#cccccc" stroke="none"/>
-					<rect x="0.8" y="0" width="0.2" height="1" fill="#dddddd" stroke="none"/>
-				</symbol>
-			],
-			toSvgElement: (coordinate: Coordinate, renderer, envItem) => {
-				let el = <use href="#office-stairs" x={coordinate.x} y={coordinate.y} width="1" height="1"/>;
-				if (envItem != null && envItem.rotate != null) {
-					el.props.transform = `rotate(${envItem.rotate}, ${coordinate.x + 0.5}, ${coordinate.y + 0.5})`;
-				}
-				return el;
-			},
-		},
-		{
-			name: "crate", layer: B, color: rgb(192, 192, 64),
-			toSvgSymbols: () => [
-				<symbol id="office-crate" viewBox="0 0 1 1" width="1" height="1">
-					<title>Crate</title>
-					<path d="M0.05,0.5 l0.45,-0.45 l0.45,0.45 l-0.45,0.45 z" fill="none" stroke="#ccffff" stroke-width="0.05"/>
-					<path d="M0.15,0.5 l0.35,-0.35 l0.35,0.35 l-0.35,0.35 z" fill="#ccffff" stroke="none"/>
-				</symbol>
-			],
-		},
-		{name: "rocks", layer: B, color: rgb(32, 128, 32),},
-		{name: "puddle", layer: B, color: rgb(32, 32, 128),},
-	],
-};
-
-export const TILE_SETS: TileSet[] = [
-	OldOnesIndoorDelve,
-];
