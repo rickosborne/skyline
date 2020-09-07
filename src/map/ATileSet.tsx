@@ -1,8 +1,9 @@
 import {h} from "preact";
-import {Tile, TileSet} from "../template/TileSet";
+import {Tile, TileRenderer, TileSet} from "../template/TileSet";
+import {ScreenMapCell, ScreenMapRenderable} from "./MapTypes";
+import {renderablesFromCellsAndTiles} from "./mapUtil";
 
 export abstract class ATileSet implements Partial<TileSet> {
-	abstract get backgroundColor(): number;
 
 	abstract get name(): string;
 
@@ -15,5 +16,9 @@ export abstract class ATileSet implements Partial<TileSet> {
 	abstract get poiFont(): string;
 
 	abstract get tiles(): Tile[];
+
+	public renderablesFromCells(cells: ScreenMapCell[], renderer: TileRenderer): ScreenMapRenderable[] {
+		return renderablesFromCellsAndTiles(cells, renderer, this.tiles);
+	}
 
 }

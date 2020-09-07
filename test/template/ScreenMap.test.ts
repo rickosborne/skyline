@@ -1,10 +1,8 @@
 import {expect} from "chai";
 import "mocha";
+import {ScreenMapEnvironmentItem, ScreenMapMetadata, ScreenMapPointOfInterest} from "../../src/map/MapTypes";
 import {
-	ScreenMap,
-	ScreenMapEnvironmentItem,
-	ScreenMapMetadata,
-	ScreenMapPointOfInterest
+	ScreenMap
 } from "../../src/template/ScreenMap";
 
 const INDOOR = `

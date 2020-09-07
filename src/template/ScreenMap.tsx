@@ -1,80 +1,46 @@
 import * as console from "console";
 import * as CSS from "csstype";
-// @ts-ignore
 import {h, JSX} from "preact";
 import {Consumer, Type} from "../engine/type/Type";
+import {
+	BACKGROUND_ID_SUFFIX,
+	CellGenerationContext, Coordinate,
+	METADATA_WRITERS,
+	POI_ID_SUFFIX,
+	ScreenMapCell, ScreenMapEnvironmentItem, ScreenMapMetadata, ScreenMapPointOfInterest, ScreenMapRenderable
+} from "../map/MapTypes";
+import {
+	cellsFromMapLines
+} from "../map/mapUtil";
 import {html} from "./hypertext";
-import {BlockLayoutItem, ScreenText} from "./ScreenText";
+import {ScreenText} from "./ScreenText";
 import {Tile, TILE_LAYERS, TileLayer, TileRenderer, TileSet} from "./TileSet";
 import {TILE_SETS} from "./TileSets";
 import {arrayify, renderCssRules, spinalCase} from "./util";
-// @ts-ignore
-const Jimp = require('potrace/node_modules/jimp');
 
-export interface Coordinate {
-	x: number;
-	y: number;
-}
 
-export interface ScreenMapMetadata {
-	scaleUnit: string;
-	scaleValue: number;
-	theme: string;
-	title: string;
-}
-
-export interface ScreenMapEnvironmentItem {
-	params?: Record<string, string>;
-	rotate?: number,
-	symbol: string;
-	type: string;
-}
-
-export interface ScreenMapPointOfInterest {
-	coordinates: Coordinate[];
-	icon?: string;
-	id: string;
-	link?: string;
-	overlay?: string;
-	rotate?: number;
-	story?: string;
-	symbol?: string;
-	tile?: string;
-	title: string;
-}
-
-export interface ScreenMapCell {
-	coordinate: Coordinate;
-	envItem?: ScreenMapEnvironmentItem;
-	layer: TileLayer;
-	poi?: ScreenMapPointOfInterest;
-	symbol: string;
-	tile?: Tile;
-}
-
-export type ScreenMapMetadataWriter = (meta: ScreenMapMetadata, item: BlockLayoutItem) => void;
-const METADATA_WRITERS: Record<string, ScreenMapMetadataWriter> = {
-	title: (meta, item) => meta.title = item.value,
-	theme: (meta, item) => meta.theme = item.value,
-	scale: (meta, item) => {
-		const match = item.value.match(/^\s*(\d+(?:[.]\d+)?)\s*(\w+)/i);
-		if (match == null) {
-			throw new Error(`Could not find Scale units in: ${item.value}`);
+export class ScreenMap implements CellGenerationContext {
+	public readonly cells: ScreenMapCell[];
+	public readonly envBySymbol: Record<string, ScreenMapEnvironmentItem>;
+	public readonly height: number;
+	public readonly poiBySymbol: Record<string, ScreenMapPointOfInterest>;
+	public readonly renderables: ScreenMapRenderable[];
+	public readonly renderer: TileRenderer = {
+		genericTile: this.genericTile.bind(this),
+		genericPoi: this.genericPoi.bind(this),
+		textAt: this.textAt.bind(this),
+		tileNameAt: this.tileNameAt.bind(this),
+	}
+	public readonly spinalName: string;
+	public readonly tilesByName: Record<string, Tile>;
+	public readonly topLevelStyles: Record<string, CSS.PropertiesHyphen> = {
+		".poi": {
+			"font-family": this.tileSet.poiFont,
+			"font-weight": "bold",
+			"cursor": "default",
 		}
-		meta.scaleValue = parseFloat(match[1]);
-		meta.scaleUnit = match[2];
-	},
-};
-
-const BACKGROUND_ID_SUFFIX = "--background";
-
-const POI_ID_SUFFIX = "--poi";
-
-export class ScreenMap {
-	private readonly cells: ScreenMapCell[];
-	private readonly envBySymbol: Record<string, ScreenMapEnvironmentItem>;
-	private readonly poiBySymbol: Record<string, ScreenMapPointOfInterest>;
-	private readonly tilesByName: Record<string, Tile>;
+	}
+	public readonly width: number;
 
 	protected constructor(
 		public readonly metadata: ScreenMapMetadata,
@@ -96,9 +62,11 @@ export class ScreenMap {
 			points[poi.id] = poi;
 			return points;
 		}, {} as Record<string, ScreenMapPointOfInterest>);
-		this.cells = this.mapLines.flatMap((line, y) => line.split("").flatMap((symbol, x): undefined | ScreenMapCell | ScreenMapCell[] => {
-			return this.cellsFromSymbol(symbol, x, y);
-		})).filter(Type.isNotNull) as ScreenMapCell[];
+		this.cells = cellsFromMapLines(this.mapLines, this);
+		this.renderables = this.tileSet.renderablesFromCells == null ? this.cells : this.tileSet.renderablesFromCells(this.cells, this.renderer);
+		this.height = this.mapLines.length;
+		this.width = Math.max(...this.mapLines.map(line => line.length));
+		this.spinalName = spinalCase(tileSet.name);
 	}
 
 	public static from(text: string): ScreenMap | undefined {
@@ -192,117 +160,58 @@ export class ScreenMap {
 		);
 	}
 
+	public cellsAt(x: number, y: number): ScreenMapCell[] {
+		return this.cells.filter(cell => cell.coordinate.x === x && cell.coordinate.y === y);
+	}
+
+	public cellsAtLayer(x: number, y: number, layer: TileLayer): ScreenMapCell[] {
+		return this.cellsAt(x, y).filter(cell => cell.layer === layer);
+	}
+
 	public cellsForLayer(layer: TileLayer): ScreenMapCell[] {
 		return this.cells.filter(cell => cell.layer === layer);
 	}
 
-	private cellsFromEnv(envItem: ScreenMapEnvironmentItem, symbol: string, x: number, y: number, poiItem?: ScreenMapPointOfInterest): ScreenMapCell {
-		const tile = this.tilesByName[envItem.type];
-		if (tile == null) {
-			throw new Error(`No tile named "${envItem.type}" for Environment symbol "${symbol}" at (${x}, ${y}).`);
-		}
-		const result: ScreenMapCell = {
-			coordinate: {x, y},
-			layer: tile?.layer || TileLayer.Background,
-			envItem,
-			tile,
-			symbol,
-		};
-		if (poiItem != null) {
-			result.poi = poiItem;
-		}
-		return result;
+	public genericPoi(coordinate: Coordinate, point: ScreenMapPointOfInterest): JSX.Element {
+		const title = <title>{point.title}</title>;
+		const circle = <use href={`#${POI_ID_SUFFIX}`} x={coordinate.x + 0.5} y={coordinate.y + 0.5}/>;
+		const label = this.textAt({x: coordinate.x + 0.5, y: coordinate.y + 0.5}, point.id);
+		return point.link == null ? <g>
+			{title}
+			{circle}
+			{label}
+		</g> : <a href={point.link}>
+			{title}
+			{circle}
+			{label}
+		</a>;
 	}
 
-	private cellsFromPoi(poi: ScreenMapPointOfInterest, symbol: string, x: number, y: number): ScreenMapCell[] {
-		const results: ScreenMapCell[] = [];
-		let envItem: ScreenMapEnvironmentItem | undefined;
-		let tile: Tile | undefined;
-		if (poi.symbol != null && poi.symbol !== symbol) {
-			results.push(...this.cellsFromSymbol(poi.symbol, x, y));
-			envItem = this.envBySymbol[poi.symbol];
-			if (envItem != null) {
-				tile = this.tilesByName[envItem.type];
-			}
-		}
-		if (poi.tile != null) {
-			envItem = envItem || this.environment.find(e => e.type === poi.tile);
-			tile = tile || this.tilesByName[poi.tile];
-		}
-		if (poi.overlay != null) {
-			const overlayTile = this.tilesByName[poi.overlay];
-			if (overlayTile == null) {
-				throw new Error(`No such overlay tile "${poi.overlay}" at "${poi.id}. ${poi.title}"`);
-			}
-			results.push(this.cellsFromTile(overlayTile, symbol, x, y, TileLayer.Overlay));
-		}
-		const result: ScreenMapCell = {
-			coordinate: {x, y},
-			layer: TileLayer.PointsOfInterest,
-			poi,
-			symbol,
-		}
-		if (envItem != null) {
-			result.envItem = envItem;
-		}
-		if (tile != null) {
-			result.tile = tile;
-		}
-		results.push(result);
-		return results;
+	public genericTile(coordinate: Coordinate, tile: Tile): JSX.Element {
+		return <use href={`#${spinalCase(tile.name)}`} x={coordinate.x} y={coordinate.y}/>;
 	}
 
-	private cellsFromSymbol(symbol: string, x: number, y: number): ScreenMapCell[] {
-		const results: ScreenMapCell[] = [];
-		const poiItem = this.poiBySymbol[symbol];
-		if (this.tileSet.isAmbient(symbol)) {
-			return results;
+	public textAt(coordinate: Coordinate, label: string, configurer?: Consumer<JSX.Element>): JSX.Element {
+		const el =
+			<text x={coordinate.x - 0.025} y={coordinate.y + 0.05} fill={this.tileSet.poiColor} font-size="1px" text-anchor="middle" dominant-baseline="middle" class="poi">{label}</text>;
+		if (configurer != null) {
+			configurer(el);
 		}
-		if (poiItem != null) {
-			results.push(...this.cellsFromPoi(poiItem, symbol, x, y));
-		}
-		const envItem = this.envBySymbol[symbol];
-		if (envItem != null) {
-			results.push(this.cellsFromEnv(envItem, symbol, x, y, poiItem));
-		}
-		return results;
+		return el;
 	}
 
-	// noinspection JSMethodCanBeStatic
-	private cellsFromTile(tile: Tile, symbol: string, x: number, y: number, layer: TileLayer = TileLayer.Background): ScreenMapCell {
-		return {
-			coordinate: {x, y},
-			layer,
-			tile,
-			symbol,
-		};
+	public tileNameAt(tx: number, ty: number) {
+		const tileLine = this.mapLines[ty];
+		if (tileLine == null || tx < 0 || tx > (tileLine.length - 1)) {
+			return undefined;
+		}
+		const sym = tileLine.charAt(tx);
+		const e = this.envBySymbol[sym];
+		return e == null ? undefined : e.type;
 	}
 
 	public toDataUri(): Promise<string> {
-		const jimp = this.toJimp();
-		return jimp.getBase64Async(Jimp.MIME_PNG);
-	}
-
-	public toJimp(): any {
-		const height = this.mapLines.length;
-		const width = Math.max(...this.mapLines.map(l => l.length));
-		const img = new Jimp(width, height);
-		this.mapLines.forEach((line, y) => {
-			for (let x = 0; x < width; x++) {
-				const symbol = line.substr(x, 1);
-				const envItem = this.envBySymbol[symbol];
-				if (envItem == null) {
-					img.setPixelColor(this.tileSet.backgroundColor, x, y);
-				} else {
-					const tile = this.tilesByName[envItem.type];
-					if (tile == null) {
-						throw new Error(`No tile for environment item: ${JSON.stringify(envItem)}`);
-					}
-					img.setPixelColor(tile.color, x, y);
-				}
-			}
-		});
-		return img;
+		throw new Error(`Not implemented: ${this.constructor.name}.toDataUri`);
 	}
 
 	public toPoiTable(): JSX.Element | undefined {
@@ -325,66 +234,10 @@ export class ScreenMap {
 	}
 
 	public toSvg(): string {
-		const lines = this.mapLines; // scale3xText(this.mapLines);
-		const height = lines.length;
-		const width = Math.max(...lines.map(l => l.length));
-		// const spinalName = spinalCase(tileSet.name) + "-";
-		const showBackground = Jimp.intToRGBA(this.tileSet.backgroundColor).a != 0;
-		const tileStyles = this.tileSet.tiles.flatMap(tile => tile.toStyles == null ? "" : Object
-			.entries(tile.toStyles())
-			.map(([selector, props]) => `${selector} {${Object
-				.entries(props)
-				.map(([key, value]) => `${key}: ${value};`)
-				.join("\n")}}`)
-			.join("\n"))
-			.join("\n");
-		const textAt = (coordinate: Coordinate, label: string, configurer?: Consumer<JSX.Element>) => {
-			const el =
-				<text x={coordinate.x - 0.025} y={coordinate.y + 0.05} fill={this.tileSet.poiColor} font-size="1px" text-anchor="middle" dominant-baseline="middle" class="poi">{label}</text>;
-			if (configurer != null) {
-				configurer(el);
-			}
-			return el;
-		};
-		const genericPoi = (coordinate: Coordinate, point: ScreenMapPointOfInterest) => {
-			const title = <title>{point.title}</title>;
-			const circle = <use href={`#${POI_ID_SUFFIX}`} x={coordinate.x + 0.5} y={coordinate.y + 0.5}/>;
-			const label = textAt({x: coordinate.x + 0.5, y: coordinate.y + 0.5}, point.id);
-			return point.link == null ? <g>
-				{title}
-				{circle}
-				{label}
-			</g> : <a href={point.link}>
-				{title}
-				{circle}
-				{label}
-			</a>;
-		};
-		const tileNameAt = (tx: number, ty: number) => {
-			const tileLine = lines[ty];
-			if (tileLine == null || tx < 0 || tx > (tileLine.length - 1)) {
-				return undefined;
-			}
-			const sym = tileLine.charAt(tx);
-			const e = this.envBySymbol[sym];
-			return e == null ? undefined : e.type;
-		};
-		const renderer: TileRenderer = {
-			genericPoi,
-			textAt,
-			tileNameAt,
-		};
-		const topLevelStyles: Record<string, CSS.PropertiesHyphen> = {
-			".poi": {
-				"font-family": this.tileSet.poiFont,
-				"font-weight": "bold",
-				"cursor": "default",
-			}
-		}
 		const svg = html(
-			<svg viewBox={`0 0 ${width} ${height}`} xmlns="http://www.w3.org/2000/svg" data-xmlns-xlink="http://www.w3.org/1999/xlink">
+			<svg viewBox={`0 0 ${this.width} ${this.height}`} xmlns="http://www.w3.org/2000/svg" data-xmlns-xlink="http://www.w3.org/1999/xlink">
 				<style>
-					{renderCssRules(topLevelStyles)}
+					{renderCssRules(this.topLevelStyles)}
 					{this.tileSet.tiles.map(tile => tile.toStyles == null ? undefined : renderCssRules(tile.toStyles())).filter(Type.isNotNull).join("\n")}
 				</style>
 				<defs>
@@ -405,18 +258,18 @@ export class ScreenMap {
 						const els: JSX.Element[] = [];
 						if (cell.tile != null) {
 							if (cell.tile.toSvgElement != null) {
-								els.push(cell.tile.toSvgElement(cell.coordinate, renderer, cell.envItem));
+								els.push(cell.tile.toSvgElement(cell.coordinate, this.renderer, cell.envItem));
 							} else {
-								els.push(<use href={`#${spinalCase(cell.tile.name)}`} x={cell.coordinate.x} y={cell.coordinate.y}/>);
+								els.push(this.genericTile(cell.coordinate, cell.tile));
 							}
-						} else if (showBackground) {
+						} else if (this.tileSet.backgroundColor != null) {
 							els.push(<use href={`#${BACKGROUND_ID_SUFFIX}`} x={cell.coordinate.x} y={cell.coordinate.y}/>);
 						}
 						if (cell.poi != null) {
 							if (this.tileSet.svgElementFromPoint != null) {
-								els.push(this.tileSet.svgElementFromPoint(cell.coordinate, renderer, cell.poi, cell.envItem, cell.tile));
+								els.push(this.tileSet.svgElementFromPoint(cell.coordinate, this.renderer, cell.poi, cell.envItem, cell.tile));
 							} else {
-								els.push(genericPoi(cell.coordinate, cell.poi));
+								els.push(this.genericPoi(cell.coordinate, cell.poi));
 							}
 						}
 						return els;

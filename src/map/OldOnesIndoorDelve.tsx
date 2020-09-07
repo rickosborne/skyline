@@ -1,7 +1,6 @@
 import {h, JSX} from "preact";
 import {Type} from "../engine/type/Type";
 import {html} from "../template/hypertext";
-import {Coordinate, ScreenMapEnvironmentItem, ScreenMapPointOfInterest} from "../template/ScreenMap";
 import {
 	CARDINAL_POINTS,
 	DIAGONAL_POINTS_LOWER_HV,
@@ -9,14 +8,20 @@ import {
 	hexFromRGB,
 	nineGridReduce,
 	NineGridReduce,
-	Tile,
+	Tile, TILE_LAYERS,
 	TileLayer,
 	TileRenderer,
-	TileSet,
-	transparentWhite
+	TileSet
 } from "../template/TileSet";
 import {ATile} from "./ATile";
 import {ATileSet} from "./ATileSet";
+import {
+	Coordinate,
+	ScreenMapCell,
+	ScreenMapEnvironmentItem,
+	ScreenMapPointOfInterest,
+	ScreenMapRenderable
+} from "./MapTypes";
 
 const B = TileLayer.Background;
 const I = TileLayer.Interact;
@@ -53,6 +58,7 @@ export class OfficeWall extends ATile implements Tile {
 		"chip-se": <use href="#office-wall-c" x="0.9" y="0.9"/>,
 		"chip-sw": <use href="#office-wall-c" x="0" y="0.9"/>,
 	};
+	public readonly joinCardinals = CARDINAL_POINTS;
 
 	public toSvgElement(coordinate: Coordinate, renderer: TileRenderer): JSX.Element {
 		const wallNames = nineGridReduce(coordinate, renderer, this.grid);
@@ -142,7 +148,6 @@ export class OfficePuddle extends ATile implements Tile {
 
 export class OldOnesIndoorDelve extends ATileSet implements TileSet {
 	public readonly ambient: string[] = [" "];
-	public readonly backgroundColor = transparentWhite;
 	public readonly name = "Old Ones Indoor Delve";
 	public readonly officeTiles = [
 		new OfficeFloor(),

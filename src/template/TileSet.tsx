@@ -1,9 +1,14 @@
 import * as CSS from "csstype";
-import * as Jimp from "jimp";
 import {h, JSX} from "preact";
 import {lpad} from "../engine/EngineConfig";
 import {Consumer} from "../engine/type/Type";
-import {Coordinate, ScreenMapEnvironmentItem, ScreenMapPointOfInterest} from "./ScreenMap";
+import {
+	Coordinate,
+	ScreenMapCell,
+	ScreenMapEnvironmentItem,
+	ScreenMapPointOfInterest,
+	ScreenMapRenderable
+} from "../map/MapTypes";
 
 export enum TileLayer {
 	Background = "B",
@@ -19,13 +24,6 @@ export const TILE_LAYERS: TileLayer[] = [
 	TileLayer.PointsOfInterest,
 ];
 
-// const transparentBlack = Jimp.rgbaToInt(0, 0, 0, 0);
-export const transparentWhite = Jimp.rgbaToInt(255, 255, 255, 0);
-
-export function rgb(red: number, green: number, blue: number): number {
-	return Jimp.rgbaToInt(red, green, blue, 255);
-}
-
 export function hexFromRGB(red: number, green: number, blue: number, alpha?: number): string {
 	return [
 		"#",
@@ -36,20 +34,9 @@ export function hexFromRGB(red: number, green: number, blue: number, alpha?: num
 	].join("");
 }
 
-export function hexFromNum(rgb: number): string {
-	return `#${lpad(rgb.toString(16), 8, "0")}`;
-	// const rgba = Jimp.intToRGBA(rgb);
-	// if (rgba.a === 255) {
-	// 	return "transparent";
-	// } else if (rgba.a > 0) {
-	// 	return `#${lpad(rgba.r.toString(16), 2, "0")}${lpad(rgba.g.toString(16), 2, "0")}${lpad(rgba.b.toString(16), 2, "0")}${lpad(rgba.a.toString(16), 2, "0")}`;
-	// } else {
-	// 	return `#${lpad(rgba.r.toString(16), 2, "0")}${lpad(rgba.g.toString(16), 2, "0")}${lpad(rgba.b.toString(16), 2, "0")}`;
-	// }
-}
-
 export interface Tile {
 	color: string;
+	joinCardinals?: NineGridCardinal[];
 	layer: TileLayer;
 	name: string;
 	toStyles?: () => Record<string, CSS.PropertiesHyphen>;
@@ -58,12 +45,14 @@ export interface Tile {
 }
 
 export interface TileSet {
-	backgroundColor: number;
+	backfillCells?: (cell: ScreenMapCell) => ScreenMapCell[];
+	backgroundColor?: string;
 	name: string;
 	poiBackgroundColor: string;
 	poiBorderColor: string;
 	poiColor: string;
 	poiFont: string;
+	renderablesFromCells?: (cells: ScreenMapCell[], renderer: TileRenderer) => ScreenMapRenderable[];
 	svgElementFromPoint?: (coordinate: Coordinate, renderer: TileRenderer, point: ScreenMapPointOfInterest, envItem?: ScreenMapEnvironmentItem, tile?: Tile) => JSX.Element;
 	tiles: Tile[];
 
@@ -75,6 +64,7 @@ export const FONT_SANS_DEFAULT = "Roboto, \"Open Sans\", \"Helvetica Neue\", Hel
 
 export interface TileRenderer {
 	genericPoi: (coordinate: Coordinate, point: ScreenMapPointOfInterest) => JSX.Element;
+	genericTile: (coordinate: Coordinate, tile: Tile) => JSX.Element;
 	textAt: (coordinate: Coordinate, label: string, configurer?: Consumer<JSX.Element>) => JSX.Element;
 	tileNameAt: (x: number, y: number) => string | undefined;
 }
@@ -111,6 +101,7 @@ export const CARDINAL_OFFSETS: Record<NineGridCardinal, CoordinateOffset> = {
 	SW: {dx: -1, dy: 1},
 	W: {dx: -1, dy: 0},
 };
+export const JOIN_CARDINALS_DEFAULT = FOUR_POINTS;
 
 export function nineGridReduce(coordinate: Coordinate, renderer: TileRenderer, grid: NineGridReduce): string[] {
 	return CARDINAL_POINTS.reduce((result, cardinal) => {
