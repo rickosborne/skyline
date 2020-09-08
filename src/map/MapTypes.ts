@@ -1,6 +1,7 @@
 import {JSX} from "preact";
 import {BlockLayoutItem} from "../template/ScreenText";
 import {Tile, TileLayer, TileRenderer, TileSet} from "../template/TileSet";
+import {Edge} from "./mapUtil";
 
 export interface Coordinate {
 	x: number;
@@ -67,6 +68,9 @@ export interface ScreenMapShape extends ScreenMapRenderable {
 	readonly cells: ScreenMapCell[];
 	readonly renderableType: ScreenMapRenderableType.Shape;
 	readonly tile: Tile;
+	edges: Edge[];
+	outline: Coordinate[][];
+	toSvgElement: (renderer: TileRenderer) => JSX.Element;
 }
 
 export type ScreenMapMetadataWriter = (meta: ScreenMapMetadata, item: BlockLayoutItem) => void;

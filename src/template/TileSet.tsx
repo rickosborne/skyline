@@ -7,7 +7,8 @@ import {
 	ScreenMapCell,
 	ScreenMapEnvironmentItem,
 	ScreenMapPointOfInterest,
-	ScreenMapRenderable
+	ScreenMapRenderable,
+	ScreenMapShape
 } from "../map/MapTypes";
 
 export enum TileLayer {
@@ -34,11 +35,15 @@ export function hexFromRGB(red: number, green: number, blue: number, alpha?: num
 	].join("");
 }
 
+export type SvgFromShape = (shape: ScreenMapShape, renderer: TileRenderer) => JSX.Element;
+export type SvgFromShapeAndLayer = (layer: TileLayer) => SvgFromShape;
+
 export interface Tile {
 	color: string;
 	joinCardinals?: NineGridCardinal[];
 	layer: TileLayer;
 	name: string;
+	svgFromShape?: SvgFromShapeAndLayer;
 	toStyles?: () => Record<string, CSS.PropertiesHyphen>;
 	toSvgElement?: (coordinate: Coordinate, renderer: TileRenderer, envItem: ScreenMapEnvironmentItem | undefined) => JSX.Element;
 	toSvgSymbols?: () => JSX.Element | JSX.Element[];
@@ -78,12 +83,14 @@ export type NineGridReduce = {
 	[P in NineGridCardinal]?: NineGridDirection;
 }
 
-export type NineGridCardinal = "NW" | "N" | "NE" | "E" | "SE" | "S" | "SW" | "W";
+export type CompassPoint = "N" | "E" | "S" | "W";
+export type DiagonalPoint = "NW" | "NE" | "SE" | "SW";
+export type NineGridCardinal = CompassPoint | DiagonalPoint;
 export type CoordinateOffset = { dx: number; dy: number };
 export const CARDINAL_POINTS: NineGridCardinal[] = ["NW", "N", "NE", "E", "SE", "S", "SW", "W"];
-export const FOUR_POINTS: NineGridCardinal[] = CARDINAL_POINTS.filter(dir => dir.length === 1);
+export const FOUR_POINTS: CompassPoint[] = ["N", "E", "S", "W"];
 export const FOUR_POINTS_LOWER = FOUR_POINTS.map(dir => dir.toLowerCase());
-export const DIAGONAL_POINTS = CARDINAL_POINTS.filter(dir => dir.length === 2);
+export const DIAGONAL_POINTS = ["NW", "NE", "SE", "SW"];
 export const DIAGONAL_POINTS_LOWER = DIAGONAL_POINTS.map(dir => dir.toLowerCase());
 export const DIAGONAL_POINTS_LOWER_HV = DIAGONAL_POINTS_LOWER.map(dir => ({
 	c: dir,
@@ -102,6 +109,30 @@ export const CARDINAL_OFFSETS: Record<NineGridCardinal, CoordinateOffset> = {
 	W: {dx: -1, dy: 0},
 };
 export const JOIN_CARDINALS_DEFAULT = FOUR_POINTS;
+export const COMPASS_FROM_DX_DY: Record<number, Record<number, CompassPoint>> = {
+	"0": {
+		"-1": "S",
+		"1": "N",
+	},
+	"1": {
+		"0": "E"
+	},
+	"-1": {
+		"0": "W",
+	}
+};
+export const COMPASS_NEXT_RH: Record<CompassPoint, CompassPoint> = {
+	N: "E",
+	E: "S",
+	S: "W",
+	W: "N",
+}
+export const COMPASS_NEXT_LH: Record<CompassPoint, CompassPoint> = {
+	N: "W",
+	E: "N",
+	S: "E",
+	W: "S",
+}
 
 export function nineGridReduce(coordinate: Coordinate, renderer: TileRenderer, grid: NineGridReduce): string[] {
 	return CARDINAL_POINTS.reduce((result, cardinal) => {

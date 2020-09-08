@@ -4,14 +4,19 @@ import {h, JSX} from "preact";
 import {Consumer, Type} from "../engine/type/Type";
 import {
 	BACKGROUND_ID_SUFFIX,
-	CellGenerationContext, Coordinate,
+	CellGenerationContext,
+	Coordinate,
+	isCell,
+	isShape,
 	METADATA_WRITERS,
 	POI_ID_SUFFIX,
-	ScreenMapCell, ScreenMapEnvironmentItem, ScreenMapMetadata, ScreenMapPointOfInterest, ScreenMapRenderable
+	ScreenMapCell,
+	ScreenMapEnvironmentItem,
+	ScreenMapMetadata,
+	ScreenMapPointOfInterest,
+	ScreenMapRenderable
 } from "../map/MapTypes";
-import {
-	cellsFromMapLines
-} from "../map/mapUtil";
+import {boundingBox, cellsFromMapLines} from "../map/mapUtil";
 import {html} from "./hypertext";
 import {ScreenText} from "./ScreenText";
 import {Tile, TILE_LAYERS, TileLayer, TileRenderer, TileSet} from "./TileSet";
@@ -191,6 +196,10 @@ export class ScreenMap implements CellGenerationContext {
 		return <use href={`#${spinalCase(tile.name)}`} x={coordinate.x} y={coordinate.y}/>;
 	}
 
+	public renderablesForLayer(layer: TileLayer): ScreenMapRenderable[] {
+		return this.renderables.filter(r => r.layer === layer);
+	}
+
 	public textAt(coordinate: Coordinate, label: string, configurer?: Consumer<JSX.Element>): JSX.Element {
 		const el =
 			<text x={coordinate.x - 0.025} y={coordinate.y + 0.05} fill={this.tileSet.poiColor} font-size="1px" text-anchor="middle" dominant-baseline="middle" class="poi">{label}</text>;
@@ -250,27 +259,34 @@ export class ScreenMap implements CellGenerationContext {
 					<circle r={0.7} id={POI_ID_SUFFIX} stroke-width={0.07} stroke={this.tileSet.poiBorderColor} fill={this.tileSet.poiBackgroundColor}/>
 				</defs>
 				{TILE_LAYERS.map(layer => {
-					const cells = this.cellsForLayer(layer);
-					if (cells.length === 0) {
-						return <g class="empty-layer"/>;
+					const renderables = this.renderablesForLayer(layer);
+					if (renderables.length === 0) {
+						return undefined;
 					}
-					const renderedCells = cells.flatMap(cell => {
+					const renderedCells = renderables.flatMap(renderable => {
 						const els: JSX.Element[] = [];
-						if (cell.tile != null) {
-							if (cell.tile.toSvgElement != null) {
-								els.push(cell.tile.toSvgElement(cell.coordinate, this.renderer, cell.envItem));
-							} else {
-								els.push(this.genericTile(cell.coordinate, cell.tile));
+						if (isShape(renderable)) {
+							els.push(renderable.toSvgElement(this.renderer));
+						} else if (isCell(renderable)) {
+							if (renderable.tile != null) {
+								if (renderable.tile.toSvgElement != null) {
+									els.push(renderable.tile.toSvgElement(renderable.coordinate, this.renderer, renderable.envItem));
+								} else {
+									els.push(this.genericTile(renderable.coordinate, renderable.tile));
+								}
+							} else if (this.tileSet.backgroundColor != null) {
+								els.push(
+									<use href={`#${BACKGROUND_ID_SUFFIX}`} x={renderable.coordinate.x} y={renderable.coordinate.y}/>);
 							}
-						} else if (this.tileSet.backgroundColor != null) {
-							els.push(<use href={`#${BACKGROUND_ID_SUFFIX}`} x={cell.coordinate.x} y={cell.coordinate.y}/>);
-						}
-						if (cell.poi != null) {
-							if (this.tileSet.svgElementFromPoint != null) {
-								els.push(this.tileSet.svgElementFromPoint(cell.coordinate, this.renderer, cell.poi, cell.envItem, cell.tile));
-							} else {
-								els.push(this.genericPoi(cell.coordinate, cell.poi));
+							if (renderable.poi != null) {
+								if (this.tileSet.svgElementFromPoint != null) {
+									els.push(this.tileSet.svgElementFromPoint(renderable.coordinate, this.renderer, renderable.poi, renderable.envItem, renderable.tile));
+								} else {
+									els.push(this.genericPoi(renderable.coordinate, renderable.poi));
+								}
 							}
+						} else {
+							throw new Error(`Unknown renderable type: ${renderable.renderableType}`);
 						}
 						return els;
 					}).filter(Type.isNotNull);
@@ -279,10 +295,12 @@ export class ScreenMap implements CellGenerationContext {
 			</svg>
 		);
 		return html(
-			<figure>
-				{svg}
-				{this.toPoiTable()}
-			</figure>
+			<section>
+				<figure>
+					{svg}
+					{this.toPoiTable()}
+				</figure>
+			</section>
 		);
 	}
 }

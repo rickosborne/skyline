@@ -268,3 +268,9 @@ export function renderCssRules(rules: Record<string, CSS.PropertiesHyphen>): str
 		}).join("\n")}}`;
 	}).join("\n");
 }
+
+export function notImplemented(message: string = "") {
+	return () => {
+		throw new Error(`Unexpected call: ${message}`);
+	};
+}

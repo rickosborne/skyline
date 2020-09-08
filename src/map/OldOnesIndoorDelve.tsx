@@ -8,20 +8,14 @@ import {
 	hexFromRGB,
 	nineGridReduce,
 	NineGridReduce,
-	Tile, TILE_LAYERS,
+	Tile,
 	TileLayer,
 	TileRenderer,
 	TileSet
 } from "../template/TileSet";
 import {ATile} from "./ATile";
 import {ATileSet} from "./ATileSet";
-import {
-	Coordinate,
-	ScreenMapCell,
-	ScreenMapEnvironmentItem,
-	ScreenMapPointOfInterest,
-	ScreenMapRenderable
-} from "./MapTypes";
+import {Coordinate, ScreenMapEnvironmentItem, ScreenMapPointOfInterest} from "./MapTypes";
 
 const B = TileLayer.Background;
 const I = TileLayer.Interact;

@@ -1773,3 +1773,24 @@ details[open] > summary.spoiler-warning::before {
     }
   }
 }
+.machine-site-overlay {
+  stroke: #ff0000;
+  stroke-width: 0.1px;
+  stroke-linejoin: bevel;
+}
+
+.forest-box {
+  fill: #33cc33;
+}
+
+.boulders-box {
+  fill: #dd9944;
+}
+
+.mountain-box {
+  fill: #996633;
+}
+
+.tall-grass-box {
+  fill: #cc3366;
+}
