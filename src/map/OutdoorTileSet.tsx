@@ -11,7 +11,7 @@ import {
 } from "../template/TileSet";
 import {ATile} from "./ATile";
 import {ATileSet} from "./ATileSet";
-import {singlePoi, svgBoxyOverlay, svgHullOverlay, svgSquaresFromShape} from "./svgShape";
+import {singlePoi, svgBoxyBlob, svgHullOverlay, svgSquaresFromShape} from "./svgShape";
 
 const B = TileLayer.Background;
 const I = TileLayer.Interact;
@@ -21,43 +21,39 @@ function layeredRender(layers: Partial<Record<TileLayer, SvgFromShape>> & { othe
 	return layer => layers[layer] || layers.otherwise;
 };
 
+const singlePoiBoxy = layeredRender({
+	[TileLayer.PointsOfInterest]: singlePoi,
+	otherwise: shape => svgBoxyBlob(shape)
+});
+
 export class BouldersTile extends ATile implements Tile {
 	public readonly color = "#dd9944";
-	public readonly layer = O;
+	public readonly layer = B;
 	public readonly name = "boulders";
-	public readonly svgFromShape = layeredRender({
-		[TileLayer.PointsOfInterest]: singlePoi,
-		otherwise: shape => svgBoxyOverlay(shape)
-	});
-
-	public toStyles(): Record<string, PropertiesHyphen> {
-		return {
-			".boulder-box": {
-				fill: "#dd9944"
-			}
-		};
-	}
+	public readonly styles: Record<string, PropertiesHyphen> = {
+		".boulders-box": {
+			fill: "#dd9944",
+		},
+	};
+	public readonly svgFromShape = singlePoiBoxy;
 }
 
 export class MachineSiteTile extends ATile implements Tile {
 	public readonly color = "#ff9900";
 	public readonly layer = O;
 	public readonly name = "machine site";
+	public readonly styles: Record<string, PropertiesHyphen> = {
+		".machine-site-overlay": {
+			stroke: "#ff0000",
+			"stroke-width": "0.1px",
+			"stroke-linejoin": "bevel",
+			"fill": "url(#machine-overlay-gradient)",
+		},
+	};
 	public readonly svgFromShape = layeredRender({
 		[TileLayer.PointsOfInterest]: singlePoi,
 		otherwise: shape => svgHullOverlay(shape, 0),
 	});
-
-	public toStyles(): Record<string, PropertiesHyphen> {
-		return {
-			".machine-site-overlay": {
-				stroke: "#ff0000",
-				"stroke-width": "0.1px",
-				"stroke-linejoin": "bevel",
-				"fill": "url(#machine-overlay-gradient)"
-			}
-		};
-	}
 
 	toSvgSymbols(): JSX.Element | JSX.Element[] {
 		return <linearGradient id="machine-overlay-gradient" spreadMethod="repeat" x1="0" x2="0.2" y1="0" y2="0.2" gradientUnits="userSpaceOnUse">
@@ -72,6 +68,11 @@ export class RoadTile extends ATile implements Tile {
 	public readonly joinCardinals = CARDINAL_POINTS;
 	public readonly layer = B;
 	public readonly name = "road";
+	public readonly styles: Record<string, PropertiesHyphen> = {
+		".road-box": {
+			fill: "#cc8033",
+		},
+	};
 	public readonly svgFromShape = layeredRender({
 		[TileLayer.PointsOfInterest]: singlePoi,
 		otherwise: svgSquaresFromShape
@@ -82,64 +83,48 @@ export class TallGrassTile extends ATile implements Tile {
 	public readonly color = "#cc3366";
 	public readonly layer = B;
 	public readonly name = "tall grass";
-	public readonly svgFromShape = layeredRender({
-		[TileLayer.PointsOfInterest]: singlePoi,
-		otherwise: shape => svgBoxyOverlay(shape)
-	});
-
-	public toStyles(): Record<string, PropertiesHyphen> {
-		return {
-			".tall-grass-box": {
-				fill: "#cc3366"
-			}
-		};
-	}
+	public styles: Record<string, PropertiesHyphen> = {
+		".tall-grass-box": {
+			fill: "#cc3366",
+		},
+	};
+	public readonly svgFromShape = singlePoiBoxy;
 }
 
 export class ForestTile extends ATile implements Tile {
 	public readonly color = "#33cc33";
 	public readonly layer = B;
 	public readonly name = "forest";
-	public readonly svgFromShape = layeredRender({
-		[TileLayer.PointsOfInterest]: singlePoi,
-		otherwise: shape => svgBoxyOverlay(shape)
-	});
-
-	public toStyles(): Record<string, PropertiesHyphen> {
-		return {
-			".forest-box": {
-				fill: "#33cc33"
-			}
-		};
-	}
+	public styles: Record<string, PropertiesHyphen> = {
+		".forest-box": {
+			fill: "#33cc33",
+		},
+	};
+	public readonly svgFromShape = singlePoiBoxy;
 }
 
 export class GrassTile extends ATile implements Tile {
 	public readonly color = "#99ff99";
 	public readonly layer = B;
 	public readonly name = "grass";
-	public readonly svgFromShape = layeredRender({
-		[TileLayer.PointsOfInterest]: singlePoi,
-		otherwise: svgSquaresFromShape
-	});
+	public styles: Record<string, PropertiesHyphen> = {
+		".grass-box": {
+			fill: "#99ff99",
+		},
+	};
+	public readonly svgFromShape = singlePoiBoxy;
 }
 
 export class MountainTile extends ATile implements Tile {
 	public readonly color = "#996633";
 	public readonly layer = B;
 	public readonly name = "mountain";
-	public readonly svgFromShape = layeredRender({
-		[TileLayer.PointsOfInterest]: singlePoi,
-		otherwise: shape => svgBoxyOverlay(shape)
-	});
-
-	public toStyles(): Record<string, PropertiesHyphen> {
-		return {
-			".mountain-box": {
-				fill: "#996633"
-			}
-		};
-	}
+	public styles: Record<string, PropertiesHyphen> = {
+		".mountain-box": {
+			fill: "#996633",
+		},
+	};
+	public readonly svgFromShape = singlePoiBoxy;
 }
 
 export class RiverTile extends ATile implements Tile {
@@ -147,6 +132,12 @@ export class RiverTile extends ATile implements Tile {
 	public readonly joinCardinals = CARDINAL_POINTS;
 	public readonly layer = B;
 	public readonly name = "river";
+	public styles: Record<string, PropertiesHyphen> = {
+		".river-box": {
+			fill: "#6699ff",
+		},
+	};
+	public readonly svgFromShape = singlePoiBoxy;
 }
 
 export class ShallowsTile extends ATile implements Tile {
@@ -154,6 +145,12 @@ export class ShallowsTile extends ATile implements Tile {
 	public readonly joinCardinals = CARDINAL_POINTS;
 	public readonly layer = B;
 	public readonly name = "shallows";
+	public styles: Record<string, PropertiesHyphen> = {
+		".shallows-box": {
+			fill: "#99bbff",
+		},
+	};
+	public readonly svgFromShape = singlePoiBoxy;
 }
 
 export class OutdoorTileSet extends ATileSet implements TileSet {
@@ -164,15 +161,15 @@ export class OutdoorTileSet extends ATileSet implements TileSet {
 	public readonly poiColor = "#000000";
 	public readonly poiFont = FONT_SANS_DEFAULT;
 	public readonly tiles = [
-		new BouldersTile(),
-		new ForestTile(),
 		new GrassTile(),
-		new MachineSiteTile(),
+		new BouldersTile(),
 		new MountainTile(),
+		new ForestTile(),
 		new RoadTile(),
 		new RiverTile(),
 		new ShallowsTile(),
 		new TallGrassTile(),
+		new MachineSiteTile(),
 	];
 
 	isAmbient(symbol: string): boolean {

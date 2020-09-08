@@ -192,8 +192,8 @@ export class ScreenMap implements CellGenerationContext {
 		</a>;
 	}
 
-	public genericTile(coordinate: Coordinate, tile: Tile): JSX.Element {
-		return <use href={`#${spinalCase(tile.name)}`} x={coordinate.x} y={coordinate.y} class="generic-tile"/>;
+	public genericTile(cell: ScreenMapCell, tile: Tile | undefined = cell.tile): JSX.Element {
+		return <use href={`#${spinalCase(tile?.name || "")}`} x={cell.coordinate.x} y={cell.coordinate.y} class="generic-tile"/>;
 	}
 
 	public renderablesForLayer(layer: TileLayer): ScreenMapRenderable[] {
@@ -247,7 +247,7 @@ export class ScreenMap implements CellGenerationContext {
 			<svg viewBox={`0 0 ${this.width} ${this.height}`} xmlns="http://www.w3.org/2000/svg" data-xmlns-xlink="http://www.w3.org/1999/xlink">
 				<style>
 					{renderCssRules(this.topLevelStyles)}
-					{this.tileSet.tiles.map(tile => tile.toStyles == null ? undefined : renderCssRules(tile.toStyles())).filter(Type.isNotNull).join("\n")}
+					{this.tileSet.tiles.map(tile => tile.styles == null ? undefined : renderCssRules(tile.styles)).filter(Type.isNotNull).join("\n")}
 				</style>
 				<defs>
 					{this.tileSet.tiles.map(tile => tile.toSvgSymbols == null ? html(
@@ -272,7 +272,7 @@ export class ScreenMap implements CellGenerationContext {
 								if (renderable.tile.toSvgElement != null) {
 									els.push(renderable.tile.toSvgElement(renderable.coordinate, this.renderer, renderable.envItem));
 								} else {
-									els.push(this.genericTile(renderable.coordinate, renderable.tile));
+									els.push(this.genericTile(renderable));
 								}
 							} else if (this.tileSet.backgroundColor != null) {
 								els.push(

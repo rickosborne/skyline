@@ -267,14 +267,14 @@ export function outlineEdges(edges: Edge[]): Coordinate[][] {
 		const sameStart = edgesByStart.get(startKey);
 		if (sameStart == null || sameStart.length === 0) {
 			if (e.length > 0) {
-				r = [];
-				rr.push(r);
 				edge = e.shift() as Edge;
+				r = [{x: edge.x1, y: edge.y1}];
+				rr.push(r);
 				const thisStart = edgesByStart.get(edgeKey(edge)) as Edge[];
 				thisStart.splice(thisStart.findIndex(t => t === edge), 1);
 			} else {
+				break;
 			}
-			break;
 		} else if (sameStart.length === 1) {
 			edge = sameStart.shift();
 			const n = e.findIndex(t => t === edge);
@@ -300,7 +300,11 @@ export function outlineEdges(edges: Edge[]): Coordinate[][] {
 	return rr;
 }
 
-export function renderablesFromCellsAndTiles(cells: ScreenMapCell[], renderer: TileRenderer, tiles: Tile[]) {
+export function renderablesFromCellsAndTiles(
+	cells: ScreenMapCell[],
+	renderer: TileRenderer,
+	tiles: Tile[]
+): ScreenMapRenderable[] {
 	const keyForLocation: (x: number, y: number) => string = (x, y) => `${x},${y}`;
 	const renderables: ScreenMapRenderable[] = [];
 	// let iterations = 0;
@@ -338,6 +342,8 @@ export function renderablesFromCellsAndTiles(cells: ScreenMapCell[], renderer: T
 					cell.shape.cells.splice(0, cell.shape.cells.length);
 					throw new Error(`Don't know how to graft two shapes!`);
 				}
+				cell.shape = shape;
+				shape.cells.push(cell);
 				const todo: ScreenMapCell[] = [cell];
 				let focus: ScreenMapCell | undefined;
 				const processedKeys = new Set<string>();

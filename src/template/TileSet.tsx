@@ -44,7 +44,7 @@ export interface Tile {
 	layer: TileLayer;
 	name: string;
 	svgFromShape?: SvgFromShapeAndLayer;
-	toStyles?: () => Record<string, CSS.PropertiesHyphen>;
+	styles?: Record<string, CSS.PropertiesHyphen>;
 	toSvgElement?: (coordinate: Coordinate, renderer: TileRenderer, envItem: ScreenMapEnvironmentItem | undefined) => JSX.Element;
 	toSvgSymbols?: () => JSX.Element | JSX.Element[];
 }
@@ -69,7 +69,7 @@ export const FONT_SANS_DEFAULT = "Roboto, \"Open Sans\", \"Helvetica Neue\", Hel
 
 export interface TileRenderer {
 	genericPoi: (coordinate: Coordinate, point: ScreenMapPointOfInterest) => JSX.Element;
-	genericTile: (coordinate: Coordinate, tile: Tile) => JSX.Element;
+	genericTile: (cell: ScreenMapCell, tile?: Tile) => JSX.Element;
 	textAt: (coordinate: Coordinate, label: string, configurer?: Consumer<JSX.Element>) => JSX.Element;
 	tileNameAt: (x: number, y: number) => string | undefined;
 }

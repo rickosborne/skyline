@@ -50,6 +50,7 @@ export function isShape(renderable: any): renderable is ScreenMapShape {
 
 export interface ScreenMapRenderable {
 	readonly layer: TileLayer;
+	note?: string;
 	readonly renderableType: ScreenMapRenderableType;
 	tile?: Tile;
 	toSvgElement?: (renderer: TileRenderer) => JSX.Element;
