@@ -16,7 +16,7 @@ import {
 	ScreenMapPointOfInterest,
 	ScreenMapRenderable
 } from "../map/MapTypes";
-import {boundingBox, cellsFromMapLines} from "../map/mapUtil";
+import {cellsFromMapLines} from "../map/mapUtil";
 import {html} from "./hypertext";
 import {ScreenText} from "./ScreenText";
 import {Tile, TILE_LAYERS, TileLayer, TileRenderer, TileSet} from "./TileSet";
@@ -179,13 +179,13 @@ export class ScreenMap implements CellGenerationContext {
 
 	public genericPoi(coordinate: Coordinate, point: ScreenMapPointOfInterest): JSX.Element {
 		const title = <title>{point.title}</title>;
-		const circle = <use href={`#${POI_ID_SUFFIX}`} x={coordinate.x + 0.5} y={coordinate.y + 0.5}/>;
+		const circle = <use href={`#${POI_ID_SUFFIX}`} x={coordinate.x + 0.5} y={coordinate.y + 0.5} class="poi-generic"/>;
 		const label = this.textAt({x: coordinate.x + 0.5, y: coordinate.y + 0.5}, point.id);
-		return point.link == null ? <g>
+		return point.link == null ? <g class="poi-generic-group">
 			{title}
 			{circle}
 			{label}
-		</g> : <a href={point.link}>
+		</g> : <a href={point.link} class="poi-generic-link">
 			{title}
 			{circle}
 			{label}
@@ -193,7 +193,7 @@ export class ScreenMap implements CellGenerationContext {
 	}
 
 	public genericTile(coordinate: Coordinate, tile: Tile): JSX.Element {
-		return <use href={`#${spinalCase(tile.name)}`} x={coordinate.x} y={coordinate.y}/>;
+		return <use href={`#${spinalCase(tile.name)}`} x={coordinate.x} y={coordinate.y} class="generic-tile"/>;
 	}
 
 	public renderablesForLayer(layer: TileLayer): ScreenMapRenderable[] {
@@ -276,7 +276,8 @@ export class ScreenMap implements CellGenerationContext {
 								}
 							} else if (this.tileSet.backgroundColor != null) {
 								els.push(
-									<use href={`#${BACKGROUND_ID_SUFFIX}`} x={renderable.coordinate.x} y={renderable.coordinate.y}/>);
+									<use href={`#${BACKGROUND_ID_SUFFIX}`} x={renderable.coordinate.x} y={renderable.coordinate.y} class="tile-background"/>
+								);
 							}
 							if (renderable.poi != null) {
 								if (this.tileSet.svgElementFromPoint != null) {

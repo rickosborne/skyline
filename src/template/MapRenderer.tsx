@@ -1,7 +1,6 @@
 import * as crypto from "crypto";
 import {h} from 'preact';
 import {ATemplate} from "./ATemplate";
-import {html} from "./hypertext";
 import {ScreenMap} from "./ScreenMap";
 
 export interface MapData {

@@ -7,7 +7,7 @@ tags:
 
 <!-- +template map story/iaso/510-mothers-watch-ruins svg -->
 
-<!-- map data 29543bcb519448128dbfc877680b6f7a6f805cedbfe7553f4083f9c7ff8334e4
+<!-- map data 85ca8972a2476882b71554f2fa2fbdfa158e110ac648d42974397e2b26c7c819
 Map
   Title: Mother's Watch Ruins, Level I
   Theme: Old Ones Indoor Delve
@@ -163,19 +163,19 @@ Points of Interest:
 					<use href="#office-wall-h" x="0" y="0.9"></use>
 					<use href="#office-wall-v" x="0" y="0"></use>
 				</g>
-				<use href="#rocks" x="10" y="1"></use>
-				<use href="#rocks" x="11" y="1"></use>
-				<use href="#rocks" x="12" y="1"></use>
-				<use href="#puddle" x="13" y="1"></use>
-				<use href="#office-floor" x="14" y="1"></use>
-				<use href="#office-floor" x="15" y="1"></use>
-				<use href="#office-floor" x="16" y="1"></use>
-				<use href="#office-floor" x="17" y="1"></use>
-				<use href="#office-floor" x="18" y="1"></use>
-				<use href="#office-floor" x="19" y="1"></use>
-				<use href="#office-floor" x="20" y="1"></use>
-				<use href="#office-floor" x="22" y="1"></use>
-				<use href="#office-floor" x="23" y="1"></use>
+				<use class="generic-tile" href="#rocks" x="10" y="1"></use>
+				<use class="generic-tile" href="#rocks" x="11" y="1"></use>
+				<use class="generic-tile" href="#rocks" x="12" y="1"></use>
+				<use class="generic-tile" href="#puddle" x="13" y="1"></use>
+				<use class="generic-tile" href="#office-floor" x="14" y="1"></use>
+				<use class="generic-tile" href="#office-floor" x="15" y="1"></use>
+				<use class="generic-tile" href="#office-floor" x="16" y="1"></use>
+				<use class="generic-tile" href="#office-floor" x="17" y="1"></use>
+				<use class="generic-tile" href="#office-floor" x="18" y="1"></use>
+				<use class="generic-tile" href="#office-floor" x="19" y="1"></use>
+				<use class="generic-tile" href="#office-floor" x="20" y="1"></use>
+				<use class="generic-tile" href="#office-floor" x="22" y="1"></use>
+				<use class="generic-tile" href="#office-floor" x="23" y="1"></use>
 				<g transform="translate(24 1)">
 					<title>Wall</title>
 					<use href="#office-wall-b" x="0" y="0"></use>
@@ -191,18 +191,18 @@ Points of Interest:
 					<use href="#office-wall-v" x="0.9" y="0"></use>
 					<use href="#office-wall-v" x="0" y="0"></use>
 				</g>
-				<use href="#rocks" x="9" y="2"></use>
-				<use href="#rocks" x="10" y="2"></use>
-				<use href="#office-floor" x="11" y="2"></use>
-				<use href="#office-floor" x="12" y="2"></use>
-				<use href="#office-floor" x="13" y="2"></use>
-				<use href="#office-floor" x="14" y="2"></use>
-				<use href="#office-floor" x="15" y="2"></use>
-				<use href="#office-floor" x="16" y="2"></use>
-				<use href="#office-floor" x="17" y="2"></use>
-				<use href="#office-floor" x="18" y="2"></use>
-				<use href="#office-floor" x="19" y="2"></use>
-				<use href="#office-floor" x="20" y="2"></use>
+				<use class="generic-tile" href="#rocks" x="9" y="2"></use>
+				<use class="generic-tile" href="#rocks" x="10" y="2"></use>
+				<use class="generic-tile" href="#office-floor" x="11" y="2"></use>
+				<use class="generic-tile" href="#office-floor" x="12" y="2"></use>
+				<use class="generic-tile" href="#office-floor" x="13" y="2"></use>
+				<use class="generic-tile" href="#office-floor" x="14" y="2"></use>
+				<use class="generic-tile" href="#office-floor" x="15" y="2"></use>
+				<use class="generic-tile" href="#office-floor" x="16" y="2"></use>
+				<use class="generic-tile" href="#office-floor" x="17" y="2"></use>
+				<use class="generic-tile" href="#office-floor" x="18" y="2"></use>
+				<use class="generic-tile" href="#office-floor" x="19" y="2"></use>
+				<use class="generic-tile" href="#office-floor" x="20" y="2"></use>
 				<g transform="translate(21 2)">
 					<title>Wall</title>
 					<use href="#office-wall-b" x="0" y="0"></use>
@@ -211,9 +211,9 @@ Points of Interest:
 					<use href="#office-wall-h" x="0" y="0.9"></use>
 					<use href="#office-wall-v" x="0" y="0"></use>
 				</g>
-				<use href="#office-floor" x="22" y="2"></use>
-				<use href="#office-floor" x="23" y="2"></use>
-				<use href="#office-floor" x="24" y="2"></use>
+				<use class="generic-tile" href="#office-floor" x="22" y="2"></use>
+				<use class="generic-tile" href="#office-floor" x="23" y="2"></use>
+				<use class="generic-tile" href="#office-floor" x="24" y="2"></use>
 				<g transform="translate(25 2)">
 					<title>Wall</title>
 					<use href="#office-wall-b" x="0" y="0"></use>
@@ -277,22 +277,22 @@ Points of Interest:
 					<use href="#office-wall-h" x="0" y="0.9"></use>
 					<use href="#office-wall-c" x="0" y="0"></use>
 				</g>
-				<use href="#puddle" x="9" y="3"></use>
-				<use href="#office-floor" x="10" y="3"></use>
-				<use href="#office-floor" x="11" y="3"></use>
-				<use href="#office-floor" x="12" y="3"></use>
-				<use href="#office-floor" x="13" y="3"></use>
-				<use href="#office-floor" x="14" y="3"></use>
-				<use href="#office-floor" x="15" y="3"></use>
-				<use href="#office-floor" x="16" y="3"></use>
-				<use href="#office-floor" x="17" y="3"></use>
-				<use href="#office-floor" x="18" y="3"></use>
-				<use href="#office-floor" x="19" y="3"></use>
-				<use href="#office-floor" x="20" y="3"></use>
-				<use href="#railing" x="21" y="3"></use>
-				<use href="#office-floor" x="22" y="3"></use>
-				<use href="#office-floor" x="23" y="3"></use>
-				<use href="#office-floor" x="24" y="3"></use>
+				<use class="generic-tile" href="#puddle" x="9" y="3"></use>
+				<use class="generic-tile" href="#office-floor" x="10" y="3"></use>
+				<use class="generic-tile" href="#office-floor" x="11" y="3"></use>
+				<use class="generic-tile" href="#office-floor" x="12" y="3"></use>
+				<use class="generic-tile" href="#office-floor" x="13" y="3"></use>
+				<use class="generic-tile" href="#office-floor" x="14" y="3"></use>
+				<use class="generic-tile" href="#office-floor" x="15" y="3"></use>
+				<use class="generic-tile" href="#office-floor" x="16" y="3"></use>
+				<use class="generic-tile" href="#office-floor" x="17" y="3"></use>
+				<use class="generic-tile" href="#office-floor" x="18" y="3"></use>
+				<use class="generic-tile" href="#office-floor" x="19" y="3"></use>
+				<use class="generic-tile" href="#office-floor" x="20" y="3"></use>
+				<use class="generic-tile" href="#railing" x="21" y="3"></use>
+				<use class="generic-tile" href="#office-floor" x="22" y="3"></use>
+				<use class="generic-tile" href="#office-floor" x="23" y="3"></use>
+				<use class="generic-tile" href="#office-floor" x="24" y="3"></use>
 				<g transform="translate(25 3)">
 					<title>Wall</title>
 					<use href="#office-wall-b" x="0" y="0"></use>
@@ -445,50 +445,50 @@ Points of Interest:
 					<use href="#office-wall-v" x="0.9" y="0"></use>
 					<use href="#office-wall-v" x="0" y="0"></use>
 				</g>
-				<use href="#office-floor" x="1" y="4"></use>
-				<use href="#office-floor" x="2" y="4"></use>
-				<use href="#office-floor" x="3" y="4"></use>
-				<use href="#office-floor" x="4" y="4"></use>
-				<use href="#office-floor" x="5" y="4"></use>
-				<use href="#office-floor" x="6" y="4"></use>
-				<use href="#office-floor" x="7" y="4"></use>
-				<use href="#office-floor" x="8" y="4"></use>
-				<use href="#office-floor" x="9" y="4"></use>
-				<use href="#office-floor" x="10" y="4"></use>
-				<use href="#office-floor" x="11" y="4"></use>
-				<use href="#office-floor" x="12" y="4"></use>
-				<use href="#office-floor" x="13" y="4"></use>
-				<use href="#office-floor" x="14" y="4"></use>
-				<use href="#office-floor" x="15" y="4"></use>
-				<use href="#office-floor" x="16" y="4"></use>
-				<use href="#office-floor" x="17" y="4"></use>
-				<use href="#office-floor" x="18" y="4"></use>
-				<use href="#office-floor" x="19" y="4"></use>
-				<use href="#office-floor" x="20" y="4"></use>
-				<use href="#railing" x="21" y="4"></use>
-				<use href="#office-floor" x="22" y="4"></use>
-				<use href="#office-floor" x="23" y="4"></use>
-				<use href="#office-floor" x="24" y="4"></use>
-				<use href="#office-floor" x="26" y="4"></use>
-				<use href="#office-floor" x="27" y="4"></use>
-				<use href="#office-floor" x="28" y="4"></use>
-				<use href="#office-floor" x="29" y="4"></use>
-				<use href="#office-floor" x="30" y="4"></use>
-				<use href="#office-floor" x="32" y="4"></use>
-				<use href="#office-floor" x="33" y="4"></use>
-				<use href="#office-floor" x="34" y="4"></use>
-				<use href="#office-floor" x="35" y="4"></use>
-				<use href="#office-floor" x="36" y="4"></use>
-				<use href="#office-floor" x="38" y="4"></use>
-				<use href="#office-floor" x="39" y="4"></use>
-				<use href="#office-floor" x="40" y="4"></use>
-				<use href="#office-floor" x="41" y="4"></use>
-				<use href="#office-floor" x="42" y="4"></use>
-				<use href="#office-floor" x="43" y="4"></use>
-				<use href="#office-floor" x="44" y="4"></use>
-				<use href="#office-floor" x="45" y="4"></use>
-				<use href="#office-floor" x="46" y="4"></use>
-				<use href="#office-floor" x="47" y="4"></use>
+				<use class="generic-tile" href="#office-floor" x="1" y="4"></use>
+				<use class="generic-tile" href="#office-floor" x="2" y="4"></use>
+				<use class="generic-tile" href="#office-floor" x="3" y="4"></use>
+				<use class="generic-tile" href="#office-floor" x="4" y="4"></use>
+				<use class="generic-tile" href="#office-floor" x="5" y="4"></use>
+				<use class="generic-tile" href="#office-floor" x="6" y="4"></use>
+				<use class="generic-tile" href="#office-floor" x="7" y="4"></use>
+				<use class="generic-tile" href="#office-floor" x="8" y="4"></use>
+				<use class="generic-tile" href="#office-floor" x="9" y="4"></use>
+				<use class="generic-tile" href="#office-floor" x="10" y="4"></use>
+				<use class="generic-tile" href="#office-floor" x="11" y="4"></use>
+				<use class="generic-tile" href="#office-floor" x="12" y="4"></use>
+				<use class="generic-tile" href="#office-floor" x="13" y="4"></use>
+				<use class="generic-tile" href="#office-floor" x="14" y="4"></use>
+				<use class="generic-tile" href="#office-floor" x="15" y="4"></use>
+				<use class="generic-tile" href="#office-floor" x="16" y="4"></use>
+				<use class="generic-tile" href="#office-floor" x="17" y="4"></use>
+				<use class="generic-tile" href="#office-floor" x="18" y="4"></use>
+				<use class="generic-tile" href="#office-floor" x="19" y="4"></use>
+				<use class="generic-tile" href="#office-floor" x="20" y="4"></use>
+				<use class="generic-tile" href="#railing" x="21" y="4"></use>
+				<use class="generic-tile" href="#office-floor" x="22" y="4"></use>
+				<use class="generic-tile" href="#office-floor" x="23" y="4"></use>
+				<use class="generic-tile" href="#office-floor" x="24" y="4"></use>
+				<use class="generic-tile" href="#office-floor" x="26" y="4"></use>
+				<use class="generic-tile" href="#office-floor" x="27" y="4"></use>
+				<use class="generic-tile" href="#office-floor" x="28" y="4"></use>
+				<use class="generic-tile" href="#office-floor" x="29" y="4"></use>
+				<use class="generic-tile" href="#office-floor" x="30" y="4"></use>
+				<use class="generic-tile" href="#office-floor" x="32" y="4"></use>
+				<use class="generic-tile" href="#office-floor" x="33" y="4"></use>
+				<use class="generic-tile" href="#office-floor" x="34" y="4"></use>
+				<use class="generic-tile" href="#office-floor" x="35" y="4"></use>
+				<use class="generic-tile" href="#office-floor" x="36" y="4"></use>
+				<use class="generic-tile" href="#office-floor" x="38" y="4"></use>
+				<use class="generic-tile" href="#office-floor" x="39" y="4"></use>
+				<use class="generic-tile" href="#office-floor" x="40" y="4"></use>
+				<use class="generic-tile" href="#office-floor" x="41" y="4"></use>
+				<use class="generic-tile" href="#office-floor" x="42" y="4"></use>
+				<use class="generic-tile" href="#office-floor" x="43" y="4"></use>
+				<use class="generic-tile" href="#office-floor" x="44" y="4"></use>
+				<use class="generic-tile" href="#office-floor" x="45" y="4"></use>
+				<use class="generic-tile" href="#office-floor" x="46" y="4"></use>
+				<use class="generic-tile" href="#office-floor" x="47" y="4"></use>
 				<g transform="translate(48 4)">
 					<title>Wall</title>
 					<use href="#office-wall-b" x="0" y="0"></use>
@@ -501,30 +501,30 @@ Points of Interest:
 					<use href="#office-wall-v" x="0.9" y="0"></use>
 					<use href="#office-wall-v" x="0" y="0"></use>
 				</g>
-				<use href="#office-floor" x="1" y="5"></use>
-				<use href="#office-floor" x="2" y="5"></use>
-				<use href="#office-floor" x="3" y="5"></use>
-				<use href="#office-floor" x="4" y="5"></use>
-				<use href="#office-floor" x="5" y="5"></use>
-				<use href="#office-floor" x="6" y="5"></use>
-				<use href="#office-floor" x="7" y="5"></use>
-				<use href="#office-floor" x="8" y="5"></use>
-				<use href="#office-floor" x="9" y="5"></use>
-				<use href="#office-floor" x="10" y="5"></use>
-				<use href="#office-floor" x="11" y="5"></use>
-				<use href="#office-floor" x="12" y="5"></use>
-				<use href="#office-floor" x="13" y="5"></use>
-				<use href="#office-floor" x="14" y="5"></use>
-				<use href="#office-floor" x="15" y="5"></use>
-				<use href="#office-floor" x="16" y="5"></use>
-				<use href="#office-floor" x="17" y="5"></use>
-				<use href="#office-floor" x="18" y="5"></use>
-				<use href="#office-floor" x="19" y="5"></use>
-				<use href="#office-floor" x="20" y="5"></use>
-				<use href="#railing" x="21" y="5"></use>
-				<use href="#office-floor" x="22" y="5"></use>
-				<use href="#office-floor" x="23" y="5"></use>
-				<use href="#office-floor" x="24" y="5"></use>
+				<use class="generic-tile" href="#office-floor" x="1" y="5"></use>
+				<use class="generic-tile" href="#office-floor" x="2" y="5"></use>
+				<use class="generic-tile" href="#office-floor" x="3" y="5"></use>
+				<use class="generic-tile" href="#office-floor" x="4" y="5"></use>
+				<use class="generic-tile" href="#office-floor" x="5" y="5"></use>
+				<use class="generic-tile" href="#office-floor" x="6" y="5"></use>
+				<use class="generic-tile" href="#office-floor" x="7" y="5"></use>
+				<use class="generic-tile" href="#office-floor" x="8" y="5"></use>
+				<use class="generic-tile" href="#office-floor" x="9" y="5"></use>
+				<use class="generic-tile" href="#office-floor" x="10" y="5"></use>
+				<use class="generic-tile" href="#office-floor" x="11" y="5"></use>
+				<use class="generic-tile" href="#office-floor" x="12" y="5"></use>
+				<use class="generic-tile" href="#office-floor" x="13" y="5"></use>
+				<use class="generic-tile" href="#office-floor" x="14" y="5"></use>
+				<use class="generic-tile" href="#office-floor" x="15" y="5"></use>
+				<use class="generic-tile" href="#office-floor" x="16" y="5"></use>
+				<use class="generic-tile" href="#office-floor" x="17" y="5"></use>
+				<use class="generic-tile" href="#office-floor" x="18" y="5"></use>
+				<use class="generic-tile" href="#office-floor" x="19" y="5"></use>
+				<use class="generic-tile" href="#office-floor" x="20" y="5"></use>
+				<use class="generic-tile" href="#railing" x="21" y="5"></use>
+				<use class="generic-tile" href="#office-floor" x="22" y="5"></use>
+				<use class="generic-tile" href="#office-floor" x="23" y="5"></use>
+				<use class="generic-tile" href="#office-floor" x="24" y="5"></use>
 				<g transform="translate(25 5)">
 					<title>Wall</title>
 					<use href="#office-wall-b" x="0" y="0"></use>
@@ -595,16 +595,16 @@ Points of Interest:
 					<use href="#office-wall-v" x="0.9" y="0"></use>
 					<use href="#office-wall-c" x="0" y="0.9"></use>
 				</g>
-				<use href="#office-floor" x="38" y="5"></use>
-				<use href="#office-floor" x="39" y="5"></use>
-				<use href="#office-floor" x="40" y="5"></use>
-				<use href="#office-floor" x="41" y="5"></use>
-				<use href="#office-floor" x="42" y="5"></use>
-				<use href="#office-floor" x="43" y="5"></use>
-				<use href="#office-floor" x="44" y="5"></use>
-				<use href="#office-floor" x="45" y="5"></use>
-				<use href="#office-floor" x="46" y="5"></use>
-				<use href="#office-floor" x="47" y="5"></use>
+				<use class="generic-tile" href="#office-floor" x="38" y="5"></use>
+				<use class="generic-tile" href="#office-floor" x="39" y="5"></use>
+				<use class="generic-tile" href="#office-floor" x="40" y="5"></use>
+				<use class="generic-tile" href="#office-floor" x="41" y="5"></use>
+				<use class="generic-tile" href="#office-floor" x="42" y="5"></use>
+				<use class="generic-tile" href="#office-floor" x="43" y="5"></use>
+				<use class="generic-tile" href="#office-floor" x="44" y="5"></use>
+				<use class="generic-tile" href="#office-floor" x="45" y="5"></use>
+				<use class="generic-tile" href="#office-floor" x="46" y="5"></use>
+				<use class="generic-tile" href="#office-floor" x="47" y="5"></use>
 				<g transform="translate(48 5)">
 					<title>Wall</title>
 					<use href="#office-wall-b" x="0" y="0"></use>
@@ -667,22 +667,22 @@ Points of Interest:
 					<use href="#office-wall-v" x="0.9" y="0"></use>
 					<use href="#office-wall-c" x="0" y="0.9"></use>
 				</g>
-				<use href="#office-floor" x="9" y="6"></use>
-				<use href="#office-floor" x="10" y="6"></use>
-				<use href="#office-floor" x="11" y="6"></use>
-				<use href="#office-floor" x="12" y="6"></use>
-				<use href="#office-floor" x="13" y="6"></use>
-				<use href="#office-floor" x="14" y="6"></use>
-				<use href="#office-floor" x="15" y="6"></use>
-				<use href="#office-floor" x="16" y="6"></use>
-				<use href="#office-floor" x="17" y="6"></use>
-				<use href="#office-floor" x="18" y="6"></use>
-				<use href="#office-floor" x="19" y="6"></use>
-				<use href="#office-floor" x="20" y="6"></use>
-				<use href="#railing" x="21" y="6"></use>
-				<use href="#office-floor" x="22" y="6"></use>
-				<use href="#office-floor" x="23" y="6"></use>
-				<use href="#office-floor" x="24" y="6"></use>
+				<use class="generic-tile" href="#office-floor" x="9" y="6"></use>
+				<use class="generic-tile" href="#office-floor" x="10" y="6"></use>
+				<use class="generic-tile" href="#office-floor" x="11" y="6"></use>
+				<use class="generic-tile" href="#office-floor" x="12" y="6"></use>
+				<use class="generic-tile" href="#office-floor" x="13" y="6"></use>
+				<use class="generic-tile" href="#office-floor" x="14" y="6"></use>
+				<use class="generic-tile" href="#office-floor" x="15" y="6"></use>
+				<use class="generic-tile" href="#office-floor" x="16" y="6"></use>
+				<use class="generic-tile" href="#office-floor" x="17" y="6"></use>
+				<use class="generic-tile" href="#office-floor" x="18" y="6"></use>
+				<use class="generic-tile" href="#office-floor" x="19" y="6"></use>
+				<use class="generic-tile" href="#office-floor" x="20" y="6"></use>
+				<use class="generic-tile" href="#railing" x="21" y="6"></use>
+				<use class="generic-tile" href="#office-floor" x="22" y="6"></use>
+				<use class="generic-tile" href="#office-floor" x="23" y="6"></use>
+				<use class="generic-tile" href="#office-floor" x="24" y="6"></use>
 				<g transform="translate(25 6)">
 					<title>Wall</title>
 					<use href="#office-wall-b" x="0" y="0"></use>
@@ -703,15 +703,15 @@ Points of Interest:
 					<use href="#office-wall-v" x="0" y="0"></use>
 				</g>
 				<use height="1" href="#office-stairs" transform="rotate(270, 35.5, 6.5)" width="1" x="35" y="6"></use>
-				<a href="150-the-blinking-light.html">
+				<a class="poi-generic-link" href="150-the-blinking-light.html">
 					<title>Stairs to Level II</title>
-					<use href="#--poi" x="35.5" y="6.5"></use>
+					<use class="poi-generic" href="#--poi" x="35.5" y="6.5"></use>
 					<text class="poi" dominant-baseline="middle" fill="#000000" font-size="1px" text-anchor="middle" x="35.475" y="6.55">2</text>
 				</a>
 				<use height="1" href="#office-stairs" transform="rotate(270, 36.5, 6.5)" width="1" x="36" y="6"></use>
-				<a href="150-the-blinking-light.html">
+				<a class="poi-generic-link" href="150-the-blinking-light.html">
 					<title>Stairs to Level II</title>
-					<use href="#--poi" x="36.5" y="6.5"></use>
+					<use class="poi-generic" href="#--poi" x="36.5" y="6.5"></use>
 					<text class="poi" dominant-baseline="middle" fill="#000000" font-size="1px" text-anchor="middle" x="36.475" y="6.55">2</text>
 				</a>
 				<g transform="translate(37 6)">
@@ -720,16 +720,16 @@ Points of Interest:
 					<use href="#office-wall-v" x="0.9" y="0"></use>
 					<use href="#office-wall-v" x="0" y="0"></use>
 				</g>
-				<use href="#office-floor" x="38" y="6"></use>
-				<use href="#office-floor" x="39" y="6"></use>
-				<use href="#office-floor" x="40" y="6"></use>
-				<use href="#office-floor" x="41" y="6"></use>
-				<use href="#office-floor" x="42" y="6"></use>
-				<use href="#office-floor" x="43" y="6"></use>
-				<use href="#office-floor" x="44" y="6"></use>
-				<use href="#office-floor" x="45" y="6"></use>
-				<use href="#office-floor" x="46" y="6"></use>
-				<use href="#office-floor" x="47" y="6"></use>
+				<use class="generic-tile" href="#office-floor" x="38" y="6"></use>
+				<use class="generic-tile" href="#office-floor" x="39" y="6"></use>
+				<use class="generic-tile" href="#office-floor" x="40" y="6"></use>
+				<use class="generic-tile" href="#office-floor" x="41" y="6"></use>
+				<use class="generic-tile" href="#office-floor" x="42" y="6"></use>
+				<use class="generic-tile" href="#office-floor" x="43" y="6"></use>
+				<use class="generic-tile" href="#office-floor" x="44" y="6"></use>
+				<use class="generic-tile" href="#office-floor" x="45" y="6"></use>
+				<use class="generic-tile" href="#office-floor" x="46" y="6"></use>
+				<use class="generic-tile" href="#office-floor" x="47" y="6"></use>
 				<g transform="translate(48 6)">
 					<title>Wall</title>
 					<use href="#office-wall-b" x="0" y="0"></use>
@@ -743,18 +743,18 @@ Points of Interest:
 					<use href="#office-wall-h" x="0" y="0.9"></use>
 					<use href="#office-wall-v" x="0" y="0"></use>
 				</g>
-				<use href="#office-floor" x="9" y="7"></use>
-				<use href="#office-floor" x="10" y="7"></use>
-				<use href="#office-floor" x="11" y="7"></use>
-				<use href="#office-floor" x="12" y="7"></use>
-				<use href="#office-floor" x="13" y="7"></use>
-				<use href="#office-floor" x="14" y="7"></use>
-				<use href="#office-floor" x="15" y="7"></use>
-				<use href="#office-floor" x="16" y="7"></use>
-				<use href="#office-floor" x="17" y="7"></use>
-				<use href="#office-floor" x="18" y="7"></use>
-				<use href="#office-floor" x="19" y="7"></use>
-				<use href="#office-floor" x="20" y="7"></use>
+				<use class="generic-tile" href="#office-floor" x="9" y="7"></use>
+				<use class="generic-tile" href="#office-floor" x="10" y="7"></use>
+				<use class="generic-tile" href="#office-floor" x="11" y="7"></use>
+				<use class="generic-tile" href="#office-floor" x="12" y="7"></use>
+				<use class="generic-tile" href="#office-floor" x="13" y="7"></use>
+				<use class="generic-tile" href="#office-floor" x="14" y="7"></use>
+				<use class="generic-tile" href="#office-floor" x="15" y="7"></use>
+				<use class="generic-tile" href="#office-floor" x="16" y="7"></use>
+				<use class="generic-tile" href="#office-floor" x="17" y="7"></use>
+				<use class="generic-tile" href="#office-floor" x="18" y="7"></use>
+				<use class="generic-tile" href="#office-floor" x="19" y="7"></use>
+				<use class="generic-tile" href="#office-floor" x="20" y="7"></use>
 				<g transform="translate(21 7)">
 					<title>Wall</title>
 					<use href="#office-wall-b" x="0" y="0"></use>
@@ -763,9 +763,9 @@ Points of Interest:
 					<use href="#office-wall-h" x="0" y="0.9"></use>
 					<use href="#office-wall-v" x="0" y="0"></use>
 				</g>
-				<use href="#office-floor" x="22" y="7"></use>
-				<use href="#office-floor" x="23" y="7"></use>
-				<use href="#office-floor" x="24" y="7"></use>
+				<use class="generic-tile" href="#office-floor" x="22" y="7"></use>
+				<use class="generic-tile" href="#office-floor" x="23" y="7"></use>
+				<use class="generic-tile" href="#office-floor" x="24" y="7"></use>
 				<g transform="translate(25 7)">
 					<title>Wall</title>
 					<use href="#office-wall-b" x="0" y="0"></use>
@@ -779,11 +779,11 @@ Points of Interest:
 					<use href="#office-wall-v" x="0.9" y="0"></use>
 					<use href="#office-wall-v" x="0" y="0"></use>
 				</g>
-				<use href="#office-floor" x="32" y="7"></use>
-				<use href="#office-floor" x="33" y="7"></use>
-				<use href="#office-floor" x="34" y="7"></use>
-				<use href="#office-floor" x="35" y="7"></use>
-				<use href="#office-floor" x="36" y="7"></use>
+				<use class="generic-tile" href="#office-floor" x="32" y="7"></use>
+				<use class="generic-tile" href="#office-floor" x="33" y="7"></use>
+				<use class="generic-tile" href="#office-floor" x="34" y="7"></use>
+				<use class="generic-tile" href="#office-floor" x="35" y="7"></use>
+				<use class="generic-tile" href="#office-floor" x="36" y="7"></use>
 				<g transform="translate(37 7)">
 					<title>Wall</title>
 					<use href="#office-wall-b" x="0" y="0"></use>
@@ -866,19 +866,19 @@ Points of Interest:
 					<use href="#office-wall-h" x="0" y="0.9"></use>
 					<use href="#office-wall-v" x="0" y="0"></use>
 				</g>
-				<use href="#office-floor" x="10" y="8"></use>
-				<use href="#office-floor" x="11" y="8"></use>
-				<use href="#office-floor" x="12" y="8"></use>
-				<use href="#office-floor" x="13" y="8"></use>
-				<use href="#office-floor" x="14" y="8"></use>
-				<use href="#office-floor" x="15" y="8"></use>
-				<use href="#office-floor" x="16" y="8"></use>
-				<use href="#office-floor" x="17" y="8"></use>
-				<use href="#office-floor" x="18" y="8"></use>
-				<use href="#office-floor" x="19" y="8"></use>
-				<use href="#office-floor" x="20" y="8"></use>
-				<use href="#office-floor" x="22" y="8"></use>
-				<use href="#office-floor" x="23" y="8"></use>
+				<use class="generic-tile" href="#office-floor" x="10" y="8"></use>
+				<use class="generic-tile" href="#office-floor" x="11" y="8"></use>
+				<use class="generic-tile" href="#office-floor" x="12" y="8"></use>
+				<use class="generic-tile" href="#office-floor" x="13" y="8"></use>
+				<use class="generic-tile" href="#office-floor" x="14" y="8"></use>
+				<use class="generic-tile" href="#office-floor" x="15" y="8"></use>
+				<use class="generic-tile" href="#office-floor" x="16" y="8"></use>
+				<use class="generic-tile" href="#office-floor" x="17" y="8"></use>
+				<use class="generic-tile" href="#office-floor" x="18" y="8"></use>
+				<use class="generic-tile" href="#office-floor" x="19" y="8"></use>
+				<use class="generic-tile" href="#office-floor" x="20" y="8"></use>
+				<use class="generic-tile" href="#office-floor" x="22" y="8"></use>
+				<use class="generic-tile" href="#office-floor" x="23" y="8"></use>
 				<g transform="translate(24 8)">
 					<title>Wall</title>
 					<use href="#office-wall-b" x="0" y="0"></use>
@@ -1018,12 +1018,12 @@ Points of Interest:
 					<use href="#office-wall-h" x="0" y="0.9"></use>
 				</g>
 			</g>
-			<g class="layer-O"><use href="#crate" x="47" y="4"></use></g>
+			<g class="layer-O"><use class="generic-tile" href="#crate" x="47" y="4"></use></g>
 			<g class="layer-I">
 				<use height="1" href="#office-stairs" width="1" x="21" y="1"></use>
-				<use href="#office-door" x="25" y="4"></use>
-				<use href="#office-door" x="31" y="4"></use>
-				<use href="#office-door" x="37" y="4"></use>
+				<use class="generic-tile" href="#office-door" x="25" y="4"></use>
+				<use class="generic-tile" href="#office-door" x="31" y="4"></use>
+				<use class="generic-tile" href="#office-door" x="37" y="4"></use>
 				<use height="1" href="#office-stairs" transform="rotate(90, 32.5, 5.5)" width="1" x="32" y="5"></use>
 				<use height="1" href="#office-stairs" transform="rotate(90, 33.5, 5.5)" width="1" x="33" y="5"></use>
 				<use height="1" href="#office-stairs" transform="rotate(90, 32.5, 6.5)" width="1" x="32" y="6"></use>
@@ -1033,27 +1033,27 @@ Points of Interest:
 				<use height="1" href="#office-stairs" width="1" x="21" y="8"></use>
 			</g>
 			<g class="layer-P">
-				<use href="#office-floor" x="11" y="2"></use>
-				<g>
+				<use class="generic-tile" href="#office-floor" x="11" y="2"></use>
+				<g class="poi-generic-group">
 					<title>Entrance</title>
-					<use href="#--poi" x="11.5" y="2.5"></use>
+					<use class="poi-generic" href="#--poi" x="11.5" y="2.5"></use>
 					<text class="poi" dominant-baseline="middle" fill="#000000" font-size="1px" text-anchor="middle" x="11.475" y="2.55">1</text>
 				</g>
-				<use href="#office-floor" x="47" y="4"></use>
+				<use class="generic-tile" href="#office-floor" x="47" y="4"></use>
 				<g>
 					<use height="2" href="#office-crate" width="2" x="46.5" y="3.5"></use>
 					<text class="poi" dominant-baseline="middle" fill="#000000" font-size="1px" text-anchor="middle" x="47.475" y="4.55">3</text>
 				</g>
 				<use height="1" href="#office-stairs" transform="rotate(270, 35.5, 6.5)" width="1" x="35" y="6"></use>
-				<a href="150-the-blinking-light.html">
+				<a class="poi-generic-link" href="150-the-blinking-light.html">
 					<title>Stairs to Level II</title>
-					<use href="#--poi" x="35.5" y="6.5"></use>
+					<use class="poi-generic" href="#--poi" x="35.5" y="6.5"></use>
 					<text class="poi" dominant-baseline="middle" fill="#000000" font-size="1px" text-anchor="middle" x="35.475" y="6.55">2</text>
 				</a>
 				<use height="1" href="#office-stairs" transform="rotate(270, 36.5, 6.5)" width="1" x="36" y="6"></use>
-				<a href="150-the-blinking-light.html">
+				<a class="poi-generic-link" href="150-the-blinking-light.html">
 					<title>Stairs to Level II</title>
-					<use href="#--poi" x="36.5" y="6.5"></use>
+					<use class="poi-generic" href="#--poi" x="36.5" y="6.5"></use>
 					<text class="poi" dominant-baseline="middle" fill="#000000" font-size="1px" text-anchor="middle" x="36.475" y="6.55">2</text>
 				</a>
 			</g>
