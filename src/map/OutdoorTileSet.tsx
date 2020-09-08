@@ -1,23 +1,23 @@
+import {PropertiesHyphen} from "csstype";
 import {h, JSX} from "preact";
 import {
 	CARDINAL_POINTS,
-	FONT_SANS_DEFAULT, SvgFromShape,
+	FONT_SANS_DEFAULT,
+	SvgFromShape,
 	SvgFromShapeAndLayer,
 	Tile,
 	TileLayer,
-	TileRenderer,
 	TileSet
 } from "../template/TileSet";
 import {ATile} from "./ATile";
 import {ATileSet} from "./ATileSet";
-import {ScreenMapShape} from "./MapTypes";
 import {singlePoi, svgBoxyOverlay, svgHullOverlay, svgSquaresFromShape} from "./svgShape";
 
 const B = TileLayer.Background;
 const I = TileLayer.Interact;
 const O = TileLayer.Overlay;
 
-function layeredRender(layers: Partial<Record<TileLayer, SvgFromShape>> & {otherwise: SvgFromShape}): SvgFromShapeAndLayer {
+function layeredRender(layers: Partial<Record<TileLayer, SvgFromShape>> & { otherwise: SvgFromShape }): SvgFromShapeAndLayer {
 	return layer => layers[layer] || layers.otherwise;
 };
 
@@ -29,6 +29,14 @@ export class BouldersTile extends ATile implements Tile {
 		[TileLayer.PointsOfInterest]: singlePoi,
 		otherwise: shape => svgBoxyOverlay(shape)
 	});
+
+	public toStyles(): Record<string, PropertiesHyphen> {
+		return {
+			".boulder-box": {
+				fill: "#dd9944"
+			}
+		};
+	}
 }
 
 export class MachineSiteTile extends ATile implements Tile {
@@ -37,18 +45,24 @@ export class MachineSiteTile extends ATile implements Tile {
 	public readonly name = "machine site";
 	public readonly svgFromShape = layeredRender({
 		[TileLayer.PointsOfInterest]: singlePoi,
-		otherwise: (shape: ScreenMapShape, renderer: TileRenderer) => {
-			return svgHullOverlay(shape, 0.1, el => {
-				el.props.fill = "url(#machine-overlay-gradient)";
-			});
-		},
+		otherwise: shape => svgHullOverlay(shape, 0),
 	});
-	// public readonly svgFromShape = hullAndSingle;
+
+	public toStyles(): Record<string, PropertiesHyphen> {
+		return {
+			".machine-site-overlay": {
+				stroke: "#ff0000",
+				"stroke-width": "0.1px",
+				"stroke-linejoin": "bevel",
+				"fill": "url(#machine-overlay-gradient)"
+			}
+		};
+	}
 
 	toSvgSymbols(): JSX.Element | JSX.Element[] {
 		return <linearGradient id="machine-overlay-gradient" spreadMethod="repeat" x1="0" x2="0.2" y1="0" y2="0.2" gradientUnits="userSpaceOnUse">
-			<stop offset="0%" stop-color="#ff0000ff" />
-			<stop offset="50%" stop-color="#ff000000" />
+			<stop offset="0%" stop-color="#ff0000ff"/>
+			<stop offset="50%" stop-color="#ff000000"/>
 		</linearGradient>;
 	}
 }
@@ -72,6 +86,14 @@ export class TallGrassTile extends ATile implements Tile {
 		[TileLayer.PointsOfInterest]: singlePoi,
 		otherwise: shape => svgBoxyOverlay(shape)
 	});
+
+	public toStyles(): Record<string, PropertiesHyphen> {
+		return {
+			".tall-grass-box": {
+				fill: "#cc3366"
+			}
+		};
+	}
 }
 
 export class ForestTile extends ATile implements Tile {
@@ -82,6 +104,14 @@ export class ForestTile extends ATile implements Tile {
 		[TileLayer.PointsOfInterest]: singlePoi,
 		otherwise: shape => svgBoxyOverlay(shape)
 	});
+
+	public toStyles(): Record<string, PropertiesHyphen> {
+		return {
+			".forest-box": {
+				fill: "#33cc33"
+			}
+		};
+	}
 }
 
 export class GrassTile extends ATile implements Tile {
@@ -102,6 +132,14 @@ export class MountainTile extends ATile implements Tile {
 		[TileLayer.PointsOfInterest]: singlePoi,
 		otherwise: shape => svgBoxyOverlay(shape)
 	});
+
+	public toStyles(): Record<string, PropertiesHyphen> {
+		return {
+			".mountain-box": {
+				fill: "#996633"
+			}
+		};
+	}
 }
 
 export class RiverTile extends ATile implements Tile {

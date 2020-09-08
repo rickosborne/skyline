@@ -1,9 +1,9 @@
 import {h, JSX} from "preact";
-import {Consumer, UniFunction} from "../engine/type/Type";
+import {Consumer} from "../engine/type/Type";
 import {TileRenderer} from "../template/TileSet";
 import {spinalCase} from "../template/util";
 import {Coordinate, ScreenMapPointOfInterest, ScreenMapShape} from "./MapTypes";
-import {INSET_DEFAULT, midpointCell, squareCoordinates, traceShape} from "./mapUtil";
+import {INSET_DEFAULT, midpointCell, traceShape} from "./mapUtil";
 
 export function pathFromOutline(coordinates: Coordinate[], title: string, className: string, after?: Consumer<JSX.Element>): JSX.Element {
 	const coords = coordinates.slice();

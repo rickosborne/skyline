@@ -5,7 +5,7 @@ title: Map Test
 
 <!-- +template map story/iaso/520-embrace svg -->
 
-<!-- map data 9c5f1f3e18758de0e4318301d25e9f0c744cc2809574410e98e98f281785bb17
+<!-- map data 9b70addf47675138933b04423b9c6d94a5f1c8c313e096d7ef99275d03ad0b8b
 Map
   Title: All-Mother's Embrace
   Theme: Outdoor
@@ -36,6 +36,24 @@ c. Campfire  (icon: campfire)
 					font-family: Roboto, "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 					font-weight: bold;
 					cursor: default;
+				}
+				.boulder-box {
+					fill: #dd9944;
+				}
+				.forest-box {
+					fill: #33cc33;
+				}
+				.machine-site-overlay {
+					stroke: #ff0000;
+					stroke-width: 0.1px;
+					stroke-linejoin: bevel;
+					fill: url(#machine-overlay-gradient);
+				}
+				.mountain-box {
+					fill: #996633;
+				}
+				.tall-grass-box {
+					fill: #cc3366;
 				}
 			</style>
 			<defs>
@@ -342,8 +360,8 @@ c. Campfire  (icon: campfire)
 				<g>
 					<path class="boulders-box" d="M32,6 L33,6 L34,6 L35,6 L35,7 L35,8 L36,8 L36,9 L35,9 L34,9 L34,8 L33,8 L33,7 L32,7 L32,6 L33,6 z"><title>boulders</title></path>
 				</g>
-				<path class="machine-site-overlay" d="M13.1,4.1 L14.9,4.1 L14.9,4.9 L13.9,5.9 L11.1,5.9 L11.1,5.1 z" fill="url(#machine-overlay-gradient)"><title>machine site</title></path>
-				<path class="machine-site-overlay" d="M35.1,6.1 L37.9,6.1 L37.9,6.9 L36.9,7.9 L35.1,7.9 z" fill="url(#machine-overlay-gradient)"><title>machine site</title></path>
+				<path class="machine-site-overlay" d="M13,4 L15,4 L15,5 L14,6 L11,6 L11,5 z"><title>machine site</title></path>
+				<path class="machine-site-overlay" d="M35,6 L38,6 L38,7 L37,8 L35,8 z"><title>machine site</title></path>
 				<use href="#machine-site" x="12" y="4"></use>
 				<use href="#machine-site" x="37" y="5"></use>
 				<use href="#boulders" x="32" y="6"></use>

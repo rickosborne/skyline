@@ -2,8 +2,11 @@ import {grahamScan2} from "@thi.ng/geom-hull";
 import {Type} from "../engine/type/Type";
 import {BlockLayoutBounds} from "../template/ScreenText";
 import {
-	CARDINAL_OFFSETS, COMPASS_FROM_DX_DY, COMPASS_NEXT_LH, CompassPoint,
-	JOIN_CARDINALS_DEFAULT, NineGridCardinal,
+	CARDINAL_OFFSETS,
+	COMPASS_FROM_DX_DY,
+	COMPASS_NEXT_LH,
+	CompassPoint,
+	JOIN_CARDINALS_DEFAULT,
 	Tile,
 	TILE_LAYERS,
 	TileLayer,
@@ -26,11 +29,11 @@ export const INSET_DEFAULT = 0.1;
 export type Point2D = [number, number];
 
 export interface Edge {
+	s?: string;
 	x1: number;
 	x2: number;
 	y1: number;
 	y2: number;
-	s?: string;
 }
 
 export function boundingBox(coordinates: ScreenMapShape | Coordinate[]): BlockLayoutBounds {
@@ -174,7 +177,7 @@ export function cellsFromTile(
 	};
 }
 
-export function midpointCell(cells: ScreenMapCell[]): {cell: ScreenMapCell; xMid: number, yMid: number;} {
+export function midpointCell(cells: ScreenMapCell[]): { cell: ScreenMapCell; xMid: number, yMid: number; } {
 	const coordinates = traceShape(cells, 0);
 	const bounds = boundingBox(coordinates);
 	const width = bounds.right - bounds.left;
@@ -218,9 +221,9 @@ export function graftEdges(target: Edge[], addition: Edge[]): void {
 		const n = target.findIndex(t => t.x1 === a.x2 && t.x2 === a.x1 && t.y1 === a.y2 && t.y2 === a.y1);
 		if (n < 0) {
 			toAdd.push(a);
-			console.log(`Adding edge: ${printEdge(a)} to ${target.length}`);
+			// console.log(`Adding edge: ${printEdge(a)} to ${target.length}`);
 		} else {
-			console.log(`Remove edge: ${printEdge(target[n])} because ${printEdge(a)} to ${target.length}`);
+			// console.log(`Remove edge: ${printEdge(target[n])} because ${printEdge(a)} to ${target.length}`);
 			target.splice(n, 1);
 		}
 	}
@@ -252,7 +255,7 @@ export function outlineEdges(edges: Edge[]): Coordinate[][] {
 	const e: Edge[] = ([] as Edge[]).concat(...edges);
 	let r: Coordinate[] = [];
 	const rr: Coordinate[][] = [r];
-		let edge = e.shift();
+	let edge = e.shift();
 	if (edge != null) {
 		r.push({x: edge.x1, y: edge.y1});
 	}
@@ -269,7 +272,8 @@ export function outlineEdges(edges: Edge[]): Coordinate[][] {
 				edge = e.shift() as Edge;
 				const thisStart = edgesByStart.get(edgeKey(edge)) as Edge[];
 				thisStart.splice(thisStart.findIndex(t => t === edge), 1);
-			} else {}
+			} else {
+			}
 			break;
 		} else if (sameStart.length === 1) {
 			edge = sameStart.shift();
@@ -357,7 +361,7 @@ export function renderablesFromCellsAndTiles(cells: ScreenMapCell[], renderer: T
 				}
 				try {
 					shape.outline = outlineEdges(shape.edges);
-				} catch(e) {
+				} catch (e) {
 					console.error(`While building ${shape.tile.name}`);
 					throw e;
 				}
