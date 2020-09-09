@@ -1,3 +1,4 @@
+import {BlockLayoutBounds} from "../template/ScreenText";
 import {CARDINAL_OFFSETS, JOIN_CARDINALS_DEFAULT, Tile, TILE_LAYERS, TileRenderer} from "../template/TileSet";
 import {edgesFromCell} from "./edgesFromCell";
 import {graftEdges} from "./graftEdges";
@@ -9,7 +10,8 @@ import {sortCells} from "./sortCells";
 export function renderablesFromCellsAndTiles(
   cells: ScreenMapCell[],
   renderer: TileRenderer,
-  tiles: Tile[]
+  tiles: Tile[],
+	bounds: BlockLayoutBounds,
 ): ScreenMapRenderable[] {
   const keyForLocation: (x: number, y: number) => string = (x, y) => `${x},${y}`;
   const renderables: ScreenMapRenderable[] = [];
@@ -90,7 +92,7 @@ export function renderablesFromCellsAndTiles(
           renderableType: ScreenMapRenderableType.Shape,
           tile,
           layer: layerId,
-          toSvgElement: (renderer) => svgFromShape(shape, renderer),
+          toSvgElement: (renderer) => svgFromShape(shape, renderer, bounds),
         };
         return aggregate(cell, shape);
       }).filter(shape => shape.cells.length > 0)).keys()).map(shape => {

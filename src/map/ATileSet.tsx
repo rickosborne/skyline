@@ -1,4 +1,5 @@
 import {h} from "preact";
+import {BlockLayoutBounds} from "../template/ScreenText";
 import {Tile, TileRenderer, TileSet} from "../template/TileSet";
 import {ScreenMapCell, ScreenMapRenderable} from "./MapTypes";
 import {renderablesFromCellsAndTiles} from "./renderablesFromCellsAndTiles";
@@ -17,8 +18,8 @@ export abstract class ATileSet implements Partial<TileSet> {
 
 	abstract get tiles(): Tile[];
 
-	public renderablesFromCells(cells: ScreenMapCell[], renderer: TileRenderer): ScreenMapRenderable[] {
-		return renderablesFromCellsAndTiles(cells, renderer, this.tiles);
+	public renderablesFromCells(cells: ScreenMapCell[], renderer: TileRenderer, bounds: BlockLayoutBounds): ScreenMapRenderable[] {
+		return renderablesFromCellsAndTiles(cells, renderer, this.tiles, bounds);
 	}
 
 }

@@ -18,7 +18,7 @@ import {
 	ScreenMapRenderable
 } from "../map/MapTypes";
 import {html} from "./hypertext";
-import {ScreenText} from "./ScreenText";
+import {BlockLayoutBounds, ScreenText} from "./ScreenText";
 import {Tile, TILE_LAYERS, TileLayer, TileRenderer, TileSet} from "./TileSet";
 import {TILE_SETS} from "./TileSets";
 import {arrayify, renderCssRules, spinalCase} from "./util";
@@ -46,6 +46,7 @@ export class ScreenMap implements CellGenerationContext {
 		}
 	}
 	public readonly width: number;
+	public readonly bounds: BlockLayoutBounds;
 
 	protected constructor(
 		public readonly metadata: ScreenMapMetadata,
@@ -68,9 +69,15 @@ export class ScreenMap implements CellGenerationContext {
 			return points;
 		}, {} as Record<string, ScreenMapPointOfInterest>);
 		this.cells = cellsFromMapLines(this.mapLines, this);
-		this.renderables = this.tileSet.renderablesFromCells == null ? this.cells : this.tileSet.renderablesFromCells(this.cells, this.renderer);
 		this.height = this.mapLines.length;
 		this.width = Math.max(...this.mapLines.map(line => line.length));
+		this.bounds = {
+			top: 0,
+			left: 0,
+			right: this.width,
+			bottom: this.height,
+		};
+		this.renderables = this.tileSet.renderablesFromCells == null ? this.cells : this.tileSet.renderablesFromCells(this.cells, this.renderer, this.bounds);
 		this.spinalName = spinalCase(tileSet.name);
 	}
 

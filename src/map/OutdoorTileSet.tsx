@@ -11,7 +11,8 @@ import {
 } from "../template/TileSet";
 import {ATile} from "./ATile";
 import {ATileSet} from "./ATileSet";
-import {singlePoi, svgBoxyBlob, svgHullOverlay, svgSquaresFromShape} from "./svgShape";
+import {rgbFromHex} from "./color";
+import {singlePoi, svgBoxyBlob, svgHullOverlay, svgRoundedBlob, svgSquaresFromShape} from "./svgShape";
 
 const B = TileLayer.Background;
 const I = TileLayer.Interact;
@@ -23,7 +24,12 @@ function layeredRender(layers: Partial<Record<TileLayer, SvgFromShape>> & { othe
 
 const singlePoiBoxy = layeredRender({
 	[TileLayer.PointsOfInterest]: singlePoi,
-	otherwise: shape => svgBoxyBlob(shape)
+	otherwise: (shape, renderer, bounds) => svgBoxyBlob(shape, bounds),
+});
+
+const singlePoiRounded = layeredRender({
+	[TileLayer.PointsOfInterest]: singlePoi,
+	otherwise: (shape, renderer, bounds) => svgRoundedBlob(shape, bounds),
 });
 
 export class BouldersTile extends ATile implements Tile {
@@ -52,7 +58,7 @@ export class MachineSiteTile extends ATile implements Tile {
 	};
 	public readonly svgFromShape = layeredRender({
 		[TileLayer.PointsOfInterest]: singlePoi,
-		otherwise: shape => svgHullOverlay(shape, 0),
+		otherwise: (shape, renderer, bounds) => svgHullOverlay(shape, bounds, 0),
 	});
 
 	toSvgSymbols(): JSX.Element | JSX.Element[] {
@@ -84,11 +90,23 @@ export class TallGrassTile extends ATile implements Tile {
 	public readonly layer = B;
 	public readonly name = "tall grass";
 	public styles: Record<string, PropertiesHyphen> = {
-		".tall-grass-box": {
+		".tall-grass-round": {
 			fill: "#cc3366",
+			filter: "url(#tall-grass-filter)",
+		},
+		".tall-grass-back": {
+			fill: GrassTile.HEX_COLOR,
+			filter: "url(#grass-filter)",
 		},
 	};
-	public readonly svgFromShape = singlePoiBoxy;
+	public readonly svgFromShape = singlePoiRounded;
+
+	toSvgSymbols(): JSX.Element | JSX.Element[] {
+		return <filter id="tall-grass-filter">
+			<feTurbulence type="turbulence" baseFrequency="4" numOctaves="4" result="turbulence" />
+			<feDisplacementMap in="SourceGraphic" in2="turbulence" scale="1" xChannelSelector="R" yChannelSelector="G" />
+		</filter>;
+	}
 }
 
 export class ForestTile extends ATile implements Tile {
@@ -96,35 +114,91 @@ export class ForestTile extends ATile implements Tile {
 	public readonly layer = B;
 	public readonly name = "forest";
 	public styles: Record<string, PropertiesHyphen> = {
-		".forest-box": {
+		".forest-round": {
 			fill: "#33cc33",
+			filter: "url(#forest-filter)",
+		},
+		".forest-back": {
+			fill: GrassTile.HEX_COLOR,
+			filter: "url(#grass-filter)",
 		},
 	};
-	public readonly svgFromShape = singlePoiBoxy;
+	public readonly svgFromShape = singlePoiRounded;
+
+	toSvgSymbols(): JSX.Element | JSX.Element[] {
+		return <filter id="forest-filter">
+			<feTurbulence type="turbulence" baseFrequency="4" numOctaves="1" result="turbulence" />
+			<feDisplacementMap in="SourceGraphic" in2="turbulence" scale="1" xChannelSelector="R" yChannelSelector="G" />
+		</filter>;
+	}
 }
 
 export class GrassTile extends ATile implements Tile {
-	public readonly color = "#99ff99";
+	public static readonly HEX_COLOR = "#99ff99";
+	public static readonly RGB_COLOR = rgbFromHex(GrassTile.HEX_COLOR)
+	public readonly color = GrassTile.HEX_COLOR;
 	public readonly layer = B;
 	public readonly name = "grass";
 	public styles: Record<string, PropertiesHyphen> = {
 		".grass-box": {
-			fill: "#99ff99",
+			fill: GrassTile.HEX_COLOR,
+			filter: "url(#grass-filter)"
 		},
 	};
 	public readonly svgFromShape = singlePoiBoxy;
+
+	toSvgSymbols(): JSX.Element | JSX.Element[] {
+		return <filter id="grass-filter">
+			<feTurbulence type="fractalNoise" baseFrequency="20,15" numOctaves="1" result="noise"/>
+			<feColorMatrix type="matrix" values="
+			0 0 0 0 0,
+   		0 0 0 0 0,
+   		0 0 0 0 0,
+   		0 0 0 -2.5 1
+   		"
+				in="noise" result="mono" />
+			<feBlend in="SourceGraphic" in2="mono" mode="multiply" result="withNoise" />
+			<feComposite in="withNoise" in2="SourceGraphic" operator="in" />
+		</filter>;
+	}
 }
 
 export class MountainTile extends ATile implements Tile {
-	public readonly color = "#996633";
+	public static readonly HEX_COLOR = "#996633"
+	public static readonly RGB_COLOR = rgbFromHex(MountainTile.HEX_COLOR);
+	public readonly color = MountainTile.HEX_COLOR;
 	public readonly layer = B;
 	public readonly name = "mountain";
 	public styles: Record<string, PropertiesHyphen> = {
-		".mountain-box": {
-			fill: "#996633",
+		".mountain-round": {
+			fill: this.color,
+			filter: "url(#mountain-filter)",
+		},
+		".mountain-back": {
+			fill: GrassTile.HEX_COLOR,
+			filter: "url(#grass-filter)",
+			// fill: hexFromRGBColor(averageColor(MountainTile.RGB_COLOR, GrassTile.RGB_COLOR)),
 		},
 	};
-	public readonly svgFromShape = singlePoiBoxy;
+	public readonly svgFromShape = singlePoiRounded;
+
+// <feTurbulence type="turbulence" baseFrequency="0.4" numOctaves="3" result="turbulence" />
+// <feDisplacementMap in="SourceGraphic" in2="turbulence" scale="0.8" xChannelSelector="R" yChannelSelector="G" result="bump" />
+// <feComposite in="bump" in2="diffLight" operator="arithmetic"/>
+	// <feComposite in2="SourceGraphic" in="diffLight" operator="arithmetic" k2="1.5" k3="-0.5"/>
+
+	toSvgSymbols(): JSX.Element | JSX.Element[] {
+		return <filter id="mountain-filter">
+			<feTurbulence type="fractalNoise" baseFrequency="0.4" numOctaves="6" result="noise"/>
+			<feDiffuseLighting in="noise" lighting-color="white" surfaceScale="100" result="diffLight">
+				{`<feDistantLight azimuth="135" elevation="50"/>`}
+			</feDiffuseLighting>
+			<feTurbulence type="turbulence" baseFrequency="1" numOctaves="2" result="turbulence" />
+			<feDisplacementMap in="SourceGraphic" in2="turbulence" scale="1" xChannelSelector="R" yChannelSelector="G" result="bump" />
+			<feComposite in2="bump" in="diffLight" operator="in" result="textured" />
+			<feComposite in2="textured" in="bump" operator="arithmetic" k2="1.5" k3="-0.5" />
+		</filter>;
+	}
 }
 
 export class RiverTile extends ATile implements Tile {

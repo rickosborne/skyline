@@ -10,6 +10,7 @@ import {
 	ScreenMapRenderable,
 	ScreenMapShape
 } from "../map/MapTypes";
+import {BlockLayoutBounds} from "./ScreenText";
 
 export enum TileLayer {
 	Background = "B",
@@ -35,7 +36,7 @@ export function hexFromRGB(red: number, green: number, blue: number, alpha?: num
 	].join("");
 }
 
-export type SvgFromShape = (shape: ScreenMapShape, renderer: TileRenderer) => JSX.Element;
+export type SvgFromShape = (shape: ScreenMapShape, renderer: TileRenderer, bounds: BlockLayoutBounds) => JSX.Element;
 export type SvgFromShapeAndLayer = (layer: TileLayer) => SvgFromShape;
 
 export interface Tile {
@@ -57,7 +58,7 @@ export interface TileSet {
 	poiBorderColor: string;
 	poiColor: string;
 	poiFont: string;
-	renderablesFromCells?: (cells: ScreenMapCell[], renderer: TileRenderer) => ScreenMapRenderable[];
+	renderablesFromCells?: (cells: ScreenMapCell[], renderer: TileRenderer, bounds: BlockLayoutBounds) => ScreenMapRenderable[];
 	svgElementFromPoint?: (coordinate: Coordinate, renderer: TileRenderer, point: ScreenMapPointOfInterest, envItem?: ScreenMapEnvironmentItem, tile?: Tile) => JSX.Element;
 	tiles: Tile[];
 
