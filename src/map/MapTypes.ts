@@ -1,7 +1,7 @@
 import {JSX} from "preact";
 import {BlockLayoutItem} from "../template/ScreenText";
 import {Tile, TileLayer, TileRenderer, TileSet} from "../template/TileSet";
-import {Edge} from "./mapUtil";
+import {Edge} from "./Edge";
 
 export interface Coordinate {
 	x: number;

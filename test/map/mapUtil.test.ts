@@ -1,5 +1,6 @@
 import {expect} from "chai";
 import "mocha";
+import {cellsFromMapLines} from "../../src/map/cellsFromMapLines";
 import {
 	CellGenerationContext,
 	Coordinate,
@@ -8,8 +9,8 @@ import {
 	ScreenMapEnvironmentItem,
 	ScreenMapRenderableType
 } from "../../src/map/MapTypes";
-import {cellsFromMapLines, renderablesFromCellsAndTiles} from "../../src/map/mapUtil";
 import {OfficeFloor, OfficeWall, OldOnesIndoorDelve} from "../../src/map/OldOnesIndoorDelve";
+import {renderablesFromCellsAndTiles} from "../../src/map/renderablesFromCellsAndTiles";
 import {Tile, TileRenderer} from "../../src/template/TileSet";
 
 

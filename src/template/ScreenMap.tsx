@@ -2,6 +2,7 @@ import * as console from "console";
 import * as CSS from "csstype";
 import {h, JSX} from "preact";
 import {Consumer, Type} from "../engine/type/Type";
+import {cellsFromMapLines} from "../map/cellsFromMapLines";
 import {
 	BACKGROUND_ID_SUFFIX,
 	CellGenerationContext,
@@ -16,7 +17,6 @@ import {
 	ScreenMapPointOfInterest,
 	ScreenMapRenderable
 } from "../map/MapTypes";
-import {cellsFromMapLines} from "../map/mapUtil";
 import {html} from "./hypertext";
 import {ScreenText} from "./ScreenText";
 import {Tile, TILE_LAYERS, TileLayer, TileRenderer, TileSet} from "./TileSet";

@@ -1,7 +1,7 @@
 import {h} from "preact";
 import {Tile, TileRenderer, TileSet} from "../template/TileSet";
 import {ScreenMapCell, ScreenMapRenderable} from "./MapTypes";
-import {renderablesFromCellsAndTiles} from "./mapUtil";
+import {renderablesFromCellsAndTiles} from "./renderablesFromCellsAndTiles";
 
 export abstract class ATileSet implements Partial<TileSet> {
 
