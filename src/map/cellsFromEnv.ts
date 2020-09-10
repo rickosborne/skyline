@@ -1,4 +1,5 @@
 import {TileLayer} from "../template/TileSet";
+import {idForCellAt} from "./idForCellAt";
 import {
   CellGenerationContext,
   ScreenMapCell,
@@ -21,6 +22,7 @@ export function cellsFromEnv(
     throw new Error(`No tile named "${envItem.type}" for Environment symbol "${symbol}" in tile set "${context.tileSet.name}" at (${x}, ${y}).`);
   }
   const result: ScreenMapCell = {
+  	id: idForCellAt(x, y),
     coordinate: {x, y},
     layer: layer || tile.layer || TileLayer.Background,
     envItem,

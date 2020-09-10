@@ -12,7 +12,7 @@ import {
 import {ATile} from "./ATile";
 import {ATileSet} from "./ATileSet";
 import {rgbFromHex} from "./color";
-import {singlePoi, svgBoxyBlob, svgHullOverlay, svgRoundedBlob, svgSquaresFromShape} from "./svgShape";
+import {singlePoi, svgBoxyBlob, svgHullOverlay, svgJourneyBlob, svgRoundedBlob, svgSquaresFromShape} from "./svgShape";
 
 const B = TileLayer.Background;
 const I = TileLayer.Interact;
@@ -75,13 +75,13 @@ export class RoadTile extends ATile implements Tile {
 	public readonly layer = B;
 	public readonly name = "road";
 	public readonly styles: Record<string, PropertiesHyphen> = {
-		".road-box": {
+		".road-journey": {
 			fill: "#cc8033",
 		},
 	};
 	public readonly svgFromShape = layeredRender({
 		[TileLayer.PointsOfInterest]: singlePoi,
-		otherwise: svgSquaresFromShape
+		otherwise: (shape, renderer, bounds) => svgJourneyBlob(shape, renderer, bounds, GrassTile.NAME),
 	});
 }
 
@@ -135,10 +135,11 @@ export class ForestTile extends ATile implements Tile {
 
 export class GrassTile extends ATile implements Tile {
 	public static readonly HEX_COLOR = "#99ff99";
-	public static readonly RGB_COLOR = rgbFromHex(GrassTile.HEX_COLOR)
+	public static readonly RGB_COLOR = rgbFromHex(GrassTile.HEX_COLOR);
+	public static readonly NAME = "grass";
 	public readonly color = GrassTile.HEX_COLOR;
 	public readonly layer = B;
-	public readonly name = "grass";
+	public readonly name = GrassTile.NAME;
 	public styles: Record<string, PropertiesHyphen> = {
 		".grass-box": {
 			fill: GrassTile.HEX_COLOR,
@@ -164,7 +165,7 @@ export class GrassTile extends ATile implements Tile {
 }
 
 export class MountainTile extends ATile implements Tile {
-	public static readonly HEX_COLOR = "#996633"
+	public static readonly HEX_COLOR = "#999999"
 	public static readonly RGB_COLOR = rgbFromHex(MountainTile.HEX_COLOR);
 	public readonly color = MountainTile.HEX_COLOR;
 	public readonly layer = B;
@@ -207,11 +208,14 @@ export class RiverTile extends ATile implements Tile {
 	public readonly layer = B;
 	public readonly name = "river";
 	public styles: Record<string, PropertiesHyphen> = {
-		".river-box": {
+		".river-journey": {
 			fill: "#6699ff",
 		},
 	};
-	public readonly svgFromShape = singlePoiBoxy;
+	public readonly svgFromShape = layeredRender({
+		[TileLayer.PointsOfInterest]: singlePoi,
+		otherwise: (shape, renderer, bounds) => svgJourneyBlob(shape, renderer, bounds, GrassTile.NAME),
+	});
 }
 
 export class ShallowsTile extends ATile implements Tile {

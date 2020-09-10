@@ -1,4 +1,5 @@
 import {Tile, TileLayer} from "../template/TileSet";
+import {idForCellAt} from "./idForCellAt";
 import {ScreenMapCell, ScreenMapRenderableType} from "./MapTypes";
 
 export function cellsFromTile(
@@ -9,6 +10,7 @@ export function cellsFromTile(
   layer: TileLayer = TileLayer.Background
 ): ScreenMapCell {
   return {
+  	id: idForCellAt(x, y),
     coordinate: {x, y},
     layer,
     tile,

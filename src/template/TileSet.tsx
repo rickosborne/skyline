@@ -2,6 +2,7 @@ import * as CSS from "csstype";
 import {h, JSX} from "preact";
 import {lpad} from "../engine/EngineConfig";
 import {Consumer} from "../engine/type/Type";
+import {computeIfAbsent} from "../map/computeIfAbsent";
 import {
 	Coordinate,
 	ScreenMapCell,
@@ -109,6 +110,10 @@ export const CARDINAL_OFFSETS: Record<NineGridCardinal, CoordinateOffset> = {
 	SW: {dx: -1, dy: 1},
 	W: {dx: -1, dy: 0},
 };
+export const CARDINAL_FROM_DX_DY = Object.entries(CARDINAL_OFFSETS).reduce((offsets, [cardinal, {dx, dy}]) => {
+	computeIfAbsent(offsets, dx, () => new Map<number, NineGridCardinal>()).set(dy, cardinal as NineGridCardinal);
+	return offsets;
+}, new Map<number, Map<number, NineGridCardinal>>());
 export const JOIN_CARDINALS_DEFAULT = FOUR_POINTS;
 export const COMPASS_FROM_DX_DY: Record<number, Record<number, CompassPoint>> = {
 	"0": {
@@ -134,6 +139,15 @@ export const COMPASS_NEXT_LH: Record<CompassPoint, CompassPoint> = {
 	S: "E",
 	W: "S",
 }
+export const CARDINAL_PREV = CARDINAL_POINTS.reduce((prev, dir, index) => {
+	prev[CARDINAL_POINTS[(index + 1) % CARDINAL_POINTS.length]] = dir;
+	return prev;
+}, {} as Record<NineGridCardinal, NineGridCardinal>);
+
+export const CARDINAL_PREV2 = CARDINAL_POINTS.reduce((prev, dir, index) => {
+	prev[CARDINAL_POINTS[(index + 2) % CARDINAL_POINTS.length]] = dir;
+	return prev;
+}, {} as Record<NineGridCardinal, NineGridCardinal>);
 
 export function nineGridReduce(coordinate: Coordinate, renderer: TileRenderer, grid: NineGridReduce): string[] {
 	return CARDINAL_POINTS.reduce((result, cardinal) => {
@@ -148,3 +162,6 @@ export function nineGridReduce(coordinate: Coordinate, renderer: TileRenderer, g
 	}, [] as string[]);
 }
 
+export function sortByCardinal(a: NineGridCardinal, b: NineGridCardinal): number {
+	return CARDINAL_POINTS.indexOf(a) - CARDINAL_POINTS.indexOf(b);
+}

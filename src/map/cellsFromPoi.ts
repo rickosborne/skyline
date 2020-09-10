@@ -2,6 +2,7 @@ import {Tile, TileLayer} from "../template/TileSet";
 import {cellsFromEnv} from "./cellsFromEnv";
 import {cellsFromSymbol} from "./cellsFromSymbol";
 import {cellsFromTile} from "./cellsFromTile";
+import {idForCellAt} from "./idForCellAt";
 import {
   CellGenerationContext,
   ScreenMapCell,
@@ -40,6 +41,7 @@ export function cellsFromPoi(
     results.push(cellsFromTile(overlayTile, symbol, x, y, TileLayer.Overlay));
   }
   const result: ScreenMapCell = {
+  	id: idForCellAt(x, y),
     coordinate: {x, y},
     layer: TileLayer.PointsOfInterest,
     poi,

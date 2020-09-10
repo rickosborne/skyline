@@ -3,6 +3,7 @@ import {Consumer} from "../engine/type/Type";
 import {BlockLayoutBounds} from "../template/ScreenText";
 import {TileRenderer} from "../template/TileSet";
 import {spinalCase} from "../template/util";
+import {journeyPaths} from "./Journey";
 import {INSET_DEFAULT} from "./mapConstants";
 import {Coordinate, ScreenMapPointOfInterest, ScreenMapShape} from "./MapTypes";
 import {midpointCell} from "./midpointCell";
@@ -43,7 +44,7 @@ export function svgHullOverlay(
 export function svgRoundedBlob(
 	shape: ScreenMapShape,
 	bounds: BlockLayoutBounds,
-	after?: Consumer<JSX.Element>
+	after?: Consumer<JSX.Element>,
 ): JSX.Element {
 	const caseName = spinalCase(shape.tile.name);
 	return <g class={caseName + "-group"}>
@@ -60,10 +61,27 @@ export function svgRoundedBlob(
 export function svgBoxyBlob(
 	shape: ScreenMapShape,
 	bounds: BlockLayoutBounds,
-	after?: Consumer<JSX.Element>
+	after?: Consumer<JSX.Element>,
 ): JSX.Element {
 	return <g class={spinalCase(shape.tile.name) + "-group"}>
 		{shape.outline.map(outline => pathFromOutline(outline, shape.tile.name, spinalCase(shape.tile.name) + "-box", bounds, undefined, after))}
+	</g>;
+}
+
+export function svgJourneyBlob(
+	shape: ScreenMapShape,
+	renderer: TileRenderer,
+	bounds: BlockLayoutBounds,
+	backgroundTileName: string,
+): JSX.Element {
+	const tileName = spinalCase(shape.tile.name);
+	return <g class={tileName + "-journey"}>
+		<g class={tileName + "-back-" + backgroundTileName}>
+			{shape.outline.map(outline => pathFromOutline(outline, shape.tile.name, backgroundTileName + "-box", bounds))}
+		</g>
+		<g class={tileName + "-fore"}>
+			{journeyPaths(shape, bounds).map(pathD => <path d={pathD}><title>{shape.tile.name}</title></path>)}
+		</g>
 	</g>;
 }
 

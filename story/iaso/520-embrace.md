@@ -5,7 +5,7 @@ title: Map Test
 
 <!-- +template map story/iaso/520-embrace svg -->
 
-<!-- map data 0310b225a1f6b6f225ce34f759e8bd0bef41399c18fa4f77c24517fcf7ae659b
+<!-- map data 1bab068b7d58709bb7b278df6e32e64505f7a7cb63f9e5aa3d6564412e142189
 Map
   Title: All-Mother's Embrace
   Theme: Outdoor
@@ -45,7 +45,7 @@ c. Campfire  (icon: campfire)
 					fill: #dd9944;
 				}
 				.mountain-round {
-					fill: #996633;
+					fill: #999999;
 					filter: url(#mountain-filter);
 				}
 				.mountain-back {
@@ -60,10 +60,10 @@ c. Campfire  (icon: campfire)
 					fill: #99ff99;
 					filter: url(#grass-filter);
 				}
-				.road-box {
+				.road-journey {
 					fill: #cc8033;
 				}
-				.river-box {
+				.river-journey {
 					fill: #6699ff;
 				}
 				.shallows-box {
@@ -204,69 +204,137 @@ c. Campfire  (icon: campfire)
 					<path class="forest-back" d="M38,6 h3 v3 h-3 v-1 h-1 v-1 h1 v-1 h1 z"><title>forest</title></path>
 					<path class="forest-round" d="M40,6 Q42,6,42,8 Q42,10,40,10 Q38,10,38,9 Q38,8,37.5,8 Q37,8,37,7.5 Q37,7,37.5,7 Q38,7,38,6.5 Q38,6,38.5,6 Q39,6,38.5,6 Q38,6,40,6 z"><title>forest</title></path>
 				</g>
-				<g class="road-squares">
-					<use class="generic-tile" href="#road" x="21" y="0"></use>
-					<use class="generic-tile" href="#road" x="20" y="1"></use>
-					<use class="generic-tile" href="#road" x="21" y="2"></use>
-					<use class="generic-tile" href="#road" x="20" y="3"></use>
-					<use class="generic-tile" href="#road" x="18" y="4"></use>
-					<use class="generic-tile" href="#road" x="19" y="4"></use>
-					<use class="generic-tile" href="#road" x="20" y="4"></use>
-					<use class="generic-tile" href="#road" x="16" y="5"></use>
-					<use class="generic-tile" href="#road" x="17" y="5"></use>
-					<use class="generic-tile" href="#road" x="3" y="6"></use>
-					<use class="generic-tile" href="#road" x="4" y="6"></use>
-					<use class="generic-tile" href="#road" x="5" y="6"></use>
-					<use class="generic-tile" href="#road" x="6" y="6"></use>
-					<use class="generic-tile" href="#road" x="7" y="6"></use>
-					<use class="generic-tile" href="#road" x="8" y="6"></use>
-					<use class="generic-tile" href="#road" x="9" y="6"></use>
-					<use class="generic-tile" href="#road" x="15" y="6"></use>
-					<use class="generic-tile" href="#road" x="0" y="7"></use>
-					<use class="generic-tile" href="#road" x="1" y="7"></use>
-					<use class="generic-tile" href="#road" x="2" y="7"></use>
-					<use class="generic-tile" href="#road" x="6" y="7"></use>
-					<use class="generic-tile" href="#road" x="7" y="7"></use>
-					<use class="generic-tile" href="#road" x="10" y="7"></use>
-					<use class="generic-tile" href="#road" x="11" y="7"></use>
-					<use class="generic-tile" href="#road" x="12" y="7"></use>
-					<use class="generic-tile" href="#road" x="13" y="7"></use>
-					<use class="generic-tile" href="#road" x="14" y="7"></use>
-					<use class="generic-tile" href="#road" x="13" y="8"></use>
+				<g class="road-journey">
+					<g class="road-back-grass">
+						<path class="grass-box" d="M21,0 h1 v1 h-1 v-1 h1 z"><title>road</title></path>
+						<path class="grass-box" d="M20,1 h1 v1 h-1 v-1 z"><title>road</title></path>
+						<path class="grass-box" d="M21,2 h1 v1 h-1 v-1 z"><title>road</title></path>
+						<path class="grass-box" d="M20,3 h1 v2 h-3 v-1 h2 v-1 z"><title>road</title></path>
+						<path class="grass-box" d="M17,5 h1 v1 h-2 v-1 h1 z"><title>road</title></path>
+						<path class="grass-box" d="M15,6 h1 v1 h-1 v-1 z"><title>road</title></path>
+						<path class="grass-box" d="M14,7 h1 v1 h-1 v1 h-1 v-1 h-3 v-1 h4 z"><title>road</title></path>
+						<path class="grass-box" d="M9,6 h1 v1 h-2 v1 h-2 v-1 h-3 v-1 h6 z"><title>road</title></path>
+						<path class="grass-box" d="M2,7 h1 v1 h-3 v-1 h2 z"><title>road</title></path>
+					</g>
+					<g class="road-fore">
+						<path d="M21.3,0 h0.4 Q21.5,0.5,21.3,1 l-0.17,0.13 l-0.26,-0.26 l0.13,-0.17 Q21.5,0.5,21.3,0 z"><title>road</title></path>
+						<path d="M20.7,1 l0.17,-0.13 l0.26,0.26 l-0.13,0.17 L21,1.7 l0.13,0.17 l-0.26,0.26 l-0.17,-0.13 Q20.5,1.5,20.7,1 z"><title>road</title></path>
+						<path d="M21,2.3 l-0.13,-0.17 l0.26,-0.26 l0.17,0.13 Q21.5,2.5,21.3,3 l-0.17,0.13 l-0.26,-0.26 l0.13,-0.17 L21,2.3 z"><title>road</title></path>
+						<path d="M20.7,3 l0.17,-0.13 l0.26,0.26 l-0.13,0.17 Q20.5,3.5,20.7,4 h-0.4 l-0.17,0.13 l-0.26,-0.26 l0.13,-0.17 Q20.5,3.5,20.7,3 z"><title>road</title></path>
+						<path d="M19,4.3 v0.4 Q18.5,4.5,18.3,5 l-0.17,0.13 l-0.26,-0.26 l0.13,-0.17 Q18.5,4.5,19,4.3 z"><title>road</title></path>
+						<path d="M19.7,4 l0.17,-0.13 l0.26,0.26 l-0.13,0.17 v0.4 Q19.5,4.5,19,4.7 v-0.4 Q19.5,4.5,19.7,4 z"><title>road</title></path>
+						<path d="M20.3,4 h0.4 Q20.5,4.5,20,4.7 v-0.4 L20.3,4 z"><title>road</title></path>
+						<path d="M17,5.3 v0.4 Q16.5,5.5,16.3,6 l-0.17,0.13 l-0.26,-0.26 l0.13,-0.17 Q16.5,5.5,17,5.3 z"><title>road</title></path>
+						<path d="M17.7,5 l0.17,-0.13 l0.26,0.26 l-0.13,0.17 Q17.5,5.5,17,5.7 v-0.4 Q17.5,5.5,17.7,5 z"><title>road</title></path>
+						<path d="M4,6.3 v0.4 Q3.5,6.5,3.3,7 l-0.17,0.13 l-0.26,-0.26 l0.13,-0.17 Q3.5,6.5,4,6.3 z"><title>road</title></path>
+						<path d="M5,6.3 v0.4 Q4.5,6.5,4,6.7 v-0.4 Q4.5,6.5,5,6.3 z"><title>road</title></path>
+						<path d="M6,6.3 v0.4 l0.13,0.17 l-0.26,0.26 l-0.17,-0.13 Q5.5,6.5,5,6.7 v-0.4 Q5.5,6.5,6,6.3 z"><title>road</title></path>
+						<path d="M7,6.3 v0.4 l0.13,0.17 l-0.26,0.26 l-0.17,-0.13 h-0.4 L6,6.7 v-0.4 Q6.5,6.5,7,6.3 z"><title>road</title></path>
+						<path d="M8,6.3 v0.4 L7.7,7 h-0.4 l-0.17,0.13 l-0.26,-0.26 l0.13,-0.17 v-0.4 Q7.5,6.5,8,6.3 z"><title>road</title></path>
+						<path d="M9,6.3 v0.4 Q8.5,6.5,8.3,7 l-0.17,0.13 l-0.26,-0.26 l0.13,-0.17 v-0.4 Q8.5,6.5,9,6.3 z"><title>road</title></path>
+						<path d="M10,6.7 l0.13,0.17 l-0.26,0.26 l-0.17,-0.13 Q9.5,6.5,9,6.7 v-0.4 Q9.5,6.5,10,6.7 z"><title>road</title></path>
+						<path d="M15.7,6 l0.17,-0.13 l0.26,0.26 l-0.13,0.17 Q15.5,6.5,15.3,7 l-0.17,0.13 l-0.26,-0.26 l0.13,-0.17 Q15.5,6.5,15.7,6 z"><title>road</title></path>
+						<path d="M1,7.3 v0.4 Q0.5,7.5,0,7.7 v-0.4 Q0.5,7.5,1,7.3 z"><title>road</title></path>
+						<path d="M2,7.3 v0.4 Q1.5,7.5,1,7.7 v-0.4 Q1.5,7.5,2,7.3 z"><title>road</title></path>
+						<path d="M2.7,7 l0.17,-0.13 l0.26,0.26 l-0.13,0.17 Q2.5,7.5,2,7.7 v-0.4 Q2.5,7.5,2.7,7 z"><title>road</title></path>
+						<path d="M6,7.3 l-0.13,-0.17 l0.26,-0.26 l0.17,0.13 h0.4 l0.17,-0.13 l0.26,0.26 l-0.13,0.17 v0.4 Q6.5,7.5,6,7.3 z"><title>road</title></path>
+						<path d="M7,7.3 l-0.13,-0.17 l0.26,-0.26 l0.17,0.13 h0.4 l0.17,-0.13 l0.26,0.26 l-0.13,0.17 Q7.5,7.5,7,7.7 v-0.4 z"><title>road</title></path>
+						<path d="M10,7.3 l-0.13,-0.17 l0.26,-0.26 l0.17,0.13 Q10.5,7.5,11,7.3 v0.4 Q10.5,7.5,10,7.3 z"><title>road</title></path>
+						<path d="M12,7.3 v0.4 Q11.5,7.5,11,7.7 v-0.4 Q11.5,7.5,12,7.3 z"><title>road</title></path>
+						<path d="M13,7.3 v0.4 l0.13,0.17 l-0.26,0.26 l-0.17,-0.13 Q12.5,7.5,12,7.7 v-0.4 Q12.5,7.5,13,7.3 z"><title>road</title></path>
+						<path d="M14,7.3 v0.4 L13.7,8 h-0.4 L13,7.7 v-0.4 Q13.5,7.5,14,7.3 z"><title>road</title></path>
+						<path d="M14.7,7 l0.17,-0.13 l0.26,0.26 l-0.13,0.17 Q14.5,7.5,14.3,8 l-0.17,0.13 l-0.26,-0.26 l0.13,-0.17 v-0.4 Q14.5,7.5,14.7,7 z"><title>road</title></path>
+						<path d="M13,8.3 l-0.13,-0.17 l0.26,-0.26 l0.17,0.13 h0.4 l0.17,-0.13 l0.26,0.26 l-0.13,0.17 Q13.5,8.5,13.7,9 h-0.4 Q13.5,8.5,13,8.3 z"><title>road</title></path>
+						<path d="M21.7,0 h-0.4 Q21.5,-0.5,21.7,0 z"><title>road</title></path>
+						<path d="M0,7.3 v0.4 Q-0.5,7.5,0,7.3 z"><title>road</title></path>
+						<path d="M13.3,9 h0.4 Q13.5,9.5,13.3,9 z"><title>road</title></path>
+					</g>
 				</g>
-				<g class="road-squares">
-					<use class="generic-tile" href="#road" x="39" y="3"></use>
-					<use class="generic-tile" href="#road" x="40" y="3"></use>
-					<use class="generic-tile" href="#road" x="23" y="4"></use>
-					<use class="generic-tile" href="#road" x="24" y="4"></use>
-					<use class="generic-tile" href="#road" x="25" y="4"></use>
-					<use class="generic-tile" href="#road" x="36" y="4"></use>
-					<use class="generic-tile" href="#road" x="37" y="4"></use>
-					<use class="generic-tile" href="#road" x="38" y="4"></use>
-					<use class="generic-tile" href="#road" x="39" y="4"></use>
-					<use class="generic-tile" href="#road" x="26" y="5"></use>
-					<use class="generic-tile" href="#road" x="27" y="5"></use>
-					<use class="generic-tile" href="#road" x="28" y="5"></use>
-					<use class="generic-tile" href="#road" x="32" y="5"></use>
-					<use class="generic-tile" href="#road" x="33" y="5"></use>
-					<use class="generic-tile" href="#road" x="34" y="5"></use>
-					<use class="generic-tile" href="#road" x="35" y="5"></use>
-					<use class="generic-tile" href="#road" x="29" y="6"></use>
-					<use class="generic-tile" href="#road" x="30" y="6"></use>
-					<use class="generic-tile" href="#road" x="31" y="6"></use>
+				<g class="road-journey">
+					<g class="road-back-grass">
+						<path class="grass-box" d="M39,3 h2 v1 h-1 v1 h-4 v-1 h3 v-1 h1 z"><title>road</title></path>
+						<path class="grass-box" d="M35,5 h1 v1 h-4 v-1 h3 z"><title>road</title></path>
+						<path class="grass-box" d="M31,6 h1 v1 h-3 v-1 h2 z"><title>road</title></path>
+						<path class="grass-box" d="M28,5 h1 v1 h-3 v-1 h2 z"><title>road</title></path>
+						<path class="grass-box" d="M25,4 h1 v1 h-3 v-1 h2 z"><title>road</title></path>
+					</g>
+					<g class="road-fore">
+						<path d="M40,3.3 v0.4 L39.7,4 h-0.4 l-0.17,0.13 l-0.26,-0.26 l0.13,-0.17 Q39.5,3.5,40,3.3 z"><title>road</title></path>
+						<path d="M41,3.3 v0.4 Q40.5,3.5,40.3,4 l-0.17,0.13 l-0.26,-0.26 l0.13,-0.17 v-0.4 Q40.5,3.5,41,3.3 z"><title>road</title></path>
+						<path d="M24,4.3 v0.4 Q23.5,4.5,24,4.3 z"><title>road</title></path>
+						<path d="M25,4.3 v0.4 Q24.5,4.5,24,4.7 v-0.4 Q24.5,4.5,25,4.3 z"><title>road</title></path>
+						<path d="M26,4.7 l0.13,0.17 l-0.26,0.26 l-0.17,-0.13 Q25.5,4.5,25,4.7 v-0.4 Q25.5,4.5,26,4.7 z"><title>road</title></path>
+						<path d="M37,4.3 v0.4 Q36.5,4.5,36.3,5 l-0.17,0.13 l-0.26,-0.26 l0.13,-0.17 Q36.5,4.5,37,4.3 z"><title>road</title></path>
+						<path d="M38,4.3 v0.4 Q37.5,4.5,37,4.7 v-0.4 Q37.5,4.5,38,4.3 z"><title>road</title></path>
+						<path d="M38.7,4 l0.17,-0.13 l0.26,0.26 l-0.13,0.17 v0.4 Q38.5,4.5,38,4.7 v-0.4 Q38.5,4.5,38.7,4 z"><title>road</title></path>
+						<path d="M39.3,4 h0.4 l0.17,-0.13 l0.26,0.26 l-0.13,0.17 Q39.5,4.5,39,4.7 v-0.4 L39.3,4 z"><title>road</title></path>
+						<path d="M26,5.3 l-0.13,-0.17 l0.26,-0.26 l0.17,0.13 Q26.5,5.5,27,5.3 v0.4 Q26.5,5.5,26,5.3 z"><title>road</title></path>
+						<path d="M28,5.3 v0.4 Q27.5,5.5,27,5.7 v-0.4 Q27.5,5.5,28,5.3 z"><title>road</title></path>
+						<path d="M29,5.7 l0.13,0.17 l-0.26,0.26 l-0.17,-0.13 Q28.5,5.5,28,5.7 v-0.4 Q28.5,5.5,29,5.7 z"><title>road</title></path>
+						<path d="M33,5.3 v0.4 Q32.5,5.5,32.3,6 l-0.17,0.13 l-0.26,-0.26 l0.13,-0.17 Q32.5,5.5,33,5.3 z"><title>road</title></path>
+						<path d="M34,5.3 v0.4 Q33.5,5.5,33,5.7 v-0.4 Q33.5,5.5,34,5.3 z"><title>road</title></path>
+						<path d="M35,5.3 v0.4 Q34.5,5.5,34,5.7 v-0.4 Q34.5,5.5,35,5.3 z"><title>road</title></path>
+						<path d="M35.7,5 l0.17,-0.13 l0.26,0.26 l-0.13,0.17 Q35.5,5.5,35,5.7 v-0.4 Q35.5,5.5,35.7,5 z"><title>road</title></path>
+						<path d="M29,6.3 l-0.13,-0.17 l0.26,-0.26 l0.17,0.13 Q29.5,6.5,30,6.3 v0.4 Q29.5,6.5,29,6.3 z"><title>road</title></path>
+						<path d="M31,6.3 v0.4 Q30.5,6.5,30,6.7 v-0.4 Q30.5,6.5,31,6.3 z"><title>road</title></path>
+						<path d="M31.7,6 l0.17,-0.13 l0.26,0.26 l-0.13,0.17 Q31.5,6.5,31,6.7 v-0.4 Q31.5,6.5,31.7,6 z"><title>road</title></path>
+						<path d="M41,3.7 v-0.4 Q41.5,3.5,41,3.7 z"><title>road</title></path>
+					</g>
 				</g>
-				<g class="river-group">
-					<path class="river-box" d="M23,0 h2 v1 h-1 v1 h1 v1 h-1 v1 h-2 v-1 h1 v-1 h-1 v-1 h1 v-1 h1 z"><title>river</title></path>
+				<g class="river-journey">
+					<g class="river-back-grass">
+						<path class="grass-box" d="M23,0 h2 v1 h-1 v1 h1 v1 h-1 v1 h-2 v-1 h1 v-1 h-1 v-1 h1 v-1 h1 z"><title>river</title></path>
+					</g>
+					<g class="river-fore">
+						<path d="M23.3,0 h0.4 L24,0.3 v0.4 L23.7,1 h-0.4 l-0.17,0.13 l-0.26,-0.26 l0.13,-0.17 Q23.5,0.5,23.3,0 z"><title>river</title></path>
+						<path d="M24.3,0 h0.4 Q24.5,0.5,24.3,1 l-0.17,0.13 l-0.26,-0.26 l0.13,-0.17 v-0.4 L24.3,0 z"><title>river</title></path>
+						<path d="M22.7,1 l0.17,-0.13 l0.26,0.26 l-0.13,0.17 v0.4 l0.13,0.17 l-0.26,0.26 l-0.17,-0.13 Q22.5,1.5,22.7,1 z"><title>river</title></path>
+						<path d="M23.3,1 h0.4 l0.17,-0.13 l0.26,0.26 l-0.13,0.17 L24,1.7 l0.13,0.17 l-0.26,0.26 l-0.17,-0.13 h-0.4 L23,1.7 v-0.4 L23.3,1 z"><title>river</title></path>
+						<path d="M23,2.3 l-0.13,-0.17 l0.26,-0.26 l0.17,0.13 h0.4 L24,2.3 v0.4 L23.7,3 h-0.4 l-0.17,0.13 l-0.26,-0.26 l0.13,-0.17 L23,2.3 z"><title>river</title></path>
+						<path d="M24,2.3 l-0.13,-0.17 l0.26,-0.26 l0.17,0.13 Q24.5,2.5,24.3,3 l-0.17,0.13 l-0.26,-0.26 l0.13,-0.17 v-0.4 z"><title>river</title></path>
+						<path d="M22.7,3 l0.17,-0.13 l0.26,0.26 l-0.13,0.17 v0.4 Q22.5,3.5,22.7,3 z"><title>river</title></path>
+						<path d="M23.3,3 h0.4 l0.17,-0.13 l0.26,0.26 l-0.13,0.17 Q23.5,3.5,23,3.7 v-0.4 L23.3,3 z"><title>river</title></path>
+						<path d="M23.7,0 h-0.4 Q23.5,-0.5,23.7,0 z"><title>river</title></path>
+						<path d="M24.7,0 h-0.4 Q24.5,-0.5,24.7,0 z"><title>river</title></path>
+					</g>
 				</g>
-				<g class="river-group">
-					<path class="river-box" d="M20,5 h2 v1 h-2 v-1 h1 z"><title>river</title></path>
-					<path class="river-box" d="M19,6 h1 v1 h-2 v-1 h1 z"><title>river</title></path>
-					<path class="river-box" d="M17,7 h1 v1 h-1 v1 h-2 v-1 h1 v-1 h1 z"><title>river</title></path>
+				<g class="river-journey">
+					<g class="river-back-grass">
+						<path class="grass-box" d="M20,5 h2 v1 h-2 v-1 h1 z"><title>river</title></path>
+						<path class="grass-box" d="M19,6 h1 v1 h-2 v-1 h1 z"><title>river</title></path>
+						<path class="grass-box" d="M17,7 h1 v1 h-1 v1 h-2 v-1 h1 v-1 h1 z"><title>river</title></path>
+					</g>
+					<g class="river-fore">
+						<path d="M21,5.3 v0.4 Q20.5,5.5,20.3,6 l-0.17,0.13 l-0.26,-0.26 l0.13,-0.17 Q20.5,5.5,21,5.3 z"><title>river</title></path>
+						<path d="M21,5.7 v-0.4 Q21.5,5.5,21,5.7 z"><title>river</title></path>
+						<path d="M19,6.3 v0.4 Q18.5,6.5,18.3,7 l-0.17,0.13 l-0.26,-0.26 l0.13,-0.17 Q18.5,6.5,19,6.3 z"><title>river</title></path>
+						<path d="M19.7,6 l0.17,-0.13 l0.26,0.26 l-0.13,0.17 Q19.5,6.5,19,6.7 v-0.4 Q19.5,6.5,19.7,6 z"><title>river</title></path>
+						<path d="M17,7.3 v0.4 L16.7,8 h-0.4 l-0.17,0.13 l-0.26,-0.26 l0.13,-0.17 Q16.5,7.5,17,7.3 z"><title>river</title></path>
+						<path d="M17.7,7 l0.17,-0.13 l0.26,0.26 l-0.13,0.17 Q17.5,7.5,17.3,8 l-0.17,0.13 l-0.26,-0.26 l0.13,-0.17 v-0.4 Q17.5,7.5,17.7,7 z"><title>river</title></path>
+						<path d="M15.7,8 l0.17,-0.13 l0.26,0.26 l-0.13,0.17 v0.4 L15.7,9 h-0.4 Q15.5,8.5,15.7,8 z"><title>river</title></path>
+						<path d="M16.3,8 h0.4 l0.17,-0.13 l0.26,0.26 l-0.13,0.17 Q16.5,8.5,16.7,9 h-0.4 L16,8.7 v-0.4 L16.3,8 z"><title>river</title></path>
+						<path d="M15.3,9 h0.4 Q15.5,9.5,15.3,9 z"><title>river</title></path>
+						<path d="M16.3,9 h0.4 Q16.5,9.5,16.3,9 z"><title>river</title></path>
+					</g>
 				</g>
-				<g class="river-group">
-					<path class="river-box" d="M23,5 h2 v1 h1 v1 h-2 v-1 h-1 v-1 h1 z"><title>river</title></path>
-					<path class="river-box" d="M26,7 h2 v1 h-2 v-1 z"><title>river</title></path>
-					<path class="river-box" d="M28,8 h2 v1 h-2 v-1 z"><title>river</title></path>
+				<g class="river-journey">
+					<g class="river-back-grass">
+						<path class="grass-box" d="M23,5 h2 v1 h1 v1 h-2 v-1 h-1 v-1 h1 z"><title>river</title></path>
+						<path class="grass-box" d="M26,7 h2 v1 h-2 v-1 z"><title>river</title></path>
+						<path class="grass-box" d="M28,8 h2 v1 h-2 v-1 z"><title>river</title></path>
+					</g>
+					<g class="river-fore">
+						<path d="M24,5.3 v0.4 l0.13,0.17 l-0.26,0.26 l-0.17,-0.13 Q23.5,5.5,24,5.3 z"><title>river</title></path>
+						<path d="M25,5.7 l0.13,0.17 l-0.26,0.26 l-0.17,-0.13 h-0.4 L24,5.7 v-0.4 Q24.5,5.5,25,5.7 z"><title>river</title></path>
+						<path d="M24,6.3 l-0.13,-0.17 l0.26,-0.26 l0.17,0.13 h0.4 L25,6.3 v0.4 Q24.5,6.5,24,6.3 z"><title>river</title></path>
+						<path d="M25,6.3 l-0.13,-0.17 l0.26,-0.26 l0.17,0.13 Q25.5,6.5,26,6.7 l0.13,0.17 l-0.26,0.26 l-0.17,-0.13 Q25.5,6.5,25,6.7 v-0.4 z"><title>river</title></path>
+						<path d="M26,7.3 l-0.13,-0.17 l0.26,-0.26 l0.17,0.13 Q26.5,7.5,27,7.3 v0.4 Q26.5,7.5,26,7.3 z"><title>river</title></path>
+						<path d="M28,7.7 l0.13,0.17 l-0.26,0.26 l-0.17,-0.13 Q27.5,7.5,27,7.7 v-0.4 Q27.5,7.5,28,7.7 z"><title>river</title></path>
+						<path d="M28,8.3 l-0.13,-0.17 l0.26,-0.26 l0.17,0.13 Q28.5,8.5,29,8.3 v0.4 L28.7,9 h-0.4 Q28.5,8.5,28,8.3 z"><title>river</title></path>
+						<path d="M29.7,9 h-0.4 L29,8.7 v-0.4 Q29.5,8.5,29.7,9 z"><title>river</title></path>
+						<path d="M28.3,9 h0.4 Q28.5,9.5,28.3,9 z"><title>river</title></path>
+						<path d="M29.3,9 h0.4 Q29.5,9.5,29.3,9 z"><title>river</title></path>
+					</g>
 				</g>
 				<g class="shallows-group">
 					<path class="shallows-box" d="M21,4 h2 v1 h-2 v-1 h1 z"><title>shallows</title></path>

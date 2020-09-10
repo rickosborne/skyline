@@ -57,6 +57,7 @@ export interface ScreenMapRenderable {
 }
 
 export interface ScreenMapCell extends ScreenMapRenderable {
+	id: number;
 	readonly coordinate: Coordinate;
 	envItem?: ScreenMapEnvironmentItem;
 	poi?: ScreenMapPointOfInterest;
@@ -66,6 +67,7 @@ export interface ScreenMapCell extends ScreenMapRenderable {
 }
 
 export interface ScreenMapShape extends ScreenMapRenderable {
+	readonly adjacencies: Map<number, number[]>;
 	readonly cells: ScreenMapCell[];
 	readonly renderableType: ScreenMapRenderableType.Shape;
 	readonly tile: Tile;
