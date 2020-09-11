@@ -1,8 +1,8 @@
-import {UniFunction} from "../engine/type/Type";
+import {BiFunction} from "../engine/type/Type";
 
-export function lookupMapFrom<T, K>(items: T[], keyBuilder: UniFunction<T, K>): Map<K, T> {
-	return items.reduce((lookup, item) => {
-		const key = keyBuilder(item);
+export function lookupMapFrom<T, K>(items: T[], keyBuilder: BiFunction<T, number, K>): Map<K, T> {
+	return items.reduce((lookup, item, index) => {
+		const key = keyBuilder(item, index);
 		if (key == null) {
 			throw new Error(`Cannot have a null key`);
 		}

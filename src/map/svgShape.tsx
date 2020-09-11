@@ -48,13 +48,7 @@ export function svgRoundedBlob(
 ): JSX.Element {
 	const caseName = spinalCase(shape.tile.name);
 	return <g class={caseName + "-group"}>
-		{shape.outline.flatMap(outline => {
-			// const traced = traceShape(shape, 0);
-			return [
-				pathFromOutline(outline, shape.tile.name, caseName + "-back", bounds, rectilinearPath, after),
-				pathFromOutline(outline, shape.tile.name, caseName + "-round", bounds, semiQuadraticPath, after),
-			];
-		})}
+		{shape.outline.map(outline => pathFromOutline(outline, shape.tile.name, caseName + "-round", bounds, semiQuadraticPath, after))}
 	</g>;
 }
 
@@ -72,16 +66,10 @@ export function svgJourneyBlob(
 	shape: ScreenMapShape,
 	renderer: TileRenderer,
 	bounds: BlockLayoutBounds,
-	backgroundTileName: string,
 ): JSX.Element {
 	const tileName = spinalCase(shape.tile.name);
 	return <g class={tileName + "-journey"}>
-		<g class={tileName + "-back-" + backgroundTileName}>
-			{shape.outline.map(outline => pathFromOutline(outline, shape.tile.name, backgroundTileName + "-box", bounds))}
-		</g>
-		<g class={tileName + "-fore"}>
-			{journeyPaths(shape, bounds).map(pathD => <path d={pathD}><title>{shape.tile.name}</title></path>)}
-		</g>
+		{journeyPaths(shape, bounds).map(pathD => <path d={pathD}><title>{shape.tile.name}</title></path>)}
 	</g>;
 }
 

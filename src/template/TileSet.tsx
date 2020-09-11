@@ -3,6 +3,7 @@ import {h, JSX} from "preact";
 import {lpad} from "../engine/EngineConfig";
 import {Consumer} from "../engine/type/Type";
 import {computeIfAbsent} from "../map/computeIfAbsent";
+import {lookupMapFrom} from "../map/lookupMapFrom";
 import {
 	Coordinate,
 	ScreenMapCell,
@@ -37,23 +38,25 @@ export function hexFromRGB(red: number, green: number, blue: number, alpha?: num
 	].join("");
 }
 
-export type SvgFromShape = (shape: ScreenMapShape, renderer: TileRenderer, bounds: BlockLayoutBounds) => JSX.Element;
+export type SvgFromShape = (shape: ScreenMapShape, renderer: TileRenderer, bounds: BlockLayoutBounds) => JSX.Element | undefined;
 export type SvgFromShapeAndLayer = (layer: TileLayer) => SvgFromShape;
 
 export interface Tile {
+	alsoAdjacentTileNames?: string[];
+	backfillCells?: (cell: ScreenMapCell, renderer: TileRenderer) => ScreenMapCell[];
 	color: string;
 	joinCardinals?: NineGridCardinal[];
 	layer: TileLayer;
 	name: string;
-	svgFromShape?: SvgFromShapeAndLayer;
 	styles?: Record<string, CSS.PropertiesHyphen>;
+	svgFromShape?: SvgFromShapeAndLayer;
 	toSvgElement?: (coordinate: Coordinate, renderer: TileRenderer, envItem: ScreenMapEnvironmentItem | undefined) => JSX.Element;
 	toSvgSymbols?: () => JSX.Element | JSX.Element[];
 }
 
 export interface TileSet {
 	backfillCells?: (cell: ScreenMapCell) => ScreenMapCell[];
-	backgroundColor?: string;
+	backgroundTile?: Tile;
 	name: string;
 	poiBackgroundColor: string;
 	poiBorderColor: string;
@@ -70,9 +73,11 @@ export interface TileSet {
 export const FONT_SANS_DEFAULT = "Roboto, \"Open Sans\", \"Helvetica Neue\", Helvetica, Arial, sans-serif";
 
 export interface TileRenderer {
+	cellsWithin: (bounds: BlockLayoutBounds) => ScreenMapCell[];
 	genericPoi: (coordinate: Coordinate, point: ScreenMapPointOfInterest) => JSX.Element;
 	genericTile: (cell: ScreenMapCell, tile?: Tile) => JSX.Element;
 	textAt: (coordinate: Coordinate, label: string, configurer?: Consumer<JSX.Element>) => JSX.Element;
+	tileForName: (name: string) => Tile,
 	tileNameAt: (x: number, y: number) => string | undefined;
 }
 
@@ -90,6 +95,7 @@ export type DiagonalPoint = "NW" | "NE" | "SE" | "SW";
 export type NineGridCardinal = CompassPoint | DiagonalPoint;
 export type CoordinateOffset = { dx: number; dy: number };
 export const CARDINAL_POINTS: NineGridCardinal[] = ["NW", "N", "NE", "E", "SE", "S", "SW", "W"];
+export const CARDINAL_OPPOSITE = lookupMapFrom(CARDINAL_POINTS, (dir, index) => CARDINAL_POINTS[(index + 4) % CARDINAL_POINTS.length]);
 export const FOUR_POINTS: CompassPoint[] = ["N", "E", "S", "W"];
 export const FOUR_POINTS_LOWER = FOUR_POINTS.map(dir => dir.toLowerCase());
 export const DIAGONAL_POINTS = ["NW", "NE", "SE", "SW"];

@@ -25,19 +25,22 @@ import {arrayify, renderCssRules, spinalCase} from "./util";
 
 
 export class ScreenMap implements CellGenerationContext {
+	public readonly bounds: BlockLayoutBounds;
 	public readonly cells: ScreenMapCell[];
 	public readonly envBySymbol: Record<string, ScreenMapEnvironmentItem>;
 	public readonly height: number;
 	public readonly poiBySymbol: Record<string, ScreenMapPointOfInterest>;
 	public readonly renderables: ScreenMapRenderable[];
+	public readonly spinalName: string;
+	public readonly tilesByName: Record<string, Tile>;
 	public readonly renderer: TileRenderer = {
+		cellsWithin: bounds => this.cells.filter(cell => cell.coordinate.x >= bounds.left && cell.coordinate.x <= bounds.right && cell.coordinate.y >= bounds.top && cell.coordinate.y <= bounds.bottom),
 		genericTile: this.genericTile.bind(this),
 		genericPoi: this.genericPoi.bind(this),
 		textAt: this.textAt.bind(this),
+		tileForName: name => this.tilesByName[name],
 		tileNameAt: this.tileNameAt.bind(this),
 	}
-	public readonly spinalName: string;
-	public readonly tilesByName: Record<string, Tile>;
 	public readonly topLevelStyles: Record<string, CSS.PropertiesHyphen> = {
 		".poi": {
 			"font-family": this.tileSet.poiFont,
@@ -46,7 +49,6 @@ export class ScreenMap implements CellGenerationContext {
 		}
 	}
 	public readonly width: number;
-	public readonly bounds: BlockLayoutBounds;
 
 	protected constructor(
 		public readonly metadata: ScreenMapMetadata,
@@ -273,18 +275,17 @@ export class ScreenMap implements CellGenerationContext {
 					const renderedCells = renderables.flatMap(renderable => {
 						const els: JSX.Element[] = [];
 						if (isShape(renderable)) {
-							els.push(renderable.toSvgElement(this.renderer));
+							const maybeEl = renderable.toSvgElement(this.renderer);
+							if (maybeEl != null) {
+								els.push(maybeEl);
+							}
 						} else if (isCell(renderable)) {
-							if (renderable.tile != null) {
+							if (renderable.tile != null && renderable.tile !== this.tileSet.backgroundTile) {
 								if (renderable.tile.toSvgElement != null) {
 									els.push(renderable.tile.toSvgElement(renderable.coordinate, this.renderer, renderable.envItem));
 								} else {
 									els.push(this.genericTile(renderable));
 								}
-							} else if (this.tileSet.backgroundColor != null) {
-								els.push(
-									<use href={`#${BACKGROUND_ID_SUFFIX}`} x={renderable.coordinate.x} y={renderable.coordinate.y} class="tile-background"/>
-								);
 							}
 							if (renderable.poi != null) {
 								if (this.tileSet.svgElementFromPoint != null) {
@@ -298,6 +299,10 @@ export class ScreenMap implements CellGenerationContext {
 						}
 						return els;
 					}).filter(Type.isNotNull);
+					if (layer === TileLayer.Background && this.tileSet.backgroundTile != null) {
+						renderedCells.unshift(
+							<rect class={this.tileSet.backgroundTile.name + "-matte"} x="-1" y="-1" width={this.bounds.right + 2} height={this.bounds.bottom + 2}/>);
+					}
 					return <g class={`layer-${layer}`}>{renderedCells.map(cell => html(cell)).join("\n")}</g>;
 				}).filter(Type.isNotNull).map(layer => html(layer)).join("\n")}
 			</svg>

@@ -1,13 +1,13 @@
 import {BlockLayoutBounds} from "../template/ScreenText";
 import {
-	CARDINAL_FROM_DX_DY,
-	CARDINAL_PREV, CARDINAL_PREV2,
+	CARDINAL_OPPOSITE,
+	CARDINAL_PREV,
+	CARDINAL_PREV2,
 	CoordinateOffset,
 	NineGridCardinal,
 	sortByCardinal
 } from "../template/TileSet";
 import {computeIfAbsent} from "./computeIfAbsent";
-import {lookupMapFrom} from "./lookupMapFrom";
 import {Coordinate, ScreenMapCell, ScreenMapShape} from "./MapTypes";
 
 export interface JourneyStep {
@@ -44,42 +44,50 @@ const BORDER_POINT_OUT: Record<NineGridCardinal, string> = {
 	NW: "l-0.13,-0.17 l0.26,-0.26 l0.17,0.13",
 }
 
+const SKIP_POINT: Record<NineGridCardinal, string> = {
+	N: "v-0.3 h0.3",
+	NE: "q0.2,0.2,0.4,0",
+	E: "h0.3 v0.3",
+	SE: "q-0.2,0.2,0,0.4",
+	S: "v0.3 h-0.3",
+	SW: "q-0.2,-0.2,-0.4,0",
+	W: "h-0.3 v-0.3",
+	NW: "q0.2,-0.2,0,-0.4",
+}
+
 export function journeyPaths(shape: ScreenMapShape, bounds: BlockLayoutBounds): string[] {
 	const cells = shape.cells;
 	const adjacencies = Array.from(shape.adjacencies.entries()).reduce((prev, [id, adj]) => {
 		prev.set(id, adj.slice());
 		return prev;
-	}, new Map<number, number[]>());
-	const extendCell = (oid: number, n: number, x: number, y: number): void => {
+	}, new Map<number, NineGridCardinal[]>());
+	const extendCell = (oid: number, n: number, dir: NineGridCardinal, x: number, y: number): void => {
 		cells.push({id: n, coordinate: {x, y}} as ScreenMapCell);
-		computeIfAbsent(adjacencies, oid, () => []).push(n);
-		computeIfAbsent(adjacencies, n, () => []).push(oid);
+		computeIfAbsent(adjacencies, oid, () => []).push(dir);
+		computeIfAbsent(adjacencies, n, () => []).push(CARDINAL_OPPOSITE.get(dir) as NineGridCardinal);
 	};
 	shape.cells.forEach(cell => {
 		const x = cell.coordinate.x;
 		const y = cell.coordinate.y;
 		if (x === bounds.left) {
-			extendCell(cell.id, cell.id - 1, x - 1, y);
+			extendCell(cell.id, cell.id - 1, "W", x - 1, y);
 		}
 		if (x === bounds.right - 1) {
-			extendCell(cell.id, cell.id + 1, x + 1, y);
+			extendCell(cell.id, cell.id + 1, "E", x + 1, y);
 		}
 		if (y === bounds.top) {
-			extendCell(cell.id, parseFloat(`${x}.01`), x, y - 1);
+			extendCell(cell.id, parseFloat(`${x}.01`), "N", x, y - 1);
 		}
 		if (y === bounds.bottom - 1) {
-			extendCell(cell.id, parseFloat(`${x}.02`), x, y + 1);
+			extendCell(cell.id, parseFloat(`${x}.02`), "S", x, y + 1);
 		}
 	});
-	const cellsById: Map<number, ScreenMapCell> = lookupMapFrom(cells, cell => cell.id);
 	return cells.map(cell => {
-		const adjacentIds = adjacencies.get(cell.id) as number[];
-		const adjacent = adjacentIds.map(cellId => cellsById.get(cellId) as ScreenMapCell);
+		const cardinals = (adjacencies.get(cell.id) as NineGridCardinal[]).slice().sort(sortByCardinal);
 		const x = cell.coordinate.x;
 		const y = cell.coordinate.y;
 		const midX = x + 0.5;
 		const midY = y + 0.5;
-		const cardinals = adjacent.map(next => CARDINAL_FROM_DX_DY.get(next.coordinate.x - x)?.get(next.coordinate.y - y) as NineGridCardinal).sort(sortByCardinal);
 		cardinals.push(cardinals[0]);
 		return cardinals.reduce(({p, d}, dir, index) => {
 			const offIn = BORDER_POINT_IN[dir];
@@ -87,14 +95,14 @@ export function journeyPaths(shape: ScreenMapShape, bounds: BlockLayoutBounds): 
 			if (p == null) {
 				d.push(`M${x + offIn.dx},${y + offIn.dy} ${offOut}`);
 			} else if (p === CARDINAL_PREV2[dir]) {
-				d.push(`L${x + offIn.dx},${y + offIn.dy} ${offOut}`);
+				d.push(`${SKIP_POINT[dir]} ${offOut}`);
 			} else if (p === CARDINAL_PREV[dir]) {
 				d.push(offOut);
 			} else {
 				d.push(`Q${midX},${midY},${x + offIn.dx},${y + offIn.dy} ${offOut}`);
 			}
 			return {p: dir, d};
-		}, {d: []} as {d: string[]; p?: NineGridCardinal}).d.join(" ") + "z";
+		}, {d: []} as { d: string[]; p?: NineGridCardinal; }).d.join(" ") + "z";
 	});
 }
 
