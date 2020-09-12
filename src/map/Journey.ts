@@ -64,7 +64,7 @@ export function journeyPaths(shape: ScreenMapShape, bounds: BlockLayoutBounds): 
 	const extendCell = (oid: number, n: number, dir: NineGridCardinal, x: number, y: number): void => {
 		cells.push({id: n, coordinate: {x, y}} as ScreenMapCell);
 		computeIfAbsent(adjacencies, oid, () => []).push(dir);
-		computeIfAbsent(adjacencies, n, () => []).push(CARDINAL_OPPOSITE.get(dir) as NineGridCardinal);
+		computeIfAbsent(adjacencies, n, () => []).push(CARDINAL_OPPOSITE[dir] as NineGridCardinal);
 	};
 	shape.cells.forEach(cell => {
 		const x = cell.coordinate.x;
@@ -94,6 +94,8 @@ export function journeyPaths(shape: ScreenMapShape, bounds: BlockLayoutBounds): 
 			const offOut = index === cardinals.length - 1 ? "" : BORDER_POINT_OUT[dir];
 			if (p == null) {
 				d.push(`M${x + offIn.dx},${y + offIn.dy} ${offOut}`);
+			// } else if (p === CARDINAL_OPPOSITE[dir]) {
+			// 	d.push(`L${x + offIn.dx},${y + offIn.dy} ${offOut}`)
 			} else if (p === CARDINAL_PREV2[dir]) {
 				d.push(`${SKIP_POINT[dir]} ${offOut}`);
 			} else if (p === CARDINAL_PREV[dir]) {

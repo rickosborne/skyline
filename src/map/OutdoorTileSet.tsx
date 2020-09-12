@@ -35,15 +35,30 @@ const singlePoiRounded = layeredRender({
 });
 
 export class BouldersTile extends ATile implements Tile {
-	public readonly color = "#dd9944";
+	public static readonly HEX_COLOR = "#cc6633";
+	public readonly color = BouldersTile.HEX_COLOR;
 	public readonly layer = B;
 	public readonly name = "boulders";
 	public readonly styles: Record<string, PropertiesHyphen> = {
-		".boulders-box": {
-			fill: "#dd9944",
+		".boulders-round": {
+			fill: BouldersTile.HEX_COLOR,
+			filter: "url(#boulders-filter)",
 		},
 	};
-	public readonly svgFromShape = singlePoiBoxy;
+	public readonly svgFromShape = singlePoiRounded;
+
+	toSvgSymbols(): JSX.Element | JSX.Element[] {
+		return <filter id="boulders-filter">
+			<feTurbulence type="fractalNoise" baseFrequency="0.3" numOctaves="5" result="noise"/>
+			<feDiffuseLighting in="noise" lighting-color="white" surfaceScale="100" result="diffLight">
+				{`<feDistantLight azimuth="135" elevation="50"/>`}
+			</feDiffuseLighting>
+			<feTurbulence type="turbulence" baseFrequency="1" numOctaves="2" result="turbulence"/>
+			<feDisplacementMap in="SourceGraphic" in2="turbulence" scale="1" xChannelSelector="R" yChannelSelector="G" result="bump"/>
+			<feComposite in2="bump" in="diffLight" operator="in" result="textured"/>
+			<feComposite in2="textured" in="bump" operator="arithmetic" k2="1.35" k3="-1"/>
+		</filter>;
+	}
 }
 
 export class MachineSiteTile extends ATile implements Tile {
@@ -101,12 +116,13 @@ export class RoadTile extends ATile implements Tile {
 }
 
 export class TallGrassTile extends ATile implements Tile {
-	public readonly color = "#cc3366";
+	public static readonly HEX_COLOR = "#cc3366";
+	public readonly color = TallGrassTile.HEX_COLOR;
 	public readonly layer = B;
 	public readonly name = "tall grass";
 	public styles: Record<string, PropertiesHyphen> = {
 		".tall-grass-round": {
-			fill: "#cc3366",
+			fill: "url(#tall-grass-dots)",
 			filter: "url(#tall-grass-filter)",
 		},
 		".tall-grass-back": {
@@ -117,21 +133,34 @@ export class TallGrassTile extends ATile implements Tile {
 	public readonly svgFromShape = singlePoiRounded;
 
 	toSvgSymbols(): JSX.Element | JSX.Element[] {
-		return <filter id="tall-grass-filter">
-			<feTurbulence type="turbulence" baseFrequency="4" numOctaves="4" result="turbulence"/>
-			<feDisplacementMap in="SourceGraphic" in2="turbulence" scale="1" xChannelSelector="R" yChannelSelector="G"/>
-			<feGaussianBlur stdDeviation="0.01"/>
-		</filter>;
+		return [
+			<filter id="tall-grass-filter">
+				<feTurbulence type="turbulence" baseFrequency="4" numOctaves="4" result="turbulence"/>
+				<feDisplacementMap in="SourceGraphic" in2="turbulence" scale="1" xChannelSelector="R" yChannelSelector="G"/>
+				<feGaussianBlur stdDeviation="0.01"/>
+			</filter>,
+			<pattern id="tall-grass-dots" patternUnits="userSpaceOnUse" width="100" height="86" patternTransform="scale(0.01) rotate(60)">
+				<rect width="100%" height="86%" fill={TallGrassTile.HEX_COLOR}/>
+				<circle id="tall-grass-dot" cx="0" cy="44" r="22" fill={TallGrassTile.HEX_COLOR}/>
+				<use href="#tall-grass-dot" transform="translate(48,0)"/>
+				<use href="#tall-grass-dot" transform="translate(25,-44)"/>
+				<use href="#tall-grass-dot" transform="translate(75,-44)"/>
+				<use href="#tall-grass-dot" transform="translate(100,0)"/>
+				<use href="#tall-grass-dot" transform="translate(75,42)"/>
+				<use href="#tall-grass-dot" transform="translate(25,42)"/>
+			</pattern>
+		];
 	}
 }
 
 export class ForestTile extends ATile implements Tile {
-	public readonly color = "#33cc33";
+	public static readonly HEX_COLOR = "#33cc33";
+	public readonly color = ForestTile.HEX_COLOR;
 	public readonly layer = B;
 	public readonly name = "forest";
 	public styles: Record<string, PropertiesHyphen> = {
 		".forest-round": {
-			fill: "#33cc33",
+			fill: "url(#forest-dots)",
 			filter: "url(#forest-filter)",
 		},
 		".forest-back": {
@@ -142,11 +171,23 @@ export class ForestTile extends ATile implements Tile {
 	public readonly svgFromShape = singlePoiRounded;
 
 	toSvgSymbols(): JSX.Element | JSX.Element[] {
-		return <filter id="forest-filter">
-			<feTurbulence type="turbulence" baseFrequency="4" numOctaves="1" result="turbulence"/>
-			<feDisplacementMap in="SourceGraphic" in2="turbulence" scale="1" xChannelSelector="R" yChannelSelector="G"/>
-			<feGaussianBlur stdDeviation="0.01"/>
-		</filter>;
+		return [
+			<filter id="forest-filter">
+				<feTurbulence type="turbulence" baseFrequency="2" numOctaves="1" result="turbulence"/>
+				<feDisplacementMap in="SourceGraphic" in2="turbulence" scale="1" xChannelSelector="R" yChannelSelector="G"/>
+				<feGaussianBlur stdDeviation="0.01"/>
+			</filter>,
+			<pattern id="forest-dots" patternUnits="userSpaceOnUse" width="100" height="86" patternTransform="scale(0.02) rotate(30)">
+				<rect width="100%" height="86%" fill={ForestTile.HEX_COLOR}/>
+				<circle cx="0" cy="44" r="22" id="forest-dot" fill={ForestTile.HEX_COLOR}/>
+				<use href="#forest-dot" transform="translate(48,0)"/>
+				<use href="#forest-dot" transform="translate(25,-44)"/>
+				<use href="#forest-dot" transform="translate(75,-44)"/>
+				<use href="#forest-dot" transform="translate(100,0)"/>
+				<use href="#forest-dot" transform="translate(75,42)"/>
+				<use href="#forest-dot" transform="translate(25,42)"/>
+			</pattern>
+		];
 	}
 }
 

@@ -129,7 +129,7 @@ function renderablesForLayerTile(
 				const b = byId.get(idForCellAt(ax + off.offset.dx, ay + off.offset.dy));
 				if (b != null) {
 					addIfNotIncluded(computeIfAbsent(shape.adjacencies, a.id, () => []), off.cardinal);
-					addIfNotIncluded(computeIfAbsent(shape.adjacencies, b.id, () => []), CARDINAL_OPPOSITE.get(off.cardinal as NineGridCardinal));
+					addIfNotIncluded(computeIfAbsent(shape.adjacencies, b.id, () => []), CARDINAL_OPPOSITE[off.cardinal as NineGridCardinal]);
 				}
 			});
 		});

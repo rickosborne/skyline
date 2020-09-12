@@ -3,7 +3,7 @@ import {h, JSX} from "preact";
 import {lpad} from "../engine/EngineConfig";
 import {Consumer} from "../engine/type/Type";
 import {computeIfAbsent} from "../map/computeIfAbsent";
-import {lookupMapFrom} from "../map/lookupMapFrom";
+import {lookupRecordFrom} from "../map/lookupMapFrom";
 import {
 	Coordinate,
 	ScreenMapCell,
@@ -95,7 +95,7 @@ export type DiagonalPoint = "NW" | "NE" | "SE" | "SW";
 export type NineGridCardinal = CompassPoint | DiagonalPoint;
 export type CoordinateOffset = { dx: number; dy: number };
 export const CARDINAL_POINTS: NineGridCardinal[] = ["NW", "N", "NE", "E", "SE", "S", "SW", "W"];
-export const CARDINAL_OPPOSITE = lookupMapFrom(CARDINAL_POINTS, (dir, index) => CARDINAL_POINTS[(index + 4) % CARDINAL_POINTS.length]);
+export const CARDINAL_OPPOSITE = lookupRecordFrom(CARDINAL_POINTS, (dir, index) => CARDINAL_POINTS[(index + 4) % CARDINAL_POINTS.length]);
 export const FOUR_POINTS: CompassPoint[] = ["N", "E", "S", "W"];
 export const FOUR_POINTS_LOWER = FOUR_POINTS.map(dir => dir.toLowerCase());
 export const DIAGONAL_POINTS = ["NW", "NE", "SE", "SW"];
