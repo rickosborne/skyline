@@ -17,7 +17,9 @@ const sourceDirs = [
 
 sourceDirs.forEach(sourceDir => {
 	templateRenderer.scan(sourceDir, (dir, name) => {
-		templateRenderer.markdown(dir, name);
+		templateRenderer.markdown(dir, name).catch(err => {
+			throw err;
+		});
 	});
 });
 
@@ -46,7 +48,10 @@ if (process.argv.includes("--watch")) {
 			// console.info(`Changed: ${dirPart} ${fileName}`);
 			try {
 				templateRenderer
-					.markdown(dirPart, fileName);
+					.markdown(dirPart, fileName)
+					.catch(err => {
+						throw err;
+					});
 			} catch (e) {
 				console.error(`Failed to render ${dirPart}/${fileName}: ${JSON.stringify(e)}`);
 			}

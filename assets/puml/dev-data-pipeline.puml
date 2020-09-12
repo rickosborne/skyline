@@ -47,6 +47,8 @@ rectangle FileTextToBookData
 rectangle FileTextToMachineData
 rectangle FileTextToMarkdown
 rectangle FileTextToPlantUml
+rectangle MapTemplateBlockIdentifier
+rectangle MapTemplateRenderer
 rectangle PlantUmlTemplateBlockIdentifier
 rectangle PlantUmlTemplateRenderer
 rectangle PrintTemplateBlockIdentifier
@@ -86,6 +88,7 @@ entity "HasOperation" as HasOperation
 entity "HasTemplateBlock" as HasTemplateBlock
 entity "MachineData" as MachineData
 entity "MachineTemplateBlock" as MachineTemplateBlock
+entity "MapTemplateBlock" as MapTemplateBlock
 entity "MarkdownFile" as MarkdownFile
 entity "MarkdownFileList" as MarkdownFileList
 entity "PlantUmlDataBlock" as PlantUmlDataBlock
@@ -97,6 +100,7 @@ entity "RenderedCypherCharacter" as RenderedCypherCharacter
 entity "RenderedCypherMachine" as RenderedCypherMachine
 entity "RenderedDND5ECharacter" as RenderedDND5ECharacter
 entity "RenderedDND5EMachine" as RenderedDND5EMachine
+entity "RenderedMapDataBlock" as RenderedMapDataBlock
 entity "RenderedPlantUml" as RenderedPlantUml
 entity "RenderedPrint" as RenderedPrint
 entity "RenderedStoryGraph" as RenderedStoryGraph
@@ -122,6 +126,7 @@ BookTemplateBlock <.. DND5ECharacterTemplateBlock
 HasTemplateBlock <.. DND5EMachineDataTemplateBlock
 MachineTemplateBlock <.. DND5EMachineTemplateBlock
 TemplateBlock <.. MachineTemplateBlock
+TemplateBlock <.. MapTemplateBlock
 HasTemplateBlock <.. PlantUmlDataBlock
 TemplateBlock <.. PlantUmlTemplateBlock
 HasTemplateBlock <.. PrintDataBlock
@@ -130,6 +135,7 @@ RenderedTemplateBlock <.. RenderedCypherCharacter
 RenderedTemplateBlock <.. RenderedCypherMachine
 RenderedTemplateBlock <.. RenderedDND5ECharacter
 RenderedTemplateBlock <.. RenderedDND5EMachine
+RenderedTemplateBlock <.. RenderedMapDataBlock
 RenderedTemplateBlock <.. RenderedPlantUml
 RenderedTemplateBlock <.. RenderedPrint
 RenderedTemplateBlock <.. RenderedStoryGraph
@@ -179,6 +185,9 @@ FileTextToPlantUml --> PlantUmlFile
 FilesFromDirectory --> SourceFileOperation
 MachineData --> CypherMachineTemplateBlockLoader
 MachineData --> DND5EMachineTemplateBlockLoader
+MapTemplateBlock --> MapTemplateRenderer
+MapTemplateBlockIdentifier --> MapTemplateBlock
+MapTemplateRenderer --> RenderedMapDataBlock
 MarkdownFile --> MarkdownFilesAggregator
 MarkdownFile --> TemplateBlockReader
 MarkdownFileList --> PrintBlockJoiner
@@ -200,6 +209,7 @@ RenderedCypherCharacter --> RenderedTemplateSaver
 RenderedCypherMachine --> RenderedTemplateSaver
 RenderedDND5ECharacter --> RenderedTemplateSaver
 RenderedDND5EMachine --> RenderedTemplateSaver
+RenderedMapDataBlock --> RenderedTemplateSaver
 RenderedPlantUml --> RenderedTemplateSaver
 RenderedPrint --> RenderedTemplateSaver
 RenderedStoryGraph --> RenderedTemplateSaver
@@ -227,6 +237,7 @@ TemplateBlock --> CypherCharacterTemplateBlockIdentifier
 TemplateBlock --> CypherMachineTemplateBlockIdentifier
 TemplateBlock --> DND5ECharacterTemplateBlockIdentifier
 TemplateBlock --> DND5EMachineTemplateBlockIdentifier
+TemplateBlock --> MapTemplateBlockIdentifier
 TemplateBlock --> PlantUmlTemplateBlockIdentifier
 TemplateBlock --> PrintTemplateBlockIdentifier
 TemplateBlock --> StoryGraphTemplateBlockIdentifier

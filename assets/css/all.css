@@ -657,6 +657,19 @@ details[open] > summary.spoiler-warning::before {
   font-weight: var(--weight-bold);
 }
 
+.points-of-interest header {
+  font-weight: bold;
+}
+.points-of-interest .detailed dt {
+  display: inline;
+}
+.points-of-interest .detailed dt::after {
+  content: ". ";
+}
+.points-of-interest .detailed dd {
+  display: inline;
+}
+
 @media (max-width: 40rem) {
   :root {
     --cadence: 1.5rem;

@@ -8,9 +8,9 @@ export abstract class ATemplate<T> {
 
 	abstract convert(data: any, params: Record<string, string>): T;
 
-	abstract getData(dataType: string, dataName: string, params: Record<string, string>): object | undefined;
+	abstract getData(dataType: string, dataName: string, params: Record<string, string>, body: string): object | undefined;
 
-	abstract render(data: T, params: Record<string, string>, originalBody: string): string;
+	abstract render(data: T, params: Record<string, string>, originalBody: string): string | Promise<string>;
 
 	public renderStartTag(
 		original: string,

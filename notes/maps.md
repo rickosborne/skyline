@@ -71,13 +71,13 @@ The Points of Interest area should be used for foreground items with which playe
 **Indoor area:**
 
     Map
-      Title: Mother's Watch Ruins (Level I)
+      Title: Mother's Watch Ruins, Level I
       Theme: Old Ones Indoor Delve
       Scale: 5ft per point
                                                        Environment:
               +------------+                           . office floor
              /:::w.......^..\                          D office door
-            |::1.........+...|                         + office wall (corner)
+            |::1.........+...|                         + office wall
     +-------+w...........]...+-----+-----+----------+  - office wall
     |....................]...D.....D.....D.........c|  / office wall
     |....................]...+-----+^^+--+..........|  \ office wall
@@ -89,7 +89,7 @@ The Points of Interest area should be used for foreground items with which playe
                                                        w puddle
     Points of Interest:
     1. Entrance  (tile: office floor)
-    2. Stairs to Level II  (tile: stairs; link: Mother's Watch Ruins (Level II))
+    2. Stairs to Level II  (tile: stairs; link: Mother's Watch Ruins, Level II)
 
 ### Metadata
 

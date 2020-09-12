@@ -35,26 +35,32 @@ const REMOVED = [
 	"children"
 ];
 
+const ATTR_RENAME: Record<string, string> = {
+	"xmlns-xlink": "xmlns:xlink",
+	"xlink-href": "xlink:href",
+};
+
 const REMOVED_IF_FALSY = [
 	DATA_MARKDOWN,
 ];
 
 const VOID_TAGS = [
-	'br',
-	'hr'
+	"br",
+	"hr",
+	"img"
 ];
 
 export function html(
 	jsx: JSX.Element | string | number | boolean | undefined,
 	nested: boolean = false,
-	parentDelim: string = '',
+	parentDelim: string = "",
 ): string {
 	if (!realElement(jsx)) {
 		return stringify(jsx);
 	}
 	const props = jsx.props || {};
 	const unwrap = !!props["data-unwrap"];
-	const delim = props[DATA_NBSP] ? "&nbsp;" : props[DATA_ENDL] ? "\n" : props[DATA_SPACE] ? " " : props[DATA_TRIM] ? '' : parentDelim;
+	const delim = props[DATA_NBSP] ? "&nbsp;" : props[DATA_ENDL] ? "\n" : props[DATA_SPACE] ? " " : props[DATA_TRIM] ? "" : parentDelim;
 	const onlyIfChildren = !!props[IF_CHILDREN] || unwrap;
 	if (IF_PRESENT in props) {
 		const ifPresent = props[IF_PRESENT];
@@ -66,7 +72,7 @@ export function html(
 		.filter(key => !REMOVED.includes(key) && (!REMOVED_IF_FALSY.includes(key) || (props[key] && props[key] !== "0")))
 		.map(key => ({target: key.replace(/^data-/, ""), value: jsx.props[key]}))
 		.sort((a, b) => a.target.localeCompare(b.target))
-		.map(attr => `${attr.target}="${attr.value}"`)
+		.map(attr => `${ATTR_RENAME[attr.target] || attr.target}="${attr.value}"`)
 		.join(" ");
 	const children = props.children;
 	let innerHtml = "";
@@ -76,7 +82,7 @@ export function html(
 				mustKeep: realElement(child) && child.props != null ? !child.props[IF_SIBLINGS] : stringify(child) !== "",
 				rendered: html(child, true, delim),
 			}));
-		if (rendered.findIndex(child => child.mustKeep && child.rendered !== '') >= 0) {
+		if (rendered.findIndex(child => child.mustKeep && child.rendered !== "") >= 0) {
 			innerHtml = rendered
 				.map(child => child.rendered)
 				.join(delim)
@@ -87,12 +93,12 @@ export function html(
 		}
 	}
 	if (props[DATA_NBSP]) {
-		innerHtml = innerHtml.replace(/\s+/g, '&nbsp;');
+		innerHtml = innerHtml.replace(/\s+/g, "&nbsp;");
 	}
 	if (onlyIfChildren && innerHtml.match(/^\s*$/s)) {
 		return "";
 	}
-	const endTag = VOID_TAGS.includes(String(jsx.type)) ? '' : `</${jsx.type}>`;
+	const endTag = VOID_TAGS.includes(String(jsx.type)) ? "" : `</${jsx.type}>`;
 	const tag = unwrap ? innerHtml : `<${jsx.type}${attrs == null || attrs === "" ? "" : (" " + attrs)}>${innerHtml}${endTag}`;
 	if (nested) {
 		return tag;

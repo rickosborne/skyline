@@ -1,10 +1,11 @@
 import equal = require("fast-deep-equal");
-import * as diff from 'diff';
+import * as diff from "diff";
 import {Logger} from "loglevel";
 import {buildConfig, configFromEnvironment, configureLogger} from "../EngineConfig";
 
 export type Consumer<T> = (item: T) => void;
 export type UniFunction<T, U> = (value: T) => U;
+export type BiFunction<T, U, V> = (t: T, u: U) => V;
 export type BiConsumer<T, U> = (item: T, value: U) => void;
 export type IsInstance<T> = (item: any) => item is T;
 export type Comparator<T> = (a: T, b: T) => boolean;
@@ -13,11 +14,11 @@ export type ArrayField<T, K extends string & keyof T> = T[K] extends Array<infer
 export type ArrayItem<T> = T extends (infer I)[] ? I : T extends undefined ? undefined : never;
 
 export type Constructor<T> = {
-	new (...args: any[]): T;
+	new(...args: any[]): T;
 }
 
 export type UniConstructor<A, T> = {
-	new (arg: A, ...args: any[]): T;
+	new(arg: A, ...args: any[]): T;
 }
 
 export type Override<Type, Key extends keyof Type, Value extends Type[Key]> = {
@@ -450,8 +451,8 @@ export class TypeBuilder<T, U> {
 }
 
 export class Type<T> {
-	public readonly subtypes: Type<T>[] = [];
 	public readonly logger: Logger;
+	public readonly subtypes: Type<T>[] = [];
 
 	protected constructor(
 		public readonly name: string,

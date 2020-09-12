@@ -1,7 +1,9 @@
 import {MarkdownFile, MarkdownFileType} from "./MarkdownFile";
 import {Type, TypeBuilder} from "./Type";
 
-export const TEMPLATE_REGEXP = /(?<startTag><!--\s+\+template\s+(?<dataType>\S+)\s+(?<dataName>\S+)\s+(?<templateId>\S+)\s+(?<keyValuePairs>.+?\s+)?-->)(?<body>.*)(?<endTag><!--\s+-template\s+\2\s+\3\s+\4\s+-->)/s;
+export const TEMPLATE_REGEXP =
+// /(?<startTag><!--\s+\+template\s+(?<dataType>\S+)\s+(?<dataName>\S+)\s+(?<templateId>\S+)\s+(?<keyValuePairs>.+?\s+)?-->)(?<body>.*)(?<endTag><!--\s+-template\s+\2\s+\3\s+\4\s+-->)/s;
+/(?<startTag><!--\s+\+template\s+(?<dataType>\S+)\s+(?<dataName>\S+)\s+(?<templateId>\S+)\s+(?<keyValuePairs>[^>]+?\s+)?-->)(?<body>.*?)(?<endTag><!--\s+-template\s+\2\s+\3\s+\4\s+-->)/s;
 
 export interface TemplateBlock {
 	body: string;
