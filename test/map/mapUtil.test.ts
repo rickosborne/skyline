@@ -11,6 +11,7 @@ import {
 } from "../../src/map/MapTypes";
 import {OfficeFloor, OfficeWall, OldOnesIndoorDelve} from "../../src/map/OldOnesIndoorDelve";
 import {renderablesFromCellsAndTiles} from "../../src/map/renderablesFromCellsAndTiles";
+import {BlockLayoutBounds} from "../../src/template/ScreenText";
 import {Tile, TileRenderer} from "../../src/template/TileSet";
 
 
@@ -21,6 +22,13 @@ const MAP_LINES = `
  +++++
 `.split("\n")
 	.filter(line => line != null && line.trim().length > 0);
+
+const BOUNDS: BlockLayoutBounds = {
+	top: 0,
+	left: 0,
+	bottom: MAP_LINES.length,
+	right: Math.max(...MAP_LINES.map(l => l.length)),
+};
 
 const OFFICE_FLOOR_ENV: ScreenMapEnvironmentItem = {
 	type: "office floor",
@@ -59,14 +67,14 @@ describe("mapUtil", () => {
 				return a.coordinate.y - b.coordinate.y;
 			});
 			expect(cells).is.instanceOf(Array);
-			const renderables = renderablesFromCellsAndTiles(cells, undefined as unknown as TileRenderer, OLD_ONES_TILE_SET.tiles);
+			const renderables = renderablesFromCellsAndTiles(cells, undefined as unknown as TileRenderer, OLD_ONES_TILE_SET.tiles, BOUNDS);
 			expect(renderables).is.instanceOf(Array);
 			const coordinates = renderables.map(renderable => ({
 				type: renderable.renderableType,
 				tile: renderable.tile?.name,
 				cells: isShape(renderable) ? renderable.cells.map(cell => cell.coordinate) : isCell(renderable) ? renderable.coordinate : undefined
 			}));
-			const actualMessage = JSON.stringify(coordinates)
+			const actualMessage = JSON.stringify(coordinates, null, 2)
 				.replace(/"([a-zA-Z]+)":/g, "$1:")
 				.replace(/{\s*x:\s*(\d+),\s*y:\s*(\d+)\s*}/g, "{x: $1, y: $2}");
 			expect(coordinates, actualMessage).deep.equals([
@@ -123,9 +131,11 @@ describe("mapUtil", () => {
 						{x: 5, y: 3}
 					]
 				}, {
-					type: "Cell",
+					type: "Shape",
 					tile: "office wall",
-					cells: {x: 13, y: 0}
+					cells: [
+						{x: 13, y: 0}
+					]
 				}
 			] as Array<{ type: ScreenMapRenderableType; cells: undefined | Coordinate | Coordinate[]; tile?: string; }>);
 		});

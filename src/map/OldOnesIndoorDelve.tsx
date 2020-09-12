@@ -1,6 +1,7 @@
 import {h, JSX} from "preact";
 import {Type} from "../engine/type/Type";
 import {html} from "../template/hypertext";
+import {BlockLayoutBounds} from "../template/ScreenText";
 import {
 	CARDINAL_POINTS,
 	DIAGONAL_POINTS_LOWER_HV,
@@ -15,7 +16,8 @@ import {
 } from "../template/TileSet";
 import {ATile} from "./ATile";
 import {ATileSet} from "./ATileSet";
-import {Coordinate, ScreenMapEnvironmentItem, ScreenMapPointOfInterest} from "./MapTypes";
+import {Coordinate, ScreenMapEnvironmentItem, ScreenMapPointOfInterest, ScreenMapShape} from "./MapTypes";
+import {svgBoxyBlob} from "./svgShape";
 
 const B = TileLayer.Background;
 const I = TileLayer.Interact;
@@ -24,6 +26,8 @@ export class OfficeFloor extends ATile implements Tile {
 	public readonly color = hexFromRGB(128, 128, 128);
 	public readonly layer = B;
 	public readonly name = "office floor";
+	// public readonly joinCardinals = CARDINAL_POINTS;
+	public readonly svgFromShape = (layer: TileLayer) => (shape: ScreenMapShape, renderer: TileRenderer, bounds: BlockLayoutBounds) => svgBoxyBlob(shape, bounds)
 }
 
 export class OfficeDoor extends ATile implements Tile {
@@ -53,6 +57,7 @@ export class OfficeWall extends ATile implements Tile {
 		"chip-sw": <use href="#office-wall-c" x="0" y="0.9"/>,
 	};
 	public readonly joinCardinals = CARDINAL_POINTS;
+	public readonly svgFromShape = (layer: TileLayer) => (shape: ScreenMapShape, renderer: TileRenderer, bounds: BlockLayoutBounds) => svgBoxyBlob(shape, bounds)
 
 	public toSvgElement(coordinate: Coordinate, renderer: TileRenderer): JSX.Element {
 		const wallNames = nineGridReduce(coordinate, renderer, this.grid);
