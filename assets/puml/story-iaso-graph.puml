@@ -44,11 +44,18 @@ e105 -> "[[106-all-mother-mountain.html 106]]" as e106
 e106 -> "[[198-corruptor-module.html 198]]" as e198 
 "[[107-lab.html 107]]" as e107  -> "[[108-exit.html 108]]" as e108 <<OptionalEncounter>>
 e108 --> "[[156-mothers-watch.html 156: Mother's Watch]]" as e156 
+"[[109-dinner.html 109]]" as e109  -> "[[115-lodging.html 115]]" as e115 
+"[[110-carja-refugee-family.html 110]]" as e110  -> e109
+"[[111-tradespeople.html 111]]" as e111  -> e109
 "[[112-leave-tonight.html 112]]" as e112 <<OptionalEncounter>> --> "[[113-olara-and-brom-night.html 113: Olara and Brom]]" as e113 
 e113 -> "[[123-iaso-brom-olara.html 123]]" as e123 
 e113 --> e124
+"[[114-iala-uln-jineko.html 114]]" as e114  -> e109
+e115 -> "[[116-logging.html 116]]" as e116 
+e116 -> "[[119-timber-and-striders.html 119]]" as e119 
 "[[117-medical-focus.html 117]]" as e117  -> "[[118-focus.html 118]]" as e118 
 e118 -> "[[168-power-wall.html 168]]" as e168 
+e119 -> "[[122-lumber-carts.html 122]]" as e122 <<TODO>>
 "[[120-scrappers-incoming.html 120]]" as e120  --> "[[173-ruins-entrance.html 173: Mother's Watch Ruins]]" as e173 
 "[[121-scrappers-treeline.html 121]]" as e121  --> e173
 e123 -> e124
@@ -79,6 +86,7 @@ e199 --> (*)
 legend
 |= Type |= Description |
 |<#C8E2F9> (Other) | Story |
+|<#eeffcc> TODO | Story, not finished |
 |<#BBF395> Travel | Party travel |
 |<#EEAD63> Encounter | Combat encounter, required |
 |<#F9E2C8> Optional Encounter | Combat encounter, optional |

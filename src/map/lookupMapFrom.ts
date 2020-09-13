@@ -8,7 +8,7 @@ export function lookupMapFrom<T, K>(items: T[], keyBuilder: BiFunction<T, number
 		}
 		const existing = lookup.get(key);
 		if (existing != null) {
-			throw new Error(`Duplicate item for key ${JSON.stringify(key)}`);
+			throw new Error(`Duplicate item for key ${JSON.stringify(key)}: ${JSON.stringify(existing, null, 2)}\n${JSON.stringify(item, null, 2)}`);
 		}
 		lookup.set(key, item);
 		return lookup;
