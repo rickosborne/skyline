@@ -11,7 +11,7 @@ Read to everyone:
 > The distinctive shape of a long-necked Watcher, followed by at least one Strider, can be seen in the distance.
 >
 > Pren is hesitant to move on to the next tree, until the machines stop and begin grazing while the Watcher begins to circle them on patrol.
-> They are far enough away that you eventually convince Pren and the others to continue, mainly by invoking the inevitable disappointment of Iala, and by promising to keep someone watching the machines at all times.
+> They are far enough away that you eventually convince Pren and the others to continue, mainly by invoking the inevitable disappointment of Grethe, and by promising to keep someone watching the machines at all times.
 >
 > Two hours pass, in which time two more trees fall to the ground and are leveraged onto the lumber carts.
 > You've mostly finished your lunch as the Oseram woman, Nalender, turns to the group.
@@ -286,4 +286,4 @@ Remember that a Watcher alerted to your presence will immediately alert all othe
 In this case, there are no additional machines beyond those you can see.
 
 {:.story-links}
-[When the encounter is complete, catch up with the carts at entry 122.](122-lumber-carts.md){:.story-link.story-link-continue}
+[When the encounter is complete, continue on to entry 122.](122-lumber-carts.md){:.story-link.story-link-continue}

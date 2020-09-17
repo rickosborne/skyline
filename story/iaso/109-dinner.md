@@ -9,9 +9,10 @@ location: Mother's Watch
 Read to everyone:
 
 > You arrive in Mother's Watch as they are closing up the main gate for the night.
-> The large open forum has a half-dozen small buildings, all in the typical Nora style.
-> Most of the buildings look like they've taken damage from some kind of fighting, with the fresh wood of recent repairs noticeable even in the dim torchlight.
-> A few merchants remain, trying to get in one last sale for the day, but the effort is half-hearted as they pack up their wares.
+> The large open forum has a half-dozen small buildings, all in the typical Nora style, and all clearly new construction.
+> Piles of black ash and burned lumber have been swept to the walls, but not entirely removed.
+>
+> A few merchants remain in the square, trying to get in one last sale for the day, but the effort is half-hearted as they pack up their wares.
 >
 > You're directed up a winding hill to another open area at the foot of a mountain.
 > It's bustling with activity — dozens of people, many in family groups, sit at long, improvised tables, sharing a meal with the weary but good-natured exhaustion of a long day's work.
@@ -25,7 +26,7 @@ If your party chooses to socialize with those around you, read the following ent
 
 * [Carja refugee family](110-carja-refugee-family.md)
 * [Tradespeople](111-tradespeople.md)
-* [Nora family](114-iala-uln-jineko.md)
+* [Nora family](114-grethe-uln-jineko.md)
 
 {:.story-links}
 [When you're done with your dinner, continue on to entry 115.](115-lodging.md){:.story-link.story-link-continue}

@@ -8,7 +8,7 @@ tags:
 Read to everyone:
 
 > The pre-dawn light is pink and orange in the east as you step out of the lodge.
-> Iala stands at the top of the hill, just to the side of a post-mounted torch.
+> Grethe stands at the top of the hill, just to the side of a post-mounted torch.
 > She beckons you over without calling to you, keeping her voice low when she speaks.
 >
 > "I like you already, newcomers — up early and ready to work."
@@ -24,11 +24,17 @@ Read to everyone:
 >
 > A group of four approach, yawning and half awake.
 > You recognize them as the quartet from the dinner table last night.
-> Iala hands out more food bundles, nodding in silence as she does.
+> Grethe hands out more food bundles, nodding in silence as she does.
 
 As you walk down the hill to the main gate, if Haldred or Van are in your party they will hear their names called out.
 Jineko sits on a log stump at the far side of the forum, next to a pile of machine parts, picking up and inspecting them one at a time.
-She waves as you pass, wishing you luck for the day.
+She waves as you pass, wishing you luck for the day, and will call over Haldred and/or Van:
+
+{:.spoilers.block}
+> "When you get a break, for lunch or whatever, walk around the area.
+> Trust me.  Eyes open.  Watch your step."
+>
+> She won't say more than that, though her eyes dart around, examining the others in the square.
 
 Pren, who has by now introduced himself and his workmates if he hadn't already done so last night, leads you to a pile of tools off to the side of the main gate.
 He guides you through roping together a pair of lumber carts — each not much more than two wheels and a bed — before piling on and lashing down a number of axes and saws.

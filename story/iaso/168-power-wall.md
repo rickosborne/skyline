@@ -25,7 +25,7 @@ IASO guides you into this back room.
 The ancient, dessicated corpse of an Old One lays in a corner here, labeled by the Focus as Director Ellen Evans.
 Characters may choose to read the associated [Datapoint](https://horizon.fandom.com/wiki/All_Good_Things...).
 
-Along the right wall as you enter sit a pair of large containers.
+Along the right wall as you enter sit two large containers.
 They are empty, but the dust on them has been disturbed recently.
 An investigation of the boxes, a Moderate difficulty skill check, will find a single Health Potion.
 

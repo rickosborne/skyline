@@ -635,13 +635,13 @@ The following chart shows the flow of the story entries, along with each locatio
       x="280.5"
       y="43.69"
     /><a
-      href="114-iala-uln-jineko.html"
+      href="114-grethe-uln-jineko.html"
       target="_top"
-      title="114-iala-uln-jineko.html"
+      title="114-grethe-uln-jineko.html"
       xlink:actuate="onRequest"
-      xlink:href="114-iala-uln-jineko.html"
+      xlink:href="114-grethe-uln-jineko.html"
       xlink:show="new"
-      xlink:title="114-iala-uln-jineko.html"
+      xlink:title="114-grethe-uln-jineko.html"
       xlink:type="simple"
     ><text
         fill="#000000"
