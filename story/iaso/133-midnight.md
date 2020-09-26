@@ -9,7 +9,7 @@ Read to everyone:
 
 > Wispy clouds obscure the moon, leaving barely enough light to see as you reach the bottom of the hill.
 > A dark form shifts, impatient, with their back to you.
-> They turn, and you're faced with a Carja Hunter: spear in one hand, bow and quiver across their back, and large feather-covered Sawtooth jaw headdress atop a face lined with makeup in angular, starburst patterns.
+> They turn, and you're faced with a Carja Hunter: spear in one hand, small leather back across their back, and large feather-covered Sawtooth jaw headdress atop a face lined with makeup in angular, starburst patterns.
 > It takes a moment to recognize Jineko, and you only do so because you know it must be her.
 >
 > When she speaks, her voice has the husky undertones of her mother, plus the imperious tone of a Carja addressing Nora savages.

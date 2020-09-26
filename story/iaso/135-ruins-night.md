@@ -26,8 +26,8 @@ IASO will address everyone:
 
 A thorough search of the facility will reveal several items, each has its own AR Focus label and story entry:
 
-* `Osteostabilizer`, entry 178
-* `NanoPatch`, entry 179
+* [`OsteAlign (adaptive orthosis)`, entry 178](178-ostealign.md)
+* [`NanoPatch`, entry 179](179-nanopatch.md)
 * `Biomechanical Neural Interface`, entry 180
 * `Hover Harness`, entry 181
 * `Wheelchair`, entry 182
