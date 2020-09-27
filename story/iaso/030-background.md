@@ -17,7 +17,7 @@ The engineering efforts of the Oseram were critical in the defense of Meridian, 
 While Banuk lands did not see as much conflict as the others, they've been focused on keeping the Daemon threat from spilling beyond their borders.
 
 It was a Nora who led the victory over the machines and Shadow Carja, which has produced a wave of pride and respect, and has led to many Nora questioning their isolationist outlook.
-The High Matriarchs have opened Nora borders to all, and are coordinating refugee integration efforts from within Mother's Heart.
+The High Matriarchs have opened Nora borders to all, and are coordinating refugee integration efforts from within All-Mother Mountain.
 Not everyone agrees with this, but it's a calculated risk — Nora lands and people have been devastated, and are on the verge of disappearing forever if they cannot adapt and regrow.
 
 Mother's Watch and other Nora settlements, razed in the attacks, are just now beginning to rebuild.

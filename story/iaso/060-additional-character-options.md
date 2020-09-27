@@ -25,6 +25,6 @@ You'll likely find those rules superfluous, as you'll see when you get to the re
 ### Additional Persistent Medical Conditions
 
 Like blindness above, this story includes narrative elements which address assistive technologies and persistent medical conditions.
-Congenital heart issues, missing limbs, reduced immune response, etc, should not be considered barriers for your characters to adventure in the world of _Horizon_.
+Congenital heart issues, missing limbs, reduced immune response, etc, should not be considered barriers for your characters to adventure in the world of _Skyline_.
 
 While a single module cannot address every possible body type or medical condition, players who wish their characters to represent the diversity of the human experience should find this module a comfortable space to express themselves.

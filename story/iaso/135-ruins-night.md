@@ -35,4 +35,5 @@ A thorough search of the facility will reveal several items, each has its own AR
 * [`Autosuture`, entry 184](184-autosuture.md)
 * [`MedBed`, entry 185](185-medbed.md)
 
-TODO
+{:.story-links}
+[When you're ready, continue with entry 187.](187-search-complete.md){:.story-link.story-link-continue}

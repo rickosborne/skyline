@@ -47,14 +47,14 @@ That is, most don't have any better sense of Old Ones history than they did befo
 Even her ability to ride machines is already beginning to fade into mythos — most people aren't reasoning about how she was able to do it, instead chalking it up to something mystical.</p>
 </aside>
 
-The farther up the hills toward Mother's Heart you go, the more refugees you see.
+The farther up the hills toward All-Mother Mountain you go, the more refugees you see.
 Each family seems to be more anxious than the last, until there's an undercurrent of barely-restrained tension at the entrance to the mountain.
 It becomes obvious why you were told to come here: there are far more people here than there are lodge beds.
 
 The pair of Brave guards posted there will not allow anyone to enter, even Nora party members.
-The guards explain that Mother's Heart is being used as an infirmary, restricting entry to only family members of those being treated.
+The guards explain that All-Mother Mountain is being used as an infirmary, restricting entry to only family members of those being treated.
 The High Matriarchs are caring for the injured, and are not available to talk.
-Skilled persuaders can only get the guards to reveal that the High Matriarchs have not left Mother's Heart in over a week, as they've been working in shifts around the clock, sleeping when they can.
+Skilled persuaders can only get the guards to reveal that the High Matriarchs have not left All-Mother Mountain in over a week, as they've been working in shifts around the clock, sleeping when they can.
 
 The guards, tradesmen, and merchants will direct the party to speak to Teb, a Nora man who is coordinating the construction of new lodges.
 

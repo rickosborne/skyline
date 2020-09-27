@@ -45,14 +45,14 @@ If you ask her why she wants to go, herself, or if she's up for it:
 
 > "I've spent years sifting through machine parts.
 > You seem competent, but I have to see for myself.
-> There might be more artifacts there, which could help the people recovering in Mother's Heart."
+> There might be more artifacts there, which could help the people recovering in All-Mother Mountain."
 
-If you ask her who's in Mother's Heart:
+If you ask her who's in All-Mother Mountain:
 
 > "You haven't seen?
 > You didn't think it was odd we've survived multiple attacks from ancient machines, and everyone seems to be whole and healthy?
 > My mother's skill with herbs is beyond most, but that can only do so much.
-> Mother's Heart has been repurposed to house the sick, injured, and dying.
+> All-Mother Mountain has been repurposed to house the sick, injured, and dying.
 > The glowing smoke from the Deathbringers does unspeakable things to flesh."
 
 If you tell her she can't go, she will only look at you with a challenging eyebrow.

@@ -9,7 +9,7 @@ Read to everyone:
 
 > Wispy clouds obscure the moon, leaving barely enough light to see as you reach the bottom of the hill.
 > A dark form shifts, impatient, with their back to you.
-> They turn, and you're faced with a Carja Hunter: spear in one hand, small leather back across their back, and large feather-covered Sawtooth jaw headdress atop a face lined with makeup in angular, starburst patterns.
+> They turn, and you're faced with a Carja Hunter: bow in one hand, quiver dangling from one hip, small leather back across their back, and large feather-covered Sawtooth jaw headdress atop a face lined with makeup in angular, starburst patterns.
 > It takes a moment to recognize Jineko, and you only do so because you know it must be her.
 >
 > When she speaks, her voice has the husky undertones of her mother, plus the imperious tone of a Carja addressing Nora savages.
@@ -44,7 +44,7 @@ If asked why she is disguised and acting in secret:
 
 > "How am I to explain this to my parents, or the Matriarchs?
 > The All-Mother came to me in a dream and healed my body?
-> Why me and not one of the suffering in Mother's Heart?
+> Why me and not one of the suffering in All-Mother Mountain?
 > And what happens when they see my Focus, or the sensor pads on my back and legs?
 > No.  I need time to think.
 > I might be able to convince them if I can find something to help.
