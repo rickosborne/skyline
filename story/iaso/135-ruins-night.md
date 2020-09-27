@@ -28,11 +28,11 @@ A thorough search of the facility will reveal several items, each has its own AR
 
 * [`OsteAlign (adaptive orthosis)`, entry 178](178-ostealign.md)
 * [`NanoPatch`, entry 179](179-nanopatch.md)
-* `Biomechanical Neural Interface`, entry 180
-* `Hover Harness`, entry 181
-* `Wheelchair`, entry 182
-* `Hoverchair`, entry 183
-* `Autosuture`, entry 184
-* `MedBed`, entry 185
+* [`Biomechanical Neural Interface`, entry 180](180-neural-interface.md)
+* [`Hover Harness`, entry 181](181-hover-harness.md)
+* [`Wheelchair`, entry 182](182-wheelchair.md)
+* [`Hoverchair`, entry 183](183-hoverchair.md)
+* [`Autosuture`, entry 184](184-autosuture.md)
+* [`MedBed`, entry 185](185-medbed.md)
 
 TODO

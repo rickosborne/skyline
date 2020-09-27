@@ -1,6 +1,7 @@
 ---
 tags:
 - story
+- loot
 location: Mother's Watch Ruins
 ---
 
