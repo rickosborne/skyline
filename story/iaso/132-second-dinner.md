@@ -28,17 +28,17 @@ Read to everyone:
 > Enjoy a nice dinner together for once.
 > I'll be right down the hill."
 >
-> Accompanying Jineko down to her stall by the main gate, her gait does not betray any change in her condition.
+> Accompanying Jineko down to her stall in the forum, her gait does not betray any change in her condition.
 > She explains as she sits, only then relaxing and kicking her feet in slow circles.
 >
 > "It's taking some getting used to, but I've almost got it.
-> I'd like your help tonight — getting there, looking around, and getting back in."
+> I'd like your help tonight — getting there, looking around, and getting back."
 
 If you ask her what she expects to get from the trip:
 
 > "You're not the first to go in there, you know.
 > Others have, too, but none have come back with sensor pads.
-> You all found something new.
+> You found something new.
 > I want to see what else is there."
 
 If you ask her why she wants to go, herself, or if she's up for it:
@@ -51,11 +51,12 @@ If you ask her who's in All-Mother Mountain:
 
 > "You haven't seen?
 > You didn't think it was odd we've survived multiple attacks from ancient machines, and everyone seems to be whole and healthy?
-> My mother's skill with herbs is beyond most, but that can only do so much.
 > All-Mother Mountain has been repurposed to house the sick, injured, and dying.
+> My mother's skill with herbs is beyond most, but that can only do so much.
 > The glowing smoke from the Deathbringers does unspeakable things to flesh."
 
 If you tell her she can't go, she will only look at you with a challenging eyebrow.
+It's clear she's going, with or without your help.
 
 Eventually, she will explain her plan:
 

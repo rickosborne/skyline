@@ -10,7 +10,7 @@ location: Mother's Watch Ruins
 Read to everyone:
 
 > Collapsed against a wall and covered in moss is a jumble of metal rings, bars, and that same metal cloth.
-> Takes some effort, but you manage to pull them apart and clean them off, revealing a half dozen objects your Focus labels as simply `Wheelchair`.
+> It takes some effort, but you manage to pull them apart and clean them off, revealing a half dozen objects your Focus labels as simply `Wheelchair`.
 > Animated graphics show how to split apart the rings, expanding the device into what appears to be a single-person cart, or a chair with built-in wheels.
 > The woven metal seat and back seem completely intact, and exhibit that same resistance to damage.
 > The wheels also appear to be made of some kind of woven metal, though much thicker and yet at the same time more giving.

@@ -47,7 +47,7 @@ If anyone in your party reacts visibly to this, she will hiss at you to get your
 > I'd like to ... learn some more."
 > 
 > It's readily apparent you probably wouldn't be able to get the devices back from her, even if you wanted to.
-> She nods her chin, and you turn to see Grethe approaching, almost pushing a hesitant Pren along in front of her.
+> She points her chin, and you turn to see Grethe approaching, almost pushing a hesitant Pren along in front of her.
 > Barely a whisper, Jineko says: "Let's talk later."
 >
 > Grethe almost has Pren by the scruff of his neck as she speaks.

@@ -30,15 +30,15 @@ Using it to supply power to the device changes its designation in your Focus ove
 There are eight working patches, and three more which do not react when power is applied.
 Some experimentation leads you to believe that each patch would charge to 100% after 8 to 12 hours, depending on size.
 
-Anyone applying a patch to an injury would experience a slight tingling effect, and that lacerations close instead of hours instead of days.
+Anyone applying a patch to an injury would experience a slight tingling effect, and would find that lacerations close in hours instead of days.
 Similar results are seen for burns, frostbite, bruises, and other basic injuries which do not require non-dermal organ repair.
 Like sensor pads, NanoPatches adhere only to skin, but become easy to remove when the injury repair is complete.
 Removing a NanoPatch before this is possible, but would likely cause additional injury to lacerated skin.
 
 <aside class="narrator-note">
 <header>Narrator note:</header>
-<p markdown="true">NanoPatches provide a narrative opportunity for overnight recovery of surface injuries, especially when on the road or otherwise in places where more thorough medical treatment may not be available.
-More serious injuries may require an [OsteAlign (orthosis)](178-ostealign.md), [Autosuture](184-autosuture.md), or [MedBed](185-medbed.md).</p>
+<p>NanoPatches provide a narrative opportunity for overnight recovery of surface injuries, especially when on the road or otherwise in places where more thorough medical treatment may not be available.
+More serious injuries may require an <a href="178-ostealign.html">OsteAlign (orthosis)</a>, <a href="184-autosuture.html">Autosuture</a>, or <a href="185-medbed.html">MedBed</a>.</p>
 <p>NanoPatches need a power source because they work on the same nanite technology as the biomass converters in Deathbringers and other FARO machines.
 The nanites are programmed for basic cellular repair, but are not sophisticated enough for the kinds of coordinated or nuanced large-scale repair required for major organ damage.
 This restriction is intended to prevent them from being a cure-all, and narrators are encouraged to tailor them to their needs.</p>

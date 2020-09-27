@@ -32,7 +32,7 @@ Only one Focus may be linked with the chair at a time.
 
 <aside class="narrator-note">
 <header>Narrator note:</header>
-<p markdown="true">Players who'd like additional ideas for hoverchair capabilities might do well to read through old X-Men comics with [Professor Xavier's hoverchair](https://marvel.fandom.com/wiki/Hoverchair).
+<p>Players who'd like additional ideas for hoverchair capabilities might do well to read through old X-Men comics with <a href="https://marvel.fandom.com/wiki/Hoverchair" rel="external">Professor Xavier's hoverchair</a>.
 Like the harness, narrators and players are encouraged to quest to extend its capabilities over time.</p>
 </aside>
 

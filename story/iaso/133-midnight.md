@@ -9,16 +9,16 @@ Read to everyone:
 
 > Wispy clouds obscure the moon, leaving barely enough light to see as you reach the bottom of the hill.
 > A dark form shifts, impatient, with their back to you.
-> They turn, and you're faced with a Carja Hunter: bow in one hand, quiver dangling from one hip, small leather back across their back, and large feather-covered Sawtooth jaw headdress atop a face lined with makeup in angular, starburst patterns.
+> They turn, and you're faced with a Carja Hunter: bow in one hand, quiver dangling from one hip, heavy leather bag across their back, and large feather-covered Sawtooth jaw headdress atop a face lined with makeup in angular, starburst patterns.
 > It takes a moment to recognize Jineko, and you only do so because you know it must be her.
 >
 > When she speaks, her voice has the husky undertones of her mother, plus the imperious tone of a Carja addressing Nora savages.
 >
 > "The Braves believe Grethe is sending you out to gather more herbs.
 > After a day of felling timber, you were given a few hours of sleep before heading back again.
-> We do not know each other, only the task we were given by Grethe."
+> We do not know each other, only the task we were given."
 >
-> Without waiting for your assent, she turns and walks toward the main gait.
+> Without waiting for your assent, she turns and walks toward the main gate.
 > She has a slight limp, but otherwise does not seem to need any assistance.
 >
 > Two Braves stand watch at the gate — one above, and one on the ground.
@@ -35,8 +35,8 @@ If you comment on her ability to walk, she won't say much about it:
 <aside class="narrator-note">
 <header>Narrator note:</header>
 <p markdown="true">
-Narrators may choose to make Jineko as talkative or taciturn as they choose.
-For guidance, see the [notes on Jineko's motivation in entry 172](172-jineko-focus-bts.md).
+Narrators may choose to make Jineko talkative, taciturn, or whatever fits her backstory.
+For guidance, see the <a href="172-jineko-focus-bts.html">notes on Jineko's motivation in entry 172</a>.
 </p>
 </aside>
 

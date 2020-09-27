@@ -194,7 +194,7 @@ h1:first-child, h2:first-child, h3:first-child, h4:first-child, h5:first-child, 
 
 blockquote, .narrator-note {
   padding: var(--cadence) var(--cadence-half);
-  margin: 0;
+  margin: var(--cadence) 0;
   display: block;
 }
 blockquote > :first-child, .narrator-note > :first-child {
@@ -504,7 +504,10 @@ blockquote {
 .narrator-note {
   color: var(--dusk-green);
   background-color: var(--dusk-green-5);
-  border-left-color: var(--dusk-green-25);
+  border-left: var(--cadence-quarter) solid var(--dusk-green-25);
+}
+.narrator-note a, .narrator-note a:visited {
+  color: var(--dusk-green);
 }
 
 .narrator-note header {

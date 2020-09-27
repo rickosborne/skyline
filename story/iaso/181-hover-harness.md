@@ -46,7 +46,7 @@ This would likely look quite odd to an observer.
 <header>Narrator note:</header>
 <p markdown="true">Obviously, giving flight to a low-level character would be game-breaking in most systems.
 The restrictions listed here are intended to make the harness a mobility aid, not a super-power.
-However, any player who isn't curious what the harness could do when combines with some Glinthawk and Stormbird components, well, they're playing the wrong game.
+However, any player who isn't curious what the harness could do when combined with some Glinthawk and Stormbird components, well, they're playing the wrong game.
 Narrators and players are encouraged to come up with reasonable limitations on the harness, such as "hovering depletes the power source at an exponential rate" or similar.</p>
 </aside>
 

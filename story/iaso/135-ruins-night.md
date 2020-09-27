@@ -8,11 +8,11 @@ location: Mother's Watch Ruins
 
 The cloud cover makes the entrance to the cave tricky to find, and even trickier to navigate.
 Each character will need to use their System Adapter to make a check appropriate for climbing against Moderate difficulty.
-Failing characters drop 15ft (5m), taking Light damage.  
+Failing characters drop 15ft (5m), taking Light damage.
 Jineko will also require some assistance getting down.
 
 Jineko mumbles to the air and waves her hands in jerky patterns for several moments, in what you now recognize as her interacting with her Focus.
-If you are a narrator who would like some behind-the-scenes context for additional roleplay options, read [entry 163](163-jineko-focus-night-bts.md).
+Narrators who would like some behind-the-scenes context for additional roleplay options may read [entry 163](163-jineko-focus-night-bts.md).
 
 After a time, Jineko speaks aloud:
 

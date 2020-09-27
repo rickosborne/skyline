@@ -43,26 +43,32 @@ e104 -> "[[105-striders.html 105]]" as e105 <<Encounter>>
 e105 -> "[[106-all-mother-mountain.html 106]]" as e106 
 e106 -> "[[198-corruptor-module.html 198]]" as e198 
 "[[107-lab.html 107]]" as e107  -> "[[108-exit.html 108]]" as e108 <<OptionalEncounter>>
-e108 --> "[[156-mothers-watch.html 156: Mother's Watch]]" as e156 
+e108 -> "[[130-mothers-watch-afternoon.html 130]]" as e130 
 "[[109-dinner.html 109]]" as e109  -> "[[115-lodging.html 115]]" as e115 
 "[[110-carja-refugee-family.html 110]]" as e110  -> e109
 "[[111-tradespeople.html 111]]" as e111  -> e109
 "[[112-leave-tonight.html 112]]" as e112 <<OptionalEncounter>> --> "[[113-olara-and-brom-night.html 113: Olara and Brom]]" as e113 
 e113 -> "[[123-iaso-brom-olara.html 123]]" as e123 
 e113 --> e124
-"[[114-iala-uln-jineko.html 114]]" as e114  -> e109
+"[[114-grethe-uln-jineko.html 114]]" as e114  -> e109
 e115 -> "[[116-logging.html 116]]" as e116 
 e116 -> "[[119-timber-and-striders.html 119]]" as e119 
 "[[117-medical-focus.html 117]]" as e117  -> "[[118-focus.html 118]]" as e118 
 e118 -> "[[168-power-wall.html 168]]" as e168 
-e119 -> "[[122-lumber-carts.html 122]]" as e122 <<TODO>>
+e119 -> "[[122-lumber-carts.html 122]]" as e122 
 "[[120-scrappers-incoming.html 120]]" as e120  --> "[[173-ruins-entrance.html 173: Mother's Watch Ruins]]" as e173 
 "[[121-scrappers-treeline.html 121]]" as e121  --> e173
+e122 -> "[[125-investigate.html 125]]" as e125 
 e123 -> e124
 e124 --> e103
 "[[129-teb.html 129: Teb]]" as e129  -> e112
 e129 --> "[[136-leave-tomorrow.html 136]]" as e136 
+e130 -> "[[131-jineko-focus.html 131]]" as e131 
+e131 -> "[[132-second-dinner.html 132]]" as e132 
+e132 -> "[[133-midnight.html 133]]" as e133 
+e133 -> "[[135-ruins-night.html 135]]" as e135 
 "[[134-synchronize.html 134]]" as e134  -> e107
+e135 -> "[[187-search-complete.html 187]]" as e187 
 e136 -> "[[137-leave-morning.html 137]]" as e137 
 e136 --> "[[191-not-interested.html 191]]" as e191 <<Travel>>
 e137 --> e102
@@ -73,20 +79,30 @@ e147 -> e121
 e147 --> e120
 "[[150-the-blinking-light.html 150]]" as e150  -> e117
 e150 --> e118
-e156 --> e129
+"[[156-mothers-watch.html 156: Mother's Watch]]" as e156  --> e129
 e162 --> e173
+"[[163-jineko-focus-night-bts.html 163]]" as e163  -> e135
 e168 -> e134
 e168 --> "[[186-no-synchronize.html 186]]" as e186 
+"[[172-jineko-focus-bts.html 172]]" as e172  -> e131
 e173 --> e150
+"[[178-ostealign.html 178]]" as e178  -> e135
+"[[179-nanopatch.html 179]]" as e179  -> e135
+"[[180-neural-interface.html 180]]" as e180  -> e135
+"[[181-hover-harness.html 181]]" as e181  -> e135
+"[[182-wheelchair.html 182]]" as e182  -> e135
+"[[183-hoverchair.html 183]]" as e183  -> e135
+"[[184-autosuture.html 184]]" as e184  -> e135
+"[[185-medbed.html 185]]" as e185  -> e135
 e186 -> e107
+e187 -> "[[199-what-next.html 199]]" as e199 
 e191 --> e103
-e198 -> "[[199-what-next.html 199]]" as e199 
+e198 -> e199
 e199 --> (*)
 
 legend
 |= Type |= Description |
 |<#C8E2F9> (Other) | Story |
-|<#eeffcc> TODO | Story, not finished |
 |<#BBF395> Travel | Party travel |
 |<#EEAD63> Encounter | Combat encounter, required |
 |<#F9E2C8> Optional Encounter | Combat encounter, optional |
