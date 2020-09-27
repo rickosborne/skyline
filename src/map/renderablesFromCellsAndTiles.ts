@@ -145,7 +145,7 @@ function renderablesFromLayer(
 	tiles: Tile[],
 	bounds: BlockLayoutBounds,
 ): ScreenMapRenderable[] {
-	return tiles.flatMap(tile => renderablesForLayerTile(tile, layerId, layerCells, allCellsById, bounds))
+	return tiles.flatMap(tile => renderablesForLayerTile(tile, layerId, layerCells, allCellsById, bounds));
 }
 
 export function renderablesFromCellsAndTiles(

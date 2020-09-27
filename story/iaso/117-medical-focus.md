@@ -14,7 +14,7 @@ Players of blind or deaf characters should read the section on [Focus as Assisti
 A number of things happen as these characters attach their Focuses, which are described in that section.
 
 Characters with other persistent medical conditions — heart defects or missing limbs, for example — will see an overlay on their vision when the Focus goes online.
-The overlay clearly represents an outline of themselves, with some kind of red indicator of the condition.
+The overlay clearly represents a cyan outline of themselves, with some kind of red indicator of the condition.
 
 Characters with heart or blood disorders will hear a voice and see an overlay, rotating through several languages:
 

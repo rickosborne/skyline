@@ -5,7 +5,7 @@ title: Map Test
 
 <!-- +template map story/iaso/520-embrace svg -->
 
-<!-- map data e626723885bddbf67969425935fcda5e6f8cc1552cea0d8f236ee33d81ca150d
+<!-- map data 1a0e46b35fcbb604ac70d2a07e1335c0937c23c59a0ada70336c7e700d9c3c00
 Map
   Title: All-Mother's Embrace
   Theme: Outdoor
@@ -173,7 +173,7 @@ c. Campfire  (icon: campfire)
 					<path class="forest-round" d="M40,6 Q42,6,42,8 Q42,10,40,10 Q38,10,38,9 Q38,8,37.5,8 Q37,8,37,7.5 Q37,7,37.5,7 Q38,7,38,6.5 Q38,6,38.5,6 Q39,6,38.5,6 Q38,6,40,6 z"><title>forest</title></path>
 				</g>
 				<g class="road-journey">
-					<path d="M21.3,0 h0.4 Q21.5,0.5,21.3,0 h0.4 Q21.5,0.5,21.7,1 h-0.4 l-0.17,0.13 l-0.26,-0.26 l0.13,-0.17 Q21.5,0.5,21.3,0 z"><title>road</title></path>
+					<path d="M21.3,0 h0.4 Q21.5,0.5,21.3,1 l-0.17,0.13 l-0.26,-0.26 l0.13,-0.17 Q21.5,0.5,21.3,0 z"><title>road</title></path>
 					<path d="M20.7,1 l0.17,-0.13 l0.26,0.26 l-0.13,0.17 q-0.2,0.2,0,0.4 l0.13,0.17 l-0.26,0.26 l-0.17,-0.13 Q20.5,1.5,20.7,1 z"><title>road</title></path>
 					<path d="M21,2.3 l-0.13,-0.17 l0.26,-0.26 l0.17,0.13 Q21.5,2.5,21.3,3 l-0.17,0.13 l-0.26,-0.26 l0.13,-0.17 q0.2,-0.2,0,-0.4 z"><title>road</title></path>
 					<path d="M20.7,3 l0.17,-0.13 l0.26,0.26 l-0.13,0.17 q-0.2,0.2,0,0.4 l0.13,0.17 l-0.26,0.26 l-0.17,-0.13 q-0.2,-0.2,-0.4,0 l-0.17,0.13 l-0.26,-0.26 l0.13,-0.17 Q20.5,3.5,20.7,3 z"><title>road</title></path>
@@ -226,8 +226,8 @@ c. Campfire  (icon: campfire)
 					<path d="M41,3.7 v-0.4 Q41.5,3.5,41,3.7 z"><title>road</title></path>
 				</g>
 				<g class="river-journey">
-					<path d="M23.3,0 h0.4 Q23.5,0.5,23.3,0 h0.4 l0.17,-0.13 l0.26,0.26 l-0.13,0.17 v0.4 l0.13,0.17 l-0.26,0.26 l-0.17,-0.13 h-0.4 l-0.17,0.13 l-0.26,-0.26 l0.13,-0.17 Q23.5,0.5,23.3,0 z"><title>river</title></path>
-					<path d="M24,0.3 l-0.13,-0.17 l0.26,-0.26 l0.17,0.13 h0.4 Q24.5,0.5,24.3,0 h0.4 Q24.5,0.5,24.7,1 h-0.4 l-0.17,0.13 l-0.26,-0.26 l0.13,-0.17 v-0.4 z"><title>river</title></path>
+					<path d="M23.3,0 h0.4 h0.3 v0.3 v0.4 v0.3 h-0.3 h-0.4 l-0.17,0.13 l-0.26,-0.26 l0.13,-0.17 Q23.5,0.5,23.3,0 z"><title>river</title></path>
+					<path d="M24.3,0 h0.4 Q24.5,0.5,24.3,1 l-0.17,0.13 l-0.26,-0.26 l0.13,-0.17 v-0.4 v-0.3 h0.3 z"><title>river</title></path>
 					<path d="M22.7,1 l0.17,-0.13 l0.26,0.26 l-0.13,0.17 v0.4 l0.13,0.17 l-0.26,0.26 l-0.17,-0.13 Q22.5,1.5,22.7,1 z"><title>river</title></path>
 					<path d="M23.3,1 h0.4 l0.17,-0.13 l0.26,0.26 l-0.13,0.17 q-0.2,0.2,0,0.4 l0.13,0.17 l-0.26,0.26 l-0.17,-0.13 h-0.4 h-0.3 v-0.3 v-0.4 v-0.3 h0.3 z"><title>river</title></path>
 					<path d="M23,2.3 l-0.13,-0.17 l0.26,-0.26 l0.17,0.13 h0.4 h0.3 v0.3 v0.4 v0.3 h-0.3 h-0.4 l-0.17,0.13 l-0.26,-0.26 l0.13,-0.17 q0.2,-0.2,0,-0.4 z"><title>river</title></path>

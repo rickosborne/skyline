@@ -20,8 +20,8 @@ The augmented reality (AR) overlay adds a glow and text to several items in the 
 The blinking teal ring around the MAU goes solid, followed by the AR highlight of the object changing from a dull, generic yellow to a matching teal.
 A holographic label above it blinks `Starting...` for several seconds before changing to `Syncronizing...`.
 
-The character who injured their hand on the door hears a voice in their head, or receives a text overlay.
-The voice is calm and neutral in tone as it says:
+The character who injured their hand on the door, along with any other characters who were injured in the fight earlier, will hear a voice in their head, or receive a text overlay.
+The communication is calm and neutral in tone as it says:
 
 > Good evening.
 > You appear to have an injury.

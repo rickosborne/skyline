@@ -39,5 +39,5 @@ The dozen Focuses all seem to be in working order, and it will occur to at least
 That person shows the others how to do it, and one by one the party is connected to the Focus network.
 
 {:.story-links.story-links-one}
-[If you have any blind or deaf party members, or members with persistent medical conditions, continue on to entry 117.](117-medical-focus.md){:.story-link.story-link-if}
+[If you have any blind or deaf party members, including Haldred, or members with persistent medical conditions, continue on to entry 117.](117-medical-focus.md){:.story-link.story-link-if}
 [Otherwise, continue on to entry 118.](118-focus.md){:.story-link.story-link-else}
