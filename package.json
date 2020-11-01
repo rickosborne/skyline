@@ -52,7 +52,7 @@
 		"template": "ts-node src/template/template.ts",
 		"template:watch": "ts-node src/template/template.ts -- --watch",
 		"test": "mocha",
-		"words": "wc -w `find story guide adapter -type f`"
+		"words": "wc -w `find story guide adapter -type f -name \"*.md\"`"
 	},
 	"version": "1.0.0-pre"
 }
