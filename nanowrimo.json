@@ -1,0 +1,9 @@
+{
+	"2020": {
+		"countCommand": "wc -w `find story guide adapter -type f -name \"*.md\"`",
+		"initialWordCount": 56911,
+		"log": {
+			"2020-11-02T03:48:18.793Z": 854
+		}
+	}
+}
