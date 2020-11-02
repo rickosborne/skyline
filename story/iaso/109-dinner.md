@@ -22,6 +22,8 @@ Read to everyone:
 > A family in Carja dress gets up from a table, making their way over to a crowd gathering around one of the lodges.
 > You take their place to sit and eat, wedged in between what looks to be a Nora family and an assortment of tradespeople of Carja and Oseram dress.
 
+If Thorn is in your party, or a character who is similarly curious and skilled at to getting into places they aren't supposed to be, read [entry 138](138-whats-in-the-mountain.md). 
+
 If your party chooses to socialize with those around you, read the following entries:
 
 * [Carja refugee family](110-carja-refugee-family.md)

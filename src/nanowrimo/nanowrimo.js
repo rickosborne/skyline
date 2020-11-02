@@ -28,12 +28,14 @@ const ts = new Date().toISOString();
 const log = config['log'] || {};
 const lastTimestamp = Object.keys(log).sort().pop();
 const lastWords = lastTimestamp == null ? 0 : log[lastTimestamp];
+console.log(`[${ts}] From initial: ${count} (current) - ${initial} (initial) = ${fromInitial} (total)`);
 if (lastWords !== fromInitial) {
 	log[ts] = fromInitial;
 	config['log'] = log;
 	const jsonOut = JSON.stringify(nano, null, '\t') + "\n";
 	fs.writeFileSync(nanoConfigFile, jsonOut);
+	const fromPrevious = fromInitial - lastWords;
+	console.log(`[${ts}] From previous: ${fromInitial} (total) - ${lastWords} (previous) = ${fromPrevious} (session)`);
 } else {
 	console.log('Did not add a new log entry — it has not changed.');
 }
-console.log(`[${ts}] ${count} - ${initial} = ${fromInitial}`);
