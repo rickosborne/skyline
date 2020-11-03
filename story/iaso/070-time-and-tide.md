@@ -68,3 +68,18 @@ A note from Rick Osborne, the author of _Skyline_:
 
 {:.align-right.signature.avoid-break-before}
 > -R
+
+## Horizon Characters
+
+Finally, a quick note about characters from _Horizon_.
+_Skyline_ modules will occasionally reference _Horizon_ characters, such as Aloy or Sylens, to refer back to canon events from the game.
+The stories in those modules, however, do not and will not feature those characters, nor will the stories depict those characters' actions in anything more than passing mentions.
+
+As _Skyline_ is a fan work without licensing from any of the owners of the _Horizon_ IP, it would not be appropriate (or legal in most places) to use those characters without permission.
+Instead, _Skyline_ modules try to keep even those references vague.
+Aloy, for example, is referred to as only "The Seeker", and only in passing.
+
+IP laws for creative works tend to focus on how the derivative works (mis)use characters, or deprive the rights-holder of markets and/or opportunities, or cause confusion about the status of the work in regard to the original.
+It is the author's hope that playing in a sandbox which pays homage to _Horizon_, without in any way attempting to depict its characters, makes _Skyline_ distinct and deferential enough to avoid any potential consternation.
+
+Long story short: you won't see Aloy or any other characters from the games in _Skyline_ modules, but what you choose to do around your own table in your own game is up to you.
