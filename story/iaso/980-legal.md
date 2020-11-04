@@ -4,10 +4,15 @@ _Skyline_ and _IASO_ are creations of Rick Osborne, who has sole copyright to th
 While they are based on the world of _Horizon_, Rick makes no claim to any association with that product, nor its developers Guerrilla Games, nor its publisher Sony Interactive Entertainment.
 
 **_Skyline_ is a fan work, meant for the enjoyment of tabletop gamers, and has no commercial aspect.**
+It has been made freely available to all, and is not for sale.
 
 _IASO_ includes adapters for game systems and products, but similarly makes no claim of association with those creators or products, and does not intentionally use any portion of those works which might be considered "product identity".
 
-While _Skyline_ and _IASO_ are **not** licensed under the OGL, for the purposes of clarity the following items are considered part of _Skyline_'s product identity: the term _Skyline_ as a descriptor for an RPG world, and _IASO_ as an AI character in that world.
+While _Skyline_ and _IASO_ are **not** licensed under the OGL, for the purposes of clarity the following items are considered part of _Skyline_'s product identity:
+
+* The term _Skyline_ as a descriptor for an RPG world.
+* The name and character of _IASO_ as portrayed by an AI.
+* The named non-player characters listed in the [NPC section](400-npc.md).
 
 See the _Skyline_ license for additional details:
 

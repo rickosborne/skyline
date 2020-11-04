@@ -1,4 +1,4 @@
-## Human-vs-Human Combat in Skyline
+## Human-vs-Human Combat in _Skyline_
 
 A note from Rick Osborne, the author:
 
