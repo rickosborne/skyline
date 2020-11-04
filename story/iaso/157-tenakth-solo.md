@@ -56,5 +56,5 @@ The child is too young to have been around for this, but the parents clearly wer
 Grethe, knowing this history, seems to be attempting to disarm the prejudice of the parents by appealing to the innocence of their daughter.
 
 {:.story-links.story-links-one}
-[If you're willing to play along, continue on to entry XXX.](XXX.md){:.story-link.story-link-if}
-[Otherwise, go to entry YYY.](YYY.md){:.story-link.story-link-else}
+[If you're willing to play along, continue on to entry 164.](164-play-along.md){:.story-link.story-link-if}
+[Otherwise, go to entry 171.](171-not-interested.md){:.story-link.story-link-else}
