@@ -1,6 +1,7 @@
 ---
 tags:
 - story
+location: Cauldron SIGMA
 ---
 
 ## 100
@@ -40,6 +41,8 @@ A new chamber is accessible to one side, leading to a room that is a mirror for 
 It is absolutely littered with the charred and exploded parts of what must be dozens of Bellowbacks.
 Some of the debris is dusty, implying those machines were destroyed weeks or months ago.
 Others still reek fire damage, recent enough to still have the sharp chemical smell of Blaze upon them.
+
+TODO: SIGMA Arena 1 Map
 
 Hearing doors on the opposite side of the room open, the party has three rounds to hide before a pair of Bellowbacks enter from different doors.
 One of them might be the mostly-new Freeze Bellowback you saw outside, while the other is something even newer.
