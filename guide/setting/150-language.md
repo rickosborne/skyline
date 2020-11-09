@@ -7,16 +7,16 @@ tags:
 
 There is no _Horizon_ canon explanation of what language the Nora or other peoples speak.
 _Skyline_ makes an inference: the Nora and surrounding peoples speak a language that is close to American English.
-There is likely _some_ drift over the five centuries since the first people left ELEUTHIA-9, but probably not as much as might be expected.
+There is likely _some_ drift over the seven centuries since the first people left ELEUTHIA-9, but probably not as much as might be expected.
 
 Project Zero Dawn brought in scientists, engineers, and other professionals from around the world.
 The expedited nature of these acquisitions, and what we know about Elisabet Sobeck's personality and her desire to accomplish as much as she could in the time she had, we might assume led to international agreements of cooperation.
-_Skyline_ assumes that there are ELEUTHIA creches around the world, or at least in the areas where they could be constructed before the war machines would notice.
+_Skyline_ assumes that there are ELEUTHIA Cradles around the world, or at least in the areas where they could be constructed before the war machines would notice.
 
 This international cooperation likely led to the learning modules in APOLLO being multilingual, with the goal of reeducating all the peoples of the world from the same material.
 Of course, the APOLLO database was purged, but not until after everything was well in motion.
-This means Zero Dawn would have started with a multilingual approach, intending to restart civilization where they left off, which implies that ELEUTHIA creche servitors were likely configured to use the local language(s).
-For ELEUTHIA-9, that would be American English.
+This means Zero Dawn would have started with a multilingual approach, intending to restart civilization where they left off, which implies that ELEUTHIA multiservitors were likely configured to use the local language(s).
+For ELEUTHIA-9, that would be American English, while for ELEUTHIA-01 it would likely be Uyghur or Mandarin (Chinese).
 
 It is possible that, after the APOLLO purge, GAIA could have foreseen communication problems among various groups and taken the opportunity to consolidate the world on a single language.
 However, even if that's the case, that one language is likely still English.
@@ -36,7 +36,7 @@ This presumes a not insignificant volume of rediscovered media of quality equiva
 Given the sheer number of phones, digital media players, digital photo frames, etc, in existence today, it's plausible that any number of them survived a thousand years, especially with the nigh-magical battery technology seen in _Horizon_.
 
 When building out your world for _Skyline_, you'll need to decide how languages are handled.
-For example, if you start your story with the Nora and your players go far enough south, it's entirely possible they would meet people who had been released from an ELEUTHIA creche in Mexico, and plausibly spoke some derivation on Spanish.
+For example, if you start your story with the Nora and your players go far enough south, it's entirely possible they would meet people who had been released from an ELEUTHIA Cradle in Mexico, and plausibly spoke some derivation on Spanish.
 Going with a single language can make it easier for your player characters to get around, but there's also something to be said for the creativity which communication difficulties inspire.
 
 If your game system treats languages as a value-add resource for your characters, consider whether the reduced number of languages in _Skyline_ might warrant compensation with something else.

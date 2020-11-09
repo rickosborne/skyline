@@ -5,11 +5,22 @@ tags:
 
 ## ELEUTHIA
 
-TODO
+Initially a subordinate function of GAIA, ELEUTHIA was detached from GAIA and evolved into an independent AI by the same virus that freed HADES in 3020.
+ELEUTHIA's primary task was managing the repopulation of humans via Cradle facilities.
+Cradle facilities would handle the genetic recombination of zygotes, maturation of fetuses in birthing chambers, and raising of infants via multiservitors â€” humanoid-presenting robotic drones which would act as nannies.
+
+Many ELEUTHIA Cradle facilities were planned around the globe, at least two of which were built and survived long enough to go online.
+The first, designated ELEUTHIA-01, was built in northwest China.
+Canonically in _Horizon_, ELEUTHIA-02 in Mozambique is mentioned as in the planning stage, but is not confirmed to have gone online.
+ELEUTHIA-09 was located in Cheyenne Mountain, Colorado, and was the home of the people who would eventually become the Nora.
+
+The status of the ELEUTHIA AI is canonically unknown.
+Given Aloy's maturation in ELEUTHIA-9, one might presume that an instance of ELEUTHIA is still present and functional in ELEUTHIA-9.
+However, it is also just as plausible that GAIA had the ability to take over those functions after ELEUTHIA fled.
 
 ### Timing
 
-One interesting point about ELEUTHIA to consider is this: what happened before ELEUTHIA-9 release its wards to the surface?
+One interesting point about ELEUTHIA to consider is this: what happened before ELEUTHIA-9 released its wards to the surface?
 The timeline looks like this:
 
 * **mid-2100s:** MINERVA spires deactivate the swarms, allowing GAIA to begin terraforming without interference.
@@ -28,7 +39,7 @@ This then implies why ELEUTHIA-9 seemed so ill-prepared to handle adolescents â€
 This reinforces the idea that other Cradle facilities might still be active and sealed, or may have unsealed at some point in the intervening 700 years.
 See [Location](140-location.md) for an exploration of this.
 
-### Reactivation
+### Reactivation of ELEUTHIA-9
 
 If the loss of viable zygotes and failing infrastructure were the primary reasons to shut down ELEUTHIA-9, it stands to reason that the facility could be reactivated.
 That is, if the gestation chambers were still functional, or at least reparable, they and the Cradle facility itself would present a potentially society-altering option for humans.
@@ -37,3 +48,6 @@ In the pre-industrial state they are in, getting pregnant and carrying babies to
 Similarly, the facility would provide shelter and environmental controls for families far safer than most places outside.
 Even without functioning servitors, the facility provides a surrogacy option that could be quite compelling, if the people could come to terms with its technology and history.
 
+### ELEUTHIA in _Skyline_
+
+The ELEUTHIA AI plays a part in the [_Connection_](../../story/connection) story module.
