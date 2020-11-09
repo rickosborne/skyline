@@ -8,10 +8,6 @@ tags:
 One of GAIA's detached subordinate functions, MINERVA's primary goals were to crack the encryption on the control codes for the FARO Swarm and to broadcast the shutdown sequence with those codes.
 Canonically, while it is never expressly confirmed that this happened, it's heavily implied via the Meridian Spire and the deactivated FARO machines.
 
-Extrapolating a bit for _Skyline_, MINERVA is the AI for communication, and it is implied that the Focus network is run atop the communications infrastructure established for MINERVA's purposes.
-MINERVA is also narratively interesting, as its canon job had been completed for hundreds of years when the mysterious signal and virus affected GAIA and the other AIs.
-How would that virus have affected MINERVA differently from the other AIs if it was dormant, and effectively offline, at the time of that event?
-
 ### The Meridian Spire
 
 A transmission tower for MINERVA that became the centerpiece of Carja lands, the Spire is not quite as tall as some of the mountains in the area, but it's close.
@@ -26,3 +22,11 @@ The reactivation codes were sent, and some FARO war machines did briefly return 
 It might be interesting to consider what might have happened if MINERVA's towers had not adequately blanketed the surface of the Earth.
 Adventurers might come across an area where FARO Swarm war machines were dormant due to low fuel, _not_ because they had received the deactivation signal.
 Reintroduction on biomatter into that area might have an interesting effect on the machines in that area, especially if one presumes the surrounding towers stopped transmitting the deactivation codes long ago.
+
+### MINERVA in _Skyline_
+
+Extrapolating a bit for _Skyline_, MINERVA is the AI for communication, and it is implied that the Focus network is run atop the communications infrastructure established for MINERVA's purposes.
+MINERVA is also narratively interesting, as its canon job had been completed for hundreds of years when the mysterious signal and virus affected GAIA and the other AIs.
+How would that virus have affected MINERVA differently from the other AIs if it had been dormant, and effectively offline, at the time of that event?
+
+The MINERVA AI plays a part in the [_Connection_](../../story/connection) story module.
