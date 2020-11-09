@@ -13,7 +13,7 @@ _Skyline_ modules are written with that location in mind, but only because it al
 If you want to run your game out of Madagascar, or Machu Picchu, or Manchester, or wherever, that's fine.
 Anywhere on Earth is plausible within what we know about the world of _Horizon_.
 
-We know that ELEUTHIA-9 was never intended to be the only Cradle facility.
+We know that [ELEUTHIA-9](240-eleuthia.md) was never intended to be the only Cradle facility.
 There are more around the world — as many as could be built without revealing their locations to the war machines.
 For example, [ELEUTHIA-01 was referenced](https://horizon.fandom.com/wiki/Cradle_Sealed) to be in Xinjiang (northwest) China, sealed just before the machines overran the area, while ELEUTHIA-02 was planned for Mt. Namuli in Mozambique.
 Even the locations which canonically fell to the war machines first are fair game — it's reasonable that an ELEUTHIA Cradle could have been built beneath a devastated area after the machines had moved on.
@@ -62,5 +62,5 @@ It would be plausible, however, to amend that to say that there are no megafauna
 That is, maybe horses have been reintroduced, but on the other side of North America, or on another continent altogether.
 
 It would take time for any megafauna species to establish itself in the ecosystem.
-This might have led to regional restrictions if DEMETER believed the megafauna species would not have a chance to grow naturally due to hunting or other concerns.
+This might have led to regional restrictions if [ARTEMIS](230-artemis.md) believed the megafauna species would not have a chance to grow naturally due to hunting or other concerns.
 Species receptive to domestication and labor would be especially hunted — the entirety of a horse population, for example, would likely be hunted to the extreme once humans figured out they could be used for labor.
