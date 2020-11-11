@@ -78,3 +78,13 @@ This is not an entirely unanimous nor altruistic decision, but it was deemed nec
 
 Just as there are some within the Nora who think this is going too far, some would see it go farther, and have begun to question the Nora fear of the technology and ruins of the Old Ones, which proved to be so vital in overcoming HADES and the Eclipse cult.
 Both factions are relatively quiet for now, following the lead of their Matriarchs, waiting to see how the new open border policy affects the tribe.
+
+### Nora Characters in _Skyline_
+
+Given their fundamentalist and hunter-gatherer leanings, it might be tempting to present Nora characters with a "[noble savage](https://tvtropes.org/pmwiki/pmwiki.php/Main/NobleSavage)" trope.
+This characterization is not just problematic, it is incorrect.
+Nora are just as cultured, intelligent, and accomplished as the more "advanced" tribes like the Carja and Oseram.
+Similarly, Nora people are just as human: while some can be noble, honorable, and "in touch with the land", just as many others can be greedy, devious, and oblivious to their environment.
+
+Nora have made a choice about how much technology and outside influence they allow in their lives.
+This does not mean they don't understand it, or can't, only that they choose to reject it.
