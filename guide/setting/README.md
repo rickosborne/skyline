@@ -8,34 +8,37 @@ People who have played through the video game will already be familiar with this
 
 <!-- +template files guide/setting web-table-of-contents -->
 
-_Estimated module completion: **~9%**._
+_Estimated module completion: **~31%**._
 
 * [Skyline Setting Guide](010-front-matter.md)
   * Introduction _(not started yet)_
   * Synopsis _(not started yet)_
   * History _(not started yet)_
+  * [Location](140-location.md)
+  * [Languages](150-language.md)
 * [A.I. and Systems](200-ai.md)
   * [A quick note on AI gender pronouns](203-ai-gender.md)
   * GAIA _(not started yet)_
   * HADES _(not started yet)_
   * HEPHAESTUS _(not started yet)_
-  * DEMETER _(not started yet)_
-  * APOLLO _(not started yet)_
-  * ARTEMIS _(not started yet)_
-  * CYAN _(not started yet)_
-  * ELEUTHIA _(not started yet)_
-  * MINERVA _(not started yet)_
-  * POSEIDON _(not started yet)_
+  * [DEMETER](220-demeter.md)
+  * [APOLLO](225-apollo.md)
+  * [ARTEMIS](230-artemis.md)
+  * [CYAN](235-cyan.md)
+  * [ELEUTHIA](240-eleuthia.md)
+  * [MINERVA](245-minerva.md)
+  * [POSEIDON](250-poseidon.md)
   * AETHER _(not started yet)_
-  * VAST SILVER _(not started yet)_
+  * [VAST SILVER](260-vast-silver.md)
   * [Creating your own AI](280-creating-your-own.md)
 * People _(not started yet)_
-  * Old Ones _(not started yet)_
-  * Nora _(not started yet)_
-  * Carja _(not started yet)_
-  * Shadow Carja _(not started yet)_
-  * Oseram _(not started yet)_
+  * [Old Ones](305-old-ones.md)
+  * [Nora](310-nora.md)
+  * [Carja](315-carja.md)
+  * [Shadow Carja](320-shadow-carja.md)
+  * [Oseram](325-oseram.md)
   * Banuk _(not started yet)_
+  * [The Eclipse](335-eclipse.md)
   * Creating your own group of people _(not started yet)_
 * Beliefs _(not started yet)_
 * Places _(not started yet)_
@@ -61,7 +64,7 @@ _Estimated module completion: **~9%**._
   * Scorcher _(not started yet)_
   * Scrapper _(not started yet)_
   * Shell-Walker _(not started yet)_
-  * Snapmaw _(not started yet)_
+  * [Snapmaw](661-snapmaw.md) _(started, unfinished)_
   * Stalker _(not started yet)_
   * Stormbird _(not started yet)_
   * Strider _(not started yet)_
