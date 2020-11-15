@@ -8,7 +8,7 @@ People who have played through the video game will already be familiar with this
 
 <!-- +template files guide/setting web-table-of-contents -->
 
-_Estimated module completion: **~31%**._
+_Estimated module completion: **~33%**._
 
 * [Skyline Setting Guide](010-front-matter.md)
   * Introduction _(not started yet)_
@@ -28,7 +28,7 @@ _Estimated module completion: **~31%**._
   * [ELEUTHIA](240-eleuthia.md)
   * [MINERVA](245-minerva.md)
   * [POSEIDON](250-poseidon.md)
-  * AETHER _(not started yet)_
+  * [AETHER](255-aether.md)
   * [VAST SILVER](260-vast-silver.md)
   * [Creating your own AI](280-creating-your-own.md)
 * People _(not started yet)_
@@ -37,7 +37,7 @@ _Estimated module completion: **~31%**._
   * [Carja](315-carja.md)
   * [Shadow Carja](320-shadow-carja.md)
   * [Oseram](325-oseram.md)
-  * Banuk _(not started yet)_
+  * [Banuk](330-banuk.md)
   * [The Eclipse](335-eclipse.md)
   * Creating your own group of people _(not started yet)_
 * Beliefs _(not started yet)_

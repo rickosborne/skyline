@@ -1,6 +1,6 @@
 ---
 tags:
-- not-started
+- guide
 ---
 
 ## AETHER
@@ -9,7 +9,7 @@ Once one of GAIA's subordinate function, AETHER was tasked with restoring the at
 Like [DEMETER](220-demeter.md), we can presume AETHER was successful based on the air on the surface, as well as the seemingly normal weather patterns including rain and snow.
 Canonically, not much is known of AETHER beyond this — not even the name of its Alpha.
 
-Elisabet Sobeck's hologram introduction to GAIA juxtaposed mention of AETHER with a depiction of a Stormbird, implying that machine may be under AETHER's purview, and may have something to do with atmospheric regeneration.
+Elisabet Sobeck's hologram introduction to GAIA juxtaposed mention of AETHER with a depiction of a [Stormbird](667-stormbird.md), implying that machine may be under AETHER's purview, and may have something to do with atmospheric regeneration.
 The graphics associated with the Stormbird could be interpreted to show the balance of atmospheric gasses, reinforcing this supposition.
 
 ### AETHER in _Skyline_
