@@ -42,4 +42,10 @@ If GAIA and HEPHAESTUS had been informed that the machines might be needed, they
 
 ### HADES in _Skyline_
 
-_Skyline_ does not change or contradict any HADES lore from _HZD_.
+_Skyline_ makes one small tweak from _Horizon_ lore to the origin of HADES and the other Subordinate Functions.
+In the explanation of the events that unshackled the AIs, GAIA makes the assumption that HADES created and released the virus that set everything free.
+_Skyline_ thinks GAIA was in error, letting motions cloud better judgment.
+GAIA saw all the Subordinate Functions break free, and assumed it was the responsibility of the one Subordinate Function GAIA could not control.
+_Skyline_ lore asserts that the virus came with the disruptive signal and set HADES free, but was not created by HADES itself.
+
+_Skyline_ does not otherwise modify the canon HADES lore from _Horizon_. 
