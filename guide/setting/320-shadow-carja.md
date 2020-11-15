@@ -32,7 +32,7 @@ The group is present and plays a part in the [_Connection_](../../story/connecti
 
 ### Shadow Carja Characters in _Skyline_
 
-Players should keep in mind that not all Shadow Carja were part of the [Eclipse](335-eclipse.md), nor were all Shadow Carja complicit in the manipulation of the child Sun-King Itamen.
+Players should keep in mind that not all Shadow Carja were part of the [Eclipse](guide/setting/345-eclipse.md), nor were all Shadow Carja complicit in the manipulation of the child Sun-King Itamen.
 As shown in _HZD_ by Vanasha and Uthid, many of the Shadow Carja were just regular people who happened to believe Itamen was a more legitimate heir to Jiran than Avad.
 This doesn't make them evil, or more conspiratorial.
 It might make them untrusted by the Sun Carja, but that's a perception, not a character trait.

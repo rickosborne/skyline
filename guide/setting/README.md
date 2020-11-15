@@ -8,7 +8,7 @@ People who have played through the video game will already be familiar with this
 
 <!-- +template files guide/setting web-table-of-contents -->
 
-_Estimated module completion: **~33%**._
+_Estimated module completion: **~35%**._
 
 * [Skyline Setting Guide](010-front-matter.md)
   * Introduction _(not started yet)_
@@ -38,7 +38,9 @@ _Estimated module completion: **~33%**._
   * [Shadow Carja](320-shadow-carja.md)
   * [Oseram](325-oseram.md)
   * [Banuk](330-banuk.md)
-  * [The Eclipse](335-eclipse.md)
+  * [Tenakth](335-tenakth.md)
+  * [Utaru](340-utaru.md)
+  * [The Eclipse](345-eclipse.md)
   * Creating your own group of people _(not started yet)_
 * Beliefs _(not started yet)_
 * Places _(not started yet)_

@@ -1,6 +1,0 @@
----
-tags:
-- guide
----
-
-## The Eclipse
