@@ -8,7 +8,7 @@ People who have played through the video game will already be familiar with this
 
 <!-- +template files guide/setting web-table-of-contents -->
 
-_Estimated module completion: **~35%**._
+_Estimated module completion: **~36%**._
 
 * [Skyline Setting Guide](010-front-matter.md)
   * Introduction _(not started yet)_
@@ -41,7 +41,7 @@ _Estimated module completion: **~35%**._
   * [Tenakth](335-tenakth.md)
   * [Utaru](340-utaru.md)
   * [The Eclipse](345-eclipse.md)
-  * Creating your own group of people _(not started yet)_
+  * [Creating your own group of people](380-creating-your-own.md)
 * Beliefs _(not started yet)_
 * Places _(not started yet)_
 * [Machines](600-machines.md)
