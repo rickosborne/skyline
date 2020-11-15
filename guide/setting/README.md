@@ -8,7 +8,7 @@ People who have played through the video game will already be familiar with this
 
 <!-- +template files guide/setting web-table-of-contents -->
 
-_Estimated module completion: **~36%**._
+_Estimated module completion: **~39%**._
 
 * [Skyline Setting Guide](010-front-matter.md)
   * Introduction _(not started yet)_
@@ -18,8 +18,8 @@ _Estimated module completion: **~36%**._
   * [Languages](150-language.md)
 * [A.I. and Systems](200-ai.md)
   * [A quick note on AI gender pronouns](203-ai-gender.md)
-  * GAIA _(not started yet)_
-  * HADES _(not started yet)_
+  * [GAIA](205-gaia.md)
+  * [HADES](210-hades.md)
   * HEPHAESTUS _(not started yet)_
   * [DEMETER](220-demeter.md)
   * [APOLLO](225-apollo.md)
