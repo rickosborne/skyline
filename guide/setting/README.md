@@ -8,7 +8,7 @@ People who have played through the video game will already be familiar with this
 
 <!-- +template files guide/setting web-table-of-contents -->
 
-_Estimated module completion: **~40%**._
+_Estimated module completion: **~46%**._
 
 * [Skyline Setting Guide](010-front-matter.md)
   * Introduction _(not started yet)_
@@ -31,7 +31,7 @@ _Estimated module completion: **~40%**._
   * [AETHER](255-aether.md)
   * [VAST SILVER](260-vast-silver.md)
   * [Creating your own AI](280-creating-your-own.md)
-* People _(not started yet)_
+* [People](300-people.md)
   * [Old Ones](305-old-ones.md)
   * [Nora](310-nora.md)
   * [Carja](315-carja.md)
@@ -42,7 +42,12 @@ _Estimated module completion: **~40%**._
   * [Utaru](340-utaru.md)
   * [The Eclipse](345-eclipse.md)
   * [Creating your own group of people](380-creating-your-own.md)
-* Beliefs _(not started yet)_
+* [Beliefs](400-beliefs.md)
+  * [The All-Mother](405-all-mother.md)
+  * [Blue Light](410-blue-light.md)
+  * [The Cycle](415-the-cycle.md)
+  * [Sun-Faith](430-sun-faith.md)
+  * [World Machine](445-world-machine.md)
 * Places _(not started yet)_
 * [Machines](600-machines.md)
   * Crucibles _(not started yet)_

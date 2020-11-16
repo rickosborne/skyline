@@ -20,7 +20,16 @@ The Oseram and Carja have strengthened their ties since then, with Oseram even p
 
 Oseram pride themselves on their craft, their loyalty, their scholarship, and their honesty.
 Their internal government is much looser than their monarchic Carja neighbors, or their Matriarchal Nora forebears.
-Canonically, not much is known, but it is hinted that Oseram organize into work parties for specific tasks, implying something more federated and organization-driven than family- or politics-driven.
+It is hinted that Oseram organize into work parties for specific tasks, implying something more federated and organization-driven than family- or politics-driven.
+Similarly, the Oseram share a disdain for both spiritualism and organized religion.
+
+Oseram follow a patriarchal structure, with many men viewing women as little more than prizes or property to be claimed.
+Women can have many of the same productive jobs as men, but they cannot hold governmental positions, and are always in danger of being "claimed".
+Oseram settlements are ruled by small groups of "ealdormen", who debate and set policy in addition to adjudicating disputes.
+Petitioning the ealdormen involves aggressive debate, to the pointing of shouting until your point is heard and acknowledged.
+
+Oseram are known, at least by the Carja, to enjoy their alcohol and reveries.
+Conversely, Oseram see the continual loss of their numbers to the "easy living" of the Carja as a serious problem.
 
 ### Oseram in _Skyline_
 
