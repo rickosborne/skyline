@@ -8,7 +8,7 @@ People who have played through the video game will already be familiar with this
 
 <!-- +template files guide/setting web-table-of-contents -->
 
-_Estimated module completion: **~46%**._
+_Estimated module completion: **~47%**._
 
 * [Skyline Setting Guide](010-front-matter.md)
   * Introduction _(not started yet)_
@@ -49,6 +49,7 @@ _Estimated module completion: **~46%**._
   * [Sun-Faith](430-sun-faith.md)
   * [World Machine](445-world-machine.md)
 * Places _(not started yet)_
+  * [Deeproot](550-deeproot.md)
 * [Machines](600-machines.md)
   * Crucibles _(not started yet)_
   * Behemoth _(not started yet)_
