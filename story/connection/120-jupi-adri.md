@@ -80,6 +80,4 @@ Tapwash sits just west of Trinidad, Colorado, a mile from Trinidad (Tapwash) Lak
 The dam at the east end of the lake has long since washed out, causing annual overflow into the basin every spring.
 </aside>
 
-TODO: Talk more about the plans of the ladies to return to Plainsong.
-
 TODO: Character sheets for Adri & Jupi
