@@ -6,7 +6,7 @@ This directory contains guidance and tips for the non-narrating players (adventu
 
 <!-- +template files guide/adventurer web-table-of-contents -->
 
-_Estimated module completion: **~25%**._
+_Estimated module completion: **~27%**._
 
 * [Adventurer's Guide](010-front-matter.md)
   * Introduction _(not started yet)_
@@ -16,6 +16,7 @@ _Estimated module completion: **~25%**._
   * Forager _(not started yet)_
   * [Archaeologist](312-archaeologist.md) _(started, unfinished)_
   * [Weaver](315-weaver.md) _(started, unfinished)_
+  * [Travel Speed](412-travel-speed.md) _(started, unfinished)_
 * [Appendices](900-appendices.md)
   * Errata _(not started yet)_
   * Author's Notes _(not started yet)_

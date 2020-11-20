@@ -65,7 +65,11 @@ adapter:
       CHA:
         score: 0
         bonus: TODO
-    speedFeet: 0
+    speedFeet: 10
+    flyFeet: 80
+    basedOn:
+      title: Giant Eagle
+      href: https://www.dndbeyond.com/monsters/giant-eagle
     hitDie: 8
     hp:
       average: 123

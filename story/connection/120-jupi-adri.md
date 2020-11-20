@@ -24,7 +24,7 @@ The pair explain their predicament, completing each other's sentences:
 > Utaru have long since learned to give them a wide berth, and to set up strong defenses against the random roaming packs.
 >
 > Something new is happening in the villages along the Southtap, the river generally considered the southernmost boundary of the lands tamed by the Utaru.
-> One fishing village on the Sunrise River is now empty — no one knows where the villagers went.
+> One fishing village is now empty — no one knows where the people went.
 > A farming village saw its occupants become paranoid, closing off their walls and refusing to leave or allow entry, starving while their fields went untended.
 > A third has seen mysterious disappearances of its young men and women, following uncharacteristic acts of aggression and violence.
 > A fourth has seen strange new fruits and vegetables sprout on the edges of their fields, not planted by any farmer.
@@ -62,6 +62,23 @@ The pair explain their predicament, completing each other's sentences:
 >
 > Hearing of your group, they asked for an introduction, hoping you might have knowledge of the Seeker's whereabouts.
 > Barring that, maybe one of your party might have tales which could shed light on the behavior of the Sunrise River villages.
+
+The pair intend to return to Plainsong, leaving as soon as they can obtain supplies to start their journey.
+They need to report their findings back in Deeproot, but they want to take the long way back to see the villages along the Sunrise River.
+If you'd like to accompany them, they are willing to wait up to three days for you to prepare.
+Otherwise, they will wait for you in Winter's Fork, the first major Utaru settlement beyond the Nora's Southern Embrace Gate, in ten days.
+From there, they will make the journey to Tapwash, the village marking the southwestern corner of Plainsong.
+
+Winter's Fork is a 2-day walk (ca. 60mi/100km) due south from the Gate, on the banks of the Sunrise River.
+Tapwash is another 90mi/150km due south, but the rougher terrain pushes the walk to almost 4 days.
+
+<aside class="narrator-note">
+<header>Narrator note:</header>
+Winter's Fork is outside of Pueblo, Colorado, on the Arkansas (Sunrise) River.
+The locals refer to the ruins of Pueblo as Sandy Shadows.
+Tapwash sits just west of Trinidad, Colorado, a mile from Trinidad (Tapwash) Lake.
+The dam at the east end of the lake has long since washed out, causing annual overflow into the basin every spring.
+</aside>
 
 TODO: Talk more about the plans of the ladies to return to Plainsong.
 
