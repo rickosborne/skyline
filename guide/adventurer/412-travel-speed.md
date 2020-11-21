@@ -92,9 +92,12 @@ TODO: /27, /40, /72, /216
 | Daytower | Song's Edge | 620mi / 1000km | 23d | 16d | 9d | 2.9d |
 | Deeproot | Meridian | 950mi / 1500km | 35d | 24d | 13d | 4.4d | 
 | Deeproot | Song's Edge | 1020mi / 1640km | 38d | 26d | 14d | 4.7d |
-| Deeproot | Southern Embrace Gate | 410mi / 660km | 15d | 10d | 6d | 1.9d | 
+| Deeproot | Southern Embrace Gate | 450mi / 720km | 17d | 11d | 6d | 2.1d | 
 | Deeproot | Tapwash | 430mi / 690km | 16d | 11d | 6d | 2.0d |
+| Deeproot | Winter's Fork | 415mi / 670km | 15d | 10d | 6d | 1.9d | 
 | Meridian | Daytower | 280mi / 450km | 10d | 7d | 4d | 1.3d |
 | Meridian | The Jewel | 240mi / 390km | 9d | 6d | 3d | 1.1d |
 | Meridian | Sunfall | 150mi / 240km | 6d | 4d | 2d | 0.7d |
 | Song's Edge | Keener's Rock | 70mi / 110km | 3d | 2d | 1d | 0.3d |
+| Southern Embrace Gate | Winter's Fork | 34mi / 55km | 1d | 0.8d | 0.5d | 1.4h |
+| Tapwash | Winter's Fork | 100 mi / 161 km | 4d | 2.5d | 4h |
