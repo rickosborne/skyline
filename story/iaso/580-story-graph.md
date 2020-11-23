@@ -18,7 +18,7 @@ The following chart shows the flow of the story entries, along with each locatio
   contentStyleType="text/css"
   preserveAspectRatio="none"
   version="1.1"
-  viewBox="0 0 2101 869"
+  viewBox="0 0 2096 874"
   zoomAndPan="magnify"
 ><defs /><g><ellipse
       cx="122.5"
