@@ -4,9 +4,9 @@ tags:
 location: Cauldron DELTA-3
 ---
 
-## 127. Hawk's Perch
+## 127. Hawk's Song
 
-The top of Hawk's Perch is swarming with Glinthawks.
+The top of Hawk's Song is swarming with Glinthawks.
 At any given time, there are no fewer than a half dozen Glinthawks along the cliff facing Tapwash to the northwest, backs to the cauldron opening.
 Another half dozen on the northeast cliff mirror those, facing vaguely toward Deeproot.
 Three more are in the air at any given time, swooping low patrols over this mesa and the larger one to the south.
@@ -18,7 +18,7 @@ There are containers of various sizes on the ground, some large enough to hide a
 The mesa surface is vaguely rectangle-shaped, oriented like a diamond on the compass points, with sides of 0.6mi/1.0km and 0.9mi/1.5km.
 Radiating out from the hexagonal opening, there's 10m of empty ground, 30m of assorted containers, another 10m of empty ground, and then vegetation.
 
-Looking back at the opening, your Focus labels it as `Cauldron DELTA-3/A`.
+Looking back at the opening, your Focus labels it as `FACILITY DELTA-3/A`.
 
 ### The Garden
 

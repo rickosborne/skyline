@@ -33,6 +33,6 @@ She confirms that their teens and young adults have gone missing — twelve in t
 
 Heeli also explains that Adri and Jupi are the third pair who have come from Deeproot to investigate.
 The other two pairs were in Tapwash for mere days before disappearing into the hills like all the others.
-One pair was last seen heading toward Hawk's Perch, the mountain visible to the southeast.
+One pair was last seen heading toward Hawk's Song, the mountain visible to the southeast.
 The other pair seemed to have been lost to the Snapmaws at the west end of the lake — at least that's the direction they were walking.
 

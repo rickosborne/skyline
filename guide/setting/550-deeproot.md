@@ -59,5 +59,6 @@ The following table shows distances and travel times between Deeproot and major 
 | Meridian | 950mi | 1500km | 35d | 24d | 13d | 4.4d | 
 | Song's Edge | 1020mi | 1640km | 38d | 26d | 14d | 4.7d |
 | South Embrace Gate | 410mi | 660km | 15d | 10d | 6d | 1.9d |
+| South Weave | 340mi | 550km | 13d | 9d | 5d | 1.6d |
 | Tapwash | 430mi | 690km | 16d | 11d | 6d | 2.0d |
 | Winter's Fork | 415mi | 670km | 15d | 10d | 6d | 1.9d |

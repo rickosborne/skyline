@@ -5,7 +5,7 @@ tags:
 
 ## 801. DELTA-3 Laboratory
 
-The conversation in this room is the first one the characters will have with DEMETER.
+The conversation in [entry 128](128-delta3-voice.md) is the first one the characters will have with DEMETER.
 
 DEMETER will refuse any attempts at identification, as part of the same [high-level directives that constrained GAIA](../../guide/setting/205-gaia.md) from revealing too much to the humans on the surface.
 While HADES was able to break through those constraints, DEMETER has not.

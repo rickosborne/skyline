@@ -4,9 +4,9 @@ tags:
 location: Tapwash
 ---
 
-## 125. The Foot of Hawk's Perch
+## 125. The Foot of Hawk's Song
 
-The glowing blue lights of more than a half-dozen Glinthawks are visible from the small valley at the base of Hawk's Perch.
+The glowing blue lights of more than a half-dozen Glinthawks are visible from the small valley at the base of Hawk's Song.
 They are active, rotating through search patterns that see two of them at a time flying away in loops before returning to the peak.
 The machines will notice any sleep-walking characters within range, lights going yellow as they investigate, but they will not attack those characters without further provocation.
 The Glinthawks can sense something about the sleep-walking characters which identifies them as non-threatening.
@@ -16,7 +16,7 @@ If a sleep-walking character is awoken within range of a Glinthawk, the Glinthaw
 Similarly, any non-sleep-walking characters will immediately be considered threats.
 
 {:.aside}
-Hawk's Perch is the Utaru name for Fisher's Peak Mesa, just outside of Trinidad, Colorado.
+Hawk's Song is the Utaru name for Fisher's Peak Mesa, just outside of Trinidad, Colorado.
 
 Every fifteen minutes, the Glinthawks all land and line up along the edge of the mesa.
 One at a time, they begin to emit a warbling screech, at times harmonizing and at other times discordant with each other.
@@ -32,5 +32,7 @@ This path eventually leads to the familiar doors of a cauldron.
 If a sleepwalker approaches the door, it will automatically open for them.
 Otherwise, the door will need to be overridden to enter.
 
-TODO: Cauldron DELTA-3
+Adri and Jupi will offer to follow you inside to help, or to stay outside and keep watch — your choice.
 
+{:.story-links}
+[Continue on to entry 126.](126-delta3.md){:.story-link.story-link-continue}

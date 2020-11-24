@@ -23,6 +23,7 @@ tags:
 | Song's Edge | Village | The Cut | Yellowstone Upper Geyser Basin, Wyoming |
 | Southern Embrace Gate | Gate | Sacred Lands | (near) Fountain, Colorado |
 | Southtap River | River | Plainsong | Cimarron River, Kansas & Oklahoma |
+| South Weave | Village | Plainsong | Kenton, Oklahoma |
 | Stone Yield | Bandit Camp | The Cut | Mammoth Hot Springs, Wyoming |
 | Sunfall | City | Rustwash | Bryce Canyon National Park, Utah |
 | Sunrise River | River | Plainsong | Arkansas River, Kansas |

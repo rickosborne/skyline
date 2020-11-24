@@ -105,6 +105,11 @@ Similarly, the Shell-Walkers will not use their Shock attacks in this room, but 
 After clearing the room, overriding the pylon in the center will provide override codes for Glinthawks and Stalkers to anyone who does not already have them.
 It also starts to open a door on the south wall, which slams shut again after opening barely a hand-width.
 
+Investigating the room, the room is a seemingly-random combination of machine parts, chemicals, and seed stock.
+Each machine group along the walls has a Focus overlay which explains which hybrids are currently being processed.
+Most are recognizable as crosses of known plants, or one known plant and a hybrid with just a number.
+A few are completely unknown, listing only a wall of scientific jargon about the process used to create the contents.
+
 TODO: Flavor datapoint for log entry?
 
 Your Focus devices say `Establishing Communication`, before a disembodied voice begins to speak to you.
