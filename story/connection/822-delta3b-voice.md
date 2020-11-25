@@ -13,7 +13,7 @@ As before, DEMETER will now open up about the history of this room, and the "ben
 
 ### Workers
 
-It's only implied by the text, but DEMETER used to have multiservitors in DELTA facilities to help with the fine manipulations needed in the garden.
+It's only implied by the text, but DEMETER used to have multiservitors in DELTA facilities to help with the fine manipulations needed in the Garden.
 Something about the Derangement, and the disconnect from the other Subordinate Functions, caused DEMETER to lose this knowledge.
 Without the ability to maintain them, DEMETER's limited supply of multiservitors has been slowly breaking down over the last 20 years, getting recycled by Glinthawks.
 The last one broke down sometime last year, leaving DEMETER frustrated at the ability of Glinthawks, Shell-Walkers, and Stalkers to maintain delicate plant structures.
@@ -29,6 +29,20 @@ DEMETER was not able to lock out that response, but it could slightly modify wha
 By running detailed scans on how the human brain reacted to the song, DEMETER was able to train Glinthawks to recognize that neurochemical response, and accept it as a sign the human was not a threat.
 DEMETER was then able to iterate on the Glinthawks' songs, producing more long-lasting and subliminal neural effects, though it also meant more trial and error.
 This allowed DEMETER to gather a small group of human workers, one at a time, over the span of the last seven months.
+
+### Replacements
+
+While it is not presented as an option in the story, particularly empathetic players may try to establish a rapport with DEMETER, especially by prying about the loss of its multiservitors.
+Because of lingering directives about disclosure of too much information to humans, it is conflicted about this.
+Explaining multiservitors would violate this directive, but if the humans offered to go find working replacements, or even find the designs DEMETER could use to build its own, DEMETER would be tempted, calculating the cost of violating a directive against the reduced efficiency of its operations without the multiservitors.
+
+The story in the next conversation with DEMETER, in [entry 824](824-delta4-voice.md), drops more hints about multiservitors.
+If it comes up this early, Narrators may choose to decline to give anything for now, wrapping it in a "none of your concern" response.
+Particularly astute players who have gone through the IASO module, and who still have the globe, might think to ask it.
+It will reply in the negative, stating that while its database knows that multiservitors were being worked on, IASO does not have the plans for them.
+
+The mid-term goal is to eventually get characters to quest to HEPHAESTUS or ELEUTHIA to find plans for multiservitors, which they can bring back to DEMETER.
+Long-term, characters will be led to try to bring together HEPHAESTUS, after whatever is wrong with it has been resolved, with DEMETER to allow the two to function in unity.
 
 ### Experiments
 
@@ -58,3 +72,16 @@ This means it can hybridize a plant like Medicinal Hintergold to optimize the co
 
 Experimenting on humans, therefore, has allowed it to try new things it could not even consider before.
 It is, however, still just mashing genes together to see what happens.
+
+### Destroying the Voice
+
+Players may be curious what it would take to shut down the Cauldron.
+It's not presented as an option in the story, but _Skyline_ presumes that characters with sufficient time to pore over the interface between their Corruptor Override Controllers and the Cauldron Control Pylon(s), would be able to figure how to instruct it to cease operations.
+There's no canon answer, in either _Skyline_ or _Horizon_, to whether this would be temporary or permanent.
+
+Having said that, the story points to the idea that the Cauldron has self-repair facilities built into it.
+This is intended to make it look like destroying the facility would be very difficult, taking hundreds of people working in concert faster than the facility could repair itself.
+
+Particularly clever players might suggest "rebooting" the Cauldron, hoping to purge the influences of the Derangement, resetting any AIs present to their uncorrupted states.
+Whether you allow this or not is up to you, but there are no story hooks for it.
+_Skyline_ presumes such reboots might clean up anything from the last few days, but would not have a lasting impact on the functioning of the Cauldron or any AIs working there.

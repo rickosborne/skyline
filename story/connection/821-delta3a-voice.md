@@ -26,14 +26,14 @@ DEMETER, for now, should have the affect and appearance of a botanist who just w
 DEMETER is willing to divulge any information, specific to plants, the characters could reasonably encounter on their own on the surface.
 For example, DEMETER will talk all day about the various differences between Medicinal Hintergold and Ochrebloom, why they grow in different climates, why they taste different, why they have different healing effectivity, and so on.
 DEMETER will not, however, talk about unreleased plants — for example, discussing the next version of medicinal herb, or fruit.
-The plants in the garden above are a grey area — DEMETER won't volunteer any information about them, but will open up about them if the characters can give proof by describing the plants they've seen in enough detail.
+The plants in the Garden above are a grey area — DEMETER won't volunteer any information about them, but will open up about them if the characters can give proof by describing the plants they've seen in enough detail.
 
 DEMETER will also talk about how the seeds and living plants are distributed and integrated with the ecosystem.
 Briefly:
 
 1. DEMETER uses genetic engineering, grafting, cross-pollination, and other techniques to come up with new varietals.
    In the game, it's canon that seed banks could only provide so much diversity, especially since a number of them were destroyed, so part of DEMETER's job is to invent new plants.
-2. Once the plants have had a few seasons in the garden to prove their viability, Glinthawks ferry the seeds (or seedlings, as necessary) to machines in the region.
+2. Once the plants have had a few seasons in the Garden to prove their viability, Glinthawks ferry the seeds (or seedlings, as necessary) to machines in the region.
 3. Most Acquisition-class machines know how to plant things.
    The antlers on Grazers, for instance, are good not just for cutting grass, but also for planting seeds at the correct depth.
    In some cases it's sufficient to just have Glinthawks strafe an area, dropping seeds.

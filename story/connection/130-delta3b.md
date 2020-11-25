@@ -51,7 +51,7 @@ If asked where they live:
 If asked why they were brought here:
 
 {:.spoiler}
-> The voice says it had machines to tend the garden, but those machines have broken, and it cannot make more.
+> The voice says it had machines to tend the Garden, but those machines have broken, and it cannot make more.
 > The voice brought us here to replace its broken machines.
 
 If asked how they speak with the voice:
@@ -87,7 +87,7 @@ She asks if you have seen her family — when she describes them, you're fairly 
 
 Linhi has a different perspective on the voice, squinting as she talks:
 
-> I tried to explain to the voice that the garden needs small animals to improve, to spread seeds, to fertilize the earth, to bring new life when they return to the earth.
+> I tried to explain to the voice that the Garden needs small animals to improve, to spread seeds, to fertilize the earth, to bring new life when they return to the earth.
 > It dismissed me, without listening.
 > It thinks it understands the cycle, and its knowledge is impressive, but it sees one small part and thinks it sees everything.
 > It is a child, playing with its toys.
@@ -95,7 +95,7 @@ Linhi has a different perspective on the voice, squinting as she talks:
 
 ### The Others
 
-Tracking down the others in the gardens takes some time.
+Tracking down the others in the Gardens takes some time.
 A young woman in her early teens, Vorea, has been here the longest at more than a half year, though she claims there were at least two others here before her who are now gone.
 The oldest person here is a Nora outcast named Fost, a balding and surly man in heavy furs, in his mid-thirties.
 The remaining trio are Utaru siblings: Kinzi, the younger sister, and Weld and Pamand, the older twin brothers.

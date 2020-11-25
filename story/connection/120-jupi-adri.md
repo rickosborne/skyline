@@ -25,7 +25,7 @@ The pair explain their predicament, completing each other's sentences:
 >
 > Something new is happening in the villages along the Southtap, the river generally considered the southernmost boundary of the lands tamed by the Utaru.
 > One fishing village is now empty — no one knows where the people went.
-> A farming village saw its occupants become paranoid, closing off their walls and refusing to leave or allow entry, starving while their fields went untended.
+> A farming village saw its occupants become paranoid, closing their doors and refusing to leave or allow entry, starving while their fields went untended.
 > A third has seen mysterious disappearances of its young men and women, following uncharacteristic acts of aggression and violence.
 > A fourth has seen strange new fruits and vegetables sprout on the edges of their fields, not planted by any farmer.
 > Other villages have similar strange tales, which many had hoped were only superstition and exaggeration, but they are getting harder to ignore.

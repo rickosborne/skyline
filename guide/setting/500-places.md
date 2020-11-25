@@ -15,6 +15,7 @@ tags:
 | [Deeproot](550-deeproot.md) | City | Plainsong | (near) Wichita, Kansas |
 | Devil's Grief | Ruins | Sacred Lands | Denver, Colorado |
 | Devil's Thirst | Ruins | Sacred Lands | Colorado Springs, Colorado |
+| Hanuli's Heel | Village | Plainsong | Woods, Kansas |
 | Jewel, The | Region | Sundom | Monument Valley, Utah & Arizona |
 | Keener's Rock | Gate | The Cut | Lower Yellowstone Falls, Wyoming |
 | Maker's End | Ruins | Sundom | Salt Lake City, Utah |

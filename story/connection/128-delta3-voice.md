@@ -36,7 +36,7 @@ If asked about what's on the mesa above:
 
 {:.spoiler}
 > These devices can only do so much, and can only tell me some things about how a plant will grow when put in the ground.
-> The gardens above are the compliment to this lab, proving out my theories and efforts before my plants get sewn into the places around here.
+> The Gardens above are the compliment to this lab, proving out my theories and efforts before my plants get sewn into the places around here.
 
 If asked about Hybrid `R77YU9`, Medicinal Hintergold: 
 
