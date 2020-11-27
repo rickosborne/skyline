@@ -112,7 +112,7 @@ Half the time, the teens who stand watch in them abandon their posts for the day
 If asked about local Cauldrons, Pehiri will again shake her head.
 She's heard of such things from travelers, but has always doubted whether they were real.
 
-If asked about local ruins of the Old Ones, Pehiri will be happy to answer in the affirmative.
+If asked about local ruins of the Old Ones, Pehiri will be happy to answer in the affirmative — they call the place "the Lonely One".
 Across the Southtap, a few hours walk from here, is a statue of an Old One.
 It is ancient and worn, barely resembling a person any more.
 It is in what clearly used to be a village, as many bizarre artifacts have been found, along with dozens of rusted shells of ancient machines.
@@ -124,6 +124,11 @@ Not all like the idea of disturbing a resting place, while others worry it might
 ### Next Steps
 
 After Pehiri has left, Adri and Jupi point to the beer and whisper that the villagers likely just got some bad grain, or bad mushrooms, or both.
-They will consider this village tale resolved, unless you have strong opinions otherwise, and will advocate you all continue on to the final village before returning to Deeproot: Whiteshores.
+They will consider this village tale resolved, unless you have strong opinions otherwise, and will advocate you all continue on to the final village before returning to Deeproot: Sparkling Shores.
 
 You could also spare an afternoon to visit the ruins — from Pehiri's description, it's only a few hours off the route along the Southtap, anyway. 
+
+{:.story-links.story-links-one}
+[To visit the Lonely One ruins, go to entry 146.](146-lonely-one.md){:.story-link.story-link-if}
+[To scout the area for a Cauldron, go to entry 147.](147-hanulis-heel-cauldron.md){:.story-link.story-link-elseif}
+[Otherwise, follow the Southtap east toward Sparking Shores with entry 150.](150-sparkling-shores.md){:.story-link.story-link-else}
