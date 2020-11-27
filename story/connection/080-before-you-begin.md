@@ -7,22 +7,22 @@ tags:
 
 This adventure module assumes a few things.
 
-### Players should have done
+### Players have done
 
-* **Players should have at least skimmed through the [Setting Guide](../../guide/setting).**
+* **Players have at least skimmed through the [Setting Guide](../../guide/setting).**
   That guide gives a general sense of the minor changes _Skyline_ makes to _Horizon_ lore, and provides a high-level overview for players who have not played _HZD_ or don't remember it.
   Don't worry about memorizing the fine details.
 
 * **Your table has played through, or is at least familiar with, the [IASO adventure module](../iaso).**
-  This isn't _required_, but it is _recommended_, as it sets up the post-_HZD_ _Skyline_ lore for the Nora.
+  This isn't _required_, but it is _recommended_, as it sets up the post- _HZD_ _Skyline_ lore for the Nora.
   Your party _does not_ need the IASO module from that adventure, though having it might provide them with some additional (but not game-changing) lore opportunities.
 
-### Characters should have done
+### Characters have done
 
 * **Your party has acquired at least one functioning Focus device.**
   For narrative simplicity, it would be better if all party members had one.
 
-* **Your party has at least one Corruptor Override Controller.**
+* **Your party has at least one functioning Corruptor Override Controller.**
   This is the piece of technology from a downed Corruptor that allows you to override machines, Cauldron doors and control pylons, etc.
   You get one of these at the end of the IASO module, without having to fight a Corruptor.
   If you've not played through the module, merchants selling parts after the Battle of the Alight are likely to have some, even if they don't know what they are.

@@ -1,4 +1,5 @@
 ---
+state: Start
 tags:
 - story
 location: Cauldron SIGMA
