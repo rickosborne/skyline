@@ -23,3 +23,13 @@ These faster speed also consume Blaze, at a rate of 2 and 5 canisters per hour, 
 Speed losses due to weight are also doubled and quadrupled for those speeds, respectively.
 If forced to sustain its "sprint" speed, stresses on the engines and airframe will tear the Glinthawk apart in under 3 hours (ca. 620mi / 1000km).
 Its "run" speed can be sustained for up to 8 hours, at which time it will need 1 hour of repairs to continue.
+
+### Glinthawks as Mounts
+
+_Skyline_ modules leave it up to the Narrator to decide whether overridden Glinthawks can be mounted and flown, or if they can pick up and carry people.
+A Glinthawk's cruising speed would make it _very_ difficult for a human on its back to keep a grip without getting ripped off by the force of the wind.
+Being picked up and carried by the shoulders would likely (be quite painful and) have the same problem.
+A hang-glider setup might work better, as would being carried in a basket or a sling.
+
+Having said all that, it's your game: if you want to travel via Glinthawk, you go right ahead.
+There's nothing in _Skyline_ which says you can't.

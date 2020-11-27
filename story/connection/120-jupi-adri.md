@@ -80,4 +80,27 @@ Tapwash sits just west of Trinidad, Colorado, a mile from Trinidad (Tapwash) Lak
 The dam at the east end of the lake has long since washed out, causing annual overflow into the basin every spring.
 </aside>
 
+### Next Steps
+
+This is the first multi-day travel of the module, and may be the first you've done in _Skyline_.
+If you have a Narrator, they may have encounter rules for you, possibly based on distance travel rules from your game system.
+
+Before you head out, you'll want to decide your mode of travel.
+Your party should have at least one Corruptor Override Controller by now.
+If your characters know how, you might override one or more Striders, providing you with options for riding or pulling a cart instead of walking.
+If you have not yet learned how to use them, you might wish to roleplay a scene in which your characters figure out how to do so.
+Such a scene is not included in this story module, but should be straightforward to improvise: your Focus devices connect to your Override Controller(s), which then present new options as you approach units you know how to control.
+
+{:.aside}
+In the author's head-canon for _Horizon_, there have absolutely been people who have tried to use boars and goats to pull carts and sleds.
+Maybe some have even succeeded.
+
+For ease of narrative, you might assume that you start off knowing how to override Striders.
+You could then figure out how to ride them, remembering there are no horses in _Horizon_ or _Skyline_, making it a new experience for everyone, or how to hitch them to a cart.
+
+If you're going to use overridden machines, how are you going to handle Adri and Jupi?
+Will you explain to them how you're able to override machines, hide it from them, or leave it a mystery?
+Maybe you walk to the border of Nora lands, and then tell them?
+It's up to you.
+
 TODO: Character sheets for Adri & Jupi
