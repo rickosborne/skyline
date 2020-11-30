@@ -21,7 +21,7 @@ Neither Scythe has been to the village, but many in Deeproot know of it:
 >
 > Someone tried, many years ago, setting up an operation in another salt flat some 90km east of here, and days closer to Deeproot.
 > After lugging dozens of sacks back to Deeproot, they soon found that the salt from that place made people sick, and gave an oily sheen when mixed with water.
-> No one could figure out how to separate the oil from the salt, so the venture and that place were abandoned.
+> No one could figure out how to separate the oil from the salt, so the venture and that place were abandoned, now known as the Salty Desert.
 > If you see a Deeproot Utaru squint at you and rub their thumb and forefinger, it means they do not trust what you say, that you are trying to sell them oily salt.
 >
 > Much later, as the population of Deeproot began to grow, demand for salt continued to drive the price up and up, until it was worth more by weight than the rarest machine component or the finest art.

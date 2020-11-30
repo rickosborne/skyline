@@ -19,7 +19,7 @@ Glinthawk cruising speed is just under 55 mi/h (88 km/h).
 It loses 5 mi/h (8 km/h) for every 200 lb (180 kg) it has to carry, to a maximum carrying capacity of 600 lb (540 kg).
 
 Like other machines, it has "run" and "sprint" variants on this speed, which are double (110 mi/h, 176 km/h) and quadruple (220 mi/h, 352 km/h) that value.
-These faster speed also consume Blaze, at a rate of 2 and 5 canisters per hour, respectively.
+These faster speeds also consume Blaze, at a rate of 2 and 5 canisters per hour, respectively.
 Speed losses due to weight are also doubled and quadrupled for those speeds, respectively.
 If forced to sustain its "sprint" speed, stresses on the engines and airframe will tear the Glinthawk apart in under 3 hours (ca. 620mi / 1000km).
 Its "run" speed can be sustained for up to 8 hours, at which time it will need 1 hour of repairs to continue.
