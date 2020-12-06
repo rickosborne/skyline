@@ -21,10 +21,12 @@ tags:
 | Maker's End | Ruins | Sundom | Salt Lake City, Utah |
 | Meridian | City | Sundom | Eagle Canyon, Utah |
 | Mother's Heart | City | Sacred Lands | Tarryall, Colorado |
+| Salty Desert | Region | Plainsong | Great Salt Plains, Oklahoma |
 | Song's Edge | Village | The Cut | Yellowstone Upper Geyser Basin, Wyoming |
 | Southern Embrace Gate | Gate | Sacred Lands | (near) Fountain, Colorado |
 | Southtap River | River | Plainsong | Cimarron River, Kansas & Oklahoma |
 | South Weave | Village | Plainsong | Kenton, Oklahoma |
+| Sparkling Shores | Village | Plainsong | Cimarron Hills Wildlife Management Area, Oklahoma |
 | Stone Yield | Bandit Camp | The Cut | Mammoth Hot Springs, Wyoming |
 | Sunfall | City | Rustwash | Bryce Canyon National Park, Utah |
 | Sunrise River | River | Plainsong | Arkansas River, Kansas |
