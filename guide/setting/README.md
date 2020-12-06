@@ -45,7 +45,7 @@ _Estimated module completion: **~48%**._
 * [Beliefs](400-beliefs.md)
   * [The All-Mother](405-all-mother.md)
   * [Blue Light](410-blue-light.md)
-  * [The Cycle](415-the-cycle.md)
+  * [The Cycle](415-the-cycle.md) _(started, unfinished)_
   * [Sun-Faith](430-sun-faith.md)
   * [World Machine](445-world-machine.md)
 * [Places](500-places.md)

@@ -7,7 +7,7 @@ If you're looking for a place to start, you probably want the [IASO adventure mo
 
 <!-- +template files story/connection web-table-of-contents -->
 
-_Estimated module completion: **~23%**._
+_Estimated module completion: **~27%**._
 
 * [Connection](010-front-matter.md)
   * [Introduction](015-introduction.md)
@@ -22,6 +22,9 @@ _Estimated module completion: **~23%**._
 * [Conclusion](799-conclusion.md)
 * [Narrator Guide](800-narrator-guide.md)
   * [Story Graph](802-story-graph.md) _(started, unfinished)_
+* [NPC Notes](840-npc-notes.md)
+  * [Adri, Utaru Plainswalker Scythe](841-adri.md)
+  * [Jupi, Utaru Plainswalker Scythe](845-jupi.md)
 * [Adapters](850-adapters.md)
   * [Free-Tail](852-free-tail.md) _(started, unfinished)_
   * [AI Patrons](870-ai-patrons.md) _(started, unfinished)_
