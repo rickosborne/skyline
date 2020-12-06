@@ -7,7 +7,7 @@ It can be played by a single player or by a small group, with or without a narra
 
 <!-- +template files story/iaso web-table-of-contents -->
 
-_Estimated module completion: **~55%**._
+_Estimated module completion: **~40%**._
 
 * [IASO](010-front-matter.md)
   * [Synopsis](015-synopsis.md)
@@ -22,15 +22,18 @@ _Estimated module completion: **~55%**._
   * [Haldred](048-engineer.md)
   * [Van](050-monk.md)
   * [Additional Character Options](060-additional-character-options.md) _(started, unfinished)_
+* [Time & Tide](070-time-and-tide.md)
   * [Begin your adventure!](099-adventure.md)
 * _Story entry point:_ [100: Mother's Crown](100-mothers-crown.md)
 * [Non-Player Characters](400-npc.md)
   * [Arund](405-arund.md){:.spoiler}
   * [Pren](450-pren.md){:.spoiler}
+  * [Verdant Faruk, Golden Elin, and family](455-verdant-faruk-and-golden-elin.md){:.spoiler}
 * [Maps & Tables](500-maps-tables.md)
   * [Mother's Cradle](505-mothers-cradle.md){:.spoiler}
   * [Mother's Watch Ruins](510-mothers-watch-ruins.md){:.spoiler} _(started, unfinished)_
   * [Mother's Watch](515-mothers-watch.md)
+  * [Map Test](520-embrace.md)
   * [Story Graph](580-story-graph.md)
 * [Artifacts of the Old Ones](590-artifacts.md)
 * [Adapters](600-adapters.md) _(started, unfinished)_

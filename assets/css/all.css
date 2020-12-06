@@ -484,8 +484,10 @@ h2 {
 
 h3 {
   color: var(--night-blue);
-  font-weight: var(--weight-heavy);
   font-size: 1.3rem;
+}
+h3, h3 em {
+  font-weight: var(--weight-heavy);
 }
 
 h4 {

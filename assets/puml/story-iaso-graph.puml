@@ -72,18 +72,28 @@ e135 -> "[[187-search-complete.html 187]]" as e187
 e136 -> "[[137-leave-morning.html 137]]" as e137 
 e136 --> "[[191-not-interested.html 191]]" as e191 <<Travel>>
 e137 --> e102
+"[[138-whats-in-the-mountain.html 138]]" as e138  -> e109
+e138 --> "[[142-inside-the-mountain.html 142]]" as e142 
+e138 --> "[[151-rejected.html 151]]" as e151 
 e141 -> e124
+e142 -> e109
+e142 --> e151
 e146 -> e121
 e146 --> e120
 e147 -> e121
 e147 --> e120
 "[[150-the-blinking-light.html 150]]" as e150  -> e117
 e150 --> e118
+e151 -> e109
 "[[156-mothers-watch.html 156: Mother's Watch]]" as e156  --> e129
+"[[157-tenakth-solo.html 157]]" as e157  -> "[[164-play-along.html 164]]" as e164 
+e157 --> "[[171-not-interested.html 171]]" as e171 
 e162 --> e173
 "[[163-jineko-focus-night-bts.html 163]]" as e163  -> e135
+e164 -> e132
 e168 -> e134
 e168 --> "[[186-no-synchronize.html 186]]" as e186 
+e171 -> e132
 "[[172-jineko-focus-bts.html 172]]" as e172  -> e131
 e173 --> e150
 "[[178-ostealign.html 178]]" as e178  -> e135

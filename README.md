@@ -19,11 +19,12 @@ You probably want one of:
 | Module | Completion | Description |
 | ------ | :----: | ----------- |
 | [IASO](story/iaso) | **~55%** | Single-session one-shot adventure for one adventurer or a small party. |
+| [Connection](story/connection) | **~27%** | Multi-arc adventure for one adventurer or a small party. |
 | [D&D 5E Adapter](adapter/dnd5e) | **~20%** | Guidance for playing Skyline with the D&D 5E system. |
 | [Cypher System Adapter](adapter/cypher) | **~23%** | Guidance for playing Skyline with the Cypher System, a mid-weight system which de-emphasizes dice rolls in favor of discovery. Used by _Numenara_, _The Strange_, _Predation_. |
 | [Adventurer's Guide](guide/adventurer) | **&lt;10%** | Narrative-agnostic guidance for players who want to make playable characters. |
 | [Narrator's Guide](guide/narrator) | **&lt;10%** | Narrative-agnostic guidance for players who want to facilitate game sessions and create their own stories. |
-| [Setting Guide](guide/setting) | **&lt;10%** | Narrative-agnostic background on the world of Skyline and how it builds on _Horizon_. |
+| [Setting Guide](guide/setting) | **40%** | Narrative-agnostic background on the world of Skyline and how it builds on _Horizon_. |
 
 There's also a [Notes](notes) section, which might be interesting to people who want to know more about the design process for Skyline.
 Data nerds might enjoy the [Data](data) section.

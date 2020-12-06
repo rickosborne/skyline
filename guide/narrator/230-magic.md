@@ -61,7 +61,7 @@ Some schools don't even require nanites:
 
 Other schools, such as transmutation and chronomancy, might require more imagination.
 
-#### Bestowed Magic: Clerics & Warlocks
+#### Bestowed Magic: Clerics, Paladins, & Warlocks
 
 Like magic, _HZD_ already has a concept of patrons and deities: AIs like CYAN and HADES.
 They have vast powers over machines and environments, and may be swayed by bargaining and supplication.
@@ -77,6 +77,12 @@ The control towers from The Cut might be co-opted by MINERVA to shoot lightning 
 Just like deities in most games, narrators are encouraged to keep their motivations and goals close to the chest.
 Even GAIA, whose motives seem clear and benevolent, is still an AI with directives, data, and considerations which may not be disclosed, truthfully or not.
 The corruption of the Derangement may also have made any number of changes to their original programming.
+
+The story of [Banukai](https://horizon.fandom.com/wiki/Banukai) may provide some inspiration — while fleeing from the Ravenous Tribe, she received a vision guiding her to a cave deep beneath the earth.
+Despite the cave being guarded by many machines, they bowed to her as she approached, and did not attack.
+Communing with the spirits of the place, she was offered power if she would accept the Blue Light into herself.
+Wading into a pool, the light reared up like snakes and pierced her skin, sewing up her wounds with cable and metal.
+The augmentation gave her abilities, and the power to vanquish her enemies, though at the eventual cost of her life.
 
 #### Magic from Nature: Druids
 

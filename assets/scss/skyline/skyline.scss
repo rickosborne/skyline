@@ -108,8 +108,11 @@ h2 {
 }
 h3 {
 	color: var(--night-blue);
-	font-weight: var(--weight-heavy);
 	font-size: 1.3rem;
+
+	&, & em {
+		font-weight: var(--weight-heavy);
+	}
 }
 h4 {
 	color: var(--night-blue);

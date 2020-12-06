@@ -6,6 +6,8 @@ location: Mother's Watch
 
 ## 132
 
+Before you settle in for dinner, if Yenever or another Tenakth is a member of your party, jump to [entry 157](157-tenakth-solo.md).
+
 Read to everyone:
 
 > Dinner is the same mildly raucous outdoor setup as the night before: long tables full of families and workers commingling and commiserating.

@@ -101,9 +101,12 @@ adapter:
       CHA:
         score: 0
         bonus: TODO
-    speedFeet: 15
-    flyFeet: 60
+    speedFeet: 20
+    flyFeet: 120
     hitDie: 12
+    basedOn:
+      title: Roc
+      href: https://www.dndbeyond.com/monsters/roc
     hp:
       average: 258
       roll: TODO
