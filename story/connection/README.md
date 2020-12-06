@@ -7,7 +7,7 @@ If you're looking for a place to start, you probably want the [IASO adventure mo
 
 <!-- +template files story/connection web-table-of-contents -->
 
-_Estimated module completion: **~27%**._
+_Estimated module completion: **~23%**._
 
 * [Connection](010-front-matter.md)
   * [Introduction](015-introduction.md)
@@ -16,9 +16,21 @@ _Estimated module completion: **~27%**._
   * [Background](030-background.md)
   * [Before You Begin](080-before-you-begin.md)
   * [Begin your adventure!](099-adventure.md)
-* _Story entry point:_ [100](100-chapter-1.md) _(started, unfinished)_
+* _Story entry point:_ [Act I](100-chapter-1.md) _(started, unfinished)_
+* [Act II](200-chapter-2.md)
+* [Act III](300-chapter-3.md)
+* [Conclusion](799-conclusion.md)
 * [Narrator Guide](800-narrator-guide.md)
+  * [Story Graph](802-story-graph.md) _(started, unfinished)_
 * [Adapters](850-adapters.md)
+  * [Free-Tail](852-free-tail.md) _(started, unfinished)_
+  * [AI Patrons](870-ai-patrons.md) _(started, unfinished)_
+* Next Steps _(not started yet)_
+* Errata _(not started yet)_
+* Author Notes _(not started yet)_
+* Author Bio _(not started yet)_
+* Credits _(not started yet)_
+* Legal _(not started yet)_
 
 <!-- -template files story/connection web-table-of-contents -->
 

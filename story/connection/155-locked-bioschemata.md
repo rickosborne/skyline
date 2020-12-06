@@ -1,6 +1,7 @@
 ---
 tags:
 - story
+- title-is-spoiler
 location: Cauldron THETA-CP19
 ---
 

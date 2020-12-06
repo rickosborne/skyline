@@ -11,7 +11,7 @@ tags:
 
 <a href="{{ '/guide/adventurer' | relative_url }}" id="print-module-top-link" data-source-name="guide/adventurer"></a>
 
-{% assign fileNames = "010-front-matter|015-introduction|300-skills|303-brave|306-prowler|309-forager|312-archaeologist|315-weaver|412-travel-speed|900-appendices|940-errata|950-author-notes|955-author-bio|960-credits|980-legal" | split: "|" %}
+{% assign fileNames = "010-front-matter|015-introduction|300-skills|303-brave|306-prowler|309-forager|312-archaeologist|315-weaver|412-travel-speed|432-overriding|900-appendices|940-errata|950-author-notes|955-author-bio|960-credits|980-legal" | split: "|" %}
 {% for fileName in fileNames %}
 
 <div data-source-file="{{ fileName }}">
