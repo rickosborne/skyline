@@ -1,0 +1,6 @@
+---
+tags:
+- appendix
+---
+
+# NPC Notes

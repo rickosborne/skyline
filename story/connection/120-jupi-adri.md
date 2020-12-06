@@ -6,17 +6,8 @@ tags:
 ## 120
 
 Grethe approaches you, accompanied by a pair in attire you don't often see: Utaru brown and gold.
-The pair of women introduce themselves as Jupi and Adri.
+The pair of women introduce themselves as [Jupi](845-jupi.md) and [Adri](841-adri.md).
 Both are covered in road dust and look exhausted, but otherwise healthy and friendly.
-
-Jupi is slightly shorter and darker complexioned, with radial makeup patterns running down one side of her face and neck.
-The woven fabric of her outfit is dyed a brown so deep it's almost black, matching her hair and eyes.
-Anyone with any proficiency in stealth would note that while her belt held a number of edged weapons and tools, all were secured tight against her, and would not make a sound as she moved.
-
-Adri is Jupi's opposite — bright gold hair dyed a bright crimson below her ears, with a heavy rose eye makeup to match.
-Her armor is heavier, with well-worn and overlapping hexagonal machine plates joined by blue cable, each painted a bright yellow or gold.
-Adri leans against a curved staff which is several heads taller than her.
-Perceptive fighters would notice the staff is a scythe, with a blade as long as an arm retracted against the wood and lightly obscured by twisting, decorative grasses.
 
 The pair explain their predicament, completing each other's sentences:
 

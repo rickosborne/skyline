@@ -17,13 +17,30 @@ They also have a seasonal outlook, accepting the inevitability of death and the 
 In _HZD_, the map showing the locations of the Metal Flowers is said to have been made by an Utaru botanist.
 This aligns with the Utaru connection with nature and agriculture, and may imply something of a link with [DEMETER](220-demeter.md).
 
+### Plainswalkers
+
+_While the Plainswalker is referenced in HZD, the game does not include any details.  These details are Skyline-specific._
+
+Plainswalkers are the Utaru equivalent of rangers, working in groups to keep Plainsong safe for their people.
+They are famed for their archery skills, each comfortable with bows of all sizes and arrows of all types.
+Plainswalkers are not a police force and have no executive capacity, though they can be gathered for defensive purposes.
+It is very common for young Utaru to serve as Plainswalkers from their teens until their early thirties, only then transitioning away from the dangerous lifestyle.
+
+Utaru do not have a formalized training system for Plainswalkers.
+Most commonly, an Utaru in their mid-teens will ask to be taken in by a group of Plainswalkers, receiving all the instruction they need while protecting the fields of Plainsong.
+Plainswalkers make enough from machine parts to feed and house themselves as needed, though in a pinch most Utaru will welcome Plainswalkers into their home for a night.
+
+Other than their bows, the other common identifier for Plainswalkers is face paint, makeup, and armor decoration.
+Designs often relate to phases of the day, such as sunrise, or of [the Cycle](415-the-cycle.md).
+The former uses yellow and white, also referencing infinite fields of grain, while the latter uses bright greens and light blues, referencing the earth and sky.
+
 ### Scythes
 
 _Scythes are not canon in Horizon — they have been created for Skyline._
 
 An Utaru who has been tasked with investigating and resolving an issue, or with a task which may necessitate authority or a show of force, is referred to as a Scythe.
 The etymology is as you might expect: they are the embodiment of long, functional, and potentially deadly tools serving some productive purpose.
-Utaru Scythes are roughly equivalent to Nora Braves, but are generally more task-oriented.
+While it is common for a Scythe to also be a Plainswalker, it is not unusual to see otherwise.
 One can take on the role of Scythe for a particular task, and then leave that role behind once the task is complete.
 
 The Utaru still have a fully-functional justice system of judges, advocates, law enforcement, etc., distinct from Scythes.

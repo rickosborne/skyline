@@ -37,3 +37,30 @@ While there is overlap in the broad strokes, belief in the Cycle is not a direct
 A narrow view of Dharma can be interpreted as implying a "true calling" to all things, but that determinism and fundamental order isn't quite what belief in the Cycle espouses.
 Instead, the Cycle does not suppose there is one perfect way for the universe to be in harmony, but that tensions between things can be resolved, or at least reduced, by aligning them through observation and reconfiguration.
 This may mean changing the functions of one or more parts, whether temporarily or permanently, to improve an entire system.
+
+### Depictions
+
+While there is no single symbol to identify the Cycle, all follow similar themes: one or more lines or curves, joined head to tail, in a loop.
+Most Utaru would mark the head of a line or arc with a single hook-stroke connected to the rest, not a double-stroke crossing the rest.
+Some variations have particular implications:
+
+* A single circle with its own head and tail joined is used only to represent intentionally over-simplistic Cycle concepts, and is often used pejoratively.
+  For example, drawing a circle on your palm without lifting your finger is equivalent to saying out loud "that's ludicrous".
+
+* An eye shape with the eyelids being a two-arc cycle, and the cornea being another two-arc cycle inside it, is often seen on the armor or makeup of a [Pinned Scythe](340-utaru.md).
+
+* Executors of note, who have been successful for a number of years or across a number of projects, are often gifted brooches fashioned from wires of different metals dyed multiple colors, woven in complex patterns which ultimately form a cycle.
+  These represent the Executor's ability to see and address the complex and inter-related issues present in cycles of significant impact.
+  Wearing one of these without earning it is just short of a crime.
+  Ripping one from the chest of an Executor is a serious insult and accusation. 
+
+* A broken cycle is a sign of distress, or of vandalism implying an accusation of unfair practices.
+
+### Cultural Affectations
+
+The ubiquity of the Cycle leads to some affectations or stereotypes:
+
+* Maps with directions always show a route out _and_ back.
+  Leaving off the return trip is almost seen as threatening: the implication is the traveler will be incapable of returning.
+
+* TODO
