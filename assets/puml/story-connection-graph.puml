@@ -1,0 +1,85 @@
+@startuml
+
+' title Connection Story Graph
+
+skinparam {
+	DefaultFontName Roboto Condensed
+	DefaultFontSize 16
+	shadowing false
+	HyperlinkUnderline false
+	HyperlinkColor #000000
+
+	
+	ArrowColor #cccccc
+	BackgroundColor #ffffff
+	
+	ActivityBackgroundColor #C8E2F9
+	ActivityBorderColor #C8E2F9
+
+  ActivityBackgroundColor<<NotStarted>> #ffff99
+  ActivityBorderColor<<NotStarted>> #ffff99
+  ActivityBackgroundColor<<TODO>> #eeffcc
+  ActivityBorderColor<<TODO>> #eeffcc
+  ActivityBackgroundColor<<OptionalEncounter>> #F9E2C8
+  ActivityBorderColor<<OptionalEncounter>> #F9E2C8
+  ActivityBackgroundColor<<Encounter>> #EEAD63
+  ActivityBorderColor<<Encounter>> #EEAD63
+  ActivityBackgroundColor<<Travel>> #BBF395
+  ActivityBorderColor<<Travel>> #BBF395
+	LegendBackgroundColor transparent
+	LegendBorderColor transparent
+	LegendBorderThickness 0
+}
+
+(*) --> "[[100-chapter-1.html Act I]]" as e100 <<TODO>>
+e100 -> "[[101-sigma-log.html 101]]" as e101 
+e101 -> "[[102-deeper-into-sigma.html 102]]" as e102 <<TODO>>
+"[[125-hawks-song.html 125. The Foot of Hawk's Song]]" as e125  -> "[[126-delta3.html 126. Cauldron DELTA-3]]" as e126 <<TODO>>
+e126 -> "[[128-delta3-voice.html 128. DELTA-3 Laboratory]]" as e128 
+e128 -> "[[129-delta3-door.html 129. DELTA-3 Laboratories]]" as e129 
+e129 -> "[[130-delta3b.html 130. DELTA-3/B]]" as e130 
+e129 --> "[[131-delta3-cauldron.html 131. DELTA-3 Cauldron]]" as e131 
+e130 -> e131
+e130 --> "[[132-delta3-exit.html 132. Hawk's Song]]" as e132 
+e131 -> e130
+e131 --> e132
+e132 -> "[[135-south-weave.html 135. South Weave]]" as e135 
+e135 -> "[[136-delta4c.html 136. DELTA-4/C]]" as e136 
+e135 --> "[[137-delta4-entrance.html 137. DELTA-4 Entrance]]" as e137 
+e136 -> "[[138-delta4-processing.html 138. DELTA-4 Processing]]" as e138 
+e137 -> e138
+e138 -> "[[139-delta4-exit.html 139. DELTA-4 Exit]]" as e139 
+e139 -> "[[145-hanulis-heel.html 145. Hanuli's Heel]]" as e145 
+e145 -> "[[146-lonely-one.html 146. The Lonely One]]" as e146 
+e145 --> "[[147-hanulis-heel-cauldron.html 147. Hanuli's Heel]]" as e147 
+e145 --> "[[150-sparkling-shores.html 150. Sparkling Shores]]" as e150 
+e146 -> e150
+e147 -> e146
+e147 --> e150
+e150 -> "[[151-sparkling-dunes.html 151. Sparkling Dunes]]" as e151 
+e151 -> "[[152-theta-cp19-entrance.html 152. THETA-CP19 Entrance]]" as e152 <<TODO>>
+e152 -> "[[153-theta-cp19-core.html 153. THETA-CP19 Core]]" as e153 <<TODO>>
+e153 -> "[[154-unlocked-bioschemata.html 154. Bioschemata Unlocked]]" as e154 
+e153 --> "[[155-locked-bioschemata.html 155. Bioschemata Locked]]" as e155 
+e154 -> "[[156-unlocked-production.html 156. Production Controls]]" as e156 
+e155 -> "[[157-locked-reset-restart.html 157. Restart Production]]" as e157 
+e155 --> "[[158-locked-no-reset.html 158. THETA-CP19 Core]]" as e158 
+e156 -> "[[159-unlocked-reset-restart.html 159. THETA-CP19 Restored]]" as e159 
+e156 --> e158
+e157 -> "[[160-artemis.html 160. THETA-CP19 Core]]" as e160 
+e158 -> "[[161-theta-cp19-exit.html 161. THETA-CP19 Exit]]" as e161 
+e159 -> e160
+e160 -> e161
+"[[799-conclusion.html Conclusion]]" as e799  --> (*)
+
+legend
+|= Type |= Description |
+|<#C8E2F9> (Other) | Story |
+|<#eeffcc> TODO | Story, not finished |
+|<#BBF395> Travel | Party travel |
+|<#EEAD63> Encounter | Combat encounter, required |
+|<#F9E2C8> Optional Encounter | Combat encounter, optional |
+endlegend
+
+
+@enduml
