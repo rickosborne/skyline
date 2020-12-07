@@ -7,7 +7,7 @@ If you're looking for a place to start, you probably want the [IASO adventure mo
 
 <!-- +template files story/connection web-table-of-contents -->
 
-_Estimated module completion: **~27%**._
+_Estimated module completion: **~25%**._
 
 * [Connection](010-front-matter.md)
   * [Introduction](015-introduction.md)
