@@ -43,7 +43,7 @@
 	"scripts": {
 		"assets:skyline": "tsc --project src/assets/tsconfig.json --watch",
 		"engine": "ts-node src/engine/engine.ts",
-		"jekyll:serve": "bundle exec jekyll serve --livereload",
+		"jekyll:serve": "./docker/jekyll/jekyll.sh serve --livereload",
 		"machines:attacks": "ts-node src/machine/attacks.ts",
 		"nano": "node src/nanowrimo/nanowrimo.js",
 		"sass": "sass --watch --no-source-map assets/scss/all.scss:assets/css/all.css",

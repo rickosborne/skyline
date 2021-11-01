@@ -1,5 +1,7 @@
 plugins:
   - jekyll-relative-links
+  - jekyll-readme-index
+  - jekyll-default-layout
 relative_links:
   enabled: true
   collections: true
@@ -18,11 +20,20 @@ exclude:
   - 'tsconfig.json'
   - 'src/*'
   - 'assets/scss/*'
+  - '.bundle/*'
+  - 'vendor/*'
 include:
   - LICENSE.md
   - CONTRIBUTING.md
 
-theme: jekyll-theme-cayman
+#theme: jekyll-theme-cayman
 
 show_downloads: false
 markdown: kramdown
+permalink: none
+
+kramdown:
+  auto_ids: true
+  input: GFM
+
+layouts_dir: _layouts
