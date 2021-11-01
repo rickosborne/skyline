@@ -32,7 +32,7 @@
   --morning-orange-50: hsla(32, 80%, 66%, 0.50);
   --morning-orange-25: hsla(32, 80%, 66%, 0.25);
   --morning-orange-5: hsla(32, 80%, 66%, 0.05);
-  --evening-orange-25: hsl(32, 80%, 44%, 0.25);
+  --evening-orange-25: hsla(32, 80%, 44%, 0.25);
   --barely-green: hsl(96, 80%, 99%);
   --noon-green: hsl(96, 80%, 77%);
   --morning-green: hsl(96, 80%, 55%);
@@ -1501,7 +1501,7 @@ details[open] > summary.spoiler-warning::before {
 .print-module .page .page-number .page-number-hex {
   margin-top: var(--hex-size);
   width: var(--hex-width);
-  height: calc(var(--hex-size) * 2.0);
+  height: calc(var(--hex-size) * 2);
   background-color: var(--noon-blue-25);
   position: relative;
 }
@@ -1513,13 +1513,13 @@ details[open] > summary.spoiler-warning::before {
   border-left: var(--hex-width-half) solid transparent;
   border-right: var(--hex-width-half) solid transparent;
   position: absolute;
-  top: calc(var(--hex-size) * -1.0);
+  top: calc(var(--hex-size) * -1);
 }
 .print-module .page .page-number .page-number-hex::after {
   content: "";
   width: 0;
   position: absolute;
-  bottom: calc(var(--hex-size) * -1.0);
+  bottom: calc(var(--hex-size) * -1);
   border-top: var(--hex-size) solid var(--noon-blue-25);
   border-left: var(--hex-width-half) solid transparent;
   border-right: var(--hex-width-half) solid transparent;

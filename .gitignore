@@ -1,4 +1,7 @@
 .idea/
+.jekyll-cache/
+.bundle/
+vendor/
 *.iml
 node_modules/
 .DS_Store

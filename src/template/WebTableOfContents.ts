@@ -98,7 +98,7 @@ export class WebTableOfContents extends AFilesTemplate<TableOfContents, ContentI
 			headingLevel = 1;
 		}
 		let todoCount = 0;
-		const todoMatches = file.matchAll(/\bTODO\b/s);
+		const todoMatches = file.matchAll(/\bTODO\b/sg);
 		for (let todoMatch of todoMatches) {
 			todoCount++;
 		}
