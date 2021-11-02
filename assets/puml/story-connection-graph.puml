@@ -73,7 +73,10 @@ e160 -> e161
 e161 -> "[[165-salty-desert.html 165. The Salty Desert]]" as e165 
 e165 -> "[[166-pi253-entrance.html 166. PI-253 Entrance]]" as e166 
 e166 -> "[[167-pi253-control.html 167. PI-253 Control Restored]]" as e167 
-e167 -> "[[168-pi253-poseidon.html 168. POSEIDON-253]]" as e168 <<TODO>>
+e166 --> "[[169-pi253-exit.html 169. Outside Cauldron PI-253]]" as e169 
+e167 -> "[[168-pi253-poseidon.html 168. POSEIDON-253]]" as e168 
+e167 --> e169
+e168 --> e169
 "[[799-conclusion.html Conclusion]]" as e799  --> (*)
 
 legend

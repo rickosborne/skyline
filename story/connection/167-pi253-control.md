@@ -29,6 +29,6 @@ If you have a Free-Tail, or otherwise have learned how to properly identify your
 
 Otherwise, the Cauldron remains silent.
 
-{:.story-links.story-links-one}
+{:.story-links}
 [If you know how to identify yourself, go to entry 168.](168-pi253-poseidon.md){:.story-link.story-link-if}
 [Otherwise, return to the surface with entry 169.](169-pi253-exit.md){:.story-link.story-link-else}

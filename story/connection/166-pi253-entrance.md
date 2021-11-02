@@ -35,7 +35,7 @@ Once it's started its return trip, you can get a sensor reading of what's on its
 The Control Pylon for the Cauldron stands in the center of the room, dormant, Focus-labeled as `(UNPOWERED)`.
 Tracing with your Focus, you find the problem: a thick cable, running beneath the floor to the west side of the room where it runs up the wall alongside the elevator before disappearing into the ceiling.
 A meter off the ground, the cable has been torn through and wrenched away from the wall and its other half.
-A thorough investigation of the room reveals a second, similar break, to another thich conduit leading to the assembly line.
+A thorough investigation of the room reveals a second, similar break, to another thick conduit leading to the assembly line.
 
 As the descending pair of Snapmaws gets into range of your Focus, you can see they are already alert.
 Use your System Adapter to resolve an encounter with the Snapmaws — they will not deescalate from alert and aggressive status. 

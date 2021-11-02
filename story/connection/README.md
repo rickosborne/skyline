@@ -17,7 +17,7 @@ _Estimated module completion: **~25%**._
   * [Before You Begin](080-before-you-begin.md)
   * [Begin your adventure!](099-adventure.md)
 * _Story entry point:_ [Act I](100-chapter-1.md) _(started, unfinished)_
-* [Act II](200-chapter-2.md)
+* [Deeproot](200-chapter-2.md)
 * [Act III](300-chapter-3.md)
 * [Conclusion](799-conclusion.md)
 * [Narrator Guide](800-narrator-guide.md)

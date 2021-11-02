@@ -54,7 +54,7 @@ When commissioned for long-term efforts, it is common to pair up Scythes.
 The "snaith" is the name of the long wooden shaft of a scythe.
 
 Acting in the role of Scythe is almost always signaled by carrying an actual, working scythe.
-Like any badge of authority, Scythes may have to make it clear when they have "put down their blade" and are acting outside of their role.
+Like any badge of authority, Scythes may have to make it clear when they have "put down their blade" and are acting outside their role.
 In confrontational circumstances, one might see the Scythe drive the shaft of their weapon into the ground, flying the blade like a flag, and stepping away to handle the situation "fairly".
 
 Most Utaru would have training in scythe use since early teenage years, and would be comfortable using one in an agricultural context.

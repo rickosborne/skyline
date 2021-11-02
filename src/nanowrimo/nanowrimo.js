@@ -8,6 +8,7 @@ const nanoConfigFile = path.join(root, nanoConfigFileName);
 const nanoText = fs.readFileSync(nanoConfigFile, {encoding: 'utf8', flag: 'r'});
 const nano = JSON.parse(nanoText);
 const keyName = process.argv[2] || "2020";
+const startOfYear = 54525;
 const config = nano[keyName];
 if (config == null) {
 	throw new Error(`No such key in ${nanoConfigFileName}: ${keyName}`);
@@ -35,7 +36,8 @@ if (lastWords !== fromInitial) {
 	const jsonOut = JSON.stringify(nano, null, '\t') + "\n";
 	fs.writeFileSync(nanoConfigFile, jsonOut);
 	const fromPrevious = fromInitial - lastWords;
-	console.log(`[${ts}] From previous: ${fromInitial} (total) - ${lastWords} (previous) = ${fromPrevious} (session)`);
+	const fromStartOfYear = fromInitial - startOfYear;
+	console.log(`[${ts}] From previous: ${fromInitial} (total) - ${lastWords} (previous) = ${fromPrevious} (session) ; ${fromStartOfYear} (this year)`);
 } else {
 	console.log('Did not add a new log entry — it has not changed.');
 }
