@@ -39,7 +39,7 @@ If asked what happened twenty years ago:
 If asked whether whatever happened twenty years ago has anything to do with the Derangement, ARTEMIS will ask for additional details, but will provide the same "limiting directive" answer with one additional piece of information:
 
 > I can, however, tell you that the behavior you describe is, at least in part, due to the actions of your own people.
-> If you acted in a way that significantly interfered with my ability to manage the animals under may care, I would have to retaliate similarly.
+> If you acted in a way that significantly interfered with my ability to manage the animals under my care, I would have to retaliate similarly.
 > For example, if you came to one of my caves and started exterminating bats, and could not otherwise be dissuaded, my directives dictate I must respond with force.
 
 If asked why it was so unhelpful before:
@@ -66,7 +66,7 @@ If asked whether there is a Cauldron for that voice near here, or whether there 
 
 > I'm sorry, but that information is still controlled by a limiting directive.
 
-If asked what the focus is for this facility:
+If asked what the goal is for this facility:
 
 > You might guess from the cave above: THETA-CP19 is dedicated to managing the bat population in the area.
 > To date, this facility has managed more than fifty million free-tailed bats, and much of the ecosystem to support them.

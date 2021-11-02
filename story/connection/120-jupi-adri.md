@@ -43,7 +43,7 @@ The pair explain their predicament, completing each other's sentences:
 >
 > Their next delay came on the road east, as they followed the Seeker's trail back toward Nora lands.
 > A caravan of Carja refugees, each with a sadder story about lost families and homes, was making camp for the night before a hard push the next day through Stormbird territory.
-> Jupi wanted to push through the night, but Adri convinced her they should at least help the group get to the Daytower Gate.
+> Jupi wanted to travel through the night, but Adri convinced her they should at least help the group get to the Daytower Gate.
 > None of the caravan had any combat, tracking, or navigation experience — they were running scared, and Adri was worried they were just going to get themselves killed.
 >
 > The refugee families made slow progress, but Jupi and Adri were able to keep them out of the sight of the machines.

@@ -38,7 +38,7 @@ TODO: Cauldron SIGMA Map
 
 The cauldron layout has not changed since its appearance in _HZD_, until the final chamber.
 Where the final confrontation with the Fire Bellowback had been, the defeated machine is still there, in pieces.
-It's odd, because the chamber around it appears to have been completely repaired — almost as if the defeated Bellowback was left as a warning.
+It's odd, because the surrounding chamber appears to have been completely repaired — almost as if the defeated Bellowback was left as a warning.
 
 A new chamber is accessible to one side, leading to a room that is a mirror for the previous one.
 It is absolutely littered with the charred and exploded parts of what must be dozens of Bellowbacks.
@@ -56,7 +56,7 @@ Once again, the Bellowbacks will focus on the party if they are detected, but wi
 
 If the party waits for a single victor, it will be the newer Freeze/Fire Bellowback.
 It will have made quick work of the other, despite taking a few Shock hits which reduce it to 2/3 its normal health.
-If not engaged immediately, the Bellowback with then move to the center of the room and seem to go dormant.
+If not engaged immediately, the Bellowback will then move to the center of the room and seem to go dormant.
 A pair of Watchers will enter, and will begin to take thorough scans of the damage to both the destroyed Bellowback and the victor.
 They will then begin clearing space in the room for what you presume to be the next battle, during which they will discover the party, alert the Bellowback, and attack.
 

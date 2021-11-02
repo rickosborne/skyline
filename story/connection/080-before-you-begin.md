@@ -14,7 +14,7 @@ This adventure module assumes a few things.
   Don't worry about memorizing the fine details.
 
 * **Your table has played through, or is at least familiar with, the [IASO adventure module](../iaso).**
-  This isn't _required_, but it is _recommended_, as it sets up the post- _HZD_ _Skyline_ lore for the Nora.
+  This isn't _required_, but it is _recommended_, as it sets up the post-_HZD_ _Skyline_ lore for the Nora.
   Your party _does not_ need the IASO module from that adventure, though having it might provide them with some additional (but not game-changing) lore opportunities.
 
 ### Characters have done
