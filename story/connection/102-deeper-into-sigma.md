@@ -8,7 +8,7 @@ location: Cauldron SIGMA
 
 Read to everyone:
 
-> As you disconnect your Override Controller from the pylon, one of the doors on the far side of the room slides open.
+> As you disconnect your Override Controller from the pylon, one of the doors on the far side of the room slides aside.
 > Before it is even half open, however, it falters and stops.
 > Seconds pass, and the door seems conflicted about whether it wants to be open or closed, sliding inches back and forth in fits and starts.
 >
