@@ -43,6 +43,26 @@ If asked whether it needs any help, the AI seems to hesitate for the briefest mo
 > You have no means to acquire what I need.
 > No, you should be on your way.
 
+The Focus overlay behind the child shifts as the AI speaks.
+The waterfall slows to a drip before stopping, the glowing water on the floor pooling at the child's feet before seeming to dry out to become a flat, sandy expanse.
+The child drops petulantly to sit, forming a cross with its legs which glows briefly in a deep, vivid blue.
+This causes the sand to contract beneath the child, the X shape shrinking but still visible below the child's lap, the edges of the projection becoming less flat and more chaotic as they zip inward.
+The motion slows, and the child leans forward to draw a lazy finger through an uneven rivulet of flowing water, coming toward the center from the far left.
+
+The compression begins again and the source of the water is revealed as a series of jagged spikes with white points, marching perpendicular away from it.
+A thin, vertical column, as tall as any mountain, streaks in from the left, chasing the water toward the child — the Meridian spire.
+Seeing that structure draws attention to just how many more spires there are dotted across the landscape zooming by on the map beneath the child.
+
+After several dizzying seconds, the map stabilizes.
+The child reaches past a wide curve to the left, waving a hand through deep blue water past the land's end.
+The other hand reaches forward to do the same in a lumpy circular pool before coming to rest in the water off to your right, past a bent coast to the east.
+Each place the child touches water, a ripple of even brighter blue dots flashes up and down each coastline before vanishing.
+
+While the child, and the now-tiny X beneath, seem to be in the center of the land, the Meridian spire seems to be only half-way between there and the west coast.
+Reaching the southern coast in front of you looks to be about the same distance from here, while the east coast seems it would take twice as long.
+
+The map is only visible for seconds, before the child sighs, seems to grab each coast in a hand, and shakes them until the construct dissipates and the waterfall returns.
+It says nothing as it does this.
 The AI will refuse to clarify its needs, and will not even hint at how they might be met.
 
 If asked of limiting directives, POSEIDON's responses become evasive, petulant, and insulting.
