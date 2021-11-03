@@ -22,7 +22,5 @@ Hendli would appreciate if you continued to watch for fallout which may affect t
 He asks Adri and Jupi if they would be willing to accompany your group, if you should choose that path, and they assent on the condition that they are wanted.
 Otherwise, they would continue working in Plainsong toward Rethi's goals.
 
-TODO: World Map, pre-Act II.
-
-As a group, decide where you'd like to head next.
-The numbers on the map correspond to events in Act II.
+{:.story-links.story-links-one}
+[Begin Act II with event 200.](200-chapter-2.md){:.story-link}

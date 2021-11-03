@@ -7,7 +7,7 @@ If you're looking for a place to start, you probably want the [IASO adventure mo
 
 <!-- +template files story/connection web-table-of-contents -->
 
-_Estimated module completion: **~27%**._
+_Estimated module completion: **~31%**._
 
 * [Connection](010-front-matter.md)
   * [Introduction](015-introduction.md)
@@ -19,8 +19,14 @@ _Estimated module completion: **~27%**._
 * _Story entry point:_ [Act I](100-chapter-1.md) _(started, unfinished)_
 * [Deeproot](180-deeproot.md)
 * [Rethi and Hendli](181-executors.md)
-* [Next Steps](182-next-steps.md) _(started, unfinished)_
-* [Act II](200-chapter-2.md)
+* [Next Steps](182-next-steps.md)
+* [Act II](200-chapter-2.md) _(started, unfinished)_
+* [South](210-gulf-coast.md)
+* [The Road to the Southtap](211-road-to-southtap.md) _(started, unfinished)_
+* [Southwest](220-tenakth-lands.md)
+* [The Road to Tapwash](221-to-tapwash.md) _(started, unfinished)_
+* [North](230-banuk-lands.md)
+* [The Road to the Cut](231-to-the-cut.md) _(started, unfinished)_
 * [Act III](300-chapter-3.md)
 * [Conclusion](799-conclusion.md)
 * [Narrator Guide](800-narrator-guide.md)
