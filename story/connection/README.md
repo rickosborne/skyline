@@ -7,7 +7,7 @@ If you're looking for a place to start, you probably want the [IASO adventure mo
 
 <!-- +template files story/connection web-table-of-contents -->
 
-_Estimated module completion: **~31%**._
+_Estimated module completion: **~32%**._
 
 * [Connection](010-front-matter.md)
   * [Introduction](015-introduction.md)
@@ -27,6 +27,9 @@ _Estimated module completion: **~31%**._
 * [The Road to Tapwash](221-to-tapwash.md) _(started, unfinished)_
 * [North](230-banuk-lands.md)
 * [The Road to the Cut](231-to-the-cut.md) _(started, unfinished)_
+* [Nora Lands](240-west.md)
+* [Return to the West](241-return-to-the-sacred-lands.md) _(started, unfinished)_
+* [Remain in Plainsong](250-plainsong.md) _(started, unfinished)_
 * [Act III](300-chapter-3.md)
 * [Conclusion](799-conclusion.md)
 * [Narrator Guide](800-narrator-guide.md)

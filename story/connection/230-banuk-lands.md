@@ -22,9 +22,9 @@ With quick movements of a smaller stick, again conveniently accessible and worn 
 Hendli points to a squiggle almost due north from Deeproot, looking to be several weeks of travel from here.
 It also looks to be just as far from The Cut as Deeproot is from Meridian, making for more than a month on the road.
 
-{:.aside}
+{:.aside.old-ones-name}
 The Northstalk is the Utaru name for the system the Old Ones would call the Missouri River and Lake Sakakawea.
-The Northtap was the Niobrara and Platte Rivers, which see significantly more flow than they did before.
+The Northtap was the Niobrara and Sweetwater Rivers, which see significantly more flow than they did before.
 
 Hendli continues, drawing ever more lines and squiggles:
 
@@ -41,7 +41,7 @@ He pauses for breath, frowning.
 > I'm sorry I can't offer more help.
 > Banuk willingness to talk of Ban-Ur has frozen over since the Red Raids and the, um, creation of The Cut.
 
-While he is talking, Rethi moves to the back curtain, quietly lifts a lid on a half-seen bin, and returns with a half-dozen carved boar tusks, each bearing intricate designs which repeat the same flowing curves of water or wind.
+While he is talking, Rethi moves to the back curtain, quietly lifts a lid on a bin, and returns with a half-dozen carved boar tusks, each bearing intricate designs which repeat the same flowing curves of water or wind.
 Adri accepts them as Rethi explains to the rest of you that the chits are markers given out by Executors and accepted as readily in Deeproot as shards or any other currency.
 They would enable the group to get enough supplies to get at least as far as the Southtap.
 She warns, however, that the markers do not go as far as they used to, especially in return for weapons or armor, and encourages you to worry about food and travel supplies first.
