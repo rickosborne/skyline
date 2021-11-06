@@ -9,6 +9,11 @@ location: Deeproot
 Based on your brief glimpse of the map, you decide to head south to the nearest coast.
 Even with mounts, it looks to be a journey of several weeks.
 
+<aside class="narrator-note">
+<title>Narrator Note</title>
+Narrators wishing to get a feel for what's ahead may want to read through <a href="story/connection/826-act2-south.md">entry 825</a>.
+</aside>
+
 Rethi warns that Utaru who travel farther than the Southtap seldom return, and never in their right mind.
 But, she acknowledges, your group may be the best chance Deeproot has to get real information about the lands she refers to as the Undertap.
 Hendli is even more curious, exhorting you to agree to return with as much detail as possible about the people, and especially the politics.

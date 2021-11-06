@@ -81,10 +81,15 @@ e169 --> "[[180-deeproot.html Deeproot]]" as e180
 e180 --> "[[181-executors.html Rethi and Hendli]]" as e181 
 e181 --> "[[182-next-steps.html Next Steps]]" as e182 
 e182 --> "[[200-chapter-2.html Act II]]" as e200 <<TODO>>
-"[[210-gulf-coast.html South]]" as e210  --> "[[211-road-to-southtap.html The Road to the Southtap]]" as e211 <<TODO>>
-"[[220-tenakth-lands.html Southwest]]" as e220  --> "[[221-to-tapwash.html The Road to Tapwash]]" as e221 <<TODO>>
-"[[230-banuk-lands.html North]]" as e230  --> "[[231-to-the-cut.html The Road to the Cut]]" as e231 <<TODO>>
-"[[240-west.html Nora Lands]]" as e240  --> "[[241-return-to-the-sacred-lands.html Return to the West]]" as e241 <<TODO>>
+e200 --> "[[210-gulf-coast.html South]]" as e210 
+e200 --> "[[220-tenakth-lands.html Southwest]]" as e220 
+e200 --> "[[230-banuk-lands.html North]]" as e230 
+e200 --> "[[240-west.html Nora Lands]]" as e240 
+e200 --> "[[250-plainsong.html Remain in Plainsong]]" as e250 <<TODO>>
+e210 --> "[[211-road-to-southtap.html The Road to the Southtap]]" as e211 <<TODO>>
+e220 --> "[[221-to-tapwash.html The Road to Tapwash]]" as e221 <<TODO>>
+e230 --> "[[231-to-the-cut.html The Road to the Cut]]" as e231 <<TODO>>
+e240 --> "[[241-return-to-the-sacred-lands.html Return to the West]]" as e241 <<TODO>>
 "[[799-conclusion.html Conclusion]]" as e799  --> (*)
 
 legend
