@@ -96,3 +96,16 @@ Thania, warlord for one of the three major Tenakth clans and the one whose lands
 To the Carja, they look like any other scavengers, trying to steal what they can, taking advantage of the chaos.
 Keen observers would notice that the raiders often leave behind valuable but bulky goods, and seem far more intelligent than raiders generally are.
 
+### Utaru Isolationists
+
+As the Nora and Carja absorbed the bulk of the Shadow cult's attention, Utaru lands went untouched by the group.
+(At least it seems that way.)
+Having split from the Nora centuries ago, due to the same kinds of ideological differences which drove out the Carja, some Utaru view the decimation of the Nora as the completion of a cycle which began all those years ago.
+While the Sundom's Royal Maizelands are visually striking, adult Utaru are all too aware of the caste systems those noble-family-owned farms perpetuate.
+
+Mix all this together, and sprinkle in the occasional Tenakth incursion from the southwest, and the general standoffish nature of the Banuk, and it all leaves some Utaru with a desire to pull back to Deeproot and let the others work out their own problems for a few years.
+
+Some frame the contraction of Plainsong as the inherent ebb and flow, wax and wane in any natural cycle.
+These advocates aren't loud or sneaky, but instead cloak their desires in expressions of sadness and resignation.
+Others are indeed loud, making bids for various Executor roles with promises to "put Utaru first".
+

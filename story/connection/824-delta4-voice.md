@@ -1,6 +1,7 @@
 ---
 tags:
 - story
+- narrator
 ---
 
 ## 824. DELTA-4 Processing
