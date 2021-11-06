@@ -7,8 +7,27 @@ const nanoConfigFileName = 'nanowrimo.json';
 const nanoConfigFile = path.join(root, nanoConfigFileName);
 const nanoText = fs.readFileSync(nanoConfigFile, {encoding: 'utf8', flag: 'r'});
 const nano = JSON.parse(nanoText);
-const keyName = process.argv[2] || "2020";
-const startOfYear = 54525;
+let record = true;
+let keyName = String(new Date().getFullYear());
+let startOfYear = 0;
+for (let i = 2; i < process.argv.length; i++) {
+	const arg = process.argv[i];
+	if (arg == null) {
+		continue;
+	}
+	if (arg.startsWith('--')) {
+		switch (arg) {
+			case '--no-record':
+				console.log(`Not recording.`);
+				record = false;
+				break;
+			default:
+				throw new Error(`Unknown argument: ${arg}`);
+		}
+	} else if (arg.match(/^\d+$/)) {
+		keyName = arg;
+	}
+}
 const config = nano[keyName];
 if (config == null) {
 	throw new Error(`No such key in ${nanoConfigFileName}: ${keyName}`);
@@ -34,7 +53,9 @@ if (lastWords !== fromInitial) {
 	log[ts] = fromInitial;
 	config['log'] = log;
 	const jsonOut = JSON.stringify(nano, null, '\t') + "\n";
-	fs.writeFileSync(nanoConfigFile, jsonOut);
+	if (record) {
+		fs.writeFileSync(nanoConfigFile, jsonOut);
+	}
 	const fromPrevious = fromInitial - lastWords;
 	const fromStartOfYear = fromInitial - startOfYear;
 	console.log(`[${ts}] From previous: ${fromInitial} (total) - ${lastWords} (previous) = ${fromPrevious} (session) ; ${fromStartOfYear} (this year)`);
