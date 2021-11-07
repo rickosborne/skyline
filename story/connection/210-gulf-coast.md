@@ -9,11 +9,6 @@ location: Deeproot
 Based on your brief glimpse of the map, you decide to head south to the nearest coast.
 Even with mounts, it looks to be a journey of several weeks.
 
-<aside class="narrator-note">
-<title>Narrator Note</title>
-Narrators wishing to get a feel for what's ahead may want to read through <a href="story/connection/826-act2-south.md">entry 825</a>.
-</aside>
-
 Rethi warns that Utaru who travel farther than the Southtap seldom return, and never in their right mind.
 But, she acknowledges, your group may be the best chance Deeproot has to get real information about the lands she refers to as the Undertap.
 Hendli is even more curious, exhorting you to agree to return with as much detail as possible about the people, and especially the politics.
@@ -33,5 +28,6 @@ If the party wants to get creative and lash a mount to a cart or wagon (once the
 
 Any number of odd day-jobs or multi-day work barters can be found within the city, if you would like to gain some additional shards or trades.
 
-{:.story-links.story-links-one}
-[When you are ready to head out, begin your journey south with entry 211.](211-road-to-southtap.md){:.story-link}
+{:.story-links}
+[Narrators wishing to get a feel for what's ahead may want to read through entry 825.](826-act2-south.md){:.story-link}
+[When your group is ready to head out, begin your journey south with entry 211.](211-road-to-southtap.md){:.story-link}

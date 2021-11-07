@@ -116,7 +116,9 @@ export type Loot = Item[];
 /**
  * Whether the component can be torn free
  */
-export type Removable = boolean;
+export type Removable = Removable1 & Removable2;
+export type Removable1 = boolean;
+export type Removable2 = string;
 /**
  * Relative difficulty to hit
  */
@@ -292,7 +294,7 @@ export interface DD5EAction {
   ranged?: IsARangedWeaponAttack;
   reachFeet?: ReachFt;
   save?: Save;
-  target?: number | string;
+  target?: number | 'all';
   toHit?: ToHitModifier;
 }
 /**

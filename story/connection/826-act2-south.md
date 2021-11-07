@@ -34,6 +34,29 @@ However, it might also be frustrating for some players, who feel the lack of exp
 In such cases, you might adjust the boundaries of POSEIDON's limiting directives to drop more hints, or to outright send the players on fetch quests.
 The map scene was exactly that, so you should feel free to do the same.
 
+### Along the way
+
+If the party chooses to head south to the gulf, or east to the coast, there's no defined set of encounters, and the details are thin on the people and machines they'll meet.
+If you are looking for some ideas on how that should go:
+
+**Frontier:** You could establish that this truly is the frontier of where humans from ELEUTHIA-9 have settled.
+Encounters with settlers would get fewer and farther between.
+The people on that frontier would both be more accustomed to isolation and self-reliance, but also more appreciative of genuine assistance.
+This could present as simple, unrelated quests which help characters advance in skills, and players learn how to work together.
+
+The lack of human interference in machine projects might also lead to older, less aggressive machines, but maybe also larger machine projects which might not be possible closer to human settlements.
+For a more ominous feel, those fringe machine projects might not be larger, but instead more insidious.
+  For example, maybe an AI has been collecting settlers and experimenting on them, say, trying to reduce human aggression, or increase human compliance.
+
+**Outsiders:** You could reveal a heretofore unknown group of humans.
+Maybe they split off a century ago and have been forgotten from living memory.
+Maybe they're from another cradle facility, with an unrelated history, tech level, social structure, etc.
+  
+Again, for a more insidious feel, maybe those people have known about the Utaru and other canon groups for some time, even going so far as to send infiltrators and spies.
+If that group also had a version of APOLLO which wasn't (entirely) destroyed, what would that do to their culture?
+
+Of course, you could also just keep the encounters sparse and focused on the POSEIDON story.
+
 ### The big bad
 
 There's no specific antagonist in the POSEIDON story progression beyond the AI's bad attitude.
@@ -43,20 +66,20 @@ Some examples for inspiration:
 * An underwater battle against a [Plesiosaur](https://en.wikipedia.org/wiki/Plesiosaurus) or [Mesosaur](https://en.wikipedia.org/wiki/Mesosaurus)
 * An upgraded Snapmaw that's even more [Deinosuchus](https://en.wikipedia.org/wiki/Deinosuchus)
 * A [Shellsnapper](https://horizon.fandom.com/wiki/Shellsnapper)
-* MechaSharkNado.
+* MechaSharkNado.  'nuff said.  (Don't forget to introduce a chainsaw.)
 
 ### Set pieces
 
 POSEIDON's realm and goals offer some fun options for cauldrons, facilities, and themes.
 Obviously, you have the opportunity to play with underwater zones, but there's so much more.
 
-Dams can prompt interesting discussions.
+**Dams:** Dams can prompt interesting discussions.
 While they can range from megastructures down to simple creek management for agriculture, dams and their uses and management have caused no end of struggle throughout human existence:
 
 * Farmers might want to dam and re-route streams and rivers, even just partially, with the laudable goal of being able to feed more people.  But this puts them at odds with industries downstream who depend on the flow, such as fishing, or other farmers, villages, etc.
 * Communities might want to dam for power generation or to create a water reservoir.  But this changes the ecosystem downstream, which can have huge impacts on hunting, grazing, arable land, animal species survival, etc.
 
-For adventuring parties with a taste for the bizarre, POSEIDON seems the most likely to use [extremophiles](https://en.wikipedia.org/wiki/Extremophile) for inspiration.
+**The Weird:** For adventuring parties with a taste for the bizarre, POSEIDON seems the most likely to use [extremophiles](https://en.wikipedia.org/wiki/Extremophile) for inspiration.
 Maybe there are some machines which have interactions with hot springs or other thermal vents — like they need them to recharge, or can't function for long away from them.
 Or maybe those machines use the temperatures and pressures of those environments to their advantage.
 Imagine a machine which dips its limbs into molten magma to reshape them into new forms.
@@ -69,3 +92,6 @@ And maybe this is on purpose, as POSEIDON has taken a page out of HADES book and
 Ratchet that up to include the maddening, with a heap of body horror, and maybe a corrupted POSEIDON has taken over an ELEUTHIA facility.
 This POSEIDON might decide the only way to instill in humans the horror of what they are doing to the planet is to convert their children over to water-breathing, gills and all, via genetic resequencing.
 (Think CRISPR viruses.)
+
+{:.story-links.story-links-continue}
+[Return to the journey with entry 210.](210-gulf-coast.md){:.story-link}
