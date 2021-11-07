@@ -30,7 +30,7 @@ export type OneOrMoreStrings = string | string[];
  * This interface was referenced by `Skyline`'s JSON-Schema
  * via the `definition` "roll".
  */
-export type Roll1 = Roll & (ExactNumber | DiceRoll);
+export type Roll = Roll1 & (ExactNumber | DiceRoll);
 export type ExactNumber = number;
 export type DiceRoll = string;
 /**
@@ -53,6 +53,6 @@ export interface Notes {
 /**
  * Roll
  */
-export interface Roll {
+export interface Roll1 {
   [k: string]: unknown;
 }

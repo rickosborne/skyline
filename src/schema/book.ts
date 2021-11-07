@@ -568,5 +568,5 @@ export interface PlayerCharacter {
    * Name
    */
   name: string;
-  tribe?: string | TribeName;
+  tribe?: 'unknown' | TribeName;
 }
