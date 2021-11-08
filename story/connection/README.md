@@ -7,7 +7,7 @@ If you're looking for a place to start, you probably want the [IASO adventure mo
 
 <!-- +template files story/connection web-table-of-contents -->
 
-_Estimated module completion: **~33%**._
+_Estimated module completion: **~35%**._
 
 * [Connection](010-front-matter.md)
   * [Introduction](015-introduction.md)
@@ -36,6 +36,8 @@ _Estimated module completion: **~33%**._
   * [Story Graph](802-story-graph.md) _(started, unfinished)_
   * [Heading south toward the gulf coast](826-act2-south.md)
   * [Heading north into Ban-Ur](827-act2-north.md)
+  * [Heading west to the Sacred Lands and Sundom](828-act2-west.md)
+  * [Remain in Plainsong](829-remain-in-plainsong.md)
 * [NPC Notes](840-npc-notes.md)
   * [Adri, Utaru Plainswalker Scythe](841-adri.md)
   * [Jupi, Utaru Plainswalker Scythe](845-jupi.md)
