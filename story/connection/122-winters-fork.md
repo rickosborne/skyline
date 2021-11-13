@@ -18,7 +18,7 @@ Mismatched boulders and logs are wedged into the hole, reducing the flow by quit
 
 There are no walls around the village, but a pair of tall watchtowers sit at either end of the dam, with a lone lookout on duty in each.
 You imagine the lookouts probably spotted you on the road an hour ago or more.
-Other than the very gentle incline from the road, the land here is almost completely flat for miles.
+Other than the very gentle incline from the road, the land here is almost completely flat.
 The outline of a mountain range is visible to the west, but the foothills seem to be at least another day away.
 
 A few dozen people can be seen going about their business.

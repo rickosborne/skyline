@@ -86,7 +86,13 @@ e200 --> "[[220-tenakth-lands.html 220. Southwest]]" as e220
 e200 --> "[[230-banuk-lands.html 230. North]]" as e230 
 e200 --> "[[240-west.html 240. Nora Lands]]" as e240 
 e200 --> "[[250-plainsong.html 250. Remain in Plainsong]]" as e250 <<TODO>>
-e210 --> "[[211-road-to-southtap.html 211. The Road to the Southtap]]" as e211 <<TODO>>
+e210 --> "[[211-road-to-southtap.html 211. The Road to the Southtap]]" as e211 
+e211 -> "[[212-bristletooth.html 212. Bristletooth]]" as e212 
+e212 --> "[[213-bristletooth-ruins.html 213. The Ruins at Bristletooth]]" as e213 
+e212 --> "[[214-bristletooth-snapmaws.html 214. Northeast Bristletooth]]" as e214 
+e212 --> "[[215-threadmaw-valley.html 215. Threadmaw Valley]]" as e215 <<TODO>>
+e213 -> e214
+e213 --> e215
 e220 --> "[[221-to-tapwash.html 221. The Road to Tapwash]]" as e221 <<TODO>>
 e230 --> "[[231-to-the-cut.html 231. The Road to the Cut]]" as e231 <<TODO>>
 e240 --> "[[241-return-to-the-sacred-lands.html 241. Return to the West]]" as e241 <<TODO>>

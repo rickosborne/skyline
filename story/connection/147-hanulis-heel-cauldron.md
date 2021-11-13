@@ -21,7 +21,7 @@ From the banks of the river to the highest point you can see, you'd guess the di
 If the Southtap ever flooded, the village would be in serious trouble.
 You can't help but think of the dam at Tapwash, and wonder whether the waters would make it this far if that dam broke.
 
-Any Nora, Oseram, and Carja characters would find this experience mildly disturbing: without any landmarks on the horizon, a navigation error could send you dozens of miles off-course, even within a single day.
+Any Nora, Oseram, and Carja characters would find this experience mildly disturbing: without any landmarks on the horizon, a navigation error could send you hours off-course, even within a single day.
 It's not a wonder the Utaru rely so heavily on rivers for reference.
 
 The glint of metal and blue light catch your eyes from grassy fields kilometers outside the farmland of the village.
