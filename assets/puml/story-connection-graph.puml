@@ -90,7 +90,7 @@ e210 --> "[[211-road-to-southtap.html 211. The Road to the Southtap]]" as e211
 e211 -> "[[212-bristletooth.html 212. Bristletooth]]" as e212 
 e212 --> "[[213-bristletooth-ruins.html 213. The Ruins at Bristletooth]]" as e213 
 e212 --> "[[214-bristletooth-snapmaws.html 214. Northeast Bristletooth]]" as e214 
-e212 --> "[[215-threadmaw-valley.html 215. Threadmaw Valley]]" as e215 <<TODO>>
+e212 --> "[[215-threadmaw-valley.html 215. Threadmaw Valley]]" as e215 
 e213 -> e214
 e213 --> e215
 e220 --> "[[221-to-tapwash.html 221. The Road to Tapwash]]" as e221 <<TODO>>

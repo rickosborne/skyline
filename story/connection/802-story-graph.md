@@ -1276,11 +1276,11 @@ The following chart shows the flow of the story entries, along with each locatio
         x="2704.5"
         y="1216.8438"
       >214. Northeast Bristletooth</text></a><rect
-      fill="#EEFFCC"
+      fill="#C8E2F9"
       height="38.75"
       rx="12.5"
       ry="12.5"
-      style="stroke:#EEFFCC;stroke-width:1.5;"
+      style="stroke:#C8E2F9;stroke-width:1.5;"
       width="169"
       x="2660"
       y="1271"
