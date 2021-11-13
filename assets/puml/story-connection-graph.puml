@@ -77,20 +77,20 @@ e166 --> "[[169-pi253-exit.html 169. Outside Cauldron PI-253]]" as e169
 e167 -> "[[168-pi253-poseidon.html 168. POSEIDON-253]]" as e168 
 e167 --> e169
 e168 --> e169
-e169 --> "[[180-deeproot.html Deeproot]]" as e180 
-e180 --> "[[181-executors.html Rethi and Hendli]]" as e181 
-e181 --> "[[182-next-steps.html Next Steps]]" as e182 
-e182 --> "[[200-chapter-2.html Act II]]" as e200 <<TODO>>
-e200 --> "[[210-gulf-coast.html South]]" as e210 
-e200 --> "[[220-tenakth-lands.html Southwest]]" as e220 
-e200 --> "[[230-banuk-lands.html North]]" as e230 
-e200 --> "[[240-west.html Nora Lands]]" as e240 
-e200 --> "[[250-plainsong.html Remain in Plainsong]]" as e250 <<TODO>>
-e210 --> "[[211-road-to-southtap.html The Road to the Southtap]]" as e211 <<TODO>>
-e220 --> "[[221-to-tapwash.html The Road to Tapwash]]" as e221 <<TODO>>
-e230 --> "[[231-to-the-cut.html The Road to the Cut]]" as e231 <<TODO>>
-e240 --> "[[241-return-to-the-sacred-lands.html Return to the West]]" as e241 <<TODO>>
-"[[799-conclusion.html Conclusion]]" as e799  --> (*)
+e169 --> "[[180-deeproot.html 180. Deeproot]]" as e180 
+e180 --> "[[181-executors.html 181. Rethi and Hendli]]" as e181 
+e181 --> "[[182-next-steps.html 182. Next Steps]]" as e182 
+e182 --> "[[200-chapter-2.html 200. Act II]]" as e200 <<TODO>>
+e200 --> "[[210-gulf-coast.html 210. South]]" as e210 
+e200 --> "[[220-tenakth-lands.html 220. Southwest]]" as e220 
+e200 --> "[[230-banuk-lands.html 230. North]]" as e230 
+e200 --> "[[240-west.html 240. Nora Lands]]" as e240 
+e200 --> "[[250-plainsong.html 250. Remain in Plainsong]]" as e250 <<TODO>>
+e210 --> "[[211-road-to-southtap.html 211. The Road to the Southtap]]" as e211 <<TODO>>
+e220 --> "[[221-to-tapwash.html 221. The Road to Tapwash]]" as e221 <<TODO>>
+e230 --> "[[231-to-the-cut.html 231. The Road to the Cut]]" as e231 <<TODO>>
+e240 --> "[[241-return-to-the-sacred-lands.html 241. Return to the West]]" as e241 <<TODO>>
+"[[799-conclusion.html 799. Conclusion]]" as e799  --> (*)
 
 legend
 |= Type |= Description |

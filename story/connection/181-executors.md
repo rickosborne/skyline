@@ -4,7 +4,7 @@ tags:
 location: Deeproot
 ---
 
-# Rethi and Hendli
+# 181. Rethi and Hendli
 
 The couple lead you outside and through the streets of Deeproot.
 Passers-by occasionally head toward the pair, but each one veers off and finds something better to do when they notice the pair of tall scythes trailing behind.

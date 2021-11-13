@@ -4,7 +4,7 @@ tags:
 location: Deeproot
 ---
 
-# Next Steps
+# 182. Next Steps
 
 Rethi is not satisfied with what you've uncovered in Plainsong.
 She wants to know how all the strange events are related, and whether your group has any ideas for stabilizing what is beginning to feel like a crumbling foundation.

@@ -4,7 +4,7 @@ tags:
 location: Deeproot
 ---
 
-# Nora Lands
+# 240. Nora Lands
 
 The Seeker learned enough in her travels around Nora and Carja lands to best not only the Shadow cult, but HADES as well.
 With what you've learned, and all the questions you now have, maybe the answers you seek are the same ones she found.

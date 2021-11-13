@@ -4,7 +4,7 @@ tags:
 location: Deeproot
 ---
 
-# Southwest
+# 220. Southwest
 
 For whatever reason, the Tenakth lands to the southwest feel like the next step on your journey.
 The frown you get from Rethi is a mixture of disappointment and concern, though the arch to her brow betrays at least a small measure of curiosity.

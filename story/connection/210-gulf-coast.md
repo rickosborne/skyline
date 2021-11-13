@@ -4,7 +4,7 @@ tags:
 location: Deeproot
 ---
 
-# South
+# 210. South
 
 Based on your brief glimpse of the map, you decide to head south to the nearest coast.
 Even with mounts, it looks to be a journey of several weeks.
@@ -29,5 +29,5 @@ If the party wants to get creative and lash a mount to a cart or wagon (once the
 Any number of odd day-jobs or multi-day work barters can be found within the city, if you would like to gain some additional shards or trades.
 
 {:.story-links}
-[Narrators wishing to get a feel for what's ahead may want to read through entry 825.](826-act2-south.md){:.story-link}
+[Narrators wishing to get a feel for what's ahead may want to read through entry 825.](826-act2-south.md){:.story-link.narrator}
 [When your group is ready to head out, begin your journey south with entry 211.](211-road-to-southtap.md){:.story-link}
