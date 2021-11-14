@@ -4,7 +4,7 @@ tags:
 location: Deeproot
 ---
 
-# Deeproot
+# 180. Deeproot
 
 Jupi and Adri become visibly excited as the first signs of Deeproot appear on the horizon.
 The smoke of cooking fires drifts lazily upward, only slightly bent in the light breeze.

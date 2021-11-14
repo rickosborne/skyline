@@ -11,8 +11,7 @@
 				{%- assign headPartPrefix = headPart | strip | slice: 0, 1 -%}
 				{%- if headPartPrefix == "1" or headPartPrefix == "2" or headPartPrefix == "3" or headPartPrefix == "4" or headPartPrefix == "5" or headPartPrefix == "6" -%}
 					{%- if pageTitle == "" -%}
-						{%- assign headPartLength = headPart | size -%}
-						{%- assign pageTitle = headPart | slice: 2, headPartLength | strip_html | strip -%}
+						{%- assign pageTitle = "<h1" | append: headPart | strip_html | strip %}
 					{%- endif -%}
 				{%- endif %}
 			{%- endfor -%}

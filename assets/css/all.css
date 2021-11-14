@@ -591,6 +591,16 @@ em {
   color: var(--dusk-orange);
   background-color: var(--morning-orange-5);
 }
+.story-link.narrator, .story-link.narrator:visited {
+  color: var(--dusk-green);
+  background-color: var(--dusk-green-5);
+  border-left: var(--cadence-quarter) solid var(--dusk-green-25);
+}
+.story-link.narrator:hover, .story-link.narrator:visited:hover {
+  color: var(--dusk-green);
+  background-color: var(--dusk-green-25);
+  border-left-color: var(--dusk-green-50);
+}
 
 code {
   color: var(--dusk-blue);

@@ -4,7 +4,7 @@ tags:
 location: Deeproot
 ---
 
-# Remain in Plainsong
+# 250. Remain in Plainsong
 
 Rethi gives an unexpected and wide smile when you say you'll continue to investigate in Plainsong.
 

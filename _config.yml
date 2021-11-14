@@ -37,3 +37,5 @@ kramdown:
   input: GFM
 
 layouts_dir: _layouts
+title: Skyline
+description: Homebrew tabletop role-playing game modules unofficially set in the world of Horizon.

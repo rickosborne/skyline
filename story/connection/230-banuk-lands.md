@@ -4,7 +4,7 @@ tags:
 location: Deeproot
 ---
 
-# North
+# 230. North
 
 Continuing your journey north, into Ban-Ur, seems like a reasonable next step.
 Hendli seems pleased with this choice, and while Rethi would have liked to see you stay local, she encourages you to take your time, and continue to investigate in Plainsong along the way.
@@ -56,5 +56,5 @@ If the party wants to get creative and lash a mount to a cart or wagon (once the
 Any number of odd day-jobs or multi-day work barters can be found within the city, if you would like to gain some additional shards or trades.
 
 {:.story-links}
-[Narrators may want some additional context for the road ahead, via entry 827.](827-act2-north.md){:.story-link}
+[Narrators may want some additional context for the road ahead, via entry 827.](827-act2-north.md){:.story-link.narrator}
 [When you are ready to head out, begin your journey northwest with entry 231.](231-to-the-cut.md){:.story-link}
