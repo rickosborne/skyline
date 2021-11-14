@@ -1281,8 +1281,8 @@ The following chart shows the flow of the story entries, along with each locatio
       rx="12.5"
       ry="12.5"
       style="stroke:#C8E2F9;stroke-width:1.5;"
-      width="169"
-      x="2660"
+      width="249"
+      x="2620"
       y="1271"
     /><a
       href="215-threadmaw-valley.html"
@@ -1298,10 +1298,36 @@ The following chart shows the flow of the story entries, along with each locatio
         font-family="Roboto Condensed"
         font-size="16"
         lengthAdjust="spacing"
-        textLength="149"
-        x="2670"
+        textLength="229"
+        x="2630"
         y="1295.8438"
-      >215. Threadmaw Valley</text></a><rect
+      >215. The Road to Threadmaw Valley</text></a><rect
+      fill="#C8E2F9"
+      height="38.75"
+      rx="12.5"
+      ry="12.5"
+      style="stroke:#C8E2F9;stroke-width:1.5;"
+      width="189"
+      x="2889"
+      y="1271"
+    /><a
+      href="216-lighted-structure.html"
+      target="_top"
+      title="216-lighted-structure.html"
+      xlink:actuate="onRequest"
+      xlink:href="216-lighted-structure.html"
+      xlink:show="new"
+      xlink:title="216-lighted-structure.html"
+      xlink:type="simple"
+    ><text
+        fill="#000000"
+        font-family="Roboto Condensed"
+        font-size="16"
+        lengthAdjust="spacing"
+        textLength="169"
+        x="2899"
+        y="1295.8438"
+      >216. The Lighted Structure</text></a><rect
       fill="#EEFFCC"
       height="38.75"
       rx="12.5"
@@ -1950,13 +1976,13 @@ The following chart shows the flow of the story entries, along with each locatio
       points="2791.5,1191.77,2795.5,1182.77,2791.5,1186.77,2787.5,1182.77,2791.5,1191.77"
       style="stroke:#CCCCCC;stroke-width:1.0;"
     /><path
-      d="M2850.53,1152.04 C2869.2,1161.01 2887.76,1173.88 2898.5,1192 C2907.34,1206.91 2908.34,1216.73 2898.5,1231 C2883.43,1252.85 2859.04,1266.55 2834.08,1275.13 "
+      d="M2850.53,1152.04 C2869.2,1161.01 2887.76,1173.88 2898.5,1192 C2907.34,1206.91 2908.34,1216.73 2898.5,1231 C2886.67,1248.15 2869.11,1260.27 2850.04,1268.84 "
       fill="none"
       id="e212-to-e215"
       style="stroke:#CCCCCC;stroke-width:1.0;"
     /><polygon
       fill="#CCCCCC"
-      points="2829.08,1276.78,2838.8813,1277.7464,2833.8263,1275.2074,2836.3652,1270.1524,2829.08,1276.78"
+      points="2845.16,1270.95,2855.0084,1271.0443,2849.7483,1268.9632,2851.8295,1263.7031,2845.16,1270.95"
       style="stroke:#CCCCCC;stroke-width:1.0;"
     /><path
       d="M2674.86,1211.5 C2679.66,1211.5 2684.45,1211.5 2689.25,1211.5 "
@@ -1975,6 +2001,15 @@ The following chart shows the flow of the story entries, along with each locatio
     /><polygon
       fill="#CCCCCC"
       points="2702.22,1270.9,2695.5886,1263.6182,2697.6422,1268.8892,2692.3712,1270.9428,2702.22,1270.9"
+      style="stroke:#CCCCCC;stroke-width:1.0;"
+    /><path
+      d="M2869.13,1290.5 C2873.95,1290.5 2878.76,1290.5 2883.57,1290.5 "
+      fill="none"
+      id="e215-to-e216"
+      style="stroke:#CCCCCC;stroke-width:1.0;"
+    /><polygon
+      fill="#CCCCCC"
+      points="2888.79,1290.5,2879.79,1286.5,2883.79,1290.5,2879.79,1294.5,2888.79,1290.5"
       style="stroke:#CCCCCC;stroke-width:1.0;"
     /><path
       d="M2984.66,1073.14 C2981.95,1083.56 2978.55,1096.66 2975.66,1107.8 "

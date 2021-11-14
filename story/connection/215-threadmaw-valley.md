@@ -78,6 +78,41 @@ The large text is accompanied by an arrow pointing west.
 Below that, an arrow to the southeast points to the barest hint of a footpath, and is labeled "Threadmaw".
 The reverse of the sign says "Plainsong", boxed in by wavy lines below and to the right, clearly meant to show this as the corner of the region.
 
-At this point, the Southtap is barely more than a creek winding around sandbars, far from the frothing whitewater you saw in Tapwash.
+Here, at the limits of Plainsong, the Southtap is barely more than a creek winding around sandbars, far from the frothing whitewater you saw in Tapwash.
 The ancient bridge across it stands, barely, with fading yellow paint marking the safest path of traversal.
 
+Once across, the trail through the grass is marked by a half dozen logs and branches.
+In two piles, roughly arms-length apart, they point southeast, away from the ancient road.
+No further indicators are given, but the ground has something of a divot that may have been an ancient creek bed.
+It leads into an old-growth forest, the canopy dense overhead.
+
+An hour later, the bright lights of Glinthawks can be seen through the trees crossing the horizon in each direction.
+Another hour after that you begin to hear the clatter of machines following the same path along the ground.
+The trees thin out, revealing an arrow-straight road of the Old Ones — one of the larger ones, split by tall grasses down the middle.
+Convoys of Shell-Walkers and Behemoths trundle slowly in both directions, escorted by Watchers.
+
+The ancient road had bridges across the creek bed, one to each side.
+Only the nearest one remains, the farther lies in rubble across the creek.
+The collapse seems like it may have been in the past few years, as the grasses of the creek bed have not yet overtaken it, and scattered machine parts can still be seen pinned under debris.
+
+The convoys are not frequent, and the Glinthawks are quite regular.
+Resolve a Stealth skill test at Easy difficulty to get under the first bridge and over the remains of the second without being noticed.
+If you fail, resolve an encounter versus two Watchers, one Shell-Walker, and one Behemoth.
+If you'd like the extra challenge or parts, you could easily attract a Glinthawk or two if you want.
+
+Hours later, the creek bed dead-ends into another, this one clearly carved out by the Old Ones and lined in grass-eaten flat stone.
+Three crude but deep grooves carved into the far stone wall form the vague shape of an arrow, pointing forward out of the creek and on the same southeast heading.
+Only a few hundred paces beyond that, past the outlines of long-gone buildings, another road of the Old Ones heads due south.
+Again, a too-convenient collection of logs by the road indicates that you should follow it.
+
+Not even an hour later, the road leads through the middle of a small Ruins.
+Seeing no machine activity, or signs you should detour around, you decide to head straight through.
+
+{:.aside}
+The Old Ones would have referred to these ruins as Prague, OK, US.
+
+You're barely a hundred steps past the first flattened building when you notice the light coming from a semi-intact structure.
+The lights seem to be the orange flicker of firelight, not the artificial blue or red of most machines.
+
+{:.story-links}
+[Investigate the light at entry 216.](216-lighted-structure.md){:.story-link.story-link-continue}
