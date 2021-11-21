@@ -97,6 +97,14 @@ e215 -> "[[216-lighted-structure.html 216. The Lighted Structure]]" as e216
 e220 --> "[[221-to-tapwash.html 221. The Road to Tapwash]]" as e221 <<TODO>>
 e230 --> "[[231-to-the-cut.html 231. The Road to the Cut]]" as e231 <<TODO>>
 e240 --> "[[241-return-to-the-sacred-lands.html 241. Return to the West]]" as e241 <<TODO>>
+"[[281-pi-308.html 281. PI-308]]" as e281  --> "[[282-pi-308-reinitialize.html 282. PI-308, Reinitialized]]" as e282 
+e281 --> "[[283-pi-308-disable-controls.html 283. PI-308, Disconnected]]" as e283 
+e281 --> "[[285-pi-308-exit.html Southeastern Frontier]]" as e285 <<TODO>>
+e282 --> e281
+e282 --> "[[284-pi-308-poseidon.html 284. PI-308, Offline]]" as e284 <<TODO>>
+e283 --> e281
+e283 --> e284
+e285 --> "[[286-pi-15-entrance.html Entrance to PI-15]]" as e286 <<TODO>>
 "[[799-conclusion.html 799. Conclusion]]" as e799  --> (*)
 
 legend

@@ -58,7 +58,9 @@ Those signs, or at least some version of them, were present in the years leading
 
 If asked about the gulf, she'll tell you of the one time she ventured that far south, maybe ten or twelve years ago.
 The journey took her the better part of three months, round-trip.
-Following various rivers, and avoiding a huge Ruins due south of here which was crawling with machines and would have taken days to walk across, she reached a second days-wide Ruins with its southeast edge on a lake.
+Following various rivers, she had to work to avoid a huge Ruins due south of here: Spider's Web.
+It was crawling with machines and would have taken days to walk across.
+Later, she reached a second days-wide Ruins with its southeast edge on a lake, which she named the Floating Ruins.
 Except the lake, after days of walking, led to a coast with no end.
 The coast had a series of broad islands protecting it from the infinite waters beyond.
 
@@ -85,5 +87,9 @@ If you're feeling generous, Janti will take any machine parts or weapons you off
 She doesn't have shards or anything else of value in return, but she offers to draw you a map of what she remembers of her trip.
 She's also quite the tinkerer and botanist, and may be able to teach incremental skills to characters who spend a few days with her.
 
+When you're ready to move along, the map provides three possible routes.
+
 {:.story-links}
-[When you're ready to move on, continue south with entry 217.](217-south-from-janti.md)
+[A river to the south leads to a large system of lakes to the southeast, at entry 217.](217-south-from-janti.md)
+[An ancient road leads south-southwest to the huge ruin Janti describe, Spider's Web, at entry 218.](218-spiders-web.md)
+[Avoiding both, you could head straight to the Floating Ruins at entry 219.](219-the-floating-ruins.md)

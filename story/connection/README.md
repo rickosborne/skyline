@@ -17,6 +17,8 @@ _Estimated module completion: **~20%**._
   * [Before You Begin](080-before-you-begin.md)
   * [Begin your adventure!](099-adventure.md)
 * _Story entry point:_ [Act I](100-chapter-1.md) _(started, unfinished)_
+  * [Southeastern Frontier](285-pi-308-exit.md) _(started, unfinished)_
+  * [Entrance to PI-15](286-pi-15-entrance.md) _(started, unfinished)_
 * [Narrator Guide](800-narrator-guide.md)
   * [Story Graph](802-story-graph.md) _(started, unfinished)_
   * [Heading south toward the gulf coast](826-act2-south.md)
@@ -28,6 +30,9 @@ _Estimated module completion: **~20%**._
   * [Jupi, Utaru Plainswalker Scythe](845-jupi.md)
 * [Adapters](850-adapters.md)
   * [Free-Tail](852-free-tail.md) _(started, unfinished)_
+  * [Spinner](853-spinners.md) _(started, unfinished)_
+  * [Glowcap](854-glowcaps.md) _(started, unfinished)_
+  * [Mount Snapmaw](860-mount-snapmaw.md) _(started, unfinished)_
   * [AI Patrons](870-ai-patrons.md) _(started, unfinished)_
 * Next Steps _(not started yet)_
 * Errata _(not started yet)_
