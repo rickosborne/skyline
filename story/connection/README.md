@@ -7,7 +7,7 @@ If you're looking for a place to start, you probably want the [IASO adventure mo
 
 <!-- +template files story/connection web-table-of-contents -->
 
-_Estimated module completion: **~20%**._
+_Estimated module completion: **~21%**._
 
 * [Connection](010-front-matter.md)
   * [Introduction](015-introduction.md)
@@ -19,6 +19,7 @@ _Estimated module completion: **~20%**._
 * _Story entry point:_ [Act I](100-chapter-1.md) _(started, unfinished)_
   * [Southeastern Frontier](285-pi-308-exit.md) _(started, unfinished)_
   * [Entrance to PI-15](286-pi-15-entrance.md) _(started, unfinished)_
+  * [Across the Bay](287-across-the-bay.md) _(started, unfinished)_
 * [Narrator Guide](800-narrator-guide.md)
   * [Story Graph](802-story-graph.md) _(started, unfinished)_
   * [Heading south toward the gulf coast](826-act2-south.md)

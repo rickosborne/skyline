@@ -82,11 +82,19 @@ If asked how long the facility has been out of communication:
 > Days later my machines reported that had stopped.
 > I started losing contact with nearby machines shortly after.
 
+<aside class="narrator-note">
+<header>Narrator Note</header>
+Now would be a good time to establish, for each character, their swimming skill.
+Most human settlements, even in arid Carja and Tenakth lands, are built along lakes and rivers.
+It would be plausible for anyone to know how to swim, but not necessarily a given.
+</aside>
+
 POSEIDON has one additional request:
 
 > While I would appreciate once again having control of this facility, be wary.
 > We do not yet know much about the adversary, including how it gains control so easily.
-> The repercussions will be for your actions are unforeseeable.
+> The repercussions for your actions are unknowable.
 > Take each step slowly, and measure the results.
 
-TODO
+{:.story-links}
+[Head out via entry 287.](287-across-the-bay.md){:.story-link}
