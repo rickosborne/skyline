@@ -33,7 +33,7 @@
 		"prettier": "^2.4.1",
 		"ts-node": "^10.4.0",
 		"typescript": "^3.9.7",
-		"yaml": "^1.10.2"
+		"yaml": "^2.2.2"
 	},
 	"homepage": "https://github.com/rickosborne/skyline/",
 	"license": "CC-BY-NC-SA-4.0",
